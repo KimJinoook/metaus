@@ -11,7 +11,7 @@
         <div class="footer-info ptb80">
             <div class="container">
 
-                <!-- 1st Footer Column -->
+                <!-- 1st Footer Column -->-
                 <div class="col-md-3 col-sm-6 col-xs-6 footer-about">
 
                     <!-- Your Logo Here -->
