@@ -114,8 +114,8 @@
                                             <div class="row">
                                                 <ul class="col-md-4">
                                                     <li class="menu-title">공지사항</li>
-                                                    <li><a href="about-us.html">about us</a></li>
-                                                    <li><a href="contact-1.html">contact us 1</a></li>
+                                                    <li><a href="about-us.html">공지사항</a></li>
+                                                    <li><a href="<c:url value='/board/faq'/>">FAQ</a></li>
                                                     <li><a href="contact-2.html">contact us 2</a></li>
                                                     <li><a href="companies.html">companies</a></li>
                                                     <li><a href="company-page-1.html">company page 1</a></li>

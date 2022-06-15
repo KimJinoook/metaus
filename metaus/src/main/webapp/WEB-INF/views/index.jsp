@@ -272,7 +272,7 @@
 
             <div class="col-md-12 mt60 text-center">
                 <a href="search-jobs-1.html" class="btn btn-blue btn-effect nomargin">browse all</a>
-            </div>
+            </div>	
 
         </div>
     </section>
