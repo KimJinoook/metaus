@@ -113,7 +113,7 @@
                                         <div class="mega-menu-inner">
                                             <div class="row">
                                                 <ul class="col-md-4">
-                                                    <li class="menu-title">pages 1</li>
+                                                    <li class="menu-title">공지사항</li>
                                                     <li><a href="about-us.html">about us</a></li>
                                                     <li><a href="contact-1.html">contact us 1</a></li>
                                                     <li><a href="contact-2.html">contact us 2</a></li>
@@ -123,7 +123,7 @@
                                                 </ul>
 
                                                 <ul class="col-md-4">
-                                                    <li class="menu-title">pages 2</li>
+                                                    <li class="menu-title">커뮤니티</li>
                                                     <li><a href="candidate-profile-1.html">candidate profile 1</a></li>
                                                     <li><a href="candidate-profile-2.html">candidate profile 2</a></li>
                                                     <li><a href="candidate-profile-3.html">candidate profile 3</a></li>
@@ -133,7 +133,7 @@
                                                 </ul>
 
                                                 <ul class="col-md-4">
-                                                    <li class="menu-title">pages 3</li>
+                                                    <li class="menu-title">실시간 채팅</li>
                                                     <li><a href="404.html">404</a></li>
                                                     <li><a href="404-2.html">404 ver. 2</a></li>
                                                     <li><a href="coming-soon.html">coming soon</a></li>
