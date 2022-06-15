@@ -115,31 +115,24 @@
                                                 <ul class="col-md-4">
                                                     <li class="menu-title">공지사항</li>
                                                     <li><a href="about-us.html">공지사항</a></li>
-                                                    <li><a href="<c:url value='/board/faq'/>">FAQ</a></li>
-                                                    <li><a href="contact-2.html">contact us 2</a></li>
-                                                    <li><a href="companies.html">companies</a></li>
-                                                    <li><a href="company-page-1.html">company page 1</a></li>
-                                                    <li><a href="company-page-2.html">company page 2</a></li>
+                                                    <li><a href="<c:url value='/board/faq'/>"> F A Q</a></li>
+                                                    <li><a href="contact-2.html"> Q N A</a></li>
+                                                    <li><a href="companies.html">기  사</a></li>
                                                 </ul>
 
                                                 <ul class="col-md-4">
                                                     <li class="menu-title">커뮤니티</li>
-                                                    <li><a href="candidate-profile-1.html">candidate profile 1</a></li>
-                                                    <li><a href="candidate-profile-2.html">candidate profile 2</a></li>
-                                                    <li><a href="candidate-profile-3.html">candidate profile 3</a></li>
-                                                    <li><a href="faq.html">faq</a></li>
-                                                    <li><a href="job-page.html">job page</a></li>
-                                                    <li><a href="privacy-policy.html">privacy policy</a></li>
-                                                </ul>
+                                                    <li><a href="candidate-profile-1.html">자유 게시판</a></li>
+                                                    <li><a href="candidate-profile-2.html">질문 게시판</a></li>
+                                                    <li><a href="candidate-profile-3.html">공유/정보 게시판</a></li>
+                                                    <li><a href="faq.html">개인의뢰 게시판</a></li>
+	                                                </ul>
 
                                                 <ul class="col-md-4">
                                                     <li class="menu-title">실시간 채팅</li>
-                                                    <li><a href="404.html">404</a></li>
-                                                    <li><a href="404-2.html">404 ver. 2</a></li>
-                                                    <li><a href="coming-soon.html">coming soon</a></li>
-                                                    <li><a href="login.html">login</a></li>
-                                                    <li><a href="register.html">register</a></li>
-                                                    <li><a href="lost-password.html">lost password</a></li>
+                                                    <li><a href="404.html">개인회원 채팅</a></li>
+                                                    <li><a href="404-2.html">기업회원 채팅</a></li>
+                                                    <li><a href="coming-soon.html">관리자 채팅</a></li>
                                                 </ul>
                                             </div>
                                         </div>
