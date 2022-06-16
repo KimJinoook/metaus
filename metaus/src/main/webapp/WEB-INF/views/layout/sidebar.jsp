@@ -12,159 +12,279 @@
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
     <!-- Ionicons -->
     <link href="http://code.ionicframework.com/ionicons/2.0.0/css/ionicons.min.css" rel="stylesheet" type="text/css" />
+    <!-- fullCalendar 2.2.5-->
+    <link href="${pageContext.request.contextPath}/plugins/fullcalendar/fullcalendar.min.css" rel="stylesheet" type="text/css" />
+    <link href="${pageContext.request.contextPath}/plugins/fullcalendar/fullcalendar.print.css" rel="stylesheet" type="text/css" media='print' />
     <!-- Theme style -->
     <link href="${pageContext.request.contextPath}/dist/css/AdminLTE.min.css" rel="stylesheet" type="text/css" />
     <!-- AdminLTE Skins. Choose a skin from the css/skins 
          folder instead of downloading all of them to reduce the load. -->
-    <link href="${pageContext.request.contextPath}/dist/css/skins/_all-skins.min.css" rel="stylesheet" type="text/css" />
+    <link href="${pageContext.request.contextPath}/dist/css/skins/_all-skins.css" rel="stylesheet" type="text/css" />
+    <!-- iCheck -->
+    <link href="${pageContext.request.contextPath}/plugins/iCheck/flat/blue.css" rel="stylesheet" type="text/css" />
+    <!-- bootstrap wysihtml5 - text editor -->
+    <link href="${pageContext.request.contextPath}/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css" rel="stylesheet" type="text/css" />
 
+	<!-- header -->
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=no">
+
+    <!-- Meta Tags - Description for Search Engine purposes -->
+    <meta name="description" content="Cariera - Job Board HTML Template">
+    <meta name="keywords" content="cariera job board, HTML Template, job board html, job listing, job portal, job postings, jobs, recruiters, recruiting, recruitment">
+    <meta name="author" content="GnoDesign">
+
+    <!-- Website Title -->
+    <title>Cariera - Job Board HTML Template</title>
+    <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
+    <link rel="apple-touch-icon-precomposed" href="images/apple-touch-icon.png">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,400i,700,800|Varela+Round" rel="stylesheet">
+
+    <!-- CSS links -->
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/owl.carousel.min.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/style_mypage.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/responsive.css">
+    <script src="https://kit.fontawesome.com/a88f4debe0.js" crossorigin="anonymous"></script>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
     <![endif]-->
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/mypage.css">
+
   </head>
   <!-- ADD THE CLASS sidedar-collapse TO HIDE THE SIDEBAR PRIOR TO LOADING THE SITE -->
-  <body class="skin-blue sidebar-collapse fixed">
+  <!-- <body class="skin-blue sidebar-collapse fixed"> -->
+  <body class="skin-blue">
     <!-- Site wrapper -->
     <div class="wrapper">
-      
-      <header class="main-header">
-        <a href="../../index2.html" class="logo"><b>Meta</b>US</a>
-        <!-- Header Navbar: style can be found in header.less -->
-        <nav class="navbar navbar-static-top" role="navigation">
-          <!-- Sidebar toggle button-->
-          <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </a>
-          <div class="navbar-custom-menu">
-            <ul class="nav navbar-nav">
-              <!-- Messages: style can be found in dropdown.less-->
-              <li class="dropdown messages-menu">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                  <i class="fa fa-envelope-o"></i>
-                  <span class="label label-success">4</span>
-                </a>
-                <ul class="dropdown-menu">
-                  <li class="header">You have 4 messages</li>
-                  <li>
-                    <!-- inner menu: contains the actual data -->
-                    <ul class="menu">
-                      <li><!-- start message -->
-                        <a href="#">
-                          <div class="pull-left">
-                            <img src="../../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image"/>
-                          </div>
-                          <h4>
-                            Support Team
-                            <small><i class="fa fa-clock-o"></i> 5 mins</small>
-                          </h4>
-                          <p>Why not buy a new awesome theme?</p>
-                        </a>
-                      </li><!-- end message -->
-                    </ul>
-                  </li>
-                  <li class="footer"><a href="#">See All Messages</a></li>
-                </ul>
-              </li>
-              <!-- Notifications: style can be found in dropdown.less -->
-              <li class="dropdown notifications-menu">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                  <i class="fa fa-bell-o"></i>
-                  <span class="label label-warning">10</span>
-                </a>
-                <ul class="dropdown-menu">
-                  <li class="header">You have 10 notifications</li>
-                  <li>
-                    <!-- inner menu: contains the actual data -->
-                    <ul class="menu">
-                      <li>
-                        <a href="#">
-                          <i class="fa fa-users text-aqua"></i> 5 new members joined today
-                        </a>
-                      </li>
-                    </ul>
-                  </li>
-                  <li class="footer"><a href="#">View all</a></li>
-                </ul>
-              </li>
-              <!-- Tasks: style can be found in dropdown.less -->
-              <li class="dropdown tasks-menu">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                  <i class="fa fa-flag-o"></i>
-                  <span class="label label-danger">9</span>
-                </a>
-                <ul class="dropdown-menu">
-                  <li class="header">You have 9 tasks</li>
-                  <li>
-                    <!-- inner menu: contains the actual data -->
-                    <ul class="menu">
-                      <li><!-- Task item -->
-                        <a href="#">
-                          <h3>
-                            Design some buttons
-                            <small class="pull-right">20%</small>
-                          </h3>
-                          <div class="progress xs">
-                            <div class="progress-bar progress-bar-aqua" style="width: 20%" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
-                              <span class="sr-only">20% Complete</span>
-                            </div>
-                          </div>
-                        </a>
-                      </li><!-- end task item -->
-                    </ul>
-                  </li>
-                  <li class="footer">
-                    <a href="#">View all tasks</a>
-                  </li>
-                </ul>
-              </li>
-              <!-- User Account: style can be found in dropdown.less -->
-              <li class="dropdown user user-menu">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                  <img src="${pageContext.request.contextPath}/dist/img/profile_image.jpg" class="user-image" alt="User Image"/>
-                  <span class="hidden-xs">User</span>
-                </a>
-                <ul class="dropdown-menu">
-                  <!-- User image -->
-                  <li class="user-header">
-                    <img src="${pageContext.request.contextPath}/dist/img/profile_image.jpg" class="img-circle" alt="User Image" />
-                    <p>
-                      User - 일반회원
-                      <small>Member since Nov. 2012</small>
-                    </p>
-                  </li>
-                  <!-- Menu Body -->
-                  <li class="user-body">
-                    <div class="col-xs-4 text-center">
-                      <a href="#">Followers</a>
-                    </div>
-                    <div class="col-xs-4 text-center">
-                      <a href="#">Sales</a>
-                    </div>
-                    <div class="col-xs-4 text-center">
-                      <a href="#">Friends</a>
-                    </div>
-                  </li>
-                  <!-- Menu Footer-->
-                  <li class="user-footer">
-                    <div class="pull-left">
-                      <a href="#" class="btn btn-default btn-flat">Profile</a>
-                    </div>
-                    <div class="pull-right">
-                      <a href="#" class="btn btn-default btn-flat">Sign out</a>
-                    </div>
-                  </li>
-                </ul>
-              </li>
-            </ul>
-          </div>
-        </nav>
-      </header>
+      <header class="sticky">
+	    <nav class="navbar navbar-default navbar-static-top fluid_header centered">
+            <!-- Logo -->
+            <div class="col-md-2 col-sm-6 col-xs-8 nopadding logo">
+                <a class="navbar-brand nomargin" href="<c:url value='/'/>"><img src="${pageContext.request.contextPath}/images/logo.svg" alt="logo"></a>
+                <!-- INSERT YOUR LOGO HERE -->
+            </div>
+            <div class="left">
+            	<a role="button" data-toggle="offcanvas" class="sidebar_menu_btn"><i class="fa-solid fa-bars"></i></a>
+            </div>
+	        <div class="container right">
+	            <!-- ======== Start of Main Menu ======== -->
+	            <div class="col-md-10 col-sm-6 col-xs-4 nopadding mypage-header">
+	                <div class="navbar-header page-scroll">
+	                    <button type="button" class="navbar-toggle toggle-menu menu-right push-body" data-toggle="collapse" data-target="#main-nav" aria-expanded="false">
+	                        <span class="sr-only">Toggle navigation</span>
+	                        <span class="icon-bar"></span>
+	                        <span class="icon-bar"></span>
+	                        <span class="icon-bar"></span>
+	                    </button>
+	                </div>
+	
+	                <!-- Start of Main Nav -->
+	                <div class="collapse navbar-collapse cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right" id="main-nav">
+	                    <ul class="nav navbar-nav pull-right">
+	
+	                        <!-- Mobile Menu Title -->
+	                        <li class="mobile-title">
+	                            <h4>main menu</h4></li>
+	
+	                        <!-- Simple Menu Item -->
+	                        <li class="dropdown simple-menu">
+	                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">home<i class="fa fa-angle-down"></i></a>
+	                            <ul class="dropdown-menu" role="menu">
+	                                <li><a href="<c:url value='/'/>">home 1</a></li>
+	                                <li><a href="index-02.html">home 2 - slider</a></li>
+	                                <li><a href="index-03.html">home 3</a></li>
+	                                <li><a href="index-04.html">boxed version</a></li>
+	                            </ul>
+	                        </li>
+	
+	                        <!-- Simple Menu Item -->
+	                        <li class="dropdown simple-menu">
+	                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">기업 찾기<i class="fa fa-angle-down"></i></a>
+	                            <ul class="dropdown-menu" role="menu">
+	                                <li><a href="search-jobs-1.html">search jobs 1</a></li>
+	                                <li><a href="search-jobs-2.html">search jobs 2</a></li>
+	                                <li><a href="search-jobs-3.html">search jobs 3</a></li>
+	                                <li><a href="search-jobs-4.html">search jobs 4</a></li>
+	                                <li><a href="submit-resume.html">submit resume</a></li>
+	                            </ul>
+	                        </li>
+	
+	                        <!-- Simple Menu Item -->
+	                        <li class="dropdown simple-menu">
+	                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">크리에이터 찾기<i class="fa fa-angle-down"></i></a>
+	                            <ul class="dropdown-menu" role="menu">
+	                                <li><a href="find-candidate-1.html">find a candidate 1</a></li>
+	                                <li><a href="find-candidate-2.html">find a candidate 2</a></li>
+	                                <li><a href="post-job.html">post a job</a></li>
+	                            </ul>
+	                        </li>
+	
+	                        <!-- Mega Menu Item -->
+	                        <li class="dropdown mega-menu">
+	                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">커뮤니티<i class="fa fa-angle-down"></i></a>
+	                            <ul class="dropdown-menu" role="menu">
+	                                <li>
+	                                    <!-- Start of Mega Menu Inner -->
+	                                    <div class="mega-menu-inner">
+	                                        <div class="row">
+	                                            <ul class="col-md-4">
+	                                                <li class="menu-title">pages 1</li>
+	                                                <li><a href="about-us.html">about us</a></li>
+	                                                <li><a href="contact-1.html">contact us 1</a></li>
+	                                                <li><a href="contact-2.html">contact us 2</a></li>
+	                                                <li><a href="companies.html">companies</a></li>
+	                                                <li><a href="company-page-1.html">company page 1</a></li>
+	                                                <li><a href="company-page-2.html">company page 2</a></li>
+	                                            </ul>
+	
+	                                            <ul class="col-md-4">
+	                                                <li class="menu-title">pages 2</li>
+	                                                <li><a href="candidate-profile-1.html">candidate profile 1</a></li>
+	                                                <li><a href="candidate-profile-2.html">candidate profile 2</a></li>
+	                                                <li><a href="candidate-profile-3.html">candidate profile 3</a></li>
+	                                                <li><a href="faq.html">faq</a></li>
+	                                                <li><a href="job-page.html">job page</a></li>
+	                                                <li><a href="privacy-policy.html">privacy policy</a></li>
+	                                            </ul>
+	
+	                                            <ul class="col-md-4">
+	                                                <li class="menu-title">pages 3</li>
+	                                                <li><a href="404.html">404</a></li>
+	                                                <li><a href="404-2.html">404 ver. 2</a></li>
+	                                                <li><a href="coming-soon.html">coming soon</a></li>
+	                                                <li><a href="login.html">login</a></li>
+	                                                <li><a href="register.html">register</a></li>
+	                                                <li><a href="lost-password.html">lost password</a></li>
+	                                            </ul>
+	                                        </div>
+	                                    </div>
+	                                    <!-- End of Mega Menu Inner -->
+	                                </li>
+	                            </ul>
+	                        </li>
+	                        <!-- End of Mega Menu Item -->
+	
+	                        <!-- Simple Menu Item -->
+	                        <li class="dropdown simple-menu">
+	                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">VOD강의<i class="fa fa-angle-down"></i></a>
+	                            <ul class="dropdown-menu">
+	                                <!-- Dropdown Submenu -->
+	                                <li class="dropdown-submenu">
+	                                    <a href="#">headers<i class="fa fa-angle-right"></i></a>
+	                                    <ul class="dropdown-menu">
+	                                        <li><a href="header1.html">header 1 - default</a></li>
+	                                        <li><a href="header2.html">header 2 - logo top</a></li>
+	                                        <li><a href="header3.html">header 3 - top bar</a></li>
+	                                        <li><a href="header4.html">header 4 - sticky</a></li>
+	                                    </ul>
+	                                </li>
+	
+	                                <!-- Dropdown Submenu -->
+	                                <li class="dropdown-submenu">
+	                                    <a href="#">footers<i class="fa fa-angle-right"></i></a>
+	                                    <ul class="dropdown-menu">
+	                                        <li><a href="footer1.html">default</a></li>
+	                                        <li><a href="footer2.html">light</a></li>
+	                                        <li><a href="footer3.html">dark</a></li>
+	                                        <li><a href="footer4.html">simple</a></li>
+	                                    </ul>
+	                                </li>
+	
+	                                <!-- Dropdown Submenu -->
+	                                <li class="dropdown-submenu">
+	                                    <a href="#">page headers<i class="fa fa-angle-right"></i></a>
+	                                    <ul class="dropdown-menu">
+	                                        <li><a href="page-header1.html">default</a></li>
+	                                        <li><a href="page-header2.html">light</a></li>
+	                                        <li><a href="page-header3.html">dark</a></li>
+	                                        <li><a href="page-header4.html">parallax</a></li>
+	                                    </ul>
+	                                </li>
+	
+	                                <li><a href="buttons.html">buttons</a></li>
+	                                <li><a href="pricing-tables.html">pricing tables</a></li>
+	                                <li><a href="typography.html">typography</a></li>
+	                            </ul>
+	                        </li>
+	
+	                        <!-- Simple Menu Item -->
+	                        <li class="dropdown simple-menu">
+	                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">마이페이지<i class="fa fa-angle-down"></i></a>
+	                            <ul class="dropdown-menu" role="menu">
+	
+	                                <!-- Dropdown Submenu -->
+	                                <li class="dropdown-submenu">
+	                                    <a href="#">blog right sidebar<i class="fa fa-angle-right"></i></a>
+	                                    <ul class="dropdown-menu">
+	                                        <li><a href="blog-right-sidebar-v1.html">version 1</a></li>
+	                                        <li><a href="blog-right-sidebar-v2.html">version 2</a></li>
+	                                    </ul>
+	                                </li>
+	
+	                                <!-- Dropdown Submenu -->
+	                                <li class="dropdown-submenu">
+	                                    <a href="#">blog left sidebar<i class="fa fa-angle-right"></i></a>
+	                                    <ul class="dropdown-menu">
+	                                        <li><a href="blog-left-sidebar-v1.html">version 1</a></li>
+	                                        <li><a href="blog-left-sidebar-v2.html">version 2</a></li>
+	                                    </ul>
+	                                </li>
+	
+	                                <!-- Dropdown Submenu -->
+	                                <li class="dropdown-submenu">
+	                                    <a href="#">blog fullwidth<i class="fa fa-angle-right"></i></a>
+	                                    <ul class="dropdown-menu">
+	                                        <li><a href="blog-fullwidth-v1.html">version 1</a></li>
+	                                        <li><a href="blog-fullwidth-v2.html">version 2</a></li>
+	                                    </ul>
+	                                </li>
+	
+	                                <!-- Dropdown Submenu -->
+	                                <li class="dropdown-submenu">
+	                                    <a href="#">masonry<i class="fa fa-angle-right"></i></a>
+	                                    <ul class="dropdown-menu">
+	                                        <li><a href="blog-masonry-4col.html">4 columns</a></li>
+	                                        <li><a href="blog-masonry-3col.html">3 columns</a></li>
+	                                        <li><a href="blog-masonry-2col.html">2 columns</a></li>
+	                                    </ul>
+	                                </li>
+	
+	                                <!-- Dropdown Submenu -->
+	                                <li class="dropdown-submenu">
+	                                    <a href="#">single post<i class="fa fa-angle-right"></i></a>
+	                                    <ul class="dropdown-menu">
+	                                        <li><a href="blog-post-right-sidebar.html">post - right sidebar</a></li>
+	                                        <li><a href="blog-post-left-sidebar.html">post - left sidebar</a></li>
+	                                        <li><a href="blog-post.html">post - fullwidth</a></li>
+	                                    </ul>
+	                                </li>
+	                            </ul>
+	                        </li>
+	
+	                        
+	
+	                        <!-- Login Menu Item -->
+	                        <li class="menu-item login-btn">
+	                            <a id="modal_trigger" href="javascript:void(0)" role="button"><i class="fa fa-lock"></i>login</a>
+	                        </li>
+	
+	                    </ul>
+	                </div>
+	                <!-- End of Main Nav -->
+	            </div>
+	            <!-- ======== End of Main Menu ======== -->
+	
+	        </div>
+	        <div class="clear"></div>
+	    </nav>
+	</header>
 
       <!-- =============================================== -->
 
@@ -183,7 +303,7 @@
                 <li><a href="../../index2.html"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
               </ul>
             </li>
-            <li class="treeview active">
+            <li class="treeview">
               <a href="#">
                 <i class="fa fa-files-o"></i>
                 <span>Layout Options</span>
@@ -295,22 +415,3 @@
 
       <!-- =============================================== -->
 
-      <!-- Right side column. Contains the navbar and content of the page -->
-      <div class="content-wrapper">
-      
-      </div><!-- /.content-wrapper -->
-
-    </div><!-- ./wrapper -->
-
-    <!-- jQuery 2.1.3 -->
-    <script src="${pageContext.request.contextPath}/plugins/jQuery/jquery-3.6.0.min.js"></script>
-    <!-- Bootstrap 3.3.2 JS -->
-    <script src="${pageContext.request.contextPath}/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
-    <!-- SlimScroll -->
-    <script src="${pageContext.request.contextPath}/plugins/slimScroll/jquery.slimScroll.min.js" type="text/javascript"></script>
-    <!-- FastClick -->
-    <script src='${pageContext.request.contextPath}/plugins/fastclick/fastclick.min.js'></script>
-    <!-- AdminLTE App -->
-    <script src="${pageContext.request.contextPath}/dist/js/app.min.js" type="text/javascript"></script>
-  </body>
-</html>
