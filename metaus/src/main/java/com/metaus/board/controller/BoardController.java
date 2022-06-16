@@ -28,4 +28,10 @@ public class BoardController {
 		logger.info("기사 페이지");
 		return "/board/news";
 	}
+	
+	@RequestMapping("/freeBoard")
+	public String freeBoard() {
+		logger.info("기사 페이지");
+		return "/board/freeBoard";
+	}
 }

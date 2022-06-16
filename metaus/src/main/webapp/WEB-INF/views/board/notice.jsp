@@ -41,7 +41,7 @@
 					<li class="active">공지사항 - 공지사항</li>
 				</ul>
 			</div>
-		</div>
+		</div>Chatting
 		<!-- End of Breadcrumb -->
 
 	</div>
