@@ -4,7 +4,7 @@
 	}
 	
 	.main-sidebar{
-		padding-top: 90px;
+		padding-top: 0;
 	}
 	
 	.skin-blue .main-sidebar{
@@ -77,4 +77,27 @@
 	
 	section{
 		background-color: #ecf0f5;
+	}
+	
+	section.shop{
+		background-color: #ecf0f5;
+	}
+	
+	.font{
+		font-size: 30px;
+		color: black;
+		
+	}
+	
+	.height-260{
+		height: 260px;
+	}
+	
+	.width-header-menu{
+		width: 729px;
+		padding-left: 0;
+	}
+	
+	ul.nav.navbar-nav.pull-right {
+    	width: 700px;
 	}

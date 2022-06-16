@@ -47,7 +47,7 @@
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/owl.carousel.min.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/style_mypage.css">
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/responsive.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/responsive_mypage.css">
     <script src="https://kit.fontawesome.com/a88f4debe0.js" crossorigin="anonymous"></script>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -70,10 +70,10 @@
                 <a class="navbar-brand nomargin" href="<c:url value='/'/>"><img src="${pageContext.request.contextPath}/images/logo.svg" alt="logo"></a>
                 <!-- INSERT YOUR LOGO HERE -->
             </div>
-            <div class="left">
+            <div class="left three-line-btn">
             	<a role="button" data-toggle="offcanvas" class="sidebar_menu_btn"><i class="fa-solid fa-bars"></i></a>
             </div>
-	        <div class="container right">
+	        <div class="container right width-header-menu">
 	            <!-- ======== Start of Main Menu ======== -->
 	            <div class="col-md-10 col-sm-6 col-xs-4 nopadding mypage-header">
 	                <div class="navbar-header page-scroll">
@@ -90,11 +90,11 @@
 	                    <ul class="nav navbar-nav pull-right">
 	
 	                        <!-- Mobile Menu Title -->
-	                        <li class="mobile-title">
+	                        <li class="mobile-title right">
 	                            <h4>main menu</h4></li>
 	
 	                        <!-- Simple Menu Item -->
-	                        <li class="dropdown simple-menu">
+	                        <li class="dropdown simple-menu right">
 	                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">home<i class="fa fa-angle-down"></i></a>
 	                            <ul class="dropdown-menu" role="menu">
 	                                <li><a href="<c:url value='/'/>">home 1</a></li>
@@ -105,7 +105,7 @@
 	                        </li>
 	
 	                        <!-- Simple Menu Item -->
-	                        <li class="dropdown simple-menu">
+	                        <li class="dropdown simple-menu right">
 	                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">기업 찾기<i class="fa fa-angle-down"></i></a>
 	                            <ul class="dropdown-menu" role="menu">
 	                                <li><a href="search-jobs-1.html">search jobs 1</a></li>
@@ -117,7 +117,7 @@
 	                        </li>
 	
 	                        <!-- Simple Menu Item -->
-	                        <li class="dropdown simple-menu">
+	                        <li class="dropdown simple-menu right">
 	                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">크리에이터 찾기<i class="fa fa-angle-down"></i></a>
 	                            <ul class="dropdown-menu" role="menu">
 	                                <li><a href="find-candidate-1.html">find a candidate 1</a></li>
@@ -127,7 +127,7 @@
 	                        </li>
 	
 	                        <!-- Mega Menu Item -->
-	                        <li class="dropdown mega-menu">
+	                        <li class="dropdown mega-menu right">
 	                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">커뮤니티<i class="fa fa-angle-down"></i></a>
 	                            <ul class="dropdown-menu" role="menu">
 	                                <li>
@@ -172,7 +172,7 @@
 	                        <!-- End of Mega Menu Item -->
 	
 	                        <!-- Simple Menu Item -->
-	                        <li class="dropdown simple-menu">
+	                        <li class="dropdown simple-menu right">
 	                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">VOD강의<i class="fa fa-angle-down"></i></a>
 	                            <ul class="dropdown-menu">
 	                                <!-- Dropdown Submenu -->
@@ -215,7 +215,7 @@
 	                        </li>
 	
 	                        <!-- Simple Menu Item -->
-	                        <li class="dropdown simple-menu">
+	                        <li class="dropdown simple-menu right">
 	                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">마이페이지<i class="fa fa-angle-down"></i></a>
 	                            <ul class="dropdown-menu" role="menu">
 	
@@ -271,9 +271,10 @@
 	                        
 	
 	                        <!-- Login Menu Item -->
-	                        <li class="menu-item login-btn">
+	                        <li class="menu-item login-btn right">
 	                            <a id="modal_trigger" href="javascript:void(0)" role="button"><i class="fa fa-lock"></i>login</a>
 	                        </li>
+	                        <div class="clear"></div>
 	
 	                    </ul>
 	                </div>
