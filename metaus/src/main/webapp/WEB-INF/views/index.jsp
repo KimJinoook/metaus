@@ -113,7 +113,7 @@
 						requestAnimationFrame(animate)
 						controls.update();
 						renderer.render(scene,camera);
-						
+						gltf.scene.rotation.y += 0.005;
 					}
 					animate();
 				});

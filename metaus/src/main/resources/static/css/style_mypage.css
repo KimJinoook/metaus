@@ -6123,6 +6123,7 @@ section.shop .product-image {
     background: linear-gradient(to right, #29b2fe -20%, #443088 120%);
 }
 
+
 section.shop .product-image img {
     width: 100%;
     height: 100%;
@@ -6133,6 +6134,8 @@ section.shop .product-image img {
     -o-transition: all .8s ease;
     transition: all .8s ease;
 }
+
+
 
 section.shop .product-image:hover img {
     -webkit-transform: scale(1.2);
