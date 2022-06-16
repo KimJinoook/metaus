@@ -1392,7 +1392,7 @@ div#main-nav {
 }
 
 .nav > li > a:focus,
-.nav > li > a:hover,
+.nav > li > a:hover
 {
     background: none !important;
 }
