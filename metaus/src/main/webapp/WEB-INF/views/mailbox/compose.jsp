@@ -108,6 +108,23 @@
       </footer>
     </div><!-- ./wrapper -->
 
+	<!-- ===== All Javascript at the bottom of the page for faster page loading ===== -->
+    <script src="${pageContext.request.contextPath}/js/jquery-3.1.1.min.js"></script>
+    <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
+    <script src="${pageContext.request.contextPath}/js/bootstrap-select.min.js"></script>
+    <script src="${pageContext.request.contextPath}/js/swiper.min.js"></script>
+    <script src="${pageContext.request.contextPath}/js/jquery.ajaxchimp.js"></script>
+    <script src="${pageContext.request.contextPath}/js/jquery.countTo.js"></script>
+    <script src="${pageContext.request.contextPath}/js/jquery.inview.min.js"></script>
+    <script src="${pageContext.request.contextPath}/js/jquery.magnific-popup.min.js"></script>
+    <script src="${pageContext.request.contextPath}/js/jquery.easypiechart.min.js"></script>
+    <script src="${pageContext.request.contextPath}/js/jquery-ui.min.js"></script>
+    <script src="${pageContext.request.contextPath}/js/owl.carousel.min.js"></script>
+    <script src="${pageContext.request.contextPath}/js/tinymce/tinymce.min.js"></script>
+    <script src="${pageContext.request.contextPath}/js/countdown.js"></script>
+    <script src="${pageContext.request.contextPath}/js/isotope.min.js"></script>
+    <script src="${pageContext.request.contextPath}/js/custom.js"></script>
+
     <!-- jQuery 2.1.3 -->
     <script src="${pageContext.request.contextPath}/plugins/jQuery/jQuery-2.1.3.min.js"></script>
     <!-- Bootstrap 3.3.2 JS -->
