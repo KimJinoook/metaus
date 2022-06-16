@@ -62,8 +62,63 @@
     </section>
     <!-- ===== End of Main Search Section ===== -->
 
+	<section>
+		<div>
+			<canvas id="canvas" width="300px" height="300px"></canvas>
+			
+		</div>
+	</section>
+			<script async src="https://unpkg.com/es-module-shims@1.3.6/dist/es-module-shims.js"></script>
+			<script type="importmap">
+				{
+					"imports":{
+						"three": "https://unpkg.com/three@0.141.0/build/three.module.js",
+						"GLTFLoader" : "https://unpkg.com/three@0.141.0/examples/jsm/loaders/GLTFLoader.js",
+						"OrbitControls" : "https://unpkg.com/three@0.141.0/examples/jsm/controls/OrbitControls.js"
+					}
+				}
+			</script>
+			<script type="module">
+				import {GLTFLoader} from 'GLTFLoader';
+				import { OrbitControls } from 'OrbitControls';
+				import * as THREE from 'three';
+
+				let scene = new THREE.Scene();
+				let renderer = new THREE.WebGLRenderer({
+					canvas : document.querySelector('#canvas'),
+					antialias : true
+				});
+				renderer.outputEncoding = THREE.sRGBEncoding;
+				
+
+				let camera = new THREE.PerspectiveCamera(30,1);
+				camera.position.set(0,0,5)
+
+				let controls = new OrbitControls(camera, renderer.domElement);
+				controls.update();
+
+				scene.background = new THREE.Color('white');
 
 
+				const grid = new THREE.GridHelper( 20, 20, 0x000000, 0x000000 );
+				grid.material.opacity = 0.2;
+				grid.material.transparent = true;
+				grid.position.y = -1;
+				scene.add( grid );
+
+				let loader = new GLTFLoader();
+				loader.load('gltfmodel/shiba/scene.gltf', function(gltf){
+					scene.add(gltf.scene);
+					function animate(){
+						requestAnimationFrame(animate)
+						controls.update();
+						renderer.render(scene,camera);
+						
+					}
+					animate();
+				});
+
+			</script>
 
 
     <!-- ===== Start of Popular Categories Section ===== -->
