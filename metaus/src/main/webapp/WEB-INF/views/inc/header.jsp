@@ -48,7 +48,7 @@
                 
                 <!-- Logo -->
                 <div class="col-md-2 col-sm-6 col-xs-8 nopadding">
-                    <a class="navbar-brand nomargin" href="<c:url value='/'/>"><img src="<c:url value='/images/logo.svg'/>" alt="logo"></a>
+                    <a class="navbar-brand nomargin" href="<c:url value='/'/>"><img src="<c:url value='/images/metaus_small_logo.png'/>" alt="logo"></a>
                     <!-- INSERT YOUR LOGO HERE -->
                 </div>
 
