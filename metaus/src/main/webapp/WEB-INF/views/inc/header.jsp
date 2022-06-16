@@ -48,9 +48,9 @@
                 
                 <!-- Logo -->
                 <div class="col-md-2 col-sm-6 col-xs-8 nopadding">
-                    <a class="navbar-brand nomargin" href="<c:url value='/'/>"><img src="<c:url value='/images/meta_us_logo.png'/>" alt="logo"></a>
+                    <a class="navbar-brand nomargin" href="<c:url value='/'/>"><img src="<c:url value='/images/metaus_logo.png'/>" alt="logo"></a>
                     <!-- INSERT YOUR LOGO HERE -->
-                </div>
+                </div> 
 
                 <!-- ======== Start of Main Menu ======== -->
                 <div class="col-md-10 col-sm-6 col-xs-4 nopadding">
