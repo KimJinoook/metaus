@@ -22,4 +22,10 @@ public class BoardController {
 		logger.info("FAQ 페이지");
 		return "/board/faq";
 	}
+	
+	@RequestMapping("/news")
+	public String news() {
+		logger.info("기사 페이지");
+		return "/board/news";
+	}
 }

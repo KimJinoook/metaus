@@ -16,7 +16,7 @@
 
                     <!-- Your Logo Here -->
                     <a href="index.html">
-                        <img src="images/logo-white.svg" alt="">
+                        <img src="/images/logo-white.svg" alt="">
                     </a>
 
                     <!-- Small Description -->

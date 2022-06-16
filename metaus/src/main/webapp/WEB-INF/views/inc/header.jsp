@@ -114,25 +114,25 @@
                                             <div class="row">
                                                 <ul class="col-md-4">
                                                     <li class="menu-title">공지사항</li>
-                                                    <li><a href="about-us.html">공지사항</a></li>
+                                                    <li><a href="<c:url value='/board/notice'/>">공지사항</a></li>
                                                     <li><a href="<c:url value='/board/faq'/>"> F A Q</a></li>
-                                                    <li><a href="contact-2.html"> Q N A</a></li>
-                                                    <li><a href="companies.html">기  사</a></li>
+                                                    <li><a href="<c:url value='/board/qna'/>"> Q N A</a></li>
+                                                    <li><a href="<c:url value='/board/news'/>">기  사</a></li>
                                                 </ul>
 
                                                 <ul class="col-md-4">
                                                     <li class="menu-title">커뮤니티</li>
-                                                    <li><a href="candidate-profile-1.html">자유 게시판</a></li>
-                                                    <li><a href="candidate-profile-2.html">질문 게시판</a></li>
-                                                    <li><a href="candidate-profile-3.html">공유/정보 게시판</a></li>
-                                                    <li><a href="faq.html">개인의뢰 게시판</a></li>
+                                                    <li><a href="<c:url value='/board/freeBoard'/>">자유 게시판</a></li>
+                                                    <li><a href="<c:url value='/board/QuestionBoard'/>">질문 게시판</a></li>
+                                                    <li><a href="<c:url value='/board/shareBoard'/>">공유/정보 게시판</a></li>
+                                                    <li><a href="<c:url value='/board/requestBoard	'/>">개인의뢰 게시판</a></li>
 	                                                </ul>
 
                                                 <ul class="col-md-4">
-                                                    <li class="menu-title">실시간 채팅</li>
-                                                    <li><a href="404.html">개인회원 채팅</a></li>
-                                                    <li><a href="404-2.html">기업회원 채팅</a></li>
-                                                    <li><a href="coming-soon.html">관리자 채팅</a></li>
+                                                    <li class="<c:url value='/board/realTimeChatting'/>">실시간 채팅</li>
+                                                    <li><a href="<c:url value='/board/individualChatting'/>">개인회원 채팅</a></li>
+                                                    <li><a href="<c:url value='/board/EnterChatting'/>">기업회원 채팅</a></li>
+                                                    <li><a href="<c:url value='/board/managerChatting'/>">관리자 채팅</a></li>
                                                 </ul>
                                             </div>
                                         </div>
