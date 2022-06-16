@@ -20,6 +20,7 @@
 <script src="<c:url value='js/isotope.min.js'/>"></script>
 <script src="<c:url value='js/custom.js'/>"></script>
 
+
 <!-- =============== Start of Page Header 1 Section =============== -->
 <section class="page-header" style="margin-top: 150px;">
 	<div class="container">
@@ -41,7 +42,7 @@
 					<li class="active">공지사항 - 공지사항</li>
 				</ul>
 			</div>
-		</div>Chatting
+		</div>
 		<!-- End of Breadcrumb -->
 
 	</div>

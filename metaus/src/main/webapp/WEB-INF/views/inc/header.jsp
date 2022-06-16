@@ -125,7 +125,7 @@
                                                     <li><a href="<c:url value='/board/freeBoard'/>">자유 게시판</a></li>
                                                     <li><a href="<c:url value='/board/QuestionBoard'/>">질문 게시판</a></li>
                                                     <li><a href="<c:url value='/board/shareBoard'/>">공유/정보 게시판</a></li>
-                                                    <li><a href="<c:url value='/board/requestBoard	'/>">개인의뢰 게시판</a></li>
+                                                    <li><a href="<c:url value='/board/requestBoard'/>">개인의뢰 게시판</a></li>
 	                                                </ul>
 
                                                 <ul class="col-md-4">
