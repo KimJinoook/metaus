@@ -14,25 +14,27 @@
                     <div class="row">
 
                         <!-- Start of Product 1 -->
-                        <div class="col-md-6 col-sm-6 col-xs-12">
+                        <div class="col-md-6 col-xs-12">
                             <div class="product">
 
                                 <!-- Product Image -->
-                                <div class="product-image" style="background: #ddd;">
-
-                                    <a href="images/shop/product1.jpg" class="hover-zoom height-260">
+                                <div class="product-image" style="background: #fff;">
+									<!-- pop up for images 사용하려면 custom_mypage.js 364행 -->
+                                    <a href="commissionDetail" class="hover-zoom height-260">
 	                                    <div class="height-260">
-	                                    	<div class="font">디자인</div>
-	                                        <div class="font">메타버스 상점 디자인</div>
-	                                        <div class="left font">최고/최저 견적</div>
-	                                        <div class="right font">100~200만원</div>
+	                                    	<div class="comList-cat left">디자인</div>
+	                                        <div class="comList-company right">소상공인 상점이름</div>
+	                                        <div class="clear"></div>
+	                                        <div class="font comList-title">메타버스 상점 디자인</div>
+	                                        <div class="left comList-estimate">최고/최저 견적</div>
+	                                        <div class="right font comList-price">100~200만원</div>
 	                                        <div class="clear"></div>
 										</div>
                                     </a>
 
                                     <!-- Product overlay -->
                                     <div class="product-overlay">
-                                        <a href="cart.html"><i class="fa-solid fa-circle-minus"></i>지원 취소</a>
+                                        <a href="commissionCancel"><i class="fa-solid fa-circle-minus"></i>지원 취소</a>
                                     </div>
 
                                 </div>
@@ -41,13 +43,314 @@
                                 <div class="product-descr">
 
                                     <a href="shop-product.html">
-                                        <h4>Cariera T-Shirt</h4>
+                                        <div class="com-decs-font com-decs-margin comList-avg-estimate left">평균견적</div>
+										<div class="com-decs-font com-decs-margin-content left com-decs-font-bold">150만원 &nbsp;&nbsp;&nbsp;&nbsp;|</div>
+										<div class="com-decs-font com-decs-margin comList-avg-period left">평균기간</div>
+										<div class="com-decs-font com-decs-margin-content left com-decs-font-bold">5일 &nbsp;&nbsp;&nbsp;&nbsp;|</div>
+										<div class="com-decs-font com-decs-margin omList-avg-applicant left">지원자수</div>
+										<div class="com-decs-font com-decs-margin-content left com-decs-font-bold">10명</div>
+										<div class="clear"></div>
+                                    </a>
+                                </div>
 
-                                        <!-- Price -->
-                                        <span class="price">
-								            <del><span class="amount">$39.99</span></del>
-                                        <span class="amount">$29.99</span>
-                                        </span>
+                            </div>
+                        </div>
+                        <!-- End of Product 1 -->
+                        <!-- Start of Product 1 -->
+                        <div class="col-md-6 col-xs-12">
+                            <div class="product">
+
+                                <!-- Product Image -->
+                                <div class="product-image" style="background: #fff;">
+									<!-- pop up for images 사용하려면 custom_mypage.js 364행 -->
+                                    <a href="commissionDetail" class="hover-zoom height-260">
+	                                    <div class="height-260">
+	                                    	<div class="comList-cat left">디자인</div>
+	                                        <div class="comList-company right">소상공인 상점이름</div>
+	                                        <div class="clear"></div>
+	                                        <div class="font comList-title">메타버스 상점 디자인</div>
+	                                        <div class="left comList-estimate">최고/최저 견적</div>
+	                                        <div class="right font comList-price">100~200만원</div>
+	                                        <div class="clear"></div>
+										</div>
+                                    </a>
+
+                                    <!-- Product overlay -->
+                                    <div class="product-overlay">
+                                        <a href="commissionCancel"><i class="fa-solid fa-circle-minus"></i>지원 취소</a>
+                                    </div>
+
+                                </div>
+
+                                <!-- Product Description -->
+                                <div class="product-descr">
+
+                                    <a href="shop-product.html">
+                                        <div class="com-decs-font com-decs-margin comList-avg-estimate left">평균견적</div>
+										<div class="com-decs-font com-decs-margin-content left com-decs-font-bold">150만원 &nbsp;&nbsp;&nbsp;&nbsp;|</div>
+										<div class="com-decs-font com-decs-margin comList-avg-period left">평균기간</div>
+										<div class="com-decs-font com-decs-margin-content left com-decs-font-bold">5일 &nbsp;&nbsp;&nbsp;&nbsp;|</div>
+										<div class="com-decs-font com-decs-margin omList-avg-applicant left">지원자수</div>
+										<div class="com-decs-font com-decs-margin-content left com-decs-font-bold">10명</div>
+										<div class="clear"></div>
+                                    </a>
+                                </div>
+
+                            </div>
+                        </div>
+                        <!-- End of Product 1 -->
+                        <!-- Start of Product 1 -->
+                        <div class="col-md-6 col-xs-12">
+                            <div class="product">
+
+                                <!-- Product Image -->
+                                <div class="product-image" style="background: #fff;">
+									<!-- pop up for images 사용하려면 custom_mypage.js 364행 -->
+                                    <a href="commissionDetail" class="hover-zoom height-260">
+	                                    <div class="height-260">
+	                                    	<div class="comList-cat left">디자인</div>
+	                                        <div class="comList-company right">소상공인 상점이름</div>
+	                                        <div class="clear"></div>
+	                                        <div class="font comList-title">메타버스 상점 디자인</div>
+	                                        <div class="left comList-estimate">최고/최저 견적</div>
+	                                        <div class="right font comList-price">100~200만원</div>
+	                                        <div class="clear"></div>
+										</div>
+                                    </a>
+
+                                    <!-- Product overlay -->
+                                    <div class="product-overlay">
+                                        <a href="commissionCancel"><i class="fa-solid fa-circle-minus"></i>지원 취소</a>
+                                    </div>
+
+                                </div>
+
+                                <!-- Product Description -->
+                                <div class="product-descr">
+
+                                    <a href="shop-product.html">
+                                        <div class="com-decs-font com-decs-margin comList-avg-estimate left">평균견적</div>
+										<div class="com-decs-font com-decs-margin-content left com-decs-font-bold">150만원 &nbsp;&nbsp;&nbsp;&nbsp;|</div>
+										<div class="com-decs-font com-decs-margin comList-avg-period left">평균기간</div>
+										<div class="com-decs-font com-decs-margin-content left com-decs-font-bold">5일 &nbsp;&nbsp;&nbsp;&nbsp;|</div>
+										<div class="com-decs-font com-decs-margin omList-avg-applicant left">지원자수</div>
+										<div class="com-decs-font com-decs-margin-content left com-decs-font-bold">10명</div>
+										<div class="clear"></div>
+                                    </a>
+                                </div>
+
+                            </div>
+                        </div>
+                        <!-- End of Product 1 -->
+                        <!-- Start of Product 1 -->
+                        <div class="col-md-6 col-xs-12">
+                            <div class="product">
+
+                                <!-- Product Image -->
+                                <div class="product-image" style="background: #fff;">
+									<!-- pop up for images 사용하려면 custom_mypage.js 364행 -->
+                                    <a href="commissionDetail" class="hover-zoom height-260">
+	                                    <div class="height-260">
+	                                    	<div class="comList-cat left">디자인</div>
+	                                        <div class="comList-company right">소상공인 상점이름</div>
+	                                        <div class="clear"></div>
+	                                        <div class="font comList-title">메타버스 상점 디자인</div>
+	                                        <div class="left comList-estimate">최고/최저 견적</div>
+	                                        <div class="right font comList-price">100~200만원</div>
+	                                        <div class="clear"></div>
+										</div>
+                                    </a>
+
+                                    <!-- Product overlay -->
+                                    <div class="product-overlay">
+                                        <a href="commissionCancel"><i class="fa-solid fa-circle-minus"></i>지원 취소</a>
+                                    </div>
+
+                                </div>
+
+                                <!-- Product Description -->
+                                <div class="product-descr">
+
+                                    <a href="shop-product.html">
+                                        <div class="com-decs-font com-decs-margin comList-avg-estimate left">평균견적</div>
+										<div class="com-decs-font com-decs-margin-content left com-decs-font-bold">150만원 &nbsp;&nbsp;&nbsp;&nbsp;|</div>
+										<div class="com-decs-font com-decs-margin comList-avg-period left">평균기간</div>
+										<div class="com-decs-font com-decs-margin-content left com-decs-font-bold">5일 &nbsp;&nbsp;&nbsp;&nbsp;|</div>
+										<div class="com-decs-font com-decs-margin omList-avg-applicant left">지원자수</div>
+										<div class="com-decs-font com-decs-margin-content left com-decs-font-bold">10명</div>
+										<div class="clear"></div>
+                                    </a>
+                                </div>
+
+                            </div>
+                        </div>
+                        <!-- End of Product 1 -->
+                        <!-- Start of Product 1 -->
+                        <div class="col-md-6 col-xs-12">
+                            <div class="product">
+
+                                <!-- Product Image -->
+                                <div class="product-image" style="background: #fff;">
+									<!-- pop up for images 사용하려면 custom_mypage.js 364행 -->
+                                    <a href="commissionDetail" class="hover-zoom height-260">
+	                                    <div class="height-260">
+	                                    	<div class="comList-cat left">디자인</div>
+	                                        <div class="comList-company right">소상공인 상점이름</div>
+	                                        <div class="clear"></div>
+	                                        <div class="font comList-title">메타버스 상점 디자인</div>
+	                                        <div class="left comList-estimate">최고/최저 견적</div>
+	                                        <div class="right font comList-price">100~200만원</div>
+	                                        <div class="clear"></div>
+										</div>
+                                    </a>
+
+                                    <!-- Product overlay -->
+                                    <div class="product-overlay">
+                                        <a href="commissionCancel"><i class="fa-solid fa-circle-minus"></i>지원 취소</a>
+                                    </div>
+
+                                </div>
+
+                                <!-- Product Description -->
+                                <div class="product-descr">
+
+                                    <a href="shop-product.html">
+                                        <div class="com-decs-font com-decs-margin comList-avg-estimate left">평균견적</div>
+										<div class="com-decs-font com-decs-margin-content left com-decs-font-bold">150만원 &nbsp;&nbsp;&nbsp;&nbsp;|</div>
+										<div class="com-decs-font com-decs-margin comList-avg-period left">평균기간</div>
+										<div class="com-decs-font com-decs-margin-content left com-decs-font-bold">5일 &nbsp;&nbsp;&nbsp;&nbsp;|</div>
+										<div class="com-decs-font com-decs-margin omList-avg-applicant left">지원자수</div>
+										<div class="com-decs-font com-decs-margin-content left com-decs-font-bold">10명</div>
+										<div class="clear"></div>
+                                    </a>
+                                </div>
+
+                            </div>
+                        </div>
+                        <!-- End of Product 1 -->
+                        <!-- Start of Product 1 -->
+                        <div class="col-md-6 col-xs-12">
+                            <div class="product">
+
+                                <!-- Product Image -->
+                                <div class="product-image" style="background: #fff;">
+									<!-- pop up for images 사용하려면 custom_mypage.js 364행 -->
+                                    <a href="commissionDetail" class="hover-zoom height-260">
+	                                    <div class="height-260">
+	                                    	<div class="comList-cat left">디자인</div>
+	                                        <div class="comList-company right">소상공인 상점이름</div>
+	                                        <div class="clear"></div>
+	                                        <div class="font comList-title">메타버스 상점 디자인</div>
+	                                        <div class="left comList-estimate">최고/최저 견적</div>
+	                                        <div class="right font comList-price">100~200만원</div>
+	                                        <div class="clear"></div>
+										</div>
+                                    </a>
+
+                                    <!-- Product overlay -->
+                                    <div class="product-overlay">
+                                        <a href="commissionCancel"><i class="fa-solid fa-circle-minus"></i>지원 취소</a>
+                                    </div>
+
+                                </div>
+
+                                <!-- Product Description -->
+                                <div class="product-descr">
+
+                                    <a href="shop-product.html">
+                                        <div class="com-decs-font com-decs-margin comList-avg-estimate left">평균견적</div>
+										<div class="com-decs-font com-decs-margin-content left com-decs-font-bold">150만원 &nbsp;&nbsp;&nbsp;&nbsp;|</div>
+										<div class="com-decs-font com-decs-margin comList-avg-period left">평균기간</div>
+										<div class="com-decs-font com-decs-margin-content left com-decs-font-bold">5일 &nbsp;&nbsp;&nbsp;&nbsp;|</div>
+										<div class="com-decs-font com-decs-margin omList-avg-applicant left">지원자수</div>
+										<div class="com-decs-font com-decs-margin-content left com-decs-font-bold">10명</div>
+										<div class="clear"></div>
+                                    </a>
+                                </div>
+
+                            </div>
+                        </div>
+                        <!-- End of Product 1 -->
+                        <!-- Start of Product 1 -->
+                        <div class="col-md-6 col-xs-12">
+                            <div class="product">
+
+                                <!-- Product Image -->
+                                <div class="product-image" style="background: #fff;">
+									<!-- pop up for images 사용하려면 custom_mypage.js 364행 -->
+                                    <a href="commissionDetail" class="hover-zoom height-260">
+	                                    <div class="height-260">
+	                                    	<div class="comList-cat left">디자인</div>
+	                                        <div class="comList-company right">소상공인 상점이름</div>
+	                                        <div class="clear"></div>
+	                                        <div class="font comList-title">메타버스 상점 디자인</div>
+	                                        <div class="left comList-estimate">최고/최저 견적</div>
+	                                        <div class="right font comList-price">100~200만원</div>
+	                                        <div class="clear"></div>
+										</div>
+                                    </a>
+
+                                    <!-- Product overlay -->
+                                    <div class="product-overlay">
+                                        <a href="commissionCancel"><i class="fa-solid fa-circle-minus"></i>지원 취소</a>
+                                    </div>
+
+                                </div>
+
+                                <!-- Product Description -->
+                                <div class="product-descr">
+
+                                    <a href="shop-product.html">
+                                        <div class="com-decs-font com-decs-margin comList-avg-estimate left">평균견적</div>
+										<div class="com-decs-font com-decs-margin-content left com-decs-font-bold">150만원 &nbsp;&nbsp;&nbsp;&nbsp;|</div>
+										<div class="com-decs-font com-decs-margin comList-avg-period left">평균기간</div>
+										<div class="com-decs-font com-decs-margin-content left com-decs-font-bold">5일 &nbsp;&nbsp;&nbsp;&nbsp;|</div>
+										<div class="com-decs-font com-decs-margin omList-avg-applicant left">지원자수</div>
+										<div class="com-decs-font com-decs-margin-content left com-decs-font-bold">10명</div>
+										<div class="clear"></div>
+                                    </a>
+                                </div>
+
+                            </div>
+                        </div>
+                        <!-- End of Product 1 -->
+                        <!-- Start of Product 1 -->
+                        <div class="col-md-6 col-xs-12">
+                            <div class="product">
+
+                                <!-- Product Image -->
+                                <div class="product-image" style="background: #fff;">
+									<!-- pop up for images 사용하려면 custom_mypage.js 364행 -->
+                                    <a href="commissionDetail" class="hover-zoom height-260">
+	                                    <div class="height-260">
+	                                    	<div class="comList-cat left">디자인</div>
+	                                        <div class="comList-company right">소상공인 상점이름</div>
+	                                        <div class="clear"></div>
+	                                        <div class="font comList-title">메타버스 상점 디자인</div>
+	                                        <div class="left comList-estimate">최고/최저 견적</div>
+	                                        <div class="right font comList-price">100~200만원</div>
+	                                        <div class="clear"></div>
+										</div>
+                                    </a>
+
+                                    <!-- Product overlay -->
+                                    <div class="product-overlay">
+                                        <a href="commissionCancel"><i class="fa-solid fa-circle-minus"></i>지원 취소</a>
+                                    </div>
+
+                                </div>
+
+                                <!-- Product Description -->
+                                <div class="product-descr">
+
+                                    <a href="shop-product.html">
+                                        <div class="com-decs-font com-decs-margin comList-avg-estimate left">평균견적</div>
+										<div class="com-decs-font com-decs-margin-content left com-decs-font-bold">150만원 &nbsp;&nbsp;&nbsp;&nbsp;|</div>
+										<div class="com-decs-font com-decs-margin comList-avg-period left">평균기간</div>
+										<div class="com-decs-font com-decs-margin-content left com-decs-font-bold">5일 &nbsp;&nbsp;&nbsp;&nbsp;|</div>
+										<div class="com-decs-font com-decs-margin omList-avg-applicant left">지원자수</div>
+										<div class="com-decs-font com-decs-margin-content left com-decs-font-bold">10명</div>
+										<div class="clear"></div>
                                     </a>
                                 </div>
 
@@ -56,299 +359,6 @@
                         <!-- End of Product 1 -->
 
 
-                        <!-- Start of Product 2 -->
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                            <div class="product">
-
-                                <!-- Product Image -->
-                                <div class="product-image">
-
-                                    <a href="images/shop/product2.jpg" class="hover-zoom">
-                                        <img src="images/shop/product2.jpg" class="img-responsive" alt="">
-                                    </a>
-
-                                    <!-- Product overlay -->
-                                    <div class="product-overlay left">
-                                        <a href="cart.html"><i class="fa fa-shopping-cart"></i>Add to Cart</a>
-                                    </div>
-                                    <div class=" left">
-                                        <a href="cart.html"><i class="fa fa-shopping-cart"></i>Add to Cart</a>
-                                    </div>
-                                    <div class="clear"></div>
-
-                                </div>
-
-                                <!-- Product Description -->
-                                <div class="product-descr">
-
-                                    <a href="shop-product.html">
-                                        <h4>Cariera Cap</h4>
-
-                                        <!-- Price -->
-                                        <span class="price">
-                                            <span class="amount">$19.99</span>
-                                        </span>
-                                    </a>
-                                </div>
-
-                            </div>
-                        </div>
-                        <!-- End of Product 2 -->
-
-
-                        <!-- Start of Product 3 -->
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                            <div class="product">
-
-                                <!-- Product Image -->
-                                <div class="product-image">
-
-                                    <a href="images/shop/product3.jpg" class="hover-zoom">
-                                        <img src="images/shop/product3.jpg" class="img-responsive" alt="">
-                                    </a>
-
-                                    <!-- Product overlay -->
-                                    <div class="product-overlay">
-                                        <a href="cart.html"><i class="fa fa-shopping-cart"></i>Add to Cart</a>
-                                    </div>
-
-                                </div>
-
-                                <!-- Product Description -->
-                                <div class="product-descr">
-
-                                    <a href="shop-product.html">
-                                        <h4>Cariera T-Shirt</h4>
-
-                                        <!-- Price -->
-                                        <span class="price">
-								            <del><span class="amount">$39.99</span></del>
-                                        <span class="amount">$29.99</span>
-                                        </span>
-                                    </a>
-                                </div>
-
-                            </div>
-                        </div>
-                        <!-- End of Product 3 -->
-
-
-                        <!-- Start of Product 4 -->
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                            <div class="product">
-
-                                <!-- Product Image -->
-                                <div class="product-image">
-
-                                    <a href="images/shop/product4.jpg" class="hover-zoom">
-                                        <img src="images/shop/product4.jpg" class="img-responsive" alt="">
-                                    </a>
-
-                                    <!-- Product overlay -->
-                                    <div class="product-overlay">
-                                        <a href="cart.html"><i class="fa fa-shopping-cart"></i>Add to Cart</a>
-                                    </div>
-
-                                </div>
-
-                                <!-- Product Description -->
-                                <div class="product-descr">
-
-                                    <a href="shop-product.html">
-                                        <h4>Cariera Mug</h4>
-
-                                        <!-- Price -->
-                                        <span class="price">
-                                            <span class="amount">$9.99</span>
-                                        </span>
-                                    </a>
-                                </div>
-
-                            </div>
-                        </div>
-                        <!-- End of Product 4 -->
-
-
-                        <!-- Start of Product 5 -->
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                            <div class="product">
-
-                                <!-- Product Image -->
-                                <div class="product-image">
-
-                                    <a href="images/shop/product5.jpg" class="hover-zoom">
-                                        <img src="images/shop/product5.jpg" class="img-responsive" alt="">
-                                    </a>
-
-                                    <!-- Product overlay -->
-                                    <div class="product-overlay">
-                                        <a href="cart.html"><i class="fa fa-shopping-cart"></i>Add to Cart</a>
-                                    </div>
-
-                                </div>
-
-                                <!-- Product Description -->
-                                <div class="product-descr">
-
-                                    <a href="shop-product.html">
-                                        <h4>Rubber Stamp</h4>
-
-                                        <!-- Price -->
-                                        <span class="price">
-                                            <span class="amount">$5.99</span>
-                                        </span>
-                                    </a>
-                                </div>
-
-                            </div>
-                        </div>
-                        <!-- End of Product 5 -->
-
-
-                        <!-- Start of Product 6 -->
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                            <div class="product">
-
-                                <!-- Product Image -->
-                                <div class="product-image">
-
-                                    <a href="images/shop/product6.jpg" class="hover-zoom">
-                                        <img src="images/shop/product6.jpg" class="img-responsive" alt="">
-                                    </a>
-
-                                    <!-- Product overlay -->
-                                    <div class="product-overlay">
-                                        <a href="cart.html"><i class="fa fa-shopping-cart"></i>Add to Cart</a>
-                                    </div>
-
-                                </div>
-
-                                <!-- Product Description -->
-                                <div class="product-descr">
-
-                                    <a href="shop-product.html">
-                                        <h4>Cariera T-Shirt</h4>
-
-                                        <!-- Price -->
-                                        <span class="price">
-                                            <span class="amount">$24.99</span>
-                                        </span>
-                                    </a>
-                                </div>
-
-                            </div>
-                        </div>
-                        <!-- End of Product 6 -->
-
-
-                        <!-- Start of Product 7 -->
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                            <div class="product">
-
-                                <!-- Product Image -->
-                                <div class="product-image">
-
-                                    <a href="images/shop/product3.jpg" class="hover-zoom">
-                                        <img src="images/shop/product3.jpg" class="img-responsive" alt="">
-                                    </a>
-
-                                    <!-- Product overlay -->
-                                    <div class="product-overlay">
-                                        <a href="cart.html"><i class="fa fa-shopping-cart"></i>Add to Cart</a>
-                                    </div>
-
-                                </div>
-
-                                <!-- Product Description -->
-                                <div class="product-descr">
-
-                                    <a href="shop-product.html">
-                                        <h4>Cariera T-Shirt</h4>
-
-                                        <!-- Price -->
-                                        <span class="price">
-								            <del><span class="amount">$39.99</span></del>
-                                        <span class="amount">$29.99</span>
-                                        </span>
-                                    </a>
-                                </div>
-
-                            </div>
-                        </div>
-                        <!-- End of Product 7 -->
-
-
-                        <!-- Start of Product 8 -->
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                            <div class="product">
-
-                                <!-- Product Image -->
-                                <div class="product-image">
-
-                                    <a href="images/shop/product1.jpg" class="hover-zoom">
-                                        <img src="images/shop/product1.jpg" class="img-responsive" alt="">
-                                    </a>
-
-                                    <!-- Product overlay -->
-                                    <div class="product-overlay">
-                                        <a href="cart.html"><i class="fa fa-shopping-cart"></i>Add to Cart</a>
-                                    </div>
-
-                                </div>
-
-                                <!-- Product Description -->
-                                <div class="product-descr">
-
-                                    <a href="shop-product.html">
-                                        <h4>Cariera T-Shirt</h4>
-
-                                        <!-- Price -->
-                                        <span class="price">
-								            <del><span class="amount">$39.99</span></del>
-                                        <span class="amount">$29.99</span>
-                                        </span>
-                                    </a>
-                                </div>
-
-                            </div>
-                        </div>
-                        <!-- End of Product 8 -->
-
-
-                        <!-- Start of Product 9 -->
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                            <div class="product">
-
-                                <!-- Product Image -->
-                                <div class="product-image">
-
-                                    <a href="images/shop/product2.jpg" class="hover-zoom">
-                                        <img src="images/shop/product2.jpg" class="img-responsive" alt="">
-                                    </a>
-
-                                    <!-- Product overlay -->
-                                    <div class="product-overlay">
-                                        <a href="cart.html"><i class="fa fa-shopping-cart"></i>Add to Cart</a>
-                                    </div>
-
-                                </div>
-
-                                <!-- Product Description -->
-                                <div class="product-descr">
-
-                                    <a href="shop-product.html">
-                                        <h4>Cariera Cap</h4>
-
-                                        <!-- Price -->
-                                        <span class="price">
-                                            <span class="amount">$19.99</span>
-                                        </span>
-                                    </a>
-                                </div>
-
-                            </div>
-                        </div>
-                        <!-- End of Product 9 -->
 
                     </div>
                     <!-- End of Products -->

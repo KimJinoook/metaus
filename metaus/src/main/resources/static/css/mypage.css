@@ -101,3 +101,58 @@
 	ul.nav.navbar-nav.pull-right {
     	width: 700px;
 	}
+	
+	.comList-cat{
+		width: 92px;
+		height: 36px;
+		border-radius: 8px; 
+		background-color: #28a0cb;
+		color: white;
+		font-size: 20px;
+		font-weight: bold;
+		line-height: 36px;
+		text-align: center;
+		margin-top: 15px;
+		margin-left: 15px;
+	}
+	
+	.comList-title{
+		margin-top: 15px;
+		margin-left: 15px;
+	}
+	
+	.comList-estimate{
+		margin-left: 15px;
+		font-size: 20px;
+		color: #665;
+		margin-top: 10px;
+	}
+	
+	.comList-price{
+		margin-right: 15px;
+		font-weight: bold;
+	}
+	
+	.comList-company{
+		margin-right: 15px;
+		margin-top: 24px;
+		color: #665;
+		font-size: 15px;
+	}
+	
+	.com-decs-font{
+		font-size: 18px;
+		color: #665;
+	}
+	
+	.com-decs-font-bold{
+		font-weight: bold;
+	}
+	
+	.com-decs-margin{
+		margin-left: 20px;
+	}
+	
+	.com-decs-margin-content{
+		margin-left: 22px;
+	}

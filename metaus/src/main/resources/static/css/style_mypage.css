@@ -408,7 +408,7 @@ img {
     content: '\f00e';
     font-family: 'fontawesome';
     font-size: 30px;
-    color: #f6f6f6;
+    color: #0a76fc;
     cursor: pointer;
     position: absolute;
     left: 0;
@@ -6117,7 +6117,7 @@ section.shop .product:hover {
 section.shop .product-image {
     position: relative;
     overflow: hidden;
-    height: 260px;
+    height: 200px;
     background: -moz-linear-gradient(left, #29b2fe -20%, #443088 120%);
     background: -webkit-linear-gradient(left, #29b2fe -20%, #443088 120%);
     background: linear-gradient(to right, #29b2fe -20%, #443088 120%);
@@ -6176,12 +6176,12 @@ section.shop .product-image .product-overlay a {
     width: 100%;
     font-size: 14px;
     color: #f6f6f6;
-    background: #443088;
+    background: #eb6767cc;
     text-align: center;
 }
 
 section.shop .product-image .product-overlay a:hover {
-    background: #29b2fe;
+    background: #da2323;
 }
 
 section.shop .product-image .product-overlay a i {
@@ -6189,7 +6189,7 @@ section.shop .product-image .product-overlay a i {
 }
 
 section.shop .product-descr {
-    background: #fff;
+    background: #e0e0e08f;
     text-align: center;
     padding: 20px 0;
 }
