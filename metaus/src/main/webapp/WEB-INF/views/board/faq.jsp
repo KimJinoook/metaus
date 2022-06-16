@@ -49,7 +49,8 @@
 									<div class="col-md-12">
 										<ul class="breadcrumb">
 											<li><a href="<c:url value='/'/>">home</a></li>
-											<li class="active">pages</li>
+											<li class="active">커뮤니티	</li>
+											<li class="active">공지사항 - FAQ</li>
 										</ul>
 									</div>
 								</div>

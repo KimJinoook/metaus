@@ -34,4 +34,28 @@ public class BoardController {
 		logger.info("기사 페이지");
 		return "/board/freeBoard";
 	}
+	
+	@RequestMapping("/QuestionBoard")
+	public String QuestionBoard() {
+		logger.info("QuestionBoard 페이지");
+		return "/board/QuestionBoard";
+	}
+	
+	@RequestMapping("/qna")
+	public String qna() {
+		logger.info("qna 페이지");
+		return "/board/qna";
+	}
+	
+	@RequestMapping("/shareBoard")
+	public String shareBoard() {
+		logger.info("shareBoard 페이지");
+		return "/board/shareBoard";
+	}
+	
+	@RequestMapping("/requestBoard")
+	public String requestBoard() {
+		logger.info("requestBoard 페이지");
+		return "/board/requestBoard";
+	}
 }

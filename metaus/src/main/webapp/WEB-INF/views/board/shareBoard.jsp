@@ -41,7 +41,7 @@ $(function () {
 		<!-- Start of Page Title -->
 		<div class="row">
 			<div class="col-md-12">
-				<h2>자유 게시판</h2>
+				<h2>공유/정보 게시판</h2>
 			</div>
 		</div>
 		<!-- End of Page Title -->
@@ -52,7 +52,7 @@ $(function () {
 				<ul class="breadcrumb">
 					<li><a href="#">home</a></li>
 					<li class="active">커뮤니티</li>
-					<li class="active">커뮤니티 - 자유 게시판</li>
+					<li class="active">커뮤니티 - 공유/정보 게시판</li>
 				</ul>
 			</div>
 		</div>
