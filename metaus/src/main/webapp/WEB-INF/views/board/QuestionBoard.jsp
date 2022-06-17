@@ -51,7 +51,7 @@
 
 
 
-
+<a href="/metaus/board/boardWrite?btypeNo=5">[글쓰기]</a>
 
 <!-- ===== Start of Blog Listing Section ===== -->
 <section class="blog-listing ptb80" id="version2" style="padding: 30px;">

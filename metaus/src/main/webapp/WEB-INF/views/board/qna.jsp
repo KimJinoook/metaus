@@ -67,8 +67,9 @@
 
                 <!-- Start of submit input -->
                 <div class="col-md-2 col-sm-2 col-xs-4">
-                    <button type="submit" class="btn btn-blue btn-effect"><i class="fa fa-search"></i>search</button>
+                    <button type="submit" class="btn btn-blue btn-effect"><i class="fa fa-search"></i>검색</button>
                 </div>
+                <a href="/metaus/board/boardWrite?btypeNo=3">[글쓰기]</a>
 
             </form>
             <!-- End of Form -->

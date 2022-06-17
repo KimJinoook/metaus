@@ -3,7 +3,11 @@ package com.metaus.board.controller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/board")
@@ -57,5 +61,22 @@ public class BoardController {
 	public String requestBoard() {
 		logger.info("requestBoard 페이지");
 		return "/board/requestBoard";
+	}
+	
+	@GetMapping("/boardWrite")
+	public String boardWrite_get(@RequestParam(defaultValue = "0") int btypeNo,
+			Model model) {
+		logger.info("커뮤니티 글 작성 페이지, 파라미터 btypeNo={}",btypeNo);
+		
+		model.addAttribute("btypeNo", btypeNo);
+		
+		return "/board/boardWrite";
+	}
+	
+	@PostMapping("/boardWrite")
+	public String boardWrite_post() {
+		logger.info("커뮤니티 글 작성 페이지");
+		
+		return "/board/";
 	}
 }
