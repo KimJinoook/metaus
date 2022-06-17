@@ -362,7 +362,7 @@ Author URI: gnodesign.com
             video_popup = $('.popup-video');
 
         // pop up for images
-        $(images_popup).magnificPopup({
+        /*$(images_popup).magnificPopup({
             type: 'image',
             mainClass: 'mfp-fade',
             fixedContentPos: false,
@@ -385,7 +385,7 @@ Author URI: gnodesign.com
                 }
             }
 
-        });
+        });*/
 		
 
         // pop up for videos

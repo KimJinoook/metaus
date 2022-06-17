@@ -4,7 +4,7 @@
 	}
 	
 	.main-sidebar{
-		padding-top: 90px;
+		padding-top: 0;
 	}
 	
 	.skin-blue .main-sidebar{
@@ -78,3 +78,160 @@
 	section{
 		background-color: #ecf0f5;
 	}
+	
+	section.shop{
+		background-color: #ecf0f5;
+	}
+	
+	.font{
+		font-size: 30px;
+		color: black;
+		
+	}
+	
+	.height-260{
+		height: 260px;
+	}
+	
+	.width-header-menu{
+		width: 729px;
+		padding-left: 0;
+	}
+	
+	ul.nav.navbar-nav.pull-right {
+    	width: 700px;
+	}
+	
+	.comList-cat{
+		width: 92px;
+		height: 36px;
+		border-radius: 8px; 
+		background-color: #28a0cb;
+		color: white;
+		font-size: 20px;
+		font-weight: bold;
+		line-height: 36px;
+		text-align: center;
+		margin-top: 15px;
+		margin-left: 15px;
+	}
+	
+	.lectureList-coupon{
+		width: 103px;
+		height: 36px;
+		border-radius: 8px; 
+		background-color: #863fe3;
+		color: white;
+		font-size: 20px;
+		font-weight: bold;
+		line-height: 36px;
+		text-align: center;
+		margin-top: 15px;
+		margin-left: 5px;
+	}
+	
+	.comList-title{
+		margin-top: 15px;
+		margin-left: 15px;
+	}
+	
+	.comList-estimate{
+		margin-left: 15px;
+		font-size: 20px;
+		color: #665;
+		margin-top: 10px;
+	}
+	
+	.comList-price{
+		margin-right: 15px;
+		font-weight: bold;
+	}
+	
+	.comList-company{
+		margin-right: 15px;
+		margin-top: 24px;
+		color: #665;
+		font-size: 15px;
+	}
+	
+	.com-decs-font{
+		font-size: 18px;
+		color: #665;
+	}
+	
+	.com-decs-font-bold{
+		font-weight: bold;
+	}
+	
+	.com-decs-margin{
+		margin-left: 20px;
+	}
+	
+	.com-decs-margin-content{
+		margin-left: 22px;
+	}
+	
+	section.shop .product.lectureList{
+		width: 500px;
+		border: none;
+	}
+	section.shop .product-image.lectureList-content{
+		height: 300px;
+		position: relative;
+	}
+	
+	section.shop .product-descr.lectureList-descr{
+		height: 70px;
+		padding: 0;
+		background: #ecf0f5;
+	}
+	
+	.lec-descr-title{
+		text-align: left;
+		font-weight: bold;
+	}
+	
+	.lec-descr-content{
+		text-align: left;
+	}
+	
+	.lectureList-img{
+		position: absolute;
+	}
+	
+	.lec-cat-index{
+		position: relative;
+		z-index: 1;
+	}
+	
+	.lec-descr-title {
+    	margin-top: 7px;
+	}
+	
+	.fa-star{
+		color: #ffc400;
+		font-size: 14px;
+	}
+	
+	.fa-heart{
+		color: red;
+	}
+	
+	.fa-thumbs-up{
+		color: #0086ff;
+		margin-left: 8px;
+	}
+	
+	.div-line{
+		background-color: #ddddddab;
+		height: 1px;
+		margin-top: 7px;
+	}
+	
+	.lec-price{
+		color: black;
+		font-size: 18px;
+		font-weight: bold;
+		margin-top: 7px;
+	}
+	

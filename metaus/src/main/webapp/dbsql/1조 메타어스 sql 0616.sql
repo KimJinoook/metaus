@@ -90,11 +90,6 @@ ALTER TABLE fp_classcontent
 
 ALTER TABLE fp_pay
 	DROP
-		CONSTRAINT FK_fp_class_TO_fp_pay
-		CASCADE;
-
-ALTER TABLE fp_pay
-	DROP
 		CONSTRAINT FK_fp_mem_TO_fp_pay
 		CASCADE;
 
@@ -126,6 +121,26 @@ ALTER TABLE fp_msgadd
 ALTER TABLE fp_classatc
 	DROP
 		CONSTRAINT FK_fp_classcontent_TO_fp_classatc
+		CASCADE;
+
+ALTER TABLE fp_cscrap
+	DROP
+		CONSTRAINT FK_fp_mem_TO_fp_cscrap
+		CASCADE;
+
+ALTER TABLE fp_cscrap
+	DROP
+		CONSTRAINT FK_fp_class_TO_fp_cscrap
+		CASCADE;
+
+ALTER TABLE fp_cart
+	DROP
+		CONSTRAINT FK_fp_mem_TO_fp_cart
+		CASCADE;
+
+ALTER TABLE fp_cart
+	DROP
+		CONSTRAINT FK_fp_class_TO_fp_cart
 		CASCADE;
 
 ALTER TABLE fp_mem
@@ -266,6 +281,24 @@ ALTER TABLE fp_classatc
 		CASCADE
 		KEEP INDEX;
 
+ALTER TABLE fp_manager
+	DROP
+		PRIMARY KEY
+		CASCADE
+		KEEP INDEX;
+
+ALTER TABLE fp_cscrap
+	DROP
+		PRIMARY KEY
+		CASCADE
+		KEEP INDEX;
+
+ALTER TABLE fp_cart
+	DROP
+		PRIMARY KEY
+		CASCADE
+		KEEP INDEX;
+
 /* 회원정보 */
 DROP TABLE fp_mem 
 	CASCADE CONSTRAINTS;
@@ -358,6 +391,18 @@ DROP TABLE fp_msgadd
 DROP TABLE fp_classatc 
 	CASCADE CONSTRAINTS;
 
+/* 관리자 */
+DROP TABLE fp_manager 
+	CASCADE CONSTRAINTS;
+
+/* 관심클래스 */
+DROP TABLE fp_cscrap 
+	CASCADE CONSTRAINTS;
+
+/* 장바구니 */
+DROP TABLE fp_cart 
+	CASCADE CONSTRAINTS;
+
 /* 회원정보 */
 CREATE TABLE fp_mem (
 	mem_no NUMBER NOT NULL, /* 회원번호 */
@@ -371,7 +416,6 @@ CREATE TABLE fp_mem (
 	mem_add CLOB, /* 주소 */
 	mem_add2 VARCHAR2(50), /* 상세주소 */
 	mem_pic CLOB, /* 프로필사진 */
-	mem_manager VARCHAR2(6), /* 관리자 */
 	mem_joindate DATE, /* 가입일 */
 	mem_outdate DATE, /* 탈퇴일 */
 	mem_cutdate DATE, /* 차단일 */
@@ -413,9 +457,9 @@ CREATE TABLE fp_com (
 	com_longi VARCHAR2(50), /* 경도 */
 	com_rrn VARCHAR2(50), /* 사업자 등록번호 */
 	com_reccnt NUMBER, /* 의뢰 수 */
-	com_tel VARCHAR2(30) /* 전화번호 */
+	com_tel VARCHAR2(30), /* 전화번호 */
 	com_joindate DATE, /* 가입일 */
-	com_outdate DATE, /* 탈퇴일 */
+	com_outdate DATE /* 탈퇴일 */
 );
 
 ALTER TABLE fp_com
@@ -667,7 +711,6 @@ ALTER TABLE fp_classcontent
 /* 결제내역 */
 CREATE TABLE fp_pay (
 	pay_no NUMBER NOT NULL, /* 결제번호 */
-	class_no NUMBER, /* 클래스번호 */
 	mem_no NUMBER, /* 회원번호 */
 	pay_kind VARCHAR2(50), /* 결제 수단 */
 	pay_price NUMBER, /* 결제 금액 */
@@ -739,6 +782,50 @@ ALTER TABLE fp_classatc
 		CONSTRAINT PK_fp_classatc
 		PRIMARY KEY (
 			ccfile_no
+		);
+
+/* 관리자 */
+CREATE TABLE fp_manager (
+	manager_no NUMBER NOT NULL, /* 관리자번호 */
+	manager_id VARCHAR2(50), /* 아이디 */
+	manager_name VARCHAR2(20), /* 이름 */
+	manager_pwd VARCHAR2(50), /* 비밀번호 */
+	manager_regdate DATE /* 등록일 */
+);
+
+ALTER TABLE fp_manager
+	ADD
+		CONSTRAINT PK_fp_manager
+		PRIMARY KEY (
+			manager_no
+		);
+
+/* 관심클래스 */
+CREATE TABLE fp_cscrap (
+	cscrap_no NUMBER NOT NULL, /* 관심클래스번호 */
+	mem_no NUMBER, /* 회원번호 */
+	class_no NUMBER /* 클래스번호 */
+);
+
+ALTER TABLE fp_cscrap
+	ADD
+		CONSTRAINT PK_fp_cscrap
+		PRIMARY KEY (
+			cscrap_no
+		);
+
+/* 장바구니 */
+CREATE TABLE fp_cart (
+	cart_no NUMBER NOT NULL, /* 장바구니번호 */
+	mem_no NUMBER, /* 회원번호 */
+	class_no NUMBER /* 클래스번호 */
+);
+
+ALTER TABLE fp_cart
+	ADD
+		CONSTRAINT PK_fp_cart
+		PRIMARY KEY (
+			cart_no
 		);
 
 ALTER TABLE fp_kakao
@@ -923,16 +1010,6 @@ ALTER TABLE fp_classcontent
 
 ALTER TABLE fp_pay
 	ADD
-		CONSTRAINT FK_fp_class_TO_fp_pay
-		FOREIGN KEY (
-			class_no
-		)
-		REFERENCES fp_class (
-			class_no
-		);
-
-ALTER TABLE fp_pay
-	ADD
 		CONSTRAINT FK_fp_mem_TO_fp_pay
 		FOREIGN KEY (
 			mem_no
@@ -1000,3 +1077,254 @@ ALTER TABLE fp_classatc
 		REFERENCES fp_classcontent (
 			cc_no
 		)on delete cascade;
+
+ALTER TABLE fp_cscrap
+	ADD
+		CONSTRAINT FK_fp_mem_TO_fp_cscrap
+		FOREIGN KEY (
+			mem_no
+		)
+		REFERENCES fp_mem (
+			mem_no
+		);
+
+ALTER TABLE fp_cscrap
+	ADD
+		CONSTRAINT FK_fp_class_TO_fp_cscrap
+		FOREIGN KEY (
+			class_no
+		)
+		REFERENCES fp_class (
+			class_no
+		)on delete cascade;
+
+ALTER TABLE fp_cart
+	ADD
+		CONSTRAINT FK_fp_mem_TO_fp_cart
+		FOREIGN KEY (
+			mem_no
+		)
+		REFERENCES fp_mem (
+			mem_no
+		);
+
+ALTER TABLE fp_cart
+	ADD
+		CONSTRAINT FK_fp_class_TO_fp_cart
+		FOREIGN KEY (
+			class_no
+		)
+		REFERENCES fp_class (
+			class_no
+		)on delete cascade;
+        
+        
+        
+        
+        
+        
+        
+
+
+
+--시퀀스
+
+
+-- 시퀀스 삭제 생성
+drop sequence fp_mem_seq;
+
+create sequence fp_mem_seq
+increment by 1
+start with 1
+nocache;
+
+drop sequence fp_port_seq;
+
+create sequence fp_port_seq
+increment by 1
+start with 1
+nocache;
+
+drop sequence fp_scrap_seq;
+
+create sequence fp_scrap_seq
+increment by 1
+start with 1
+nocache;
+
+drop sequence fp_manager_seq;
+
+create sequence fp_manager_seq
+increment by 1
+start with 1
+nocache;
+
+drop sequence fp_boardType_seq;
+
+create sequence fp_boardType_seq
+increment by 1
+start with 1
+nocache;
+
+drop sequence fp_board_seq;
+
+create sequence fp_board_seq
+increment by 1
+start with 1
+nocache;
+
+drop sequence fp_boardatc_seq;
+
+create sequence fp_boardatc_seq
+increment by 1
+start with 1
+nocache;
+
+drop sequence fp_report_seq;
+
+create sequence fp_report_seq
+increment by 1
+start with 1
+nocache;
+
+drop sequence fp_comment_seq;
+
+create sequence fp_comment_seq
+increment by 1
+start with 1
+nocache;
+
+
+drop sequence fp_msgadd_seq;
+
+create sequence fp_msgadd_seq
+increment by 1
+start with 1
+nocache;
+
+
+drop sequence fp_msg_seq;
+
+create sequence fp_msg_seq
+increment by 1
+start with 1
+nocache;
+
+
+drop sequence fp_msgtype_seq;
+
+create sequence fp_msgtype_seq
+increment by 1
+start with 1
+nocache;
+
+
+drop sequence fp_com_seq;
+
+create sequence fp_com_seq
+increment by 1
+start with 1
+nocache;
+
+
+drop sequence fp_rec_seq;
+
+create sequence fp_rec_seq
+increment by 1
+start with 1
+nocache;
+
+
+drop sequence fp_recatc_seq;
+
+create sequence fp_recatc_seq
+increment by 1
+start with 1
+nocache;
+
+
+drop sequence fp_recpre_seq;
+
+create sequence fp_recpre_seq
+increment by 1
+start with 1
+nocache;
+
+
+drop sequence fp_class_seq;
+
+create sequence fp_class_seq
+increment by 1
+start with 1
+nocache;
+
+
+drop sequence fp_cscrap_seq;
+
+create sequence fp_cscrap_seq
+increment by 1
+start with 1
+nocache;
+
+
+drop sequence fp_cart_seq;
+
+create sequence fp_cart_seq
+increment by 1
+start with 1
+nocache;
+
+
+drop sequence fp_classatc_seq;
+
+create sequence fp_classatc_seq
+increment by 1
+start with 1
+nocache;
+
+
+drop sequence fp_classcontent_seq;
+
+create sequence fp_classcontent_seq
+increment by 1
+start with 1
+nocache;
+
+
+drop sequence fp_classcate_seq;
+
+create sequence fp_classcate_seq
+increment by 1
+start with 1
+nocache;
+
+
+drop sequence fp_pay_seq;
+
+create sequence fp_pay_seq
+increment by 1
+start with 1
+nocache;
+
+
+insert into fp_mem(mem_no, mem_name, mem_id, mem_pw, mem_joindate)
+values(fp_mem_seq.nextval,'테스터','test@naver.com','1234',sysdate);
+
+insert into fp_boardType
+values(fp_boardType_seq.nextval,'공지사항','Y','Y');
+insert into fp_boardType
+values(fp_boardType_seq.nextval,'FAQ','Y','N');
+insert into fp_boardType
+values(fp_boardType_seq.nextval,'QNA','N','Y');
+insert into fp_boardType
+values(fp_boardType_seq.nextval,'기사','Y','Y');
+insert into fp_boardType
+values(fp_boardType_seq.nextval,'질문게시판','N','Y');
+insert into fp_boardType
+values(fp_boardType_seq.nextval,'공유정보게시판','N','Y');
+insert into fp_boardType
+values(fp_boardType_seq.nextval,'개인의뢰게시판','N','Y');
+insert into fp_boardType
+values(fp_boardType_seq.nextval,'자유게시판','N','Y');
+
+commit;
