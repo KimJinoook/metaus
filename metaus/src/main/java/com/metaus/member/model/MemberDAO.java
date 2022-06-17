@@ -2,7 +2,10 @@ package com.metaus.member.model;
 
 import org.apache.ibatis.annotations.Mapper;
 
+
 @Mapper
-public class MemberDAO {
+public interface MemberDAO {
+	String selectPwd(String memId);
+	MemberVO selectByUserid(String memId) ;
 
 }

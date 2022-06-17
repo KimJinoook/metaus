@@ -62,7 +62,7 @@ $(function () {
 </section>
 <!-- =============== End of Page Header 1 Section =============== -->
 
-
+<a href="/metaus/board/boardWrite?btypeNo=8">[글쓰기]</a>
 <!-- ===== Start of Blog Listing Section ===== -->
 <section class="blog-listing ptb80" id="version2">
 	<div class="container">

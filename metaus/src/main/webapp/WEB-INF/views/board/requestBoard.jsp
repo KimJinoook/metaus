@@ -49,7 +49,7 @@
     <!-- =============== End of Page Header 1 Section =============== -->
 
 
-
+<a href="/metaus/board/boardWrite?btypeNo=7">[글쓰기]</a>
 
 
     <!-- ===== Start of Main Wrapper Section ===== -->
