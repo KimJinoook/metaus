@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.metaus.member.model.MemberDAO">
+	
+	<select id="selectPwd" parameterType="string" resultType="String">
+		select mem_pw from fp_mem
+		where mem_id=#{memId} and mem_outdate is null
+	</select>
+	
+	<select id="selectByUserid" parameterType="string" 
+		resultType="memberVo">
+      select * from fp_mem where mem_id=#{memId}
+   	</select>
+   	
+	
+</mapper>
+
+
+
+
+

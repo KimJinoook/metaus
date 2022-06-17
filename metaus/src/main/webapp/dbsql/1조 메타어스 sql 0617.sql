@@ -407,7 +407,7 @@ DROP TABLE fp_cart
 CREATE TABLE fp_mem (
 	mem_no NUMBER NOT NULL, /* 회원번호 */
 	mem_name VARCHAR2(20) NOT NULL, /* 이름 */
-	mem_id CLOB NOT NULL, /* IDEmail */
+	mem_id VARCHAR2(200) NOT NULL, /* IDEmail */
 	mem_pw VARCHAR2(50) NOT NULL, /* PW */
 	mem_nick VARCHAR2(50), /* 닉네임 */
 	mem_birth VARCHAR2(20), /* 생년월일 */
@@ -1306,9 +1306,10 @@ increment by 1
 start with 1
 nocache;
 
+select * from fp_mem;
 
-insert into fp_mem(mem_no, mem_name, mem_id, mem_pw, mem_joindate)
-values(fp_mem_seq.nextval,'테스터','test@naver.com','1234',sysdate);
+insert into fp_mem
+values(fp_mem_seq.nextval,'테스터','test@naver.com','1234','닉네임1','941215','01030843045','15151','서울시영등포구시흥대로','상세주소','프사경로',sysdate,null,null,null,null,null);
 
 insert into fp_boardType
 values(fp_boardType_seq.nextval,'공지사항','Y','Y');
