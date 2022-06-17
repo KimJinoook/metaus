@@ -67,7 +67,7 @@
 	    <nav class="navbar navbar-default navbar-static-top fluid_header centered">
             <!-- Logo -->
             <div class="col-md-2 col-sm-6 col-xs-8 nopadding logo">
-                <a class="navbar-brand nomargin" href="<c:url value='/'/>"><img src="${pageContext.request.contextPath}/images/logo.svg" alt="logo"></a>
+                <a class="navbar-brand nomargin" href="<c:url value='/'/>"><img src="${pageContext.request.contextPath}/images/metaus_logo2.png" alt="logo"></a>
                 <!-- INSERT YOUR LOGO HERE -->
             </div>
             <div class="left three-line-btn">

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../layout/sidebar.jsp" %>
+
 <div class="content-wrapper">
     <!-- ===== Start of Shop Section ===== -->
     <section class="shop ptb80">
@@ -15,42 +16,34 @@
 
                         <!-- Start of Product 1 -->
                         <div class="col-md-6 col-xs-12">
-                            <div class="product">
+                            <div class="product lectureList">
 
                                 <!-- Product Image -->
-                                <div class="product-image" style="background: #fff;">
+                                <div class="product-image lectureList-content" style="background: #fff;">
 									<!-- pop up for images 사용하려면 custom_mypage.js 364행 -->
                                     <a href="commissionDetail" class="hover-zoom height-260">
-	                                    <div class="height-260">
-	                                    	<div class="comList-cat left">디자인</div>
-	                                        <div class="comList-company right">소상공인 상점이름</div>
-	                                        <div class="clear"></div>
-	                                        <div class="font comList-title">메타버스 상점 디자인</div>
-	                                        <div class="left comList-estimate">최고/최저 견적</div>
-	                                        <div class="right font comList-price">100~200만원</div>
-	                                        <div class="clear"></div>
-										</div>
+                                    	<img src="https://jpassets.jobplanet.co.kr/production/uploads/company_story/contents/2021/04/02/184f70b6-1fb3-48d5-991f-f8f6fcb5b05c.jpg" class="img-responsive lectureList-img" alt="이미지">
+                                    	<div class="comList-cat left lec-cat-index">3D모델링</div>
+                                    	<div class="lectureList-coupon left lec-cat-index">3만원 쿠폰</div>
+                                        <div class="clear"></div>
                                     </a>
 
                                     <!-- Product overlay -->
                                     <div class="product-overlay">
-                                        <a href="commissionCancel"><i class="fa-solid fa-circle-minus"></i>지원 취소</a>
+                                        <a href="commissionCancel"><i class="fa-solid fa-circle-minus"></i>목록에서 삭제</a>
                                     </div>
 
                                 </div>
 
                                 <!-- Product Description -->
-                                <div class="product-descr">
-
-                                    <a href="shop-product.html">
-                                        <div class="com-decs-font com-decs-margin comList-avg-estimate left">평균견적</div>
-										<div class="com-decs-font com-decs-margin-content left com-decs-font-bold">150만원 &nbsp;&nbsp;&nbsp;&nbsp;|</div>
-										<div class="com-decs-font com-decs-margin comList-avg-period left">평균기간</div>
-										<div class="com-decs-font com-decs-margin-content left com-decs-font-bold">5일 &nbsp;&nbsp;&nbsp;&nbsp;|</div>
-										<div class="com-decs-font com-decs-margin omList-avg-applicant left">지원자수</div>
-										<div class="com-decs-font com-decs-margin-content left com-decs-font-bold">10명</div>
-										<div class="clear"></div>
-                                    </a>
+                                <div class="product-descr lectureList-descr">
+									<div class="lec-descr-title">김메타</div>
+									<div class="lec-descr-content">[<i class="fa-solid fa-star"></i> BEST] 상상을 담아내는 방법, 김메타의 3D 모델링</div>
+									<div class="left"><i class="fa-solid fa-heart"></i> 1515</div>
+									<div class="left thumb-position"><i class="fa-solid fa-thumbs-up"></i> 97%</div>
+									<div class="clear"></div>
+									<div class="div-line"></div>
+									<div class="left lec-price">100,000원</div>
                                 </div>
 
                             </div>
@@ -58,42 +51,34 @@
                         <!-- End of Product 1 -->
                         <!-- Start of Product 1 -->
                         <div class="col-md-6 col-xs-12">
-                            <div class="product">
+                            <div class="product lectureList">
 
                                 <!-- Product Image -->
-                                <div class="product-image" style="background: #fff;">
+                                <div class="product-image lectureList-content" style="background: #fff;">
 									<!-- pop up for images 사용하려면 custom_mypage.js 364행 -->
                                     <a href="commissionDetail" class="hover-zoom height-260">
-	                                    <div class="height-260">
-	                                    	<div class="comList-cat left">디자인</div>
-	                                        <div class="comList-company right">소상공인 상점이름</div>
-	                                        <div class="clear"></div>
-	                                        <div class="font comList-title">메타버스 상점 디자인</div>
-	                                        <div class="left comList-estimate">최고/최저 견적</div>
-	                                        <div class="right font comList-price">100~200만원</div>
-	                                        <div class="clear"></div>
-										</div>
+                                    	<img src="https://blog.kakaocdn.net/dn/bUpKT6/btqzaZ8GWbk/kLRAVjzJGTK77jQP5YLFM1/img.png" class="img-responsive lectureList-img" alt="이미지">
+                                    	<div class="comList-cat left lec-cat-index">컨설팅</div>
+                                    	<div class="lectureList-coupon left lec-cat-index">4만원 쿠폰</div>
+                                        <div class="clear"></div>
                                     </a>
 
                                     <!-- Product overlay -->
                                     <div class="product-overlay">
-                                        <a href="commissionCancel"><i class="fa-solid fa-circle-minus"></i>지원 취소</a>
+                                        <a href="commissionCancel"><i class="fa-solid fa-circle-minus"></i>목록에서 삭제</a>
                                     </div>
 
                                 </div>
 
                                 <!-- Product Description -->
-                                <div class="product-descr">
-
-                                    <a href="shop-product.html">
-                                        <div class="com-decs-font com-decs-margin comList-avg-estimate left">평균견적</div>
-										<div class="com-decs-font com-decs-margin-content left com-decs-font-bold">150만원 &nbsp;&nbsp;&nbsp;&nbsp;|</div>
-										<div class="com-decs-font com-decs-margin comList-avg-period left">평균기간</div>
-										<div class="com-decs-font com-decs-margin-content left com-decs-font-bold">5일 &nbsp;&nbsp;&nbsp;&nbsp;|</div>
-										<div class="com-decs-font com-decs-margin omList-avg-applicant left">지원자수</div>
-										<div class="com-decs-font com-decs-margin-content left com-decs-font-bold">10명</div>
-										<div class="clear"></div>
-                                    </a>
+                                <div class="product-descr lectureList-descr">
+									<div class="lec-descr-title">김메타</div>
+									<div class="lec-descr-content">[<i class="fa-solid fa-star"></i> BEST] 상상을 담아내는 방법, 김메타의 3D 모델링</div>
+									<div class="left"><i class="fa-solid fa-heart"></i> 1515</div>
+									<div class="left thumb-position"><i class="fa-solid fa-thumbs-up"></i> 97%</div>
+									<div class="clear"></div>
+									<div class="div-line"></div>
+									<div class="left lec-price">100,000원</div>
                                 </div>
 
                             </div>
@@ -101,42 +86,34 @@
                         <!-- End of Product 1 -->
                         <!-- Start of Product 1 -->
                         <div class="col-md-6 col-xs-12">
-                            <div class="product">
+                            <div class="product lectureList">
 
                                 <!-- Product Image -->
-                                <div class="product-image" style="background: #fff;">
+                                <div class="product-image lectureList-content" style="background: #fff;">
 									<!-- pop up for images 사용하려면 custom_mypage.js 364행 -->
                                     <a href="commissionDetail" class="hover-zoom height-260">
-	                                    <div class="height-260">
-	                                    	<div class="comList-cat left">디자인</div>
-	                                        <div class="comList-company right">소상공인 상점이름</div>
-	                                        <div class="clear"></div>
-	                                        <div class="font comList-title">메타버스 상점 디자인</div>
-	                                        <div class="left comList-estimate">최고/최저 견적</div>
-	                                        <div class="right font comList-price">100~200만원</div>
-	                                        <div class="clear"></div>
-										</div>
+                                    	<img src="https://jpassets.jobplanet.co.kr/production/uploads/company_story/contents/2021/04/02/184f70b6-1fb3-48d5-991f-f8f6fcb5b05c.jpg" class="img-responsive lectureList-img" alt="이미지">
+                                    	<div class="comList-cat left lec-cat-index">3D모델링</div>
+                                    	<div class="lectureList-coupon left lec-cat-index">3만원 쿠폰</div>
+                                        <div class="clear"></div>
                                     </a>
 
                                     <!-- Product overlay -->
                                     <div class="product-overlay">
-                                        <a href="commissionCancel"><i class="fa-solid fa-circle-minus"></i>지원 취소</a>
+                                        <a href="commissionCancel"><i class="fa-solid fa-circle-minus"></i>목록에서 삭제</a>
                                     </div>
 
                                 </div>
 
                                 <!-- Product Description -->
-                                <div class="product-descr">
-
-                                    <a href="shop-product.html">
-                                        <div class="com-decs-font com-decs-margin comList-avg-estimate left">평균견적</div>
-										<div class="com-decs-font com-decs-margin-content left com-decs-font-bold">150만원 &nbsp;&nbsp;&nbsp;&nbsp;|</div>
-										<div class="com-decs-font com-decs-margin comList-avg-period left">평균기간</div>
-										<div class="com-decs-font com-decs-margin-content left com-decs-font-bold">5일 &nbsp;&nbsp;&nbsp;&nbsp;|</div>
-										<div class="com-decs-font com-decs-margin omList-avg-applicant left">지원자수</div>
-										<div class="com-decs-font com-decs-margin-content left com-decs-font-bold">10명</div>
-										<div class="clear"></div>
-                                    </a>
+                                <div class="product-descr lectureList-descr">
+									<div class="lec-descr-title">김메타</div>
+									<div class="lec-descr-content">[<i class="fa-solid fa-star"></i> BEST] 상상을 담아내는 방법, 김메타의 3D 모델링</div>
+									<div class="left"><i class="fa-solid fa-heart"></i> 1515</div>
+									<div class="left thumb-position"><i class="fa-solid fa-thumbs-up"></i> 97%</div>
+									<div class="clear"></div>
+									<div class="div-line"></div>
+									<div class="left lec-price">100,000원</div>
                                 </div>
 
                             </div>
@@ -144,42 +121,34 @@
                         <!-- End of Product 1 -->
                         <!-- Start of Product 1 -->
                         <div class="col-md-6 col-xs-12">
-                            <div class="product">
+                            <div class="product lectureList">
 
                                 <!-- Product Image -->
-                                <div class="product-image" style="background: #fff;">
+                                <div class="product-image lectureList-content" style="background: #fff;">
 									<!-- pop up for images 사용하려면 custom_mypage.js 364행 -->
                                     <a href="commissionDetail" class="hover-zoom height-260">
-	                                    <div class="height-260">
-	                                    	<div class="comList-cat left">디자인</div>
-	                                        <div class="comList-company right">소상공인 상점이름</div>
-	                                        <div class="clear"></div>
-	                                        <div class="font comList-title">메타버스 상점 디자인</div>
-	                                        <div class="left comList-estimate">최고/최저 견적</div>
-	                                        <div class="right font comList-price">100~200만원</div>
-	                                        <div class="clear"></div>
-										</div>
+                                    	<img src="https://jpassets.jobplanet.co.kr/production/uploads/company_story/contents/2021/04/02/184f70b6-1fb3-48d5-991f-f8f6fcb5b05c.jpg" class="img-responsive lectureList-img" alt="이미지">
+                                    	<div class="comList-cat left lec-cat-index">3D모델링</div>
+                                    	<div class="lectureList-coupon left lec-cat-index">3만원 쿠폰</div>
+                                        <div class="clear"></div>
                                     </a>
 
                                     <!-- Product overlay -->
                                     <div class="product-overlay">
-                                        <a href="commissionCancel"><i class="fa-solid fa-circle-minus"></i>지원 취소</a>
+                                        <a href="commissionCancel"><i class="fa-solid fa-circle-minus"></i>목록에서 삭제</a>
                                     </div>
 
                                 </div>
 
                                 <!-- Product Description -->
-                                <div class="product-descr">
-
-                                    <a href="shop-product.html">
-                                        <div class="com-decs-font com-decs-margin comList-avg-estimate left">평균견적</div>
-										<div class="com-decs-font com-decs-margin-content left com-decs-font-bold">150만원 &nbsp;&nbsp;&nbsp;&nbsp;|</div>
-										<div class="com-decs-font com-decs-margin comList-avg-period left">평균기간</div>
-										<div class="com-decs-font com-decs-margin-content left com-decs-font-bold">5일 &nbsp;&nbsp;&nbsp;&nbsp;|</div>
-										<div class="com-decs-font com-decs-margin omList-avg-applicant left">지원자수</div>
-										<div class="com-decs-font com-decs-margin-content left com-decs-font-bold">10명</div>
-										<div class="clear"></div>
-                                    </a>
+                                <div class="product-descr lectureList-descr">
+									<div class="lec-descr-title">김메타</div>
+									<div class="lec-descr-content">[<i class="fa-solid fa-star"></i> BEST] 상상을 담아내는 방법, 김메타의 3D 모델링</div>
+									<div class="left"><i class="fa-solid fa-heart"></i> 1515</div>
+									<div class="left thumb-position"><i class="fa-solid fa-thumbs-up"></i> 97%</div>
+									<div class="clear"></div>
+									<div class="div-line"></div>
+									<div class="left lec-price">100,000원</div>
                                 </div>
 
                             </div>
@@ -187,42 +156,34 @@
                         <!-- End of Product 1 -->
                         <!-- Start of Product 1 -->
                         <div class="col-md-6 col-xs-12">
-                            <div class="product">
+                            <div class="product lectureList">
 
                                 <!-- Product Image -->
-                                <div class="product-image" style="background: #fff;">
+                                <div class="product-image lectureList-content" style="background: #fff;">
 									<!-- pop up for images 사용하려면 custom_mypage.js 364행 -->
                                     <a href="commissionDetail" class="hover-zoom height-260">
-	                                    <div class="height-260">
-	                                    	<div class="comList-cat left">디자인</div>
-	                                        <div class="comList-company right">소상공인 상점이름</div>
-	                                        <div class="clear"></div>
-	                                        <div class="font comList-title">메타버스 상점 디자인</div>
-	                                        <div class="left comList-estimate">최고/최저 견적</div>
-	                                        <div class="right font comList-price">100~200만원</div>
-	                                        <div class="clear"></div>
-										</div>
+                                    	<img src="https://jpassets.jobplanet.co.kr/production/uploads/company_story/contents/2021/04/02/184f70b6-1fb3-48d5-991f-f8f6fcb5b05c.jpg" class="img-responsive lectureList-img" alt="이미지">
+                                    	<div class="comList-cat left lec-cat-index">3D모델링</div>
+                                    	<div class="lectureList-coupon left lec-cat-index">3만원 쿠폰</div>
+                                        <div class="clear"></div>
                                     </a>
 
                                     <!-- Product overlay -->
                                     <div class="product-overlay">
-                                        <a href="commissionCancel"><i class="fa-solid fa-circle-minus"></i>지원 취소</a>
+                                        <a href="commissionCancel"><i class="fa-solid fa-circle-minus"></i>목록에서 삭제</a>
                                     </div>
 
                                 </div>
 
                                 <!-- Product Description -->
-                                <div class="product-descr">
-
-                                    <a href="shop-product.html">
-                                        <div class="com-decs-font com-decs-margin comList-avg-estimate left">평균견적</div>
-										<div class="com-decs-font com-decs-margin-content left com-decs-font-bold">150만원 &nbsp;&nbsp;&nbsp;&nbsp;|</div>
-										<div class="com-decs-font com-decs-margin comList-avg-period left">평균기간</div>
-										<div class="com-decs-font com-decs-margin-content left com-decs-font-bold">5일 &nbsp;&nbsp;&nbsp;&nbsp;|</div>
-										<div class="com-decs-font com-decs-margin omList-avg-applicant left">지원자수</div>
-										<div class="com-decs-font com-decs-margin-content left com-decs-font-bold">10명</div>
-										<div class="clear"></div>
-                                    </a>
+                                <div class="product-descr lectureList-descr">
+									<div class="lec-descr-title">김메타</div>
+									<div class="lec-descr-content">[<i class="fa-solid fa-star"></i> BEST] 상상을 담아내는 방법, 김메타의 3D 모델링</div>
+									<div class="left"><i class="fa-solid fa-heart"></i> 1515</div>
+									<div class="left thumb-position"><i class="fa-solid fa-thumbs-up"></i> 97%</div>
+									<div class="clear"></div>
+									<div class="div-line"></div>
+									<div class="left lec-price">100,000원</div>
                                 </div>
 
                             </div>
@@ -230,42 +191,34 @@
                         <!-- End of Product 1 -->
                         <!-- Start of Product 1 -->
                         <div class="col-md-6 col-xs-12">
-                            <div class="product">
+                            <div class="product lectureList">
 
                                 <!-- Product Image -->
-                                <div class="product-image" style="background: #fff;">
+                                <div class="product-image lectureList-content" style="background: #fff;">
 									<!-- pop up for images 사용하려면 custom_mypage.js 364행 -->
                                     <a href="commissionDetail" class="hover-zoom height-260">
-	                                    <div class="height-260">
-	                                    	<div class="comList-cat left">디자인</div>
-	                                        <div class="comList-company right">소상공인 상점이름</div>
-	                                        <div class="clear"></div>
-	                                        <div class="font comList-title">메타버스 상점 디자인</div>
-	                                        <div class="left comList-estimate">최고/최저 견적</div>
-	                                        <div class="right font comList-price">100~200만원</div>
-	                                        <div class="clear"></div>
-										</div>
+                                    	<img src="https://jpassets.jobplanet.co.kr/production/uploads/company_story/contents/2021/04/02/184f70b6-1fb3-48d5-991f-f8f6fcb5b05c.jpg" class="img-responsive lectureList-img" alt="이미지">
+                                    	<div class="comList-cat left lec-cat-index">3D모델링</div>
+                                    	<div class="lectureList-coupon left lec-cat-index">3만원 쿠폰</div>
+                                        <div class="clear"></div>
                                     </a>
 
                                     <!-- Product overlay -->
                                     <div class="product-overlay">
-                                        <a href="commissionCancel"><i class="fa-solid fa-circle-minus"></i>지원 취소</a>
+                                        <a href="commissionCancel"><i class="fa-solid fa-circle-minus"></i>목록에서 삭제</a>
                                     </div>
 
                                 </div>
 
                                 <!-- Product Description -->
-                                <div class="product-descr">
-
-                                    <a href="shop-product.html">
-                                        <div class="com-decs-font com-decs-margin comList-avg-estimate left">평균견적</div>
-										<div class="com-decs-font com-decs-margin-content left com-decs-font-bold">150만원 &nbsp;&nbsp;&nbsp;&nbsp;|</div>
-										<div class="com-decs-font com-decs-margin comList-avg-period left">평균기간</div>
-										<div class="com-decs-font com-decs-margin-content left com-decs-font-bold">5일 &nbsp;&nbsp;&nbsp;&nbsp;|</div>
-										<div class="com-decs-font com-decs-margin omList-avg-applicant left">지원자수</div>
-										<div class="com-decs-font com-decs-margin-content left com-decs-font-bold">10명</div>
-										<div class="clear"></div>
-                                    </a>
+                                <div class="product-descr lectureList-descr">
+									<div class="lec-descr-title">김메타</div>
+									<div class="lec-descr-content">[<i class="fa-solid fa-star"></i> BEST] 상상을 담아내는 방법, 김메타의 3D 모델링</div>
+									<div class="left"><i class="fa-solid fa-heart"></i> 1515</div>
+									<div class="left thumb-position"><i class="fa-solid fa-thumbs-up"></i> 97%</div>
+									<div class="clear"></div>
+									<div class="div-line"></div>
+									<div class="left lec-price">100,000원</div>
                                 </div>
 
                             </div>
@@ -273,42 +226,34 @@
                         <!-- End of Product 1 -->
                         <!-- Start of Product 1 -->
                         <div class="col-md-6 col-xs-12">
-                            <div class="product">
+                            <div class="product lectureList">
 
                                 <!-- Product Image -->
-                                <div class="product-image" style="background: #fff;">
+                                <div class="product-image lectureList-content" style="background: #fff;">
 									<!-- pop up for images 사용하려면 custom_mypage.js 364행 -->
                                     <a href="commissionDetail" class="hover-zoom height-260">
-	                                    <div class="height-260">
-	                                    	<div class="comList-cat left">디자인</div>
-	                                        <div class="comList-company right">소상공인 상점이름</div>
-	                                        <div class="clear"></div>
-	                                        <div class="font comList-title">메타버스 상점 디자인</div>
-	                                        <div class="left comList-estimate">최고/최저 견적</div>
-	                                        <div class="right font comList-price">100~200만원</div>
-	                                        <div class="clear"></div>
-										</div>
+                                    	<img src="https://jpassets.jobplanet.co.kr/production/uploads/company_story/contents/2021/04/02/184f70b6-1fb3-48d5-991f-f8f6fcb5b05c.jpg" class="img-responsive lectureList-img" alt="이미지">
+                                    	<div class="comList-cat left lec-cat-index">3D모델링</div>
+                                    	<div class="lectureList-coupon left lec-cat-index">3만원 쿠폰</div>
+                                        <div class="clear"></div>
                                     </a>
 
                                     <!-- Product overlay -->
                                     <div class="product-overlay">
-                                        <a href="commissionCancel"><i class="fa-solid fa-circle-minus"></i>지원 취소</a>
+                                        <a href="commissionCancel"><i class="fa-solid fa-circle-minus"></i>목록에서 삭제</a>
                                     </div>
 
                                 </div>
 
                                 <!-- Product Description -->
-                                <div class="product-descr">
-
-                                    <a href="shop-product.html">
-                                        <div class="com-decs-font com-decs-margin comList-avg-estimate left">평균견적</div>
-										<div class="com-decs-font com-decs-margin-content left com-decs-font-bold">150만원 &nbsp;&nbsp;&nbsp;&nbsp;|</div>
-										<div class="com-decs-font com-decs-margin comList-avg-period left">평균기간</div>
-										<div class="com-decs-font com-decs-margin-content left com-decs-font-bold">5일 &nbsp;&nbsp;&nbsp;&nbsp;|</div>
-										<div class="com-decs-font com-decs-margin omList-avg-applicant left">지원자수</div>
-										<div class="com-decs-font com-decs-margin-content left com-decs-font-bold">10명</div>
-										<div class="clear"></div>
-                                    </a>
+                                <div class="product-descr lectureList-descr">
+									<div class="lec-descr-title">김메타</div>
+									<div class="lec-descr-content">[<i class="fa-solid fa-star"></i> BEST] 상상을 담아내는 방법, 김메타의 3D 모델링</div>
+									<div class="left"><i class="fa-solid fa-heart"></i> 1515</div>
+									<div class="left thumb-position"><i class="fa-solid fa-thumbs-up"></i> 97%</div>
+									<div class="clear"></div>
+									<div class="div-line"></div>
+									<div class="left lec-price">100,000원</div>
                                 </div>
 
                             </div>
@@ -316,42 +261,34 @@
                         <!-- End of Product 1 -->
                         <!-- Start of Product 1 -->
                         <div class="col-md-6 col-xs-12">
-                            <div class="product">
+                            <div class="product lectureList">
 
                                 <!-- Product Image -->
-                                <div class="product-image" style="background: #fff;">
+                                <div class="product-image lectureList-content" style="background: #fff;">
 									<!-- pop up for images 사용하려면 custom_mypage.js 364행 -->
                                     <a href="commissionDetail" class="hover-zoom height-260">
-	                                    <div class="height-260">
-	                                    	<div class="comList-cat left">디자인</div>
-	                                        <div class="comList-company right">소상공인 상점이름</div>
-	                                        <div class="clear"></div>
-	                                        <div class="font comList-title">메타버스 상점 디자인</div>
-	                                        <div class="left comList-estimate">최고/최저 견적</div>
-	                                        <div class="right font comList-price">100~200만원</div>
-	                                        <div class="clear"></div>
-										</div>
+                                    	<img src="https://jpassets.jobplanet.co.kr/production/uploads/company_story/contents/2021/04/02/184f70b6-1fb3-48d5-991f-f8f6fcb5b05c.jpg" class="img-responsive lectureList-img" alt="이미지">
+                                    	<div class="comList-cat left lec-cat-index">3D모델링</div>
+                                    	<div class="lectureList-coupon left lec-cat-index">3만원 쿠폰</div>
+                                        <div class="clear"></div>
                                     </a>
 
                                     <!-- Product overlay -->
                                     <div class="product-overlay">
-                                        <a href="commissionCancel"><i class="fa-solid fa-circle-minus"></i>지원 취소</a>
+                                        <a href="commissionCancel"><i class="fa-solid fa-circle-minus"></i>목록에서 삭제</a>
                                     </div>
 
                                 </div>
 
                                 <!-- Product Description -->
-                                <div class="product-descr">
-
-                                    <a href="shop-product.html">
-                                        <div class="com-decs-font com-decs-margin comList-avg-estimate left">평균견적</div>
-										<div class="com-decs-font com-decs-margin-content left com-decs-font-bold">150만원 &nbsp;&nbsp;&nbsp;&nbsp;|</div>
-										<div class="com-decs-font com-decs-margin comList-avg-period left">평균기간</div>
-										<div class="com-decs-font com-decs-margin-content left com-decs-font-bold">5일 &nbsp;&nbsp;&nbsp;&nbsp;|</div>
-										<div class="com-decs-font com-decs-margin omList-avg-applicant left">지원자수</div>
-										<div class="com-decs-font com-decs-margin-content left com-decs-font-bold">10명</div>
-										<div class="clear"></div>
-                                    </a>
+                                <div class="product-descr lectureList-descr">
+									<div class="lec-descr-title">김메타</div>
+									<div class="lec-descr-content">[<i class="fa-solid fa-star"></i> BEST] 상상을 담아내는 방법, 김메타의 3D 모델링</div>
+									<div class="left"><i class="fa-solid fa-heart"></i> 1515</div>
+									<div class="left thumb-position"><i class="fa-solid fa-thumbs-up"></i> 97%</div>
+									<div class="clear"></div>
+									<div class="div-line"></div>
+									<div class="left lec-price">100,000원</div>
                                 </div>
 
                             </div>
