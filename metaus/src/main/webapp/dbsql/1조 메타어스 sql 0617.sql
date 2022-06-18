@@ -448,6 +448,8 @@ ALTER TABLE fp_kakao
 /* 기업정보 */
 CREATE TABLE fp_com (
 	com_no NUMBER NOT NULL, /* 기업번호 */
+	com_id VARCHAR2(200), /*기업아이디*/
+	com_pw VARCHAR2(50), /*기업비밀번호*/
 	com_name VARCHAR2(100), /* 기업이름 */
 	com_preview CLOB, /* 기업소개 */
 	com_pic CLOB, /* 기업로고 */
