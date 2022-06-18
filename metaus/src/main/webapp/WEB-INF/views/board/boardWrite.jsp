@@ -52,7 +52,7 @@
 	<div class="container">
 
 		<!-- Start of Post Resume Form -->
-		<form action="#" class="post-job-resume mt50" style="margin-top: 0px;">
+		<form action="<c:url value='/board/boardWrite'/>" class="post-job-resume mt50" style="margin-top: 0px;" method="post">
 
 			<!-- Start of Resume Details -->
 			<div class="row">
@@ -79,17 +79,19 @@
                     </select>
                 </div>
                 	<input type="hidden" name="btypeNo" id="btypeNo" value="${param.btypeNo }">
+                	<input type="hidden" name="memNo" value="1">
 					<!-- Form Group -->
 					
 					<div class="form-group">
 						<label>글 제목</label> <input class="form-control" type="text"
-							placeholder="글 제목을 입력해주세요" required style="color: black;">
+							placeholder="글 제목을 입력해주세요" required style="color: black;"
+							name="boardTitle">
 					</div>
 					
 					<!-- Form Group -->
 					<div class="form-group">
 						<label>글 내용</label>
-						<textarea class="tinymce"></textarea>
+						<textarea class="tinymce" name="boardContent"></textarea>
 					</div>
 
 					<!-- Form Group -->

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.metaus.board.model.BoardDAO">
+
+<insert id="insertBoard" parameterType="boardVo">
+	<selectKey resultType="int" keyProperty="boardNo" order="BEFORE">
+		select fp_board_seq.nextval from dual
+	</selectKey>
+	insert into fp_board(board_no, mem_no, board_title, board_content, btype_no)
+	values(#{boardNo}, #{memNo}, #{boardTitle}, #{boardContent}, #{btypeNo})
+</insert>
+
+<select id="selectBoard" parameterType="int" resultType="boardVo">
+	select * from fp_board
+	where btype_no=#{btypeNo}
+</select>
+
+</mapper>
