@@ -53,10 +53,40 @@
 			$('#ismailcodeCheck').val('Y');
 			var id = $('#memId').val();
 			var num = Math.floor(Math.random() * 10000)+1;
+			var datas = {"id":id,"num":num};
+			var getdata;
 			$('#mailcodeCheck').val(num);
 			window.open("<c:url value='/email/signEmail'/>?receiver="+id+"&num="+num,"idcheck",
 			"width=1,height=1,location=no,resizable=no,top=-9999,left=9999");
-			event.preventDefault();	
+				
+			
+			
+			var request = $.ajax({
+				url: "ajaxEmailCheck.jsp",
+				method: "POST",
+				data: datas,
+				dataType:"json",
+				async:false
+			});
+			
+			request.done(function(data){
+				if(data != undefined && data!=""){
+					getdata==data;
+					
+				}
+			});
+			
+			if(getdata == undefined || getdata.result =='N'){
+				alert('사용할 수 없는 이메일 입니다');
+			}else if(getdata.result =='D'){
+				alert('이미 있는 이메일 입니다');
+			}else{
+				alert('인증번호가 메일로 발송되웠습니다');
+			}
+			
+			event.preventDefault();
+			
+			
 		});
 		
 		$('#btnChkId').click(function(){
