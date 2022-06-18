@@ -12,9 +12,11 @@
 	values(#{boardNo}, #{memNo}, #{boardTitle}, #{boardContent}, #{btypeNo})
 </insert>
 
-<select id="selectBoard" parameterType="int" resultType="boardVo">
-	select * from fp_board
-	where btype_no=#{btypeNo}
+<select id="selectBoard" parameterType="int" resultType="map">
+	select b.*, m.mem_name
+	from fp_board b join fp_mem m
+	on b.mem_no=m.mem_no
+	where b.btype_no=#{btypeNo}
 </select>
 
 </mapper>

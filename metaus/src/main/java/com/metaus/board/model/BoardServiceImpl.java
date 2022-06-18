@@ -1,8 +1,11 @@
 package com.metaus.board.model;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Service;
+
+import com.metaus.member.model.MemberVO;
 
 import lombok.RequiredArgsConstructor;
 
@@ -16,7 +19,7 @@ public class BoardServiceImpl implements BoardService {
 		return boardDao.insertBoard(boardVo);
 	}
 	@Override
-	public List<BoardVO> selectBoard(int btypeNo) {
+	public List<Map<String, Object>> selectBoard(int btypeNo) {
 		return boardDao.selectBoard(btypeNo);
 	}
 
