@@ -60,125 +60,30 @@
 
 			<!-- Start of Blog Posts -->
 			<div class="col-md-12 col-xs-12 blog-posts-wrapper">
+				<c:if test="${!empty list }">
+					<!-- 반복 시작 -->
+					<c:forEach var="map" items="${list }">
+						<!-- Start of Blog Post Article 1 -->
+						<article class="col-md-12 blog-post"
+							style="margin-bottom: 5px; padding-bottom: 5px; height: 80px;">
 
-				<!-- Start of Blog Post Article 1 -->
-				<article class="col-md-12 blog-post" style="margin-bottom: 5px; padding-bottom: 5px; height: 80px;">
-
-					<!-- Blog Post Thumbnail -->
-					
-
-					<!-- Blog Post Description -->
-					<div class="col-md-12 blog-desc" style="margin-top: 10px;">
-						<h5>
-							<a href="blog-post-right-sidebar.html">세계에서 TOP3 프로그래머는 누구에욤</a>
-						</h5>
-						<div class="post-detail pt10 pb20">
-							<span><i class="fa fa-user"></i>연어훈제</span> <span><i
-								class="fa fa-clock-o"></i>2022-06-16 4:30</span> <span><i
-								class="fa fa-comments-o"></i>12</span>
-						</div>
-					</div>
-				</article>
-				<!-- End of Blog Post Article 1 -->
-
-				<!-- Start of Blog Post Article 1 -->
-				<article class="col-md-12 blog-post" style="margin-bottom: 5px; padding-bottom: 5px; height: 80px;">
-
-					<!-- Blog Post Thumbnail -->
-					
-
-					<!-- Blog Post Description -->
-					<div class="col-md-12 blog-desc" style="margin-top: 10px;">
-						<h5>
-							<a href="blog-post-right-sidebar.html">세계에서 TOP3 프로그래머는 누구에욤</a>
-						</h5>
-						<div class="post-detail pt10 pb20">
-							<span><i class="fa fa-user"></i>연어훈제</span> <span><i
-								class="fa fa-clock-o"></i>2022-06-16 4:30</span> <span><i
-								class="fa fa-comments-o"></i>12</span>
-						</div>
-					</div>
-				</article>
-				<!-- End of Blog Post Article 1 -->
-				<!-- Start of Blog Post Article 1 -->
-				<article class="col-md-12 blog-post" style="margin-bottom: 5px; padding-bottom: 5px; height: 80px;">
-
-					<!-- Blog Post Thumbnail -->
-					
-
-					<!-- Blog Post Description -->
-					<div class="col-md-12 blog-desc" style="margin-top: 10px;">
-						<h5>
-							<a href="blog-post-right-sidebar.html">세계에서 TOP3 프로그래머는 누구에욤</a>
-						</h5>
-						<div class="post-detail pt10 pb20">
-							<span><i class="fa fa-user"></i>연어훈제</span> <span><i
-								class="fa fa-clock-o"></i>2022-06-16 4:30</span> <span><i
-								class="fa fa-comments-o"></i>12</span>
-						</div>
-					</div>
-				</article>
-				<!-- End of Blog Post Article 1 -->
-				<!-- Start of Blog Post Article 1 -->
-				<article class="col-md-12 blog-post" style="margin-bottom: 5px; padding-bottom: 5px; height: 80px;">
-
-					<!-- Blog Post Thumbnail -->
-					
-
-					<!-- Blog Post Description -->
-					<div class="col-md-12 blog-desc" style="margin-top: 10px;">
-						<h5>
-							<a href="blog-post-right-sidebar.html">세계에서 TOP3 프로그래머는 누구에욤</a>
-						</h5>
-						<div class="post-detail pt10 pb20">
-							<span><i class="fa fa-user"></i>연어훈제</span> <span><i
-								class="fa fa-clock-o"></i>2022-06-16 4:30</span> <span><i
-								class="fa fa-comments-o"></i>12</span>
-						</div>
-					</div>
-				</article>
-				<!-- End of Blog Post Article 1 -->
-				<!-- Start of Blog Post Article 1 -->
-				<article class="col-md-12 blog-post" style="margin-bottom: 5px; padding-bottom: 5px; height: 80px;">
-
-					<!-- Blog Post Thumbnail -->
-					
-
-					<!-- Blog Post Description -->
-					<div class="col-md-12 blog-desc" style="margin-top: 10px;">
-						<h5>
-							<a href="blog-post-right-sidebar.html">세계에서 TOP3 프로그래머는 누구에욤</a>
-						</h5>
-						<div class="post-detail pt10 pb20">
-							<span><i class="fa fa-user"></i>연어훈제</span> <span><i
-								class="fa fa-clock-o"></i>2022-06-16 4:30</span> <span><i
-								class="fa fa-comments-o"></i>12</span>
-						</div>
-					</div>
-				</article>
-				<!-- End of Blog Post Article 1 -->
-				<!-- Start of Blog Post Article 1 -->
-				<article class="col-md-12 blog-post" style="margin-bottom: 5px; padding-bottom: 5px; height: 80px;">
-
-					<!-- Blog Post Thumbnail -->
-					
-
-					<!-- Blog Post Description -->
-					<div class="col-md-12 blog-desc" style="margin-top: 10px;">
-						<h5>
-							<a href="blog-post-right-sidebar.html">세계에서 TOP3 프로그래머는 누구에욤</a>
-						</h5>
-						<div class="post-detail pt10 pb20">
-							<span><i class="fa fa-user"></i>연어훈제</span> <span><i
-								class="fa fa-clock-o"></i>2022-06-16 4:30</span> <span><i
-								class="fa fa-comments-o"></i>12</span>
-						</div>
-					</div>
-				</article>
-				<!-- End of Blog Post Article 1 -->
-				
-
-				
+							<!-- Blog Post Thumbnail -->
+							<!-- Blog Post Description -->
+							<div class="col-md-12 blog-desc" style="margin-top: 10px;">
+								<h5>
+									<a href="blog-post-right-sidebar.html">${map['BOARD_TITLE'] }</a>
+								</h5>
+								<div class="post-detail pt10 pb20">
+									<span><i class="fa fa-user"></i>${map['MEM_NAME'] }</span> <span><i
+										class="fa fa-clock-o"></i>${map['BOARD_REGDATE'] }</span> <span><i
+										class="fa fa-comments-o"></i>${map['BOARD_READCOUNT'] }</span>
+								</div>
+							</div>
+						</article>
+						<!-- End of Blog Post Article 1 -->
+					</c:forEach>
+					<!-- 반복 종료 -->
+				</c:if>
 
 				<!-- Start of Pagination -->
 				<div class="col-md-12">

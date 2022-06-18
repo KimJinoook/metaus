@@ -1,11 +1,13 @@
 package com.metaus.board.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -28,41 +30,70 @@ public class BoardController {
 	
 	@RequestMapping("/notice")
 	public String notice(@RequestParam(defaultValue = "0")int btypeNo, Model model) {
-		logger.info("공지사항 페이지");
+		logger.info("notice 페이지 - 게시판 종류 btypeNo={}", btypeNo);
+		
+		List<Map<String, Object>>list = boardService.selectBoard(btypeNo);
+		logger.info("notice 목록 조회 결과, list.size={}",list.size());
+
+		model.addAttribute("list",list);
+		model.addAttribute("btypeNo", btypeNo);
+		
 		return "/board/notice";
 	}
 	
 	@RequestMapping("/faq")
 	public String faq(@RequestParam(defaultValue = "0")int btypeNo, Model model) {
 		logger.info("FAQ 페이지");
+
 		return "/board/faq";
 	}
 	
 	@RequestMapping("/news")
 	public String news(@RequestParam(defaultValue = "0")int btypeNo, Model model) {
-		logger.info("기사 페이지");
+		logger.info("news 페이지 - 게시판 종류 btypeNo={}", btypeNo);
+		
+		List<Map<String, Object>>list = boardService.selectBoard(btypeNo);
+		logger.info("news 목록 조회 결과, list.size={}",list.size());
+
+		model.addAttribute("list",list);
+		model.addAttribute("btypeNo", btypeNo);
+		
 		return "/board/news";
 	}
 	
 	@RequestMapping("/freeBoard")
 	public String freeBoard(@RequestParam(defaultValue = "0")int btypeNo, Model model) {
-		logger.info("기사 페이지");
+		logger.info("freeBoard 페이지 - 게시판 종류 btypeNo={}", btypeNo);
+		
+		List<Map<String, Object>>list = boardService.selectBoard(btypeNo);
+		logger.info("freeBoard 목록 조회 결과, list.size={}",list.size());
+
+		model.addAttribute("list",list);
+		model.addAttribute("btypeNo", btypeNo);
+		
 		return "/board/freeBoard";
 	}
 	
 	@RequestMapping("/QuestionBoard")
 	public String QuestionBoard(@RequestParam(defaultValue = "0")int btypeNo, Model model) {
-		logger.info("QuestionBoard 페이지");
+		logger.info("QuestionBoard 페이지 - 게시판 종류 btypeNo={}", btypeNo);
+		
+		List<Map<String, Object>>list = boardService.selectBoard(btypeNo);
+		logger.info("QuestionBoard 목록 조회 결과, list.size={}",list.size());
+
+		model.addAttribute("list",list);
+		model.addAttribute("btypeNo", btypeNo);
+		
 		return "/board/QuestionBoard";
 	}
 	
 	@RequestMapping("/qna")
-	public String qna(@RequestParam(defaultValue = "0")int btypeNo, Model model) {
+	public String qna(@RequestParam(defaultValue = "0")int btypeNo, ModelMap model) {
 		logger.info("qna 페이지 - 게시판 종류 btypeNo={}", btypeNo);
 		
-		List<BoardVO>list = boardService.selectBoard(btypeNo);
+		List<Map<String, Object>>list = boardService.selectBoard(btypeNo);
 		logger.info("qna 목록 조회 결과, list.size={}",list.size());
-		
+
 		model.addAttribute("list",list);
 		model.addAttribute("btypeNo", btypeNo);
 		
@@ -71,13 +102,27 @@ public class BoardController {
 	
 	@RequestMapping("/shareBoard")
 	public String shareBoard(@RequestParam(defaultValue = "0")int btypeNo, Model model) {
-		logger.info("shareBoard 페이지");
+		logger.info("shareBoard 페이지 - 게시판 종류 btypeNo={}", btypeNo);
+		
+		List<Map<String, Object>>list = boardService.selectBoard(btypeNo);
+		logger.info("shareBoard 목록 조회 결과, list.size={}",list.size());
+
+		model.addAttribute("list",list);
+		model.addAttribute("btypeNo", btypeNo);
+		
 		return "/board/shareBoard";
 	}
 	
 	@RequestMapping("/requestBoard")
 	public String requestBoard(@RequestParam(defaultValue = "0")int btypeNo, Model model) {
-		logger.info("requestBoard 페이지");
+		logger.info("requestBoard 페이지 - 게시판 종류 btypeNo={}", btypeNo);
+		
+		List<Map<String, Object>>list = boardService.selectBoard(btypeNo);
+		logger.info("requestBoard 목록 조회 결과, list.size={}",list.size());
+
+		model.addAttribute("list",list);
+		model.addAttribute("btypeNo", btypeNo);
+		
 		return "/board/requestBoard";
 	}
 	
@@ -108,15 +153,15 @@ public class BoardController {
 		
 		
 		if(btypeNo==3) {
-			return "/board/qna";
+			return "redirect:/board/qna";
 		}else if(btypeNo==8) {
-			return "/board/freeBoard";
+			return "redirect:/board/freeBoard";
 		}else if(btypeNo==5) {
-			return "/board/QuestionBoard";
+			return "redirect:/board/QuestionBoard";
 		}else if(btypeNo==6) {
-			return "/board/shareBoard";
+			return "redirect:/board/shareBoard";
 		}else if(btypeNo==7) {
-			return "/board/requestBoard";
+			return "redirect:/board/requestBoard";
 		}
 		return "/";
 	}

@@ -65,7 +65,7 @@
 				class="col-md-6 col-md-offset-2 col-sm-6 col-sm-offset-2 col-xs-8">
 				<label for="search-keywords">Keywords</label> <input type="text"
 					name="search-keywords" id="search-keywords" class="form-control"
-					placeholder="Keywords">
+					placeholder="여기에 검색할 내용을 입력해주세요">
 			</div>
 
 			<!-- Start of submit input -->
@@ -89,7 +89,7 @@
 				<div class="candidate-wrapper">
 					<c:if test="${!empty list }">
 						<!-- 반복 시작 -->
-						<c:forEach var="vo" items="${list }">
+						<c:forEach var="map" items="${list }">
 
 							<!-- ===== Start of Single Candidate 1 ===== -->
 							<div class="single-candidate row nomargin">
@@ -109,19 +109,19 @@
 
 									<!-- Candidate Name -->
 									<div class="candidate-name">
-										<a href="candidate-profile-1.html"><h5>${vo.boardTitle }</h5></a>
+										<a href="candidate-profile-1.html"><h5>${map['BOARD_TITLE'] }</h5></a>
 									</div>
 
 									<!-- Candidate Info -->
 									<div class="candidate-info mt5">
 										<ul class="list-inline">
-											<li><span><i class="fa fa-user"></i>${vo.memNo }</span></li>
+											<li><span><i class="fa fa-user"></i>${map['MEM_NAME'] }</span></li>
 
 											<li><span><i class="fa fa-clock-o"></i>
-											<fmt:formatDate value="${vo.boardRegdate }" pattern="yyyy-MM-dd"/> 
+											<fmt:formatDate value="${map['BOARD_REGDATE'] }" pattern="yyyy-MM-dd"/> 
 											</span></li>
 
-											<li><span><i class="fa fa-briefcase"></i>${vo.boardReadcount }</span></li>
+											<li><span><i class="fa fa-briefcase"></i>${map['BOARD_READCOUNT'] }</span></li>
 										</ul>
 									</div>
 								</div>
@@ -131,7 +131,7 @@
 								<div class="col-md-2 col-xs-3">
 									<div class="candidate-cta ptb30">
 										<a href="candidate-profile-1.html"
-											class="btn btn-blue btn-small btn-effect">hire me</a>
+											class="btn btn-blue btn-small btn-effect">답변하기</a>
 									</div>
 								</div>
 
