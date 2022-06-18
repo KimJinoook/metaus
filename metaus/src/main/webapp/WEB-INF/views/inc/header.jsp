@@ -242,12 +242,12 @@
                             
 
                             <!-- Login Menu Item -->
-                            <c:if test="${empty sessionScope.memId }">
+                            <c:if test="${empty sessionScope.isLogin }">
 	                            <li class="menu-item login-btn">
 	                                <a id="modal_trigger" href="javascript:void(0)" role="button"><i class="fa fa-lock"></i>login</a>
 	                            </li>
 	                        </c:if>
-	                        <c:if test="${!empty sessionScope.memId }">
+	                        <c:if test="${!empty sessionScope.isLogin }">
 	                            <li class="menu-item login-btn">
 	                                <a id="logoutBtn" href="<c:url value='/login/logout'/>" role="button"><i class="fa fa-lock"></i>logout</a>
 	                            </li>
