@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.metaus.member.model.CompanyDAO">
+	
+	<select id="selectPwd" parameterType="string" resultType="String">
+		select com_pw from fp_com
+		where com_id=#{comId} and com_outdate is null
+	</select>
+	
+	<select id="selectByUserid" parameterType="string" 
+		resultType="CompanyVO">
+      select * from fp_com where com_id=#{comId}
+   	</select>
+   	
+	
+</mapper>
+
+
+
+
+

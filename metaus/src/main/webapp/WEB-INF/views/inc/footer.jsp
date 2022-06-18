@@ -255,24 +255,23 @@
         <div class="cd-user-modal-container">
             <!-- this is the container wrapper -->
             <ul class="cd-switcher">
-                <li><a href="#0">Sign in</a></li>
-                <li><a href="#1">New account</a></li>
+                <li><a href="#0">일반 회원</a></li>
+                <li><a href="#1">기업 회원</a></li>
             </ul>
 
             <div id="cd-login">
                 <!-- log in form -->
-                <form class="cd-form">
+                <form class="cd-form" id="memloginfrm" method="post" action="<c:url value='/login/memberlogin'/>">
                     <p class="fieldset">
                         <label class="image-replace cd-email" for="signin-email">E-mail</label>
-                        <input class="full-width has-padding has-border" id="signin-email" type="email" placeholder="E-mail">
+                        <input class="full-width has-padding has-border" name="memId" type="email" placeholder="E-mail">
                     </p>
                     <p class="fieldset">
                         <label class="image-replace cd-password" for="signin-password">Password</label>
-                        <input class="full-width has-padding has-border" id="signin-password" type="password" placeholder="Password">
+                        <input class="full-width has-padding has-border" name="memPw" type="password" placeholder="Password">
                     </p>
                     <p class="fieldset">
-                        <input type="checkbox" id="remember-me" checked>
-                        <label for="remember-me">Remember me</label>
+                        <label for="remember-me">아직 계정이 없으시다면 <a href="#">여기</a>를 클릭하세요</label>
                     </p>
                     <p class="fieldset">
                         <button type="submit" value="Login" class="btn btn-blue btn-effect">Login</button>
@@ -283,25 +282,20 @@
 
             <div id="cd-signup">
                 <!-- sign up form -->
-                <form class="cd-form">
-                    <p class="fieldset">
-                        <label class="image-replace cd-username" for="signup-username">Username</label>
-                        <input class="full-width has-padding has-border" id="signup-username" type="text" placeholder="Username">
-                    </p>
+                <form class="cd-form" id="comloginfrm"  method="post" action="<c:url value='/login/companylogin'/>">
                     <p class="fieldset">
                         <label class="image-replace cd-email" for="signup-email">E-mail</label>
-                        <input class="full-width has-padding has-border" id="signup-email" type="email" placeholder="E-mail">
+                        <input class="full-width has-padding has-border" id="signup-email" name="comId" type="email" placeholder="E-mail">
                     </p>
                     <p class="fieldset">
                         <label class="image-replace cd-password" for="signup-password">Password</label>
-                        <input class="full-width has-padding has-border" id="signup-password" type="password" placeholder="Password">
+                        <input class="full-width has-padding has-border" id="signup-password" name="comPw" type="password" placeholder="Password">
                     </p>
                     <p class="fieldset">
-                        <input type="checkbox" id="accept-terms">
-                        <label for="accept-terms">I agree to the <a href="#0">Terms</a></label>
+                        <label for="remember-me">아직 계정이 없으시다면 <a href="#">여기</a>를 클릭하세요</label>
                     </p>
                     <p class="fieldset">
-                        <button class="btn btn-blue btn-effect" type="submit" value="Create account">Create Account</button>
+                        <button class="btn btn-blue btn-effect" type="submit" value="Create account">Login</button>
                     </p>
                 </form>
             </div>
