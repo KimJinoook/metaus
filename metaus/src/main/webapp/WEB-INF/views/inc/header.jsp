@@ -114,18 +114,18 @@
                                             <div class="row">
                                                 <ul class="col-md-4">
                                                     <li class="menu-title">공지사항</li>
-                                                    <li><a href="<c:url value='/board/notice'/>">공지사항</a></li>
-                                                    <li><a href="<c:url value='/board/faq'/>"> F A Q</a></li>
-                                                    <li><a href="<c:url value='/board/qna'/>"> Q N A</a></li>
-                                                    <li><a href="<c:url value='/board/news'/>">기  사</a></li>
+                                                    <li><a href="<c:url value='/board/notice?btypeNo=1'/>">공지사항</a></li>
+                                                    <li><a href="<c:url value='/board/faq?btypeNo=2'/>"> F A Q</a></li>
+                                                    <li><a href="<c:url value='/board/qna?btypeNo=3'/>"> Q N A</a></li>
+                                                    <li><a href="<c:url value='/board/news?btypeNo=4'/>">기  사</a></li>
                                                 </ul>
 
                                                 <ul class="col-md-4">
                                                     <li class="menu-title">커뮤니티</li>
-                                                    <li><a href="<c:url value='/board/freeBoard'/>">자유 게시판</a></li>
-                                                    <li><a href="<c:url value='/board/QuestionBoard'/>">질문 게시판</a></li>
-                                                    <li><a href="<c:url value='/board/shareBoard'/>">공유/정보 게시판</a></li>
-                                                    <li><a href="<c:url value='/board/requestBoard'/>">개인의뢰 게시판</a></li>
+                                                    <li><a href="<c:url value='/board/freeBoard?btypeNo=8'/>">자유 게시판</a></li>
+                                                    <li><a href="<c:url value='/board/QuestionBoard?btypeNo=5'/>">질문 게시판</a></li>
+                                                    <li><a href="<c:url value='/board/shareBoard?btypeNo=6'/>">공유/정보 게시판</a></li>
+                                                    <li><a href="<c:url value='/board/requestBoard?btypeNo=7'/>">개인의뢰 게시판</a></li>
 	                                                </ul>
 
                                                 <ul class="col-md-4">
