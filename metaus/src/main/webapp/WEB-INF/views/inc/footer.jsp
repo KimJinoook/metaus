@@ -271,7 +271,7 @@
                         <input class="full-width has-padding has-border" name="memPw" type="password" placeholder="Password">
                     </p>
                     <p class="fieldset">
-                        <label for="remember-me">아직 계정이 없으시다면 <a href="#">여기</a>를 클릭하세요</label>
+                        <label for="remember-me">아직 계정이 없으시다면 <a href="<c:url value='/member/register'/>">여기</a>를 클릭하세요</label>
                     </p>
                     <p class="fieldset">
                         <button type="submit" value="Login" class="btn btn-blue btn-effect">Login</button>
@@ -292,7 +292,7 @@
                         <input class="full-width has-padding has-border" id="signup-password" name="comPw" type="password" placeholder="Password">
                     </p>
                     <p class="fieldset">
-                        <label for="remember-me">아직 계정이 없으시다면 <a href="#">여기</a>를 클릭하세요</label>
+                        <label for="remember-me">아직 계정이 없으시다면 <a href="<c:url value='/member/register'/>">여기</a>를 클릭하세요</label>
                     </p>
                     <p class="fieldset">
                         <button class="btn btn-blue btn-effect" type="submit" value="Create account">Login</button>
