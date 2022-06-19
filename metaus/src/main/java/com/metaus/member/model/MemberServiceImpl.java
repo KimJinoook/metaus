@@ -11,6 +11,11 @@ public class MemberServiceImpl implements MemberService {
 	
 	private final MemberDAO memberDao;
 	
+	public int insertMember(MemberVO vo){
+		int cnt=memberDao.insertMember(vo);
+		return cnt;
+	}
+	
 	public int checkLogin(String userid, String pwd) {
 		String dbPwd = memberDao.selectPwd(userid);
 		
@@ -30,6 +35,19 @@ public class MemberServiceImpl implements MemberService {
 	
 	public MemberVO selectByUserid(String memId) {
 		return memberDao.selectByUserid(memId);
+	}
+	
+	public int duplicateId(String memId){
+		int count=memberDao.duplicateId(memId);
+		
+		int result=0;
+		if(count>0) {  //이미 존재 => 사용불가
+			result=MemberService.UNUSABLE_ID;
+		}else { //사용가능
+			result=MemberService.USABLE_ID;			
+		}
+		
+		return result;
 	}
 
 }
