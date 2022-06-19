@@ -60,6 +60,8 @@
 
 			<!-- Start of Blog Posts -->
 			<div class="col-md-12 col-xs-12 blog-posts-wrapper">
+					<!-- 반복 시작 -->
+					<c:forEach var="map" items="${list }">
 
 				<!-- Start of Blog Post Article 1 -->
 				<article class="col-md-12 blog-post">
@@ -68,12 +70,7 @@
 					<div class="col-md-12 blog-thumbnail">
 						<a href="blog-post-right-sidebar.html" class="hover-link"><img
 							src="images/blog/blog1.jpg" class="img-responsive" alt=""></a>
-						<div class="date">
-							<span class="day">15</span> <span class="publish-month">Mar</span>
-						</div>
 					</div>
-					<!-- 반복 시작 -->
-					<c:forEach var="map" items="${list }">
 					<!-- Blog Post Description -->
 					<div class="col-md-12 blog-desc">
 						<h5>
@@ -86,8 +83,6 @@
 								</span> <span><i
 								class="fa fa-comments-o"></i>${map['BOARD_READCOUNT'] }</span>
 						</div>
-
-						<p>${map['BOARD_CONTENT'] }</p>
 						<a href="blog-post-right-sidebar.html"
 							class="btn btn-blue btn-effect mt10">상세보기</a>
 					</div>

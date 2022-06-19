@@ -8,7 +8,11 @@
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js?autoload=false"></script>
 <script type="text/javascript" src="<c:url value='/js/jquery-3.6.0.min.js'/>"></script>
 <script type="text/javascript">
+	var timer = null;
+	var isRunning = false;
+	
 	$(function() {
+		
 		$('#btnMemSign').click(function() {
 			if ($('#ismailcodeCheck').val() != 'Y'){
 				alert("이메일 인증이 필요합니다.");
@@ -42,11 +46,7 @@
 				alert("휴대전화는 숫자만 입력해주세요.");
 				$('#memTel').focus();
 				event.preventDefault();				
-			}/* else if ($('#chkId').val() != 'Y') {
-				alert("아이디 중복확인을 해주세요.");
-				$('#btChkId').focus();
-				event.preventDefault();
-			} */
+			}
 		});
 		
 		$('#sendEmail').click(function(){
@@ -55,49 +55,60 @@
 			var num = Math.floor(Math.random() * 10000)+1;
 			var datas = {"id":id,"num":num};
 			var getdata;
-			$('#mailcodeCheck').val(num);
-			window.open("<c:url value='/email/signEmail'/>?receiver="+id+"&num="+num,"idcheck",
-			"width=1,height=1,location=no,resizable=no,top=-9999,left=9999");
-				
+
 			
-			
-			var request = $.ajax({
-				url: "ajaxEmailCheck.jsp",
-				method: "POST",
-				data: datas,
-				dataType:"json",
-				async:false
-			});
-			
-			request.done(function(data){
-				if(data != undefined && data!=""){
-					getdata==data;
-					
-				}
-			});
-			
-			if(getdata == undefined || getdata.result =='N'){
-				alert('사용할 수 없는 이메일 입니다');
-			}else if(getdata.result =='D'){
-				alert('이미 있는 이메일 입니다');
+			if(!validate_email(id)){
+				alert("이메일 형식이 올바르지 않습니다.");
+				$('#memId').focus();
+				event.preventDefault();
 			}else{
-				alert('인증번호가 메일로 발송되웠습니다');
+				$.ajax({
+					url: "<c:url value='/email/signEmail'/>"+"?receiver="+id+"&num="+num,
+					type:"get",
+					async:false,
+					success:function(data){
+						if(data==1){
+							alert('해당 이메일로 인증번호가 발송되었습니다.');
+							$('#mailcodeCheck').val(num);
+							
+							var display = $('#emailCnt');
+					    	var leftSec = 180;
+					    	// 남은 시간
+					    	// 이미 타이머가 작동중이면 중지
+					    	if (isRunning){
+					    		clearInterval(timer);
+					    		display.html("");
+					    		startTimer(leftSec, display);
+					    	}else{
+					    		startTimer(leftSec, display);
+					    		
+					    	}
+						}else if(data==2){
+							alert('이미 사용중인 이메일 계정입니다.');
+						}else{
+							alert('인증번호 발송이 실패했습니다.');
+						}
+					}
+				});
+				event.preventDefault();			
 			}
-			
-			event.preventDefault();
-			
-			
 		});
 		
-		$('#btnChkId').click(function(){
-			var id = $('#userid').val();
-						
-			window.open("checkUserid.do?userid="+id,"idcheck",
-				"width=450,height=200,location=no,resizable=no,top=100,left=50");
-		});
 		
 		$('#memZipcode').click(function(){
 			execDaumPostcode();
+		});
+		
+		
+		$('#memPwCheck').keyup(function(){
+			if($.trim($('#memPw').val()) != $.trim($('#memPwCheck').val())){
+				$('#memPwCheckLb').html("&nbsp;&nbsp;[비밀번호 확인이 일치하지 않습니다]");
+				$('#memPwCheckLb').css("color","red");
+			}else{
+				$('#memPwCheckLb').html("&nbsp;&nbsp;[비밀번호 확인이 일치합니다]");
+				$('#memPwCheckLb').css("color","green");
+				
+			}
 		});
 		
 	});
@@ -115,13 +126,41 @@
 		var pattern = new RegExp(/^[0-9]*$/g);
 		return pattern.test(birth);
 	}
+	function validate_email(email) {
+		var pattern = new RegExp(/^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i);
+		return pattern.test(email);
+	}
+	
+	function startTimer(count, display) {
+	
+		var minutes, seconds;
+        timer = setInterval(function () {
+	        minutes = parseInt(count / 60, 10);
+	        seconds = parseInt(count % 60, 10);
+	 
+	        minutes = minutes < 10 ? "0" + minutes : minutes;
+	        seconds = seconds < 10 ? "0" + seconds : seconds;
+	 
+	        display.html("&nbsp;&nbsp;("+minutes + ":" + seconds+")");
+	 
+	        // 타이머 끝
+	        if (--count < 0) {
+		    	clearInterval(timer);
+		    	alert("시간초과");
+		    	display.html("시간초과");
+		    	isRunning = false;
+		    	$('#mailcodeCheck').val("");
+	        }
+	    }, 1000);
+	         isRunning = true;
+	}
 	
 	/** 우편번호 찾기 */
 	function execDaumPostcode() {
 	    daum.postcode.load(function(){
 	        new daum.Postcode({
 	            oncomplete: function(data) {
-	              // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분입니다.
+
 	              $("#memZipcode").val(data.zonecode);
 	              $("#memAdd").val(data.roadAddress);
 	            }
@@ -188,35 +227,38 @@
                         <div role="tabpanel" class="tab-pane active" id="personal">
                             <div class="row">
                             <form method="post" action="<c:url value='/member/memberRegister'/>">
-                            	<div class="col-md-6 col-md-offset-3">
+                            	<div class="col-md-4 col-md-offset-3">
 
                                     <!-- Form Group -->
                                     <div class="form-group">
                                         <label>이메일</label>
                                         <input type="email" class="form-control" name="memId" id="memId">
                                     </div>
+                                    
+                                    
+                       
                                 </div>
                                 
                                 <div class="col-md-2">
-                                	<div class="">
+                                	<div class="form-group">
                                 		<label> </label>
-                                    	<button style="margin-top: 5px" id="sendEmail"  class="btn btn-blue btn-effect form-control">인증번호 발송</button>
+                                    	<button type="button" style="margin-top: 5px" id="sendEmail"  class="btn btn-blue btn-effect form-control">인증번호 발송</button>
                                    	</div>
                                 </div>
                                 
                                 <div class="col-md-6 col-md-offset-3">
-
                                     <!-- Form Group -->
                                     <div class="form-group">
-                                        <label>인증번호 확인</label>
+                                        <label>인증번호 확인</label><label id="emailCnt" style="color: red"></label>
                                         <input type="text" class="form-control" id="mailcode">
                                     </div>
                                     
                                     <!-- Form Group -->
                                     <div class="form-group">
-                                        <input type="text" class="form-control" id="mailcodeCheck">
-                                        <input type="text" class="form-control" id="ismailcodeCheck">
+                                        <input type="hidden" class="form-control" id="mailcodeCheck">
+                                        <input type="hidden" class="form-control" id="ismailcodeCheck">
                                     </div>
+
                                 </div>
                                 
                                 
@@ -232,7 +274,7 @@
 
                                     <!-- Form Group -->
                                     <div class="form-group mb30">
-                                        <label>비밀번호 확인</label>
+                                        <label>비밀번호 확인</label><label id="memPwCheckLb" style="color: red"></label>
                                         <input type="password" class="form-control" id="memPwCheck">
                                     </div>
                                     
@@ -281,7 +323,7 @@
 
                                     <!-- Form Group -->
                                     <div class="form-group text-center nomargin">
-                                        <button type="submit" id="btnMemSign" class="btn btn-blue btn-effect">create account</button>
+                                        <button type="submit" id="btnMemSign" class="btn btn-blue btn-effect">회원가입</button>
                                     </div>
 
                                 </div>
