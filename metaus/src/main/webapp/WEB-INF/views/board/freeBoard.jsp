@@ -4,21 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ include file="../inc/header.jsp"%>
-<script src="<c:url value='js/jquery-3.1.1.min.js'/>"></script>
-<script src="<c:url value='js/bootstrap.min.js'/>"></script>
-<script src="<c:url value='js/bootstrap-select.min.js'/>"></script>
-<script src="<c:url value='js/swiper.min.js'/>"></script>
-<script src="<c:url value='js/jquery.ajaxchimp.js'/>"></script>
-<script src="<c:url value='js/jquery.countTo.js'/>"></script>
-<script src="<c:url value='js/jquery.inview.min.js'/>"></script>
-<script src="<c:url value='js/jquery.magnific-popup.min.js'/>"></script>
-<script src="<c:url value='js/jquery.easypiechart.min.js'/>"></script>
-<script src="<c:url value='js/jquery-ui.min.js'/>"></script>
-<script src="<c:url value='js/owl.carousel.min.js'/>"></script>
-<script src="<c:url value='js/tinymce/tinymce.min.js'/>"></script>
-<script src="<c:url value='js/countdown.js'/>"></script>
-<script src="<c:url value='js/isotope.min.js'/>"></script>
-<script src="<c:url value='js/custom.js'/>"></script>
+
 
 <script th:inline="javascript">
 	$(function() {
@@ -69,18 +55,15 @@
 			<!-- Start of Blog Posts -->
 			<div class="col-md-8 col-xs-12 blog-posts-wrapper">
 
-				<!-- Start of Blog Post Article 1 -->
-				<article class="col-md-12 blog-post">
-					<c:if test="${!empty list }">
-						<!-- 반복 시작 -->
-						<c:forEach var="map" items="${list }">
+				<c:if test="${!empty list }">
+					<!-- 반복 시작 -->
+					<c:forEach var="map" items="${list }">
+						<!-- Start of Blog Post Article 1 -->
+						<article class="col-md-12 blog-post">
 							<!-- Blog Post Thumbnail -->
 							<div class="col-md-12 blog-thumbnail">
 								<a href="blog-post-right-sidebar.html" class="hover-link"><img
 									src="images/blog/blog1.jpg" class="img-responsive" alt=""></a>
-								<div class="date">
-									<span class="day">15</span> <span class="publish-month">Mar</span>
-								</div>
 							</div>
 
 							<!-- Blog Post Description -->
@@ -93,14 +76,12 @@
 										class="fa fa-clock-o"></i>${map['BOARD_REGDATE'] }</span> <span><i
 										class="fa fa-comments-o"></i>${map['BOARD_READCOUNT'] }</span>
 								</div>
-
-								<p>${map['BOARD_CONTENT'] }</p>
 								<a href="blog-post-right-sidebar.html"
 									class="btn btn-blue btn-effect mt10">상세보기</a>
 							</div>
-				</article>
-				<!-- End of Blog Post Article 1 -->
-				</c:forEach>
+						</article>
+						<!-- End of Blog Post Article 1 -->
+					</c:forEach>
 				</c:if>
 
 				<!-- Start of Pagination -->

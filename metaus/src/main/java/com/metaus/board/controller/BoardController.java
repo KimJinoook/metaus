@@ -1,7 +1,10 @@
 package com.metaus.board.controller;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,8 +17,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.metaus.board.model.BoardAtcVO;
 import com.metaus.board.model.BoardService;
 import com.metaus.board.model.BoardVO;
+import com.metaus.common.ConstUtil;
+import com.metaus.common.FileUploadUtil;
 
 import lombok.RequiredArgsConstructor;
 
@@ -27,6 +33,7 @@ public class BoardController {
 	=LoggerFactory.getLogger(BoardController.class);
 	
 	private final BoardService boardService;
+	private final FileUploadUtil fileUploadUtil;
 	
 	@RequestMapping("/notice")
 	public String notice(@RequestParam(defaultValue = "0")int btypeNo, Model model) {
@@ -88,18 +95,21 @@ public class BoardController {
 	}
 	
 	@RequestMapping("/qna")
-	public String qna(@RequestParam(defaultValue = "0")int btypeNo, ModelMap model) {
+	public String qna(@RequestParam(defaultValue = "0")int btypeNo, Model model) {
 		logger.info("qna 페이지 - 게시판 종류 btypeNo={}", btypeNo);
 		
 		List<Map<String, Object>>list = boardService.selectBoard(btypeNo);
-		logger.info("qna 목록 조회 결과, list.size={}",list.size());
+		logger.info("qna 목록 조회 결과, list.size={}", list.size());
+		List<BoardAtcVO> atcList = boardService.selectBoardAtc();
 
 		model.addAttribute("list",list);
+		model.addAttribute("atcList",atcList);
 		model.addAttribute("btypeNo", btypeNo);
 		
 		return "/board/qna";
 	}
-	
+
+
 	@RequestMapping("/shareBoard")
 	public String shareBoard(@RequestParam(defaultValue = "0")int btypeNo, Model model) {
 		logger.info("shareBoard 페이지 - 게시판 종류 btypeNo={}", btypeNo);
@@ -138,12 +148,36 @@ public class BoardController {
 	
 	@PostMapping("/boardWrite")
 	public String boardWrite_post(@RequestParam int btypeNo,
-			@ModelAttribute BoardVO boardVo, Model model) {
+			@ModelAttribute BoardVO boardVo, 
+			@ModelAttribute BoardAtcVO boardAtcVo,
+			HttpServletRequest request, Model model) {
 		logger.info("커뮤니티 글 작성 페이지, 파라미터 btypeNo={}", btypeNo);
+		
+		String fileName = "", originFileName = "";
+		
+		try {
+			List<Map<String, Object>> fileList = fileUploadUtil.fileUpload(request, ConstUtil.UPLOAD_FILE_FLAG);
+
+			for (Map<String, Object> fileMap : fileList) {
+				originFileName = (String) fileMap.get("originalFileName");
+				fileName = (String) fileMap.get("fileName");
+			}
+			logger.info("파일 업로드 성공, fileName={}", fileName);
+		} catch (IllegalStateException | IOException e) {
+			e.printStackTrace();
+		}
+		
 		
 		boardVo.setBtypeNo(btypeNo);
 		int cnt = boardService.insertBoard(boardVo);
 		logger.info("글 작성 결과 조회, cnt={}", cnt);
+		
+		boardAtcVo.setBfileFilename(fileName);
+		boardAtcVo.setBfileOriginname(originFileName);
+		boardAtcVo.setBoardNo(boardVo.getBoardNo());
+		
+		int upload = boardService.insertBoardAtc(boardAtcVo);
+		logger.info("파일 업로드 결과 조회, upload={}", upload);
 		
 		if(cnt>0) {
 			logger.info("글 작성 성공!");
@@ -153,7 +187,7 @@ public class BoardController {
 		
 		
 		if(btypeNo==3) {
-			return "redirect:/board/qna";
+			return "redirect:/board/qna?btypeNo=3";
 		}else if(btypeNo==8) {
 			return "redirect:/board/freeBoard";
 		}else if(btypeNo==5) {
@@ -164,5 +198,22 @@ public class BoardController {
 			return "redirect:/board/requestBoard";
 		}
 		return "/";
+	}
+	
+	@RequestMapping("/boardDetail")
+	public String boardDetail(@RequestParam(defaultValue = "0") int boardNo,
+			Model model) {
+		logger.info("게시글 상세조회 - 파라미터 boardNo={}", boardNo);
+		
+		BoardVO vo = boardService.selectBoardDetail(boardNo);
+		logger.info("게시글 상세조회 결과, vo={}", vo);
+		
+		BoardAtcVO AtcVo = boardService.selectBoardAtcByNo(boardNo);
+		logger.info("게시글 상세조회 파일 결과, AtcVo={}", AtcVo);
+		
+		model.addAttribute("vo", vo);
+		model.addAttribute("AtcVo", AtcVo);
+		
+		return "/board/boardDetail";
 	}
 }

@@ -55,19 +55,16 @@
 
 			<!-- Start of Blog Posts -->
 			<div class="col-md-12 col-xs-12 blog-posts-wrapper">
+				<c:if test="${!empty list }">
+					<!-- 반복 시작 -->
+					<c:forEach var="map" items="${list }">
 
-				<!-- Start of Blog Post Article 1 -->
-				<article class="col-md-12 blog-post">
-					<c:if test="${!empty list }">
-						<!-- 반복 시작 -->
-						<c:forEach var="map" items="${list }">
+						<!-- Start of Blog Post Article 1 -->
+						<article class="col-md-12 blog-post">
 							<!-- Blog Post Thumbnail -->
 							<div class="col-md-4 blog-thumbnail">
 								<a href="blog-post-right-sidebar.html" class="hover-link"><img
 									src="images/blog/blog1.jpg" class="img-responsive" alt=""></a>
-								<div class="date">
-									<span class="day">15</span> <span class="publish-month">Mar</span>
-								</div>
 							</div>
 
 							<!-- Blog Post Description -->
@@ -80,17 +77,15 @@
 										class="fa fa-clock-o"></i>${map['BOARD_REGDATE'] }</span> <span><i
 										class="fa fa-comments-o"></i>${map['BOARD_READCOUNT'] }</span>
 								</div>
-
-								<p>${map['BOARD_CONTENT'] }</p>
 								<a href="blog-post-right-sidebar.html"
 									class="btn btn-blue btn-effect mt10">자세히</a>
 							</div>
-				</article>
-				<!-- End of Blog Post Article 1 -->
-				</c:forEach>
+						</article>
+						<!-- End of Blog Post Article 1 -->
+					</c:forEach>
 				</c:if>
 
-				
+
 
 				<!-- Start of Pagination -->
 				<div class="col-md-12">

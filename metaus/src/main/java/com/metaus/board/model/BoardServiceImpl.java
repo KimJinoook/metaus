@@ -22,5 +22,22 @@ public class BoardServiceImpl implements BoardService {
 	public List<Map<String, Object>> selectBoard(int btypeNo) {
 		return boardDao.selectBoard(btypeNo);
 	}
+	@Override
+	public int insertBoardAtc(BoardAtcVO boardAtcVo) {
+		return boardDao.insertBoardAtc(boardAtcVo);
+	}
+	@Override
+	public List<BoardAtcVO> selectBoardAtc() {
+		return boardDao.selectBoardAtc();
+	}
+	@Override
+	public BoardVO selectBoardDetail(int boardNo) {
+		return boardDao.selectBoardDetail(boardNo);
+	}
+	@Override
+	public BoardAtcVO selectBoardAtcByNo(int boardNo) {
+		return boardDao.selectBoardAtcByNo(boardNo);
+	}
+	
 
 }

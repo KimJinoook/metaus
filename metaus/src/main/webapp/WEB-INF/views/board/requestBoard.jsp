@@ -4,22 +4,6 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ include file="../inc/header.jsp"%>
-<script src="<c:url value='js/jquery-3.1.1.min.js'/>"></script>
-<script src="<c:url value='js/bootstrap.min.js'/>"></script>
-<script src="<c:url value='js/bootstrap-select.min.js'/>"></script>
-<script src="<c:url value='js/swiper.min.js'/>"></script>
-<script src="<c:url value='js/jquery.ajaxchimp.js'/>"></script>
-<script src="<c:url value='js/jquery.countTo.js'/>"></script>
-<script src="<c:url value='js/jquery.inview.min.js'/>"></script>
-<script src="<c:url value='js/jquery.magnific-popup.min.js'/>"></script>
-<script src="<c:url value='js/jquery.easypiechart.min.js'/>"></script>
-<script src="<c:url value='js/jquery-ui.min.js'/>"></script>
-<script src="<c:url value='js/owl.carousel.min.js'/>"></script>
-<script src="<c:url value='js/tinymce/tinymce.min.js'/>"></script>
-<script src="<c:url value='js/countdown.js'/>"></script>
-<script src="<c:url value='js/isotope.min.js'/>"></script>
-<script src="<c:url value='js/custom.js'/>"></script>
-
 <!-- =============== Start of Page Header 1 Section =============== -->
 <section class="page-header" style="margin-top: 150px;">
 	<div class="container">
@@ -108,13 +92,13 @@
 			<div class="col-md-12">
 				<h4>999개의 검색결과가 있습니다</h4>
 			</div>
+			<c:if test="${!empty list }">
+				<!-- 반복 시작 -->
+				<c:forEach var="map" items="${list }">
 
-			<!-- ===== Start of Job Post Column 1 ===== -->
-			<div class="col-md-12 mt20">
-				<div class="item-block shadow-hover">
-					<c:if test="${!empty list }">
-						<!-- 반복 시작 -->
-						<c:forEach var="map" items="${list }">
+					<!-- ===== Start of Job Post Column 1 ===== -->
+					<div class="col-md-12 mt20">
+						<div class="item-block shadow-hover">
 							<!-- Start of Job Post Header -->
 							<div class="job-post-header clearfix">
 								<a href="company-page-1.html"><img
@@ -136,39 +120,11 @@
 							</div>
 							<!-- End of Job Post Header -->
 
-							<!-- Start of Job Post Body -->
-							<div class="job-post-body">
-								<p>자격조건 및 보수금:</p>
-								<ul class="list mt10">
-									<li>${map['BOARD_CONTENT'] }</li>
-
-									<li>Converting PSD into HTML5 & CSS3</li>
-
-									<li>WordPress Theme Development</li>
-
-									<li>Troubleshooting, testing and maintaining web Themes</li>
-								</ul>
-							</div>
-							<!-- End of Job Post Body -->
-
-							<!-- Start of Job Post Footer -->
-							<div class="job-post-footer row">
-
-								<div class="col-md-6 col-sm-6 col-xs-12">
-									<i class="fa fa-map-marker"></i> <span>서울시, 서대문구</span>
-								</div>
-
-								<div class="col-md-6 col-sm-6 col-xs-12">
-									<i class="fa fa-money"></i> <span>\50,000 - \80,000 /
-										완료 시</span>
-								</div>
-
-							</div>
-							<!-- End of Job Post Footer -->
-				</div>
-			</div>
-			<!-- ===== End of Job Post Column 1 ===== -->
-			</c:forEach>
+							
+						</div>
+					</div>
+					<!-- ===== End of Job Post Column 1 ===== -->
+				</c:forEach>
 			</c:if>
 
 			<!-- Start of Pagination -->

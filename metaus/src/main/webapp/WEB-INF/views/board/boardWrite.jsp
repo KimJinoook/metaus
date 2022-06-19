@@ -52,7 +52,10 @@
 	<div class="container">
 
 		<!-- Start of Post Resume Form -->
-		<form action="<c:url value='/board/boardWrite'/>" class="post-job-resume mt50" style="margin-top: 0px;" method="post">
+		<form action="<c:url value='/board/boardWrite'/>" 
+			class="post-job-resume mt50" 
+			style="margin-top: 0px;" method="post"
+			enctype="multipart/form-data">
 
 			<!-- Start of Resume Details -->
 			<div class="row">

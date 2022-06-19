@@ -4,21 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ include file="../inc/header.jsp"%>
-<script src="<c:url value='js/jquery-3.1.1.min.js'/>"></script>
-<script src="<c:url value='js/bootstrap.min.js'/>"></script>
-<script src="<c:url value='js/bootstrap-select.min.js'/>"></script>
-<script src="<c:url value='js/swiper.min.js'/>"></script>
-<script src="<c:url value='js/jquery.ajaxchimp.js'/>"></script>
-<script src="<c:url value='js/jquery.countTo.js'/>"></script>
-<script src="<c:url value='js/jquery.inview.min.js'/>"></script>
-<script src="<c:url value='js/jquery.magnific-popup.min.js'/>"></script>
-<script src="<c:url value='js/jquery.easypiechart.min.js'/>"></script>
-<script src="<c:url value='js/jquery-ui.min.js'/>"></script>
-<script src="<c:url value='js/owl.carousel.min.js'/>"></script>
-<script src="<c:url value='js/tinymce/tinymce.min.js'/>"></script>
-<script src="<c:url value='js/countdown.js'/>"></script>
-<script src="<c:url value='js/isotope.min.js'/>"></script>
-<script src="<c:url value='js/custom.js'/>"></script>
+
 
 <!-- =============== Start of Page Header 1 Section =============== -->
 <section class="page-header" id="find-candidate"
@@ -81,15 +67,15 @@
 
 		<!-- Start of Row -->
 		<div class="row mt60">
-
 			<!-- Start of Candidate Main -->
 			<div class="col-md-12 candidate-main">
 
-				<!-- Start of Candidates Wrapper -->
-				<div class="candidate-wrapper">
-					<c:if test="${!empty list }">
-						<!-- 반복 시작 -->
-						<c:forEach var="map" items="${list }">
+
+				<c:if test="${!empty list }">
+					<!-- 반복 시작 -->
+					<c:forEach var="map" items="${list }">
+						<!-- Start of Candidates Wrapper -->
+						<div class="candidate-wrapper">
 
 							<!-- ===== Start of Single Candidate 1 ===== -->
 							<div class="single-candidate row nomargin">
@@ -97,9 +83,13 @@
 								<!-- Candidate Image -->
 								<div class="col-md-2 col-xs-3">
 									<div class="candidate-img">
-										<a href="candidate-profile-1.html"> <img
-											src="images/candidates/candidate1.jpg" class="img-responsive"
-											alt="">
+										<a href="<c:url value='/board/boardDetail?boardNo=${map["BOARD_NO"] }&btypeNo=3'/>">
+										<c:forEach var="vo" items="${atcList }">
+											<c:if test="${vo.boardNo==map['BOARD_NO'] }">
+												<img src="<c:url value='/img_upload/${vo.bfileFilename }'/>"
+													class="img-responsive" alt="이미지" />
+											</c:if>
+										</c:forEach>
 										</a>
 									</div>
 								</div>
@@ -117,8 +107,8 @@
 										<ul class="list-inline">
 											<li><span><i class="fa fa-user"></i>${map['MEM_NAME'] }</span></li>
 
-											<li><span><i class="fa fa-clock-o"></i>
-											<fmt:formatDate value="${map['BOARD_REGDATE'] }" pattern="yyyy-MM-dd"/> 
+											<li><span><i class="fa fa-clock-o"></i> <fmt:formatDate
+														value="${map['BOARD_REGDATE'] }" pattern="yyyy-MM-dd" />
 											</span></li>
 
 											<li><span><i class="fa fa-briefcase"></i>${map['BOARD_READCOUNT'] }</span></li>
@@ -130,38 +120,36 @@
 								<!-- CTA -->
 								<div class="col-md-2 col-xs-3">
 									<div class="candidate-cta ptb30">
-										<a href="candidate-profile-1.html"
+										<a href="<c:url value='/board/boardDetail?boardNo=${map["BOARD_NO"] }&btypeNo=3'/>"
 											class="btn btn-blue btn-small btn-effect">답변하기</a>
 									</div>
 								</div>
 
 							</div>
 							<!-- ===== End of Single Candidate 1 ===== -->
-						</c:forEach>
-						<!-- 반복 종료 -->
-					</c:if>
-
-
-				</div>
-				<!-- End of Candidates Wrapper -->
-
-				<!-- Start of Pagination -->
-				<div class="col-md-12 mt10">
-					<ul class="pagination list-inline text-center">
-						<li class="active"><a href="javascript:void(0)">1</a></li>
-						<li><a href="#">2</a></li>
-						<li><a href="#">3</a></li>
-						<li><a href="#">4</a></li>
-						<li><a href="#">Next</a></li>
-					</ul>
-				</div>
-				<!-- End of Pagination -->
-
+					</c:forEach>
+					<!-- 반복 종료 -->
+				</c:if>
 			</div>
-			<!-- End of Candidate Main -->
+			<!-- End of Candidates Wrapper -->
+
+			<!-- Start of Pagination -->
+			<div class="col-md-12 mt10">
+				<ul class="pagination list-inline text-center">
+					<li class="active"><a href="javascript:void(0)">1</a></li>
+					<li><a href="#">2</a></li>
+					<li><a href="#">3</a></li>
+					<li><a href="#">4</a></li>
+					<li><a href="#">Next</a></li>
+				</ul>
+			</div>
+			<!-- End of Pagination -->
 
 		</div>
-		<!-- End of Row -->
+		<!-- End of Candidate Main -->
+
+	</div>
+	<!-- End of Row -->
 
 	</div>
 </section>
