@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../inc/header.jsp" %>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <link rel="stylesheet" type="text/css" href="<c:url value='/css/resume.css'/>">
 
@@ -13,8 +13,8 @@
 
 	 
 
-	<form action="<c:url value='/resume/resumeDetail'/>">
-	
+	<form action="<c:url value='/resume/resumeWrite'/>" method="post">
+	<input type="hidden" name="memNo" value="${mvo.memNo }">
     <!-- ===== Start of Main Wrapper Candidate Profile Section ===== -->
     <section class="ptb80" id="candidate-profile">
 	    <section class="page-header">
@@ -27,7 +27,8 @@
 	            </div>
 	        </div>
 	    </section>
-			<input type="text" class="live-search-box form-control mt20 ss" placeholder="제목을 입력하세요" >
+			<input type="text" class="live-search-box form-control mt20 ss" 
+			name="resTitle" placeholder="제목을 입력하세요" >
                         
         <div class="container">
 				
@@ -40,24 +41,14 @@
                         <!-- Profile Title -->
                         
                         <div class="form-group">
-                            <label>이름</label>
-                            <input class="form-control" type="text" required placeholder="name">
+                            <label>이름 : </label><span>${mvo.memName}</span>
+                          
                         </div>
+                    
                         <div class="form-group">
-                            <label>생년월일</label>
-                            <input class="form-control" type="text" required placeholder="birth">
-                        </div>
-                        <div class="form-group">
-                            <label>이메일</label>
-                            <input class="form-control" type="text" required placeholder="email">
-                        </div>
-                        <div class="form-group">
-                            <label>전화번호</label>
-                            <input class="form-control" type="text" required placeholder="Tel">
-                        </div>
-                        <div class="form-group">
-                        	<label>주소</label>                                
-                            <input type="text"  class="form-control " id="mc-email" placeholder="address">                                                                                         
+                        	<label>주소 : </label><span>${mvo.memAdd}</span><br>
+                        	&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                        	<span>${mvo.memAdd2}</span>                                                                                                                                                    
                         </div>
 
                     <label>연락가능시간</label>
@@ -65,18 +56,18 @@
 
 		                <!-- Start of keywords input -->
 		                <div class="col-md-3 col-sm-12 search-categories">
-							<select class="selectpicker" id="search-categories" data-live-search="true" title="클릭하세요" data-size="3" data-container="body">
-		                        		<option value="1">AM 09</option>
-				                        <option value="2">AM 10</option>
-				                        <option value="3">AM 11</option>
-				                        <option value="4">PM 12</option>
-				                        <option value="5">PM 13</option>
-				                        <option value="6">PM 14</option>
-				                        <option value="7">PM 15</option>
-				                        <option value="8">PM 16</option>
-				                        <option value="9">PM 17</option>
-				                        <option value="10">PM 18</option>
-				                        <option value="11">PM 19</option>
+							<select class="selectpicker" id="search-categories" data-live-search="true" title="클릭하세요" data-size="3" data-container="body" name="resTime1">
+		                        		<option value="AM 09">AM 09</option>
+				                        <option value="AM 10">AM 10</option>
+				                        <option value="AM 11">AM 11</option>
+				                        <option value="PM 12">PM 12</option>
+				                        <option value="PM 13">PM 13</option>
+				                        <option value="PM 14">PM 14</option>
+				                        <option value="PM 15">PM 15</option>
+				                        <option value="PM 16">PM 16</option>
+				                        <option value="PM 17">PM 17</option>
+				                        <option value="PM 18">PM 18</option>
+				                        <option value="PM 19">PM 19</option>
 		                    </select>                
 		                    </div>
 						
@@ -85,18 +76,18 @@
 		         	<div class="job-search-form row">
 		                <div class="col-md-3 col-sm-12 search-categories">
 		                    
-		                    <select class="selectpicker" id="search-categories" data-live-search="true" title="클릭하세요" data-size="5" data-container="body">
-		                        		<option value="1">AM 10</option>
-				                        <option value="2">AM 11</option>
-				                        <option value="3">PM 12</option>
-				                        <option value="4">PM 13</option>
-				                        <option value="5">PM 14</option>
-				                        <option value="6">PM 15</option>
-				                        <option value="7">PM 16</option>
-				                        <option value="8">PM 17</option>
-				                        <option value="9">PM 18</option>
-				                        <option value="10">PM 19</option>
-				                        <option value="11">PM 20</option>
+		                    <select class="selectpicker" id="search-categories" data-live-search="true" title="클릭하세요" data-size="5" data-container="body" name="resTime2">
+		                        		<option value="AM 10">AM 10</option>
+				                        <option value="AM 11">AM 11</option>
+				                        <option value="PM 12">PM 12</option>
+				                        <option value="PM 13">PM 13</option>
+				                        <option value="PM 14">PM 14</option>
+				                        <option value="PM 15">PM 15</option>
+				                        <option value="PM 16">PM 16</option>
+				                        <option value="PM 17">PM 17</option>
+				                        <option value="PM 18">PM 18</option>
+				                        <option value="PM 19">PM 19</option>
+				                        <option value="PM 20">PM 20</option>
 		                    </select>
 		                </div>
 						  
@@ -106,35 +97,20 @@
                         <!-- Profile Details -->
                         
 
-                        <ul class="profile-info mt20 nopadding">
-                            <li>
-                                <i class="fa fa-map-marker"></i>
-                                <span>New York, USA</span>
-                            </li>
-
-                            <li>
-                                <i class="fa fa-globe"></i>
-                                <a href="#">cariera.com</a>
-                            </li>
-
-                            <li>
-                                <i class="fa fa-money"></i>
-                                <span>$65 / hour</span>
-                            </li>
-
+                        <ul class="profile-info mt20 nopadding">                        
                             <li>
                                 <i class="fa fa-birthday-cake"></i>
-                                <span>29 years-old</span>
+                                <span>${mvo.memBirth}</span>
                             </li>
 
                             <li>
                                 <i class="fa fa-phone"></i>
-                                <span>(+1) 123 456 7890</span>
+                                <span>${mvo.memTel}</span>
                             </li>
 
                             <li>
                                 <i class="fa fa-envelope"></i>
-                                <a href="#">myemail@cariera.com</a>
+                                <span>${mvo.memId}</span>
                             </li>
                         </ul>
 
@@ -155,7 +131,7 @@
 				
 				<div class="form-group">
                      <label>job description <span>(optional)</span></label>
-                     <textarea class="tinymce"></textarea>
+                     <textarea class="tinymce" name="resContent"></textarea>
                 </div>
 			</div>	
            </div>     

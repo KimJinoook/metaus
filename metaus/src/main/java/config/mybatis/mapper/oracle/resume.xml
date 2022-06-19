@@ -3,5 +3,22 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.metaus.resume.model.ResumeDAO">
+	
+	<insert id="insertresume" parameterType="ResumeVo">		
+		insert into fp_resume(mem_no, res_title, res_content,res_time)
+		values(#{memNo}, #{resTitle}, #{resContent}, #{resTime})
+	</insert>
+	
+	<select id="selectresume" parameterType="int" resultType="map">
+		select b.*, m.*
+		from fp_resume b join fp_mem m
+		on b.mem_no=m.mem_no
+		where b.mem_no=#{memNo}
+ 	</select>
+ 	
+ 	<select id="selectBymemNo" parameterType="int" resultType="resumeVo">
+		select * from fp_resume where mem_no=#{memNo}
+	</select>
+
 
 </mapper>

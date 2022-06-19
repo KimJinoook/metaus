@@ -14,7 +14,8 @@
 	 
 
 	<form action="<c:url value='/resume/resumeDetail'/>">
-	
+	<input type="hidden" name="memNo" value="${mvo.memNo }">
+	<%-- <input type="hidden" name="memNo" value="${rvo.memNo }"> --%>
     <!-- ===== Start of Main Wrapper Candidate Profile Section ===== -->
     <section class="ptb80" id="candidate-profile">
 	    <section class="page-header">
@@ -44,7 +45,7 @@
                         </div>
                         <div class="form-group">
                             <label>이름</label>
-                            <span></span>
+                            <span>${mvo.memName }</span>
                         </div>
                         <div class="form-group">
                             <label>생년월일</label>
