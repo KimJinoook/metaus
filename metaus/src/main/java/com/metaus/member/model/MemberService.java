@@ -11,5 +11,7 @@ public interface MemberService {
 	
 	public int checkLogin(String userid, String pwd);
 	public MemberVO selectByUserid(String memId);
+	public int duplicateId(String memId);
+	public int insertMember(MemberVO vo);
 
 }

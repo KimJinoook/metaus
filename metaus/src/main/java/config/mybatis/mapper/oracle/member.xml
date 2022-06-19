@@ -14,6 +14,21 @@
       select * from fp_mem where mem_id=#{memId}
    	</select>
    	
+   	<select id="duplicateId" parameterType="String" resultType="int">
+		select count(*) from fp_mem 
+		where mem_id=#{memId}
+	</select>
+	
+	<insert id="insertMember" parameterType="memberVo">
+		<selectKey resultType="int" keyProperty="memNo" order="BEFORE">
+			select fp_mem_seq.nextval from dual
+		</selectKey>
+		insert into fp_mem(mem_no,mem_name,mem_id,mem_pw,mem_nick,mem_birth,mem_tel,mem_zipcode,mem_add,mem_add2,mem_joindate)
+		values(#{memNo}, #{memName}, #{memId}, #{memPw}, 
+			#{memNick},#{memBirth}, #{memTel},#{memZipcode}, #{memAdd}, 
+			#{memAdd2}, sysdate)
+	</insert>
+   	
 	
 </mapper>
 

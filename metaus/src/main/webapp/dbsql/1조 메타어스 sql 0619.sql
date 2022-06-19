@@ -613,7 +613,7 @@ CREATE TABLE fp_boardatc (
 	board_no NUMBER, /* 글 번호 */
 	bfile_filename CLOB, /* 파일명 */
 	bfile_originname CLOB, /* 원본파일명 */
-	bfile_filesize CLOB /* 파일사이즈 */
+	bfile_filesize number /* 파일사이즈 */
 );
 
 ALTER TABLE fp_boardatc
@@ -1308,10 +1308,13 @@ increment by 1
 start with 1
 nocache;
 
-select * from fp_mem;
+select * from fp_com;
 
 insert into fp_mem
 values(fp_mem_seq.nextval,'테스터','test@naver.com','1234','닉네임1','941215','01030843045','15151','서울시영등포구시흥대로','상세주소','프사경로',sysdate,null,null,null,null,null);
+
+insert into fp_com
+values(fp_com_seq.nextval,'testcom','1234','테스트기업','기업프리뷰','기업사진경로','기업대표','기업주소','기업위도','기업경도','사업자등록번호',1,'기업전화번호',sysdate,null);
 
 insert into fp_boardType
 values(fp_boardType_seq.nextval,'공지사항','Y','Y');
