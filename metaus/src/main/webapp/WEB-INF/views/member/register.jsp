@@ -414,6 +414,7 @@
 					    	if (isRunning){
 					    		clearInterval(timer);
 					    		display.html("");
+					    		$('#emailCnt').css("color","red");
 					    		startTimer(leftSec, display);
 					    	}else{
 					    		startTimer(leftSec, display);
@@ -427,6 +428,15 @@
 					}
 				});
 				event.preventDefault();			
+			}
+		});
+		
+		/**일반회원 인증번호 입력*/
+		$('#mailcode').keyup(function(){
+			if($.trim($('#mailcode').val()) == $.trim($('#mailcodeCheck').val())){
+				clearInterval(timer);
+				$('#emailCnt').html("&nbsp;&nbsp;[인증번호 일치]");
+				$('#emailCnt').css("color","green");
 			}
 		});
 		
@@ -599,8 +609,7 @@
 	        // 타이머 끝
 	        if (--count < 0) {
 		    	clearInterval(timer);
-		    	alert("시간초과");
-		    	display.html("시간초과");
+		    	display.html("&nbsp;&nbsp;시간초과");
 		    	isRunning = false;
 		    	$('#mailcodeCheck').val("");
 	        }
