@@ -741,11 +741,11 @@ ul.list {
 /*** ====== 4.1.1 Button Colors ====== ***/
 
 .btn-blue {
-    background: #29b1fd;
+    background: #29b1fd !important;
 }
 
 .btn-blue:hover {
-    background: #66c9ff;
+    background: #93d6fa !important;
 }
 
 .btn-green {

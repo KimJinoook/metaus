@@ -609,8 +609,7 @@
 	        // 타이머 끝
 	        if (--count < 0) {
 		    	clearInterval(timer);
-		    	alert("시간초과");
-		    	display.html("시간초과");
+		    	display.html("&nbsp;&nbsp;시간초과");
 		    	isRunning = false;
 		    	$('#mailcodeCheck').val("");
 	        }
