@@ -189,20 +189,27 @@ public class BoardController {
 		if(btypeNo==3) {
 			return "redirect:/board/qna?btypeNo=3";
 		}else if(btypeNo==8) {
-			return "redirect:/board/freeBoard";
+			return "redirect:/board/freeBoardbtypeNo=8";
 		}else if(btypeNo==5) {
-			return "redirect:/board/QuestionBoard";
+			return "redirect:/board/QuestionBoardbtypeNo=5";
 		}else if(btypeNo==6) {
-			return "redirect:/board/shareBoard";
+			return "redirect:/board/shareBoardbtypeNo=6";
 		}else if(btypeNo==7) {
-			return "redirect:/board/requestBoard";
+			return "redirect:/board/requestBoardbtypeNo=7";
 		}
 		return "/";
 	}
 	
-	@RequestMapping("/boardDetail")
-	public String boardDetail(@RequestParam(defaultValue = "0") int boardNo,
+	
+	@RequestMapping("/readCountUp")
+	public String readCountUp(@RequestParam(defaultValue = "0") int boardNo,
+			@RequestParam(defaultValue = "0") int btypeNo,
 			Model model) {
+		logger.info("게시글 조회수 증가, 파라미터 boardNO={}, btypeNo={}", boardNo, btypeNo);
+		
+		int cnt = boardService.updateBoardReadCount(boardNo);
+		logger.info("게시글 조회수 증가 결과, 파라미터 cnt={}", cnt);
+		
 		logger.info("게시글 상세조회 - 파라미터 boardNo={}", boardNo);
 		
 		BoardVO vo = boardService.selectBoardDetail(boardNo);
@@ -213,6 +220,10 @@ public class BoardController {
 		
 		model.addAttribute("vo", vo);
 		model.addAttribute("AtcVo", AtcVo);
+		
+		
+		model.addAttribute("boardNo", boardNo);
+		model.addAttribute("btypeNo", btypeNo);
 		
 		return "/board/boardDetail";
 	}

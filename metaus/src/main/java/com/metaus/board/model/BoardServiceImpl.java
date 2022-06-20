@@ -38,6 +38,10 @@ public class BoardServiceImpl implements BoardService {
 	public BoardAtcVO selectBoardAtcByNo(int boardNo) {
 		return boardDao.selectBoardAtcByNo(boardNo);
 	}
+	@Override
+	public int updateBoardReadCount(int boardNo) {
+		return boardDao.updateBoardReadCount(boardNo);
+	}
 	
 
 }
