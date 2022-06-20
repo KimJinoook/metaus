@@ -4,36 +4,30 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.metaus.member.model.CompanyService;
-import com.metaus.member.model.MemberService;
-import com.metaus.member.model.MemberVO;
+import com.metaus.member.model.CompanyVO;
 
 import lombok.RequiredArgsConstructor;
 
 @Controller
-@RequestMapping("/member")
+@RequestMapping("/company")
 @RequiredArgsConstructor
-public class MemberController {
+public class CompanyController {
 	
-	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
+	private static final Logger logger = LoggerFactory.getLogger(CompanyController.class);
 
-	private final MemberService memberService;
+	private final CompanyService companyService;
 	
-	@GetMapping("/register")
-	public void register_get() {
-		logger.info("회원가입 뷰");
-	}
-	
-	@PostMapping("/memberRegister")
-	public String memregister_post(@ModelAttribute MemberVO vo, Model model) {
-		logger.info("일반회원 회원가입 처리, 파라미터 vo={}", vo);
+	@PostMapping("/companyRegister")
+	public String memregister_post(@ModelAttribute CompanyVO vo, Model model) {
+		logger.info("기업회원 회원가입 처리, 파라미터 vo={}", vo);
 		
-		int cnt=memberService.insertMember(vo);
+		int cnt=companyService.insertCompany(vo);
 		logger.info("회원가입 결과, cnt={}", cnt);
 
 		String msg="회원가입 실패", url="/member/register";
@@ -47,6 +41,19 @@ public class MemberController {
 
 		return "/common/message";
 		
+	}
+	
+	@ResponseBody
+	@RequestMapping("comIdCheck")
+	public int comIdCheck(String id) {
+		int result = 0;
+		if(id!=null && !id.isEmpty()) {
+			result=companyService.duplicateId(id);
+		
+			logger.info("아이디 중복확인 결과, result={}", result);
+		}
+		
+		return result;
 	}
 
 }

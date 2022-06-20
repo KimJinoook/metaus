@@ -284,8 +284,8 @@
                 <!-- sign up form -->
                 <form class="cd-form" id="comloginfrm"  method="post" action="<c:url value='/login/companylogin'/>">
                     <p class="fieldset">
-                        <label class="image-replace cd-email" for="signup-email">E-mail</label>
-                        <input class="full-width has-padding has-border" id="signup-email" name="comId" type="email" placeholder="E-mail">
+                        <label class="image-replace cd-email" for="signup-email">ID</label>
+                        <input class="full-width has-padding has-border" id="" name="comId" type="text" placeholder="ID">
                     </p>
                     <p class="fieldset">
                         <label class="image-replace cd-password" for="signup-password">Password</label>

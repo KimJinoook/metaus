@@ -10,5 +10,7 @@ public interface CompanyService {
 	public static final int NONE_USERID=3;  //해당 아이디 없다	
 	
 	public int checkLogin(String userid, String pwd);
-	public CompanyVO selectByUserid(String memId);
+	public CompanyVO selectByUserid(String comId);
+	public int duplicateId(String comId);
+	public int insertCompany(CompanyVO vo);
 }
