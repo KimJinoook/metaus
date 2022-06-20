@@ -200,12 +200,8 @@
                                     </li>
 
                                     <!-- Dropdown Submenu -->
-                                    <li class="dropdown-submenu">
-                                        <a href="#">blog left sidebar<i class="fa fa-angle-right"></i></a>
-                                        <ul class="dropdown-menu">
-                                            <li><a href="blog-left-sidebar-v1.html">version 1</a></li>
-                                            <li><a href="blog-left-sidebar-v2.html">version 2</a></li>
-                                        </ul>
+                                    <li class="dropdown-submenu">                               
+                                        <a href="<c:url value='/resume/resumeDetail'/>">이력서<i class="fa fa-angle-right"></i></a>                                      
                                     </li>
 
                                     <!-- Dropdown Submenu -->

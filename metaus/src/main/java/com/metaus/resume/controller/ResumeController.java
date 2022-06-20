@@ -1,5 +1,7 @@
 package com.metaus.resume.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -29,10 +31,20 @@ public class ResumeController {
 	private final MemberService memberService;
 	
 	@GetMapping("/resumeWrite")
-	public void get_write(@RequestParam String memid,Model model) {
+	public String get_write(HttpSession session,Model model) {		
+		String memId=(String)session.getAttribute("memId");
 		logger.info("등록 화면");
-		MemberVO mvo=memberService.selectByUserid(memid);
+		if(memId==null || memId.isEmpty()) {
+			return "/index";
+		}
+		MemberVO mvo=memberService.selectByUserid(memId);
+		logger.info("등록 mvo={}",mvo);
+
+		
 		model.addAttribute("mvo",mvo);
+
+		
+		return "/resume/resumeWrite";
 		
 	}
 	
@@ -55,12 +67,18 @@ public class ResumeController {
 	}
 	
 	@RequestMapping("/resumeDetail")
-	public void detail(@RequestParam int memNo,@RequestParam String memid,Model model) {
+	public String detail(HttpSession session,Model model) {
+		String memId=(String)session.getAttribute("memId");
 		logger.info("상세보기 화면");
-		MemberVO mvo=memberService.selectByUserid(memid);
-		//ResumeVO rvo=resumeService.selectBymemNo(memNo);
+		MemberVO mvo=memberService.selectByUserid(memId);
+		ResumeVO rvo=resumeService.selectBymemNo(mvo.getMemNo());
+		if(rvo==null) {
+			return "redirect:/resume/resumeWrite";
+		}
 		model.addAttribute("mvo",mvo);
-		//model.addAttribute("rvo",rvo);
+		model.addAttribute("rvo",rvo);
+		
+		return "/resume/resumeDetail";
 	}
 	
 }

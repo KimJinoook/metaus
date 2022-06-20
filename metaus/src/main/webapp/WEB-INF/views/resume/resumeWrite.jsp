@@ -2,9 +2,15 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../inc/header.jsp" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
 <link rel="stylesheet" type="text/css" href="<c:url value='/css/resume.css'/>">
+<script type="text/javascript" 
+	src="<c:url value='/js/jquery-3.6.0.min.js'/>"></script>
 
+<script type="text/javascript">
+	$(function(){
+		
+	});
+</script>
 
 
 
@@ -146,87 +152,11 @@
     <section class="portfolio ptb80">
         <div class="container">
 
-            <div class="row">
-                <h3 class="text-center pb60">포트폴리오</h3>
-
-                <!-- Filter Buttons -->
-                <ul class="list-inline text-center uppercase" id="portfolio-sorting">
-                    <li><a href="#0" data-filter="*" class="current">all</a></li>
-                    <li><a href="#0" data-filter=".portfolio-cat1">logos</a></li>
-                    <li><a href="#0" data-filter=".portfolio-cat2">websites</a></li>
-                    <li><a href="#0" data-filter=".portfolio-cat3">ui</a></li>
-                    <li><a href="#0" data-filter=".portfolio-cat4">printings</a></li>
-                </ul>
-            </div>
-
-            <!-- Start of Portfolio Grid -->
-            <div class="row portfolio-grid mt40">
-
-                <!-- Portfolio Item -->
-                <div class="element col-md-4 col-sm-6 col-xs-6 portfolio-cat1">
-                    <figure>
-                        <a href="<c:url value='/resume/portfolio'/>" class="">
-                            <img src="../images/portfolio/plus.png" class="img-responsive" id="portfolio" alt="">
-                        </a>
-                    </figure>
-                </div>
-
-                <!-- Portfolio Item -->
-                <div class="element col-md-4 col-sm-6 col-xs-6 portfolio-cat2">
-                    <figure>
-                        <a href="images/portfolio/image2.jpg" class="hover-zoom">
-                            <img src="images/portfolio/image2.jpg" class="img-responsive" alt="">
-                        </a>
-                    </figure>
-                </div>
-
-                <!-- Portfolio Item -->
-                <div class="element col-md-4 col-sm-6 col-xs-6 portfolio-cat3">
-                    <figure>
-                        <a href="images/portfolio/image3.jpg" class="hover-zoom">
-                            <img src="images/portfolio/image3.jpg" class="img-responsive" alt="">
-                        </a>
-                    </figure>
-                </div>
-
-                <!-- Portfolio Item -->
-                <div class="element col-md-4 col-sm-6 col-xs-6 portfolio-cat4">
-                    <figure>
-                        <a href="images/portfolio/image4.jpg" class="hover-zoom">
-                            <img src="images/portfolio/image4.jpg" class="img-responsive" alt="">
-                        </a>
-                    </figure>
-                </div>
-
-                <!-- Portfolio Item -->
-                <div class="element col-md-4 col-sm-6 col-xs-6 portfolio-cat1">
-                    <figure>
-                        <a href="images/portfolio/image5.jpg" class="hover-zoom">
-                            <img src="images/portfolio/image5.jpg" class="img-responsive" alt="">
-                        </a>
-                    </figure>
-                </div>
-
-                <!-- Portfolio Item -->
-                <div class="element col-md-4 col-sm-6 col-xs-6 portfolio-cat2">
-                    <figure>
-                        <a href="" class="">
-                            <img src="images/portfolio/image6.jpg" class="img-responsive" alt="">
-                        </a>
-                    </figure>
-                </div>
-				
-            </div>
-            <!-- End of Portfolio Grid -->
-
-             <div class="row">
-                <div class="col-md-12 text-center mt20">
-                    <a href="#" class="btn btn-blue btn-effect">show more</a>
-                </div>
-            </div> 
+            
 					
 			<div class="form-group pt30 nomargin" id="last">
-                    <button class="btn btn-blue btn-effect">submit</button>
+                    <button class="btn btn-blue btn-effect">등록</button>
+			<a href="<c:url value='/'/>" class="btn btn-blue btn-effect">취소</a>
             </div>
         </div>
                         
