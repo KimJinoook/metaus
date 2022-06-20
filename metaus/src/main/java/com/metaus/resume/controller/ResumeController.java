@@ -1,5 +1,7 @@
 package com.metaus.resume.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -29,10 +31,23 @@ public class ResumeController {
 	private final MemberService memberService;
 	
 	@GetMapping("/resumeWrite")
-	public void get_write(@RequestParam String memid,Model model) {
+	public String get_write(HttpSession session,Model model) {		
+		String memId=(String)session.getAttribute("memId");
 		logger.info("등록 화면");
-		MemberVO mvo=memberService.selectByUserid(memid);
+		MemberVO mvo=memberService.selectByUserid(memId);
+		logger.info("등록 mvo={}",mvo);
+		String msg="실패",url="/resume/resumeWrite?memId="+mvo.getMemId();
+		if(mvo.getMemId() != null && !mvo.getMemId().isEmpty()) {
+			url="/resume/resumeWrite?memId="+mvo.getMemId();
+		}else{
+			msg="로그인 후 이용하세요";
+			url="/";
+		}
 		model.addAttribute("mvo",mvo);
+		model.addAttribute("msg",msg);
+		model.addAttribute("url",url);
+		
+		return "/common/message";
 		
 	}
 	
