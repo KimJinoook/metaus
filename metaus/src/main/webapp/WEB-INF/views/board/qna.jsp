@@ -70,7 +70,10 @@
 			<!-- Start of Candidate Main -->
 			<div class="col-md-12 candidate-main">
 
-
+				<c:if test="${empty list }">
+					<img alt="게시글 내용이 없습니다" src="<c:url value='/images/board/no_board.gif'/>"
+					style="width: 1000px;margin-left: 100px;">
+				</c:if>
 				<c:if test="${!empty list }">
 					<!-- 반복 시작 -->
 					<c:forEach var="map" items="${list }">
