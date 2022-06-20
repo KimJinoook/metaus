@@ -86,7 +86,7 @@
 								<!-- Candidate Image -->
 								<div class="col-md-2 col-xs-3">
 									<div class="candidate-img">
-										<a href="<c:url value='/board/boardDetail?boardNo=${map["BOARD_NO"] }&btypeNo=3'/>">
+										<a href="<c:url value='/board/readCountUp?boardNo=${map["BOARD_NO"] }&btypeNo=3'/>">
 										<c:forEach var="vo" items="${atcList }">
 											<c:if test="${vo.boardNo==map['BOARD_NO'] }">
 												<img src="<c:url value='/img_upload/${vo.bfileFilename }'/>"
@@ -102,7 +102,8 @@
 
 									<!-- Candidate Name -->
 									<div class="candidate-name">
-										<a href="candidate-profile-1.html"><h5>${map['BOARD_TITLE'] }</h5></a>
+										<a href="<c:url value='/board/boardDetail?boardNo=${map["BOARD_NO"] }&btypeNo=3'/>">
+										<h5>${map['BOARD_TITLE'] }</h5></a>
 									</div>
 
 									<!-- Candidate Info -->

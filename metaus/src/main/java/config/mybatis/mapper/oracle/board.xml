@@ -47,4 +47,10 @@
 	select * from fp_boardatc
 	where board_no=#{boardNo}
 </select>
+
+<update id="updateBoardReadCount" parameterType="int">
+	update fp_board
+	set board_readcount=board_readcount+1
+	where board_no=#{boardNo}
+</update>
 </mapper>
