@@ -269,14 +269,34 @@
                     <p class="fieldset">
                         <label class="image-replace cd-password" for="signin-password">Password</label>
                         <input class="full-width has-padding has-border" name="memPw" type="password" placeholder="Password">
-                    </p>
-                    <p class="fieldset">
-                        <label for="remember-me">아직 계정이 없으시다면 <a href="<c:url value='/member/register'/>">여기</a>를 클릭하세요</label>
-                    </p>
+                    </p>       
                     <p class="fieldset">
                         <button type="submit" value="Login" class="btn btn-blue btn-effect">Login</button>
                     </p>
                 </form>
+                
+                <div class="text-center">
+                    <!-- Form Group -->
+                    <div class="form-group">
+                        <label for="agree2">소셜 계정으로 간편하게 로그인하세요!</label><br>
+                        <br>
+                        <a style="width:10px"><img src="<c:url value='/images/icons/naverbtn.png'/>" width="40px" height="40px"></a>&nbsp;&nbsp;
+                        <a style="width:10px"><img src="<c:url value='/images/icons/kakaobtn.png'/>" width="40px" height="40px"></a>&nbsp;&nbsp;
+                        <a style="width:10px"><img src="<c:url value='/images/icons/facebookbtn.png'/>" width="40px" height="40px"></a>
+                        <br>
+                    </div>
+                </div>
+                          
+                <div class="text-center">
+                    <!-- Form Group -->
+                    <div class="form-group">
+                    	<br>
+                        <label for="agree2"><a href="<c:url value='/member/register'/>">비밀번호를 잊어버렸어요</a></label><br>
+                        <label for="agree2">아직 회원이 아니신가요? <a href="<c:url value='/member/register'/>">회원 가입하기</a></label>
+                        <br><br>
+                    </div>
+                </div>
+          
             </div>
             <!-- cd-login -->
 
@@ -291,13 +311,20 @@
                         <label class="image-replace cd-password" for="signup-password">Password</label>
                         <input class="full-width has-padding has-border" id="signup-password" name="comPw" type="password" placeholder="Password">
                     </p>
-                    <p class="fieldset">
-                        <label for="remember-me">아직 계정이 없으시다면 <a href="<c:url value='/member/register'/>">여기</a>를 클릭하세요</label>
-                    </p>
+                 
                     <p class="fieldset">
                         <button class="btn btn-blue btn-effect" type="submit" value="Create account">Login</button>
                     </p>
                 </form>
+                
+                <div class="text-center">
+                       <!-- Form Group -->
+                       <div class="form-group">
+                           <label for="agree2"><a href="<c:url value='/member/register'/>">비밀번호를 잊어버렸어요</a></label><br>
+                           <label for="agree2">아직 회원이 아니신가요? <a href="<c:url value='/member/register'/>">회원 가입하기</a></label>
+                           <br><br>
+                       </div>
+                </div>
             </div>
             <!-- cd-signup -->
         </div>
