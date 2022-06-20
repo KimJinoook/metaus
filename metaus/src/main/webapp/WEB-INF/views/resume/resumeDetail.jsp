@@ -14,7 +14,6 @@
 	 
 
 	<form action="<c:url value='/resume/resumeDetail'/>">
-	<input type="hidden" name="memNo" value="${mvo.memNo }">
 	<%-- <input type="hidden" name="memNo" value="${rvo.memNo }"> --%>
     <!-- ===== Start of Main Wrapper Candidate Profile Section ===== -->
     <section class="ptb80" id="candidate-profile">
@@ -79,22 +78,7 @@
                         <!-- Profile Details -->
                         
 
-                        <ul class="profile-info mt20 nopadding">
-                            <li>
-                                <i class="fa fa-map-marker"></i>
-                                <span>New York, USA</span>
-                            </li>
-
-                            <li>
-                                <i class="fa fa-globe"></i>
-                                <a href="#">cariera.com</a>
-                            </li>
-
-                            <li>
-                                <i class="fa fa-money"></i>
-                                <span>$65 / hour</span>
-                            </li>
-
+                        <ul class="profile-info mt20 nopadding">                          
                             <li>
                                 <i class="fa fa-birthday-cake"></i>
                                 <span>29 years-old</span>

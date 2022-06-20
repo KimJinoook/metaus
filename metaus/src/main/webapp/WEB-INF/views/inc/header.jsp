@@ -201,11 +201,7 @@
 
                                     <!-- Dropdown Submenu -->
                                     <li class="dropdown-submenu">                               
-                                        <a href="<c:url value='/resume/resumeDetail'/>">이력서<i class="fa fa-angle-right"></i></a>
-                                        <ul class="dropdown-menu">
-                                            <li><a href="<c:url value='/resume/resumeWrite'/>">이력서 등록</a></li>
-                                            <li><a href="<c:url value='/resume/portfolio'/>">포트폴리오 등록</a></li>
-                                        </ul>
+                                        <a href="<c:url value='/resume/resumeDetail'/>">이력서<i class="fa fa-angle-right"></i></a>                                      
                                     </li>
 
                                     <!-- Dropdown Submenu -->

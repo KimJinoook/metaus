@@ -34,20 +34,17 @@ public class ResumeController {
 	public String get_write(HttpSession session,Model model) {		
 		String memId=(String)session.getAttribute("memId");
 		logger.info("등록 화면");
+		if(memId==null || memId.isEmpty()) {
+			return "/index";
+		}
 		MemberVO mvo=memberService.selectByUserid(memId);
 		logger.info("등록 mvo={}",mvo);
-		String msg="실패",url="/resume/resumeWrite?memId="+mvo.getMemId();
-		if(mvo.getMemId() != null && !mvo.getMemId().isEmpty()) {
-			url="/resume/resumeWrite?memId="+mvo.getMemId();
-		}else{
-			msg="로그인 후 이용하세요";
-			url="/";
-		}
-		model.addAttribute("mvo",mvo);
-		model.addAttribute("msg",msg);
-		model.addAttribute("url",url);
+
 		
-		return "/common/message";
+		model.addAttribute("mvo",mvo);
+
+		
+		return "/resume/resumeWrite";
 		
 	}
 	
@@ -70,12 +67,18 @@ public class ResumeController {
 	}
 	
 	@RequestMapping("/resumeDetail")
-	public void detail(@RequestParam int memNo,@RequestParam String memid,Model model) {
+	public String detail(HttpSession session,Model model) {
+		String memId=(String)session.getAttribute("memId");
 		logger.info("상세보기 화면");
-		MemberVO mvo=memberService.selectByUserid(memid);
-		//ResumeVO rvo=resumeService.selectBymemNo(memNo);
+		MemberVO mvo=memberService.selectByUserid(memId);
+		ResumeVO rvo=resumeService.selectBymemNo(mvo.getMemNo());
+		if(rvo==null) {
+			return "redirect:/resume/resumeWrite";
+		}
 		model.addAttribute("mvo",mvo);
-		//model.addAttribute("rvo",rvo);
+		model.addAttribute("rvo",rvo);
+		
+		return "/resume/resumeDetail";
 	}
 	
 }
