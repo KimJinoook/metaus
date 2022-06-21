@@ -78,20 +78,20 @@
                         <!-- Profile Details -->
                         
 
-                        <ul class="profile-info mt20 nopadding">                          
+                        <ul class="profile-info mt20 nopadding">                        
                             <li>
                                 <i class="fa fa-birthday-cake"></i>
-                                <span>29 years-old</span>
+                                <span>${mvo.memBirth}</span>
                             </li>
 
                             <li>
                                 <i class="fa fa-phone"></i>
-                                <span>(+1) 123 456 7890</span>
+                                <span>${mvo.memTel}</span>
                             </li>
 
                             <li>
                                 <i class="fa fa-envelope"></i>
-                                <a href="#">myemail@cariera.com</a>
+                                <span>${mvo.memId}</span>
                             </li>
                         </ul>
 
@@ -112,7 +112,7 @@
 				
 				<div class="form-group">
                      <label>job description <span>(optional)</span></label>
-                     <textarea class="tinymce"></textarea>
+                     ${rvo.resContent}
                 </div>
 			</div>	
            </div>     
@@ -207,7 +207,8 @@
             </div> 
 					
 			<div class="form-group pt30 nomargin" id="last">
-                    <button class="btn btn-blue btn-effect">submit</button>
+                    <input type="submit" class="btn btn-blue btn-effect" value="수정">
+			<a href="<c:url value='/'/>" class="btn btn-blue btn-effect">취소</a>
             </div>
         </div>
                         

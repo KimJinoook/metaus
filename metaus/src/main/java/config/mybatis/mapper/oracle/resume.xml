@@ -19,6 +19,7 @@
  	<select id="selectBymemNo" parameterType="int" resultType="resumeVo">
 		select * from fp_resume where mem_no=#{memNo}
 	</select>
-
+	 
+	
 
 </mapper>

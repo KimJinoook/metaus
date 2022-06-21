@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.metaus.member.model.MemberService;
 import com.metaus.member.model.MemberVO;
@@ -56,11 +57,10 @@ public class ResumeController {
 		String res1=resTime1;
 		String res2=resTime2;
 		String resTime=res1+"-"+res2;
-		Rvo.setResTime(resTime);
-		
+		Rvo.setResTime(resTime);		
 		
 		int cnt=resumeService.insertresume(Rvo);
-		logger.info("등록 처리 결과 cnt={}",cnt);
+		logger.info("등록 처리 결과 cnt={}",cnt);		
 		
 		return "redirect:/resume/resumeDetail";
 		
