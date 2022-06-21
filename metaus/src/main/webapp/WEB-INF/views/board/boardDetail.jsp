@@ -33,10 +33,6 @@
 </section>
 <!-- =============== End of Page Header 1 Section =============== -->
 
-
-
-
-
 <!-- ===== Start of Single Blog Post Section ===== -->
 <section class="ptb80" id="blog-post">
 	<div class="container">
@@ -55,17 +51,15 @@
 				</div>
 			</div>
 			<!-- End of Post Title -->
-
 			<!-- Post Image -->
-			<div class="post-img">
-				<img
-					src="<c:url value='images/img_upload/${AtcVo.bfileFilename }'/>">
-			</div>
+			<c:if test="${!empty AtcVo.bfileFilename }">
+				<div class="post-img" style="height: auto;">
+					<img src="<c:url value='/img_upload/${AtcVo.bfileFilename }'/>">
+				</div>
+			</c:if>
 			<!-- Start of Post Content -->
 			<div class="post-content">
 				<p>${vo.boardContent }</p>
-
-
 				<!-- Start of Social Media Buttons -->
 				<ul class="social-btns list-inline mt20">
 					<!-- Social Media -->

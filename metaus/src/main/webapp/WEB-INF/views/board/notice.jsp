@@ -60,6 +60,10 @@
 
 			<!-- Start of Blog Posts -->
 			<div class="col-md-12 col-xs-12 blog-posts-wrapper">
+			<c:if test="${empty list }">
+					<img alt="게시글 내용이 없습니다" src="<c:url value='/images/board/no_board.gif'/>"
+					style="width: 950px;margin-left: 100px;">
+				</c:if>
 					<!-- 반복 시작 -->
 					<c:forEach var="map" items="${list }">
 
@@ -81,10 +85,11 @@
 							<span><i class="fa fa-user"></i>${map['MEM_NAME'] }</span> <span><i
 								class="fa fa-clock-o"></i>
 								<fmt:formatDate value="${map['BOARD_REGDATE'] }" pattern="yyyy-MM-dd"/> 
-								</span> <span><i
-								class="fa fa-comments-o"></i>${map['BOARD_READCOUNT'] }</span>
+								</span> <span><img src="<c:url value='/images/board/eye.png'/>"
+											style="width: 14px;height: 14.4px;">
+											${map['BOARD_READCOUNT'] }</span>
 						</div>
-						<a href="blog-post-right-sidebar.html"
+						<a href="<c:url value='/board/readCountUp?boardNo=${map["BOARD_NO"] }&btypeNo=1'/>"
 							class="btn btn-blue btn-effect mt10">상세보기</a>
 					</div>
 				</article>

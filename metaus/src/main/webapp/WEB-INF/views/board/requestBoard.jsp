@@ -88,11 +88,15 @@
 
 		<!-- Start of Row -->
 		<div class="row mt60">
-
-			<div class="col-md-12">
-				<h4>999개의 검색결과가 있습니다</h4>
-			</div>
+			<c:if test="${empty list }">
+				<img alt="게시글 내용이 없습니다"
+					src="<c:url value='/images/board/no_board.gif'/>"
+					style="width: 950px; margin-left: 100px;">
+			</c:if>
 			<c:if test="${!empty list }">
+				<div class="col-md-12">
+					<h4>999개의 검색결과가 있습니다</h4>
+				</div>
 				<!-- 반복 시작 -->
 				<c:forEach var="map" items="${list }">
 
@@ -101,11 +105,15 @@
 						<div class="item-block shadow-hover">
 							<!-- Start of Job Post Header -->
 							<div class="job-post-header clearfix">
-								<a href="<c:url value='/board/readCountUp?boardNo=${map["BOARD_NO"] }&btypeNo=7'/>">
-								<img src="images/companies/envato.svg" alt=""></a>
+								<a
+									href="<c:url value='/board/readCountUp?boardNo=${map["BOARD_NO"] }&btypeNo=7'/>">
+									<img src="images/companies/envato.svg" alt="">
+								</a>
 								<div>
-									<a href="<c:url value='/board/readCountUp?boardNo=${map["BOARD_NO"] }&btypeNo=7'/>">
-									<h4>${map['BOARD_TITLE'] }</h4></a>
+									<a
+										href="<c:url value='/board/readCountUp?boardNo=${map["BOARD_NO"] }&btypeNo=7'/>">
+										<h4>${map['BOARD_TITLE'] }</h4>
+									</a>
 									<h5>
 										<small>${map['MEM_NAME'] }</small>
 									</h5>
@@ -113,7 +121,7 @@
 
 								<ul class="pull-right">
 									<li>
-										<h6 class="time">${map['BOARD_REFDATE'] }</h6>
+										<h6 class="time">${map['BOARD_REGDATE'] }</h6>
 									</li>
 									<li><a href="#" class="btn btn-green btn-small btn-effect">지원하기</a></li>
 								</ul>
@@ -121,7 +129,7 @@
 							</div>
 							<!-- End of Job Post Header -->
 
-							
+
 						</div>
 					</div>
 					<!-- ===== End of Job Post Column 1 ===== -->
