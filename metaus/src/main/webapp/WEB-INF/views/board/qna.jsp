@@ -4,8 +4,9 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ include file="../inc/header.jsp"%>
-
-
+<script type="text/javascript">
+	
+</script>
 <!-- =============== Start of Page Header 1 Section =============== -->
 <section class="page-header" id="find-candidate"
 	style="margin-top: 150px;">
@@ -34,11 +35,7 @@
 	</div>
 </section>
 <!-- =============== End of Page Header 1 Section =============== -->
-
-
-
-
-
+	
 <!-- ===== Start of Main Wrapper Section ===== -->
 <section class="find-candidate ptb80">
 	<div class="container">
@@ -61,7 +58,6 @@
 				</button>
 			</div>
 			<a href="/metaus/board/boardWrite?btypeNo=3">[글쓰기]</a>
-
 		</form>
 		<!-- End of Form -->
 
@@ -71,8 +67,9 @@
 			<div class="col-md-12 candidate-main">
 
 				<c:if test="${empty list }">
-					<img alt="게시글 내용이 없습니다" src="<c:url value='/images/board/no_board.gif'/>"
-					style="width: 1000px;margin-left: 100px;">
+					<img alt="게시글 내용이 없습니다"
+						src="<c:url value='/images/board/no_board.gif'/>"
+						style="width: 950px; margin-left: 100px;">
 				</c:if>
 				<c:if test="${!empty list }">
 					<!-- 반복 시작 -->
@@ -86,24 +83,27 @@
 								<!-- Candidate Image -->
 								<div class="col-md-2 col-xs-3">
 									<div class="candidate-img">
-										<a href="<c:url value='/board/readCountUp?boardNo=${map["BOARD_NO"] }&btypeNo=3'/>">
-										<c:forEach var="vo" items="${atcList }">
-											<c:if test="${vo.boardNo==map['BOARD_NO'] }">
-												<img src="<c:url value='/img_upload/${vo.bfileFilename }'/>"
-													class="img-responsive" alt="이미지" />
-											</c:if>
-										</c:forEach>
+										<a
+											href="<c:url value='/board/readCountUp?boardNo=${map["BOARD_NO"] }&btypeNo=3'/>">
+											<c:forEach var="vo" items="${atcList }">
+												<c:if test="${vo.boardNo==map['BOARD_NO'] }">
+													<img
+														src="<c:url value='/img_upload/${vo.bfileFilename }'/>"
+														class="img-responsive" alt="이미지" />
+												</c:if>
+											</c:forEach>
 										</a>
 									</div>
 								</div>
-
 								<!-- Start of Candidate Name & Info -->
 								<div class="col-md-8 col-xs-6 ptb20">
 
 									<!-- Candidate Name -->
 									<div class="candidate-name">
-										<a href="<c:url value='/board/boardDetail?boardNo=${map["BOARD_NO"] }&btypeNo=3'/>">
-										<h5>${map['BOARD_TITLE'] }</h5></a>
+										<a
+											href="<c:url value='/board/readCountUp?boardNo=${map["BOARD_NO"] }&btypeNo=3'/>">
+											<h5>${map['BOARD_TITLE'] }</h5>
+										</a>
 									</div>
 
 									<!-- Candidate Info -->
@@ -115,7 +115,9 @@
 														value="${map['BOARD_REGDATE'] }" pattern="yyyy-MM-dd" />
 											</span></li>
 
-											<li><span><i class="fa fa-briefcase"></i>${map['BOARD_READCOUNT'] }</span></li>
+											<li><span><img src="<c:url value='/images/board/eye.png'/>"
+											style="width: 14px;height: 14.4px;">
+											${map['BOARD_READCOUNT'] }</span></li>
 										</ul>
 									</div>
 								</div>
@@ -124,7 +126,8 @@
 								<!-- CTA -->
 								<div class="col-md-2 col-xs-3">
 									<div class="candidate-cta ptb30">
-										<a href="<c:url value='/board/boardDetail?boardNo=${map["BOARD_NO"] }&btypeNo=3'/>"
+										<a
+											href="<c:url value='/board/boardDetail?boardNo=${map["BOARD_NO"] }&btypeNo=3'/>"
 											class="btn btn-blue btn-small btn-effect">답변하기</a>
 									</div>
 								</div>
@@ -141,20 +144,14 @@
 			<div class="col-md-12 mt10">
 				<ul class="pagination list-inline text-center">
 					<li class="active"><a href="javascript:void(0)">1</a></li>
-					<li><a href="#">2</a></li>
-					<li><a href="#">3</a></li>
-					<li><a href="#">4</a></li>
 					<li><a href="#">Next</a></li>
 				</ul>
 			</div>
 			<!-- End of Pagination -->
-
 		</div>
 		<!-- End of Candidate Main -->
-
 	</div>
 	<!-- End of Row -->
-
 	</div>
 </section>
 <!-- ===== End of Main Wrapper Section ===== -->
