@@ -19,6 +19,11 @@ public class ResumeServiceImpl implements ResumeService{
 		return resumeDao.selectBymemNo(memNo);
 	}
 
+	@Override
+	public int dupTitle(String resTitle) {
+		return resumeDao.dupTitle(resTitle);
+	}
+
 	
 	
 }

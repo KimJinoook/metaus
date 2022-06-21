@@ -6,4 +6,5 @@ import org.apache.ibatis.annotations.Mapper;
 public interface ResumeDAO {
 	int insertresume(ResumeVO vo);
 	ResumeVO selectBymemNo(int memNo);
+	int dupTitle(String resTitle);
 }
