@@ -62,14 +62,15 @@
 						<article class="col-md-12 blog-post">
 							<!-- Blog Post Thumbnail -->
 							<div class="col-md-12 blog-thumbnail">
-								<a href="blog-post-right-sidebar.html" class="hover-link"><img
-									src="images/blog/blog1.jpg" class="img-responsive" alt=""></a>
+								<a href="<c:url value='/board/readCountUp?boardNo=${map["BOARD_NO"] }&btypeNo=8'/>">
+								<img src="images/blog/blog1.jpg" class="img-responsive" alt=""></a>
 							</div>
 
 							<!-- Blog Post Description -->
 							<div class="col-md-12 blog-desc">
 								<h5>
-									<a href="blog-post-right-sidebar.html">${map['BOARD_TITLE'] }</a>
+									<a href="<c:url value='/board/readCountUp?boardNo=${map["BOARD_NO"] }&btypeNo=8'/>">
+									${map['BOARD_TITLE'] }</a>
 								</h5>
 								<div class="post-detail pt10 pb20">
 									<span><i class="fa fa-user"></i>${map['MEM_NAME'] }</span> <span><i

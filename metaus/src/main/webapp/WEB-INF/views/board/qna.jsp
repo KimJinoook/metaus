@@ -102,7 +102,7 @@
 
 									<!-- Candidate Name -->
 									<div class="candidate-name">
-										<a href="<c:url value='/board/boardDetail?boardNo=${map["BOARD_NO"] }&btypeNo=3'/>">
+										<a href="<c:url value='/board/readCountUp?boardNo=${map["BOARD_NO"] }&btypeNo=3'/>">
 										<h5>${map['BOARD_TITLE'] }</h5></a>
 									</div>
 

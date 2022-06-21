@@ -54,7 +54,8 @@
 							<!-- Blog Post Description -->
 							<div class="col-md-12 blog-desc" style="margin-top: 10px;">
 								<h5>
-									<a href="blog-post-right-sidebar.html">${map['BOARD_TITLE'] }</a>
+									<a href="<c:url value='/board/readCountUp?boardNo=${map["BOARD_NO"] }&btypeNo=5'/>">
+									${map['BOARD_TITLE'] }</a>
 								</h5>
 								<div class="post-detail pt10 pb20">
 									<span><i class="fa fa-user"></i>${map['MEM_NAME'] }</span> <span><i

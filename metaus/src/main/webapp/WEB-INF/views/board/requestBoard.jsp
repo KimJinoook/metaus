@@ -101,10 +101,11 @@
 						<div class="item-block shadow-hover">
 							<!-- Start of Job Post Header -->
 							<div class="job-post-header clearfix">
-								<a href="company-page-1.html"><img
-									src="images/companies/envato.svg" alt=""></a>
+								<a href="<c:url value='/board/readCountUp?boardNo=${map["BOARD_NO"] }&btypeNo=7'/>">
+								<img src="images/companies/envato.svg" alt=""></a>
 								<div>
-									<a href="job-page.html"><h4>${map['BOARD_TITLE'] }</h4></a>
+									<a href="<c:url value='/board/readCountUp?boardNo=${map["BOARD_NO"] }&btypeNo=7'/>">
+									<h4>${map['BOARD_TITLE'] }</h4></a>
 									<h5>
 										<small>${map['MEM_NAME'] }</small>
 									</h5>
