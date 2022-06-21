@@ -26,4 +26,9 @@ public class LectureController {
 		logger.info("chart_component 페이지");
 	}
 	
+	@RequestMapping("/morris")
+	public void morris() {
+		logger.info("morris 페이지");
+	}
+	
 }

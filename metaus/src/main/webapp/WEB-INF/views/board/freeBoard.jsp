@@ -54,7 +54,10 @@
 
 			<!-- Start of Blog Posts -->
 			<div class="col-md-8 col-xs-12 blog-posts-wrapper">
-
+<c:if test="${empty list }">
+					<img alt="게시글 내용이 없습니다" src="<c:url value='/images/board/no_board.gif'/>"
+					style="width: 800px;">
+				</c:if>
 				<c:if test="${!empty list }">
 					<!-- 반복 시작 -->
 					<c:forEach var="map" items="${list }">
@@ -62,21 +65,23 @@
 						<article class="col-md-12 blog-post">
 							<!-- Blog Post Thumbnail -->
 							<div class="col-md-12 blog-thumbnail">
-								<a href="blog-post-right-sidebar.html" class="hover-link"><img
-									src="images/blog/blog1.jpg" class="img-responsive" alt=""></a>
+								<a href="<c:url value='/board/readCountUp?boardNo=${map["BOARD_NO"] }&btypeNo=8'/>">
+								<img src="images/blog/blog1.jpg" class="img-responsive" alt=""></a>
 							</div>
 
 							<!-- Blog Post Description -->
 							<div class="col-md-12 blog-desc">
 								<h5>
-									<a href="blog-post-right-sidebar.html">${map['BOARD_TITLE'] }</a>
+									<a href="<c:url value='/board/readCountUp?boardNo=${map["BOARD_NO"] }&btypeNo=8'/>">
+									${map['BOARD_TITLE'] }</a>
 								</h5>
 								<div class="post-detail pt10 pb20">
 									<span><i class="fa fa-user"></i>${map['MEM_NAME'] }</span> <span><i
-										class="fa fa-clock-o"></i>${map['BOARD_REGDATE'] }</span> <span><i
-										class="fa fa-comments-o"></i>${map['BOARD_READCOUNT'] }</span>
+										class="fa fa-clock-o"></i>${map['BOARD_REGDATE'] }</span> <span><img src="<c:url value='/images/board/eye.png'/>"
+											style="width: 14px;height: 14.4px;">
+											${map['BOARD_READCOUNT'] }</span>
 								</div>
-								<a href="blog-post-right-sidebar.html"
+								<a href="<c:url value='/board/readCountUp?boardNo=${map["BOARD_NO"] }&btypeNo=8'/>"
 									class="btn btn-blue btn-effect mt10">상세보기</a>
 							</div>
 						</article>

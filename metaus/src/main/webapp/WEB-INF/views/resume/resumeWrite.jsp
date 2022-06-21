@@ -8,8 +8,42 @@
 
 <script type="text/javascript">
 	$(function(){
+		$('form[name=frm1]').submit(function(){
+			var content = $("#resContent").val();
+			if($('#chkId1').val()!='Y'){
+				alert("제목을 입력 하세요");
+				$("#resTitle").focus();
+				event.preventDefault();	
+			}else if($("[name=resTime1]").val().length<1){
+				alert("연락가능 시간을 입력 하세요");
+				$("[name=resTime1]").focus();
+				event.preventDefault();
+			}else if($("[name=resTime2]").val().length<1){
+				alert("연락가능 시간을 입력 하세요");
+				$("[name=resTime2]").focus();
+				event.preventDefault();
+			}else if(content=="" || content ==null || content == "&nbsp;" || content == "<p>&nbsp;</p>"){
+				alert("자기소개서를 입력 하세요");
+				$("#resContent").focus();
+				event.preventDefault();
+			}
+	}); 
+	
 		
+	$('#resTitle').keyup(function(){
+		var img="";
+		if($('#resTitle').val()==""){
+			img="<img scr='../images/portfolio/엑스.png'>";
+			$('#chkId1').val('N');
+		}else{
+			img="<img scr='../images/portfolio/체크.png'>";
+			$('#chkId1').val('Y');
+		}	
+		$('.error').text(img);
 	});
+
+});
+
 </script>
 
 
@@ -19,7 +53,7 @@
 
 	 
 
-	<form action="<c:url value='/resume/resumeWrite'/>" method="post">
+	<form name='frm1' action="<c:url value='/resume/resumeWrite'/>" method="post">
 	<input type="hidden" name="memNo" value="${mvo.memNo }">
     <!-- ===== Start of Main Wrapper Candidate Profile Section ===== -->
     <section class="ptb80" id="candidate-profile">
@@ -33,8 +67,11 @@
 	            </div>
 	        </div>
 	    </section>
-			<input type="text" class="live-search-box form-control mt20 ss" 
-			name="resTitle" placeholder="제목을 입력하세요" >
+			<div>
+				<input type="text" class="live-search-box form-control mt20 ss" 
+				name="resTitle" id="resTitle" placeholder="제목을 입력하세요">
+				<span class="error"></span>
+			</div>
                         
         <div class="container">
 				
@@ -53,7 +90,7 @@
                     
                         <div class="form-group">
                         	<label>주소 : </label><span>${mvo.memAdd}</span><br>
-                        	&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                        	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         	<span>${mvo.memAdd2}</span>                                                                                                                                                    
                         </div>
 
@@ -137,7 +174,7 @@
 				
 				<div class="form-group">
                      <label>job description <span>(optional)</span></label>
-                     <textarea class="tinymce" name="resContent"></textarea>
+                     <textarea class="tinymce" name="resContent" id="resContent"></textarea>
                 </div>
 			</div>	
            </div>     
@@ -155,12 +192,13 @@
             
 					
 			<div class="form-group pt30 nomargin" id="last">
-                    <button class="btn btn-blue btn-effect">등록</button>
+                    <input type="submit" class="btn btn-blue btn-effect" value="등록">
 			<a href="<c:url value='/'/>" class="btn btn-blue btn-effect">취소</a>
             </div>
         </div>
                         
     </section>
+    <input type="text" name="chkId" id="chkId1">
   </form>	
 
 <%@ include file="../inc/footer.jsp" %>
