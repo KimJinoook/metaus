@@ -1333,4 +1333,6 @@ values(fp_boardType_seq.nextval,'개인의뢰게시판','N','Y');
 insert into fp_boardType
 values(fp_boardType_seq.nextval,'자유게시판','N','Y');
 
+
+
 commit;
