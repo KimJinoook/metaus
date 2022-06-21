@@ -256,3 +256,13 @@
 	.blog-listing{
 		padding-top: 40px;
 	}
+	
+	@media (min-width: 992px){
+		.monthly-amount{
+			width: 317px;
+		}
+	}
+	
+	div#bar-chart {
+    	margin-top: -57px;
+	}

@@ -6,7 +6,7 @@
 
     <!-- ===== Start of Blog Listing Section ===== -->
     <section class="blog-listing ptb80" id="version1">
-        <div class="container">
+        <div class="container" style="padding-right: 0;">
             <div class="row">
 
                 <!-- Start of Blog Posts -->
@@ -42,6 +42,9 @@
 							        <div class="knob-label" style="font-weight:bold;font-size:20px;">누적 매출액</div>
 							        <div class="accum-num" style="font-weight:bold;font-size:25px;"><i class="fa-solid fa-won-sign"></i>2,400,000</div>
 							      </div><!-- ./col -->
+							      <div class="col-md-3 col-sm-6 col-xs-6 text-center left monthly-amount">
+					               	<div class="chart" id="bar-chart" style="height: 300px;padding-right:0;"></div>
+					              </div><!-- ./col -->
 							      <div class="clear"></div>
 							    </div><!-- /.row -->
 							  </div><!-- /.box-body -->
@@ -451,15 +454,39 @@
 
 </div>
 
-<!-- jQuery 2.1.3 -->
-
 <%@ include file="../layout/sidebar_function_bottom.jsp" %>
-<!-- jQuery 2.1.3 -->
-<script src="${pageContext.request.contextPath}/plugins/jQuery/jQuery-2.1.3.min.js"></script>
 <!-- jQuery Knob -->
 <script src="${pageContext.request.contextPath}/plugins/knob/jquery.knob.js" type="text/javascript"></script>
-
+<!-- Morris.js charts -->
+<script src="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+<script src="${pageContext.request.contextPath}/plugins/morris/morris.min.js" type="text/javascript"></script>
 <!-- page script -->
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/chart.js"></script>
+
+<script type="text/javascript">
+$(function () {
+	  "use strict";
+	  //BAR CHART
+	  var bar = new Morris.Bar({
+	    element: 'bar-chart',
+	    resize: true,
+	    data: [
+	      {y: '6월', a: 170},
+	      {y: '7월', a: 75},
+	      {y: '8월', a: 50},
+	      {y: '9월', a: 120},
+	      {y: '10월', a: 200},
+	      {y: '11월', a: 200}
+	    ],
+	    barColors: ['#00a65a', '#f56954'],
+	    xkey: 'y',
+	    //ykeys: ['a', 'b'],
+	    ykeys: ['a'],
+	    //labels: ['CPU', 'DISK'],
+	    labels: ['매출액'],
+	    hideHover: 'auto'
+	  });
+});
+</script>
 </body>
 </html>
