@@ -13,6 +13,10 @@
 		resultType="memberVo">
       select * from fp_mem where mem_id=#{memId}
    	</select>
+	<select id="selectByMemNo" parameterType="int" 
+		resultType="memberVo">
+      select * from fp_mem where mem_no=#{memNo}
+   	</select>
    	
    	<select id="duplicateId" parameterType="String" resultType="int">
 		select count(*) from fp_mem 

@@ -434,7 +434,7 @@ ALTER TABLE fp_mem
 /* 카카오 */
 CREATE TABLE fp_kakao (
 	mem_no NUMBER NOT NULL, /* 회원번호 */
-	kakao_email CLOB, /* 이메일 */
+	kakao_email VARCHAR2(200), /* 이메일 */
 	kakao_name VARCHAR2(20) /* 이름 */
 );
 

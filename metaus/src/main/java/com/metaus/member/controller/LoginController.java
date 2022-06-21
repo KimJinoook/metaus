@@ -1,6 +1,5 @@
 package com.metaus.member.controller;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -9,14 +8,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.metaus.member.model.CompanyService;
 import com.metaus.member.model.CompanyVO;
+import com.metaus.member.model.KakaoService;
+import com.metaus.member.model.KakaoVO;
 import com.metaus.member.model.MemberService;
 import com.metaus.member.model.MemberVO;
 
@@ -30,6 +30,7 @@ public class LoginController {
 
 	private final MemberService memberService;
 	private final CompanyService companyService;
+	private final KakaoService kakaoService;
 	
 	
 	
@@ -69,6 +70,17 @@ public class LoginController {
 		return "/common/message";
 	}
 	
+	@ResponseBody
+	@RequestMapping("/ajaxLoginCheck")
+	public int ajaxLoginCheck(@RequestParam String memId, @RequestParam(defaultValue = "0") String memPw) {
+		logger.info("ajax 아이디 비밀번호 확인, 파라미터 memId={},memPw={}", memId,memPw);
+		
+		int result=memberService.checkLogin(memId, memPw);
+		logger.info("로그인 처리 결과 result={}", result);
+		return result;
+
+	}
+	
 	@RequestMapping("/companylogin")
 	public String comlogin_post(@ModelAttribute CompanyVO vo,
 			HttpServletRequest request,
@@ -98,6 +110,44 @@ public class LoginController {
 		}else if(result==CompanyService.NONE_USERID) {
 			msg="해당 아이디가 존재하지 않습니다.";			
 		}
+		
+		model.addAttribute("msg", msg);
+		model.addAttribute("url", url);
+		
+		return "/common/message";
+	}
+	@RequestMapping("/kakaologin")
+	public String kakaologin_post(@ModelAttribute KakaoVO vo,
+			HttpServletRequest request,
+			HttpServletResponse response, Model model) {
+		logger.info("카카오 로그인 처리, 파라미터 vo={}", vo);
+		
+		KakaoVO kakaoVo = kakaoService.selectByUserid(vo.getKakaoEmail());
+		
+		String url = "/", msg="로그인 실패";
+		
+		if(kakaoVo != null) {
+			//[1] session에 저장
+			MemberVO memVo = memberService.selectByMemNo(kakaoVo.getMemNo());
+			
+			HttpSession session=request.getSession();
+			session.setAttribute("isLogin", "kakao");
+			session.setAttribute("memNo", memVo.getMemNo());
+			session.setAttribute("memId", memVo.getMemId());
+			session.setAttribute("memName", memVo.getMemName());
+			
+			msg = memVo.getMemName()+"님 환영합니다";
+			
+		}else if(kakaoVo == null) {
+			MemberVO memVo = memberService.selectByUserid(vo.getKakaoEmail());
+			model.addAttribute("vo",memVo);
+			model.addAttribute("socialEmail",vo.getKakaoEmail());
+			model.addAttribute("socialName",vo.getKakaoName());
+			model.addAttribute("socialType","kakao");
+			msg = "연동된 계정이 없습니다";
+			return "/member/socialRegister";
+		}
+		
 		
 		model.addAttribute("msg", msg);
 		model.addAttribute("url", url);

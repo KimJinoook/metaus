@@ -1390,6 +1390,9 @@ div#main-nav {
 .navbar .navbar-nav > li.login-btn {
     margin-left: 10px;
 }
+.navbar .navbar-nav > li.logout-btn {
+    margin-left: 10px;
+}
 
 .nav > li > a:focus,
 .nav > li > a:hover
@@ -1436,6 +1439,13 @@ div#main-nav {
 }
 
 .navbar .navbar-nav > li.login-btn > a {
+    background: #29b2fe;
+    color: #f6f6f6 !important;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
+.navbar .navbar-nav > li.logout-btn > a {
     background: #29b2fe;
     color: #f6f6f6 !important;
     -webkit-border-radius: 5px;

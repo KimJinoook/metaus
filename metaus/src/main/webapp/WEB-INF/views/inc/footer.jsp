@@ -281,7 +281,7 @@
                         <label for="agree2">소셜 계정으로 간편하게 로그인하세요!</label><br>
                         <br>
                         <a style="width:10px"><img src="<c:url value='/images/icons/naverbtn.png'/>" width="40px" height="40px"></a>&nbsp;&nbsp;
-                        <a style="width:10px"><img src="<c:url value='/images/icons/kakaobtn.png'/>" width="40px" height="40px"></a>&nbsp;&nbsp;
+                        <a style="width:10px" href="javascript:loginFormWithKakao()"><img src="<c:url value='/images/icons/kakaobtn.png'/>" width="40px" height="40px"></a>&nbsp;&nbsp;
                         <a style="width:10px"><img src="<c:url value='/images/icons/facebookbtn.png'/>" width="40px" height="40px"></a>
                         <br>
                     </div>
@@ -333,7 +333,44 @@
     <!-- cd-user-modal -->
     <!-- ===== End of Login Pop Up div ===== -->
 
+	<form id="form-kakao-login" method="post" action="<c:url value='/login/kakaologin'/>">
+		<input type="hidden" name="kakaoEmail"/>
+		<input type="hidden" name="kakaoName"/>
+	</form>
+	
 
+<script type="text/javascript">	
+	function loginFormWithKakao(){
+		Kakao.init('48fd685b6c1070cc71f894be6653d843');
+
+		Kakao.Auth.login({
+	        success: function(authObj) {
+	         
+	          //2. 로그인 성공시, API 호출
+	          Kakao.API.request({
+	            url: '/v2/user/me',
+	            success: function(res) {
+	              console.log(res);
+	              var id = res.id;
+	              var account = res.kakao_account;
+	              $('#form-kakao-login input[name=kakaoEmail]').val(account.email);
+	              $('#form-kakao-login input[name=kakaoName]').val(account.profile.nickname);
+				  scope : 'account_email';
+				document.querySelector('#form-kakao-login').submit();
+			
+
+	              
+	        }
+	          })
+	          console.log(authObj);
+	          var token = authObj.access_token;
+	        },
+	        fail: function(err) {
+	          alert(JSON.stringify(err));
+	        }
+	      });
+	};
+</script>
 
 
 

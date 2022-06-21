@@ -37,6 +37,33 @@
 	<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
 	<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
+<script type="text/javascript" src="<c:url value='/js/jquery-3.6.0.min.js'/>"></script>
+<script src = "https://developers.kakao.com/sdk/js/kakao.min.js"></script>
+<script>
+function logout(){
+	var loginType = '${sessionScope.isLogin}';
+	if(loginType=='kakao'){
+		Kakao.init('48fd685b6c1070cc71f894be6653d843');
+		if (Kakao.Auth.getAccessToken()) {
+		      Kakao.API.request({
+		    	  
+		        url: '/v1/user/unlink',
+		        success: function(response) {
+		        	console.log(response);
+		        	console.log('성공');
+		        	Kakao.Auth.setAccessToken(undefined);
+					location.href="<c:url value='/login/logout'/>";
+		        },
+		        fail: function(error) {
+		          console.log(error);
+		        }
+		      });
+	    }
+	}else{
+		location.href="<c:url value='/login/logout'/>";
+	}
+}
+</script>
 </head>
 
 <body>
@@ -244,8 +271,8 @@
 	                            </li>
 	                        </c:if>
 	                        <c:if test="${!empty sessionScope.isLogin }">
-	                            <li class="menu-item login-btn">
-	                                <a id="logoutBtn" href="<c:url value='/login/logout'/>" role="button"><i class="fa fa-lock"></i>logout</a>
+	                            <li class="menu-item logout-btn">
+	                                <a id="logoutBtn" onclick="logout()" href="#" role="button"><i class="fa fa-lock"></i>logout</a>
 	                            </li>
 	                        </c:if>
 

@@ -36,6 +36,9 @@ public class MemberServiceImpl implements MemberService {
 	public MemberVO selectByUserid(String memId) {
 		return memberDao.selectByUserid(memId);
 	}
+	public MemberVO selectByMemNo(int memNo) {
+		return memberDao.selectByMemNo(memNo);
+	}
 	
 	public int duplicateId(String memId){
 		int count=memberDao.duplicateId(memId);
