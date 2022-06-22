@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.metaus.request.model.RequestDAO">
+	<insert id="insertRequest" parameterType="RequestVo">
+		<selectKey resultType="int" keyProperty="rec_no" order="BEFORE">
+			select fp_rec_seq.nextval from dual
+		</selectKey>
+		insert into fp_rec(rec_no, com_no, rec_title, rec_content, rec_pay, rec_regdate, rec_readcount)
+		values(#{rec_no},#{com_no},#{rec_title},#{rec_content},#{rec_pay},sysdate,#{rec_readcount})
+	</insert>
+</mapper>

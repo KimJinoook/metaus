@@ -131,11 +131,8 @@ $(function(){
                             <li class="dropdown simple-menu">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">기업 찾기<i class="fa fa-angle-down"></i></a>
                                 <ul class="dropdown-menu" role="menu">
-                                    <li><a href="search-jobs-1.html">search jobs 1</a></li>
-                                    <li><a href="search-jobs-2.html">search jobs 2</a></li>
-                                    <li><a href="search-jobs-3.html">search jobs 3</a></li>
-                                    <li><a href="search-jobs-4.html">search jobs 4</a></li>
-                                    <li><a href="submit-resume.html">submit resume</a></li>
+                                    <li><a href="<c:url value='/request/search'/>">기업 의뢰 게시판</a></li>
+                                    <li><a href="<c:url value='/request/post'/>">의뢰 등록</a></li>
                                 </ul>
                             </li>
 
