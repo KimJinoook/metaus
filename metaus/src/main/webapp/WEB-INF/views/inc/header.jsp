@@ -40,6 +40,7 @@
 <![endif]-->
 <script type="text/javascript" src="<c:url value='/js/jquery-3.6.0.min.js'/>"></script>
 <script src = "https://developers.kakao.com/sdk/js/kakao.min.js"></script>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/ko_KR/sdk.js#xfbml=1&version=v10.0&appId=550605189855072" nonce="SiOBIhLG"></script>
 <script>
 $(function(){
 	
@@ -64,6 +65,17 @@ $(function(){
 		    }
 		}else if(loginType=='naver'){
 			location.href="<c:url value='/login/logout'/>";
+		}else if(loginType=='facebook'){
+	
+		        FB.login(function(response) {
+		            if (response.status === 'connected') {
+		                FB.logout(function(response) {
+
+		                		location.href="<c:url value='/login/logout'/>";
+		                    });
+		                }
+		     
+		        });
 		}else{
 			location.href="<c:url value='/login/logout'/>";
 		}
