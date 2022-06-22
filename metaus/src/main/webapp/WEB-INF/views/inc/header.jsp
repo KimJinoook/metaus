@@ -176,9 +176,9 @@ $(function(){
 
                             <!-- Simple Menu Item -->
                             <li class="dropdown simple-menu">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">VOD강의<i class="fa fa-angle-down"></i></a>
-                                <ul class="dropdown-menu">
-                                    <!-- Dropdown Submenu -->
+                                <a href="<c:url value='/vod/vod'/>" class="dropdown-toggle" data-toggle="dropdown" role="button">VOD강의<!-- <i class="fa fa-angle-down"></i> --></a>
+                                <!-- <ul class="dropdown-menu">
+                                    Dropdown Submenu
                                     <li class="dropdown-submenu">
                                         <a href="#">headers<i class="fa fa-angle-right"></i></a>
                                         <ul class="dropdown-menu">
@@ -189,7 +189,7 @@ $(function(){
                                         </ul>
                                     </li>
 
-                                    <!-- Dropdown Submenu -->
+                                    Dropdown Submenu
                                     <li class="dropdown-submenu">
                                         <a href="#">footers<i class="fa fa-angle-right"></i></a>
                                         <ul class="dropdown-menu">
@@ -200,7 +200,7 @@ $(function(){
                                         </ul>
                                     </li>
 
-                                    <!-- Dropdown Submenu -->
+                                    Dropdown Submenu
                                     <li class="dropdown-submenu">
                                         <a href="#">page headers<i class="fa fa-angle-right"></i></a>
                                         <ul class="dropdown-menu">
@@ -211,12 +211,12 @@ $(function(){
                                         </ul>
                                     </li>
 
-                                    <li><a href="buttons.html">buttons</a></li>
+                                    <li><a href="">buttons</a></li>
                                     <li><a href="pricing-tables.html">pricing tables</a></li>
                                     <li><a href="typography.html">typography</a></li>
                                 </ul>
                             </li>
-
+ -->
                             <!-- Simple Menu Item -->
                             <li class="dropdown simple-menu">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">마이페이지<i class="fa fa-angle-down"></i></a>
