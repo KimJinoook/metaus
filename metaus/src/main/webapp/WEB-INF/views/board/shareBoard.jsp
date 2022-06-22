@@ -4,34 +4,16 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ include file="../inc/header.jsp"%>
-<script src="<c:url value='js/jquery-3.1.1.min.js'/>"></script>
-<script src="<c:url value='js/bootstrap.min.js'/>"></script>
-<script src="<c:url value='js/bootstrap-select.min.js'/>"></script>
-<script src="<c:url value='js/swiper.min.js'/>"></script>
-<script src="<c:url value='js/jquery.ajaxchimp.js'/>"></script>
-<script src="<c:url value='js/jquery.countTo.js'/>"></script>
-<script src="<c:url value='js/jquery.inview.min.js'/>"></script>
-<script src="<c:url value='js/jquery.magnific-popup.min.js'/>"></script>
-<script src="<c:url value='js/jquery.easypiechart.min.js'/>"></script>
-<script src="<c:url value='js/jquery-ui.min.js'/>"></script>
-<script src="<c:url value='js/owl.carousel.min.js'/>"></script>
-<script src="<c:url value='js/tinymce/tinymce.min.js'/>"></script>
-<script src="<c:url value='js/countdown.js'/>"></script>
-<script src="<c:url value='js/isotope.min.js'/>"></script>
-<script src="<c:url value='js/custom.js'/>"></script>
-
 <script th:inline="javascript">
+	$(function() {
 
-$(function () {
-	
-	var result =/*[[${msg}]]*/ 'default';
-	
-	if(result == 'success'){
-		alert("처리가 완료되었습니다. result:" + result);
-	}
-	
-  });
+		var result = /*[[${msg}]]*/'default';
 
+		if (result == 'success') {
+			alert("처리가 완료되었습니다. result:" + result);
+		}
+
+	});
 </script>
 
 <!-- =============== Start of Page Header 1 Section =============== -->
@@ -62,7 +44,7 @@ $(function () {
 </section>
 <!-- =============== End of Page Header 1 Section =============== -->
 
-
+<a href="/metaus/board/boardWrite?btypeNo=6">[글쓰기]</a>
 <!-- ===== Start of Blog Listing Section ===== -->
 <section class="blog-listing ptb80" id="version2">
 	<div class="container">
@@ -70,220 +52,43 @@ $(function () {
 
 			<!-- Start of Blog Posts -->
 			<div class="col-md-8 col-xs-12 blog-posts-wrapper">
+<c:if test="${empty list }">
+					<img alt="게시글 내용이 없습니다" src="<c:url value='/images/board/no_board.gif'/>"
+					style="width: 800px;">
+				</c:if>
+				<c:if test="${!empty list }">
+					<!-- 반복 시작 -->
+					<c:forEach var="map" items="${list }">
+						<!-- Start of Blog Post Article 1 -->
+						<article class="col-md-12 blog-post">
+							<!-	- Blog Post Thumbnail -->
+							<div class="col-md-12 blog-thumbnail">
+								<a href="<c:url value='/board/readCountUp?boardNo=${map["BOARD_NO"] }&btypeNo=6'/>">
+								<img src="images/blog/blog1.jpg" class="img-responsive" alt=""></a>
+							</div>
 
-				<!-- Start of Blog Post Article 1 -->
-				<article class="col-md-12 blog-post">
-
-					<!-- Blog Post Thumbnail -->
-					<div class="col-md-12 blog-thumbnail">
-						<a href="blog-post-right-sidebar.html" class="hover-link"><img
-							src="images/blog/blog1.jpg" class="img-responsive" alt=""></a>
-						<div class="date">
-							<span class="day">15</span> <span class="publish-month">Mar</span>
-						</div>
-					</div>
-
-					<!-- Blog Post Description -->
-					<div class="col-md-12 blog-desc">
-						<h5>
-							<a href="blog-post-right-sidebar.html">top 10 tips for web
-								developers</a>
-						</h5>
-						<div class="post-detail pt10 pb20">
-							<span><i class="fa fa-user"></i>Author</span> <span><i
-								class="fa fa-clock-o"></i>4:30</span> <span><i
-								class="fa fa-comments-o"></i>12 Comments</span>
-						</div>
-
-						<p>Lorem Ipsum is simply dummy text of the printing and
-							typesetting industry. Lorem Ipsum has been the industry's
-							standard dummy text ever since the 1500s, when an unknown printer
-							took a galley of type and scrambled it to make a type specimen
-							book....</p>
-						<a href="blog-post-right-sidebar.html"
-							class="btn btn-blue btn-effect mt10">read more</a>
-					</div>
-				</article>
-				<!-- End of Blog Post Article 1 -->
-
-
-				<!-- Start of Blog Post Article 2 -->
-				<article class="col-md-12 blog-post">
-
-					<!-- Blog Post Thumbnail -->
-					<div class="col-md-12 blog-thumbnail">
-						<a href="blog-post-right-sidebar.html" class="hover-link"><img
-							src="images/blog/blog2.jpg" class="img-responsive" alt=""></a>
-						<div class="date">
-							<span class="day">14</span> <span class="publish-month">Mar</span>
-						</div>
-					</div>
-
-					<!-- Blog Post Description -->
-					<div class="col-md-12 blog-desc">
-						<h5>
-							<a href="blog-post-right-sidebar.html">how to prepare for an
-								interview</a>
-						</h5>
-						<div class="post-detail pt10 pb20">
-							<span><i class="fa fa-user"></i>Author</span> <span><i
-								class="fa fa-clock-o"></i>4:30</span> <span><i
-								class="fa fa-comments-o"></i>12 Comments</span>
-						</div>
-
-						<p>Lorem Ipsum is simply dummy text of the printing and
-							typesetting industry. Lorem Ipsum has been the industry's
-							standard dummy text ever since the 1500s, when an unknown printer
-							took a galley of type and scrambled it to make a type specimen
-							book....</p>
-						<a href="blog-post-right-sidebar.html"
-							class="btn btn-blue btn-effect mt10">read more</a>
-					</div>
-				</article>
-				<!-- End of Blog Post Article 2 -->
+							<!-- Blog Post Description -->
+							<div class="col-md-12 blog-desc">
+								<h5>
+									<a href="<c:url value='/board/readCountUp?boardNo=${map["BOARD_NO"] }&btypeNo=6'/>">
+									${map['BOARD_TITLE'] }</a>
+								</h5>
+								<div class="post-detail pt10 pb20">
+									<span><i class="fa fa-user"></i>${map['MEM_NAME'] }</span> <span><i
+										class="fa fa-clock-o"></i>${map['BOARD_REGDATE'] }</span> <span><img src="<c:url value='/images/board/eye.png'/>"
+											style="width: 14px;height: 14.4px;">
+											${map['BOARD_READCOUNT'] }</span>
+								</div>
+								<a href="blog-post-right-sidebar.html"
+									class="btn btn-blue btn-effect mt10">상세보기</a>
+							</div>
+						</article>
+						<!-- End of Blog Post Article 1 -->
+					</c:forEach>
+				</c:if>
 
 
-				<!-- Start of Blog Post Article 3 -->
-				<article class="col-md-12 blog-post">
 
-					<!-- Blog Post Thumbnail -->
-					<div class="col-md-12 blog-thumbnail">
-						<a href="blog-post-right-sidebar.html" class="hover-link"><img
-							src="images/blog/blog3.jpg" class="img-responsive" alt=""></a>
-						<div class="date">
-							<span class="day">13</span> <span class="publish-month">Mar</span>
-						</div>
-					</div>
-
-					<!-- Blog Post Description -->
-					<div class="col-md-12 blog-desc">
-						<h5>
-							<a href="blog-post-right-sidebar.html">freelancing vs
-								employment</a>
-						</h5>
-						<div class="post-detail pt10 pb20">
-							<span><i class="fa fa-user"></i>Author</span> <span><i
-								class="fa fa-clock-o"></i>4:30</span> <span><i
-								class="fa fa-comments-o"></i>12 Comments</span>
-						</div>
-
-						<p>Lorem Ipsum is simply dummy text of the printing and
-							typesetting industry. Lorem Ipsum has been the industry's
-							standard dummy text ever since the 1500s, when an unknown printer
-							took a galley of type and scrambled it to make a type specimen
-							book....</p>
-						<a href="blog-post-right-sidebar.html"
-							class="btn btn-blue btn-effect mt10">read more</a>
-					</div>
-				</article>
-				<!-- End of Blog Post Article 3 -->
-
-
-				<!-- Start of Blog Post Article 4 -->
-				<article class="col-md-12 blog-post">
-
-					<!-- Blog Post Thumbnail -->
-					<div class="col-md-12 blog-thumbnail">
-						<a href="blog-post-right-sidebar.html" class="hover-link"><img
-							src="images/blog/blog4.jpg" class="img-responsive" alt=""></a>
-						<div class="date">
-							<span class="day">13</span> <span class="publish-month">Mar</span>
-						</div>
-					</div>
-
-					<!-- Blog Post Description -->
-					<div class="col-md-12 blog-desc">
-						<h5>
-							<a href="blog-post-right-sidebar.html">why should you trust
-								cariera</a>
-						</h5>
-						<div class="post-detail pt10 pb20">
-							<span><i class="fa fa-user"></i>Author</span> <span><i
-								class="fa fa-clock-o"></i>4:30</span> <span><i
-								class="fa fa-comments-o"></i>12 Comments</span>
-						</div>
-
-						<p>Lorem Ipsum is simply dummy text of the printing and
-							typesetting industry. Lorem Ipsum has been the industry's
-							standard dummy text ever since the 1500s, when an unknown printer
-							took a galley of type and scrambled it to make a type specimen
-							book....</p>
-						<a href="blog-post-right-sidebar.html"
-							class="btn btn-blue btn-effect mt10">read more</a>
-					</div>
-				</article>
-				<!-- End of Blog Post Article 4 -->
-
-
-				<!-- Start of Blog Post Article 5 -->
-				<article class="col-md-12 blog-post">
-
-					<!-- Blog Post Thumbnail -->
-					<div class="col-md-12 blog-thumbnail">
-						<a href="blog-post-right-sidebar.html" class="hover-link"><img
-							src="images/blog/blog5.jpg" class="img-responsive" alt=""></a>
-						<div class="date">
-							<span class="day">12</span> <span class="publish-month">Mar</span>
-						</div>
-					</div>
-
-					<!-- Blog Post Description -->
-					<div class="col-md-12 blog-desc">
-						<h5>
-							<a href="blog-post-right-sidebar.html">our workflow
-								techniques</a>
-						</h5>
-						<div class="post-detail pt10 pb20">
-							<span><i class="fa fa-user"></i>Author</span> <span><i
-								class="fa fa-clock-o"></i>4:30</span> <span><i
-								class="fa fa-comments-o"></i>12 Comments</span>
-						</div>
-
-						<p>Lorem Ipsum is simply dummy text of the printing and
-							typesetting industry. Lorem Ipsum has been the industry's
-							standard dummy text ever since the 1500s, when an unknown printer
-							took a galley of type and scrambled it to make a type specimen
-							book....</p>
-						<a href="blog-post-right-sidebar.html"
-							class="btn btn-blue btn-effect mt10">read more</a>
-					</div>
-				</article>
-				<!-- End of Blog Post Article 5 -->
-
-
-				<!-- Start of Blog Post Article 6 -->
-				<article class="col-md-12 blog-post">
-
-					<!-- Blog Post Thumbnail -->
-					<div class="col-md-12 blog-thumbnail">
-						<a href="blog-post-right-sidebar.html" class="hover-link"><img
-							src="images/blog/blog6.jpg" class="img-responsive" alt=""></a>
-						<div class="date">
-							<span class="day">11</span> <span class="publish-month">Mar</span>
-						</div>
-					</div>
-
-					<!-- Blog Post Description -->
-					<div class="col-md-12 blog-desc">
-						<h5>
-							<a href="blog-post-right-sidebar.html">apperance is the key</a>
-						</h5>
-						<div class="post-detail pt10 pb20">
-							<span><i class="fa fa-user"></i>Author</span> <span><i
-								class="fa fa-clock-o"></i>4:30</span> <span><i
-								class="fa fa-comments-o"></i>12 Comments</span>
-						</div>
-
-						<p>Lorem Ipsum is simply dummy text of the printing and
-							typesetting industry. Lorem Ipsum has been the industry's
-							standard dummy text ever since the 1500s, when an unknown printer
-							took a galley of type and scrambled it to make a type specimen
-							book....</p>
-						<a href="blog-post-right-sidebar.html"
-							class="btn btn-blue btn-effect mt10">read more</a>
-					</div>
-				</article>
-				<!-- End of Blog Post Article 6 -->
 
 				<!-- Start of Pagination -->
 				<div class="col-md-12">

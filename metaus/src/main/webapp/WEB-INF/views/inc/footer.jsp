@@ -255,55 +255,76 @@
         <div class="cd-user-modal-container">
             <!-- this is the container wrapper -->
             <ul class="cd-switcher">
-                <li><a href="#0">Sign in</a></li>
-                <li><a href="#1">New account</a></li>
+                <li><a href="#0">일반 회원</a></li>
+                <li><a href="#1">기업 회원</a></li>
             </ul>
 
             <div id="cd-login">
                 <!-- log in form -->
-                <form class="cd-form">
+                <form class="cd-form" id="memloginfrm" method="post" action="<c:url value='/login/memberlogin'/>">
                     <p class="fieldset">
                         <label class="image-replace cd-email" for="signin-email">E-mail</label>
-                        <input class="full-width has-padding has-border" id="signin-email" type="email" placeholder="E-mail">
+                        <input class="full-width has-padding has-border" name="memId" type="email" placeholder="E-mail">
                     </p>
                     <p class="fieldset">
                         <label class="image-replace cd-password" for="signin-password">Password</label>
-                        <input class="full-width has-padding has-border" id="signin-password" type="password" placeholder="Password">
-                    </p>
-                    <p class="fieldset">
-                        <input type="checkbox" id="remember-me" checked>
-                        <label for="remember-me">Remember me</label>
-                    </p>
+                        <input class="full-width has-padding has-border" name="memPw" type="password" placeholder="Password">
+                    </p>       
                     <p class="fieldset">
                         <button type="submit" value="Login" class="btn btn-blue btn-effect">Login</button>
                     </p>
                 </form>
+                
+                <div class="text-center">
+                    <!-- Form Group -->
+                    <div class="form-group">
+                        <label for="agree2">소셜 계정으로 간편하게 로그인하세요!</label><br>
+                        <br>
+                        <a style="width:10px"><img src="<c:url value='/images/icons/naverbtn.png'/>" width="40px" height="40px"></a>&nbsp;&nbsp;
+                        <a style="width:10px" href="javascript:loginFormWithKakao()"><img src="<c:url value='/images/icons/kakaobtn.png'/>" width="40px" height="40px"></a>&nbsp;&nbsp;
+                        <a style="width:10px"><img src="<c:url value='/images/icons/facebookbtn.png'/>" width="40px" height="40px"></a>
+                        <br>
+                    </div>
+                </div>
+                          
+                <div class="text-center">
+                    <!-- Form Group -->
+                    <div class="form-group">
+                    	<br>
+                        <label for="agree2"><a href="<c:url value='/member/register'/>">비밀번호를 잊어버렸어요</a></label><br>
+                        <label for="agree2">아직 회원이 아니신가요? <a href="<c:url value='/member/register'/>">회원 가입하기</a></label>
+                        <br><br>
+                    </div>
+                </div>
+          
             </div>
             <!-- cd-login -->
 
             <div id="cd-signup">
                 <!-- sign up form -->
-                <form class="cd-form">
+                <form class="cd-form" id="comloginfrm"  method="post" action="<c:url value='/login/companylogin'/>">
                     <p class="fieldset">
-                        <label class="image-replace cd-username" for="signup-username">Username</label>
-                        <input class="full-width has-padding has-border" id="signup-username" type="text" placeholder="Username">
-                    </p>
-                    <p class="fieldset">
-                        <label class="image-replace cd-email" for="signup-email">E-mail</label>
-                        <input class="full-width has-padding has-border" id="signup-email" type="email" placeholder="E-mail">
+                        <label class="image-replace cd-email" for="signup-email">ID</label>
+                        <input class="full-width has-padding has-border" id="" name="comId" type="text" placeholder="ID">
                     </p>
                     <p class="fieldset">
                         <label class="image-replace cd-password" for="signup-password">Password</label>
-                        <input class="full-width has-padding has-border" id="signup-password" type="password" placeholder="Password">
+                        <input class="full-width has-padding has-border" id="signup-password" name="comPw" type="password" placeholder="Password">
                     </p>
+                 
                     <p class="fieldset">
-                        <input type="checkbox" id="accept-terms">
-                        <label for="accept-terms">I agree to the <a href="#0">Terms</a></label>
-                    </p>
-                    <p class="fieldset">
-                        <button class="btn btn-blue btn-effect" type="submit" value="Create account">Create Account</button>
+                        <button class="btn btn-blue btn-effect" type="submit" value="Create account">Login</button>
                     </p>
                 </form>
+                
+                <div class="text-center">
+                       <!-- Form Group -->
+                       <div class="form-group">
+                           <label for="agree2"><a href="<c:url value='/member/register'/>">비밀번호를 잊어버렸어요</a></label><br>
+                           <label for="agree2">아직 회원이 아니신가요? <a href="<c:url value='/member/register'/>">회원 가입하기</a></label>
+                           <br><br>
+                       </div>
+                </div>
             </div>
             <!-- cd-signup -->
         </div>
@@ -312,7 +333,44 @@
     <!-- cd-user-modal -->
     <!-- ===== End of Login Pop Up div ===== -->
 
+	<form id="form-kakao-login" method="post" action="<c:url value='/login/kakaologin'/>">
+		<input type="hidden" name="kakaoEmail"/>
+		<input type="hidden" name="kakaoName"/>
+	</form>
+	
 
+<script type="text/javascript">	
+	function loginFormWithKakao(){
+		Kakao.init('48fd685b6c1070cc71f894be6653d843');
+
+		Kakao.Auth.login({
+	        success: function(authObj) {
+	         
+	          //2. 로그인 성공시, API 호출
+	          Kakao.API.request({
+	            url: '/v2/user/me',
+	            success: function(res) {
+	              console.log(res);
+	              var id = res.id;
+	              var account = res.kakao_account;
+	              $('#form-kakao-login input[name=kakaoEmail]').val(account.email);
+	              $('#form-kakao-login input[name=kakaoName]').val(account.profile.nickname);
+				  scope : 'account_email';
+				document.querySelector('#form-kakao-login').submit();
+			
+
+	              
+	        }
+	          })
+	          console.log(authObj);
+	          var token = authObj.access_token;
+	        },
+	        fail: function(err) {
+	          alert(JSON.stringify(err));
+	        }
+	      });
+	};
+</script>
 
 
 

@@ -81,14 +81,9 @@
 						</div>
 
 						<!-- Answer -->
-						<p class="answer" style="display: none;">Lorem ipsum dolor sit
-							amet, consectetur adipiscing elit, sed do eiusmod tempor
-							incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-							veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-							ex ea commodo consequat. Duis aute irure dolor in reprehenderit
-							in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-							Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
-							officia deserunt mollit anim id est laborum.</p>
+						<p class="answer" style="display: none;">오른쪽 위에 LOGIN 버튼을 클릭 후
+						"아직 계정이 없으시다면 여기를 클릭하세요" 부분을 클릭하시면 일반회원, 기업회원으로
+						회원가입을 진행하실 수 있습니다.</p>
 					</div>
 					<!-- End of Topic 1 -->
 
@@ -103,14 +98,8 @@
 						</div>
 
 						<!-- Answer -->
-						<p class="answer" style="display: none;">Lorem ipsum dolor sit
-							amet, consectetur adipiscing elit, sed do eiusmod tempor
-							incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-							veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-							ex ea commodo consequat. Duis aute irure dolor in reprehenderit
-							in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-							Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
-							officia deserunt mollit anim id est laborum.</p>
+						<p class="answer" style="display: none;">로그인 후 위의 메뉴에서
+						'마이페이지'에 들어가신 다음 회원탈퇴 절차를 밟으시면 회원탈퇴가 가능합니다.</p>
 					</div>
 					<!-- End of Topic 2 -->
 
@@ -125,14 +114,9 @@
 						</div>
 
 						<!-- Answer -->
-						<p class="answer" style="display: none;">Lorem ipsum dolor sit
-							amet, consectetur adipiscing elit, sed do eiusmod tempor
-							incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-							veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-							ex ea commodo consequat. Duis aute irure dolor in reprehenderit
-							in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-							Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
-							officia deserunt mollit anim id est laborum.</p>
+						<p class="answer" style="display: none;">로그인 후 위의 메뉴에서
+						'마이페이지'에 들어가신 다음 '이력서 등록'을 클릭하시면 이력서 등록 및 
+						포트폴리오 작성이 가능합니다.</p>
 					</div>
 					<!-- End of Topic 3 -->
 
@@ -147,14 +131,8 @@
 						</div>
 
 						<!-- Answer -->
-						<p class="answer" style="display: none;">Lorem ipsum dolor sit
-							amet, consectetur adipiscing elit, sed do eiusmod tempor
-							incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-							veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-							ex ea commodo consequat. Duis aute irure dolor in reprehenderit
-							in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-							Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
-							officia deserunt mollit anim id est laborum.</p>
+						<p class="answer" style="display: none;">위의 메뉴에서 
+						'기업 찾기', '크리에이터 찾기' 메뉴를 들어가시면 구인구직을 할 수 있습니다.</p>
 					</div>
 					<!-- End of Topic 4 -->
 
@@ -169,14 +147,8 @@
 						</div>
 
 						<!-- Answer -->
-						<p class="answer">Lorem ipsum dolor sit amet, consectetur
-							adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-							dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-							exercitation ullamco laboris nisi ut aliquip ex ea commodo
-							consequat. Duis aute irure dolor in reprehenderit in voluptate
-							velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-							occaecat cupidatat non proident, sunt in culpa qui officia
-							deserunt mollit anim id est laborum.</p>
+						<p class="answer">기본적으로는 윈도우10에서 지원하고 있으며
+						모바일 플렛폼으로 들어오실 경우에도 지원합니다.</p>
 					</div>
 					<!-- End of Topic 5 -->
 
@@ -191,14 +163,7 @@
 						</div>
 
 						<!-- Answer -->
-						<p class="answer" style="display: none;">Lorem ipsum dolor sit
-							amet, consectetur adipiscing elit, sed do eiusmod tempor
-							incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-							veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-							ex ea commodo consequat. Duis aute irure dolor in reprehenderit
-							in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-							Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
-							officia deserunt mollit anim id est laborum.</p>
+						<p class="answer" style="display: none;">미정</p>
 					</div>
 					<!-- End of Topic 6 -->
 
@@ -213,14 +178,7 @@
 						</div>
 
 						<!-- Answer -->
-						<p class="answer" style="display: none;">Lorem ipsum dolor sit
-							amet, consectetur adipiscing elit, sed do eiusmod tempor
-							incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-							veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-							ex ea commodo consequat. Duis aute irure dolor in reprehenderit
-							in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-							Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
-							officia deserunt mollit anim id est laborum.</p>
+						<p class="answer" style="display: none;">출시 예정입니다.</p>
 					</div>
 					<!-- End of Topic 7 -->
 
@@ -235,14 +193,7 @@
 						</div>
 
 						<!-- Answer -->
-						<p class="answer" style="display: none;">Lorem ipsum dolor sit
-							amet, consectetur adipiscing elit, sed do eiusmod tempor
-							incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-							veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-							ex ea commodo consequat. Duis aute irure dolor in reprehenderit
-							in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-							Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
-							officia deserunt mollit anim id est laborum.</p>
+						<p class="answer" style="display: none;">미정</p>
 					</div>
 					<!-- End of Topic 8 -->
 

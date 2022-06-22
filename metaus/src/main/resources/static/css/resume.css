@@ -2,10 +2,15 @@
 
 .aa{
 	margin-top: 90px;
+	
 }
 
-.ss{
-	width: 150px;
+.ss{	
+	width: 1070px;
 	margin: 0px auto; 
 	margin-top: 10px;
+	
+}
+#portfolio{
+	padding: 130px;
 }

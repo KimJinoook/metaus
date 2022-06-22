@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.metaus.member.model.CompanyDAO">
+	
+	<select id="selectPwd" parameterType="string" resultType="String">
+		select com_pw from fp_com
+		where com_id=#{comId} and com_outdate is null
+	</select>
+	
+	<select id="selectByUserid" parameterType="string" 
+		resultType="CompanyVO">
+      select * from fp_com where com_id=#{comId}
+   	</select>
+   	
+   	<select id="duplicateId" parameterType="String" resultType="int">
+		select count(*) from fp_com 
+		where com_id=#{comId}
+	</select>
+	
+	<insert id="insertCompany" parameterType="CompanyVO">
+		<selectKey resultType="int" keyProperty="comNo" order="BEFORE">
+			select fp_com_seq.nextval from dual
+		</selectKey>
+		insert into fp_com(com_no,com_id,com_pw,com_name,com_preview,com_ceo,com_add,com_lati,com_longi,com_rrn,com_reccnt,com_tel,com_joindate)
+		values(#{comNo},#{comId},#{comPw},#{comName},#{comPreview},#{comCeo},#{comAdd},#{comLati},#{comLongi},#{comRrn},0,#{comTel},sysdate)
+	</insert>
+   	
+	
+</mapper>
+
+
+
+
+

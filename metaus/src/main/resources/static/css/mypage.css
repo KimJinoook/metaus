@@ -235,3 +235,34 @@
 		margin-top: 7px;
 	}
 	
+	.post-detail.pt10.pb20 {
+    	padding-bottom: 5px;
+	}	
+	
+	.knob-label{
+		padding-top: 7px;
+	}
+	
+	.accum-num{
+		margin-top: -7px;
+	}
+	
+	.lecture-total{
+		margin-left: 15px;
+		font-weight: bold;
+		font-size: 30px;
+	}
+	
+	.blog-listing{
+		padding-top: 40px;
+	}
+	
+	@media (min-width: 992px){
+		.monthly-amount{
+			width: 317px;
+		}
+	}
+	
+	div#bar-chart {
+    	margin-top: -57px;
+	}

@@ -72,7 +72,7 @@
 			<script type="importmap">
 				{
 					"imports":{
-						"three": "https://unpkg.com/three@0.141.0/build/three.module.js",
+						"three": "<c:url value='/js/three.module.js'/>",
 						"GLTFLoader" : "https://unpkg.com/three@0.141.0/examples/jsm/loaders/GLTFLoader.js",
 						"OrbitControls" : "https://unpkg.com/three@0.141.0/examples/jsm/controls/OrbitControls.js"
 					}

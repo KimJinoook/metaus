@@ -16,6 +16,18 @@ public class IndexController {
 		
 		return "/index";
 	}
+	@RequestMapping("/test/test")
+	public String test() {
+		logger.info("test 페이지");
+		
+		return "/test/test";
+	}
+	@RequestMapping("/indexzip")
+	public String indexzip() {
+		logger.info("test 페이지");
+		
+		return "/indexzip";
+	}
 	
 	
 }

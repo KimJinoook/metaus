@@ -37,6 +37,33 @@
 	<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
 	<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
+<script type="text/javascript" src="<c:url value='/js/jquery-3.6.0.min.js'/>"></script>
+<script src = "https://developers.kakao.com/sdk/js/kakao.min.js"></script>
+<script>
+function logout(){
+	var loginType = '${sessionScope.isLogin}';
+	if(loginType=='kakao'){
+		Kakao.init('48fd685b6c1070cc71f894be6653d843');
+		if (Kakao.Auth.getAccessToken()) {
+		      Kakao.API.request({
+		    	  
+		        url: '/v1/user/unlink',
+		        success: function(response) {
+		        	console.log(response);
+		        	console.log('성공');
+		        	Kakao.Auth.setAccessToken(undefined);
+					location.href="<c:url value='/login/logout'/>";
+		        },
+		        fail: function(error) {
+		          console.log(error);
+		        }
+		      });
+	    }
+	}else{
+		location.href="<c:url value='/login/logout'/>";
+	}
+}
+</script>
 </head>
 
 <body>
@@ -114,18 +141,18 @@
                                             <div class="row">
                                                 <ul class="col-md-4">
                                                     <li class="menu-title">공지사항</li>
-                                                    <li><a href="<c:url value='/board/notice'/>">공지사항</a></li>
-                                                    <li><a href="<c:url value='/board/faq'/>"> F A Q</a></li>
-                                                    <li><a href="<c:url value='/board/qna'/>"> Q N A</a></li>
-                                                    <li><a href="<c:url value='/board/news'/>">기  사</a></li>
+                                                    <li><a href="<c:url value='/board/notice?btypeNo=1'/>">공지사항</a></li>
+                                                    <li><a href="<c:url value='/board/faq?btypeNo=2'/>"> F A Q</a></li>
+                                                    <li><a href="<c:url value='/board/qna?btypeNo=3'/>"> Q N A</a></li>
+                                                    <li><a href="<c:url value='/board/news?btypeNo=4'/>">기  사</a></li>
                                                 </ul>
 
                                                 <ul class="col-md-4">
                                                     <li class="menu-title">커뮤니티</li>
-                                                    <li><a href="<c:url value='/board/freeBoard'/>">자유 게시판</a></li>
-                                                    <li><a href="<c:url value='/board/QuestionBoard'/>">질문 게시판</a></li>
-                                                    <li><a href="<c:url value='/board/shareBoard'/>">공유/정보 게시판</a></li>
-                                                    <li><a href="<c:url value='/board/requestBoard'/>">개인의뢰 게시판</a></li>
+                                                    <li><a href="<c:url value='/board/freeBoard?btypeNo=8'/>">자유 게시판</a></li>
+                                                    <li><a href="<c:url value='/board/QuestionBoard?btypeNo=5'/>">질문 게시판</a></li>
+                                                    <li><a href="<c:url value='/board/shareBoard?btypeNo=6'/>">공유/정보 게시판</a></li>
+                                                    <li><a href="<c:url value='/board/requestBoard?btypeNo=7'/>">개인의뢰 게시판</a></li>
 	                                                </ul>
 
                                                 <ul class="col-md-4">
@@ -200,12 +227,8 @@
                                     </li>
 
                                     <!-- Dropdown Submenu -->
-                                    <li class="dropdown-submenu">
-                                        <a href="#">blog left sidebar<i class="fa fa-angle-right"></i></a>
-                                        <ul class="dropdown-menu">
-                                            <li><a href="blog-left-sidebar-v1.html">version 1</a></li>
-                                            <li><a href="blog-left-sidebar-v2.html">version 2</a></li>
-                                        </ul>
+                                    <li class="dropdown-submenu">                               
+                                        <a href="<c:url value='/resume/resumeDetail'/>">이력서<i class="fa fa-angle-right"></i></a>                                      
                                     </li>
 
                                     <!-- Dropdown Submenu -->
@@ -242,9 +265,16 @@
                             
 
                             <!-- Login Menu Item -->
-                            <li class="menu-item login-btn">
-                                <a id="modal_trigger" href="javascript:void(0)" role="button"><i class="fa fa-lock"></i>login</a>
-                            </li>
+                            <c:if test="${empty sessionScope.isLogin }">
+	                            <li class="menu-item login-btn">
+	                                <a id="modal_trigger" href="javascript:void(0)" role="button"><i class="fa fa-lock"></i>login</a>
+	                            </li>
+	                        </c:if>
+	                        <c:if test="${!empty sessionScope.isLogin }">
+	                            <li class="menu-item logout-btn">
+	                                <a id="logoutBtn" onclick="logout()" href="#" role="button"><i class="fa fa-lock"></i>logout</a>
+	                            </li>
+	                        </c:if>
 
                         </ul>
                     </div>
