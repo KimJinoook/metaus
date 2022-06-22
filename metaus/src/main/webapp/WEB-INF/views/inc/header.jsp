@@ -7,6 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name ="google-signin-client_id" content="386529770600-22sjdk23dmt8g9lgdcheujm6ciugjevo.apps.googleusercontent.com">
 <!-- Mobile viewport optimized -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=no">

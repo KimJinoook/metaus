@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.metaus.member.model.CompanyService;
 import com.metaus.member.model.CompanyVO;
+import com.metaus.member.model.FacebookService;
+import com.metaus.member.model.FacebookVO;
 import com.metaus.member.model.KakaoService;
 import com.metaus.member.model.KakaoVO;
 import com.metaus.member.model.MemberService;
@@ -34,6 +36,7 @@ public class LoginController {
 	private final CompanyService companyService;
 	private final KakaoService kakaoService;
 	private final NaverService naverService;
+	private final FacebookService facebookService;
 	
 	
 	
@@ -190,6 +193,47 @@ public class LoginController {
 			model.addAttribute("socialEmail",vo.getNaverEmail());
 			model.addAttribute("socialName",vo.getNaverName());
 			model.addAttribute("socialType","naver");
+			msg = "연동된 계정이 없습니다";
+			return "/member/socialRegister";
+		}
+		
+		
+		model.addAttribute("msg", msg);
+		model.addAttribute("url", url);
+		
+		return "/common/message";
+	}
+	
+	@RequestMapping("/facebooklogin")
+	public String facebooklogin_post(@ModelAttribute FacebookVO vo,
+			HttpServletRequest request,
+			HttpServletResponse response, Model model) {
+		logger.info("카카오 로그인 처리, 파라미터 vo={}", vo);
+		
+		FacebookVO facebookVo = facebookService.selectByUserid(vo.getFacebookEmail());
+		String facebookId = vo.getFacebookEmail().substring(0, vo.getFacebookEmail().indexOf("@"));
+		logger.info("facebookId={}",facebookId);
+		
+		String url = "/", msg="로그인 실패";
+		
+		if(facebookVo != null) {
+			//[1] session에 저장
+			MemberVO memVo = memberService.selectByMemNo(facebookVo.getMemNo());
+			
+			HttpSession session=request.getSession();
+			session.setAttribute("isLogin", "facebook");
+			session.setAttribute("memNo", memVo.getMemNo());
+			session.setAttribute("memId", memVo.getMemId());
+			session.setAttribute("memName", memVo.getMemName());
+			
+			msg = memVo.getMemName()+"님 환영합니다";
+			
+		}else if(facebookVo == null) {
+			MemberVO memVo = memberService.selectBySocialid(facebookId);
+			model.addAttribute("vo",memVo);
+			model.addAttribute("socialEmail",vo.getFacebookEmail());
+			model.addAttribute("socialName",vo.getFacebookName());
+			model.addAttribute("socialType","facebook");
 			msg = "연동된 계정이 없습니다";
 			return "/member/socialRegister";
 		}

@@ -13,5 +13,6 @@ public interface MemberDAO {
 	public int duplicateId(String memId);
 	public int updateKakao(int memNo);
 	public int updateNaver(int memNo);
+	public int updateFacebook(int memNo);
 
 }

@@ -282,7 +282,7 @@
                         <br>
                         <a style="width:10px" href="javascript:loginFormWithNaver()"><img src="<c:url value='/images/icons/naverbtn.png'/>" width="40px" height="40px"></a>&nbsp;&nbsp;
                         <a style="width:10px" href="javascript:loginFormWithKakao()"><img src="<c:url value='/images/icons/kakaobtn.png'/>" width="40px" height="40px"></a>&nbsp;&nbsp;
-                        <a style="width:10px"><img src="<c:url value='/images/icons/facebookbtn.png'/>" width="40px" height="40px"></a>
+                        <a style="width:10px" href="javascript:loginFormWithFacebook()"><img src="<c:url value='/images/icons/facebookbtn.png'/>" width="40px" height="40px"></a>
                         <br>
                     </div>
                 </div>
@@ -337,8 +337,13 @@
 		<input type="hidden" name="kakaoEmail"/>
 		<input type="hidden" name="kakaoName"/>
 	</form>
+	<form id="form-facebook-login" method="post" action="<c:url value='/login/facebooklogin'/>">
+		<input type="hidden" name="facebookEmail"/>
+		<input type="hidden" name="facebookName"/>
+	</form>
 	<div id="naverIdLogin" style="display:none"></div>
-	
+
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/ko_KR/sdk.js#xfbml=1&version=v10.0&appId=550605189855072" nonce="SiOBIhLG"></script>
 <script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js" charset="utf-8"></script>
 <script type="text/javascript">	
 	function loginFormWithKakao(){
@@ -383,6 +388,42 @@
 		loginButton:{color:'green',type:5,height:60}
 	});
 	naverLogin.init();
+	
+	function loginFormWithFacebook(){
+		
+
+		function fnFbCustomLogin(){
+			FB.login(function(response) {
+				if (response.status === 'connected') {
+					FB.api('/me', 'get', {fields: 'name,email'}, function(r) {
+						console.log(r);
+						$('#form-facebook-login input[name=facebookEmail]').val(r.email);
+			            $('#form-facebook-login input[name=facebookName]').val(r.name);
+			            document.querySelector('#form-facebook-login').submit();
+					})
+				} else if (response.status === 'not_authorized') {
+					// 사람은 Facebook에 로그인했지만 앱에는 로그인하지 않았습니다.
+					alert('앱에 로그인해야 이용가능한 기능입니다.');
+				} else {
+					// 그 사람은 Facebook에 로그인하지 않았으므로이 앱에 로그인했는지 여부는 확실하지 않습니다.
+					fnFbCustomLogin();
+				}
+			}, {scope: 'public_profile,email'});
+		}
+		fnFbCustomLogin();
+
+		window.fbAsyncInit = function() {
+			FB.init({
+				appId      : '550605189855072', // 내 앱 ID를 입력한다.
+				cookie     : true,
+				xfbml      : true,
+				version    : 'v10.0'
+			});
+			FB.AppEvents.logPageView();   
+		};
+	};
+	
+
 	
 </script>
 

@@ -61,5 +61,8 @@ public class MemberServiceImpl implements MemberService {
 	public int updateNaver(int memNo) {
 		return memberDao.updateNaver(memNo);
 	}
+	public int updateFacebook(int memNo) {
+		return memberDao.updateFacebook(memNo);
+	}
 
 }
