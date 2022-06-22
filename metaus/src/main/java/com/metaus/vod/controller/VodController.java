@@ -17,4 +17,11 @@ public class VodController {
 		
 		return "/vod/vod";
 	}
+	
+	@RequestMapping("/vodDetail")
+	public String vodDetail() {
+		logger.info("vod Detail 페이지");
+		
+		return "/vod/vodDetail";
+	}
 }

@@ -51,6 +51,11 @@
 		set mem_naver = 'Y'
 		where mem_no=#{memNo}
 	</update>
+	<update id="updateFacebook" parameterType="int">
+		update fp_mem
+		set mem_facebook = 'Y'
+		where mem_no=#{memNo}
+	</update>
    	
 	
 </mapper>
