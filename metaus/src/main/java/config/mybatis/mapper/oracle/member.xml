@@ -13,6 +13,14 @@
 		resultType="memberVo">
       select * from fp_mem where mem_id=#{memId}
    	</select>
+   	
+   	<select id="selectBySocialid" parameterType="string" 
+		resultType="memberVo">
+      select * from fp_mem where mem_id like #{memId} || '%'
+   	</select>
+   	
+   	
+   	
 	<select id="selectByMemNo" parameterType="int" 
 		resultType="memberVo">
       select * from fp_mem where mem_no=#{memNo}
@@ -32,6 +40,17 @@
 			#{memNick},#{memBirth}, #{memTel},#{memZipcode}, #{memAdd}, 
 			#{memAdd2}, sysdate)
 	</insert>
+	
+	<update id="updateKakao" parameterType="int">
+		update fp_mem
+		set mem_kakao = 'Y'
+		where mem_no=#{memNo}
+	</update>
+	<update id="updateNaver" parameterType="int">
+		update fp_mem
+		set mem_naver = 'Y'
+		where mem_no=#{memNo}
+	</update>
    	
 	
 </mapper>

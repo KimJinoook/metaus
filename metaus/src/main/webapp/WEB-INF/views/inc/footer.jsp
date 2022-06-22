@@ -280,7 +280,7 @@
                     <div class="form-group">
                         <label for="agree2">소셜 계정으로 간편하게 로그인하세요!</label><br>
                         <br>
-                        <a style="width:10px"><img src="<c:url value='/images/icons/naverbtn.png'/>" width="40px" height="40px"></a>&nbsp;&nbsp;
+                        <a style="width:10px" href="javascript:loginFormWithNaver()"><img src="<c:url value='/images/icons/naverbtn.png'/>" width="40px" height="40px"></a>&nbsp;&nbsp;
                         <a style="width:10px" href="javascript:loginFormWithKakao()"><img src="<c:url value='/images/icons/kakaobtn.png'/>" width="40px" height="40px"></a>&nbsp;&nbsp;
                         <a style="width:10px"><img src="<c:url value='/images/icons/facebookbtn.png'/>" width="40px" height="40px"></a>
                         <br>
@@ -337,8 +337,9 @@
 		<input type="hidden" name="kakaoEmail"/>
 		<input type="hidden" name="kakaoName"/>
 	</form>
+	<div id="naverIdLogin" style="display:none"></div>
 	
-
+<script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js" charset="utf-8"></script>
 <script type="text/javascript">	
 	function loginFormWithKakao(){
 		Kakao.init('48fd685b6c1070cc71f894be6653d843');
@@ -370,6 +371,19 @@
 	        }
 	      });
 	};
+	function loginFormWithNaver(){
+		var nl = document.getElementById("naverIdLogin").firstChild;
+		nl.click();
+	};
+
+	var naverLogin = new naver.LoginWithNaverId({
+		clientId: "hP_hkEdQKOSZIWk68Pgk",
+		callbackUrl: "http://localhost:9091/metaus/login/navercallback",
+		isPopup: false,
+		loginButton:{color:'green',type:5,height:60}
+	});
+	naverLogin.init();
+	
 </script>
 
 
