@@ -38,39 +38,25 @@
                     <div class="profile-descr">
 						 
                         <!-- Profile Title -->
-                         <div class="form-group">
-                            <label>제목</label>
-                            <span></span>
+                         <div class="form-group" style="font-size: 17px;">
+                            <label>제목 : </label>&nbsp;
+                            <span>${rvo.resTitle }</span>
                         </div>
-                        <div class="form-group">
-                            <label>이름</label>
+                        <br>
+                        <div class="form-group" style="font-size: 17px;">
+                            <label>이름 : </label>&nbsp;
                             <span>${mvo.memName }</span>
+                        </div> 
+                        <br>                     
+                        <div class="form-group" style="font-size: 17px;">
+                        	<label>주소 : </label>&nbsp;<span>${mvo.memAdd}</span><br>
+                        	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        	<span>${mvo.memAdd2}</span>                                                                                                                                                    
                         </div>
-                        <div class="form-group">
-                            <label>생년월일</label>
-                            <span></span>
-                        </div>
-                        <div class="form-group">
-                            <label>이메일</label>
-                            <span></span>
-                        </div>
-                        <div class="form-group">
-                            <label>전화번호</label>
-                            <span></span>
-                        </div>
-                        <div class="form-group">
-                        	<label>주소</label>                                
-                            <span></span>                                                                                        
-                        </div>
-
-                    <label>연락가능시간</label>
-                	<div class="job-search-form row">
-
-		                <!-- Start of keywords input -->
-		                <div class="col-md-3 col-sm-12 search-categories">
-							<span></span> <h5>~</h5> <span></span>             
-		                    </div>
-						
+						<br>
+                	<div class="form-group" style="font-size: 17px;">
+	                    <label>연락가능시간 : </label>&nbsp;
+							<span>${rvo.resTime }</span>            	
 		         	</div>	
 		         
 					
@@ -106,12 +92,11 @@
             <!-- Start of Row -->
             <div class="row skills mt40">
 
-                <div class="col-md-12 text-center">
+                <div class="col-md-12 text-center" >
                     <h3 class="pb40">자기소개서</h3>
                 </div>
 				
-				<div class="form-group">
-                     <label>job description <span>(optional)</span></label>
+				<div class="form-group">                    
                      ${rvo.resContent}
                 </div>
 			</div>	
