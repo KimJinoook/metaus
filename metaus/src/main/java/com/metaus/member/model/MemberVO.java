@@ -23,4 +23,6 @@ public class MemberVO {
 	private int memWarncnt;
 	private String memLock;
 	private String memKakao;
+	private String memNaver;
+	private String memFacebook;
 }

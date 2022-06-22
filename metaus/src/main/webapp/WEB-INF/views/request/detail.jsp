@@ -75,9 +75,9 @@
                         <div class="col-md-12">
 
                             <!-- Vimeo Video -->
-                            <div class="embed-responsive embed-responsive-16by9">
+                           <!--  <div class="embed-responsive embed-responsive-16by9">
                                 <iframe class="embed-responsive-item" src="https://player.vimeo.com/video/176916362?title=0&amp;byline=0&amp;portrait=0" allowfullscreen=""></iframe>
-                            </div>
+                            </div> -->
 
                             <!-- Div wrapper -->
                             <div class="pt40">

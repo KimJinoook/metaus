@@ -269,14 +269,34 @@
                     <p class="fieldset">
                         <label class="image-replace cd-password" for="signin-password">Password</label>
                         <input class="full-width has-padding has-border" name="memPw" type="password" placeholder="Password">
-                    </p>
-                    <p class="fieldset">
-                        <label for="remember-me">아직 계정이 없으시다면 <a href="<c:url value='/member/register'/>">여기</a>를 클릭하세요</label>
-                    </p>
+                    </p>       
                     <p class="fieldset">
                         <button type="submit" value="Login" class="btn btn-blue btn-effect">Login</button>
                     </p>
                 </form>
+                
+                <div class="text-center">
+                    <!-- Form Group -->
+                    <div class="form-group">
+                        <label for="agree2">소셜 계정으로 간편하게 로그인하세요!</label><br>
+                        <br>
+                        <a style="width:10px" href="javascript:loginFormWithNaver()"><img src="<c:url value='/images/icons/naverbtn.png'/>" width="40px" height="40px"></a>&nbsp;&nbsp;
+                        <a style="width:10px" href="javascript:loginFormWithKakao()"><img src="<c:url value='/images/icons/kakaobtn.png'/>" width="40px" height="40px"></a>&nbsp;&nbsp;
+                        <a style="width:10px" href="javascript:loginFormWithFacebook()"><img src="<c:url value='/images/icons/facebookbtn.png'/>" width="40px" height="40px"></a>
+                        <br>
+                    </div>
+                </div>
+                          
+                <div class="text-center">
+                    <!-- Form Group -->
+                    <div class="form-group">
+                    	<br>
+                        <label for="agree2"><a href="<c:url value='/member/register'/>">비밀번호를 잊어버렸어요</a></label><br>
+                        <label for="agree2">아직 회원이 아니신가요? <a href="<c:url value='/member/register'/>">회원 가입하기</a></label>
+                        <br><br>
+                    </div>
+                </div>
+          
             </div>
             <!-- cd-login -->
 
@@ -284,20 +304,27 @@
                 <!-- sign up form -->
                 <form class="cd-form" id="comloginfrm"  method="post" action="<c:url value='/login/companylogin'/>">
                     <p class="fieldset">
-                        <label class="image-replace cd-email" for="signup-email">E-mail</label>
-                        <input class="full-width has-padding has-border" id="signup-email" name="comId" type="email" placeholder="E-mail">
+                        <label class="image-replace cd-email" for="signup-email">ID</label>
+                        <input class="full-width has-padding has-border" id="" name="comId" type="text" placeholder="ID">
                     </p>
                     <p class="fieldset">
                         <label class="image-replace cd-password" for="signup-password">Password</label>
                         <input class="full-width has-padding has-border" id="signup-password" name="comPw" type="password" placeholder="Password">
                     </p>
-                    <p class="fieldset">
-                        <label for="remember-me">아직 계정이 없으시다면 <a href="<c:url value='/member/register'/>">여기</a>를 클릭하세요</label>
-                    </p>
+                 
                     <p class="fieldset">
                         <button class="btn btn-blue btn-effect" type="submit" value="Create account">Login</button>
                     </p>
                 </form>
+                
+                <div class="text-center">
+                       <!-- Form Group -->
+                       <div class="form-group">
+                           <label for="agree2"><a href="<c:url value='/member/register'/>">비밀번호를 잊어버렸어요</a></label><br>
+                           <label for="agree2">아직 회원이 아니신가요? <a href="<c:url value='/member/register'/>">회원 가입하기</a></label>
+                           <br><br>
+                       </div>
+                </div>
             </div>
             <!-- cd-signup -->
         </div>
@@ -306,7 +333,100 @@
     <!-- cd-user-modal -->
     <!-- ===== End of Login Pop Up div ===== -->
 
+	<form id="form-kakao-login" method="post" action="<c:url value='/login/kakaologin'/>">
+		<input type="hidden" name="kakaoEmail"/>
+		<input type="hidden" name="kakaoName"/>
+	</form>
+	<form id="form-facebook-login" method="post" action="<c:url value='/login/facebooklogin'/>">
+		<input type="hidden" name="facebookEmail"/>
+		<input type="hidden" name="facebookName"/>
+	</form>
+	<div id="naverIdLogin" style="display:none"></div>
+	
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/ko_KR/sdk.js#xfbml=1&version=v10.0&appId=550605189855072" nonce="SiOBIhLG"></script>
+<script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js" charset="utf-8"></script>
+<script type="text/javascript">	
+	function loginFormWithKakao(){
+		Kakao.init('48fd685b6c1070cc71f894be6653d843');
 
+		Kakao.Auth.login({
+	        success: function(authObj) {
+	         
+	          //2. 로그인 성공시, API 호출
+	          Kakao.API.request({
+	            url: '/v2/user/me',
+	            success: function(res) {
+	              console.log(res);
+	              var id = res.id;
+	              var account = res.kakao_account;
+	              $('#form-kakao-login input[name=kakaoEmail]').val(account.email);
+	              $('#form-kakao-login input[name=kakaoName]').val(account.profile.nickname);
+				  scope : 'account_email';
+				document.querySelector('#form-kakao-login').submit();
+			
+
+	              
+	        }
+	          })
+	          console.log(authObj);
+	          var token = authObj.access_token;
+	        },
+	        fail: function(err) {
+	          alert(JSON.stringify(err));
+	        }
+	      });
+	};
+	function loginFormWithNaver(){
+		var nl = document.getElementById("naverIdLogin").firstChild;
+		nl.click();
+	};
+
+	var naverLogin = new naver.LoginWithNaverId({
+		clientId: "hP_hkEdQKOSZIWk68Pgk",
+		callbackUrl: "http://localhost:9091/metaus/login/navercallback",
+		isPopup: false,
+		loginButton:{color:'green',type:5,height:60}
+	});
+	naverLogin.init();
+	
+	function loginFormWithFacebook(){
+		
+
+		function fnFbCustomLogin(){
+			FB.login(function(response) {
+				if (response.status === 'connected') {
+					FB.api('/me', 'get', {fields: 'name,email'}, function(r) {
+						console.log(r);
+						$('#form-facebook-login input[name=facebookEmail]').val(r.email);
+			            $('#form-facebook-login input[name=facebookName]').val(r.name);
+			            document.querySelector('#form-facebook-login').submit();
+					})
+				} else if (response.status === 'not_authorized') {
+					// 사람은 Facebook에 로그인했지만 앱에는 로그인하지 않았습니다.
+					alert('앱에 로그인해야 이용가능한 기능입니다.');
+				} else {
+					// 그 사람은 Facebook에 로그인하지 않았으므로이 앱에 로그인했는지 여부는 확실하지 않습니다.
+					fnFbCustomLogin();
+				}
+			}, {scope: 'public_profile,email'});
+		}
+		fnFbCustomLogin();
+
+		window.fbAsyncInit = function() {
+			FB.init({
+				appId      : '550605189855072', // 내 앱 ID를 입력한다.
+				cookie     : true,
+				xfbml      : true,
+				version    : 'v10.0'
+			});
+			FB.AppEvents.logPageView();   
+		};
+	};
+	
+	
+
+	
+</script>
 
 
 

@@ -43,16 +43,15 @@
 </section>
 <!-- =============== End of Page Header 1 Section =============== -->
 
-
-
-
-
 <!-- ===== Start of Main Wrapper Section ===== -->
 <section class="ptb80" id="post-job">
 	<div class="container">
 
 		<!-- Start of Post Resume Form -->
-		<form action="<c:url value='/board/boardWrite'/>" class="post-job-resume mt50" style="margin-top: 0px;" method="post">
+		<form action="<c:url value='/board/boardWrite'/>" 
+			class="post-job-resume mt50" 
+			style="margin-top: 0px;" method="post"
+			enctype="multipart/form-data">
 
 			<!-- Start of Resume Details -->
 			<div class="row">
@@ -105,7 +104,6 @@
 								accept=".jpg,.png,.gif">
 						</div>
 					</div>
-
 					<!-- Form Group -->
 					<div class="form-group pt30 nomargin" id="last">
 						<button class="btn btn-blue btn-effect">submit</button>
@@ -114,13 +112,9 @@
 				</div>
 			</div>
 			<!-- End of Resume Details -->
-
 		</form>
 		<!-- End of Post Resume Form -->
-
 	</div>
 </section>
 <!-- ===== End of Main Wrapper Section ===== -->
-
-
 <%@ include file="../inc/footer.jsp"%>

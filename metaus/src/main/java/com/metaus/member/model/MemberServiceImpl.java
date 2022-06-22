@@ -36,6 +36,12 @@ public class MemberServiceImpl implements MemberService {
 	public MemberVO selectByUserid(String memId) {
 		return memberDao.selectByUserid(memId);
 	}
+	public MemberVO selectBySocialid(String memId) {
+		return memberDao.selectBySocialid(memId);
+	}
+	public MemberVO selectByMemNo(int memNo) {
+		return memberDao.selectByMemNo(memNo);
+	}
 	
 	public int duplicateId(String memId){
 		int count=memberDao.duplicateId(memId);
@@ -48,6 +54,15 @@ public class MemberServiceImpl implements MemberService {
 		}
 		
 		return result;
+	}
+	public int updateKakao(int memNo) {
+		return memberDao.updateKakao(memNo);
+	}
+	public int updateNaver(int memNo) {
+		return memberDao.updateNaver(memNo);
+	}
+	public int updateFacebook(int memNo) {
+		return memberDao.updateFacebook(memNo);
 	}
 
 }

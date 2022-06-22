@@ -11,7 +11,12 @@ public interface MemberService {
 	
 	public int checkLogin(String userid, String pwd);
 	public MemberVO selectByUserid(String memId);
+	public MemberVO selectBySocialid(String memId);
+	public MemberVO selectByMemNo(int memNo);
 	public int duplicateId(String memId);
 	public int insertMember(MemberVO vo);
+	public int updateKakao(int memNo);
+	public int updateNaver(int memNo);
+	public int updateFacebook(int memNo);
 
 }

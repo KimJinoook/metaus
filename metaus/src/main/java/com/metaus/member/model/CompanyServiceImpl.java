@@ -29,5 +29,23 @@ public class CompanyServiceImpl implements CompanyService {
 	public CompanyVO selectByUserid(String memId) {
 		return companyDao.selectByUserid(memId);
 	}
+	
+	public int duplicateId(String memId){
+		int count=companyDao.duplicateId(memId);
+		
+		int result=0;
+		if(count>0) {  //이미 존재 => 사용불가
+			result=CompanyService.UNUSABLE_ID;
+		}else { //사용가능
+			result=CompanyService.USABLE_ID;			
+		}
+		
+		return result;
+	}
+	
+	public int insertCompany(CompanyVO vo){
+		int cnt=companyDao.insertCompany(vo);
+		return cnt;
+	}
 
 }

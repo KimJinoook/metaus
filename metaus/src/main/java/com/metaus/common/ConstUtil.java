@@ -2,18 +2,18 @@ package com.metaus.common;
 
 public interface ConstUtil {
 	//게시판 페이징 관련 상수
-	public static final int RECORD_COUNT=5;
-	int BLOCKSIZE=10;
+	public static final int RECORD_COUNT=1;
+	int BLOCKSIZE=5;
 
 	//파일 업로드 관련 상수
 	String FILE_UPLOAD_TYPE="test";   //테스트시
 	//String FILE_UPLOAD_TYPE="deploy"; //배포시
 	
 	//자료실 - 파일 저장 경로
-	/*
-	 * String FILE_UPLOAD_PATH="pds_upload"; String FILE_UPLOAD_PATH_TEST=
-	 * "C:\\lecture\\workspace_list\\spboot_ws\\springherb\\src\\main\\resources\\static\\pds_upload";
-	 */
+	
+	  String FILE_UPLOAD_PATH="pds_upload"; String FILE_UPLOAD_PATH_TEST=/*"/img_upload";*/
+	  "C:\\Users\\USER\\git\\metaus\\metaus\\src\\main\\resources\\static\\img_upload";
+	 
 	
 	//관리자 페이지 - 상품 등록시 상품 이미지 저장 경로
 	/*

@@ -7,6 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name ="google-signin-client_id" content="386529770600-22sjdk23dmt8g9lgdcheujm6ciugjevo.apps.googleusercontent.com">
 <!-- Mobile viewport optimized -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=no">
@@ -37,10 +38,54 @@
 	<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
 	<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
+<script type="text/javascript" src="<c:url value='/js/jquery-3.6.0.min.js'/>"></script>
+<script src = "https://developers.kakao.com/sdk/js/kakao.min.js"></script>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/ko_KR/sdk.js#xfbml=1&version=v10.0&appId=550605189855072" nonce="SiOBIhLG"></script>
+<script>
+$(function(){
+	
+	$('#logoutBtn').click(function(){
+		var loginType = '${sessionScope.isLogin}';
+		if(loginType=='kakao'){
+			Kakao.init('48fd685b6c1070cc71f894be6653d843');
+			if (Kakao.Auth.getAccessToken()) {
+			      Kakao.API.request({
+			    	  
+			        url: '/v1/user/unlink',
+			        success: function(response) {
+			        	console.log(response);
+			        	console.log('성공');
+			        	Kakao.Auth.setAccessToken(undefined);
+						location.href="<c:url value='/login/logout'/>";
+			        },
+			        fail: function(error) {
+			          console.log(error);
+			        }
+			      });
+		    }
+		}else if(loginType=='naver'){
+			location.href="<c:url value='/login/logout'/>";
+		}else if(loginType=='facebook'){
+	
+		        FB.login(function(response) {
+		            if (response.status === 'connected') {
+		                FB.logout(function(response) {
+
+		                		location.href="<c:url value='/login/logout'/>";
+		                    });
+		                }
+		     
+		        });
+		}else{
+			location.href="<c:url value='/login/logout'/>";
+		}
+	});
+
+});
+</script>
 </head>
 
 <body>
-
     <!-- =============== Start of Header 4 Navigation =============== -->
     <header class="sticky">
         <nav class="navbar navbar-default navbar-static-top fluid_header centered">
@@ -86,11 +131,8 @@
                             <li class="dropdown simple-menu">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">기업 찾기<i class="fa fa-angle-down"></i></a>
                                 <ul class="dropdown-menu" role="menu">
-                                    <li><a href="search-jobs-1.html">search jobs 1</a></li>
-                                    <li><a href="search-jobs-2.html">search jobs 2</a></li>
-                                    <li><a href="search-jobs-3.html">search jobs 3</a></li>
-                                    <li><a href="search-jobs-4.html">search jobs 4</a></li>
-                                    <li><a href="submit-resume.html">submit resume</a></li>
+                                    <li><a href="<c:url value='/request/search'/>">기업 의뢰 게시판</a></li>
+                                    <li><a href="<c:url value='/request/post'/>">의뢰 등록</a></li>
                                 </ul>
                             </li>
 
@@ -144,9 +186,9 @@
 
                             <!-- Simple Menu Item -->
                             <li class="dropdown simple-menu">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">VOD강의<i class="fa fa-angle-down"></i></a>
-                                <ul class="dropdown-menu">
-                                    <!-- Dropdown Submenu -->
+                                <a href="<c:url value='/vod/vod'/>" class="dropdown-toggle" data-toggle="dropdown" role="button">VOD강의<!-- <i class="fa fa-angle-down"></i> --></a>
+                                <!-- <ul class="dropdown-menu">
+                                    Dropdown Submenu
                                     <li class="dropdown-submenu">
                                         <a href="#">headers<i class="fa fa-angle-right"></i></a>
                                         <ul class="dropdown-menu">
@@ -157,7 +199,7 @@
                                         </ul>
                                     </li>
 
-                                    <!-- Dropdown Submenu -->
+                                    Dropdown Submenu
                                     <li class="dropdown-submenu">
                                         <a href="#">footers<i class="fa fa-angle-right"></i></a>
                                         <ul class="dropdown-menu">
@@ -168,7 +210,7 @@
                                         </ul>
                                     </li>
 
-                                    <!-- Dropdown Submenu -->
+                                    Dropdown Submenu
                                     <li class="dropdown-submenu">
                                         <a href="#">page headers<i class="fa fa-angle-right"></i></a>
                                         <ul class="dropdown-menu">
@@ -179,12 +221,12 @@
                                         </ul>
                                     </li>
 
-                                    <li><a href="buttons.html">buttons</a></li>
+                                    <li><a href="">buttons</a></li>
                                     <li><a href="pricing-tables.html">pricing tables</a></li>
                                     <li><a href="typography.html">typography</a></li>
                                 </ul>
                             </li>
-
+ -->
                             <!-- Simple Menu Item -->
                             <li class="dropdown simple-menu">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">마이페이지<i class="fa fa-angle-down"></i></a>
@@ -200,12 +242,8 @@
                                     </li>
 
                                     <!-- Dropdown Submenu -->
-                                    <li class="dropdown-submenu">
-                                        <a href="#">blog left sidebar<i class="fa fa-angle-right"></i></a>
-                                        <ul class="dropdown-menu">
-                                            <li><a href="blog-left-sidebar-v1.html">version 1</a></li>
-                                            <li><a href="blog-left-sidebar-v2.html">version 2</a></li>
-                                        </ul>
+                                    <li class="dropdown-submenu">                               
+                                        <a href="<c:url value='/resume/resumeDetail'/>">이력서<i class="fa fa-angle-right"></i></a>                                      
                                     </li>
 
                                     <!-- Dropdown Submenu -->
@@ -248,8 +286,8 @@
 	                            </li>
 	                        </c:if>
 	                        <c:if test="${!empty sessionScope.isLogin }">
-	                            <li class="menu-item login-btn">
-	                                <a id="logoutBtn" href="<c:url value='/login/logout'/>" role="button"><i class="fa fa-lock"></i>logout</a>
+	                            <li class="menu-item logout-btn">
+	                                <a id="logoutBtn"  href="#" role="button"><i class="fa fa-lock"></i>logout</a>
 	                            </li>
 	                        </c:if>
 

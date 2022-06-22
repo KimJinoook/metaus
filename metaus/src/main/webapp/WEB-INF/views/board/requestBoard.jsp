@@ -4,22 +4,12 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ include file="../inc/header.jsp"%>
-<script src="<c:url value='js/jquery-3.1.1.min.js'/>"></script>
-<script src="<c:url value='js/bootstrap.min.js'/>"></script>
-<script src="<c:url value='js/bootstrap-select.min.js'/>"></script>
-<script src="<c:url value='js/swiper.min.js'/>"></script>
-<script src="<c:url value='js/jquery.ajaxchimp.js'/>"></script>
-<script src="<c:url value='js/jquery.countTo.js'/>"></script>
-<script src="<c:url value='js/jquery.inview.min.js'/>"></script>
-<script src="<c:url value='js/jquery.magnific-popup.min.js'/>"></script>
-<script src="<c:url value='js/jquery.easypiechart.min.js'/>"></script>
-<script src="<c:url value='js/jquery-ui.min.js'/>"></script>
-<script src="<c:url value='js/owl.carousel.min.js'/>"></script>
-<script src="<c:url value='js/tinymce/tinymce.min.js'/>"></script>
-<script src="<c:url value='js/countdown.js'/>"></script>
-<script src="<c:url value='js/isotope.min.js'/>"></script>
-<script src="<c:url value='js/custom.js'/>"></script>
-
+<script type="text/javascript">
+	function boardList(curPage){
+		$('input[name=currentPage]').val(curPage);
+		$('form[name=frmPage]').submit();
+	}
+</script>
 <!-- =============== Start of Page Header 1 Section =============== -->
 <section class="page-header" style="margin-top: 150px;">
 	<div class="container">
@@ -104,23 +94,32 @@
 
 		<!-- Start of Row -->
 		<div class="row mt60">
+			<c:if test="${empty list }">
+				<img alt="게시글 내용이 없습니다"
+					src="<c:url value='/images/board/no_board.gif'/>"
+					style="width: 950px; margin-left: 100px;">
+			</c:if>
+			<c:if test="${!empty list }">
+				<div class="col-md-12">
+					<h4>999개의 검색결과가 있습니다</h4>
+				</div>
+				<!-- 반복 시작 -->
+				<c:forEach var="map" items="${list }">
 
-			<div class="col-md-12">
-				<h4>999개의 검색결과가 있습니다</h4>
-			</div>
-
-			<!-- ===== Start of Job Post Column 1 ===== -->
-			<div class="col-md-12 mt20">
-				<div class="item-block shadow-hover">
-					<c:if test="${!empty list }">
-						<!-- 반복 시작 -->
-						<c:forEach var="map" items="${list }">
+					<!-- ===== Start of Job Post Column 1 ===== -->
+					<div class="col-md-12 mt20">
+						<div class="item-block shadow-hover">
 							<!-- Start of Job Post Header -->
 							<div class="job-post-header clearfix">
-								<a href="company-page-1.html"><img
-									src="images/companies/envato.svg" alt=""></a>
+								<a
+									href="<c:url value='/board/readCountUp?boardNo=${map["BOARD_NO"] }&btypeNo=7'/>">
+									<img src="images/companies/envato.svg" alt="">
+								</a>
 								<div>
-									<a href="job-page.html"><h4>${map['BOARD_TITLE'] }</h4></a>
+									<a
+										href="<c:url value='/board/readCountUp?boardNo=${map["BOARD_NO"] }&btypeNo=7'/>">
+										<h4>${map['BOARD_TITLE'] }</h4>
+									</a>
 									<h5>
 										<small>${map['MEM_NAME'] }</small>
 									</h5>
@@ -128,7 +127,7 @@
 
 								<ul class="pull-right">
 									<li>
-										<h6 class="time">${map['BOARD_REFDATE'] }</h6>
+										<h6 class="time">${map['BOARD_REGDATE'] }</h6>
 									</li>
 									<li><a href="#" class="btn btn-green btn-small btn-effect">지원하기</a></li>
 								</ul>
@@ -136,52 +135,48 @@
 							</div>
 							<!-- End of Job Post Header -->
 
-							<!-- Start of Job Post Body -->
-							<div class="job-post-body">
-								<p>자격조건 및 보수금:</p>
-								<ul class="list mt10">
-									<li>${map['BOARD_CONTENT'] }</li>
 
-									<li>Converting PSD into HTML5 & CSS3</li>
+						</div>
+					</div>
+					<!-- ===== End of Job Post Column 1 ===== -->
+				</c:forEach>
 
-									<li>WordPress Theme Development</li>
+				<!-- Start of Pagination -->
+				<div class="col-md-12">
+					<ul class="pagination list-inline text-center">
+						<c:if test="${pagingInfo.firstPage>1 }">
+							<li><a href="#"
+								onclick="boardList(${pagingInfo.firstPage-1})">prev</a></li>
+						</c:if>
 
-									<li>Troubleshooting, testing and maintaining web Themes</li>
-								</ul>
-							</div>
-							<!-- End of Job Post Body -->
+						<!-- [1][2][3][4][5][6][7][8][9][10] -->
+						<c:forEach var="i" begin="${pagingInfo.firstPage }"
+							end="${pagingInfo.lastPage }">
+							<c:if test="${i==pagingInfo.currentPage }">
+								<li class="active"><a>${i }</a></li>
+							</c:if>
+							<c:if test="${i!=pagingInfo.currentPage }">
+								<li><a href="#" onclick="boardList(${i})">${i } </a></li>
+							</c:if>
+						</c:forEach>
 
-							<!-- Start of Job Post Footer -->
-							<div class="job-post-footer row">
-
-								<div class="col-md-6 col-sm-6 col-xs-12">
-									<i class="fa fa-map-marker"></i> <span>서울시, 서대문구</span>
-								</div>
-
-								<div class="col-md-6 col-sm-6 col-xs-12">
-									<i class="fa fa-money"></i> <span>\50,000 - \80,000 /
-										완료 시</span>
-								</div>
-
-							</div>
-							<!-- End of Job Post Footer -->
+						<c:if test="${pagingInfo.lastPage<pagingInfo.totalPage }">
+							<li><a href="#"
+								onclick="boardList(${pagingInfo.lastPage+1})">Next</a></li>
+						</c:if>
+						<!--  페이지 번호 끝 -->
+					</ul>
 				</div>
-			</div>
-			<!-- ===== End of Job Post Column 1 ===== -->
-			</c:forEach>
+				<!-- End of Pagination -->
+
 			</c:if>
 
-			<!-- Start of Pagination -->
-			<div class="col-md-12 mt10">
-				<ul class="pagination list-inline text-center">
-					<li class="active"><a href="javascript:void(0)">1</a></li>
-					<li><a href="#">2</a></li>
-					<li><a href="#">3</a></li>
-					<li><a href="#">4</a></li>
-					<li><a href="#">Next</a></li>
-				</ul>
-			</div>
-			<!-- End of Pagination -->
+			<!-- 페이징 처리를 위한 form 시작-->
+			<form name="frmPage" method="post"
+				action="<c:url value='/board/requestBoard?btypeNo=7'/>">
+				<input type="hidden" name="currentPage">
+			</form>
+			<!-- 페이징 처리 form 끝 -->
 
 		</div>
 		<!-- End of Row -->

@@ -22,7 +22,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 public class FileUploadUtil {
 	private static final Logger logger
 	=LoggerFactory.getLogger(FileUploadUtil.class);
-/*
+
 	public List<Map<String, Object>> fileUpload(HttpServletRequest request,
 			int uploadFlag) 
 					throws IllegalStateException, IOException {
@@ -99,16 +99,18 @@ public class FileUploadUtil {
 		if(ConstUtil.FILE_UPLOAD_TYPE.equals("test")) {
 			if(pathFlag==ConstUtil.UPLOAD_FILE_FLAG) {  //자료실
 				path=ConstUtil.FILE_UPLOAD_PATH_TEST;
-			}else if(pathFlag==ConstUtil.UPLOAD_IMAGE_FLAG) {  //상품등록
+			}/*else if(pathFlag==ConstUtil.UPLOAD_IMAGE_FLAG) {  //상품등록
 				path=ConstUtil.IMAGE_FILE_UPLOAD_PATH_TEST;				
 			}
+			*/
 		}else {  //deploy
 			if(pathFlag==ConstUtil.UPLOAD_FILE_FLAG) {  //자료실
 				path=ConstUtil.FILE_UPLOAD_PATH;  //pds_upload
-			}else if(pathFlag==ConstUtil.UPLOAD_IMAGE_FLAG) {  //상품등록
+			}/*
+			 else if(pathFlag==ConstUtil.UPLOAD_IMAGE_FLAG) {  //상품등록
 				path=ConstUtil.IMAGE_FILE_UPLOAD_PATH; //pd_images				
 			}
-
+			 */
 			//실제 물리적인 경로 구하기
 			path=request.getSession().getServletContext().getRealPath(path);
 		}
@@ -117,7 +119,8 @@ public class FileUploadUtil {
 
 		return path;
 	}
-
+	/*
+	 
 	public String getFileInfo(String originalFileName, long fileSize,
 			HttpServletRequest request) {
 		String result="";		
@@ -131,7 +134,7 @@ public class FileUploadUtil {
 		
 		return result;
 	}
-*/
+	 */
 
 }
 

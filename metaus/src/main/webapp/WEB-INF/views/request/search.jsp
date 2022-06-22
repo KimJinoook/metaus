@@ -102,7 +102,7 @@
             <div class="row mt60">
 
                 <div class="col-md-12">
-                <a href="post-job.html" class="btn btn-blue btn-effect" style="float: right;">의뢰 작성</a>
+                <a href="<c:url value='/request/post'/>" class="btn btn-blue btn-effect" style="float: right;">의뢰 작성</a>
                     <h4>총 1건의 검색결과</h4>
                     
                 </div>
@@ -114,7 +114,7 @@
                         <div class="job-post-header clearfix">
                             <a href="company-page-1.html"><img src="images/companies/envato.svg" alt=""></a>
                             <div>
-                                <a href="job-page.html"><h4>3D 맵 제작</h4></a>
+                                <a href="<c:url value='/request/detail'/>"><h4>3D 맵 개발자 구인</h4></a>
                                 <h5><small>Envato</small></h5>
                             </div>
 

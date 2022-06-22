@@ -14,7 +14,7 @@
 	 
 
 	<form action="<c:url value='/resume/resumeDetail'/>">
-	
+	<%-- <input type="hidden" name="memNo" value="${rvo.memNo }"> --%>
     <!-- ===== Start of Main Wrapper Candidate Profile Section ===== -->
     <section class="ptb80" id="candidate-profile">
 	    <section class="page-header">
@@ -38,39 +38,25 @@
                     <div class="profile-descr">
 						 
                         <!-- Profile Title -->
-                         <div class="form-group">
-                            <label>제목</label>
-                            <span></span>
+                         <div class="form-group" style="font-size: 17px;">
+                            <label>제목 : </label>&nbsp;
+                            <span>${rvo.resTitle }</span>
                         </div>
-                        <div class="form-group">
-                            <label>이름</label>
-                            <span></span>
+                        <br>
+                        <div class="form-group" style="font-size: 17px;">
+                            <label>이름 : </label>&nbsp;
+                            <span>${mvo.memName }</span>
+                        </div> 
+                        <br>                     
+                        <div class="form-group" style="font-size: 17px;">
+                        	<label>주소 : </label>&nbsp;<span>${mvo.memAdd}</span><br>
+                        	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        	<span>${mvo.memAdd2}</span>                                                                                                                                                    
                         </div>
-                        <div class="form-group">
-                            <label>생년월일</label>
-                            <span></span>
-                        </div>
-                        <div class="form-group">
-                            <label>이메일</label>
-                            <span></span>
-                        </div>
-                        <div class="form-group">
-                            <label>전화번호</label>
-                            <span></span>
-                        </div>
-                        <div class="form-group">
-                        	<label>주소</label>                                
-                            <span></span>                                                                                        
-                        </div>
-
-                    <label>연락가능시간</label>
-                	<div class="job-search-form row">
-
-		                <!-- Start of keywords input -->
-		                <div class="col-md-3 col-sm-12 search-categories">
-							<span></span> <h5>~</h5> <span></span>             
-		                    </div>
-						
+						<br>
+                	<div class="form-group" style="font-size: 17px;">
+	                    <label>연락가능시간 : </label>&nbsp;
+							<span>${rvo.resTime }</span>            	
 		         	</div>	
 		         
 					
@@ -78,35 +64,20 @@
                         <!-- Profile Details -->
                         
 
-                        <ul class="profile-info mt20 nopadding">
-                            <li>
-                                <i class="fa fa-map-marker"></i>
-                                <span>New York, USA</span>
-                            </li>
-
-                            <li>
-                                <i class="fa fa-globe"></i>
-                                <a href="#">cariera.com</a>
-                            </li>
-
-                            <li>
-                                <i class="fa fa-money"></i>
-                                <span>$65 / hour</span>
-                            </li>
-
+                        <ul class="profile-info mt20 nopadding">                        
                             <li>
                                 <i class="fa fa-birthday-cake"></i>
-                                <span>29 years-old</span>
+                                <span>${mvo.memBirth}</span>
                             </li>
 
                             <li>
                                 <i class="fa fa-phone"></i>
-                                <span>(+1) 123 456 7890</span>
+                                <span>${mvo.memTel}</span>
                             </li>
 
                             <li>
                                 <i class="fa fa-envelope"></i>
-                                <a href="#">myemail@cariera.com</a>
+                                <span>${mvo.memId}</span>
                             </li>
                         </ul>
 
@@ -121,13 +92,12 @@
             <!-- Start of Row -->
             <div class="row skills mt40">
 
-                <div class="col-md-12 text-center">
+                <div class="col-md-12 text-center" >
                     <h3 class="pb40">자기소개서</h3>
                 </div>
 				
-				<div class="form-group">
-                     <label>job description <span>(optional)</span></label>
-                     <textarea class="tinymce"></textarea>
+				<div class="form-group">                    
+                     ${rvo.resContent}
                 </div>
 			</div>	
            </div>     
@@ -222,7 +192,8 @@
             </div> 
 					
 			<div class="form-group pt30 nomargin" id="last">
-                    <button class="btn btn-blue btn-effect">submit</button>
+                    <input type="submit" class="btn btn-blue btn-effect" value="수정">
+			<a href="<c:url value='/'/>" class="btn btn-blue btn-effect">취소</a>
             </div>
         </div>
                         

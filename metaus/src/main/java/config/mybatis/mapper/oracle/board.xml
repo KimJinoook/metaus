@@ -4,19 +4,80 @@
 
 <mapper namespace="com.metaus.board.model.BoardDAO">
 
-<insert id="insertBoard" parameterType="boardVo">
-	<selectKey resultType="int" keyProperty="boardNo" order="BEFORE">
-		select fp_board_seq.nextval from dual
-	</selectKey>
-	insert into fp_board(board_no, mem_no, board_title, board_content, btype_no)
-	values(#{boardNo}, #{memNo}, #{boardTitle}, #{boardContent}, #{btypeNo})
-</insert>
+	<insert id="insertBoard" parameterType="boardVo">
+		<selectKey resultType="int" keyProperty="boardNo"
+			order="BEFORE">
+			select fp_board_seq.nextval from dual
+		</selectKey>
+		insert into fp_board(board_no, mem_no, board_title, board_content,
+		btype_no)
+		values(#{boardNo}, #{memNo}, #{boardTitle}, #{boardContent},
+		#{btypeNo})
+	</insert>
 
-<select id="selectBoard" parameterType="int" resultType="map">
-	select b.*, m.mem_name
-	from fp_board b join fp_mem m
-	on b.mem_no=m.mem_no
-	where b.btype_no=#{btypeNo}
-</select>
+	<insert id="insertBoardAtc" parameterType="boardAtcVo">
+		<selectKey resultType="int" keyProperty="bfileNo"
+			order="BEFORE">
+			select fp_boardatc_seq.nextval from dual
+		</selectKey>
+		insert into fp_boardatc(bfile_no, board_no, bfile_filename,
+		bfile_originname)
+		values(#{bfileNo}, #{boardNo}, #{bfileFilename},
+		#{bfileOriginname})
+	</insert>
+
+	<resultMap type="HashMap" id="contentMap">
+		<result property="boardContent" column="board_content"
+			jdbcType="CLOB" javaType="String" />
+	</resultMap>
+
+	<select id="selectBoard" parameterType="searchVo" resultType="Map">
+		select * from
+		(
+			select rownum as RNUM, A.*
+			from
+				(
+					select b.*, m.mem_name, f.bfile_filename
+					from fp_board b join fp_mem m
+					on b.mem_no=m.mem_no
+					left join fp_boardatc f
+					on b.board_no= f.board_no
+					where b.btype_no=#{btypeNo}
+					order by board_regdate desc
+				)A
+		)
+		where
+		RNUM>#{firstRecordIndex} 
+		<![CDATA[	
+		and RNUM<=#{firstRecordIndex} + #{recordCountPerPage} ]]>
+	</select>
+
+	<select id="selectBoardAtc" resultType="boardAtcVo">
+		select * from fp_boardatc
+	</select>
+
+	<select id="selectBoardDetail" parameterType="int"
+		resultType="boardVo">
+		select * from fp_board
+		where board_no=#{boardNo}
+	</select>
+
+	<select id="selectBoardAtcByNo" parameterType="int"
+		resultType="boardAtcVo">
+		select * from fp_boardatc
+		where board_no=#{boardNo}
+	</select>
+
+	<update id="updateBoardReadCount" parameterType="int">
+		update fp_board
+		set board_readcount=board_readcount+1
+		where board_no=#{boardNo}
+	</update>
+
+	<select id="selectTotalRecord" parameterType="int"
+		resultType="int">
+		select count(*) from fp_board
+		where btype_no=#{btypeNo}
+	</select>
 
 </mapper>
