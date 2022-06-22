@@ -2,6 +2,16 @@ ALTER TABLE fp_kakao
 	DROP
 		CONSTRAINT FK_fp_mem_TO_fp_kakao
 		CASCADE;
+        
+ALTER TABLE fp_naver
+	DROP
+		CONSTRAINT FK_fp_mem_TO_fp_naver
+		CASCADE;     
+        
+ALTER TABLE fp_facebook
+	DROP
+		CONSTRAINT FK_fp_mem_TO_fp_facebook
+		CASCADE;         
 
 ALTER TABLE fp_resume
 	DROP
@@ -154,6 +164,18 @@ ALTER TABLE fp_kakao
 		PRIMARY KEY
 		CASCADE
 		KEEP INDEX;
+        
+ALTER TABLE fp_naver
+	DROP
+		PRIMARY KEY
+		CASCADE
+		KEEP INDEX;       
+
+ALTER TABLE fp_facebook
+	DROP
+		PRIMARY KEY
+		CASCADE
+		KEEP INDEX;          
 
 ALTER TABLE fp_com
 	DROP
@@ -306,6 +328,14 @@ DROP TABLE fp_mem
 /* 카카오 */
 DROP TABLE fp_kakao 
 	CASCADE CONSTRAINTS;
+    
+/* 네이버 */
+DROP TABLE fp_naver 
+	CASCADE CONSTRAINTS;  
+    
+/* 페이스북 */
+DROP TABLE fp_facebook 
+	CASCADE CONSTRAINTS;     
 
 /* 기업정보 */
 DROP TABLE fp_com 
@@ -421,7 +451,9 @@ CREATE TABLE fp_mem (
 	mem_cutdate DATE, /* 차단일 */
 	mem_warncnt NUMBER, /* 경고수 */
 	mem_lock CLOB, /* 암호키 */
-	mem_kakao VARCHAR2(6) /* 카카오연동 */
+	mem_kakao VARCHAR2(6), /* 카카오연동 */
+    mem_naver VARCHAR2(6), /* 네이버연동 */
+    mem_facebook VARCHAR2(6)
 );
 
 ALTER TABLE fp_mem
@@ -444,6 +476,34 @@ ALTER TABLE fp_kakao
 		PRIMARY KEY (
 			mem_no
 		);
+        
+/* 네이버 */
+CREATE TABLE fp_naver (
+	mem_no NUMBER NOT NULL, /* 회원번호 */
+	naver_email VARCHAR2(200), /* 이메일 */
+	naver_name VARCHAR2(20) /* 이름 */
+);     
+
+ALTER TABLE fp_naver
+	ADD
+		CONSTRAINT PK_fp_naver
+		PRIMARY KEY (
+			mem_no
+		);
+        
+/* 페이스북 */
+CREATE TABLE fp_facebook (
+	mem_no NUMBER NOT NULL, /* 회원번호 */
+	facebook_email VARCHAR2(200), /* 이메일 */
+	facebook_name VARCHAR2(20) /* 이름 */
+);     
+
+ALTER TABLE fp_facebook
+	ADD
+		CONSTRAINT PK_fp_facebook
+		PRIMARY KEY (
+			mem_no
+		);        
 
 /* 기업정보 */
 CREATE TABLE fp_com (
@@ -839,6 +899,26 @@ ALTER TABLE fp_kakao
 		REFERENCES fp_mem (
 			mem_no
 		);
+        
+ALTER TABLE fp_naver
+	ADD
+		CONSTRAINT FK_fp_mem_TO_fp_naver
+		FOREIGN KEY (
+			mem_no
+		)
+		REFERENCES fp_mem (
+			mem_no
+		);    
+        
+ALTER TABLE fp_facebook
+	ADD
+		CONSTRAINT FK_fp_mem_TO_fp_facebook
+		FOREIGN KEY (
+			mem_no
+		)
+		REFERENCES fp_mem (
+			mem_no
+		);         
 
 ALTER TABLE fp_resume
 	ADD
@@ -1311,7 +1391,10 @@ nocache;
 select * from fp_com;
 
 insert into fp_mem
-values(fp_mem_seq.nextval,'테스터','test@naver.com','1234','닉네임1','941215','01030843045','15151','서울시영등포구시흥대로','상세주소','프사경로',sysdate,null,null,null,null,null);
+values(fp_mem_seq.nextval,'테스터','test@naver.com','1234','닉네임1','941215','01030843045','15151','서울시영등포구시흥대로','상세주소','프사경로',sysdate,null,null,null,null,null,null);
+
+insert into fp_mem
+values(fp_mem_seq.nextval,'김진욱','kimjin0132@naver.com','1234','닉네임1','941215','01030843045','15151','서울시영등포구시흥대로','상세주소','프사경로',sysdate,null,null,null,null,null,null);
 
 insert into fp_com
 values(fp_com_seq.nextval,'testcom','1234','테스트기업','기업프리뷰','기업사진경로','기업대표','기업주소','기업위도','기업경도','사업자등록번호',1,'기업전화번호',sysdate,null);
@@ -1336,3 +1419,8 @@ values(fp_boardType_seq.nextval,'자유게시판','N','Y');
 
 
 commit;
+select * from fp_mem where mem_id like 'kimjin0132%';
+
+select * from fp_mem;
+select * from fp_kakao;
+select * from fp_naver;
