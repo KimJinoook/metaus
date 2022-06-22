@@ -5,15 +5,17 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.metaus.common.SearchVO;
 import com.metaus.member.model.MemberVO;
 
 @Mapper
 public interface BoardDAO {
 	int insertBoard(BoardVO boardVo);
 	int insertBoardAtc(BoardAtcVO boardAtcVo);
-	List<Map<String, Object>> selectBoard(int btypeNo);
+	List<Map<String, Object>> selectBoard(SearchVO vo);
 	List<BoardAtcVO> selectBoardAtc();
 	BoardVO selectBoardDetail(int boardNo);
 	BoardAtcVO selectBoardAtcByNo(int boardNo);
 	int updateBoardReadCount(int boardNo);
+	int selectTotalRecord(int btypeNo);
 }
