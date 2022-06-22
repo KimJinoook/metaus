@@ -40,6 +40,10 @@ public class MemberController {
 	public void register_get() {
 		logger.info("회원가입 뷰");
 	}
+	@GetMapping("/lostAccount")
+	public void lostAccount_get() {
+		logger.info("계정찾기 뷰");
+	}
 	
 	@PostMapping("/memberRegister")
 	public String memregister_post(@ModelAttribute MemberVO vo, Model model) {
