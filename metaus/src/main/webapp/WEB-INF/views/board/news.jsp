@@ -4,22 +4,12 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ include file="../inc/header.jsp"%>
-<script src="<c:url value='js/jquery-3.1.1.min.js'/>"></script>
-<script src="<c:url value='js/bootstrap.min.js'/>"></script>
-<script src="<c:url value='js/bootstrap-select.min.js'/>"></script>
-<script src="<c:url value='js/swiper.min.js'/>"></script>
-<script src="<c:url value='js/jquery.ajaxchimp.js'/>"></script>
-<script src="<c:url value='js/jquery.countTo.js'/>"></script>
-<script src="<c:url value='js/jquery.inview.min.js'/>"></script>
-<script src="<c:url value='js/jquery.magnific-popup.min.js'/>"></script>
-<script src="<c:url value='js/jquery.easypiechart.min.js'/>"></script>
-<script src="<c:url value='js/jquery-ui.min.js'/>"></script>
-<script src="<c:url value='js/owl.carousel.min.js'/>"></script>
-<script src="<c:url value='js/tinymce/tinymce.min.js'/>"></script>
-<script src="<c:url value='js/countdown.js'/>"></script>
-<script src="<c:url value='js/isotope.min.js'/>"></script>
-<script src="<c:url value='js/custom.js'/>"></script>
-
+<script type="text/javascript">
+	function boardList(curPage){
+		$('input[name=currentPage]').val(curPage);
+		$('form[name=frmPage]').submit();
+	}
+</script>
 <!-- =============== Start of Page Header 1 Section =============== -->
 <section class="page-header" style="margin-top: 150px;">
 	<div class="container">
@@ -89,21 +79,43 @@
 						</article>
 						<!-- End of Blog Post Article 1 -->
 					</c:forEach>
+					
+					<!-- Start of Pagination -->
+					<div class="col-md-12">
+					<ul class="pagination list-inline text-center">
+					<c:if test="${pagingInfo.firstPage>1 }">
+						<li><a href="#" onclick="boardList(${pagingInfo.firstPage-1})">prev</a></li>
+					</c:if>
+
+					<!-- [1][2][3][4][5][6][7][8][9][10] -->
+					<c:forEach var="i" begin="${pagingInfo.firstPage }"
+						end="${pagingInfo.lastPage }">
+						<c:if test="${i==pagingInfo.currentPage }">
+							<li class="active"><a>${i }</a></li>
+						</c:if>
+						<c:if test="${i!=pagingInfo.currentPage }">
+							<li><a href="#" onclick="boardList(${i})">${i } </a></li>
+						</c:if>
+					</c:forEach>
+
+					<c:if test="${pagingInfo.lastPage<pagingInfo.totalPage }">
+						<li><a href="#" onclick="boardList(${pagingInfo.lastPage+1})">Next</a></li>
+					</c:if>
+					<!--  페이지 번호 끝 -->
+					</ul>
+					</div>
+					<!-- End of Pagination -->
+					
 				</c:if>
 
 
 
-				<!-- Start of Pagination -->
-				<div class="col-md-12">
-					<ul class="pagination list-inline text-center">
-						<li class="active"><a href="javascript:void(0)">1</a></li>
-						<li><a href="#">2</a></li>
-						<li><a href="#">3</a></li>
-						<li><a href="#">4</a></li>
-						<li><a href="#">Next</a></li>
-					</ul>
-				</div>
-				<!-- End of Pagination -->
+				<!-- 페이징 처리를 위한 form 시작-->
+				<form name="frmPage" method="post"
+					action="<c:url value='/board/news?btypeNo=4'/>">
+					<input type="hidden" name="currentPage">
+				</form>
+				<!-- 페이징 처리 form 끝 -->
 
 			</div>
 			<!-- End of Blog Posts -->

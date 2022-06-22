@@ -23,6 +23,8 @@ import com.metaus.board.model.BoardService;
 import com.metaus.board.model.BoardVO;
 import com.metaus.common.ConstUtil;
 import com.metaus.common.FileUploadUtil;
+import com.metaus.common.PaginationInfo;
+import com.metaus.common.SearchVO;
 
 import lombok.RequiredArgsConstructor;
 
@@ -37,72 +39,192 @@ public class BoardController {
 	private final FileUploadUtil fileUploadUtil;
 	
 	@RequestMapping("/notice")
-	public String notice(@RequestParam(defaultValue = "0")int btypeNo, Model model) {
-		logger.info("notice 페이지 - 게시판 종류 btypeNo={}", btypeNo);
+	public String notice(@ModelAttribute SearchVO searchVo,
+			@RequestParam(defaultValue = "0")int btypeNo, Model model) {
+		logger.info("qna 페이지 - 게시판 종류 btypeNo={}", btypeNo);
+		logger.info("qna 페이지, searchVo={}", searchVo);
 		
-		List<Map<String, Object>>list = boardService.selectBoard(btypeNo);
-		logger.info("notice 목록 조회 결과, list.size={}",list.size());
-
+		PaginationInfo pagingInfo = new PaginationInfo();
+		pagingInfo.setBlockSize(ConstUtil.BLOCKSIZE);
+		pagingInfo.setRecordCountPerPage(ConstUtil.RECORD_COUNT);
+		pagingInfo.setCurrentPage(searchVo.getCurrentPage());
+		logger.info("t ={}",pagingInfo.getCurrentPage());
+		
+		searchVo.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
+		logger.info("t2={}",pagingInfo.getFirstRecordIndex());
+		logger.info("t3={}",searchVo.getFirstRecordIndex());
+		searchVo.setRecordCountPerPage(ConstUtil.RECORD_COUNT);
+		searchVo.setBtypeNo(btypeNo);
+		
+		List<Map<String, Object>>list = boardService.selectBoard(searchVo);
+		logger.info("qna 목록 조회 결과, list.size={}", list.size());
+		List<BoardAtcVO> atcList = boardService.selectBoardAtc();
+		int totalRecord=boardService.selectTotalRecord(btypeNo);
+		pagingInfo.setTotalRecord(totalRecord);
+		
+		logger.info("qna 목록 조회-레코드 개수, totalRecord={}", totalRecord);
+		logger.info("qna 목록 조회-pagingInfo, pagingInfo.getFirstPage={}", pagingInfo.getFirstPage());
+		logger.info("qna 목록 조회-pagingInfo, pagingInfo.getLastPage={}", pagingInfo.getLastPage());
+		
+		model.addAttribute("pagingInfo", pagingInfo);
 		model.addAttribute("list",list);
+		model.addAttribute("atcList",atcList);
 		model.addAttribute("btypeNo", btypeNo);
 		
 		return "/board/notice";
 	}
 	
 	@RequestMapping("/faq")
-	public String faq(@RequestParam(defaultValue = "0")int btypeNo, Model model) {
-		logger.info("FAQ 페이지");
-
+	public String faq(@ModelAttribute SearchVO searchVo,
+			@RequestParam(defaultValue = "0")int btypeNo, Model model) {
+		logger.info("FAQ 페이지 - 게시판 종류 btypeNo={}", btypeNo);
+		
+		List<Map<String, Object>>list = boardService.selectBoard(searchVo);
+		logger.info("FAQ 목록 조회 결과, list.size={}", list.size());
+		
+		model.addAttribute("list", list);
+		model.addAttribute("btypeNo", btypeNo);
+		
 		return "/board/faq";
 	}
 	
 	@RequestMapping("/news")
-	public String news(@RequestParam(defaultValue = "0")int btypeNo, Model model) {
-		logger.info("news 페이지 - 게시판 종류 btypeNo={}", btypeNo);
+	public String news(@ModelAttribute SearchVO searchVo,
+			@RequestParam(defaultValue = "0")int btypeNo, Model model) {
+		logger.info("qna 페이지 - 게시판 종류 btypeNo={}", btypeNo);
+		logger.info("qna 페이지, searchVo={}", searchVo);
 		
-		List<Map<String, Object>>list = boardService.selectBoard(btypeNo);
-		logger.info("news 목록 조회 결과, list.size={}",list.size());
-
+		PaginationInfo pagingInfo = new PaginationInfo();
+		pagingInfo.setBlockSize(ConstUtil.BLOCKSIZE);
+		pagingInfo.setRecordCountPerPage(ConstUtil.RECORD_COUNT);
+		pagingInfo.setCurrentPage(searchVo.getCurrentPage());
+		logger.info("t ={}",pagingInfo.getCurrentPage());
+		
+		searchVo.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
+		logger.info("t2={}",pagingInfo.getFirstRecordIndex());
+		logger.info("t3={}",searchVo.getFirstRecordIndex());
+		searchVo.setRecordCountPerPage(ConstUtil.RECORD_COUNT);
+		searchVo.setBtypeNo(btypeNo);
+		
+		List<Map<String, Object>>list = boardService.selectBoard(searchVo);
+		logger.info("qna 목록 조회 결과, list.size={}", list.size());
+		List<BoardAtcVO> atcList = boardService.selectBoardAtc();
+		int totalRecord=boardService.selectTotalRecord(btypeNo);
+		pagingInfo.setTotalRecord(totalRecord);
+		
+		logger.info("qna 목록 조회-레코드 개수, totalRecord={}", totalRecord);
+		logger.info("qna 목록 조회-pagingInfo, pagingInfo.getFirstPage={}", pagingInfo.getFirstPage());
+		logger.info("qna 목록 조회-pagingInfo, pagingInfo.getLastPage={}", pagingInfo.getLastPage());
+		
+		model.addAttribute("pagingInfo", pagingInfo);
 		model.addAttribute("list",list);
+		model.addAttribute("atcList",atcList);
 		model.addAttribute("btypeNo", btypeNo);
 		
 		return "/board/news";
 	}
 	
 	@RequestMapping("/freeBoard")
-	public String freeBoard(@RequestParam(defaultValue = "0")int btypeNo, Model model) {
-		logger.info("freeBoard 페이지 - 게시판 종류 btypeNo={}", btypeNo);
+	public String freeBoard(@ModelAttribute SearchVO searchVo,
+			@RequestParam(defaultValue = "0")int btypeNo, Model model) {
+		logger.info("qna 페이지 - 게시판 종류 btypeNo={}", btypeNo);
+		logger.info("qna 페이지, searchVo={}", searchVo);
 		
-		List<Map<String, Object>>list = boardService.selectBoard(btypeNo);
-		logger.info("freeBoard 목록 조회 결과, list.size={}",list.size());
-
+		PaginationInfo pagingInfo = new PaginationInfo();
+		pagingInfo.setBlockSize(ConstUtil.BLOCKSIZE);
+		pagingInfo.setRecordCountPerPage(ConstUtil.RECORD_COUNT);
+		pagingInfo.setCurrentPage(searchVo.getCurrentPage());
+		logger.info("t ={}",pagingInfo.getCurrentPage());
+		
+		searchVo.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
+		logger.info("t2={}",pagingInfo.getFirstRecordIndex());
+		logger.info("t3={}",searchVo.getFirstRecordIndex());
+		searchVo.setRecordCountPerPage(ConstUtil.RECORD_COUNT);
+		searchVo.setBtypeNo(btypeNo);
+		
+		List<Map<String, Object>>list = boardService.selectBoard(searchVo);
+		logger.info("qna 목록 조회 결과, list.size={}", list.size());
+		List<BoardAtcVO> atcList = boardService.selectBoardAtc();
+		int totalRecord=boardService.selectTotalRecord(btypeNo);
+		pagingInfo.setTotalRecord(totalRecord);
+		
+		logger.info("qna 목록 조회-레코드 개수, totalRecord={}", totalRecord);
+		logger.info("qna 목록 조회-pagingInfo, pagingInfo.getFirstPage={}", pagingInfo.getFirstPage());
+		logger.info("qna 목록 조회-pagingInfo, pagingInfo.getLastPage={}", pagingInfo.getLastPage());
+		
+		model.addAttribute("pagingInfo", pagingInfo);
 		model.addAttribute("list",list);
+		model.addAttribute("atcList",atcList);
 		model.addAttribute("btypeNo", btypeNo);
 		
 		return "/board/freeBoard";
 	}
 	
 	@RequestMapping("/QuestionBoard")
-	public String QuestionBoard(@RequestParam(defaultValue = "0")int btypeNo, Model model) {
-		logger.info("QuestionBoard 페이지 - 게시판 종류 btypeNo={}", btypeNo);
+	public String QuestionBoard(@ModelAttribute SearchVO searchVo,
+			@RequestParam(defaultValue = "0")int btypeNo, Model model) {
+		logger.info("qna 페이지 - 게시판 종류 btypeNo={}", btypeNo);
+		logger.info("qna 페이지, searchVo={}", searchVo);
 		
-		List<Map<String, Object>>list = boardService.selectBoard(btypeNo);
-		logger.info("QuestionBoard 목록 조회 결과, list.size={}",list.size());
-
+		PaginationInfo pagingInfo = new PaginationInfo();
+		pagingInfo.setBlockSize(ConstUtil.BLOCKSIZE);
+		pagingInfo.setRecordCountPerPage(ConstUtil.RECORD_COUNT);
+		pagingInfo.setCurrentPage(searchVo.getCurrentPage());
+		logger.info("t ={}",pagingInfo.getCurrentPage());
+		
+		searchVo.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
+		logger.info("t2={}",pagingInfo.getFirstRecordIndex());
+		logger.info("t3={}",searchVo.getFirstRecordIndex());
+		searchVo.setRecordCountPerPage(ConstUtil.RECORD_COUNT);
+		searchVo.setBtypeNo(btypeNo);
+		
+		List<Map<String, Object>>list = boardService.selectBoard(searchVo);
+		logger.info("qna 목록 조회 결과, list.size={}", list.size());
+		List<BoardAtcVO> atcList = boardService.selectBoardAtc();
+		int totalRecord=boardService.selectTotalRecord(btypeNo);
+		pagingInfo.setTotalRecord(totalRecord);
+		
+		logger.info("qna 목록 조회-레코드 개수, totalRecord={}", totalRecord);
+		logger.info("qna 목록 조회-pagingInfo, pagingInfo.getFirstPage={}", pagingInfo.getFirstPage());
+		logger.info("qna 목록 조회-pagingInfo, pagingInfo.getLastPage={}", pagingInfo.getLastPage());
+		
+		model.addAttribute("pagingInfo", pagingInfo);
 		model.addAttribute("list",list);
+		model.addAttribute("atcList",atcList);
 		model.addAttribute("btypeNo", btypeNo);
 		
 		return "/board/QuestionBoard";
 	}
 	
 	@RequestMapping("/qna")
-	public String qna(@RequestParam(defaultValue = "0")int btypeNo, Model model) {
+	public String qna(@ModelAttribute SearchVO searchVo,
+			@RequestParam(defaultValue = "0")int btypeNo, Model model) {
 		logger.info("qna 페이지 - 게시판 종류 btypeNo={}", btypeNo);
+		logger.info("qna 페이지, searchVo={}", searchVo);
 		
-		List<Map<String, Object>>list = boardService.selectBoard(btypeNo);
+		PaginationInfo pagingInfo = new PaginationInfo();
+		pagingInfo.setBlockSize(ConstUtil.BLOCKSIZE);
+		pagingInfo.setRecordCountPerPage(ConstUtil.RECORD_COUNT);
+		pagingInfo.setCurrentPage(searchVo.getCurrentPage());
+		logger.info("t ={}",pagingInfo.getCurrentPage());
+		
+		searchVo.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
+		logger.info("t2={}",pagingInfo.getFirstRecordIndex());
+		logger.info("t3={}",searchVo.getFirstRecordIndex());
+		searchVo.setRecordCountPerPage(ConstUtil.RECORD_COUNT);
+		searchVo.setBtypeNo(btypeNo);
+		
+		List<Map<String, Object>>list = boardService.selectBoard(searchVo);
 		logger.info("qna 목록 조회 결과, list.size={}", list.size());
 		List<BoardAtcVO> atcList = boardService.selectBoardAtc();
-
+		int totalRecord=boardService.selectTotalRecord(btypeNo);
+		pagingInfo.setTotalRecord(totalRecord);
+		
+		logger.info("qna 목록 조회-레코드 개수, totalRecord={}", totalRecord);
+		logger.info("qna 목록 조회-pagingInfo, pagingInfo.getFirstPage={}", pagingInfo.getFirstPage());
+		logger.info("qna 목록 조회-pagingInfo, pagingInfo.getLastPage={}", pagingInfo.getLastPage());
+		
+		model.addAttribute("pagingInfo", pagingInfo);
 		model.addAttribute("list",list);
 		model.addAttribute("atcList",atcList);
 		model.addAttribute("btypeNo", btypeNo);
@@ -112,26 +234,72 @@ public class BoardController {
 
 
 	@RequestMapping("/shareBoard")
-	public String shareBoard(@RequestParam(defaultValue = "0")int btypeNo, Model model) {
-		logger.info("shareBoard 페이지 - 게시판 종류 btypeNo={}", btypeNo);
+	public String shareBoard(@ModelAttribute SearchVO searchVo,
+			@RequestParam(defaultValue = "0")int btypeNo, Model model) {
+		logger.info("qna 페이지 - 게시판 종류 btypeNo={}", btypeNo);
+		logger.info("qna 페이지, searchVo={}", searchVo);
 		
-		List<Map<String, Object>>list = boardService.selectBoard(btypeNo);
-		logger.info("shareBoard 목록 조회 결과, list.size={}",list.size());
-
+		PaginationInfo pagingInfo = new PaginationInfo();
+		pagingInfo.setBlockSize(ConstUtil.BLOCKSIZE);
+		pagingInfo.setRecordCountPerPage(ConstUtil.RECORD_COUNT);
+		pagingInfo.setCurrentPage(searchVo.getCurrentPage());
+		logger.info("t ={}",pagingInfo.getCurrentPage());
+		
+		searchVo.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
+		logger.info("t2={}",pagingInfo.getFirstRecordIndex());
+		logger.info("t3={}",searchVo.getFirstRecordIndex());
+		searchVo.setRecordCountPerPage(ConstUtil.RECORD_COUNT);
+		searchVo.setBtypeNo(btypeNo);
+		
+		List<Map<String, Object>>list = boardService.selectBoard(searchVo);
+		logger.info("qna 목록 조회 결과, list.size={}", list.size());
+		List<BoardAtcVO> atcList = boardService.selectBoardAtc();
+		int totalRecord=boardService.selectTotalRecord(btypeNo);
+		pagingInfo.setTotalRecord(totalRecord);
+		
+		logger.info("qna 목록 조회-레코드 개수, totalRecord={}", totalRecord);
+		logger.info("qna 목록 조회-pagingInfo, pagingInfo.getFirstPage={}", pagingInfo.getFirstPage());
+		logger.info("qna 목록 조회-pagingInfo, pagingInfo.getLastPage={}", pagingInfo.getLastPage());
+		
+		model.addAttribute("pagingInfo", pagingInfo);
 		model.addAttribute("list",list);
+		model.addAttribute("atcList",atcList);
 		model.addAttribute("btypeNo", btypeNo);
 		
 		return "/board/shareBoard";
 	}
 	
 	@RequestMapping("/requestBoard")
-	public String requestBoard(@RequestParam(defaultValue = "0")int btypeNo, Model model) {
-		logger.info("requestBoard 페이지 - 게시판 종류 btypeNo={}", btypeNo);
+	public String requestBoard(@ModelAttribute SearchVO searchVo,
+			@RequestParam(defaultValue = "0")int btypeNo, Model model) {
+		logger.info("qna 페이지 - 게시판 종류 btypeNo={}", btypeNo);
+		logger.info("qna 페이지, searchVo={}", searchVo);
 		
-		List<Map<String, Object>>list = boardService.selectBoard(btypeNo);
-		logger.info("requestBoard 목록 조회 결과, list.size={}",list.size());
-
+		PaginationInfo pagingInfo = new PaginationInfo();
+		pagingInfo.setBlockSize(ConstUtil.BLOCKSIZE);
+		pagingInfo.setRecordCountPerPage(ConstUtil.RECORD_COUNT);
+		pagingInfo.setCurrentPage(searchVo.getCurrentPage());
+		logger.info("t ={}",pagingInfo.getCurrentPage());
+		
+		searchVo.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
+		logger.info("t2={}",pagingInfo.getFirstRecordIndex());
+		logger.info("t3={}",searchVo.getFirstRecordIndex());
+		searchVo.setRecordCountPerPage(ConstUtil.RECORD_COUNT);
+		searchVo.setBtypeNo(btypeNo);
+		
+		List<Map<String, Object>>list = boardService.selectBoard(searchVo);
+		logger.info("qna 목록 조회 결과, list.size={}", list.size());
+		List<BoardAtcVO> atcList = boardService.selectBoardAtc();
+		int totalRecord=boardService.selectTotalRecord(btypeNo);
+		pagingInfo.setTotalRecord(totalRecord);
+		
+		logger.info("qna 목록 조회-레코드 개수, totalRecord={}", totalRecord);
+		logger.info("qna 목록 조회-pagingInfo, pagingInfo.getFirstPage={}", pagingInfo.getFirstPage());
+		logger.info("qna 목록 조회-pagingInfo, pagingInfo.getLastPage={}", pagingInfo.getLastPage());
+		
+		model.addAttribute("pagingInfo", pagingInfo);
 		model.addAttribute("list",list);
+		model.addAttribute("atcList",atcList);
 		model.addAttribute("btypeNo", btypeNo);
 		
 		return "/board/requestBoard";
@@ -190,13 +358,13 @@ public class BoardController {
 		if(btypeNo==3) {
 			return "redirect:/board/qna?btypeNo=3";
 		}else if(btypeNo==8) {
-			return "redirect:/board/freeBoardbtypeNo=8";
+			return "redirect:/board/freeBoard?btypeNo=8";
 		}else if(btypeNo==5) {
-			return "redirect:/board/QuestionBoardbtypeNo=5";
+			return "redirect:/board/QuestionBoard?btypeNo=5";
 		}else if(btypeNo==6) {
-			return "redirect:/board/shareBoardbtypeNo=6";
+			return "redirect:/board/shareBoard?btypeNo=6";
 		}else if(btypeNo==7) {
-			return "redirect:/board/requestBoardbtypeNo=7";
+			return "redirect:/board/requestBoard?btypeNo=7";
 		}
 		return "/";
 	}

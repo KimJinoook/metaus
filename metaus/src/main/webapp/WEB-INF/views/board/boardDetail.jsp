@@ -329,8 +329,8 @@
 								<p>욕설 및 상대방을 비하하는 댓글은 삭제될 수 있습니다.</p>
 							</div>
 							<div class="col-md-6 col-xs-6 comment-submit">
-								<button class="btn btn-blue btn-effect pull-right" type="submit">Send
-									message</button>
+								<button class="btn btn-blue btn-effect pull-right" type="submit">
+								댓글 쓰기</button>
 							</div>
 						</form>
 						<!-- End of Comment Submit Form -->

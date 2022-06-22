@@ -5,7 +5,10 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ include file="../inc/header.jsp"%>
 <script type="text/javascript">
-	
+	function boardList(curPage){
+		$('input[name=currentPage]').val(curPage);
+		$('form[name=frmPage]').submit();
+	}
 </script>
 <!-- =============== Start of Page Header 1 Section =============== -->
 <section class="page-header" id="find-candidate"
@@ -35,9 +38,10 @@
 	</div>
 </section>
 <!-- =============== End of Page Header 1 Section =============== -->
-	
+
 <!-- ===== Start of Main Wrapper Section ===== -->
 <section class="find-candidate ptb80">
+
 	<div class="container">
 
 		<!-- Start of Form -->
@@ -115,9 +119,10 @@
 														value="${map['BOARD_REGDATE'] }" pattern="yyyy-MM-dd" />
 											</span></li>
 
-											<li><span><img src="<c:url value='/images/board/eye.png'/>"
-											style="width: 14px;height: 14.4px;">
-											${map['BOARD_READCOUNT'] }</span></li>
+											<li><span><img
+													src="<c:url value='/images/board/eye.png'/>"
+													style="width: 14px; height: 14.4px;">
+													${map['BOARD_READCOUNT'] }</span></li>
 										</ul>
 									</div>
 								</div>
@@ -127,7 +132,7 @@
 								<div class="col-md-2 col-xs-3">
 									<div class="candidate-cta ptb30">
 										<a
-											href="<c:url value='/board/boardDetail?boardNo=${map["BOARD_NO"] }&btypeNo=3'/>"
+											href="<c:url value='/board/readCountUp?boardNo=${map["BOARD_NO"] }&btypeNo=3'/>"
 											class="btn btn-blue btn-small btn-effect">답변하기</a>
 									</div>
 								</div>
@@ -136,18 +141,43 @@
 							<!-- ===== End of Single Candidate 1 ===== -->
 					</c:forEach>
 					<!-- 반복 종료 -->
+					
+					<!-- Start of Pagination -->
+					<div class="col-md-12">
+					<ul class="pagination list-inline text-center">
+					<c:if test="${pagingInfo.firstPage>1 }">
+						<li><a href="#" onclick="boardList(${pagingInfo.firstPage-1})">prev</a></li>
+					</c:if>
+
+					<!-- [1][2][3][4][5][6][7][8][9][10] -->
+					<c:forEach var="i" begin="${pagingInfo.firstPage }"
+						end="${pagingInfo.lastPage }">
+						<c:if test="${i==pagingInfo.currentPage }">
+							<li class="active"><a>${i }</a></li>
+						</c:if>
+						<c:if test="${i!=pagingInfo.currentPage }">
+							<li><a href="#" onclick="boardList(${i})">${i } </a></li>
+						</c:if>
+					</c:forEach>
+
+					<c:if test="${pagingInfo.lastPage<pagingInfo.totalPage }">
+						<li><a href="#" onclick="boardList(${pagingInfo.lastPage+1})">Next</a></li>
+					</c:if>
+					<!--  페이지 번호 끝 -->
+					</ul>
+					</div>
+					<!-- End of Pagination -->
+					
+					
 				</c:if>
 			</div>
+			<!-- 페이징 처리를 위한 form 시작-->
+			<form name="frmPage" method="post"
+				action="<c:url value='/board/qna?btypeNo=3'/>">
+				<input type="hidden" name="currentPage">
+			</form>
+			<!-- 페이징 처리 form 끝 -->
 			<!-- End of Candidates Wrapper -->
-
-			<!-- Start of Pagination -->
-			<div class="col-md-12 mt10">
-				<ul class="pagination list-inline text-center">
-					<li class="active"><a href="javascript:void(0)">1</a></li>
-					<li><a href="#">Next</a></li>
-				</ul>
-			</div>
-			<!-- End of Pagination -->
 		</div>
 		<!-- End of Candidate Main -->
 	</div>

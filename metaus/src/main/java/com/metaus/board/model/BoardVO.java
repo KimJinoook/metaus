@@ -2,10 +2,12 @@ package com.metaus.board.model;
 
 import java.sql.Timestamp;
 
+import com.metaus.common.SearchVO;
+
 import lombok.Data;
 
 @Data
-public class BoardVO {
+public class BoardVO extends SearchVO {
 	private int boardNo;/* 글 번호 */
 	private int memNo;/* 회원번호 */
 	private String boardTitle;/* 제목 */

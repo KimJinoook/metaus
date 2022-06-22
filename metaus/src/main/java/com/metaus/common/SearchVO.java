@@ -19,8 +19,18 @@ public class SearchVO {
 	/** 현재 페이지 */
 	private int currentPage = 1;
 	
-    
-    /**블럭당 보여질 페이지 수,  페이지 사이즈 */
+	/** 현재 페이지 */
+	private int btypeNo = 0;
+	
+    public int getBtypeNo() {
+		return btypeNo;
+	}
+
+	public void setBtypeNo(int btypeNo) {
+		this.btypeNo = btypeNo;
+	}
+
+	/**블럭당 보여질 페이지 수,  페이지 사이즈 */
     private int blockSize; // properties에서 설정
     
     /** 시작 인덱스 */

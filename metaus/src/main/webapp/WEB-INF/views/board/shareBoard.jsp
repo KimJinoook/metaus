@@ -4,16 +4,11 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ include file="../inc/header.jsp"%>
-<script th:inline="javascript">
-	$(function() {
-
-		var result = /*[[${msg}]]*/'default';
-
-		if (result == 'success') {
-			alert("처리가 완료되었습니다. result:" + result);
-		}
-
-	});
+<script type="text/javascript">
+	function boardList(curPage){
+		$('input[name=currentPage]').val(curPage);
+		$('form[name=frmPage]').submit();
+	}
 </script>
 
 <!-- =============== Start of Page Header 1 Section =============== -->
@@ -52,9 +47,10 @@
 
 			<!-- Start of Blog Posts -->
 			<div class="col-md-8 col-xs-12 blog-posts-wrapper">
-<c:if test="${empty list }">
-					<img alt="게시글 내용이 없습니다" src="<c:url value='/images/board/no_board.gif'/>"
-					style="width: 800px;">
+				<c:if test="${empty list }">
+					<img alt="게시글 내용이 없습니다"
+						src="<c:url value='/images/board/no_board.gif'/>"
+						style="width: 800px;">
 				</c:if>
 				<c:if test="${!empty list }">
 					<!-- 반복 시작 -->
@@ -63,21 +59,25 @@
 						<article class="col-md-12 blog-post">
 							<!-	- Blog Post Thumbnail -->
 							<div class="col-md-12 blog-thumbnail">
-								<a href="<c:url value='/board/readCountUp?boardNo=${map["BOARD_NO"] }&btypeNo=6'/>">
-								<img src="images/blog/blog1.jpg" class="img-responsive" alt=""></a>
+								<a
+									href="<c:url value='/board/readCountUp?boardNo=${map["BOARD_NO"] }&btypeNo=6'/>">
+									<img src="images/blog/blog1.jpg" class="img-responsive" alt="">
+								</a>
 							</div>
 
 							<!-- Blog Post Description -->
 							<div class="col-md-12 blog-desc">
 								<h5>
-									<a href="<c:url value='/board/readCountUp?boardNo=${map["BOARD_NO"] }&btypeNo=6'/>">
-									${map['BOARD_TITLE'] }</a>
+									<a
+										href="<c:url value='/board/readCountUp?boardNo=${map["BOARD_NO"] }&btypeNo=6'/>">
+										${map['BOARD_TITLE'] }</a>
 								</h5>
 								<div class="post-detail pt10 pb20">
 									<span><i class="fa fa-user"></i>${map['MEM_NAME'] }</span> <span><i
-										class="fa fa-clock-o"></i>${map['BOARD_REGDATE'] }</span> <span><img src="<c:url value='/images/board/eye.png'/>"
-											style="width: 14px;height: 14.4px;">
-											${map['BOARD_READCOUNT'] }</span>
+										class="fa fa-clock-o"></i>${map['BOARD_REGDATE'] }</span> <span><img
+										src="<c:url value='/images/board/eye.png'/>"
+										style="width: 14px; height: 14.4px;">
+										${map['BOARD_READCOUNT'] }</span>
 								</div>
 								<a href="blog-post-right-sidebar.html"
 									class="btn btn-blue btn-effect mt10">상세보기</a>
@@ -85,22 +85,43 @@
 						</article>
 						<!-- End of Blog Post Article 1 -->
 					</c:forEach>
+
+					<!-- Start of Pagination -->
+					<div class="col-md-12">
+						<ul class="pagination list-inline text-center">
+							<c:if test="${pagingInfo.firstPage>1 }">
+								<li><a href="#"
+									onclick="boardList(${pagingInfo.firstPage-1})">prev</a></li>
+							</c:if>
+
+							<!-- [1][2][3][4][5][6][7][8][9][10] -->
+							<c:forEach var="i" begin="${pagingInfo.firstPage }"
+								end="${pagingInfo.lastPage }">
+								<c:if test="${i==pagingInfo.currentPage }">
+									<li class="active"><a>${i }</a></li>
+								</c:if>
+								<c:if test="${i!=pagingInfo.currentPage }">
+									<li><a href="#" onclick="boardList(${i})">${i } </a></li>
+								</c:if>
+							</c:forEach>
+
+							<c:if test="${pagingInfo.lastPage<pagingInfo.totalPage }">
+								<li><a href="#"
+									onclick="boardList(${pagingInfo.lastPage+1})">Next</a></li>
+							</c:if>
+							<!--  페이지 번호 끝 -->
+						</ul>
+					</div>
+					<!-- End of Pagination -->
+
 				</c:if>
 
-
-
-
-				<!-- Start of Pagination -->
-				<div class="col-md-12">
-					<ul class="pagination list-inline text-center">
-						<li class="active"><a href="javascript:void(0)">1</a></li>
-						<li><a href="#">2</a></li>
-						<li><a href="#">3</a></li>
-						<li><a href="#">4</a></li>
-						<li><a href="#">Next</a></li>
-					</ul>
-				</div>
-				<!-- End of Pagination -->
+				<!-- 페이징 처리를 위한 form 시작-->
+				<form name="frmPage" method="post"
+					action="<c:url value='/board/shareBoard?btypeNo=6'/>">
+					<input type="hidden" name="currentPage">
+				</form>
+				<!-- 페이징 처리 form 끝 -->
 
 			</div>
 			<!-- End of Blog Posts -->
