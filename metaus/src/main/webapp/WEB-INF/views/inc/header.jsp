@@ -148,7 +148,7 @@ $(function(){
 
                             <!-- Mega Menu Item -->
                             <li class="dropdown mega-menu">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">커뮤니티<i class="fa fa-angle-down"></i></a>
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">게시판<i class="fa fa-angle-down"></i></a>
                                 <ul class="dropdown-menu" role="menu">
                                     <li>
                                         <!-- Start of Mega Menu Inner -->
@@ -223,6 +223,7 @@ $(function(){
 
                                     <li><a href="<c:url value='/vod/vod'/>">VOD 강의 페이지</a></li>
                                     <li><a href="<c:url value='/vod/vodPost'/>">VOD 강의 등록</a></li>
+                                    <li><a href="<c:url value='/etc/create'/>">3d모델 제작</a></li>
                                     <!-- <li><a href="typography.html">typography</a></li> -->
                                 </ul>
                             </li>
