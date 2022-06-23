@@ -58,6 +58,16 @@
 		<![CDATA[	
 		and RNUM<=#{firstRecordIndex} + #{recordCountPerPage} ]]>
 	</select>
+	
+	<select id="selectBoardFaq" parameterType="boardVo" resultType="boardVo">
+		select b.*, m.mem_name, f.bfile_filename
+		from fp_board b join fp_mem m
+		on b.mem_no=m.mem_no
+		left join fp_boardatc f
+		on b.board_no= f.board_no
+		where b.btype_no=#{btypeNo}
+		order by board_regdate desc
+	</select>
 
 	<select id="selectBoardAtc" resultType="boardAtcVo">
 		select * from fp_boardatc
