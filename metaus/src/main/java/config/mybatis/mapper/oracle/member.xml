@@ -19,6 +19,20 @@
       select * from fp_mem where mem_id like #{memId} || '%'
    	</select>
    	
+   	<select id="findId" parameterType="MemberVO" resultType="string">
+   		select mem_id from fp_mem where mem_name=#{memName} and mem_tel = #{memTel}
+   	</select>
+   	
+   	<select id="findPw" parameterType="MemberVO" resultType="string">
+   		select mem_pw from fp_mem where mem_name=#{memName} and mem_tel = #{memTel} and mem_id = #{memId}
+   	</select>
+   	
+   	<update id="updatePw" parameterType="MemberVO">
+		update fp_mem
+		set mem_pw = #{memPw}
+		where mem_id=#{memId}
+	</update>
+   	
    	
    	
 	<select id="selectByMemNo" parameterType="int" 
