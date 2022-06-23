@@ -23,7 +23,7 @@
                 <div class="col-md-12">
                     <ul class="breadcrumb">
                         <li><a href="#">home</a></li>
-                        <li class="active">for metaus</li>
+                        <li class="active">VOD 강의 등록</li>
                     </ul>
                 </div>
             </div>
