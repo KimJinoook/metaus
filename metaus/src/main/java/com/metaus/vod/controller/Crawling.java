@@ -23,7 +23,7 @@ public class Crawling {
         try {
             // 개발 강의 모든 페이징 순회
             for (int i = FIRST_PAGE_INDEX; i <= LAST_PAGE_INDEX; i++) {
-                final String inflearnUrl = "https://www.inflearn.com/courses/it-programming?order=seq&page=" + i;
+                final String inflearnUrl = "https://www.inflearn.com/courses?order=seq&skill=metaverse" + i;
                 Connection conn = Jsoup.connect(inflearnUrl);
                 Document document = conn.get();
 

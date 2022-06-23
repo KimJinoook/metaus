@@ -8,7 +8,7 @@
             <!-- Start of Page Title -->
             <div class="row">
                 <div class="col-md-12">
-                    <h2>VOD 강의</h2>
+                    <h2>${className }</h2>
                 </div>
             </div>
             <!-- End of Page Title -->

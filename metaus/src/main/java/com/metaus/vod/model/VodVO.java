@@ -6,11 +6,11 @@ import lombok.Data;
 
 @Data
 public class VodVO {
-	private int class_no; /* 클래스번호 */
-	private String class_name; /* 클래스명 */
-	private int class_price; /* 가격 */
-	private Timestamp class_regdate; /* 등록일 */
-	private String class_preview; /* 클래스소개 */
-	private int mem_no; /* 회원번호 */
-	private int cate_no; /* 카테고리번호 */
+	private int classNo; /* 클래스번호 */
+	private String className; /* 클래스명 */
+	private int classPrice; /* 가격 */
+	private Timestamp classRegdate; /* 등록일 */
+	private String classPreview; /* 클래스소개 */
+	private int memNo; /* 회원번호 */
+	private int cateNo; /* 카테고리번호 */
 }

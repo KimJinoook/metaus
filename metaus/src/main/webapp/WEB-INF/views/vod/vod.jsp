@@ -34,7 +34,7 @@
                 <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
                     <div class="col mb-5">
                         <div class="card h-100">
-                            <a href="https://www.inflearn.com/course/%EC%A0%AD-%EB%A9%94%ED%83%80%EB%B2%84%EC%8A%A4-%EC%9B%94%EB%93%9C%EB%A7%8C%EB%93%A4%EA%B8%B0">
+                            <a href="<c:url value='/vod/vodDetail?classNo=${classNo }'/>">
                             <!-- Product image-->
                             <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..."/>
                             <!-- Product details-->
@@ -51,7 +51,7 @@
                     </div>
                     <div class="col mb-5">
                         <div class="card h-100">
-                        <a href="https://www.inflearn.com/course/%EC%A0%9C%ED%8E%98%ED%86%A0-%EB%A9%94%ED%83%80%EB%B2%84%EC%8A%A4-%EC%9B%94%EB%93%9C-%EB%A7%8C%EB%93%A4%EA%B8%B0">
+                        <a href="<c:url value='/vod/vodDetail?classNo=${classNo }'/>">
                             <!-- Product image-->
                             <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
                             <!-- Product details-->
@@ -77,7 +77,7 @@
                     </div>
                     <div class="col mb-5">
                         <div class="card h-100">
-                        <a href="<c:url value='/vod/vodDetail'/>">
+                        <a href="<c:url value='/vod/vodDetail?classNo=${classNo }'/>">
                             <!-- Product image-->
                             <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
                             <!-- Product details-->
@@ -95,7 +95,7 @@
                     </div>
                     <div class="col mb-5">
                         <div class="card h-100">
-                        	<a href="<c:url value='/vod/vodDetail'/>">
+                        	<a href="<c:url value='/vod/vodDetail?classNo=${classNo }'/>">
                             <!-- Product image-->
                             <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
                             <!-- Product details-->
