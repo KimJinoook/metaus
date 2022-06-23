@@ -186,10 +186,10 @@ $(function(){
 
                             <!-- Simple Menu Item -->
                             <li class="dropdown simple-menu">
-                                <a href="<c:url value='/vod/vod'/>" class="dropdown-toggle" data-toggle="dropdown" role="button">VOD강의<!-- <i class="fa fa-angle-down"></i> --></a>
-                                <!-- <ul class="dropdown-menu">
-                                    Dropdown Submenu
-                                    <li class="dropdown-submenu">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">VOD강의<i class="fa fa-angle-down"></i></a>
+                                 <ul class="dropdown-menu">
+                                    <!--  Dropdown Submenu-->
+                                    <!-- <li class="dropdown-submenu">
                                         <a href="#">headers<i class="fa fa-angle-right"></i></a>
                                         <ul class="dropdown-menu">
                                             <li><a href="header1.html">header 1 - default</a></li>
@@ -197,10 +197,10 @@ $(function(){
                                             <li><a href="header3.html">header 3 - top bar</a></li>
                                             <li><a href="header4.html">header 4 - sticky</a></li>
                                         </ul>
-                                    </li>
+                                    </li> -->
 
-                                    Dropdown Submenu
-                                    <li class="dropdown-submenu">
+                                    <!--  Dropdown Submenu-->
+                                    <!-- <li class="dropdown-submenu">
                                         <a href="#">footers<i class="fa fa-angle-right"></i></a>
                                         <ul class="dropdown-menu">
                                             <li><a href="footer1.html">default</a></li>
@@ -208,10 +208,10 @@ $(function(){
                                             <li><a href="footer3.html">dark</a></li>
                                             <li><a href="footer4.html">simple</a></li>
                                         </ul>
-                                    </li>
+                                    </li> -->
 
-                                    Dropdown Submenu
-                                    <li class="dropdown-submenu">
+                                    <!-- Dropdown Submenu-->
+                                    <!-- <li class="dropdown-submenu">
                                         <a href="#">page headers<i class="fa fa-angle-right"></i></a>
                                         <ul class="dropdown-menu">
                                             <li><a href="page-header1.html">default</a></li>
@@ -219,14 +219,14 @@ $(function(){
                                             <li><a href="page-header3.html">dark</a></li>
                                             <li><a href="page-header4.html">parallax</a></li>
                                         </ul>
-                                    </li>
+                                    </li> -->
 
-                                    <li><a href="">buttons</a></li>
-                                    <li><a href="pricing-tables.html">pricing tables</a></li>
-                                    <li><a href="typography.html">typography</a></li>
+                                    <li><a href="<c:url value='/vod/vod'/>">VOD 강의 페이지</a></li>
+                                    <li><a href="<c:url value='/vod/vodPost'/>">VOD 강의 등록</a></li>
+                                    <!-- <li><a href="typography.html">typography</a></li> -->
                                 </ul>
                             </li>
- -->
+
                             <!-- Simple Menu Item -->
                             <li class="dropdown simple-menu">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">마이페이지<i class="fa fa-angle-down"></i></a>
