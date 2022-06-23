@@ -13,7 +13,7 @@
 
 	 
 
-	<form action="<c:url value='/resume/resumeDetail'/>">
+	<form action="<c:url value='/resume/resumeEdit'/>" method="get">
 	<%-- <input type="hidden" name="memNo" value="${rvo.memNo }"> --%>
     <!-- ===== Start of Main Wrapper Candidate Profile Section ===== -->
     <section class="ptb80" id="candidate-profile">
@@ -132,55 +132,24 @@
                 <div class="element col-md-4 col-sm-6 col-xs-6 portfolio-cat1">
                     <figure>
                         <a href="<c:url value='/resume/portfolio'/>" class="">
-                            <img src="../images/portfolio/plus.png" class="img-responsive" id="portfolio" alt="">
+                            <img src="<c:url value='/images/portfolio/plus.png'/>" class="img-responsive" id="portfolio" alt="">
                         </a>
                     </figure>
                 </div>
-
-                <!-- Portfolio Item -->
-                <div class="element col-md-4 col-sm-6 col-xs-6 portfolio-cat2">
-                    <figure>
-                        <a href="images/portfolio/image2.jpg" class="hover-zoom">
-                            <img src="images/portfolio/image2.jpg" class="img-responsive" alt="">
-                        </a>
-                    </figure>
-                </div>
-
-                <!-- Portfolio Item -->
-                <div class="element col-md-4 col-sm-6 col-xs-6 portfolio-cat3">
-                    <figure>
-                        <a href="images/portfolio/image3.jpg" class="hover-zoom">
-                            <img src="images/portfolio/image3.jpg" class="img-responsive" alt="">
-                        </a>
-                    </figure>
-                </div>
-
-                <!-- Portfolio Item -->
-                <div class="element col-md-4 col-sm-6 col-xs-6 portfolio-cat4">
-                    <figure>
-                        <a href="images/portfolio/image4.jpg" class="hover-zoom">
-                            <img src="images/portfolio/image4.jpg" class="img-responsive" alt="">
-                        </a>
-                    </figure>
-                </div>
-
-                <!-- Portfolio Item -->
+                
+           
+                <c:if test="${!empty list }">
+                <c:forEach var="vo" items="${list }">
                 <div class="element col-md-4 col-sm-6 col-xs-6 portfolio-cat1">
                     <figure>
-                        <a href="images/portfolio/image5.jpg" class="hover-zoom">
-                            <img src="images/portfolio/image5.jpg" class="img-responsive" alt="">
-                        </a>
+                    		<a href="<c:url value='/resume/portfolioDetail?portNo=${vo.portNo }'/>" class="">
+                            	<img src="<c:url value='/images/portfolio/체크.png'/>" class="img-responsive" id="portfolio" alt="">                      
+                    		</a>
                     </figure>
                 </div>
-
-                <!-- Portfolio Item -->
-                <div class="element col-md-4 col-sm-6 col-xs-6 portfolio-cat2">
-                    <figure>
-                        <a href="" class="">
-                            <img src="images/portfolio/image6.jpg" class="img-responsive" alt="">
-                        </a>
-                    </figure>
-                </div>
+                </c:forEach>
+                </c:if>
+                
 				
             </div>
             <!-- End of Portfolio Grid -->
