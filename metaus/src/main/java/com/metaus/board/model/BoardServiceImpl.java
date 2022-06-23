@@ -47,6 +47,10 @@ public class BoardServiceImpl implements BoardService {
 	public int selectTotalRecord(int btypeNo) {
 		return boardDao.selectTotalRecord(btypeNo);
 	}
+	@Override
+	public List<BoardVO> selectBoardFaq(BoardVO boardVo) {
+		return boardDao.selectBoardFaq(boardVo);
+	}
 	
 
 }

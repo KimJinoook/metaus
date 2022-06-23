@@ -75,11 +75,11 @@ public class BoardController {
 	}
 	
 	@RequestMapping("/faq")
-	public String faq(@ModelAttribute SearchVO searchVo,
+	public String faq(@ModelAttribute BoardVO boardVo,
 			@RequestParam(defaultValue = "0")int btypeNo, Model model) {
 		logger.info("FAQ 페이지 - 게시판 종류 btypeNo={}", btypeNo);
 		
-		List<Map<String, Object>>list = boardService.selectBoard(searchVo);
+		List<BoardVO>list = boardService.selectBoardFaq(boardVo);
 		logger.info("FAQ 목록 조회 결과, list.size={}", list.size());
 		
 		model.addAttribute("list", list);
