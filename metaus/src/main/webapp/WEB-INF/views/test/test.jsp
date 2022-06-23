@@ -11,6 +11,9 @@
 </head>
 <body>
 <canvas id="canvas" width="300px" height="300px"></canvas>
+<iframe width="100%" height="100%" src="https://threejs.org/editor/"></iframe>
+
+
 <script src="https://rawgit.com/mrdoob/three.js/dev/build/three.js"></script>
 <script src="https://rawgit.com/mrdoob/three.js/dev/examples/js/loaders/GLTFLoader.js"></script>
 
@@ -18,7 +21,8 @@
 <script src="https://unpkg.com/three@0.141.0/examples/js/controls/OrbitControls.js"></script>
 
 <script>
-	var url = "<c:url value='/gltfmodel/bathroom_interior.zip'/>";
+	//var url = "<c:url value='/gltfmodel/bathroom_interior.zip'/>";
+	var url = "<c:url value='/gltfmodel/scene.gltf'/>";
 	//var url = 'models/gltf/BoomBox.gltf';
 
 	var manager = new THREE.LoadingManager();
