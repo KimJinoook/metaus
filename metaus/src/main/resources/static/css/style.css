@@ -6769,6 +6769,7 @@ section.shop .panel-group .panel .panel-heading h4 a {
     font-size: 18px;
 }
 
+/* vod css*/
 .py-5 {
   padding-top: 3rem !important;
   padding-bottom: 3rem !important;
@@ -6839,7 +6840,7 @@ section.shop .panel-group .panel .panel-heading h4 a {
     display: inline-block;
     margin-top: 43px;
     margin-right: 64px;
-    width: 27%;
+    width: 25%;
 }
 
 img.card-img-top {width: 100%;}
@@ -6849,46 +6850,11 @@ img.card-img-top {width: 100%;}
 }
 
 .detail {
-    width: 250%;
+    width: 200%;
 }
 
-/*--
-    slider Start
---*/
-#slider {
-  padding: 50px 0px;
-}
-#slider .block {
-  padding: 0px 40px;
-}
-#slider .block .title {
-  padding: 0px ;
-}
-#slider .block .owl-carousel {
-  padding-top: 30px;
-  position: relative;
-  text-align: center;
-}
-#slider .block .owl-carousel img {
-  padding-right: 30px;
-  border-radius: 2px;
-  padding-bottom: 50px;
-}
-#slider .block .owl-carousel .owl-pagination .active {
-  background: #FF5333;
-}
-#slider .block .owl-carousel .owl-pagination div {
-  background: #DADADA;
-  border-radius: 100%;
-  display: inline-block;
-  height: 10px;
-  margin-right: 5px;
-  width: 10px;
-}
-#slider .block .owl-carousel .owl-buttons {
-  position: absolute;
-  right: 0;
-  top: -40px;
-  font-size: 40px;
-  color: #AA9D84;
+h5.fw-bolder {
+    font-size: 16px;
+    font-weight: bold;
+    color: #5c5c5c;
 }
