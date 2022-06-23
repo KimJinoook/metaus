@@ -1,5 +1,7 @@
 package com.metaus.member.controller;
 
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -10,8 +12,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.metaus.member.model.FacebookService;
 import com.metaus.member.model.FacebookVO;
@@ -225,6 +229,45 @@ public class MemberController {
 		model.addAttribute("url", url);
 		
 		return "/common/message";
+	}
+	
+	@ResponseBody
+	@RequestMapping("/findId")
+	public String findId(String memName, String memTel) {
+
+		MemberVO vo = new MemberVO();
+		vo.setMemName(memName);
+		vo.setMemTel(memTel);
+		logger.info("일반회원 아이디 찾기 vo={}",vo);
+		String result = "";
+		String memId = memberService.findId(vo);
+		if(memId!=null && !memId.isEmpty()) {
+			result=memId;
+		
+			logger.info("아이디 중복확인 결과, result={}", result);
+		}
+		
+		return result;
+	}
+	
+	@ResponseBody
+	@RequestMapping("/findPw")
+	public int findPw(String memName, String memTel, String memId) {
+
+		MemberVO vo = new MemberVO();
+		vo.setMemName(memName);
+		vo.setMemTel(memTel);
+		vo.setMemId(memId);
+		logger.info("일반회원 비밀번호 찾기 vo={}",vo);
+		int result = 0;
+		String memPw = memberService.findPw(vo);
+		if(memPw!=null && !memPw.isEmpty()) {
+			result=1;
+		
+			logger.info("아이디 중복확인 결과, result={}", result);
+		}
+		
+		return result;
 	}
 
 }

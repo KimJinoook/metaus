@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.metaus.common.EmailSender;
 import com.metaus.member.model.MemberService;
+import com.metaus.member.model.MemberVO;
 
 import lombok.RequiredArgsConstructor;
 
@@ -53,6 +54,35 @@ public class EmailController {
 				logger.info("이메일실패");
 			}
 		}
+		
+		
+		return result;
+	}
+	
+	@ResponseBody
+	@RequestMapping("/pwEmail")
+	public int pwEmail(String receiver, String pw) {
+		
+		int result=0;
+
+		String subject="메타어스 신규 비밀번호 발송";
+		String content = "신규 비밀번호 : "+pw;
+		String sender = "kimjin0132@naver.com";
+		
+		try {
+			emailSender.sendEmail(subject, content, receiver, sender);
+			logger.info("이메일발송");
+			result = 1;
+			MemberVO vo = new MemberVO();
+			vo.setMemId(receiver);
+			vo.setMemPw(pw);
+			int cnt = memberService.updatePw(vo);
+			return result;
+		} catch (MessagingException e) {
+			e.printStackTrace();
+			logger.info("이메일실패");
+		}
+
 		
 		
 		return result;

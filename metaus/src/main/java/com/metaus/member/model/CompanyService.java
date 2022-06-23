@@ -13,4 +13,7 @@ public interface CompanyService {
 	public CompanyVO selectByUserid(String comId);
 	public int duplicateId(String comId);
 	public int insertCompany(CompanyVO vo);
+	public String findId(CompanyVO vo);
+	public String findPw(CompanyVO vo);
+	public int updatePw(CompanyVO vo);
 }

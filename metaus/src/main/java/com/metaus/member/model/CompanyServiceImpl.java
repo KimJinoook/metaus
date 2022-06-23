@@ -47,5 +47,15 @@ public class CompanyServiceImpl implements CompanyService {
 		int cnt=companyDao.insertCompany(vo);
 		return cnt;
 	}
+	
+	public String findId(CompanyVO vo) {
+		return companyDao.findId(vo);
+	}
+	public String findPw(CompanyVO vo) {
+		return companyDao.findPw(vo);
+	}
+	public int updatePw(CompanyVO vo) {
+		return companyDao.updatePw(vo);
+	}
 
 }

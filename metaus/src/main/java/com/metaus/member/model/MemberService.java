@@ -18,5 +18,8 @@ public interface MemberService {
 	public int updateKakao(int memNo);
 	public int updateNaver(int memNo);
 	public int updateFacebook(int memNo);
+	public String findId(MemberVO vo);
+	public String findPw(MemberVO vo);
+	public int updatePw(MemberVO vo);
 
 }

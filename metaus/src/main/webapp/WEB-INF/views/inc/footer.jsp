@@ -291,7 +291,7 @@
                     <!-- Form Group -->
                     <div class="form-group">
                     	<br>
-                        <label for="agree2"><a href="<c:url value='/member/register'/>">비밀번호를 잊어버렸어요</a></label><br>
+                        <label for="agree2"><a href="<c:url value='/member/lostAccount'/>">비밀번호를 잊어버렸어요</a></label><br>
                         <label for="agree2">아직 회원이 아니신가요? <a href="<c:url value='/member/register'/>">회원 가입하기</a></label>
                         <br><br>
                     </div>
@@ -320,7 +320,7 @@
                 <div class="text-center">
                        <!-- Form Group -->
                        <div class="form-group">
-                           <label for="agree2"><a href="<c:url value='/member/register'/>">비밀번호를 잊어버렸어요</a></label><br>
+                           <label for="agree2"><a href="<c:url value='/member/lostAccount'/>">비밀번호를 잊어버렸어요</a></label><br>
                            <label for="agree2">아직 회원이 아니신가요? <a href="<c:url value='/member/register'/>">회원 가입하기</a></label>
                            <br><br>
                        </div>

@@ -29,6 +29,11 @@ public class IndexController {
 		return "/indexzip";
 	}
 	
+	@RequestMapping("/etc/create")
+	public void create() {
+		
+	}
+	
 	
 }
 
