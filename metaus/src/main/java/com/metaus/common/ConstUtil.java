@@ -12,7 +12,7 @@ public interface ConstUtil {
 	//자료실 - 파일 저장 경로
 	
 	  String FILE_UPLOAD_PATH="pds_upload"; String FILE_UPLOAD_PATH_TEST=/*"/img_upload";*/
-	  "C:\\Users\\EZEN\\git\\metaus\\metaus\\src\\main\\resources\\static\\img_upload";
+	  "C:\\Users\\USER\\git\\metaus\\metaus\\src\\main\\resources\\static\\img_upload";
 	 
 	
 	//관리자 페이지 - 상품 등록시 상품 이미지 저장 경로
