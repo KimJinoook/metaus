@@ -14,7 +14,9 @@
 		});
 	});
 </script>
-
+<style>
+  .ck-editor__editable { height: 500px; }
+</style>
 <!-- =============== Start of Page Header 1 Section =============== -->
 <section class="page-header" style="margin-top: 150px;">
 	<div class="container">
@@ -90,7 +92,14 @@
 					<!-- Form Group -->
 					<div class="form-group">
 						<label>글 내용</label>
-						<textarea class="tinymce" name="boardContent"></textarea>
+						<textarea name="boardContent" id="editor"></textarea>	
+						<script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/ckeditor.js"></script>
+						<script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/translations/ko.js"></script>
+					    <script>
+					      	ClassicEditor.create( document.querySelector( '#editor' ), {
+					      		language: "ko"
+					      	});
+					    </script>
 					</div>
 
 					<!-- Form Group -->
