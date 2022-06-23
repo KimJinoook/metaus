@@ -175,12 +175,8 @@
                         <!-- Start of Tabpanel for Company Account -->
                         <div role="tabpanel" class="tab-pane" id="company">
                             <div class="row">
-<<<<<<< HEAD
-							
-=======
                             <form method="post" action="<c:url value='/company/companyRegister'/>">
 
->>>>>>> branch 'main' of https://github.com/KimJinoook/metaus.git
                                 <!-- Start of the First Column -->
                                 <div class="col-md-6">
 
