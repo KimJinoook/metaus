@@ -68,7 +68,7 @@ public class FileUploadUtil {
 
 		return list;
 	}
-
+	
 	public String getUniqueFileName(String fileName) {
 		//파일명이 중복될 경우 파일이름 변경하기
 		//파일명에 현재시간(년월일시분초밀리초)을 붙여서 변경된 파일이름 구하기
@@ -99,14 +99,20 @@ public class FileUploadUtil {
 		if(ConstUtil.FILE_UPLOAD_TYPE.equals("test")) {
 			if(pathFlag==ConstUtil.UPLOAD_FILE_FLAG) {  //자료실
 				path=ConstUtil.FILE_UPLOAD_PATH_TEST;
-			}/*else if(pathFlag==ConstUtil.UPLOAD_IMAGE_FLAG) {  //상품등록
+			}else if(pathFlag==ConstUtil.UPLOAD_MESSAGE_FLAG) {
+				path=ConstUtil.ATTACHMENT_FILE_UPLOAD_PATH_TEST; //메세지 첨부파일
+			}
+			/*else if(pathFlag==ConstUtil.UPLOAD_IMAGE_FLAG) {  //상품등록
 				path=ConstUtil.IMAGE_FILE_UPLOAD_PATH_TEST;				
 			}
 			*/
 		}else {  //deploy
 			if(pathFlag==ConstUtil.UPLOAD_FILE_FLAG) {  //자료실
 				path=ConstUtil.FILE_UPLOAD_PATH;  //pds_upload
-			}/*
+			}else if(pathFlag==ConstUtil.UPLOAD_MESSAGE_FLAG) {
+				path=ConstUtil.ATTACHMENT_FILE_UPLOAD_PATH;  //message_attachment
+			}
+			/*
 			 else if(pathFlag==ConstUtil.UPLOAD_IMAGE_FLAG) {  //상품등록
 				path=ConstUtil.IMAGE_FILE_UPLOAD_PATH; //pd_images				
 			}
