@@ -16,7 +16,6 @@
 			</div>
 		</div>
 		<!-- End of Page Title -->
-
 		<!-- Start of Breadcrumb -->
 		<div class="row">
 			<div class="col-md-12">

@@ -19,6 +19,20 @@
 		where com_id=#{comId}
 	</select>
 	
+	<select id="findId" parameterType="CompanyVO" resultType="string">
+   		select com_id from fp_com where com_ceo=#{comCeo} and com_rrn = #{comRrn}
+   	</select>
+   	
+   	<select id="findPw" parameterType="CompanyVO" resultType="string">
+   		select com_pw from fp_com where com_ceo=#{comCeo} and com_rrn = #{comRrn} and com_id = #{comId}
+   	</select>
+   	
+   	<update id="updatePw" parameterType="CompanyVO">
+		update fp_com
+		set com_pw = #{comPw}
+		where com_id=#{comId}
+	</update>
+	
 	<insert id="insertCompany" parameterType="CompanyVO">
 		<selectKey resultType="int" keyProperty="comNo" order="BEFORE">
 			select fp_com_seq.nextval from dual

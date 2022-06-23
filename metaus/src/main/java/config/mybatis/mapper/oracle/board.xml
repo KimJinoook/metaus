@@ -3,6 +3,12 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.metaus.board.model.BoardDAO">
+	<sql id="searchWhere">
+		<if test="searchKeyword !=null and searchKeyword !=''">
+        	where ${searchCondition} 
+        	like '%' || #{searchKeyword} || '%'
+        </if>
+	</sql>
 
 	<insert id="insertBoard" parameterType="boardVo">
 		<selectKey resultType="int" keyProperty="boardNo"
@@ -43,6 +49,7 @@
 					left join fp_boardatc f
 					on b.board_no= f.board_no
 					where b.btype_no=#{btypeNo}
+					<include refid="searchWhere"></include>
 					order by board_regdate desc
 				)A
 		)
@@ -50,6 +57,16 @@
 		RNUM>#{firstRecordIndex} 
 		<![CDATA[	
 		and RNUM<=#{firstRecordIndex} + #{recordCountPerPage} ]]>
+	</select>
+	
+	<select id="selectBoardFaq" parameterType="boardVo" resultType="boardVo">
+		select b.*, m.mem_name, f.bfile_filename
+		from fp_board b join fp_mem m
+		on b.mem_no=m.mem_no
+		left join fp_boardatc f
+		on b.board_no= f.board_no
+		where b.btype_no=#{btypeNo}
+		order by board_regdate desc
 	</select>
 
 	<select id="selectBoardAtc" resultType="boardAtcVo">

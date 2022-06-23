@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../layout/sidebar.jsp" %>
+
       <!-- Right side column. Contains the navbar and content of the page -->
       <div class="content-wrapper">
         <!-- Content Header (Page header) -->
@@ -35,67 +36,46 @@
                   </ul>
                 </div><!-- /.box-body -->
               </div><!-- /. box -->
-              <div class="box box-solid">
-                <div class="box-header with-border">
-                  <h3 class="box-title">Labels</h3>
-                </div><!-- /.box-header -->
-                <div class="box-body no-padding">
-                  <ul class="nav nav-pills nav-stacked">
-                    <li><a href="#"><i class="fa fa-circle-o text-red"></i> Important</a></li>
-                    <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> Promotions</a></li>
-                    <li><a href="#"><i class="fa fa-circle-o text-light-blue"></i> Social</a></li>
-                  </ul>
-                </div><!-- /.box-body -->
-              </div><!-- /.box -->
             </div><!-- /.col -->
             <div class="col-md-9">
-              <div class="box box-primary">
-                <div class="box-header with-border">
-                  <h3 class="box-title">새 메세지</h3>
-                </div><!-- /.box-header -->
-                <div class="box-body">
-                  <div class="form-group">
-                    <input class="form-control" placeholder="받는사람:"/>
-                  </div>
-                  <div class="form-group">
-                    <input class="form-control" placeholder="제목:"/>
-                  </div>
-                  <div class="form-group">
-                    <textarea id="compose-textarea" class="form-control" style="height: 300px">
-                      메세지 내용
-                      메세지 내용
-                      메세지 내용
-                      메세지 내용
-                      메세지 내용
-                      메세지 내용
-                      메세지 내용
-                      메세지 내용
-                      메세지 내용
-                      메세지 내용
-                      메세지 내용
-                      메세지 내용
-                      메세지 내용
-                      메세지 내용
-                      메세지 내용
-                      메세지 내용
-                    </textarea>
-                  </div>
-                  <div class="form-group">
-                    <div class="btn btn-default btn-file">
-                      <i class="fa fa-paperclip"></i> 첨부파일
-                      <input type="file" name="attachment"/>
-                    </div>
-                    <p class="help-block">최대용량: 32MB</p>
-                  </div>
-                </div><!-- /.box-body -->
-                <div class="box-footer">
-                  <div class="pull-right">
-                    <button class="btn btn-default"><i class="fa fa-pencil"></i> 임시저장</button>
-                    <button type="submit" class="btn btn-primary"><i class="fa fa-envelope-o"></i> 보내기</button>
-                  </div>
-                  <button class="btn btn-default"><i class="fa fa-times"></i> 취소</button>
-                </div><!-- /.box-footer -->
-              </div><!-- /. box -->
+            <form name="frm" action="/mailbox/sendMail" method="post" enctype="multipart/form-data">
+	              <div class="box box-primary">
+	                <div class="box-header with-border">
+	                  <h3 class="box-title">새 메세지</h3>
+	                </div><!-- /.box-header -->
+	                <div class="box-body">
+	                  <div class="form-group">
+	                    <input type="text" class="form-control" name="msgRecipient" placeholder="받는사람:"/>
+	                  </div>
+	                  <div class="form-group">
+	                    <input type="text" class="form-control" name="msgTitle" placeholder="제목:"/>
+	                  </div>
+	                  <div class="form-group">
+	                    <textarea id="compose-textarea" name="msgContent" class="form-control" style="height: 300px">
+	                      메세지 내용
+	                      메세지 내용
+	                      메세지 내용
+	                      메세지 내용
+	                      메세지 내용
+	                    </textarea>
+	                  </div>
+	                  <div class="form-group">
+	                    <div class="btn btn-default btn-file">
+	                    	<i class="fa fa-paperclip"></i> 첨부파일
+	                      	<input type="file" id="attachment" name="attachment" multiple/>
+	                    </div>
+	                    <p class="help-block">최대용량: 5MB</p>
+	                  </div>
+	                </div><!-- /.box-body -->
+	                <div class="box-footer">
+	                  <div class="pull-right">
+	                    <button class="btn btn-default"><i class="fa fa-pencil"></i> 임시저장</button>
+	                    <button type="submit" class="btn btn-primary"><i class="fa fa-envelope-o"></i> 보내기</button>
+	                  </div>
+	                  <button class="btn btn-default"><i class="fa fa-times"></i> 취소</button>
+	                </div><!-- /.box-footer -->
+	              </div><!-- /. box -->
+              </form>
             </div><!-- /.col -->
           </div><!-- /.row -->
         </section><!-- /.content -->
@@ -109,5 +89,8 @@
     </div><!-- ./wrapper -->
 
 	<%@ include file="../layout/sidebar_function_bottom.jsp" %>
+	<script type="text/javascript">
+	
+	</script>
   </body>
 </html>

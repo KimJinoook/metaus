@@ -107,10 +107,13 @@
                     
                 </div>
                 <!-- ===== Start of Job Post Column 1 ===== -->
+                <c:forEach var="vo" items="${list }">
                 <div class="col-md-12 mt20">
                     <div class="item-block shadow-hover">
 
                         <!-- Start of Job Post Header -->
+                        <!-- 반복문 시작 -->
+                       
                         <div class="job-post-header clearfix">
                             <a href="company-page-1.html"><img src="images/companies/envato.svg" alt=""></a>
                             <div>
@@ -161,6 +164,7 @@
 
                     </div>
                 </div>
+                </c:forEach>
                 <!-- ===== End of Job Post Column 1 ===== -->             
 
                 <!-- Start of Pagination -->
