@@ -3952,8 +3952,8 @@ section.find-candidate .candidate-wrapper .single-candidate:last-child {
 section.find-candidate .candidate-wrapper .single-candidate:hover {
     background: #f6f6f6;
 }
-
-section.find-candidate .candidate-wrapper .single-candidate .candidate-img {
+/*
+section.find-candidate .candidate-wrapper .single-candidate  .candidate-img{
     width: 85px;
     height: 85px;
     border: 1px solid #e3e3e3;
@@ -3961,6 +3961,13 @@ section.find-candidate .candidate-wrapper .single-candidate .candidate-img {
     background: -moz-linear-gradient(left, #29b2fe -20%, #443088 120%);
     background: -webkit-linear-gradient(left, #29b2fe -20%, #443088 120%);
     background: linear-gradient(to right, #29b2fe -20%, #443088 120%);
+}
+*/
+.candidate-img{
+	width: 85px;
+    height: 85px;
+    border: 1px solid #e3e3e3;
+    overflow: hidden;
 }
 
 section.find-candidate .candidate-wrapper .single-candidate .candidate-img img {
@@ -6839,8 +6846,8 @@ section.shop .panel-group .panel .panel-heading h4 a {
 .col.mb-5 {
     display: inline-block;
     margin-top: 43px;
-    margin-right: 64px;
-    width: 25%;
+    margin-right: 25px;
+    width: 30%;
 }
 
 img.card-img-top {width: 100%;}
