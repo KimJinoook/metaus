@@ -1,5 +1,7 @@
 package com.metaus.member.model;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 
@@ -73,6 +75,10 @@ public class MemberServiceImpl implements MemberService {
 	}
 	public int updatePw(MemberVO vo) {
 		return memberDao.updatePw(vo);
+	}
+	
+	public List<MemberVO> selectAllCreater(){
+		return memberDao.selectAllCreater();
 	}
 
 }
