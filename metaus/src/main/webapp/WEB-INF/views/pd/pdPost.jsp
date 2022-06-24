@@ -3,9 +3,6 @@
 <%@ include file="../inc/header.jsp"%>
 
 
-
-
-
     <!-- =============== Start of Page Header 1 Section =============== -->
     <section class="page-header">
         <div class="container">
@@ -13,7 +10,7 @@
             <!-- Start of Page Title -->
             <div class="row">
                 <div class="col-md-12">
-                    <h2>vod 강의 등록</h2>
+                    <h2>3D 모델 등록</h2>
                 </div>
             </div>
             <!-- End of Page Title -->
@@ -23,7 +20,7 @@
                 <div class="col-md-12">
                     <ul class="breadcrumb">
                         <li><a href="#">home</a></li>
-                        <li class="active">VOD 강의 등록</li>
+                        <li class="active">3D 모델 등록</li>
                     </ul>
                 </div>
             </div>
@@ -47,10 +44,10 @@
             
            
              
-            <form method="post" action="<c:url value='/request/insertRequest'/>" class="post-job-resume mt50">
+            <form method="post" action="<c:url value='/pd/pdPost'/>" class="post-job-resume mt50">
 
                 <!-- Start of Job Details -->
-             <h3 class="capitalize pb20">강의 정보</h3>
+             <h3 class="capitalize pb20">모델 정보</h3>
              <br>
                 <div class="row">
                     <div class="col-md-12">
@@ -59,7 +56,7 @@
 
                         <!-- Form Group -->
                         <div class="form-group">
-                            <label>강의 제목</label>
+                            <label>모델 제목</label>
                             <input class="form-control" name="rec_title" id="rec_title" type="text" required>
                         </div>
 
@@ -86,7 +83,7 @@
                     
                         <!-- Form Group -->
                         <div class="form-group">
-                            <label>강의 설명 <span>(선택사항)</span></label>
+                            <label>모델 설명 <span>(선택사항)</span></label>
                             <textarea class="tinymce" name="rec_content" id="rec_content"></textarea>
                         </div>
                         

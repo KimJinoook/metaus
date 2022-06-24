@@ -186,7 +186,7 @@ $(function(){
 
                             <!-- Simple Menu Item -->
                             <li class="dropdown simple-menu">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">VOD강의<i class="fa fa-angle-down"></i></a>
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">3D Model<i class="fa fa-angle-down"></i></a>
                                  <ul class="dropdown-menu">
                                     <!--  Dropdown Submenu-->
                                     <!-- <li class="dropdown-submenu">
@@ -221,9 +221,9 @@ $(function(){
                                         </ul>
                                     </li> -->
 
-                                    <li><a href="<c:url value='/vod/vod'/>">VOD 강의 페이지</a></li>
-                                    <li><a href="<c:url value='/vod/vodPost'/>">VOD 강의 등록</a></li>
-                                    <li><a href="<c:url value='/etc/create'/>">3d모델 제작</a></li>
+                                    <li><a href="<c:url value='/pd/pd'/>">3D Model 목록</a></li>
+                                    <li><a href="<c:url value='/pd/pdPost'/>">3D Model 등록</a></li>
+                                    <li><a href="<c:url value='/etc/create'/>">3D Model 제작</a></li>
                                     <!-- <li><a href="typography.html">typography</a></li> -->
                                 </ul>
                             </li>
