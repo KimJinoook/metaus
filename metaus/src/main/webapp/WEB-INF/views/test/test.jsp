@@ -24,7 +24,9 @@
 	
 
 	//var url = "<c:url value='/gltfmodel/bathroom_interior.zip'/>";
+
 	var url = "<c:url value='/gltfmodel/1.zip'/>";
+
 	//var url = 'models/gltf/BoomBox.gltf';
 
 	var manager = new THREE.LoadingManager();
