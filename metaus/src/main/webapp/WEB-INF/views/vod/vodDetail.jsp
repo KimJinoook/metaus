@@ -18,7 +18,7 @@
                 <div class="col-md-12">
                     <ul class="breadcrumb">
                         <li><a href="#">home</a></li>
-                        <li class="active">for metaus</li>
+                        <li class="active">VOD</li>
                     </ul>
                 </div>
             </div>

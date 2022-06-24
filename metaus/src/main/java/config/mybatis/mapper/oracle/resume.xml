@@ -20,6 +20,33 @@
 		select * from fp_resume where mem_no=#{memNo}
 	</select>
 	 
+	<update id="updateresume" parameterType="resumeVo">
+		update fp_resume
+		set res_title=#{resTitle}, res_content=#{resContent}, res_time=#{resTime}
+		where mem_no=#{memNo}
+	</update>
 	
-
+	<insert id="insertPortAtc" parameterType="portfolioVo">
+		<selectKey resultType="int" keyProperty="portNo"
+			order="BEFORE">
+			select fp_port_seq.nextval from dual
+		</selectKey>
+		insert into fp_port(port_no, mem_no,port_title, port_filename,
+		port_originname,port_content)
+		values(#{portNo}, #{memNo},#{portTitle} ,#{portFilename},
+		#{portOriginname},#{portContent})
+	</insert>
+	
+	<select id="selectmemNo" parameterType="int" resultType="portfolioVo">
+		select * from fp_port where mem_no=#{memNo}
+	</select>
+	
+	<select id="selectportNo" parameterType="int" resultType="portfolioVo">
+		select * from fp_port where port_no=#{portNo}
+	</select>
+	
+	<delete id="deleteport" parameterType="int">
+		delete from fp_port
+		where port_no=#{portNo}
+	</delete>
 </mapper>
