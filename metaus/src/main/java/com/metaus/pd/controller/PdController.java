@@ -1,4 +1,4 @@
-package com.metaus.vod.controller;
+package com.metaus.pd.controller;
 
 import javax.servlet.http.HttpSession;
 
@@ -11,41 +11,43 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.metaus.pd.model.PdDAO;
+import com.metaus.pd.model.PdVO;
 import com.metaus.vod.model.VodDAO;
 import com.metaus.vod.model.VodVO;
 
 import lombok.RequiredArgsConstructor;
 
 @Controller
-@RequestMapping("/vod")
+@RequestMapping("/pd")
 @RequiredArgsConstructor
-public class VodController {
+public class PdController {
 	private static final Logger logger
-	=LoggerFactory.getLogger(VodController.class);
+	=LoggerFactory.getLogger(PdController.class);
 	
-	private final VodDAO vodDao;
+	private final PdDAO pdDao;
 	
-	@RequestMapping("/vod")
+	@RequestMapping("/pd")
 	public String vod() {
-		logger.info("vod 페이지");
+		logger.info("pd 페이지");
 		
-		return "/vod/vod";
+		return "/pd/pd";
 	}
 	
-	@RequestMapping("/vodDetail")
+	@RequestMapping("/pdDetail")
 	public String vodDetail(@RequestParam(defaultValue = "0") int classNo, Model model) {
-		logger.info("vod Detail 페이지");
+		logger.info("pd Detail 페이지");
 		
-		VodVO vo =vodDao.selectVodByNo(classNo);
-		model.addAttribute("vo",vo);
 		
-		return "/vod/vodDetail";
+		return "/pd/pdDetail";
 	}
 	
-	@GetMapping("/vodPost")
-	public String vodPost(@ModelAttribute VodVO vo, HttpSession session,Model model) {
-		logger.info("vod Post 페이지");
+	@GetMapping("/pdPost")
+	public String vodPost(@ModelAttribute PdVO vo, HttpSession session,Model model) {
+		logger.info("pd Post 페이지");
 		
-		return "/vod/vodPost";
+		int cnt=pdDao.insertPd(vo);
+		
+		return "/pd/pdPost";
 	}
 }

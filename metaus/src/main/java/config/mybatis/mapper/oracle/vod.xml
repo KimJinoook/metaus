@@ -9,5 +9,14 @@
 		select * from fp_class
 		where class_no=#{classNo}
 	</select>
-
+	
+	<insert id="insertPd" parameterType="PdVO">
+		<selectKey resultType="int" keyProperty="productNo" order="BEFORE">
+			select fp_product_seq.nextval from dual
+		</selectKey>
+		insert into fp_product(pd_no, pd_name, pd_price,
+		 pd_preview, pd_filename, pd_originname)
+		values(#{pdNo},#{pdName},#{pdPrice},#{pdPreview},#{pdFileName},#{pdOriginName});
+	</insert>
+	
 </mapper>

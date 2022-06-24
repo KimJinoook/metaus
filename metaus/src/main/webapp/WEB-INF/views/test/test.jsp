@@ -22,7 +22,7 @@
 
 <script>
 	//var url = "<c:url value='/gltfmodel/bathroom_interior.zip'/>";
-	var url = "<c:url value='/gltfmodel/scene.gltf'/>";
+	var url = "<c:url value='/gltfmodel/shiba.zip'/>";
 	//var url = 'models/gltf/BoomBox.gltf';
 
 	var manager = new THREE.LoadingManager();
