@@ -193,7 +193,7 @@
 					
 			<div class="form-group pt30 nomargin" id="last">
                     <input type="submit" class="btn btn-blue btn-effect" value="등록">
-			<a href="<c:url value='/'/>" class="btn btn-blue btn-effect">취소</a>
+			<a href="<c:url value='/resume/resumeDetail'/>" class="btn btn-blue btn-effect">취소</a>
             </div>
         </div>
                         
