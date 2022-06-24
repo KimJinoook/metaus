@@ -11,6 +11,16 @@
 		$('input[name=currentPage]').val(curPage);
 		$('form[name=frmPage]').submit();
 	}
+	
+	$(function(){
+		$('#writeBoard').click(function(){
+			if($('#memId').val()=="" || $('#memId').val()==null){
+				alert('로그인 후 이용가능합니다!');
+				event.preventDefault();
+			}
+		});
+	});
+	
 </script>
 <!-- =============== Start of Page Header 1 Section =============== -->
 <section class="page-header" id="find-candidate"
@@ -41,6 +51,8 @@
 </section>
 <!-- =============== End of Page Header 1 Section =============== -->
 
+<input type="hidden" id="memId" name="memId" value="${memId }">
+
 <!-- ===== Start of Main Wrapper Section ===== -->
 <section class="find-candidate ptb80">
 
@@ -59,14 +71,15 @@
 			<option value="boardContent">내용</option>
 		</select> <input type="text" class="live-search-box form-control mt20"
 			placeholder="검색하실 내용을 입력해주세요" name="searchKeyword" id=""searchKeyword"">
-		<a href="/metaus/board/boardWrite?btypeNo=8">
+		<a href="/metaus/board/boardWrite?btypeNo=3">
 			<button class="btn btn-large btn-blue btn-effect mt30" id="searchBt">
 				검색</button>
-		</a> <a href="/metaus/board/boardWrite?btypeNo=8">
-			<button class="btn btn-large btn-blue btn-effect mt30">글쓰기</button>
+		</a> <a href="/metaus/board/boardWrite?btypeNo=3" id="writeBoard">
+			<button class="btn btn-large btn-blue btn-effect mt30" id="writeBoard">글쓰기</button>
 		</a>
 	</div>
 </div>
+
 <!-- 검색 끝 -->
 
 		<!-- Start of Row -->

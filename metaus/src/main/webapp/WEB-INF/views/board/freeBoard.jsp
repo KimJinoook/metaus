@@ -11,6 +11,14 @@
 		$('input[name=currentPage]').val(curPage);
 		$('form[name=frmPage]').submit();
 	}
+	$(function(){
+		$('#writeBoard').click(function(){
+			if($('#memId').val()=="" || $('#memId').val()==null){
+				alert('로그인 후 이용가능합니다!');
+				event.preventDefault();
+			}
+		});
+	});
 </script>
 <!-- =============== Start of Page Header 1 Section =============== -->
 <section class="page-header" style="margin-top: 150px;">
@@ -54,12 +62,12 @@
 			<button class="btn btn-large btn-blue btn-effect mt30" id="searchBt">
 				검색</button>
 		</a> <a href="/metaus/board/boardWrite?btypeNo=8">
-			<button class="btn btn-large btn-blue btn-effect mt30">글쓰기</button>
+			<button class="btn btn-large btn-blue btn-effect mt30" id="writeBoard">글쓰기</button>
 		</a>
 	</div>
 </div>
 <!-- 검색 끝 -->
-
+<input type="hidden" id="memId" name="memId" value="${memId }">
 <!-- =============== End of Page Header 1 Section =============== -->
 <!-- ===== Start of Blog Listing Section ===== -->
 <section class="blog-listing ptb80" id="version2">

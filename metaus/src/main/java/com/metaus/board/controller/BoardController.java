@@ -5,18 +5,17 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.metaus.board.model.BoardAtcVO;
 import com.metaus.board.model.BoardService;
@@ -25,6 +24,8 @@ import com.metaus.common.ConstUtil;
 import com.metaus.common.FileUploadUtil;
 import com.metaus.common.PaginationInfo;
 import com.metaus.common.SearchVO;
+import com.metaus.member.model.MemberService;
+import com.metaus.member.model.MemberVO;
 
 import lombok.RequiredArgsConstructor;
 
@@ -37,6 +38,7 @@ public class BoardController {
 	
 	private final BoardService boardService;
 	private final FileUploadUtil fileUploadUtil;
+	private final MemberService memberService;
 	
 	@RequestMapping("/notice")
 	public String notice(@ModelAttribute SearchVO searchVo,
@@ -76,7 +78,9 @@ public class BoardController {
 	
 	@RequestMapping("/faq")
 	public String faq(@ModelAttribute BoardVO boardVo,
+			HttpSession session,
 			@RequestParam(defaultValue = "0")int btypeNo, Model model) {
+		String memId = (String)session.getAttribute("memId");
 		logger.info("FAQ 페이지 - 게시판 종류 btypeNo={}", btypeNo);
 		
 		List<BoardVO>list = boardService.selectBoardFaq(boardVo);
@@ -84,6 +88,7 @@ public class BoardController {
 		
 		model.addAttribute("list", list);
 		model.addAttribute("btypeNo", btypeNo);
+		model.addAttribute("memId", memId);
 		
 		return "/board/faq";
 	}
@@ -126,7 +131,9 @@ public class BoardController {
 	
 	@RequestMapping("/freeBoard")
 	public String freeBoard(@ModelAttribute SearchVO searchVo,
+			HttpSession session,
 			@RequestParam(defaultValue = "0")int btypeNo, Model model) {
+		String memId = (String)session.getAttribute("memId");
 		logger.info("freeBoard 페이지 - 게시판 종류 btypeNo={}", btypeNo);
 		logger.info("freeBoard 페이지, searchVo={}", searchVo);
 		
@@ -156,13 +163,16 @@ public class BoardController {
 		model.addAttribute("list",list);
 		model.addAttribute("atcList",atcList);
 		model.addAttribute("btypeNo", btypeNo);
+		model.addAttribute("memId", memId);
 		
 		return "/board/freeBoard";
 	}
 	
 	@RequestMapping("/QuestionBoard")
 	public String QuestionBoard(@ModelAttribute SearchVO searchVo,
+			HttpSession session,
 			@RequestParam(defaultValue = "0")int btypeNo, Model model) {
+		String memId = (String)session.getAttribute("memId");
 		logger.info("QuestionBoard 페이지 - 게시판 종류 btypeNo={}", btypeNo);
 		logger.info("QuestionBoard 페이지, searchVo={}", searchVo);
 		
@@ -192,13 +202,16 @@ public class BoardController {
 		model.addAttribute("list",list);
 		model.addAttribute("atcList",atcList);
 		model.addAttribute("btypeNo", btypeNo);
+		model.addAttribute("memId", memId);
 		
 		return "/board/QuestionBoard";
 	}
 	
 	@RequestMapping("/qna")
 	public String qna(@ModelAttribute SearchVO searchVo,
+			HttpSession session,
 			@RequestParam(defaultValue = "0")int btypeNo, Model model) {
+		String memId = (String)session.getAttribute("memId");
 		logger.info("qna 페이지 - 게시판 종류 btypeNo={}", btypeNo);
 		logger.info("qna 페이지, searchVo={}", searchVo);
 		
@@ -228,6 +241,7 @@ public class BoardController {
 		model.addAttribute("list",list);
 		model.addAttribute("atcList",atcList);
 		model.addAttribute("btypeNo", btypeNo);
+		model.addAttribute("memId", memId);
 		
 		return "/board/qna";
 	}
@@ -235,7 +249,9 @@ public class BoardController {
 
 	@RequestMapping("/shareBoard")
 	public String shareBoard(@ModelAttribute SearchVO searchVo,
+			HttpSession session,
 			@RequestParam(defaultValue = "0")int btypeNo, Model model) {
+		String memId = (String)session.getAttribute("memId");
 		logger.info("shareBoard 페이지 - 게시판 종류 btypeNo={}", btypeNo);
 		logger.info("shareBoard 페이지, searchVo={}", searchVo);
 		
@@ -265,13 +281,16 @@ public class BoardController {
 		model.addAttribute("list",list);
 		model.addAttribute("atcList",atcList);
 		model.addAttribute("btypeNo", btypeNo);
+		model.addAttribute("memId", memId);
 		
 		return "/board/shareBoard";
 	}
 	
 	@RequestMapping("/requestBoard")
 	public String requestBoard(@ModelAttribute SearchVO searchVo,
+			HttpSession session,
 			@RequestParam(defaultValue = "0")int btypeNo, Model model) {
+		String memId = (String)session.getAttribute("memId");
 		logger.info("requestBoard 페이지 - 게시판 종류 btypeNo={}", btypeNo);
 		logger.info("requestBoard 페이지, searchVo={}", searchVo);
 		
@@ -301,26 +320,36 @@ public class BoardController {
 		model.addAttribute("list",list);
 		model.addAttribute("atcList",atcList);
 		model.addAttribute("btypeNo", btypeNo);
+		model.addAttribute("memId", memId);
 		
 		return "/board/requestBoard";
 	}
 	
 	@GetMapping("/boardWrite")
 	public String boardWrite_get(@RequestParam(defaultValue = "0") int btypeNo,
+			HttpSession session,
 			Model model) {
 		logger.info("커뮤니티 글 작성 페이지, 파라미터 btypeNo={}",btypeNo);
 		
-		model.addAttribute("btypeNo", btypeNo);
+		String memId = (String)session.getAttribute("memId");
 		
+		logger.info("커뮤니티 글 작성 페이지, 파라미터 memId={}",memId);
+		
+		model.addAttribute("btypeNo", btypeNo);
+		model.addAttribute("memId",memId);
 		return "/board/boardWrite";
 	}
 	
 	@PostMapping("/boardWrite")
 	public String boardWrite_post(@RequestParam int btypeNo,
+			@RequestParam String memId,
 			@ModelAttribute BoardVO boardVo, 
 			@ModelAttribute BoardAtcVO boardAtcVo,
-			HttpServletRequest request, Model model) {
+			HttpServletRequest request, 
+			Model model) {
 		logger.info("커뮤니티 글 작성 페이지, 파라미터 btypeNo={}", btypeNo);
+		
+		MemberVO memVo = memberService.selectByUserid(memId);
 		
 		String fileName = "", originFileName = "";
 		
@@ -336,7 +365,7 @@ public class BoardController {
 			e.printStackTrace();
 		}
 		
-		
+		boardVo.setMemNo(memVo.getMemNo());
 		boardVo.setBtypeNo(btypeNo);
 		int cnt = boardService.insertBoard(boardVo);
 		logger.info("글 작성 결과 조회, cnt={}", cnt);
@@ -372,8 +401,10 @@ public class BoardController {
 	
 	@RequestMapping("/readCountUp")
 	public String readCountUp(@RequestParam(defaultValue = "0") int boardNo,
+			HttpSession session,
 			@RequestParam(defaultValue = "0") int btypeNo,
 			Model model) {
+		String memName=(String)session.getAttribute("memName");
 		logger.info("게시글 조회수 증가, 파라미터 boardNO={}, btypeNo={}", boardNo, btypeNo);
 		
 		int cnt = boardService.updateBoardReadCount(boardNo);
@@ -387,6 +418,10 @@ public class BoardController {
 		BoardAtcVO AtcVo = boardService.selectBoardAtcByNo(boardNo);
 		logger.info("게시글 상세조회 파일 결과, AtcVo={}", AtcVo);
 		
+		MemberVO memVo = memberService.selectByMemNo(vo.getMemNo());
+		
+		model.addAttribute("memName",memName);
+		model.addAttribute("memVo", memVo);
 		model.addAttribute("vo", vo);
 		model.addAttribute("AtcVo", AtcVo);
 		
@@ -397,5 +432,20 @@ public class BoardController {
 		return "/board/boardDetail";
 	}
 	
-
+	@RequestMapping("/boardUpdate")
+	public String boardUpdate(@ModelAttribute BoardVO boardVo,
+			@ModelAttribute BoardAtcVO boardAtcVo,
+			Model model) {
+		logger.info("글 수정 페이지, 파라미터 boardVo={}, boardAtcVo={}", boardVo, boardAtcVo);
+		
+		int boardResult = boardService.updateBoard(boardVo);
+		logger.info("글 내용 수정 결과, boardResult={}", boardResult);
+		int boardAtcResult = boardService.updateBoardAtc(boardAtcVo);
+		logger.info("글 파일 수정 결과, boardAtcResult={}", boardAtcResult);
+		
+		model.addAttribute("boardVo", boardVo);
+		model.addAttribute("boardAtcVo", boardAtcVo);
+		
+		return "/board/boardUpdate";
+	}
 }

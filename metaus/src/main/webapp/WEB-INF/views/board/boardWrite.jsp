@@ -80,7 +80,7 @@
                     </select>
                 </div>
                 	<input type="hidden" name="btypeNo" id="btypeNo" value="${param.btypeNo }">
-                	<input type="hidden" name="memNo" value="1">
+                	<input type="hidden" name="memId" value="${memId }">
 					<!-- Form Group -->
 					
 					<div class="form-group">

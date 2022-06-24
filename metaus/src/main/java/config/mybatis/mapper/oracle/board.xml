@@ -98,4 +98,15 @@
 		where btype_no=#{btypeNo}
 	</select>
 
+	<update id="updateBoard" parameterType="boardVo">
+		update fp_board
+		set board_title=#{boardTitle}, board_content=#{boardContent}
+		where board_no=#{boardNo}
+	</update>
+	
+	<update id="updateBoardAtc" parameterType="boardAtcVo">
+		update fp_boardatc
+		set bfile_filename=#{bfileFilename}, bfile_originname=#{bfileOriginname}
+		where bfile_no=#{bfileNo}
+	</update>
 </mapper>
