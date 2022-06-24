@@ -75,7 +75,8 @@
 
 	<select id="selectBoardDetail" parameterType="int"
 		resultType="boardVo">
-		select * from fp_board
+		select *
+		from fp_board
 		where board_no=#{boardNo}
 	</select>
 

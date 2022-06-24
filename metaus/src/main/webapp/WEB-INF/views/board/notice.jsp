@@ -65,7 +65,12 @@
 							<div class="col-md-12 blog-thumbnail">
 								<a
 									href="<c:url value='/board/readCountUp?boardNo=${map["BOARD_NO"] }&btypeNo=1'/>">
-									<img src="images/blog/blog1.jpg" class="img-responsive" alt="">
+									<c:forEach var="vo" items="${atcList }">
+										<c:if test="${vo.boardNo==map['BOARD_NO'] }">
+											<img src="<c:url value='/img_upload/${vo.bfileFilename }'/>"
+												class="img-responsive" alt="이미지" />
+										</c:if>
+									</c:forEach>
 								</a>
 							</div>
 							<!-- Blog Post Description -->
@@ -91,33 +96,35 @@
 						<!-- End of Blog Post Article 1 -->
 					</c:forEach>
 					<!-- 반복 끝 -->
-					
+
 					<!-- Start of Pagination -->
 					<div class="col-md-12">
-					<ul class="pagination list-inline text-center">
-					<c:if test="${pagingInfo.firstPage>1 }">
-						<li><a href="#" onclick="boardList(${pagingInfo.firstPage-1})">prev</a></li>
-					</c:if>
+						<ul class="pagination list-inline text-center">
+							<c:if test="${pagingInfo.firstPage>1 }">
+								<li><a href="#"
+									onclick="boardList(${pagingInfo.firstPage-1})">prev</a></li>
+							</c:if>
 
-					<!-- [1][2][3][4][5][6][7][8][9][10] -->
-					<c:forEach var="i" begin="${pagingInfo.firstPage }"
-						end="${pagingInfo.lastPage }">
-						<c:if test="${i==pagingInfo.currentPage }">
-							<li class="active"><a>${i }</a></li>
-						</c:if>
-						<c:if test="${i!=pagingInfo.currentPage }">
-							<li><a href="#" onclick="boardList(${i})">${i } </a></li>
-						</c:if>
-					</c:forEach>
+							<!-- [1][2][3][4][5][6][7][8][9][10] -->
+							<c:forEach var="i" begin="${pagingInfo.firstPage }"
+								end="${pagingInfo.lastPage }">
+								<c:if test="${i==pagingInfo.currentPage }">
+									<li class="active"><a>${i }</a></li>
+								</c:if>
+								<c:if test="${i!=pagingInfo.currentPage }">
+									<li><a href="#" onclick="boardList(${i})">${i } </a></li>
+								</c:if>
+							</c:forEach>
 
-					<c:if test="${pagingInfo.lastPage<pagingInfo.totalPage }">
-						<li><a href="#" onclick="boardList(${pagingInfo.lastPage+1})">Next</a></li>
-					</c:if>
-					<!--  페이지 번호 끝 -->
-					</ul>
+							<c:if test="${pagingInfo.lastPage<pagingInfo.totalPage }">
+								<li><a href="#"
+									onclick="boardList(${pagingInfo.lastPage+1})">Next</a></li>
+							</c:if>
+							<!--  페이지 번호 끝 -->
+						</ul>
 					</div>
 					<!-- End of Pagination -->
-					
+
 				</c:if>
 
 

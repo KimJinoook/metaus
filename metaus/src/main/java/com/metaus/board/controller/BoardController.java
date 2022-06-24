@@ -41,8 +41,8 @@ public class BoardController {
 	@RequestMapping("/notice")
 	public String notice(@ModelAttribute SearchVO searchVo,
 			@RequestParam(defaultValue = "0")int btypeNo, Model model) {
-		logger.info("qna 페이지 - 게시판 종류 btypeNo={}", btypeNo);
-		logger.info("qna 페이지, searchVo={}", searchVo);
+		logger.info("notice 페이지 - 게시판 종류 btypeNo={}", btypeNo);
+		logger.info("notice 페이지, searchVo={}", searchVo);
 		
 		PaginationInfo pagingInfo = new PaginationInfo();
 		pagingInfo.setBlockSize(ConstUtil.BLOCKSIZE);
@@ -57,14 +57,14 @@ public class BoardController {
 		searchVo.setBtypeNo(btypeNo);
 		
 		List<Map<String, Object>>list = boardService.selectBoard(searchVo);
-		logger.info("qna 목록 조회 결과, list.size={}", list.size());
+		logger.info("notice 목록 조회 결과, list.size={}", list.size());
 		List<BoardAtcVO> atcList = boardService.selectBoardAtc();
 		int totalRecord=boardService.selectTotalRecord(btypeNo);
 		pagingInfo.setTotalRecord(totalRecord);
 		
-		logger.info("qna 목록 조회-레코드 개수, totalRecord={}", totalRecord);
-		logger.info("qna 목록 조회-pagingInfo, pagingInfo.getFirstPage={}", pagingInfo.getFirstPage());
-		logger.info("qna 목록 조회-pagingInfo, pagingInfo.getLastPage={}", pagingInfo.getLastPage());
+		logger.info("notice 목록 조회-레코드 개수, totalRecord={}", totalRecord);
+		logger.info("notice 목록 조회-pagingInfo, pagingInfo.getFirstPage={}", pagingInfo.getFirstPage());
+		logger.info("notice 목록 조회-pagingInfo, pagingInfo.getLastPage={}", pagingInfo.getLastPage());
 		
 		model.addAttribute("pagingInfo", pagingInfo);
 		model.addAttribute("list",list);
@@ -91,8 +91,8 @@ public class BoardController {
 	@RequestMapping("/news")
 	public String news(@ModelAttribute SearchVO searchVo,
 			@RequestParam(defaultValue = "0")int btypeNo, Model model) {
-		logger.info("qna 페이지 - 게시판 종류 btypeNo={}", btypeNo);
-		logger.info("qna 페이지, searchVo={}", searchVo);
+		logger.info("news 페이지 - 게시판 종류 btypeNo={}", btypeNo);
+		logger.info("news 페이지, searchVo={}", searchVo);
 		
 		PaginationInfo pagingInfo = new PaginationInfo();
 		pagingInfo.setBlockSize(ConstUtil.BLOCKSIZE);
@@ -107,14 +107,14 @@ public class BoardController {
 		searchVo.setBtypeNo(btypeNo);
 		
 		List<Map<String, Object>>list = boardService.selectBoard(searchVo);
-		logger.info("qna 목록 조회 결과, list.size={}", list.size());
+		logger.info("news 목록 조회 결과, list.size={}", list.size());
 		List<BoardAtcVO> atcList = boardService.selectBoardAtc();
 		int totalRecord=boardService.selectTotalRecord(btypeNo);
 		pagingInfo.setTotalRecord(totalRecord);
 		
-		logger.info("qna 목록 조회-레코드 개수, totalRecord={}", totalRecord);
-		logger.info("qna 목록 조회-pagingInfo, pagingInfo.getFirstPage={}", pagingInfo.getFirstPage());
-		logger.info("qna 목록 조회-pagingInfo, pagingInfo.getLastPage={}", pagingInfo.getLastPage());
+		logger.info("news 목록 조회-레코드 개수, totalRecord={}", totalRecord);
+		logger.info("news 목록 조회-pagingInfo, pagingInfo.getFirstPage={}", pagingInfo.getFirstPage());
+		logger.info("news 목록 조회-pagingInfo, pagingInfo.getLastPage={}", pagingInfo.getLastPage());
 		
 		model.addAttribute("pagingInfo", pagingInfo);
 		model.addAttribute("list",list);
@@ -127,8 +127,8 @@ public class BoardController {
 	@RequestMapping("/freeBoard")
 	public String freeBoard(@ModelAttribute SearchVO searchVo,
 			@RequestParam(defaultValue = "0")int btypeNo, Model model) {
-		logger.info("qna 페이지 - 게시판 종류 btypeNo={}", btypeNo);
-		logger.info("qna 페이지, searchVo={}", searchVo);
+		logger.info("freeBoard 페이지 - 게시판 종류 btypeNo={}", btypeNo);
+		logger.info("freeBoard 페이지, searchVo={}", searchVo);
 		
 		PaginationInfo pagingInfo = new PaginationInfo();
 		pagingInfo.setBlockSize(ConstUtil.BLOCKSIZE);
@@ -143,14 +143,14 @@ public class BoardController {
 		searchVo.setBtypeNo(btypeNo);
 		
 		List<Map<String, Object>>list = boardService.selectBoard(searchVo);
-		logger.info("qna 목록 조회 결과, list.size={}", list.size());
+		logger.info("freeBoard 목록 조회 결과, list.size={}", list.size());
 		List<BoardAtcVO> atcList = boardService.selectBoardAtc();
 		int totalRecord=boardService.selectTotalRecord(btypeNo);
 		pagingInfo.setTotalRecord(totalRecord);
 		
-		logger.info("qna 목록 조회-레코드 개수, totalRecord={}", totalRecord);
-		logger.info("qna 목록 조회-pagingInfo, pagingInfo.getFirstPage={}", pagingInfo.getFirstPage());
-		logger.info("qna 목록 조회-pagingInfo, pagingInfo.getLastPage={}", pagingInfo.getLastPage());
+		logger.info("freeBoard 목록 조회-레코드 개수, totalRecord={}", totalRecord);
+		logger.info("freeBoard 목록 조회-pagingInfo, pagingInfo.getFirstPage={}", pagingInfo.getFirstPage());
+		logger.info("freeBoard 목록 조회-pagingInfo, pagingInfo.getLastPage={}", pagingInfo.getLastPage());
 		
 		model.addAttribute("pagingInfo", pagingInfo);
 		model.addAttribute("list",list);
@@ -163,8 +163,8 @@ public class BoardController {
 	@RequestMapping("/QuestionBoard")
 	public String QuestionBoard(@ModelAttribute SearchVO searchVo,
 			@RequestParam(defaultValue = "0")int btypeNo, Model model) {
-		logger.info("qna 페이지 - 게시판 종류 btypeNo={}", btypeNo);
-		logger.info("qna 페이지, searchVo={}", searchVo);
+		logger.info("QuestionBoard 페이지 - 게시판 종류 btypeNo={}", btypeNo);
+		logger.info("QuestionBoard 페이지, searchVo={}", searchVo);
 		
 		PaginationInfo pagingInfo = new PaginationInfo();
 		pagingInfo.setBlockSize(ConstUtil.BLOCKSIZE);
@@ -179,14 +179,14 @@ public class BoardController {
 		searchVo.setBtypeNo(btypeNo);
 		
 		List<Map<String, Object>>list = boardService.selectBoard(searchVo);
-		logger.info("qna 목록 조회 결과, list.size={}", list.size());
+		logger.info("QuestionBoard 목록 조회 결과, list.size={}", list.size());
 		List<BoardAtcVO> atcList = boardService.selectBoardAtc();
 		int totalRecord=boardService.selectTotalRecord(btypeNo);
 		pagingInfo.setTotalRecord(totalRecord);
 		
-		logger.info("qna 목록 조회-레코드 개수, totalRecord={}", totalRecord);
-		logger.info("qna 목록 조회-pagingInfo, pagingInfo.getFirstPage={}", pagingInfo.getFirstPage());
-		logger.info("qna 목록 조회-pagingInfo, pagingInfo.getLastPage={}", pagingInfo.getLastPage());
+		logger.info("QuestionBoard 목록 조회-레코드 개수, totalRecord={}", totalRecord);
+		logger.info("QuestionBoard 목록 조회-pagingInfo, pagingInfo.getFirstPage={}", pagingInfo.getFirstPage());
+		logger.info("QuestionBoard 목록 조회-pagingInfo, pagingInfo.getLastPage={}", pagingInfo.getLastPage());
 		
 		model.addAttribute("pagingInfo", pagingInfo);
 		model.addAttribute("list",list);
@@ -236,8 +236,8 @@ public class BoardController {
 	@RequestMapping("/shareBoard")
 	public String shareBoard(@ModelAttribute SearchVO searchVo,
 			@RequestParam(defaultValue = "0")int btypeNo, Model model) {
-		logger.info("qna 페이지 - 게시판 종류 btypeNo={}", btypeNo);
-		logger.info("qna 페이지, searchVo={}", searchVo);
+		logger.info("shareBoard 페이지 - 게시판 종류 btypeNo={}", btypeNo);
+		logger.info("shareBoard 페이지, searchVo={}", searchVo);
 		
 		PaginationInfo pagingInfo = new PaginationInfo();
 		pagingInfo.setBlockSize(ConstUtil.BLOCKSIZE);
@@ -252,14 +252,14 @@ public class BoardController {
 		searchVo.setBtypeNo(btypeNo);
 		
 		List<Map<String, Object>>list = boardService.selectBoard(searchVo);
-		logger.info("qna 목록 조회 결과, list.size={}", list.size());
+		logger.info("shareBoard 목록 조회 결과, list.size={}", list.size());
 		List<BoardAtcVO> atcList = boardService.selectBoardAtc();
 		int totalRecord=boardService.selectTotalRecord(btypeNo);
 		pagingInfo.setTotalRecord(totalRecord);
 		
-		logger.info("qna 목록 조회-레코드 개수, totalRecord={}", totalRecord);
-		logger.info("qna 목록 조회-pagingInfo, pagingInfo.getFirstPage={}", pagingInfo.getFirstPage());
-		logger.info("qna 목록 조회-pagingInfo, pagingInfo.getLastPage={}", pagingInfo.getLastPage());
+		logger.info("shareBoard 목록 조회-레코드 개수, totalRecord={}", totalRecord);
+		logger.info("shareBoard 목록 조회-pagingInfo, pagingInfo.getFirstPage={}", pagingInfo.getFirstPage());
+		logger.info("shareBoard 목록 조회-pagingInfo, pagingInfo.getLastPage={}", pagingInfo.getLastPage());
 		
 		model.addAttribute("pagingInfo", pagingInfo);
 		model.addAttribute("list",list);
@@ -272,8 +272,8 @@ public class BoardController {
 	@RequestMapping("/requestBoard")
 	public String requestBoard(@ModelAttribute SearchVO searchVo,
 			@RequestParam(defaultValue = "0")int btypeNo, Model model) {
-		logger.info("qna 페이지 - 게시판 종류 btypeNo={}", btypeNo);
-		logger.info("qna 페이지, searchVo={}", searchVo);
+		logger.info("requestBoard 페이지 - 게시판 종류 btypeNo={}", btypeNo);
+		logger.info("requestBoard 페이지, searchVo={}", searchVo);
 		
 		PaginationInfo pagingInfo = new PaginationInfo();
 		pagingInfo.setBlockSize(ConstUtil.BLOCKSIZE);
@@ -288,14 +288,14 @@ public class BoardController {
 		searchVo.setBtypeNo(btypeNo);
 		
 		List<Map<String, Object>>list = boardService.selectBoard(searchVo);
-		logger.info("qna 목록 조회 결과, list.size={}", list.size());
+		logger.info("requestBoard 목록 조회 결과, list.size={}", list.size());
 		List<BoardAtcVO> atcList = boardService.selectBoardAtc();
 		int totalRecord=boardService.selectTotalRecord(btypeNo);
 		pagingInfo.setTotalRecord(totalRecord);
 		
-		logger.info("qna 목록 조회-레코드 개수, totalRecord={}", totalRecord);
-		logger.info("qna 목록 조회-pagingInfo, pagingInfo.getFirstPage={}", pagingInfo.getFirstPage());
-		logger.info("qna 목록 조회-pagingInfo, pagingInfo.getLastPage={}", pagingInfo.getLastPage());
+		logger.info("requestBoard 목록 조회-레코드 개수, totalRecord={}", totalRecord);
+		logger.info("requestBoard 목록 조회-pagingInfo, pagingInfo.getFirstPage={}", pagingInfo.getFirstPage());
+		logger.info("requestBoard 목록 조회-pagingInfo, pagingInfo.getLastPage={}", pagingInfo.getLastPage());
 		
 		model.addAttribute("pagingInfo", pagingInfo);
 		model.addAttribute("list",list);

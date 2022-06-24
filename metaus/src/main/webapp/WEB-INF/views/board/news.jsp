@@ -4,7 +4,8 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ include file="../inc/header.jsp"%>
-<link rel="stylesheet" type="text/css" href="<c:url value='/css/search.css'/>">
+<link rel="stylesheet" type="text/css"
+	href="<c:url value='/css/search.css'/>">
 <script type="text/javascript">
 	function boardList(curPage){
 		$('input[name=currentPage]').val(curPage);
@@ -41,24 +42,22 @@
 
 <!-- 검색 시작 -->
 <div id="searchBox">
-<div class="col-md-3 col-sm-12 search-categories"
-	style="display: contents;">
-	<label for="search-categories"></label> <select
-		name="searchCondition" class="selectpicker" id="search-categories"
-		data-live-search="true" title="검색 조건" data-size="3"
-		data-container="body" style="display: flow-root;">
-		<option value="3">작성자</option>
-		<option value="8">제목</option>
-		<option value="5">내용</option>
-	</select> 
-	<input type="text" class="live-search-box form-control mt20"
-		placeholder="검색하실 내용을 입력해주세요" name="searchKeyword" id=""searchKeyword""> 
-	<a href="/metaus/board/boardWrite?btypeNo=8">
-	<button class="btn btn-large btn-blue btn-effect mt30" id="searchBt">
-	검색
-	</button>
-	</a>
-</div>
+	<div class="col-md-3 col-sm-12 search-categories"
+		style="display: contents;">
+		<label for="search-categories"></label> <select name="searchCondition"
+			class="selectpicker" id="search-categories" data-live-search="true"
+			title="검색 조건" data-size="3" data-container="body"
+			style="display: flow-root;">
+			<option value="3">작성자</option>
+			<option value="8">제목</option>
+			<option value="5">내용</option>
+		</select> <input type="text" class="live-search-box form-control mt20"
+			placeholder="검색하실 내용을 입력해주세요" name="searchKeyword" id=""searchKeyword"">
+		<a href="/metaus/board/boardWrite?btypeNo=8">
+			<button class="btn btn-large btn-blue btn-effect mt30" id="searchBt">
+				검색</button>
+		</a>
+	</div>
 </div>
 <!-- 검색 끝 -->
 
@@ -69,9 +68,10 @@
 
 			<!-- Start of Blog Posts -->
 			<div class="col-md-12 col-xs-12 blog-posts-wrapper">
-			<c:if test="${empty list }">
-					<img alt="게시글 내용이 없습니다" src="<c:url value='/images/board/no_board.gif'/>"
-					style="width: 950px;margin-left: 100px;">
+				<c:if test="${empty list }">
+					<img alt="게시글 내용이 없습니다"
+						src="<c:url value='/images/board/no_board.gif'/>"
+						style="width: 950px; margin-left: 100px;">
 				</c:if>
 				<c:if test="${!empty list }">
 					<!-- 반복 시작 -->
@@ -81,55 +81,66 @@
 						<article class="col-md-12 blog-post">
 							<!-- Blog Post Thumbnail -->
 							<div class="col-md-4 blog-thumbnail">
-								<a href="<c:url value='/board/readCountUp?boardNo=${map["BOARD_NO"] }&btypeNo=4'/>">
-								<img src="images/blog/blog1.jpg" class="img-responsive" alt=""></a>
+								<a
+									href="<c:url value='/board/readCountUp?boardNo=${map["BOARD_NO"] }&btypeNo=4'/>">
+									<c:forEach var="vo" items="${atcList }">
+										<c:if test="${vo.boardNo==map['BOARD_NO'] }">
+											<img src="<c:url value='/img_upload/${vo.bfileFilename }'/>"
+												class="img-responsive" alt="이미지" />
+										</c:if>
+									</c:forEach>
 							</div>
 
 							<!-- Blog Post Description -->
 							<div class="col-md-8 blog-desc">
 								<h5>
-									<a href="<c:url value='/board/readCountUp?boardNo=${map["BOARD_NO"] }&btypeNo=4'/>">
-									${map['BOARD_TITLE'] }</a>
+									<a
+										href="<c:url value='/board/readCountUp?boardNo=${map["BOARD_NO"] }&btypeNo=4'/>">
+										${map['BOARD_TITLE'] }</a>
 								</h5>
 								<div class="post-detail pt10 pb20">
 									<span><i class="fa fa-user"></i>${map['MEM_NAME'] }</span> <span><i
-										class="fa fa-clock-o"></i>${map['BOARD_REGDATE'] }</span> <span><img src="<c:url value='/images/board/eye.png'/>"
-											style="width: 14px;height: 14.4px;">
-											${map['BOARD_READCOUNT'] }</span>
+										class="fa fa-clock-o"></i>${map['BOARD_REGDATE'] }</span> <span><img
+										src="<c:url value='/images/board/eye.png'/>"
+										style="width: 14px; height: 14.4px;">
+										${map['BOARD_READCOUNT'] }</span>
 								</div>
-								<a href="<c:url value='/board/readCountUp?boardNo=${map["BOARD_NO"] }&btypeNo=4'/>"
+								<a
+									href="<c:url value='/board/readCountUp?boardNo=${map["BOARD_NO"] }&btypeNo=4'/>"
 									class="btn btn-blue btn-effect mt10">자세히</a>
 							</div>
 						</article>
 						<!-- End of Blog Post Article 1 -->
 					</c:forEach>
-					
+
 					<!-- Start of Pagination -->
 					<div class="col-md-12">
-					<ul class="pagination list-inline text-center">
-					<c:if test="${pagingInfo.firstPage>1 }">
-						<li><a href="#" onclick="boardList(${pagingInfo.firstPage-1})">prev</a></li>
-					</c:if>
+						<ul class="pagination list-inline text-center">
+							<c:if test="${pagingInfo.firstPage>1 }">
+								<li><a href="#"
+									onclick="boardList(${pagingInfo.firstPage-1})">prev</a></li>
+							</c:if>
 
-					<!-- [1][2][3][4][5][6][7][8][9][10] -->
-					<c:forEach var="i" begin="${pagingInfo.firstPage }"
-						end="${pagingInfo.lastPage }">
-						<c:if test="${i==pagingInfo.currentPage }">
-							<li class="active"><a>${i }</a></li>
-						</c:if>
-						<c:if test="${i!=pagingInfo.currentPage }">
-							<li><a href="#" onclick="boardList(${i})">${i } </a></li>
-						</c:if>
-					</c:forEach>
+							<!-- [1][2][3][4][5][6][7][8][9][10] -->
+							<c:forEach var="i" begin="${pagingInfo.firstPage }"
+								end="${pagingInfo.lastPage }">
+								<c:if test="${i==pagingInfo.currentPage }">
+									<li class="active"><a>${i }</a></li>
+								</c:if>
+								<c:if test="${i!=pagingInfo.currentPage }">
+									<li><a href="#" onclick="boardList(${i})">${i } </a></li>
+								</c:if>
+							</c:forEach>
 
-					<c:if test="${pagingInfo.lastPage<pagingInfo.totalPage }">
-						<li><a href="#" onclick="boardList(${pagingInfo.lastPage+1})">Next</a></li>
-					</c:if>
-					<!--  페이지 번호 끝 -->
-					</ul>
+							<c:if test="${pagingInfo.lastPage<pagingInfo.totalPage }">
+								<li><a href="#"
+									onclick="boardList(${pagingInfo.lastPage+1})">Next</a></li>
+							</c:if>
+							<!--  페이지 번호 끝 -->
+						</ul>
 					</div>
 					<!-- End of Pagination -->
-					
+
 				</c:if>
 
 
