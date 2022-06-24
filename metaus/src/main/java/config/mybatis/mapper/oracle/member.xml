@@ -27,15 +27,7 @@
    		select mem_pw from fp_mem where mem_name=#{memName} and mem_tel = #{memTel} and mem_id = #{memId}
    	</select>
    	
-   	<update id="updatePw" parameterType="MemberVO">
-		update fp_mem
-		set mem_pw = #{memPw}
-		where mem_id=#{memId}
-	</update>
-   	
-   	
-   	
-	<select id="selectByMemNo" parameterType="int" 
+   	<select id="selectByMemNo" parameterType="int" 
 		resultType="memberVo">
       select * from fp_mem where mem_no=#{memNo}
    	</select>
@@ -45,15 +37,16 @@
 		where mem_id=#{memId}
 	</select>
 	
-	<insert id="insertMember" parameterType="memberVo">
-		<selectKey resultType="int" keyProperty="memNo" order="BEFORE">
-			select fp_mem_seq.nextval from dual
-		</selectKey>
-		insert into fp_mem(mem_no,mem_name,mem_id,mem_pw,mem_nick,mem_birth,mem_tel,mem_zipcode,mem_add,mem_add2,mem_joindate)
-		values(#{memNo}, #{memName}, #{memId}, #{memPw}, 
-			#{memNick},#{memBirth}, #{memTel},#{memZipcode}, #{memAdd}, 
-			#{memAdd2}, sysdate)
-	</insert>
+	<select id="selectAllCreater" resultType="MemberVO">
+		select A.*, (select count(*) from fp_port B where A.mem_no = B.mem_no) as memItem, (select count(*) from fp_contact C where A.mem_no = C.mem_no) as memComplete  from fp_mem A where mem_no in (select mem_no from fp_port)
+	</select>
+   	
+   	
+   	<update id="updatePw" parameterType="MemberVO">
+		update fp_mem
+		set mem_pw = #{memPw}
+		where mem_id=#{memId}
+	</update>
 	
 	<update id="updateKakao" parameterType="int">
 		update fp_mem
@@ -70,6 +63,16 @@
 		set mem_facebook = 'Y'
 		where mem_no=#{memNo}
 	</update>
+	
+	<insert id="insertMember" parameterType="memberVo">
+		<selectKey resultType="int" keyProperty="memNo" order="BEFORE">
+			select fp_mem_seq.nextval from dual
+		</selectKey>
+		insert into fp_mem(mem_no,mem_name,mem_id,mem_pw,mem_nick,mem_birth,mem_tel,mem_zipcode,mem_add,mem_add2,mem_joindate)
+		values(#{memNo}, #{memName}, #{memId}, #{memPw}, 
+			#{memNick},#{memBirth}, #{memTel},#{memZipcode}, #{memAdd}, 
+			#{memAdd2}, sysdate)
+	</insert>
    	
 	
 </mapper>

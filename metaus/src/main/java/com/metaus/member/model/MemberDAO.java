@@ -1,5 +1,7 @@
 package com.metaus.member.model;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 
 
@@ -17,5 +19,6 @@ public interface MemberDAO {
 	public String findId(MemberVO vo);
 	public String findPw(MemberVO vo);
 	public int updatePw(MemberVO vo);
+	public List<MemberVO> selectAllCreater();
 
 }
