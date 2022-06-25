@@ -3,7 +3,19 @@
 <%@ include file="../inc/header.jsp" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <link rel="stylesheet" type="text/css" href="<c:url value='/css/resume.css'/>">
-
+<script type="text/javascript">
+$(function(){
+	$('form[name=frmDelete]').submit(function(){
+		if(confirm('삭제하시겠습니까?')){
+			if($.trim($('input[name=portNo]').val()).length<1){
+				event.preventDefault();
+			}
+		}else{
+			event.preventDefault();
+		}
+	});
+});
+</script>
  <section class="ptb80" id="job-page">
  	<section class="page-header">
         <div class="container">
@@ -21,8 +33,8 @@
     
  <section class="ptb80" id="post-job">
         <div class="container">
-            <form action="<c:url value='/resume/portfolioDetail'/>" class="post-job-resume mt50" method="get" enctype="multipart/form-data">
-            <input type="hidden" name="portNo" value="${pvo.portNo }">
+            <form name="frmDelete" action="<c:url value='/resume/portfolioDetail'/>" class="post-job-resume mt50" method="post" enctype="multipart/form-data">
+            <input type="hidden" name="portNo"  value="${pvo.portNo }">
                <div class="row candidate-profile nomargin">            
                 <!-- Start of Profile Description -->
                 <div class="col-md-9 col-xs-12">
@@ -53,7 +65,7 @@
 
                         <!-- Form Group -->
                         <div class="form-group pt30 nomargin" id="last">
-                            <button class="btn btn-blue btn-effect">삭제</button>
+                            <input type="submit" class="btn btn-blue btn-effect" value="삭제">
                             <a href="<c:url value='/resume/resumeDetail'/>" class="btn btn-blue btn-effect">취소</a>
                         </div> 
 					  </div>	
