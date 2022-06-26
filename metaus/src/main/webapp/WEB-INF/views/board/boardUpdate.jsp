@@ -45,7 +45,7 @@
 	<div class="container">
 
 		<!-- Start of Post Resume Form -->
-		<form action="<c:url value='/board/boardWrite'/>" 
+		<form action="<c:url value='/board/boardUpdate'/>" 
 			class="post-job-resume mt50" 
 			style="margin-top: 0px;" method="post"
 			enctype="multipart/form-data">
@@ -56,21 +56,22 @@
 				
 				<!-- Start of category input -->
                
-                	<input type="hidden" name="btypeNo" id="btypeNo" value="${param.btypeNo }">
-                	<input type="hidden" name="memId" value="${memId }">
+                	<input type="text" name="btypeNo" id="btypeNo" value="${vo.btypeNo }">
+                	<input type="text" name="boardNo" id="boardNo" value="${vo.boardNo }">
+                	<input type="text" name="bfileNo" id="bfileNo" value="${AtcVo.bfileNo }">
 					<!-- Form Group -->
 					
 					<div class="form-group">
 						<label>글 제목</label> <input class="form-control" type="text"
 							required style="color: black;"
 							name="boardTitle"
-							value="${boardVo.boardTitle }">
+							value="${vo.boardTitle }">
 					</div>
 					
 					<!-- Form Group -->
 					<div class="form-group">
 						<label>글 내용</label>
-						<textarea name="boardContent" id="editor">${boardVo.boardContent }</textarea>	
+						<textarea name="boardContent" id="editor">${vo.boardContent }</textarea>	
 						<script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/ckeditor.js"></script>
 						<script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/translations/ko.js"></script>
 					    <script>
@@ -93,7 +94,7 @@
 					</div>
 					<!-- Form Group -->
 					<div class="form-group pt30 nomargin" id="last">
-						<button class="btn btn-blue btn-effect">수정하기</button>
+						<button class="btn btn-blue btn-effect" type="submit">수정하기</button>
 					</div>
 				</div>
 			</div>

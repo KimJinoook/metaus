@@ -97,6 +97,16 @@
 		select count(*) from fp_board
 		where btype_no=#{btypeNo}
 	</select>
+	
+	<select id="selectByBoardNo" parameterType="int" resultType="boardVo">
+		select * from fp_board
+		where board_no=#{boardNo}
+	</select>
+	
+	<select id="selectByBfileNo" parameterType="int" resultType="boardAtcVo">
+		select * from fp_boardatc
+		where bfile_no=#{bfileNo}
+	</select>
 
 	<update id="updateBoard" parameterType="boardVo">
 		update fp_board

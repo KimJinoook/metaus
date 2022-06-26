@@ -33,8 +33,7 @@
 <!-- =============== End of Page Header 1 Section =============== -->
 
 
-<!-- ===== Start of Single Blog Post Section ===== -->
-<form action="<c:url value='/board/boardUpdate'/>" method="post" >
+<!--===== Start of Single Blog Post Section ===== -->
 <section class="ptb80" id="blog-post">
 	<div class="container">
 
@@ -79,16 +78,18 @@
 			
 			<c:if test="${memName == memName2 }">
 			<div>
+			<a href="<c:url value='/board/boardUpdate?boardNo=${vo.boardNo }&bfileNo=${AtcVo.bfileNo}'/>">
 				<button class="btn btn-large btn-blue btn-effect mt30"
-						id="writeBoard" type="submit">수정</button>
+						id="writeBoard">수정</button>
+				</a>
 						
 				 <a href="/metaus/board/boardDelete" id="boardDelete">
 					<button class="btn btn-large btn-blue btn-effect mt30"
-						id="writeBoard">삭제</button>
+						id="boardDelete">삭제</button>
 				</a>
 			</div>
 			</c:if>
-			</form>
+		
 				<!-- Start of Social Media Buttons -->
 				<ul class="social-btns list-inline mt20">
 					<!-- Social Media -->
