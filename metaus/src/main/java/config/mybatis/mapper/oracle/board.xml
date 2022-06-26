@@ -119,4 +119,9 @@
 		set bfile_filename=#{bfileFilename}, bfile_originname=#{bfileOriginname}
 		where bfile_no=#{bfileNo}
 	</update>
+	
+	<delete id="deleteBoardAtc" parameterType="boardAtcVo">
+		delete fp_boardatc
+		where bfile_no=#{bfileNo}
+	</delete>
 </mapper>

@@ -236,6 +236,8 @@ public class BoardController {
 		logger.info("qna 목록 조회-레코드 개수, totalRecord={}", totalRecord);
 		logger.info("qna 목록 조회-pagingInfo, pagingInfo.getFirstPage={}", pagingInfo.getFirstPage());
 		logger.info("qna 목록 조회-pagingInfo, pagingInfo.getLastPage={}", pagingInfo.getLastPage());
+		logger.info("searchVo.getRecordCountPerPage={}", searchVo.getRecordCountPerPage());
+		logger.info("pagingInfo.getRecordCountPerPage={}", pagingInfo.getRecordCountPerPage());
 		
 		model.addAttribute("pagingInfo", pagingInfo);
 		model.addAttribute("list",list);
@@ -479,9 +481,6 @@ public class BoardController {
 		boardAtcVo.setBfileOriginname(originFileName);
 		boardAtcVo.setBoardNo(boardVo.getBoardNo());
 		
-		int upload = boardService.insertBoardAtc(boardAtcVo);
-		logger.info("파일 업로드 결과 조회, upload={}", upload);
-		
 		int boardAtcResult = boardService.updateBoardAtc(boardAtcVo);
 		logger.info("글 파일 수정 결과, boardAtcResult={}", boardAtcResult);
 		
@@ -496,6 +495,6 @@ public class BoardController {
 		model.addAttribute("boardNo", boardVo.getBoardNo());
 		model.addAttribute("btypeNo", boardVo.getBtypeNo());
 				
-		return "/board/boardDetail";
+		return "redirect:/board/boardDetail";
 	}
 }
