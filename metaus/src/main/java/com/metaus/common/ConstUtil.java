@@ -14,7 +14,9 @@ public interface ConstUtil {
 
 	  String FILE_UPLOAD_PATH="pds_upload"; 
 	  String FILE_UPLOAD_PATH_TEST=/*"/img_upload";*/
-	  "C:\\Users\\EZEN\\git\\metaus\\metaus\\src\\main\\resources\\static\\img_upload";
+	  //"C:\\Users\\EZEN\\git\\metaus\\metaus\\src\\main\\resources\\static\\img_upload";
+			  //"C:\\Users\\USER\\Documents\\GitHub\\metaus\\metaus\\src\\main\\resources\\static\\img_upload";
+			  "src/main/resources/static/img_upload";
 
 	 
 	
@@ -34,7 +36,8 @@ public interface ConstUtil {
 	
 	//메세지 - 첨부파일 저장 경로
 	String ATTACHMENT_FILE_UPLOAD_PATH="message_attachment";
-	String ATTACHMENT_FILE_UPLOAD_PATH_TEST="C:\\Users\\hanym\\git\\metaus\\metaus\\src\\main\\resources\\static\\message_attachment";
+	//String ATTACHMENT_FILE_UPLOAD_PATH_TEST="C:\\Users\\hanym\\git\\metaus\\metaus\\src\\main\\resources\\static\\message_attachment";
+	String ATTACHMENT_FILE_UPLOAD_PATH_TEST="src/main/resources/static/message_attachment";
 	 
 	
 	
