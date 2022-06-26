@@ -18,4 +18,6 @@ public interface BoardService {
 	List<BoardVO> selectBoardFaq(BoardVO boardVo);
 	int updateBoard(BoardVO vo);
 	int updateBoardAtc(BoardAtcVO vo);
+	BoardVO selectByBoardNo(int boardNo);
+	BoardAtcVO selectByBfileNo(int bfileNo);
 }

@@ -115,7 +115,7 @@
 					</div>
 					<!-- Form Group -->
 					<div class="form-group pt30 nomargin" id="last">
-						<button class="btn btn-blue btn-effect">submit</button>
+						<button class="btn btn-blue btn-effect">작성하기</button>
 					</div>
 
 				</div>

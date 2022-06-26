@@ -432,20 +432,70 @@ public class BoardController {
 		return "/board/boardDetail";
 	}
 	
-	@RequestMapping("/boardUpdate")
-	public String boardUpdate(@ModelAttribute BoardVO boardVo,
+	@GetMapping("/boardUpdate")
+	public String boardUpdate_get(@RequestParam int boardNo,
+		@RequestParam int bfileNo, 
+		Model model) {
+		logger.info("글 수정 페이지, 파라미터 boardNo={}, bfileNo={}", boardNo, bfileNo);
+	
+		BoardVO vo = boardService.selectByBoardNo(boardNo);
+		BoardAtcVO AtcVo = boardService.selectBoardAtcByNo(bfileNo);
+		
+		model.addAttribute("vo", vo);
+		model.addAttribute("AtcVo", AtcVo);
+		
+		return "/board/boardUpdate";
+	}
+	
+	@PostMapping("/boardUpdate")
+	public String boardUpdate_post(@ModelAttribute BoardVO boardVo,
+			HttpSession session,
+			HttpServletRequest request,
 			@ModelAttribute BoardAtcVO boardAtcVo,
 			Model model) {
+		String memName=(String)session.getAttribute("memName");
 		logger.info("글 수정 페이지, 파라미터 boardVo={}, boardAtcVo={}", boardVo, boardAtcVo);
+		logger.info("글 수정 페이지, 파라미터 memName={}", memName);
 		
 		int boardResult = boardService.updateBoard(boardVo);
 		logger.info("글 내용 수정 결과, boardResult={}", boardResult);
+		
+		
+		String fileName = "", originFileName = "";
+		
+		try {
+			List<Map<String, Object>> fileList = fileUploadUtil.fileUpload(request, ConstUtil.UPLOAD_FILE_FLAG);
+
+			for (Map<String, Object> fileMap : fileList) {
+				originFileName = (String) fileMap.get("originalFileName");
+				fileName = (String) fileMap.get("fileName");
+			}
+			logger.info("파일 업로드 성공, fileName={}", fileName);
+		} catch (IllegalStateException | IOException e) {
+			e.printStackTrace();
+		}
+		
+		boardAtcVo.setBfileFilename(fileName);
+		boardAtcVo.setBfileOriginname(originFileName);
+		boardAtcVo.setBoardNo(boardVo.getBoardNo());
+		
+		int upload = boardService.insertBoardAtc(boardAtcVo);
+		logger.info("파일 업로드 결과 조회, upload={}", upload);
+		
 		int boardAtcResult = boardService.updateBoardAtc(boardAtcVo);
 		logger.info("글 파일 수정 결과, boardAtcResult={}", boardAtcResult);
+		
+		MemberVO memVo = memberService.selectByMemNo(boardVo.getMemNo());
+		
+		model.addAttribute("memName",memName);
+		model.addAttribute("memVo", memVo);
 		
 		model.addAttribute("boardVo", boardVo);
 		model.addAttribute("boardAtcVo", boardAtcVo);
 		
-		return "/board/boardUpdate";
+		model.addAttribute("boardNo", boardVo.getBoardNo());
+		model.addAttribute("btypeNo", boardVo.getBtypeNo());
+				
+		return "/board/boardDetail";
 	}
 }
