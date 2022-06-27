@@ -57,4 +57,13 @@ public class CreaterController {
 		model.addAttribute("list",list);
 	}
 	
+	@RequestMapping("/createrDetail")
+	public void createrDetail() {
+		
+	}
+	@RequestMapping("/createrDetail2")
+	public void createrDetail2() {
+		
+	}
+	
 }

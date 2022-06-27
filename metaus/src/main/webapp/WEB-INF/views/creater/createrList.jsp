@@ -162,14 +162,6 @@
 		$('input[name=currentPage]').val(curPage);
 		$('form[name=frmPage]').submit();
 	}
-	$(function(){
-		$('#writeBoard').click(function(){
-			if($('#memId').val()=="" || $('#memId').val()==null){
-				alert('로그인 후 이용가능합니다!');
-				event.preventDefault();
-			}
-		});
-	});
 </script>
 
 <%@ include file="../inc/footer.jsp" %>
