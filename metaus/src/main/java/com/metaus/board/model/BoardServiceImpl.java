@@ -67,6 +67,11 @@ public class BoardServiceImpl implements BoardService {
 	public BoardAtcVO selectByBfileNo(int bfileNo) {
 		return boardDao.selectBoardAtcByNo(bfileNo);
 	}
+	@Override
+	public int deleteBoard(BoardVO vo) {
+		return boardDao.deleteBoard(vo);
+	}
+	
 	
 
 }

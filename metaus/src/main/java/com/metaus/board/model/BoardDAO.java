@@ -23,4 +23,5 @@ public interface BoardDAO {
 	int updateBoardAtc(BoardAtcVO vo);
 	BoardVO selectByBoardNo(int boardNo);
 	BoardAtcVO selectByBfileNo(int bfileNo);
+	int deleteBoard(BoardVO vo);
 }

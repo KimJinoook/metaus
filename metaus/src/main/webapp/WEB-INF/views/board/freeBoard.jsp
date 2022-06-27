@@ -46,26 +46,29 @@
 	</div>
 </section>
 <!-- 검색 시작 -->
-<div id="searchBox">
-	<div class="col-md-3 col-sm-12 search-categories"
-		style="display: contents;">
-		<label for="search-categories"></label> <select name="searchCondition"
-			class="selectpicker" id="search-categories" data-live-search="true"
-			title="검색 조건" data-size="3" data-container="body"
-			style="display: flow-root;">
-			<option value="memNo">작성자</option>
-			<option value="boardTitle">제목</option>
-			<option value="boardContent">내용</option>
-		</select> <input type="text" class="live-search-box form-control mt20"
-			placeholder="검색하실 내용을 입력해주세요" name="searchKeyword" id=""searchKeyword"">
-		<a href="/metaus/board/boardWrite?btypeNo=8">
-			<button class="btn btn-large btn-blue btn-effect mt30" id="searchBt">
-				검색</button>
-		</a> <a href="/metaus/board/boardWrite?btypeNo=8">
-			<button class="btn btn-large btn-blue btn-effect mt30" id="writeBoard">글쓰기</button>
-		</a>
+<form id="searchFrm" method="post" action="<c:url value='/board/qna?btypeNo=8'/>">
+	<div id="searchBox">
+		<div class="col-md-3 col-sm-12 search-categories"
+			style="display: contents;">
+			<label for="search-categories"></label> <select
+				name="searchCondition" class="selectpicker" id="searchCondition"
+				data-live-search="true" title="검색 조건" data-size="3"
+				data-container="body" style="display: flow-root;">
+				<option value="memName">작성자</option>
+				<option value="boardTitle">제목</option>
+				<option value="boardContent">내용</option>
+			</select> <input type="text" class="live-search-box form-control mt20"
+				placeholder="검색하실 내용을 입력해주세요" name="searchKeyword"
+				id="searchKeyword"> <input type="hidden" name="btypeNo"
+				value="8">
+			<button class="btn btn-large btn-blue btn-effect mt30" id="searchBt"
+				type="submit">검색</button>
+		</div>
 	</div>
-</div>
+</form>
+<a href="/metaus/board/boardWrite?btypeNo=8" id="writeBoard">
+	<button class="btn btn-large btn-blue btn-effect mt30" id="writeBoard">글쓰기</button>
+</a>
 <!-- 검색 끝 -->
 <input type="hidden" id="memId" name="memId" value="${memId }">
 <!-- =============== End of Page Header 1 Section =============== -->
@@ -91,11 +94,17 @@
 								<a
 									href="<c:url value='/board/readCountUp?boardNo=${map["BOARD_NO"] }&btypeNo=8'/>">
 									<c:forEach var="vo" items="${atcList }">
-										<c:if test="${vo.boardNo==map['BOARD_NO'] }">
-											<img src="<c:url value='/img_upload/${vo.bfileFilename }'/>"
-												class="img-responsive" alt="이미지" />
-										</c:if>
-									</c:forEach>
+												<c:if test="${vo.boardNo==map['BOARD_NO'] }">
+													<img
+														src="<c:url value='/img_upload/${vo.bfileFilename }'/>"
+														class="img-responsive" />
+												</c:if>
+												<c:if test="${vo.boardNo!=map['BOARD_NO'] }">
+													<img
+														src="<c:url value='/images/board/noimg.png'/>"
+														class="img-responsive"/>
+												</c:if>
+											</c:forEach>
 								</a>
 							</div>
 

@@ -495,6 +495,38 @@ public class BoardController {
 		model.addAttribute("boardNo", boardVo.getBoardNo());
 		model.addAttribute("btypeNo", boardVo.getBtypeNo());
 				
-		return "redirect:/board/boardDetail";
+		if(boardVo.getBtypeNo()==3) {
+			return "redirect:/board/qna?btypeNo=3";
+		}else if(boardVo.getBtypeNo()==8) {
+			return "redirect:/board/freeBoard?btypeNo=8";
+		}else if(boardVo.getBtypeNo()==5) {
+			return "redirect:/board/QuestionBoard?btypeNo=5";
+		}else if(boardVo.getBtypeNo()==6) {
+			return "redirect:/board/shareBoard?btypeNo=6";
+		}else if(boardVo.getBtypeNo()==7) {
+			return "redirect:/board/requestBoard?btypeNo=7";
+		}
+		return "/";
+	}
+	
+	@RequestMapping("/boardDelete")
+	public String boardDelete(@ModelAttribute BoardVO vo) {
+		logger.info("게시글 삭제, 파라미터 vo.getBoardNo()={}", vo.getBoardNo());
+		
+		int cnt = boardService.deleteBoard(vo);
+		logger.info("게시글 삭제, 결과 cnt={}",cnt);
+		
+		if(vo.getBtypeNo()==3) {
+			return "redirect:/board/qna?btypeNo=3";
+		}else if(vo.getBtypeNo()==8) {
+			return "redirect:/board/freeBoard?btypeNo=8";
+		}else if(vo.getBtypeNo()==5) {
+			return "redirect:/board/QuestionBoard?btypeNo=5";
+		}else if(vo.getBtypeNo()==6) {
+			return "redirect:/board/shareBoard?btypeNo=6";
+		}else if(vo.getBtypeNo()==7) {
+			return "redirect:/board/requestBoard?btypeNo=7";
+		}
+		return "/";
 	}
 }

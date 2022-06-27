@@ -59,28 +59,32 @@
 	<div class="container">
 
 		<!-- 검색 시작 -->
-<div id="searchBox">
-	<div class="col-md-3 col-sm-12 search-categories"
-		style="display: contents;">
-		<label for="search-categories"></label> <select name="searchCondition"
-			class="selectpicker" id="search-categories" data-live-search="true"
-			title="검색 조건" data-size="3" data-container="body"
-			style="display: flow-root;">
-			<option value="memNo">작성자</option>
-			<option value="boardTitle">제목</option>
-			<option value="boardContent">내용</option>
-		</select> <input type="text" class="live-search-box form-control mt20"
-			placeholder="검색하실 내용을 입력해주세요" name="searchKeyword" id=""searchKeyword"">
-		<a href="/metaus/board/boardWrite?btypeNo=3">
-			<button class="btn btn-large btn-blue btn-effect mt30" id="searchBt">
-				검색</button>
-		</a> <a href="/metaus/board/boardWrite?btypeNo=3" id="writeBoard">
-			<button class="btn btn-large btn-blue btn-effect mt30" id="writeBoard">글쓰기</button>
+		<form id="searchFrm" method="post" style="display: contents;"
+			action="<c:url value='/board/qna?btypeNo=3'/>">
+			<div id="searchBox">
+				<div class="col-md-3 col-sm-12 search-categories"
+					style="display: contents;">
+					<label for="search-categories"></label> <select
+						name="searchCondition" class="selectpicker" id="searchCondition"
+						data-live-search="true" title="검색 조건" data-size="3"
+						data-container="body" style="display: flow-root;">
+						<option value="memName">작성자</option>
+						<option value="boardTitle">제목</option>
+						<option value="boardContent">내용</option>
+					</select> <input type="text" class="live-search-box form-control mt20"
+						placeholder="검색하실 내용을 입력해주세요" name="searchKeyword"
+						id="searchKeyword"> <input type="hidden" name="btypeNo"
+						value="3">
+					<button class="btn btn-large btn-blue btn-effect mt30"
+						id="searchBt" type="submit">검색</button>
+				</div>
+			</div>
+		</form>
+		<a href="/metaus/board/boardWrite?btypeNo=3" id="writeBoard">
+			<button class="btn btn-large btn-blue btn-effect mt30"
+				id="writeBoard" style="float: right;">글쓰기</button>
 		</a>
-	</div>
-</div>
-
-<!-- 검색 끝 -->
+		<!-- 검색 끝 -->
 
 		<!-- Start of Row -->
 		<div class="row mt60">
@@ -110,7 +114,12 @@
 												<c:if test="${vo.boardNo==map['BOARD_NO'] }">
 													<img
 														src="<c:url value='/img_upload/${vo.bfileFilename }'/>"
-														class="img-responsive" alt="이미지" />
+														class="img-responsive" />
+												</c:if>
+												<c:if test="${vo.boardNo!=map['BOARD_NO'] }">
+													<img
+														src="<c:url value='/images/board/noimg.png'/>"
+														class="img-responsive"/>
 												</c:if>
 											</c:forEach>
 										</a>
@@ -158,34 +167,36 @@
 							<!-- ===== End of Single Candidate 1 ===== -->
 					</c:forEach>
 					<!-- 반복 종료 -->
-					
+
 					<!-- Start of Pagination -->
 					<div class="col-md-12">
-					<ul class="pagination list-inline text-center">
-					<c:if test="${pagingInfo.firstPage>1 }">
-						<li><a href="#" onclick="boardList(${pagingInfo.firstPage-1})">prev</a></li>
-					</c:if>
+						<ul class="pagination list-inline text-center">
+							<c:if test="${pagingInfo.firstPage>1 }">
+								<li><a href="#"
+									onclick="boardList(${pagingInfo.firstPage-1})">prev</a></li>
+							</c:if>
 
-					<!-- [1][2][3][4][5][6][7][8][9][10] -->
-					<c:forEach var="i" begin="${pagingInfo.firstPage }"
-						end="${pagingInfo.lastPage }">
-						<c:if test="${i==pagingInfo.currentPage }">
-							<li class="active"><a>${i }</a></li>
-						</c:if>
-						<c:if test="${i!=pagingInfo.currentPage }">
-							<li><a href="#" onclick="boardList(${i})">${i } </a></li>
-						</c:if>
-					</c:forEach>
+							<!-- [1][2][3][4][5][6][7][8][9][10] -->
+							<c:forEach var="i" begin="${pagingInfo.firstPage }"
+								end="${pagingInfo.lastPage }">
+								<c:if test="${i==pagingInfo.currentPage }">
+									<li class="active"><a>${i }</a></li>
+								</c:if>
+								<c:if test="${i!=pagingInfo.currentPage }">
+									<li><a href="#" onclick="boardList(${i})">${i } </a></li>
+								</c:if>
+							</c:forEach>
 
-					<c:if test="${pagingInfo.lastPage<pagingInfo.totalPage }">
-						<li><a href="#" onclick="boardList(${pagingInfo.lastPage+1})">Next</a></li>
-					</c:if>
-					<!--  페이지 번호 끝 -->
-					</ul>
+							<c:if test="${pagingInfo.lastPage<pagingInfo.totalPage }">
+								<li><a href="#"
+									onclick="boardList(${pagingInfo.lastPage+1})">Next</a></li>
+							</c:if>
+							<!--  페이지 번호 끝 -->
+						</ul>
 					</div>
 					<!-- End of Pagination -->
-					
-					
+
+
 				</c:if>
 			</div>
 			<!-- 페이징 처리를 위한 form 시작-->

@@ -3,10 +3,17 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.metaus.board.model.BoardDAO">
-	<sql id="searchWhere">
+	<sql id="searchandWhere">
 		<if test="searchKeyword !=null and searchKeyword !=''">
-        	where ${searchCondition} 
-        	like '%' || #{searchKeyword} || '%'
+			<if test="searchCondition == 'mem_name'">
+				and m.mem_name like '%' || #{searchKeyword} || '%'
+			</if>
+			<if test="searchCondition == 'boardTitle'">
+				and b.board_title like '%' || #{searchKeyword} || '%'
+			</if>
+			<if test="searchCondition == 'boardContent'">
+				and b.board_content like '%' || #{searchKeyword} || '%'
+			</if>
         </if>
 	</sql>
 
@@ -48,8 +55,8 @@
 					on b.mem_no=m.mem_no
 					left join fp_boardatc f
 					on b.board_no= f.board_no
-					where b.btype_no=#{btypeNo}
-					<include refid="searchWhere"></include>
+					where b.btype_no=#{btypeNo} and board_delFlag='N'
+					<include refid="searchandWhere"/>
 					order by board_regdate desc
 				)A
 		)
@@ -95,7 +102,7 @@
 	<select id="selectTotalRecord" parameterType="int"
 		resultType="int">
 		select count(*) from fp_board
-		where btype_no=#{btypeNo}
+		where btype_no=#{btypeNo} and board_delFlag='N'
 	</select>
 	
 	<select id="selectByBoardNo" parameterType="int" resultType="boardVo">
@@ -120,8 +127,9 @@
 		where bfile_no=#{bfileNo}
 	</update>
 	
-	<delete id="deleteBoardAtc" parameterType="boardAtcVo">
-		delete fp_boardatc
-		where bfile_no=#{bfileNo}
+	<delete id="deleteBoard" parameterType="boardVo">
+		update fp_board
+		set board_delFlag='Y'
+		where board_no=#{boardNo}
 	</delete>
 </mapper>
