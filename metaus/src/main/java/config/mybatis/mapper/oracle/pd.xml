@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.metaus.pd.model.PdDAO">
+
+	<select id="selectPdByNo" parameterType="int"
+		resultType="PdVo">
+		select * from fp_pd
+		where pd_no=#{pdNo}
+	</select>
+	
+	<insert id="insertPd" parameterType="PdVO">
+		<selectKey resultType="int" keyProperty="pdNo" order="BEFORE">
+			select fp_pd_seq.nextval from dual
+		</selectKey>
+		insert into fp_pd(pd_no, pd_name, pd_pre, pd_filename, pd_originname, pd_filesize)
+		values(#{pdNo},#{pdName},#{pdPre},#{pdFilename},#{pdOriginname},#{pdFilesize});
+	</insert>
+	
+	<select id="selectByCategory" parameterType="int"
+		resultType="pdVo">
+		select * from fp_pd
+		where cate_no=#{cateNo}
+	</select>
+	
+	<delete id="deletePd" parameterType="int">
+		delete from fp_pd
+		where pd_no=#{pdNo}
+	</delete>
+</mapper>

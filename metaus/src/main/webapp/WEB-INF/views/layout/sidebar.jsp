@@ -7,7 +7,11 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>MetaUS</title>
+    <meta name ="google-signin-client_id" content="386529770600-22sjdk23dmt8g9lgdcheujm6ciugjevo.apps.googleusercontent.com">
+<!-- Mobile viewport optimized -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=no">
+
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
     <!-- Bootstrap 3.3.2 -->
     <link href="${pageContext.request.contextPath}/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
@@ -59,7 +63,51 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
     <![endif]-->
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/mypage.css">
-
+    <script type="text/javascript" src="<c:url value='/js/jquery-3.6.0.min.js'/>"></script>
+	<script src = "https://developers.kakao.com/sdk/js/kakao.min.js"></script>
+	<script async defer crossorigin="anonymous" src="https://connect.facebook.net/ko_KR/sdk.js#xfbml=1&version=v10.0&appId=550605189855072" nonce="SiOBIhLG"></script>
+	<script>
+	$(function(){
+		$('#logoutBtn').click(function(){
+			console.log("click");
+			var loginType = '${sessionScope.isLogin}';
+			if(loginType=='kakao'){
+				Kakao.init('48fd685b6c1070cc71f894be6653d843');
+				if (Kakao.Auth.getAccessToken()) {
+				      Kakao.API.request({
+				    	  
+				        url: '/v1/user/unlink',
+				        success: function(response) {
+				        	console.log(response);
+				        	console.log('성공');
+				        	Kakao.Auth.setAccessToken(undefined);
+							location.href="<c:url value='/login/logout'/>";
+				        },
+				        fail: function(error) {
+				          console.log(error);
+				        }
+				      });
+			    }
+			}else if(loginType=='naver'){
+				location.href="<c:url value='/login/logout'/>";
+			}else if(loginType=='facebook'){
+		
+			        FB.login(function(response) {
+			            if (response.status === 'connected') {
+			                FB.logout(function(response) {
+	
+			                		location.href="<c:url value='/login/logout'/>";
+			                    });
+			                }
+			     
+			        });
+			}else{
+				location.href="<c:url value='/login/logout'/>";
+			}
+		});
+	
+	});
+	</script>
   </head>
   <!-- ADD THE CLASS sidedar-collapse TO HIDE THE SIDEBAR PRIOR TO LOADING THE SITE -->
   <!-- <body class="skin-blue sidebar-collapse fixed"> -->
@@ -271,12 +319,10 @@
 	                            </ul>
 	                        </li>
 	
-	                        
-	
 	                        <!-- Login Menu Item -->
-	                        <li class="menu-item login-btn right">
-	                            <a id="modal_trigger" href="javascript:void(0)" role="button"><i class="fa fa-lock"></i>login</a>
-	                        </li>
+                            <li class="menu-item logout-btn">
+                                <a id="logoutBtn" role="button"><i class="fa fa-lock"></i> logout</a>
+                            </li>
 	                        <div class="clear"></div>
 	
 	                    </ul>

@@ -44,8 +44,8 @@ public class BoardServiceImpl implements BoardService {
 		return boardDao.updateBoardReadCount(boardNo);
 	}
 	@Override
-	public int selectTotalRecord(int btypeNo) {
-		return boardDao.selectTotalRecord(btypeNo);
+	public int selectTotalRecord(SearchVO searchVo) {
+		return boardDao.selectTotalRecord(searchVo);
 	}
 	@Override
 	public List<BoardVO> selectBoardFaq(BoardVO boardVo) {
@@ -67,6 +67,11 @@ public class BoardServiceImpl implements BoardService {
 	public BoardAtcVO selectByBfileNo(int bfileNo) {
 		return boardDao.selectBoardAtcByNo(bfileNo);
 	}
+	@Override
+	public int deleteBoard(BoardVO vo) {
+		return boardDao.deleteBoard(vo);
+	}
+	
 	
 
 }

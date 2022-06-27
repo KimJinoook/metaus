@@ -1,4 +1,4 @@
-package com.metaus.vod.controller;
+package com.metaus.crawling.model;
 
 import java.io.IOException;
 import java.util.Objects;
