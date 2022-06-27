@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.metaus.mailbox.model.MailboxDAO">
+	<insert id="insertMailbox" parameterType="mailboxVo">
+		<selectKey resultType="int" keyProperty="msgNo" order="BEFORE">
+			select FP_MSG_SEQ.nextval from dual
+		</selectKey>
+		
+		insert into fp_msg(msg_no, msg_title, msgadd_adser, msg_content)
+		values(#{msgNo}, #{msgTitle}, #{msgaddAdser}, #{msgContent})
+	</insert>
+	
+	<select id="selectMsgNo" resultType="int">
+		select msg_no from fp_msg
+		where rownum=1 order by msg_no desc
+	</select>
+	
+	<insert id="insertRecipient" parameterType="RecipientVO">
+		<selectKey resultType="int" keyProperty="msgaddNo" order="BEFORE">
+			select fp_msgadd_SEQ.nextval from dual
+		</selectKey>
+		
+		insert into fp_msgadd(msgadd_no, msg_no, msgadd_adsee)
+		values(#{msgaddNo}, #{msgNo}, #{msgaddAdsee})
+	</insert>
+</mapper>

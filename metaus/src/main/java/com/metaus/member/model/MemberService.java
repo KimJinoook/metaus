@@ -2,6 +2,8 @@ package com.metaus.member.model;
 
 import java.util.List;
 
+import com.metaus.common.SearchVO;
+
 public interface MemberService {
 	public static final int USABLE_ID=1;  //사용가능한 아이디
 	public static final int UNUSABLE_ID=2; //이미 존재해서 사용불가능한 아이디
@@ -23,6 +25,7 @@ public interface MemberService {
 	public String findId(MemberVO vo);
 	public String findPw(MemberVO vo);
 	public int updatePw(MemberVO vo);
-	public List<MemberVO> selectAllCreater();
+	public List<MemberVO> selectAllCreater(SearchVO vo);
+	public int getTotalRecord(SearchVO vo);
 
 }
