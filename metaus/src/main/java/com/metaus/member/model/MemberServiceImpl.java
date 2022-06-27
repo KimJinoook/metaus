@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.metaus.common.SearchVO;
 
 import lombok.RequiredArgsConstructor;
 
@@ -77,8 +78,12 @@ public class MemberServiceImpl implements MemberService {
 		return memberDao.updatePw(vo);
 	}
 	
-	public List<MemberVO> selectAllCreater(){
-		return memberDao.selectAllCreater();
+	public List<MemberVO> selectAllCreater(SearchVO vo){
+		return memberDao.selectAllCreater(vo);
+	}
+	
+	public int getTotalRecord(SearchVO vo) {
+		return memberDao.getTotalRecord(vo);
 	}
 
 }

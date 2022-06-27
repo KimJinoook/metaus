@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.metaus.common.SearchVO;
+
 
 @Mapper
 public interface MemberDAO {
@@ -19,6 +21,7 @@ public interface MemberDAO {
 	public String findId(MemberVO vo);
 	public String findPw(MemberVO vo);
 	public int updatePw(MemberVO vo);
-	public List<MemberVO> selectAllCreater();
+	public List<MemberVO> selectAllCreater(SearchVO vo);
+	public int getTotalRecord(SearchVO vo);
 
 }
