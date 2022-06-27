@@ -5,7 +5,7 @@
 <mapper namespace="com.metaus.board.model.BoardDAO">
 	<sql id="searchandWhere">
 		<if test="searchKeyword !=null and searchKeyword !=''">
-			<if test="searchCondition == 'mem_name'">
+			<if test="searchCondition == 'memName'">
 				and m.mem_name like '%' || #{searchKeyword} || '%'
 			</if>
 			<if test="searchCondition == 'boardTitle'">
@@ -99,10 +99,22 @@
 		where board_no=#{boardNo}
 	</update>
 
-	<select id="selectTotalRecord" parameterType="int"
+	<select id="selectTotalRecord" parameterType="searchVo"
 		resultType="int">
-		select count(*) from fp_board
+		select count(*) from fp_board b left join fp_mem m
+		on b.mem_no = m.mem_no
 		where btype_no=#{btypeNo} and board_delFlag='N'
+		<if test="searchKeyword !=null and searchKeyword !=''">
+			<if test="searchCondition == 'memName'">
+				and m.mem_name like '%' || #{searchKeyword} || '%'
+			</if>
+			<if test="searchCondition == 'boardTitle'">
+				and b.board_title like '%' || #{searchKeyword} || '%'
+			</if>
+			<if test="searchCondition == 'boardContent'">
+				and b.board_content like '%' || #{searchKeyword} || '%'
+			</if>
+        </if>
 	</select>
 	
 	<select id="selectByBoardNo" parameterType="int" resultType="boardVo">

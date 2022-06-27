@@ -17,7 +17,7 @@ public interface BoardDAO {
 	BoardVO selectBoardDetail(int boardNo);
 	BoardAtcVO selectBoardAtcByNo(int boardNo);
 	int updateBoardReadCount(int boardNo);
-	int selectTotalRecord(int btypeNo);
+	int selectTotalRecord(SearchVO searchVo);
 	List<BoardVO> selectBoardFaq(BoardVO boardVo);
 	int updateBoard(BoardVO vo);
 	int updateBoardAtc(BoardAtcVO vo);

@@ -61,7 +61,7 @@ public class BoardController {
 		List<Map<String, Object>>list = boardService.selectBoard(searchVo);
 		logger.info("notice 목록 조회 결과, list.size={}", list.size());
 		List<BoardAtcVO> atcList = boardService.selectBoardAtc();
-		int totalRecord=boardService.selectTotalRecord(btypeNo);
+		int totalRecord=boardService.selectTotalRecord(searchVo);
 		pagingInfo.setTotalRecord(totalRecord);
 		
 		logger.info("notice 목록 조회-레코드 개수, totalRecord={}", totalRecord);
@@ -114,7 +114,7 @@ public class BoardController {
 		List<Map<String, Object>>list = boardService.selectBoard(searchVo);
 		logger.info("news 목록 조회 결과, list.size={}", list.size());
 		List<BoardAtcVO> atcList = boardService.selectBoardAtc();
-		int totalRecord=boardService.selectTotalRecord(btypeNo);
+		int totalRecord=boardService.selectTotalRecord(searchVo);
 		pagingInfo.setTotalRecord(totalRecord);
 		
 		logger.info("news 목록 조회-레코드 개수, totalRecord={}", totalRecord);
@@ -152,7 +152,7 @@ public class BoardController {
 		List<Map<String, Object>>list = boardService.selectBoard(searchVo);
 		logger.info("freeBoard 목록 조회 결과, list.size={}", list.size());
 		List<BoardAtcVO> atcList = boardService.selectBoardAtc();
-		int totalRecord=boardService.selectTotalRecord(btypeNo);
+		int totalRecord=boardService.selectTotalRecord(searchVo);
 		pagingInfo.setTotalRecord(totalRecord);
 		
 		logger.info("freeBoard 목록 조회-레코드 개수, totalRecord={}", totalRecord);
@@ -191,7 +191,7 @@ public class BoardController {
 		List<Map<String, Object>>list = boardService.selectBoard(searchVo);
 		logger.info("QuestionBoard 목록 조회 결과, list.size={}", list.size());
 		List<BoardAtcVO> atcList = boardService.selectBoardAtc();
-		int totalRecord=boardService.selectTotalRecord(btypeNo);
+		int totalRecord=boardService.selectTotalRecord(searchVo);
 		pagingInfo.setTotalRecord(totalRecord);
 		
 		logger.info("QuestionBoard 목록 조회-레코드 개수, totalRecord={}", totalRecord);
@@ -230,7 +230,7 @@ public class BoardController {
 		List<Map<String, Object>>list = boardService.selectBoard(searchVo);
 		logger.info("qna 목록 조회 결과, list.size={}", list.size());
 		List<BoardAtcVO> atcList = boardService.selectBoardAtc();
-		int totalRecord=boardService.selectTotalRecord(btypeNo);
+		int totalRecord=boardService.selectTotalRecord(searchVo);
 		pagingInfo.setTotalRecord(totalRecord);
 		
 		logger.info("qna 목록 조회-레코드 개수, totalRecord={}", totalRecord);
@@ -272,7 +272,7 @@ public class BoardController {
 		List<Map<String, Object>>list = boardService.selectBoard(searchVo);
 		logger.info("shareBoard 목록 조회 결과, list.size={}", list.size());
 		List<BoardAtcVO> atcList = boardService.selectBoardAtc();
-		int totalRecord=boardService.selectTotalRecord(btypeNo);
+		int totalRecord=boardService.selectTotalRecord(searchVo);
 		pagingInfo.setTotalRecord(totalRecord);
 		
 		logger.info("shareBoard 목록 조회-레코드 개수, totalRecord={}", totalRecord);
@@ -311,7 +311,7 @@ public class BoardController {
 		List<Map<String, Object>>list = boardService.selectBoard(searchVo);
 		logger.info("requestBoard 목록 조회 결과, list.size={}", list.size());
 		List<BoardAtcVO> atcList = boardService.selectBoardAtc();
-		int totalRecord=boardService.selectTotalRecord(btypeNo);
+		int totalRecord=boardService.selectTotalRecord(searchVo);
 		pagingInfo.setTotalRecord(totalRecord);
 		
 		logger.info("requestBoard 목록 조회-레코드 개수, totalRecord={}", totalRecord);

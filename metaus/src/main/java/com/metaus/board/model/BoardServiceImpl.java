@@ -44,8 +44,8 @@ public class BoardServiceImpl implements BoardService {
 		return boardDao.updateBoardReadCount(boardNo);
 	}
 	@Override
-	public int selectTotalRecord(int btypeNo) {
-		return boardDao.selectTotalRecord(btypeNo);
+	public int selectTotalRecord(SearchVO searchVo) {
+		return boardDao.selectTotalRecord(searchVo);
 	}
 	@Override
 	public List<BoardVO> selectBoardFaq(BoardVO boardVo) {
