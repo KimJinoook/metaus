@@ -51,13 +51,7 @@
 	                    <input type="text" class="form-control" name="msgTitle" placeholder="제목:"/>
 	                  </div>
 	                  <div class="form-group">
-	                    <textarea id="compose-textarea" name="msgContent" class="form-control" style="height: 300px">
-	                      메세지 내용
-	                      메세지 내용
-	                      메세지 내용
-	                      메세지 내용
-	                      메세지 내용
-	                    </textarea>
+	                    <textarea id="compose-textarea" name="msgContent" class="form-control" style="height: 300px"></textarea>
 	                  </div>
 	                  <div class="form-group">
 	                    <div class="btn btn-default btn-file">
