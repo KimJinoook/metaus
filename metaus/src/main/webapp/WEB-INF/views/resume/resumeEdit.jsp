@@ -29,8 +29,8 @@
 			}
 	}); 
 	
-		
-	$('#resTitle').keyup(function(){
+	
+	$('#resTitle').keyup(function(){				
 		var img="";
 		if($('#resTitle').val()==""){
 			img="<img scr='../images/portfolio/엑스.png'>";
@@ -69,8 +69,11 @@
 	    </section>
 			<div>
 				<input type="text" class="live-search-box form-control mt20 ss" 
-				name="resTitle" id="resTitle" placeholder="제목을 입력하세요" value="${rvo.resTitle }">
+				name="resTitle" id="resTitle" placeholder="제목을 입력하세요" value="${rvo.resTitle }">				
+			<%-- <c:if test="${empty rrvo}">
+				<img src="<c:url value='/images/portfolio/엑스.png'/>"> --%>
 				<span class="error"></span>
+			<%-- </c:if> --%>
 			</div>
                         
         <div class="container">
@@ -84,8 +87,7 @@
                         <!-- Profile Title -->
                         
                         <div class="form-group">
-                            <label>이름&nbsp; : &nbsp;</label><span>${mvo.memName}</span>
-                          
+                            <label>이름&nbsp; : &nbsp;</label><span>${mvo.memName}</span>                          
                         </div>
                     
                         <div class="form-group">

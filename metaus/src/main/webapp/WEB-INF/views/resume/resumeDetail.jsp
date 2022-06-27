@@ -32,14 +32,14 @@
         <div class="container">
 				
             <!-- Start of Row -->
-            <div class="row candidate-profile nomargin" style="background-color: #f0f0f0">            
+            <div class="row candidate-profile nomargin" style="background-color: #f0f0f0" >            
                 <!-- Start of Profile Description -->
                 <div class="col-md-9 col-xs-12">
                     <div class="profile-descr">
 						 
 						 
                         <!-- Profile Title -->
-                         <div class="form-group" style="font-size: 17px;">
+                         <div class="form-group" style="font-size: 17px;" align="center">
                            <!--  <label>제목 : </label>&nbsp; -->
                             <span class="title">< &nbsp;${rvo.resTitle }&nbsp; ></span>
                         </div>
