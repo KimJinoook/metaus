@@ -38,14 +38,14 @@
               </div><!-- /. box -->
             </div><!-- /.col -->
             <div class="col-md-9">
-            <form name="frm" action="/mailbox/sendMail" method="post" enctype="multipart/form-data">
+            <form name="frm" action="<c:url value='/mailbox/sendMail' />" method="post" enctype="multipart/form-data">
 	              <div class="box box-primary">
 	                <div class="box-header with-border">
 	                  <h3 class="box-title">새 메세지</h3>
 	                </div><!-- /.box-header -->
 	                <div class="box-body">
 	                  <div class="form-group">
-	                    <input type="text" class="form-control" name="msgRecipient" placeholder="받는사람:"/>
+	                    <input type="text" class="form-control" name="msgaddAdsee" placeholder="받는사람:"/>
 	                  </div>
 	                  <div class="form-group">
 	                    <input type="text" class="form-control" name="msgTitle" placeholder="제목:"/>
@@ -90,7 +90,11 @@
 
 	<%@ include file="../layout/sidebar_function_bottom.jsp" %>
 	<script type="text/javascript">
-	
+		$(function(){
+			$('button[type=submit]').click(function(){
+				$('form[name=frm]').submit();
+			});
+		});
 	</script>
   </body>
 </html>

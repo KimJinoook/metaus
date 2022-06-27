@@ -235,10 +235,10 @@ $(function(){
 
                                     <!-- Dropdown Submenu -->
                                     <li class="dropdown-submenu">
-                                        <a href="#">blog right sidebar<i class="fa fa-angle-right"></i></a>
+                                        <a href="#">메세지<i class="fa fa-angle-right"></i></a>
                                         <ul class="dropdown-menu">
-                                            <li><a href="blog-right-sidebar-v1.html">version 1</a></li>
-                                            <li><a href="blog-right-sidebar-v2.html">version 2</a></li>
+                                            <li><a href="<c:url value='/mailbox/mailbox'/>">메세지 목록</a></li>
+                                            <li><a href="<c:url value='/mailbox/compose'/>">메세지 작성</a></li>
                                         </ul>
                                     </li>
 
