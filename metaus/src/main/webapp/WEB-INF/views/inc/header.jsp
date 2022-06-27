@@ -167,7 +167,6 @@ $(function(){
                                                     <li><a href="<c:url value='/board/freeBoard?btypeNo=8'/>">자유 게시판</a></li>
                                                     <li><a href="<c:url value='/board/QuestionBoard?btypeNo=5'/>">질문 게시판</a></li>
                                                     <li><a href="<c:url value='/board/shareBoard?btypeNo=6'/>">공유/정보 게시판</a></li>
-                                                    <li><a href="<c:url value='/board/requestBoard?btypeNo=7'/>">개인의뢰 게시판</a></li>
 	                                                </ul>
 
                                                 <ul class="col-md-4">
