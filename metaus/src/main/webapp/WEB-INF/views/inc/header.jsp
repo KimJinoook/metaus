@@ -167,7 +167,6 @@ $(function(){
                                                     <li><a href="<c:url value='/board/freeBoard?btypeNo=8'/>">자유 게시판</a></li>
                                                     <li><a href="<c:url value='/board/QuestionBoard?btypeNo=5'/>">질문 게시판</a></li>
                                                     <li><a href="<c:url value='/board/shareBoard?btypeNo=6'/>">공유/정보 게시판</a></li>
-                                                    <li><a href="<c:url value='/board/requestBoard?btypeNo=7'/>">개인의뢰 게시판</a></li>
 	                                                </ul>
 
                                                 <ul class="col-md-4">
@@ -249,10 +248,10 @@ $(function(){
 
                                     <!-- Dropdown Submenu -->
                                     <li class="dropdown-submenu">
-                                        <a href="#">blog fullwidth<i class="fa fa-angle-right"></i></a>
+                                        <a href="#">메세지<i class="fa fa-angle-right"></i></a>
                                         <ul class="dropdown-menu">
-                                            <li><a href="blog-fullwidth-v1.html">version 1</a></li>
-                                            <li><a href="blog-fullwidth-v2.html">version 2</a></li>
+                                            <li><a href="<c:url value='/mailbox/mailbox'/>">메세지 목록</a></li>
+                                            <li><a href="<c:url value='/mailbox/compose'/>">메세지 작성</a></li>
                                         </ul>
                                     </li>
 
