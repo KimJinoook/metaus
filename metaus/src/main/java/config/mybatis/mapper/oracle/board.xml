@@ -3,6 +3,12 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.metaus.board.model.BoardDAO">
+	<sql id="searchWhere">
+		<if test="searchKeyword !=null and searchKeyword !=''">
+        	where ${searchCondition} 
+        	like '%' || #{searchKeyword} || '%'
+        </if>
+	</sql>
 
 	<insert id="insertBoard" parameterType="boardVo">
 		<selectKey resultType="int" keyProperty="boardNo"
@@ -43,6 +49,7 @@
 					left join fp_boardatc f
 					on b.board_no= f.board_no
 					where b.btype_no=#{btypeNo}
+					<include refid="searchWhere"></include>
 					order by board_regdate desc
 				)A
 		)
@@ -51,6 +58,16 @@
 		<![CDATA[	
 		and RNUM<=#{firstRecordIndex} + #{recordCountPerPage} ]]>
 	</select>
+	
+	<select id="selectBoardFaq" parameterType="boardVo" resultType="boardVo">
+		select b.*, m.mem_name, f.bfile_filename
+		from fp_board b join fp_mem m
+		on b.mem_no=m.mem_no
+		left join fp_boardatc f
+		on b.board_no= f.board_no
+		where b.btype_no=#{btypeNo}
+		order by board_regdate desc
+	</select>
 
 	<select id="selectBoardAtc" resultType="boardAtcVo">
 		select * from fp_boardatc
@@ -58,7 +75,8 @@
 
 	<select id="selectBoardDetail" parameterType="int"
 		resultType="boardVo">
-		select * from fp_board
+		select *
+		from fp_board
 		where board_no=#{boardNo}
 	</select>
 
@@ -79,5 +97,31 @@
 		select count(*) from fp_board
 		where btype_no=#{btypeNo}
 	</select>
+	
+	<select id="selectByBoardNo" parameterType="int" resultType="boardVo">
+		select * from fp_board
+		where board_no=#{boardNo}
+	</select>
+	
+	<select id="selectByBfileNo" parameterType="int" resultType="boardAtcVo">
+		select * from fp_boardatc
+		where bfile_no=#{bfileNo}
+	</select>
 
+	<update id="updateBoard" parameterType="boardVo">
+		update fp_board
+		set board_title=#{boardTitle}, board_content=#{boardContent}
+		where board_no=#{boardNo}
+	</update>
+	
+	<update id="updateBoardAtc" parameterType="boardAtcVo">
+		update fp_boardatc
+		set bfile_filename=#{bfileFilename}, bfile_originname=#{bfileOriginname}
+		where bfile_no=#{bfileNo}
+	</update>
+	
+	<delete id="deleteBoardAtc" parameterType="boardAtcVo">
+		delete fp_boardatc
+		where bfile_no=#{bfileNo}
+	</delete>
 </mapper>

@@ -4,12 +4,23 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ include file="../inc/header.jsp"%>
+<link rel="stylesheet" type="text/css"
+	href="<c:url value='/css/search.css'/>">
 <script type="text/javascript">
 	function boardList(curPage){
 		$('input[name=currentPage]').val(curPage);
 		$('form[name=frmPage]').submit();
 	}
+	$(function(){
+		$('#writeBoard').click(function(){
+			if($('#memId').val()=="" || $('#memId').val()==null){
+				alert('로그인 후 이용가능합니다!');
+				event.preventDefault();
+			}
+		});
+	});
 </script>
+<input type="hidden" id="memId" name="memId" value="${memId }">
 <!-- =============== Start of Page Header 1 Section =============== -->
 <section class="page-header" style="margin-top: 150px;">
 	<div class="container">
@@ -38,9 +49,28 @@
 </section>
 <!-- =============== End of Page Header 1 Section =============== -->
 
-
-
-<a href="/metaus/board/boardWrite?btypeNo=5">[글쓰기]</a>
+<!-- 검색 시작 -->
+<div id="searchBox">
+	<div class="col-md-3 col-sm-12 search-categories"
+		style="display: contents;">
+		<label for="search-categories"></label> <select name="searchCondition"
+			class="selectpicker" id="search-categories" data-live-search="true"
+			title="검색 조건" data-size="3" data-container="body"
+			style="display: flow-root;">
+			<option value="3">작성자</option>
+			<option value="8">제목</option>
+			<option value="5">내용</option>
+		</select> <input type="text" class="live-search-box form-control mt20"
+			placeholder="검색하실 내용을 입력해주세요" name="searchKeyword" id=""searchKeyword"">
+		<a href="/metaus/board/boardWrite?btypeNo=8">
+			<button class="btn btn-large btn-blue btn-effect mt30" id="searchBt">
+				검색</button>
+		</a><a href="/metaus/board/boardWrite?btypeNo=5">
+			<button class="btn btn-large btn-blue btn-effect mt30" id="writeBoard">글쓰기</button>
+		</a>
+	</div>
+</div>
+<!-- 검색 끝 -->
 
 <!-- ===== Start of Blog Listing Section ===== -->
 <section class="blog-listing ptb80" id="version2" style="padding: 30px;">

@@ -25,4 +25,6 @@ public class MemberVO {
 	private String memKakao;
 	private String memNaver;
 	private String memFacebook;
+	private int memItem;
+	private int memComplete;
 }

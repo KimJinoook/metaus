@@ -64,23 +64,22 @@
 						</div>
 					</c:if>
 					<c:if test="${!empty list }">
-						<c:forEach var="map" items="${list }">
-
+						<c:set var="i" value="1"/>
+						<c:forEach var="vo" items="${list }">
+							
 							<div class="col-md-12 topic">
 								<!-- Question -->
 								<div class="open">
 									<h6 class="question"
-										data-search-term="1. how does cloudify work?">${map['BOARD_NO'] }.
-										${map['BOARD_TITLE'] }</h6>
+										data-search-term="1. how does cloudify work?">${i}.
+										${vo.boardTitle}</h6>
 									<i class="fa fa-angle-down hidden-xs"></i>
 								</div>
 
 								<!-- Answer -->
-								<p class="answer" style="display: none;">오른쪽 위에 LOGIN 버튼을 클릭
-									후 "아직 계정이 없으시다면 여기를 클릭하세요" 부분을 클릭하시면 일반회원, 기업회원으로 회원가입을 진행하실 수
-									있습니다.</p>
+								<p class="answer" style="display: none;">${vo.boardContent}</p>
 							</div>
-
+							<c:set var="i" value="${i+1 }" />
 						</c:forEach>
 					</c:if>
 

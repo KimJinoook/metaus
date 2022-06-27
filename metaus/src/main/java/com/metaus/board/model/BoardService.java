@@ -15,4 +15,9 @@ public interface BoardService {
 	BoardAtcVO selectBoardAtcByNo(int boardNo);
 	int updateBoardReadCount(int boardNo);
 	int selectTotalRecord(int btypeNo);
+	List<BoardVO> selectBoardFaq(BoardVO boardVo);
+	int updateBoard(BoardVO vo);
+	int updateBoardAtc(BoardAtcVO vo);
+	BoardVO selectByBoardNo(int boardNo);
+	BoardAtcVO selectByBfileNo(int bfileNo);
 }

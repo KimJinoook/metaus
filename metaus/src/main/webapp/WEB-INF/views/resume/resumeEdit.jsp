@@ -62,7 +62,7 @@
 	            <!-- Start of Page Title -->
 	            <div class="row">
 	                <div class="col-md-12">
-	                    <h2>Resume</h2>
+	                    <h1>Resume</h1>
 	                </div>
 	            </div>
 	        </div>
@@ -84,13 +84,13 @@
                         <!-- Profile Title -->
                         
                         <div class="form-group">
-                            <label>이름 : </label><span>${mvo.memName}</span>
+                            <label>이름&nbsp; : &nbsp;</label><span>${mvo.memName}</span>
                           
                         </div>
                     
                         <div class="form-group">
-                        	<label>주소 : </label><span>${mvo.memAdd}</span><br>
-                        	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        	<label>주소&nbsp; : &nbsp;</label><span>${mvo.memAdd}</span><br>
+                        	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         	<span>${mvo.memAdd2}</span>                                                                                                                                                    
                         </div>
 
@@ -192,7 +192,7 @@
             
 					
 			<div class="form-group pt30 nomargin" id="last">
-                    <input type="submit" class="btn btn-blue btn-effect" value="등록">
+                    <input type="submit" class="btn btn-blue btn-effect" value="수정">
 			<a href="<c:url value='/resume/resumeDetail'/>" class="btn btn-blue btn-effect">취소</a>
             </div>
         </div>

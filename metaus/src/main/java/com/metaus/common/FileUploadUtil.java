@@ -68,7 +68,7 @@ public class FileUploadUtil {
 
 		return list;
 	}
-
+	
 	public String getUniqueFileName(String fileName) {
 		//파일명이 중복될 경우 파일이름 변경하기
 		//파일명에 현재시간(년월일시분초밀리초)을 붙여서 변경된 파일이름 구하기
@@ -99,18 +99,50 @@ public class FileUploadUtil {
 		if(ConstUtil.FILE_UPLOAD_TYPE.equals("test")) {
 			if(pathFlag==ConstUtil.UPLOAD_FILE_FLAG) {  //자료실
 				path=ConstUtil.FILE_UPLOAD_PATH_TEST;
-			}/*else if(pathFlag==ConstUtil.UPLOAD_IMAGE_FLAG) {  //상품등록
-				path=ConstUtil.IMAGE_FILE_UPLOAD_PATH_TEST;				
+				
+			}else if(pathFlag==ConstUtil.UPLOAD_MESSAGE_FLAG) {
+				path=ConstUtil.ATTACHMENT_FILE_UPLOAD_PATH_TEST; //메세지 첨부파일
+				
+			}else if(pathFlag==ConstUtil.UPLOAD_MEMBER_PROFILE_FLAG) {
+				path=ConstUtil.MEMBER_FILE_UPLOAD_PATH_TEST; //일반회원 프로필사진
+				
+			}else if(pathFlag==ConstUtil.UPLOAD_COMPANY_PROFILE_FLAG) {
+				path=ConstUtil.COMPANY_FILE_UPLOAD_PATH_TEST; //기업회원 로고
+				
+			}else if(pathFlag==ConstUtil.UPLOAD_PORTFOLIO_FLAG) {
+				path=ConstUtil.PORTFOLIO_FILE_UPLOAD_PATH_TEST; //포트폴리오 첨부파일
+				
+			}else if(pathFlag==ConstUtil.UPLOAD_RECRUIT_FLAG) {
+				path=ConstUtil.RECRUIT_FILE_UPLOAD_PATH_TEST; //기업의뢰 첨부파일
+				
+			}else if(pathFlag==ConstUtil.UPLOAD_PRODUCT_FLAG) {
+				path=ConstUtil.PRODUCT_FILE_UPLOAD_PATH_TEST; //상품모델링 첨부파일
+				
 			}
-			*/
+			
 		}else {  //deploy
 			if(pathFlag==ConstUtil.UPLOAD_FILE_FLAG) {  //자료실
 				path=ConstUtil.FILE_UPLOAD_PATH;  //pds_upload
-			}/*
-			 else if(pathFlag==ConstUtil.UPLOAD_IMAGE_FLAG) {  //상품등록
-				path=ConstUtil.IMAGE_FILE_UPLOAD_PATH; //pd_images				
+				
+			}else if(pathFlag==ConstUtil.UPLOAD_MESSAGE_FLAG) {
+				path=ConstUtil.ATTACHMENT_FILE_UPLOAD_PATH;  //message_attachment
+				
+			}else if(pathFlag==ConstUtil.UPLOAD_MEMBER_PROFILE_FLAG) {
+				path=ConstUtil.MEMBER_FILE_UPLOAD_PATH; //일반회원 프로필사진
+				
+			}else if(pathFlag==ConstUtil.UPLOAD_COMPANY_PROFILE_FLAG) {
+				path=ConstUtil.COMPANY_FILE_UPLOAD_PATH; //기업회원 로고
+				
+			}else if(pathFlag==ConstUtil.UPLOAD_PORTFOLIO_FLAG) {
+				path=ConstUtil.PORTFOLIO_FILE_UPLOAD_PATH; //포트폴리오 첨부파일
+				
+			}else if(pathFlag==ConstUtil.UPLOAD_RECRUIT_FLAG) {
+				path=ConstUtil.RECRUIT_FILE_UPLOAD_PATH; //기업의뢰 첨부파일
+				
+			}else if(pathFlag==ConstUtil.UPLOAD_PRODUCT_FLAG) {
+				path=ConstUtil.PRODUCT_FILE_UPLOAD_PATH; //상품모델링 첨부파일
+				
 			}
-			 */
 			//실제 물리적인 경로 구하기
 			path=request.getSession().getServletContext().getRealPath(path);
 		}

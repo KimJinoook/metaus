@@ -1,5 +1,7 @@
 package com.metaus.member.model;
 
+import java.util.List;
+
 public interface MemberService {
 	public static final int USABLE_ID=1;  //사용가능한 아이디
 	public static final int UNUSABLE_ID=2; //이미 존재해서 사용불가능한 아이디
@@ -18,5 +20,9 @@ public interface MemberService {
 	public int updateKakao(int memNo);
 	public int updateNaver(int memNo);
 	public int updateFacebook(int memNo);
+	public String findId(MemberVO vo);
+	public String findPw(MemberVO vo);
+	public int updatePw(MemberVO vo);
+	public List<MemberVO> selectAllCreater();
 
 }

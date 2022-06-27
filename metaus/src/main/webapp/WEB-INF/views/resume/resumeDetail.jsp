@@ -16,13 +16,13 @@
 	<form action="<c:url value='/resume/resumeEdit'/>" method="get">
 	<%-- <input type="hidden" name="memNo" value="${rvo.memNo }"> --%>
     <!-- ===== Start of Main Wrapper Candidate Profile Section ===== -->
-    <section class="ptb80" id="candidate-profile">
+    <section class="portfolio ptb80" id="candidate-profile" id="version2">
 	    <section class="page-header">
 	        <div class="container">
 	            <!-- Start of Page Title -->
 	            <div class="row">
 	                <div class="col-md-12">
-	                    <h2>Resume</h2>
+	                    <h1>Resume</h1>
 	                </div>
 	            </div>
 	        </div>
@@ -32,39 +32,89 @@
         <div class="container">
 				
             <!-- Start of Row -->
-            <div class="row candidate-profile nomargin">            
+            <div class="row candidate-profile nomargin" style="background-color: #f0f0f0">            
                 <!-- Start of Profile Description -->
                 <div class="col-md-9 col-xs-12">
                     <div class="profile-descr">
 						 
+						 
                         <!-- Profile Title -->
                          <div class="form-group" style="font-size: 17px;">
-                            <label>제목 : </label>&nbsp;
-                            <span>${rvo.resTitle }</span>
+                           <!--  <label>제목 : </label>&nbsp; -->
+                            <span class="title">< &nbsp;${rvo.resTitle }&nbsp; ></span>
                         </div>
                         <br>
-                        <div class="form-group" style="font-size: 17px;">
-                            <label>이름 : </label>&nbsp;
-                            <span>${mvo.memName }</span>
+                        <div class="form-group">
+                            <!-- <div class="name"> -->	                        
+			                      <ul class="list list-introduction">
+			                      	<li>
+			                            <div class="memname">${mvo.memName }</div>
+			                      	</li>
+			                      </ul>
+			             </div>
+			             <div class="form-group">
+			                      <ul class="list list-introduction">                              
+		                            <li>
+		                                <i class="fa fa-birthday-cake"></i>
+		                                <span>${mvo.memBirth}</span>
+		                            </li>
+		
+		                            <li>
+		                                <i class="fa fa-phone"></i>
+		                                <span>${mvo.memTel}</span>
+		                            </li>
+		
+		                            <li>
+		                                <i class="fa fa-envelope"></i>
+		                                <span>${mvo.memId}</span>
+		                            </li>
+		                        </ul>
+                            </div>
                         </div> 
                         <br>                     
-                        <div class="form-group" style="font-size: 17px;">
-                        	<label>주소 : </label>&nbsp;<span>${mvo.memAdd}</span><br>
-                        	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        	<span>${mvo.memAdd2}</span>                                                                                                                                                    
+                        <div class="form-group">
+                        	<ul class="list list-introduction">                              
+		                    	<li> 	
+				                    <label>주소 : </label>&nbsp;<span>${mvo.memAdd}</span><br>
+				                    <label>상세주소 : </label>&nbsp;<span>${mvo.memAdd2}</span><br> 		                        	
+		                        </li>
+		                    </ul>                                                                                                                                                  
                         </div>
 						<br>
-                	<div class="form-group" style="font-size: 17px;">
-	                    <label>연락가능시간 : </label>&nbsp;
-							<span>${rvo.resTime }</span>            	
+                	<div class="form-group">
+		            	<ul class="list list-introduction">                              
+		                	<li>
+					            <label>연락가능시간 : </label>&nbsp;
+								<span>${rvo.resTime }</span>   
+							</li>
+						</ul>         	
 		         	</div>	
 		         
-					
+					<div class="base">
+						<div class="row skills mt40">
+
+			                <div class="col-md-12 text-center" >
+			                    <h2 class="header">자기소개서</h2>
+			                </div>
+							<div class="form-group">
+								
+								<ul class="list list-introduction">
+									<li class="item">
+			                     		<div class="content">
+				                     		${rvo.resContent}
+			                     		</div>
+								                    
+									</li>
+								</ul>
+								
+			                </div>
+						</div>
+					</div>
 						
                         <!-- Profile Details -->
                         
 
-                        <ul class="profile-info mt20 nopadding">                        
+                        <%-- <ul class="profile-info mt20 nopadding">                        
                             <li>
                                 <i class="fa fa-birthday-cake"></i>
                                 <span>${mvo.memBirth}</span>
@@ -79,7 +129,7 @@
                                 <i class="fa fa-envelope"></i>
                                 <span>${mvo.memId}</span>
                             </li>
-                        </ul>
+                        </ul> --%>
 
                     </div>
                 </div>
@@ -89,17 +139,7 @@
             <!-- End of Row -->
 
 
-            <!-- Start of Row -->
-            <div class="row skills mt40">
-
-                <div class="col-md-12 text-center" >
-                    <h3 class="pb40">자기소개서</h3>
-                </div>
-				
-				<div class="form-group">                    
-                     ${rvo.resContent}
-                </div>
-			</div>	
+            
            </div>     
     </section>
     <!-- ===== End of Candidate Profile Section ===== -->
@@ -109,7 +149,7 @@
 
 
     <!-- ===== Start of Portfolio Section ===== -->
-    <section class="portfolio ptb80">
+    <section class="portfolio2 ptb80">
         <div class="container">
 
             <div class="row">

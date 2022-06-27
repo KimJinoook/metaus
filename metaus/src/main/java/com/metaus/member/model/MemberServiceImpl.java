@@ -1,5 +1,7 @@
 package com.metaus.member.model;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 
@@ -63,6 +65,20 @@ public class MemberServiceImpl implements MemberService {
 	}
 	public int updateFacebook(int memNo) {
 		return memberDao.updateFacebook(memNo);
+	}
+	
+	public String findId(MemberVO vo) {
+		return memberDao.findId(vo);
+	}
+	public String findPw(MemberVO vo) {
+		return memberDao.findPw(vo);
+	}
+	public int updatePw(MemberVO vo) {
+		return memberDao.updatePw(vo);
+	}
+	
+	public List<MemberVO> selectAllCreater(){
+		return memberDao.selectAllCreater();
 	}
 
 }

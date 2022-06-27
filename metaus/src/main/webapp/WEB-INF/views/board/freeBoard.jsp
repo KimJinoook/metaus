@@ -4,11 +4,21 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ include file="../inc/header.jsp"%>
+<link rel="stylesheet" type="text/css"
+	href="<c:url value='/css/search.css'/>">
 <script type="text/javascript">
 	function boardList(curPage){
 		$('input[name=currentPage]').val(curPage);
 		$('form[name=frmPage]').submit();
 	}
+	$(function(){
+		$('#writeBoard').click(function(){
+			if($('#memId').val()=="" || $('#memId').val()==null){
+				alert('로그인 후 이용가능합니다!');
+				event.preventDefault();
+			}
+		});
+	});
 </script>
 <!-- =============== Start of Page Header 1 Section =============== -->
 <section class="page-header" style="margin-top: 150px;">
@@ -33,12 +43,32 @@
 			</div>
 		</div>
 		<!-- End of Breadcrumb -->
-
 	</div>
 </section>
+<!-- 검색 시작 -->
+<div id="searchBox">
+	<div class="col-md-3 col-sm-12 search-categories"
+		style="display: contents;">
+		<label for="search-categories"></label> <select name="searchCondition"
+			class="selectpicker" id="search-categories" data-live-search="true"
+			title="검색 조건" data-size="3" data-container="body"
+			style="display: flow-root;">
+			<option value="memNo">작성자</option>
+			<option value="boardTitle">제목</option>
+			<option value="boardContent">내용</option>
+		</select> <input type="text" class="live-search-box form-control mt20"
+			placeholder="검색하실 내용을 입력해주세요" name="searchKeyword" id=""searchKeyword"">
+		<a href="/metaus/board/boardWrite?btypeNo=8">
+			<button class="btn btn-large btn-blue btn-effect mt30" id="searchBt">
+				검색</button>
+		</a> <a href="/metaus/board/boardWrite?btypeNo=8">
+			<button class="btn btn-large btn-blue btn-effect mt30" id="writeBoard">글쓰기</button>
+		</a>
+	</div>
+</div>
+<!-- 검색 끝 -->
+<input type="hidden" id="memId" name="memId" value="${memId }">
 <!-- =============== End of Page Header 1 Section =============== -->
-
-<a href="/metaus/board/boardWrite?btypeNo=8">[글쓰기]</a>
 <!-- ===== Start of Blog Listing Section ===== -->
 <section class="blog-listing ptb80" id="version2">
 	<div class="container">
@@ -46,9 +76,10 @@
 
 			<!-- Start of Blog Posts -->
 			<div class="col-md-8 col-xs-12 blog-posts-wrapper">
-<c:if test="${empty list }">
-					<img alt="게시글 내용이 없습니다" src="<c:url value='/images/board/no_board.gif'/>"
-					style="width: 800px;">
+				<c:if test="${empty list }">
+					<img alt="게시글 내용이 없습니다"
+						src="<c:url value='/images/board/no_board.gif'/>"
+						style="width: 800px;">
 				</c:if>
 				<c:if test="${!empty list }">
 					<!-- 반복 시작 -->
@@ -57,55 +88,68 @@
 						<article class="col-md-12 blog-post">
 							<!-- Blog Post Thumbnail -->
 							<div class="col-md-12 blog-thumbnail">
-								<a href="<c:url value='/board/readCountUp?boardNo=${map["BOARD_NO"] }&btypeNo=8'/>">
-								<img src="images/blog/blog1.jpg" class="img-responsive" alt=""></a>
+								<a
+									href="<c:url value='/board/readCountUp?boardNo=${map["BOARD_NO"] }&btypeNo=8'/>">
+									<c:forEach var="vo" items="${atcList }">
+										<c:if test="${vo.boardNo==map['BOARD_NO'] }">
+											<img src="<c:url value='/img_upload/${vo.bfileFilename }'/>"
+												class="img-responsive" alt="이미지" />
+										</c:if>
+									</c:forEach>
+								</a>
 							</div>
 
 							<!-- Blog Post Description -->
 							<div class="col-md-12 blog-desc">
 								<h5>
-									<a href="<c:url value='/board/readCountUp?boardNo=${map["BOARD_NO"] }&btypeNo=8'/>">
-									${map['BOARD_TITLE'] }</a>
+									<a
+										href="<c:url value='/board/readCountUp?boardNo=${map["BOARD_NO"] }&btypeNo=8'/>">
+										${map['BOARD_TITLE'] }</a>
 								</h5>
 								<div class="post-detail pt10 pb20">
 									<span><i class="fa fa-user"></i>${map['MEM_NAME'] }</span> <span><i
-										class="fa fa-clock-o"></i>${map['BOARD_REGDATE'] }</span> <span><img src="<c:url value='/images/board/eye.png'/>"
-											style="width: 14px;height: 14.4px;">
-											${map['BOARD_READCOUNT'] }</span>
+										class="fa fa-clock-o"></i> <fmt:formatDate
+											value="${map['BOARD_REGDATE'] }" pattern="yyyy-MM-dd" /> </span> <span><img
+										src="<c:url value='/images/board/eye.png'/>"
+										style="width: 14px; height: 14.4px;">
+										${map['BOARD_READCOUNT'] }</span>
 								</div>
-								<a href="<c:url value='/board/readCountUp?boardNo=${map["BOARD_NO"] }&btypeNo=8'/>"
+								<a
+									href="<c:url value='/board/readCountUp?boardNo=${map["BOARD_NO"] }&btypeNo=8'/>"
 									class="btn btn-blue btn-effect mt10">상세보기</a>
 							</div>
 						</article>
 						<!-- End of Blog Post Article 1 -->
 					</c:forEach>
-					
+
 					<!-- Start of Pagination -->
 					<div class="col-md-12">
-					<ul class="pagination list-inline text-center">
-					<c:if test="${pagingInfo.firstPage>1 }">
-						<li><a href="#" onclick="boardList(${pagingInfo.firstPage-1})">prev</a></li>
-					</c:if>
+						<ul class="pagination list-inline text-center">
+							<c:if test="${pagingInfo.firstPage>1 }">
+								<li><a href="#"
+									onclick="boardList(${pagingInfo.firstPage-1})">prev</a></li>
+							</c:if>
 
-					<!-- [1][2][3][4][5][6][7][8][9][10] -->
-					<c:forEach var="i" begin="${pagingInfo.firstPage }"
-						end="${pagingInfo.lastPage }">
-						<c:if test="${i==pagingInfo.currentPage }">
-							<li class="active"><a>${i }</a></li>
-						</c:if>
-						<c:if test="${i!=pagingInfo.currentPage }">
-							<li><a href="#" onclick="boardList(${i})">${i } </a></li>
-						</c:if>
-					</c:forEach>
+							<!-- [1][2][3][4][5][6][7][8][9][10] -->
+							<c:forEach var="i" begin="${pagingInfo.firstPage }"
+								end="${pagingInfo.lastPage }">
+								<c:if test="${i==pagingInfo.currentPage }">
+									<li class="active"><a>${i }</a></li>
+								</c:if>
+								<c:if test="${i!=pagingInfo.currentPage }">
+									<li><a href="#" onclick="boardList(${i})">${i } </a></li>
+								</c:if>
+							</c:forEach>
 
-					<c:if test="${pagingInfo.lastPage<pagingInfo.totalPage }">
-						<li><a href="#" onclick="boardList(${pagingInfo.lastPage+1})">Next</a></li>
-					</c:if>
-					<!--  페이지 번호 끝 -->
-					</ul>
+							<c:if test="${pagingInfo.lastPage<pagingInfo.totalPage }">
+								<li><a href="#"
+									onclick="boardList(${pagingInfo.lastPage+1})">Next</a></li>
+							</c:if>
+							<!--  페이지 번호 끝 -->
+						</ul>
 					</div>
 					<!-- End of Pagination -->
-					
+
 				</c:if>
 
 				<!-- 페이징 처리를 위한 form 시작-->
@@ -132,107 +176,32 @@
 
 				<!-- Start of Popular Posts -->
 				<div class="col-md-12 clearfix mt40">
-					<h4 class="widget-title">실시간 인기글</h4>
+					<h4 class="widget-title">인기글</h4>
 
 					<!-- Blog Post 1 -->
 					<div class="sidebar-blog-post">
 						<!-- Thumbnail -->
 						<div class="thumbnail-post">
 							<a href="blog-post-right-sidebar.html"> <img
-								src="images/blog/blog1.jpg" alt="">
+								src="<c:url value='/images/board/TOP.jpg'/>" alt="">
 							</a>
 						</div>
 
 						<!-- Link -->
 						<div class="post-info">
-							<a href="blog-post-right-sidebar.html">top 10 tips for web
-								developers</a> <span>1 day ago</span>
+							<a href="blog-post-right-sidebar.html">세계에서 가장유명한 프로그래머 10명 </a>
+							<span>1 day ago</span>
 						</div>
 					</div>
 
-					<!-- Blog Post 2 -->
-					<div class="sidebar-blog-post">
-						<!-- Thumbnail -->
-						<div class="thumbnail-post">
-							<a href="blog-post-right-sidebar.html"> <img
-								src="images/blog/blog2.jpg" alt="">
-							</a>
-						</div>
 
-						<!-- Link -->
-						<div class="post-info">
-							<a href="blog-post-right-sidebar.html">how to prepare for an
-								interview</a> <span>2 days ago</span>
-						</div>
-					</div>
-
-					<!-- Blog Post 3 -->
-					<div class="sidebar-blog-post">
-						<!-- Thumbnail -->
-						<div class="thumbnail-post">
-							<a href="blog-post-right-sidebar.html"> <img
-								src="images/blog/blog3.jpg" alt="">
-							</a>
-						</div>
-
-						<!-- Link -->
-						<div class="post-info">
-							<a href="blog-post-right-sidebar.html">freelance vs
-								employment</a> <span>3 days ago</span>
-						</div>
-					</div>
 
 				</div>
 				<!-- End of Popular Posts -->
 
-
-				<!-- Start of Newsletter -->
-				<div class="col-md-12 mt40">
-					<h4 class="widget-title">newsletter</h4>
-
-					<!-- Start Mailchimp Form -->
-					<form action="#" class="mailchimp" novalidate>
-						<div class="form-group">
-
-							<!-- Input -->
-							<input type="email" name="EMAIL" class="form-control"
-								id="mc-email2" placeholder="Your Email" autocomplete="off">
-
-							<!-- Label - Do not delete this -->
-							<label for="mc-email2"></label>
-
-							<!-- Subscribe Button -->
-							<button type="submit" class="btn btn-blue btn-effect mt20">subscribe</button>
-						</div>
-					</form>
-					<!-- End of Mailchimp Form -->
-				</div>
-				<!-- End of Newsletter -->
-
-
-				<!-- Start of Trending Tags -->
-				<div class="col-md-12 mt40">
-					<h4 class="widget-title">trending tags</h4>
-
-					<!-- Tags Wrapper -->
-					<div class="tag-wrapper">
-						<a href="#" class="tag-link">recruitment</a> <a href="#"
-							class="tag-link">tags</a> <a href="#" class="tag-link">android</a>
-						<a href="#" class="tag-link">cariera template</a> <a href="#"
-							class="tag-link">html5</a> <a href="#" class="tag-link">css3</a>
-						<a href="#" class="tag-link">design</a> <a href="#"
-							class="tag-link">job board</a> <a href="#" class="tag-link">envato</a>
-						<a href="#" class="tag-link">creative</a> <a href="#"
-							class="tag-link">themeforest</a> <a href="#" class="tag-link">web
-							art</a>
-					</div>
-				</div>
-				<!-- End of Trending Tags -->
-
-
 				<!-- Start of Social Media -->
 				<div class="col-md-12 mt40">
-					<h4 class="widget-title">share</h4>
+					<h4 class="widget-title">공유하기</h4>
 
 					<ul class="social-btns list-inline">
 						<!-- Social Media -->
@@ -287,35 +256,7 @@
 				<!-- Start of Social Media -->
 
 
-				<!-- Start of Categories -->
-				<div class="col-md-12 mt40">
-					<h4 class="widget-title">categories</h4>
 
-					<ul class="sidebar-list">
-						<li><a href="#">design</a></li>
-						<li><a href="#">tech</a></li>
-						<li><a href="#">strategy</a></li>
-						<li><a href="#">job board</a></li>
-						<li><a href="#">marketing</a></li>
-						<li><a href="#">life</a></li>
-						<li><a href="#">finance</a></li>
-					</ul>
-				</div>
-				<!-- End of Categories -->
-
-				<!-- Start of Archives -->
-				<div class="col-md-12 mt40">
-					<h4 class="widget-title">archives</h4>
-
-					<ul class="sidebar-list">
-						<li><a href="#">january</a></li>
-						<li><a href="#">february</a></li>
-						<li><a href="#">march</a></li>
-						<li><a href="#">april</a></li>
-						<li><a href="#">may</a></li>
-					</ul>
-				</div>
-				<!-- End of Archives -->
 
 			</div>
 			<!-- End of Blog Sidebar -->

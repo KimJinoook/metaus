@@ -15,7 +15,7 @@
             <!-- Start of Page Title -->
             <div class="row">
                 <div class="col-md-12">
-                    <h2>회원가입</h2>
+                    <h2>사용자 계정 찾기</h2>
                 </div>
             </div>
             <!-- End of Page Title -->
@@ -41,7 +41,6 @@
                         <li role="presentation" class="active">
                             <a href="#personal" aria-controls="personal" role="tab" data-toggle="tab" aria-expanded="true">
                                 <h6>일반회원</h6>
-                                <span>I'm creater</span>
                             </a>
                         </li>
 
@@ -49,7 +48,6 @@
                         <li role="presentation" class="">
                             <a href="#company" aria-controls="company" role="tab" data-toggle="tab" aria-expanded="false">
                                 <h6>기업회원</h6>
-                                <span>We are looking for creater</span>
                             </a>
                         </li>
                     </ul>
@@ -67,45 +65,46 @@
 
                                     <!-- Form Group -->
                                     <div class="form-group">
-                                        <label>Full Name</label>
-                                        <input type="text" class="form-control">
+                                        <label>이름</label>
+                                        <input type="text" name="memName" class="form-control" id="memIdFindName">
                                     </div>
 
                                     <!-- Form Group -->
                                     <div class="form-group">
-                                        <label>Username</label>
-                                        <input type="text" class="form-control">
+                                        <label>전화번호</label>
+                                        <input type="text" name="memTel" class="form-control" id="memIdFindTel">
                                     </div>
-
-                                    <!-- Form Group -->
-                                    <div class="form-group">
-                                        <label>E-mail</label>
-                                        <input type="email" class="form-control">
-                                    </div>
-
-                                    <!-- Form Group -->
-                                    <div class="form-group">
-                                        <label>Password</label>
-                                        <input type="password" class="form-control">
-                                    </div>
-
-                                    <!-- Form Group -->
-                                    <div class="form-group mb30">
-                                        <label>Confirm Password</label>
-                                        <input type="password" class="form-control">
-                                    </div>
-
-                                    <!-- Form Group -->
-                                    <div class="form-group text-center">
-                                        <input type="checkbox" id="agree">
-                                        <label for="agree">Agree with the <a href="#">Terms and Conditions</a></label>
-                                    </div>
-
+                                    
                                     <!-- Form Group -->
                                     <div class="form-group text-center nomargin">
-                                        <button type="submit" class="btn btn-blue btn-effect">create account</button>
+                                        <button type="button" class="btn btn-blue btn-effect" id="memIdFind">아이디 찾기</button>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-8 col-md-offset-2">
+
+                                    <!-- Form Group -->
+                                    <div class="form-group">
+                                        <label>아이디</label>
+                                        <input type="email" name="memId" class="form-control" id="memPwFindId">
                                     </div>
 
+                                     <!-- Form Group -->
+                                    <div class="form-group">
+                                        <label>이름</label>
+                                        <input type="text" name="memName" class="form-control" id="memPwFindName">
+                                    </div>
+
+                                    <!-- Form Group -->
+                                    <div class="form-group">
+                                        <label>전화번호</label>
+                                        <input type="text" name="memTel" class="form-control" id="memPwFindTel">
+                                    </div>
+                                    
+                                    <!-- Form Group -->
+                                    <div class="form-group text-center nomargin">
+                                        <button type="submit" class="btn btn-blue btn-effect" id="memPwFind">비밀번호 찾기</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -114,110 +113,52 @@
                         <!-- Start of Tabpanel for Company Account -->
                         <div role="tabpanel" class="tab-pane" id="company">
                             <div class="row">
-                            <form method="post" action="<c:url value='/company/companyRegister'/>">
-
-                                <!-- Start of the First Column -->
-                                <div class="col-md-6">
-
-                                    <!-- Form Group -->
-                                    <div class="form-group">
-                                        <label>아이디</label>
-                                        <input type="text" class="form-control" id="comId" name="comId">
-                                        <input type="hidden" class="form-control" id="isComIdCheck" name="comIdCheck">
-                                    </div>
-
-                                    <!-- Form Group -->
-                                    <div class="form-group">
-                                        <label>비밀번호</label>
-                                        <input type="password" class="form-control" id="comPw" name="comPw">
-                                    </div>
-
-                                    <!-- Form Group -->
-                                    <div class="form-group">
-                                        <label>회사명</label>
-                                        <input type="text" class="form-control" id="comName" name="comName">
-                                    </div>
-
-                                    <!-- Form Group -->
-                                    <div class="form-group">
-                                        <label>주소</label>
-                                        <input type="text" class="form-control" id="comAdd" name="comAdd">
-                                        <input type="hidden" class="form-control" id="comLati" name="comLati">
-                                        <input type="hidden" class="form-control" id="comLongi" name="comLongi">
-                                    </div>
-                                    
-                                    <!-- Form Group -->
-                                    <div class="form-group">
-                                        <label>사업자 등록번호</label>
-                                        <input type="text" class="form-control" id="comRrn" name="comRrn"  placeholder="'-'를 제외한 등록번호 입력">
-                                        <input type="hidden" class="form-control" id="isComRrnCheck" name="isComRrnCheck">
-                                    </div>
-                                </div>
-                                <!-- End of the First Column -->
-
-                                <!-- Start of the Second Column -->
-                                <div class="col-md-2">
-                                	 <!-- Form Group -->
-                                    <div class="form-group">
-                                		<label> </label>
-                                    	<button type="button" style="margin-top: 5px;margin-bottom:5px" id="comIdCheck"  class="btn btn-blue btn-effect form-control">중복확인</button>
-                                   	</div>
-                                </div>
-                                
-                                
-                                
-                                <div class="col-md-6">
-
-                                    <!-- Form Group -->
-                                    <div class="form-group">
-                                        <label>비밀번호 확인</label><label id="comPwCheckLb" style="color: red"></label>
-                                        <input type="password" class="form-control" id="comPwCheck">
-                                    </div>
+                                <div class="col-md-8 col-md-offset-2">
 
                                     <!-- Form Group -->
                                     <div class="form-group">
                                         <label>대표자명</label>
-                                        <input type="text" class="form-control" id="comCeo" name="comCeo">
+                                        <input type="text" name="comCeo" class="form-control" id="comIdFindCeo">
                                     </div>
 
                                     <!-- Form Group -->
                                     <div class="form-group">
-                                        <label>전화번호</label>
-                                        <input type="tel" class="form-control" id="comTel" name="comTel" placeholder="'-'를 제외한 전화번호 입력">
+                                        <label>사업자번호</label>
+                                        <input type="text" name="comRrn" class="form-control" id="comIdFindRrn">
                                     </div>
-                                </div>
-                                
-                                <div class="col-md-4">
-                                	 <!-- Form Group -->
-                                    <div class="form-group">
-                                		<label>개업일</label>
-                                    	<input type="text" class="form-control" id="comOpen" placeholder="예) 20010101">
-                                   	</div>
-                                </div>
-                                <div class="col-md-2">
-                                	 <!-- Form Group -->
-                                    <div class="form-group">
-                                		<label> </label>
-                                    	<button type="button" style="margin-top: 5px" id="comRrnCheck"  class="btn btn-blue btn-effect form-control">등록번호 확인</button>
-                                   	</div>
-                                </div>
-                                
-                                <div class="col-md-12">
+                                    
                                     <!-- Form Group -->
-                                    <div class="form-group">
-                                        <label>기업소개</label>
-                                        <input type="text" class="form-control" name="comPreview" id="comPreview">
+                                    <div class="form-group text-center nomargin">
+                                        <button type="button" class="btn btn-blue btn-effect" id="comIdFind">아이디 찾기</button>
                                     </div>
                                 </div>
-                                <!-- End of the Second Column -->
-                                 <div class="col-md-12 text-center">
+                                
+                                <form method="post" action="<c:url value='/company/comPwReset'/>" id="comPwFindFrm"> 
+                                <div class="col-md-8 col-md-offset-2">
 
                                     <!-- Form Group -->
-                                    <div class="form-group nomargin">
-                                        <button type="submit" id="btnComSign" class="btn btn-blue btn-effect">회원가입</button>
+                                    <div class="form-group">
+                                        <label>아이디</label>
+                                        <input type="text" name="comId" class="form-control" id="comPwFindId">
+                                    </div>
+
+                                     <!-- Form Group -->
+                                    <div class="form-group">
+                                        <label>대표자명</label>
+                                        <input type="text" name="comCeo" class="form-control" id="comPwFindCeo">
+                                    </div>
+
+                                    <!-- Form Group -->
+                                    <div class="form-group">
+                                        <label>사업자번호</label>
+                                        <input type="text" name="comRrn" class="form-control" id="comPwFindRrn">
+                                    </div>
+                                    
+                                    <!-- Form Group -->
+                                    <div class="form-group text-center nomargin">
+                                        <button type="button" class="btn btn-blue btn-effect" id="comPwFind">비밀번호 찾기</button>
                                     </div>
                                 </div>
-                                
                                 </form>
                             </div>
                         </div>
@@ -230,5 +171,223 @@
             </div>
         </div>
     </section>
+    
+<script type="text/javascript" src="<c:url value='/js/jquery-3.6.0.min.js'/>"></script>
+<script type="text/javascript">
+	$(function() {
+		/** 일반회원 유효성검사*/
+		$('#memIdFind').click(function() {
+			if ($.trim($('#memIdFindName').val()).length < 1) {
+				alert("이름을 입력해주세요");
+				$('#memIdFindName').focus();
+				event.preventDefault();
+
+			} else if ($.trim($('#memIdFindTel').val()).length < 1) {
+				alert("전화번호를 입력해주세요");
+				$('#memIdFindTel').focus();
+				event.preventDefault();
+
+			} else if(!validate_tel($('#memIdFindTel').val())){
+				alert("휴대전화는 숫자만 입력해주세요.");
+				$('#memIdFindTel').focus();
+				event.preventDefault();				
+			} else{
+				var name = $('#memIdFindName').val();
+				var tel = $('#memIdFindTel').val();
+				
+				$.ajax({
+					url: "<c:url value='/member/findId'/>",
+					type:"GET",
+					data:{
+						memName:name,
+						memTel:tel
+					},
+					async:false,
+					success:function(data){
+						if(data==""){
+							alert('사용자의 정보와 일치하는 계정이 없습니다.');
+							
+						}else{
+							alert("회원님의 계정은 "+data+" 입니다.");
+							$('#memPwFindId').val(data);
+							$('#memPwFindId').focus();
+						}
+					},
+					error:function(){
+						alert('ajax 오류');
+					}
+				});
+			}
+		});
+		
+		$('#memPwFind').click(function() {
+			if ($.trim($('#memPwFindName').val()).length < 1) {
+				alert("이름을 입력해주세요");
+				$('#memPwFindName').focus();
+				event.preventDefault();
+
+			} else if ($.trim($('#memPwFindTel').val()).length < 1) {
+				alert("전화번호를 입력해주세요");
+				$('#memPwFindTel').focus();
+				event.preventDefault();
+
+			} else if(!validate_tel($('#memPwFindTel').val())){
+				alert("휴대전화는 숫자만 입력해주세요.");
+				$('#memPwFindTel').focus();
+				event.preventDefault();				
+			} else if ($.trim($('#memPwFindId').val()).length < 1) {
+				alert("아이디를 입력해주세요");
+				$('#memPwFindId').focus();
+				event.preventDefault();
+
+			} else{
+				var name = $('#memPwFindName').val();
+				var tel = $('#memPwFindTel').val();
+				var id = $('#memPwFindId').val();
+				
+				$.ajax({
+					url: "<c:url value='/member/findPw'/>",
+					type:"GET",
+					data:{
+						memName:name,
+						memTel:tel,
+						memId:id
+					},
+					async:false,
+					success:function(data){
+						if(data==0){
+							alert('사용자의 정보와 일치하는 계정이 없습니다.');
+							
+						}else if(data==1){
+							var num = Math.floor(Math.random() * 10000)+1;
+							$.ajax({
+								url: "<c:url value='/email/pwEmail'/>",
+								type:"GET",
+								data:{
+									pw:num,
+									receiver:id
+								},
+								async:false,
+								success:function(data){
+									if(data==0){
+										alert('이메일 발송이 실패했습니다');
+										
+									}else if(data==1){
+										alert('회원님의 이메일로 임시비밀번호가 발송되었습니다.');
+									}
+								},
+								error:function(){
+									alert('ajax 오류');
+								}
+							});
+						}
+					},
+					error:function(){
+						alert('ajax 오류');
+					}
+				});
+			}
+		});
+		
+		/** 기업회원 유효성검사*/
+		$('#comIdFind').click(function() {
+			if ($.trim($('#comIdFindCeo').val()).length < 1) {
+				alert("대표자명을 입력해주세요");
+				$('#comIdFindCeo').focus();
+				event.preventDefault();
+
+			} else if ($.trim($('#comIdFindRrn').val()).length < 1) {
+				alert("사업자번호를 입력해주세요");
+				$('#comIdFindRrn').focus();
+				event.preventDefault();
+
+			} else if(!validate_tel($('#comIdFindRrn').val())){
+				alert("사업자번호는 숫자만 입력해주세요.");
+				$('#comIdFindRrn').focus();
+				event.preventDefault();				
+			} else{
+				var name = $('#comIdFindCeo').val();
+				var tel = $('#comIdFindRrn').val();
+				
+				$.ajax({
+					url: "<c:url value='/company/findId'/>",
+					type:"GET",
+					data:{
+						comCeo:name,
+						comRrn:tel
+					},
+					async:false,
+					success:function(data){
+						if(data==""){
+							alert('사용자의 정보와 일치하는 계정이 없습니다.');
+							
+						}else{
+							alert("회원님의 계정은 "+data+" 입니다.");
+							$('#comPwFindId').val(data);
+							$('#comPwFindId').focus();
+						}
+					},
+					error:function(){
+						alert('ajax 오류');
+					}
+				});
+			}
+		});
+		
+		$('#comPwFind').click(function() {
+			if ($.trim($('#comPwFindCeo').val()).length < 1) {
+				alert("대표자명을 입력해주세요");
+				$('#comPwFindCeo').focus();
+				event.preventDefault();
+
+			} else if ($.trim($('#comPwFindRrn').val()).length < 1) {
+				alert("사업자번호를 입력해주세요");
+				$('#comPwFindRrn').focus();
+				event.preventDefault();
+
+			} else if(!validate_tel($('#comPwFindRrn').val())){
+				alert("사업자번호는 숫자만 입력해주세요.");
+				$('#comPwFindRrn').focus();
+				event.preventDefault();				
+			} else if ($.trim($('#comPwFindId').val()).length < 1) {
+				alert("아이디를 입력해주세요");
+				$('#comPwFindId').focus();
+				event.preventDefault();
+
+			} else{
+				var name = $('#comPwFindCeo').val();
+				var tel = $('#comPwFindRrn').val();
+				var id = $('#comPwFindId').val();
+				
+				$.ajax({
+					url: "<c:url value='/company/findPw'/>",
+					type:"GET",
+					data:{
+						comCeo:name,
+						comRrn:tel,
+						comId:id
+					},
+					async:false,
+					success:function(data){
+						if(data==0){
+							alert('사용자의 정보와 일치하는 계정이 없습니다.');
+							
+						}else if(data==1){
+							document.querySelector('#comPwFindFrm').submit();
+						}
+					},
+					error:function(){
+						alert('ajax 오류');
+					}
+				});
+			}
+		});
+		
+		function validate_tel(tel) {
+			var pattern = new RegExp(/^[0-9]*$/g);
+			return pattern.test(tel);
+		}
+	});
+</script>
     <!-- ===== End of Login - Register Section ===== -->
 <%@ include file="../inc/footer.jsp" %>

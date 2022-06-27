@@ -1,0 +1,62 @@
+@charset "UTF-8";
+
+button.btn.dropdown-toggle.bs-placeholder.btn-default {
+	width: 150px;
+}
+
+.selectpicker {
+	width: 150px;
+}
+
+.col-md-3 col-sm-12 search-categories {
+	width: 150px;
+}
+
+.span.filter-option.pull-left {
+	width: 150px;
+	margin: 10px auto;
+}
+
+.bootstrap-select>.dropdown-toggle {
+	width: 150px;
+}
+
+.bs-searchbox .form-control {
+	width: 140px;
+}
+
+.bs-searchbox {
+	width: 150px;
+}
+
+.bootstrap-select.btn-group[class*=col-] .dropdown-toggle,
+	.bootstrap-select.form-control:not([class*=col-]), .bootstrap-select:not([class*=col-]):not([class*=form-control]):not(.input-group-btn),
+	.form-inline .bootstrap-select.btn-group .form-control {
+	width: 150px;
+}
+
+.form-control {
+	width: 344px;
+	display: inline;
+}
+#searchBox{
+	width: 100%;
+	margin: 0px auto;
+	text-align: center;
+}
+input.live-search-box.form-control.mt20{
+	width: 628px;
+}
+
+button.btn.btn-large.btn-blue.btn-effect.mt30{
+	margin:  0 50px 0 5px;
+	height: 52px;
+}
+
+
+
+
+
+
+
+

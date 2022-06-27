@@ -47,6 +47,26 @@ public class BoardServiceImpl implements BoardService {
 	public int selectTotalRecord(int btypeNo) {
 		return boardDao.selectTotalRecord(btypeNo);
 	}
+	@Override
+	public List<BoardVO> selectBoardFaq(BoardVO boardVo) {
+		return boardDao.selectBoardFaq(boardVo);
+	}
+	@Override
+	public int updateBoard(BoardVO vo) {
+		return boardDao.updateBoard(vo);
+	}
+	@Override
+	public int updateBoardAtc(BoardAtcVO vo) {
+		return boardDao.updateBoardAtc(vo);
+	}
+	@Override
+	public BoardVO selectByBoardNo(int boardNo) {
+		return boardDao.selectByBoardNo(boardNo);
+	}
+	@Override
+	public BoardAtcVO selectByBfileNo(int bfileNo) {
+		return boardDao.selectBoardAtcByNo(bfileNo);
+	}
 	
 
 }

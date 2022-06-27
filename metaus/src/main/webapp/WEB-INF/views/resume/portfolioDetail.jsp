@@ -22,7 +22,7 @@ $(function(){
             <!-- Start of Page Title -->
             <div class="row">
                 <div class="col-md-12">
-                    <h2>Portfolio</h2>
+                    <h1>Portfolio</h1>
                 </div>
             </div>
             <!-- End of Page Title -->
@@ -41,26 +41,60 @@ $(function(){
                     <div class="profile-descr">
 						 
                         <!-- Profile Title -->
-                         <div class="form-group" style="font-size: 17px;">
-                            <label>포트폴리오 제목 : 
-                            &nbsp;
-                            <span>${pvo.portTitle }</span>
-                            </label>
+                        <div class="form-group" style="font-size: 17px;">
+                           <!--  <label>포트폴리오제목 : </label>&nbsp; -->
+                            <span class="title">< &nbsp;${pvo.portTitle }&nbsp; ></span>
                         </div>
                         <br>
-                        <div class="form-group" style="font-size: 17px;">
-                            <label>작업 사진 : 
-                            &nbsp;
-                            <span>${pvo.portOriginname }</span>
-                            </label>
-                        </div> 
-                        <br>             
-                        <div class="form-group" style="font-size: 17px;">
-                            <label>작업 내용 : 
-                            &nbsp;
-                            <span>${pvo.portContent }</span>
-                            </label>
-                        </div> 
+                         
+                        <br>
+                        
+                        
+                        <div class="base">
+							<div class="row skills mt40">
+	
+				                <div class="col-md-12 text-center" >
+				                    <h2 class="header">작업 파일</h2>
+				                </div>
+								<div class="form-group">
+									
+									<ul class="list list-introduction">
+										<li class="item">
+				                     		<div class="content">
+					                     		${pvo.portOriginname}
+				                     		</div>
+									                    
+										</li>
+									</ul>
+									
+				                </div>
+							</div>
+						</div>
+                        
+                        <br>
+                        
+                        <div class="base">
+							<div class="row skills mt40">
+	
+				                <div class="col-md-12 text-center" >
+				                    <h2 class="header">작업 내용</h2>
+				                </div>
+								<div class="form-group">
+									
+									<ul class="list list-introduction">
+										<li class="item">
+				                     		<div class="content">
+					                     		${pvo.portContent}
+				                     		</div>
+									                    
+										</li>
+									</ul>
+									
+				                </div>
+							</div>
+						</div>
+                                     
+                      
                         <br>             
 
                         <!-- Form Group -->

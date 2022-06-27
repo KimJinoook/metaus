@@ -14,7 +14,9 @@
 		});
 	});
 </script>
-
+<style>
+  .ck-editor__editable { height: 500px; }
+</style>
 <!-- =============== Start of Page Header 1 Section =============== -->
 <section class="page-header" style="margin-top: 150px;">
 	<div class="container">
@@ -78,7 +80,7 @@
                     </select>
                 </div>
                 	<input type="hidden" name="btypeNo" id="btypeNo" value="${param.btypeNo }">
-                	<input type="hidden" name="memNo" value="1">
+                	<input type="hidden" name="memId" value="${memId }">
 					<!-- Form Group -->
 					
 					<div class="form-group">
@@ -90,7 +92,14 @@
 					<!-- Form Group -->
 					<div class="form-group">
 						<label>글 내용</label>
-						<textarea class="tinymce" name="boardContent"></textarea>
+						<textarea name="boardContent" id="editor"></textarea>	
+						<script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/ckeditor.js"></script>
+						<script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/translations/ko.js"></script>
+					    <script>
+					      	ClassicEditor.create( document.querySelector( '#editor' ), {
+					      		language: "ko"
+					      	});
+					    </script>
 					</div>
 
 					<!-- Form Group -->
@@ -106,7 +115,7 @@
 					</div>
 					<!-- Form Group -->
 					<div class="form-group pt30 nomargin" id="last">
-						<button class="btn btn-blue btn-effect">submit</button>
+						<button class="btn btn-blue btn-effect">작성하기</button>
 					</div>
 
 				</div>

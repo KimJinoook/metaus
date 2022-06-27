@@ -10,4 +10,24 @@
 		insert into fp_rec(rec_no, com_no, rec_title, rec_content, rec_pay, rec_regdate, rec_readcount)
 		values(#{rec_no},#{com_no},#{rec_title},#{rec_content},#{rec_pay},sysdate,#{rec_readcount})
 	</insert>
+	
+	<select id="selectAll" parameterType="searchVo" resultType="RequestVo">
+		select * from
+		(
+			select rownum as RNUM, A.*
+			from
+				(
+					select b.*, m.mem_name, f.bfile_filename
+					from fp_rec r join fp_com c
+					on r.rec_no=c.com_no
+					left join fp_recatc f
+					on r.rec_no= f.rec_no
+					where r.rec_title like '%' ||  #{keyword} || '%'
+					order by rec_regdate desc
+				)A
+		)
+		where RNUM>#{firstRecordIndex} 
+		<![CDATA[
+		and RNUM<=#{firstRecordIndex} + #{recordCountPerPage} ]]>
+	</select>
 </mapper>

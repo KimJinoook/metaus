@@ -16,7 +16,6 @@
 			</div>
 		</div>
 		<!-- End of Page Title -->
-
 		<!-- Start of Breadcrumb -->
 		<div class="row">
 			<div class="col-md-12">
@@ -33,7 +32,8 @@
 </section>
 <!-- =============== End of Page Header 1 Section =============== -->
 
-<!-- ===== Start of Single Blog Post Section ===== -->
+
+<!--===== Start of Single Blog Post Section ===== -->
 <section class="ptb80" id="blog-post">
 	<div class="container">
 
@@ -45,9 +45,11 @@
 				<h2>${vo.boardTitle }</h2>
 				<!-- Post Details -->
 				<div class="post-detail">
-					<span><i class="fa fa-user"></i>${vo.memNo }</span> <span><i
-						class="fa fa-clock-o"></i>${vo.boardRegdate }</span> <span><i
-						class="fa fa-comments-o"></i>${vo.boardReadcount }</span>
+					<span id="memVoName"><i class="fa fa-user"></i>${memVo.memName }</span> <span><i
+						class="fa fa-clock-o"></i> <fmt:formatDate
+							value="${vo.boardRegdate }" pattern="yyyy년MM월dd HH시mm분" /> &nbsp;
+						<img src="<c:url value='/images/board/eye.png'/>"
+						style="width: 14px; height: 14.4px;"> ${vo.boardReadcount }</span>
 				</div>
 			</div>
 			<!-- End of Post Title -->
@@ -60,6 +62,34 @@
 			<!-- Start of Post Content -->
 			<div class="post-content">
 				<p>${vo.boardContent }</p>
+				
+			<c:set var="memName2" value="${memVo.memName }"/>
+			<c:set var="memName" value="${memName }"/>
+			
+			<input type="text" name="boardNo" value="${vo.boardNo }">
+			<input type="text" name="boardTitle" value="${vo.boardTitle }">
+			<input type="text" name="boardContent" value="${vo.boardContent }">
+			<input type="text" name="bfileNo" value="${AtcVo.bfileNo }">
+			<input type="text" name="bfileFilename" value="${AtcVo.bfileFilename }">
+			<input type="text" name="bfileOriginname" value="${AtcVo.bfileOriginname }">
+			
+			<input type="hidden" value="${memName2 }">
+			<input type="hidden" value="${memName }">
+			
+			<c:if test="${memName == memName2 }">
+			<div>
+			<a href="<c:url value='/board/boardUpdate?boardNo=${vo.boardNo }&bfileNo=${AtcVo.bfileNo}'/>">
+				<button class="btn btn-large btn-blue btn-effect mt30"
+						id="writeBoard">수정</button>
+				</a>
+						
+				 <a href="/metaus/board/boardDelete" id="boardDelete">
+					<button class="btn btn-large btn-blue btn-effect mt30"
+						id="boardDelete">삭제</button>
+				</a>
+			</div>
+			</c:if>
+		
 				<!-- Start of Social Media Buttons -->
 				<ul class="social-btns list-inline mt20">
 					<!-- Social Media -->
@@ -312,8 +342,7 @@
 						<form class="row" id="comment-form">
 							<div class="col-md-6 form-group">
 								<input class="form-control input-box" type="text" name="name"
-									disabled="disabled"
-									value="">
+									disabled="disabled" value="">
 							</div>
 
 							<div class="col-md-6 form-group">
@@ -330,7 +359,7 @@
 							</div>
 							<div class="col-md-6 col-xs-6 comment-submit">
 								<button class="btn btn-blue btn-effect pull-right" type="submit">
-								댓글 쓰기</button>
+									댓글 쓰기</button>
 							</div>
 						</form>
 						<!-- End of Comment Submit Form -->
