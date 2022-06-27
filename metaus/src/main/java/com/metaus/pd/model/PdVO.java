@@ -1,17 +1,17 @@
 package com.metaus.pd.model;
 
-import java.sql.Timestamp;
-
 import lombok.Data;
 
 @Data
+/* 모델링상품 */
 public class PdVO {
-	private int pdNo; /* 상품 번호 */
-	private String pdName; /* 상품명 */
-	private int pdPrice; /* 가격 */
-	private Timestamp pdRegdate; /* 등록일 */
-	private String pdPreview; /* 상품소개 */
-    private String pdFileName; /* 파일명 */
-	private String pdOriginName; /* 원본파일명 */
+	private int pdNo; /* 모델번호 */
+	private int cateNo; /* 카테고리번호 */
 	private int memNo; /* 회원번호 */
+	private String pdName; /* 모델명 */
+	private String pdPre; /* 모델소개 */
+	private String pdFilename; /* 모델파일명 */
+	private String pdOriginname; /* 모델원본파일명 */
+	private int pdFilesize; /* 모델파일사이즈 */
+	private int pdBuycnt; /* 구매수 */
 }
