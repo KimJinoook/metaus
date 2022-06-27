@@ -56,9 +56,9 @@
 				
 				<!-- Start of category input -->
                
-                	<input type="text" name="btypeNo" id="btypeNo" value="${vo.btypeNo }">
-                	<input type="text" name="boardNo" id="boardNo" value="${vo.boardNo }">
-                	<input type="text" name="bfileNo" id="bfileNo" value="${AtcVo.bfileNo }">
+                	<input type="hidden" name="btypeNo" id="btypeNo" value="${vo.btypeNo }">
+                	<input type="hidden" name="boardNo" id="boardNo" value="${vo.boardNo }">
+                	<input type="hidden" name="bfileNo" id="bfileNo" value="${AtcVo.bfileNo }">
 					<!-- Form Group -->
 					
 					<div class="form-group">

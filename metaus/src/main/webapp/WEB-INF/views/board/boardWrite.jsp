@@ -12,6 +12,7 @@
 			alert('게시판 종류가 변경되었습니다');
 			$('#btypeNo').val($(this).val());
 		});
+
 	});
 </script>
 <style>
@@ -22,7 +23,7 @@
 	<div class="container">
 
 		<!-- Start of Page Title -->
-		<div class="row">
+		<div class="row" >
 			<div class="col-md-12">
 				<h2>게시판 글작성</h2>
 			</div>
@@ -103,7 +104,8 @@
 					</div>
 
 					<!-- Form Group -->
-					<div class="form-group">
+					
+					<div class="form-group" id="upDiv">
 						<label>사진 업로드</label>
 
 						<!-- Upload Button -->
@@ -113,6 +115,7 @@
 								accept=".jpg,.png,.gif">
 						</div>
 					</div>
+
 					<!-- Form Group -->
 					<div class="form-group pt30 nomargin" id="last">
 						<button class="btn btn-blue btn-effect">작성하기</button>
