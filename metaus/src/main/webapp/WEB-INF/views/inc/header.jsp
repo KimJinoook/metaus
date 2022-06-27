@@ -226,57 +226,58 @@ $(function(){
                                     <!-- <li><a href="typography.html">typography</a></li> -->
                                 </ul>
                             </li>
-
-                            <!-- Simple Menu Item -->
-                            <li class="dropdown simple-menu">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">마이페이지<i class="fa fa-angle-down"></i></a>
-                                <ul class="dropdown-menu" role="menu">
-
-                                    <!-- Dropdown Submenu -->
-                                    <li class="dropdown-submenu">
-                                        <a href="#">blog right sidebar<i class="fa fa-angle-right"></i></a>
-                                        <ul class="dropdown-menu">
-                                            <li><a href="blog-right-sidebar-v1.html">version 1</a></li>
-                                            <li><a href="blog-right-sidebar-v2.html">version 2</a></li>
-                                        </ul>
-                                    </li>
-
-                                    <!-- Dropdown Submenu -->
-                                    <li class="dropdown-submenu">                               
-                                        <a href="<c:url value='/resume/resumeDetail'/>">이력서<i class="fa fa-angle-right"></i></a>                                      
-                                    </li>
-
-                                    <!-- Dropdown Submenu -->
-                                    <li class="dropdown-submenu">
-                                        <a href="#">메세지<i class="fa fa-angle-right"></i></a>
-                                        <ul class="dropdown-menu">
-                                            <li><a href="<c:url value='/mailbox/mailbox'/>">메세지 목록</a></li>
-                                            <li><a href="<c:url value='/mailbox/compose'/>">메세지 작성</a></li>
-                                        </ul>
-                                    </li>
-
-                                    <!-- Dropdown Submenu -->
-                                    <li class="dropdown-submenu">
-                                        <a href="#">masonry<i class="fa fa-angle-right"></i></a>
-                                        <ul class="dropdown-menu">
-                                            <li><a href="blog-masonry-4col.html">4 columns</a></li>
-                                            <li><a href="blog-masonry-3col.html">3 columns</a></li>
-                                            <li><a href="blog-masonry-2col.html">2 columns</a></li>
-                                        </ul>
-                                    </li>
-
-                                    <!-- Dropdown Submenu -->
-                                    <li class="dropdown-submenu">
-                                        <a href="#">single post<i class="fa fa-angle-right"></i></a>
-                                        <ul class="dropdown-menu">
-                                            <li><a href="blog-post-right-sidebar.html">post - right sidebar</a></li>
-                                            <li><a href="blog-post-left-sidebar.html">post - left sidebar</a></li>
-                                            <li><a href="blog-post.html">post - fullwidth</a></li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </li>
-
+							
+							<c:if test="${!empty sessionScope.isLogin }">
+	                            <!-- Simple Menu Item -->
+	                            <li class="dropdown simple-menu">
+	                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">마이페이지<i class="fa fa-angle-down"></i></a>
+	                                <ul class="dropdown-menu" role="menu">
+	
+	                                    <!-- Dropdown Submenu -->
+	                                    <li class="dropdown-submenu">
+	                                        <a href="#">blog right sidebar<i class="fa fa-angle-right"></i></a>
+	                                        <ul class="dropdown-menu">
+	                                            <li><a href="blog-right-sidebar-v1.html">version 1</a></li>
+	                                            <li><a href="blog-right-sidebar-v2.html">version 2</a></li>
+	                                        </ul>
+	                                    </li>
+	
+	                                    <!-- Dropdown Submenu -->
+	                                    <li class="dropdown-submenu">                               
+	                                        <a href="<c:url value='/resume/resumeDetail'/>">이력서<i class="fa fa-angle-right"></i></a>                                      
+	                                    </li>
+	
+	                                    <!-- Dropdown Submenu -->
+	                                    <li class="dropdown-submenu">
+	                                        <a href="#">메세지<i class="fa fa-angle-right"></i></a>
+	                                        <ul class="dropdown-menu">
+	                                            <li><a href="<c:url value='/mailbox/mailbox'/>">메세지 목록</a></li>
+	                                            <li><a href="<c:url value='/mailbox/compose'/>">메세지 작성</a></li>
+	                                        </ul>
+	                                    </li>
+	
+	                                    <!-- Dropdown Submenu -->
+	                                    <li class="dropdown-submenu">
+	                                        <a href="#">masonry<i class="fa fa-angle-right"></i></a>
+	                                        <ul class="dropdown-menu">
+	                                            <li><a href="blog-masonry-4col.html">4 columns</a></li>
+	                                            <li><a href="blog-masonry-3col.html">3 columns</a></li>
+	                                            <li><a href="blog-masonry-2col.html">2 columns</a></li>
+	                                        </ul>
+	                                    </li>
+	
+	                                    <!-- Dropdown Submenu -->
+	                                    <li class="dropdown-submenu">
+	                                        <a href="#">single post<i class="fa fa-angle-right"></i></a>
+	                                        <ul class="dropdown-menu">
+	                                            <li><a href="blog-post-right-sidebar.html">post - right sidebar</a></li>
+	                                            <li><a href="blog-post-left-sidebar.html">post - left sidebar</a></li>
+	                                            <li><a href="blog-post.html">post - fullwidth</a></li>
+	                                        </ul>
+	                                    </li>
+	                                </ul>
+	                            </li>
+							</c:if>
                             
 
                             <!-- Login Menu Item -->

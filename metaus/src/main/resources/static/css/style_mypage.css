@@ -1434,7 +1434,7 @@ div#main-nav {
     padding-left: 0;
 }
 
-.navbar .navbar-nav > li.login-btn > a {
+.navbar .navbar-nav > li.login-btn > a, .navbar .navbar-nav > li.logout-btn > a {
     background: #29b2fe;
     color: #f6f6f6 !important;
     -webkit-border-radius: 5px;
