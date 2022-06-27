@@ -408,7 +408,7 @@ img {
     content: '\f00e';
     font-family: 'fontawesome';
     font-size: 30px;
-    color: #0a76fc;
+    color: #f6f6f6;
     cursor: pointer;
     position: absolute;
     left: 0;
@@ -672,7 +672,7 @@ ul.list {
     line-height: 35px;
     font-size: 14px;
     font-weight: 600;
-    color: #6 !important;
+    color: #f6f6f6 !important;
     text-transform: uppercase;
     -webkit-transition: all .5s ease;
     -moz-transition: all .5s ease;
@@ -840,6 +840,7 @@ ul.list {
 [type="checkbox"]:not(:checked),
 [type="checkbox"]:checked {
     position: absolute;
+    left: -9999px;
 }
 
 [type="checkbox"]:not(:checked) + label,
@@ -1391,7 +1392,7 @@ div#main-nav {
 }
 
 .nav > li > a:focus,
-.nav > li > a:hover,
+.nav > li > a:hover
 {
     background: none !important;
 }
@@ -1434,7 +1435,7 @@ div#main-nav {
     padding-left: 0;
 }
 
-.navbar .navbar-nav > li.login-btn > a, .navbar .navbar-nav > li.logout-btn > a {
+.navbar .navbar-nav > li.login-btn > a {
     background: #29b2fe;
     color: #f6f6f6 !important;
     -webkit-border-radius: 5px;
@@ -6117,12 +6118,11 @@ section.shop .product:hover {
 section.shop .product-image {
     position: relative;
     overflow: hidden;
-    height: 200px;
+    height: 260px;
     background: -moz-linear-gradient(left, #29b2fe -20%, #443088 120%);
     background: -webkit-linear-gradient(left, #29b2fe -20%, #443088 120%);
     background: linear-gradient(to right, #29b2fe -20%, #443088 120%);
 }
-
 
 section.shop .product-image img {
     width: 100%;
@@ -6134,8 +6134,6 @@ section.shop .product-image img {
     -o-transition: all .8s ease;
     transition: all .8s ease;
 }
-
-
 
 section.shop .product-image:hover img {
     -webkit-transform: scale(1.2);
@@ -6179,12 +6177,12 @@ section.shop .product-image .product-overlay a {
     width: 100%;
     font-size: 14px;
     color: #f6f6f6;
-    background: #eb6767cc;
+    background: #443088;
     text-align: center;
 }
 
 section.shop .product-image .product-overlay a:hover {
-    background: #da2323;
+    background: #29b2fe;
 }
 
 section.shop .product-image .product-overlay a i {
@@ -6192,7 +6190,7 @@ section.shop .product-image .product-overlay a i {
 }
 
 section.shop .product-descr {
-    background: #e0e0e08f;
+    background: #fff;
     text-align: center;
     padding: 20px 0;
 }

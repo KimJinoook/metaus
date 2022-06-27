@@ -10,9 +10,11 @@
 <title>Insert title here</title>
 </head>
 <body>
+<img src="<c:url value='/img_upload/고양이.jpg'/>" height="800px" width="800px">
 <canvas id="canvas1" width="300px" height="300px"></canvas>
 <canvas id="canvas2" width="300px" height="300px"></canvas>
 <iframe width="100%" height="100%" src="https://threejs.org/editor/"></iframe>
+
 
 
 <script src="https://rawgit.com/mrdoob/three.js/dev/build/three.js"></script>

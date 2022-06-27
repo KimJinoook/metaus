@@ -5,6 +5,21 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ include file="../inc/header.jsp"%>
 
+<script>
+$(function(){
+	$('#boardDelete').click(function(){
+		var rlt = confirm('삭제하시겠습니까?'); 
+
+		if(rlt){
+		 //확인 눌렀을시 실행문
+			alert('삭제되었습니다.');
+		}else{
+		// 취소 눌렀을시 
+			return false;
+		}
+	});
+});
+</script>
 <!-- =============== Start of Page Header 1 Section =============== -->
 <section class="page-header" style="margin-top: 150px;">
 	<div class="container">
@@ -66,12 +81,12 @@
 			<c:set var="memName2" value="${memVo.memName }"/>
 			<c:set var="memName" value="${memName }"/>
 			
-			<input type="text" name="boardNo" value="${vo.boardNo }">
-			<input type="text" name="boardTitle" value="${vo.boardTitle }">
-			<input type="text" name="boardContent" value="${vo.boardContent }">
-			<input type="text" name="bfileNo" value="${AtcVo.bfileNo }">
-			<input type="text" name="bfileFilename" value="${AtcVo.bfileFilename }">
-			<input type="text" name="bfileOriginname" value="${AtcVo.bfileOriginname }">
+			<input type="hidden" name="boardNo" value="${vo.boardNo }">
+			<input type="hidden" name="boardTitle" value="${vo.boardTitle }">
+			<input type="hidden" name="boardContent" value="${vo.boardContent }">
+			<input type="hidden" name="bfileNo" value="${AtcVo.bfileNo }">
+			<input type="hidden" name="bfileFilename" value="${AtcVo.bfileFilename }">
+			<input type="hidden" name="bfileOriginname" value="${AtcVo.bfileOriginname }">
 			
 			<input type="hidden" value="${memName2 }">
 			<input type="hidden" value="${memName }">
@@ -83,10 +98,12 @@
 						id="writeBoard">수정</button>
 				</a>
 						
-				 <a href="/metaus/board/boardDelete" id="boardDelete">
+				 <form id="boardDelete" action="<c:url value='/board/boardDelete'/>">
+				 <input type="hidden" name="boardNo" value="${vo.boardNo }">
+				 <input type="hidden" name="btypeNo" value="${vo.btypeNo }">
 					<button class="btn btn-large btn-blue btn-effect mt30"
-						id="boardDelete">삭제</button>
-				</a>
+						id="boardDelete" type="submit">삭제</button>
+				</form>
 			</div>
 			</c:if>
 		

@@ -3,6 +3,11 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.metaus.member.model.MemberDAO">
+	<sql id="searchAndWhere">
+		<if test="searchKeyword !=null and searchKeyword !=''">
+			and (mem_nick like '%' || #{searchKeyword} || '%' or mem_id like '%' || #{searchKeyword} || '%')
+        </if>
+	</sql>
 	
 	<select id="selectPwd" parameterType="string" resultType="String">
 		select mem_pw from fp_mem
@@ -37,8 +42,24 @@
 		where mem_id=#{memId}
 	</select>
 	
-	<select id="selectAllCreater" resultType="MemberVO">
-		select A.*, (select count(*) from fp_port B where A.mem_no = B.mem_no) as memItem, (select count(*) from fp_contact C where A.mem_no = C.mem_no) as memComplete  from fp_mem A where mem_no in (select mem_no from fp_port)
+	<select id="selectAllCreater" resultType="MemberVO" parameterType="SearchVO">
+		select * from (
+			select rownum as RNUM, R.* from(
+				select A.*, (select count(*) from fp_port B where A.mem_no = B.mem_no) as memItem, (select count(*) from fp_contact C where A.mem_no = C.mem_no) as memComplete  from fp_mem A where mem_no in (select mem_no from fp_port)
+				<include refid="searchAndWhere"></include>
+			) R
+		)
+		where
+		RNUM>#{firstRecordIndex} 
+		<![CDATA[	
+		and RNUM<=#{firstRecordIndex} + #{recordCountPerPage} ]]>
+	</select>
+   	
+   	<select id="getTotalRecord" resultType="int" parameterType="SearchVO">
+		
+		select count(*) from fp_mem A where mem_no in (select mem_no from fp_port)
+		<include refid="searchAndWhere"></include>
+	
 	</select>
    	
    	

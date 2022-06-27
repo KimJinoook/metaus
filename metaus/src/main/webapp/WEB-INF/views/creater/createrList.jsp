@@ -31,17 +31,17 @@
         <div class="container">
 
             <!-- Start of Form -->
-            <form class="row" action="#" method="get">
+            <form class="row" action="<c:url value='/creater/createrList'/>" method="post">
 
                 <!-- Start of keywords input -->
                 <div class="col-md-6 col-md-offset-2 col-sm-6 col-sm-offset-2 col-xs-8">
                     <label for="search-keywords">Keywords</label>
-                    <input type="text" name="search-keywords" id="search-keywords" class="form-control" placeholder="Keywords">
+                    <input type="text" name="searchKeyword" id="search-keywords" class="form-control" placeholder="Keywords">
                 </div>
 
                 <!-- Start of submit input -->
                 <div class="col-md-2 col-sm-2 col-xs-4">
-                    <button type="submit" class="btn btn-blue btn-effect"><i class="fa fa-search"></i>search</button>
+                    <button type="submit" class="btn btn-blue btn-effect"><i class="fa fa-search"></i>검색</button>
                 </div>
 
             </form>
@@ -56,9 +56,14 @@
 
                     <!-- Start of Candidates Wrapper -->
                     <div class="candidate-wrapper">
-						
-						<c:forEach var="vo" items="${list }">
-						
+						<c:if test="${empty list }">
+							<img alt="게시글 내용이 없습니다"
+								src="<c:url value='/images/board/no_board.gif'/>"
+								style="width: 800px;">
+						</c:if>
+				
+						<c:if test="${!empty list }">
+						<c:forEach var="vo" items="${list }">		
                         <!-- ===== Start of Single Candidate 1 ===== -->
                         <div class="single-candidate row nomargin">
 
@@ -106,6 +111,7 @@
                         </div>
                         <!-- ===== End of Single Candidate 1 ===== -->
                         </c:forEach>
+                        </c:if>
 
 
                     </div>
@@ -114,11 +120,24 @@
                     <!-- Start of Pagination -->
                     <div class="col-md-12 mt10">
                         <ul class="pagination list-inline text-center">
-                            <li class="active"><a href="javascript:void(0)">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#">4</a></li>
-                            <li><a href="#">Next</a></li>
+                        	<c:if test="${pagingInfo.firstPage>1 }">
+								<li><a href="#"
+									onclick="boardList(${pagingInfo.firstPage-1})">이전</a></li>
+							</c:if>
+							<c:forEach var="i" begin="${pagingInfo.firstPage }"
+								end="${pagingInfo.lastPage }">
+								<c:if test="${i==pagingInfo.currentPage }">
+									<li class="active"><a>${i }</a></li>
+								</c:if>
+								<c:if test="${i!=pagingInfo.currentPage }">
+									<li><a href="#" onclick="boardList(${i})">${i } </a></li>
+								</c:if>
+							</c:forEach>
+
+							<c:if test="${pagingInfo.lastPage<pagingInfo.totalPage }">
+								<li><a href="#"
+									onclick="boardList(${pagingInfo.lastPage+1})">다음</a></li>
+							</c:if>
                         </ul>
                     </div>
                     <!-- End of Pagination -->
@@ -131,7 +150,18 @@
 
         </div>
     </section>
+    <form name="frmPage" method="post"
+		action="<c:url value='/creater/createrList'/>">
+		<input type="hidden" name="currentPage">
+		<input type="hidden" name="searchKeyword" value="${searchVo.searchKeyword }">
+	</form>
     <!-- ===== End of Main Wrapper Section ===== -->
-
+    
+<script type="text/javascript">
+	function boardList(curPage){
+		$('input[name=currentPage]').val(curPage);
+		$('form[name=frmPage]').submit();
+	}
+</script>
 
 <%@ include file="../inc/footer.jsp" %>

@@ -1,5 +1,7 @@
 package com.metaus.category.model;
 
-public interface CategoryService {
+import java.util.List;
 
+public interface CategoryService {
+	List<CategoryVO> selectCategory();
 }
