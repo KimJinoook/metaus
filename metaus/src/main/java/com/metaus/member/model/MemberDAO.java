@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.metaus.common.SearchVO;
+import com.metaus.resume.model.PortfolioVO;
 
 
 @Mapper
@@ -23,5 +24,6 @@ public interface MemberDAO {
 	public int updatePw(MemberVO vo);
 	public List<MemberVO> selectAllCreater(SearchVO vo);
 	public int getTotalRecord(SearchVO vo);
+	public List<PortfolioVO> selectPortByMenNo(int memNo);
 
 }

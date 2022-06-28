@@ -3,6 +3,7 @@ package com.metaus.member.model;
 import java.util.List;
 
 import com.metaus.common.SearchVO;
+import com.metaus.resume.model.PortfolioVO;
 
 public interface MemberService {
 	public static final int USABLE_ID=1;  //사용가능한 아이디
@@ -27,5 +28,6 @@ public interface MemberService {
 	public int updatePw(MemberVO vo);
 	public List<MemberVO> selectAllCreater(SearchVO vo);
 	public int getTotalRecord(SearchVO vo);
+	public List<PortfolioVO> selectPortByMenNo(int memNo);
 
 }
