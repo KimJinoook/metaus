@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.metaus.contact.model.ContactDAO">
+
+	<select id="selectContactByMemNo" parameterType="ContactVO" resultType="int">
+		select * from fp_contact A 
+		join fp_rec B
+		on A.rec_no=B.rec_no
+		join fp_com C
+		on B.com_no=C.com_no
+		join fp_mem D
+		on A.mem_no=D.mem_no
+		where A.mem_no=#{memNo}
+	</select>
+	
+	
+</mapper>
+
+
+
+
+

@@ -138,12 +138,8 @@ $(function(){
 
                             <!-- Simple Menu Item -->
                             <li class="dropdown simple-menu">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">크리에이터 찾기<i class="fa fa-angle-down"></i></a>
-                                <ul class="dropdown-menu" role="menu">
-                                    <li><a href="find-candidate-1.html">find a candidate 1</a></li>
-                                    <li><a href="find-candidate-2.html">find a candidate 2</a></li>
-                                    <li><a href="post-job.html">post a job</a></li>
-                                </ul>
+                                <a href="<c:url value='/creater/createrList'/>" class="dropdown-toggle" data-toggle="dropdown" role="button">크리에이터 찾기</a>
+                     
                             </li>
 
                             <!-- Mega Menu Item -->
