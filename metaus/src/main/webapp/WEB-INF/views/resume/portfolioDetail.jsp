@@ -41,7 +41,7 @@ $(function(){
                     <div class="profile-descr">
 						 
                         <!-- Profile Title -->
-                        <div class="form-group" style="font-size: 17px;">
+                        <div class="form-group" style="font-size: 17px;" align="center">
                            <!--  <label>포트폴리오제목 : </label>&nbsp; -->
                             <span class="title">< &nbsp;${pvo.portTitle }&nbsp; ></span>
                         </div>
@@ -54,7 +54,7 @@ $(function(){
 							<div class="row skills mt40">
 	
 				                <div class="col-md-12 text-center" >
-				                    <h2 class="header">작업 파일</h2>
+				                    <h2 class="header2">작업 파일</h2>
 				                </div>
 								<div class="form-group">
 									
@@ -77,7 +77,7 @@ $(function(){
 							<div class="row skills mt40">
 	
 				                <div class="col-md-12 text-center" >
-				                    <h2 class="header">작업 내용</h2>
+				                    <h2 class="header2">작업 내용</h2>
 				                </div>
 								<div class="form-group">
 									

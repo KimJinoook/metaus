@@ -49,6 +49,12 @@
     margin-bottom: 13px;
     font-size: 22px;
     color: #000;
+    text-align: center;
+}
+ h2.header2 {
+    margin-bottom: 13px;
+    font-size: 22px;
+    color: #000;
     text-align: left;
 }
 h2 {
@@ -96,4 +102,38 @@ li {
 }
 ul {
     list-style-type: disc;
+}
+
+.col-md-9 {
+    width: 100%;
+}
+
+form.post-job-resume .upload-file-btn input[type=file] {
+    position: absolute;
+    width: 150%;
+    height: 45%;
+    top: 23px;
+    left: -75px;
+    opacity: 1;
+    cursor: pointer;
+    color: black;
+}
+
+form.post-job-resume .upload-file-btn {
+    position: relative;
+    overflow: hidden;
+    background: #29b1fd;
+    color: #f6f6f6;
+    padding: 6px 55px 26px 9px;
+    font-size: 14px;
+    font-weight: 700;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    text-align: center;
+    display: inline-block;
+}
+.error{
+	margin: 432px;
+	color: red;
 }

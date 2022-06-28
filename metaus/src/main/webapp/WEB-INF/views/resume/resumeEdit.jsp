@@ -33,10 +33,10 @@
 	$('#resTitle').keyup(function(){				
 		var img="";
 		if($('#resTitle').val()==""){
-			img="<img scr='../images/portfolio/엑스.png'>";
+			img="제목을 입력하세요";
 			$('#chkId1').val('N');
 		}else{
-			img="<img scr='../images/portfolio/체크.png'>";
+			img="";
 			$('#chkId1').val('Y');
 		}	
 		$('.error').text(img);
