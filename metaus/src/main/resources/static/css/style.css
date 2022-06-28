@@ -6842,7 +6842,7 @@ section.shop .panel-group .panel .panel-heading h4 a {
     font-size: 18px;
 }
 
-/* vod css*/
+/* ----------------------------------pd css*/
 .py-5 {
   padding-top: 3rem !important;
   padding-bottom: 3rem !important;
@@ -6930,4 +6930,19 @@ h5.fw-bolder {
     font-size: 16px;
     font-weight: bold;
     color: #5c5c5c;
+}
+
+li.catelist {
+    display: inline-block;
+    margin-left: 11px;
+    font-size: larger;
+}
+
+a {
+    color: #666;
+}
+
+nav.cateMenu {
+    margin-top: 23px;
+    text-align-last: center;
 }

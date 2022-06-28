@@ -10,6 +10,12 @@
 		where pd_no=#{pdNo}
 	</select>
 	
+	<select id="selectPdByMemNo" parameterType="int"
+		resultType="PdVo">
+		select * from fp_pd
+		where mem_no=#{memNo}
+	</select>
+	
 	<insert id="insertPd" parameterType="PdVO">
 		<selectKey resultType="int" keyProperty="pdNo" order="BEFORE">
 			select fp_pd_seq.nextval from dual

@@ -207,10 +207,11 @@ $(function(){
 
                                     <!-- Dropdown Submenu-->
                                      <li class="dropdown-submenu">
-                                        <a href="<c:url value='/pd/pd'/>">3D Model 목록<i class="fa fa-angle-right"></i></a>
+                                        <a href="#">3D Model 목록<i class="fa fa-angle-right"></i></a>
                                         <ul class="dropdown-menu">
-                                            <li><a href="page-header1.html">
-											<c:import url="/pd/categoryList"></c:import></a></li>
+                                            <li><a href="<c:url value='/pd/pd'/>">전체 목록</a></li>
+                                            <hr>
+                                            <li><c:import url="/pd/categoryList"></c:import></li>
                                         </ul>
                                     </li>
 
