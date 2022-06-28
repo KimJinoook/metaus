@@ -1,6 +1,10 @@
 package com.metaus.pd.controller;
 
-import javax.servlet.http.HttpSession;
+import java.io.IOException;
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,6 +16,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.metaus.common.ConstUtil;
+import com.metaus.common.FileUploadUtil;
 import com.metaus.pd.model.PdService;
 import com.metaus.pd.model.PdVO;
 
@@ -25,6 +31,7 @@ public class PdController {
 	=LoggerFactory.getLogger(PdController.class);
 	
 	private final PdService pdService;
+	private final FileUploadUtil fileUploadUtil;
 	
 	@RequestMapping("/pd")
 	public String pd() {
@@ -51,10 +58,38 @@ public class PdController {
 	}
 	
 	@PostMapping("/pdPost")
-	public String pd_Post(@ModelAttribute PdVO vo, HttpSession session, Model model) {
+	public String pd_Post(@ModelAttribute PdVO vo, HttpServletRequest request, Model model) {
 		logger.info("pd Post 등록처리, 파라미터 vo={}",vo);
+		String fileName="";
+
+		try {
+			List<Map<String, Object>> fileList
+			=fileUploadUtil.fileUpload(request, ConstUtil.UPLOAD_IMAGE_FLAG);
+
+			for(Map<String, Object> fileMap : fileList) { 
+				fileName=(String) fileMap.get("fileName");
+			}
+		} catch (IllegalStateException | IOException e) {
+			e.printStackTrace();
+		}
+
+		vo.setPdFilename(fileName);
+
 		int cnt=pdService.insertPd(vo);
-		
-		return "/pd/pdDetail";
+		logger.info("상품 등록 처리 결과, cnt={}",cnt);
+
+		return "redirect:/pd/pd";
+	}
+	
+	@RequestMapping("/pdByCategory")
+	public void pdByCategory(@RequestParam String cateName,
+			@RequestParam int cateNo, Model model) {
+		logger.info("카테고리 상품 화면, 파라미터 categoryName={}, categoryNo={}"
+				,cateName, cateNo);
+
+		List<PdVO> list=pdService.selectByCategory(cateNo);
+
+		model.addAttribute("list", list);
+
 	}
 }

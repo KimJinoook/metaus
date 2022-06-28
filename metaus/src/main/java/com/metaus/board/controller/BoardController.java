@@ -20,6 +20,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.metaus.board.model.BoardAtcVO;
 import com.metaus.board.model.BoardService;
 import com.metaus.board.model.BoardVO;
+import com.metaus.comment.model.CommentService;
+import com.metaus.comment.model.CommentVO;
 import com.metaus.common.ConstUtil;
 import com.metaus.common.FileUploadUtil;
 import com.metaus.common.PaginationInfo;
@@ -39,6 +41,7 @@ public class BoardController {
 	private final BoardService boardService;
 	private final FileUploadUtil fileUploadUtil;
 	private final MemberService memberService;
+	private final CommentService commentService;
 	
 	@RequestMapping("/notice")
 	public String notice(@ModelAttribute SearchVO searchVo,
@@ -420,6 +423,12 @@ public class BoardController {
 		BoardAtcVO AtcVo = boardService.selectBoardAtcByNo(boardNo);
 		logger.info("게시글 상세조회 파일 결과, AtcVo={}", AtcVo);
 		
+		List<CommentVO> list = commentService.selectComment(vo.getBoardNo());
+		logger.info("게시글 댓글 list.size={}", list.size());
+		
+		int count = commentService.countComment(vo.getBoardNo());
+		logger.info("게시글 댓글 개수 count={}", count);
+		
 		MemberVO memVo = memberService.selectByMemNo(vo.getMemNo());
 		
 		model.addAttribute("memName",memName);
@@ -427,6 +436,8 @@ public class BoardController {
 		model.addAttribute("vo", vo);
 		model.addAttribute("AtcVo", AtcVo);
 		
+		model.addAttribute("list", list);
+		model.addAttribute("count", count);
 		
 		model.addAttribute("boardNo", boardNo);
 		model.addAttribute("btypeNo", btypeNo);

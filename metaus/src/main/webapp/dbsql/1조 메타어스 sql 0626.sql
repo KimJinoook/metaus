@@ -1471,6 +1471,19 @@ values(fp_cate_seq.nextval, '°úÇÐ');
 insert into fp_cate
 values(fp_cate_seq.nextval, '½ºÆ÷Ã÷');
 
+
+insert into fp_resume
+values(2,'1','1','1');
+
+insert into fp_port
+values(FP_PORT_SEQ.nextval,2,'1','2.zip','1','1');
+insert into fp_port
+values(FP_PORT_SEQ.nextval,2,'1','1.zip','1','1');
+insert into fp_port
+values(FP_PORT_SEQ.nextval,2,'1','2.zip','1','1');
+insert into fp_port
+values(FP_PORT_SEQ.nextval,2,'1','1.zip','1','1');
+
 commit;
 select * from fp_mem where mem_id like 'kimjin0132%';
 

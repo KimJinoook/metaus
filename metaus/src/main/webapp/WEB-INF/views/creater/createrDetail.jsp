@@ -24,7 +24,12 @@
                 <!-- Start of Profile Picture -->
                 <div class="col-md-12">
                     <div class="profile-photo">
-                        <img src="images/clients/client1.jpg" class="img-responsive" alt="">
+                        <div style="
+                    		width: 240px; 
+                    		height:240px; 
+                    		border-radius:100%;
+                    	"><img src="<c:url value='/images/createrProfile/${memVo.memPic}'/>" class="img-responsive" alt="" style="height:100%;width:100%;" onerror="this.onerror=null; this.src='<c:url value='/images/createrProfile/user.png'/>'">
+                    	</div>
                     </div>
 
                 </div>
@@ -37,48 +42,30 @@
 
                         <!-- Profile Title -->
                         <div class="profile-title">
-                            <h2 class="capitalize">john doe</h2>
-                            <h5 class="pt10">Front-End Developer</h5>
+                            <h2 class="capitalize">${memVo.memNick }</h2>
+                            <h5 class="pt10">${memVo.memId }</h5>
                         </div>
 
                         <!-- Start of Social Media Buttons -->
                         <ul class="social-btns list-inline mt20">
+                        
                             <!-- Social Media -->
                             <li>
                                 <a href="#" class="social-btn-roll facebook transparent">
                                     <div class="social-btn-roll-icons">
-                                        <i class="social-btn-roll-icon fa fa-facebook"></i>
-                                        <i class="social-btn-roll-icon fa fa-facebook"></i>
+                                        <i class="social-btn-roll-icon fa fa-envelope-o"></i>
+                                        <i class="social-btn-roll-icon fa fa-envelope-o"></i>
                                     </div>
                                 </a>
                             </li>
 
-                            <!-- Social Media -->
-                            <li>
-                                <a href="#" class="social-btn-roll twitter transparent">
-                                    <div class="social-btn-roll-icons">
-                                        <i class="social-btn-roll-icon fa fa-twitter"></i>
-                                        <i class="social-btn-roll-icon fa fa-twitter"></i>
-                                    </div>
-                                </a>
-                            </li>
-
-                            <!-- Social Media -->
-                            <li>
-                                <a href="#" class="social-btn-roll google-plus transparent">
-                                    <div class="social-btn-roll-icons">
-                                        <i class="social-btn-roll-icon fa fa-google-plus"></i>
-                                        <i class="social-btn-roll-icon fa fa-google-plus"></i>
-                                    </div>
-                                </a>
-                            </li>
 
                             <!-- Social Media -->
                             <li>
                                 <a href="#" class="social-btn-roll instagram transparent">
                                     <div class="social-btn-roll-icons">
-                                        <i class="social-btn-roll-icon fa fa-instagram"></i>
-                                        <i class="social-btn-roll-icon fa fa-instagram"></i>
+                                        <i class="social-btn-roll-icon fa fa-file-text"></i>
+                                        <i class="social-btn-roll-icon fa fa-file-text"></i>
                                     </div>
                                 </a>
                             </li>
@@ -87,8 +74,8 @@
                             <li>
                                 <a href="#" class="social-btn-roll linkedin transparent">
                                     <div class="social-btn-roll-icons">
-                                        <i class="social-btn-roll-icon fa fa-linkedin"></i>
-                                        <i class="social-btn-roll-icon fa fa-linkedin"></i>
+                                        <i class="social-btn-roll-icon fa fa-shopping-basket"></i>
+                                        <i class="social-btn-roll-icon fa fa-shopping-basket"></i>
                                     </div>
                                 </a>
                             </li>
@@ -98,7 +85,7 @@
 
                         <!-- Profile Details -->
                         <div class="profile-details mt40">
-                            <p>Front end developers use HTML, CSS, and JavaScript to code the website and web app designs created by web designers. The code they write runs inside the user’s browser (as opposed to a back end developer, whose code runs on the web server). Being also in charge of making sure that there are no errors or bugs on the front end, as well as making sure that the design appears as it’s supposed to across various platforms and browsers.</p>
+                            <p>${resumeVo.resContent }</p>
                         </div>
                     </div>
 
@@ -110,34 +97,26 @@
                 <div class="col-md-4 col-md-offset-2 col-xs-12 mt80">
                     <ul class="profile-info">
                         <li>
-                            <i class="fa fa-map-marker"></i>
-                            <span>New York, USA</span>
+                            <i class="fa fa-handshake-o"></i>
+                            <span>${contactList.size()} contracts</span>
                         </li>
 
                         <li>
-                            <i class="fa fa-globe"></i>
-                            <a href="#">cariera.com</a>
+                            <i class="fa fa-inbox"></i>
+                            <span>${portfolioList.size() } items</span>
                         </li>
 
                         <li>
-                            <i class="fa fa-money"></i>
-                            <span>$65 / hour</span>
+                            <i class="fa fa-shopping-basket"></i>
+                            <span> products</span>
                         </li>
 
                         <li>
                             <i class="fa fa-birthday-cake"></i>
-                            <span>29 years-old</span>
+                            <span>${memVo.memBirth }</span>
                         </li>
 
-                        <li>
-                            <i class="fa fa-phone"></i>
-                            <span>(+1) 123 456 7890</span>
-                        </li>
-
-                        <li>
-                            <i class="fa fa-envelope"></i>
-                            <a href="#">myemail@cariera.com</a>
-                        </li>
+                        
                     </ul>
                 </div>
                 <!-- End of Profile Info -->
@@ -146,48 +125,7 @@
             <!-- End of Row -->
 
 
-            <!-- Start of Row -->
-            <div class="row skills mt80">
-
-                <div class="col-md-12 text-center">
-                    <h3 class="pb40">My Skills</h3>
-                </div>
-
-                <!-- Start of Skill Charts Wrapper -->
-                <div class="col-md-12 mt20">
-                    <div class="row">
-
-                        <!-- Chart -->
-                        <div class="col-md-2 col-sm-6 col-xs-6 chart mb40" data-percent="90"><span>HTML5</span>
-                        </div>
-
-                        <!-- Chart -->
-                        <div class="col-md-2 col-sm-6 col-xs-6 chart mb40" data-percent="85"><span>CSS3</span>
-                        </div>
-
-                        <!-- Chart -->
-                        <div class="col-md-2 col-sm-6 col-xs-6 chart mb40" data-percent="75"><span>JavaScript</span>
-                        </div>
-
-                        <!-- Chart -->
-                        <div class="col-md-2 col-sm-6 col-xs-6 chart mb40" data-percent="70"> <span>PHP</span>
-                        </div>
-                        
-                        <!-- Chart -->
-                        <div class="col-md-2 col-sm-6 col-xs-6 chart mb40" data-percent="65"> <span>MySql</span>
-                        </div>
-                        
-                        <!-- Chart -->
-                        <div class="col-md-2 col-sm-6 col-xs-6 chart mb40" data-percent="55"> <span>WordPress</span>
-                        </div>
-
-                    </div>
-                </div>
-                <!-- End of Skill Charts Wrapper -->
-
-            </div>
-            <!-- End of Row -->
-
+            
         </div>
     </section>
     <!-- ===== End of Candidate Profile Section ===== -->
@@ -195,7 +133,10 @@
 
 
 
-
+<script src="https://rawgit.com/mrdoob/three.js/dev/build/three.js"></script>
+<script src="https://rawgit.com/mrdoob/three.js/dev/examples/js/loaders/GLTFLoader.js"></script>
+<script src="https://cdn.rawgit.com/takahirox/THREE.ZipLoader/v0.0.1/build/ziploader.min.js"></script>
+<script src="https://unpkg.com/three@0.141.0/examples/js/controls/OrbitControls.js"></script>
     <!-- ===== Start of Portfolio Section ===== -->
     <section class="portfolio ptb80">
         <div class="container">
@@ -203,81 +144,91 @@
             <div class="row">
                 <h3 class="text-center pb60">Recent Work</h3>
 
-                <!-- Filter Buttons -->
-                <ul class="list-inline text-center uppercase" id="portfolio-sorting">
-                    <li><a href="#0" data-filter="*" class="current">all</a></li>
-                    <li><a href="#0" data-filter=".portfolio-cat1">logos</a></li>
-                    <li><a href="#0" data-filter=".portfolio-cat2">websites</a></li>
-                    <li><a href="#0" data-filter=".portfolio-cat3">ui</a></li>
-                    <li><a href="#0" data-filter=".portfolio-cat4">printings</a></li>
-                </ul>
+                
             </div>
 
             <!-- Start of Portfolio Grid -->
             <div class="row portfolio-grid mt40">
-
+				
+				<c:forEach var="portfolioVo" items="${portfolioList }">
+				
                 <!-- Portfolio Item -->
                 <div class="element col-md-4 col-sm-6 col-xs-6 portfolio-cat1">
-                    <figure>
-                        <a href="images/portfolio/image1.jpg" class="hover-zoom">
-                            <img src="images/portfolio/image1.jpg" class="img-responsive" alt="">
-                        </a>
-                    </figure>
-                </div>
+                    
+                    	<canvas id="can${portfolioVo.portNo }" width="360px" height="270px" style="margin-bottom:0"></canvas>
 
-                <!-- Portfolio Item -->
-                <div class="element col-md-4 col-sm-6 col-xs-6 portfolio-cat2">
-                    <figure>
-                        <a href="images/portfolio/image2.jpg" class="hover-zoom">
-                            <img src="images/portfolio/image2.jpg" class="img-responsive" alt="">
-                        </a>
-                    </figure>
-                </div>
+<script type="module">
 
-                <!-- Portfolio Item -->
-                <div class="element col-md-4 col-sm-6 col-xs-6 portfolio-cat3">
-                    <figure>
-                        <a href="images/portfolio/image3.jpg" class="hover-zoom">
-                            <img src="images/portfolio/image3.jpg" class="img-responsive" alt="">
-                        </a>
-                    </figure>
-                </div>
+	var url = "<c:url value='/gltfmodel/${portfolioVo.portFilename}'/>";
 
-                <!-- Portfolio Item -->
-                <div class="element col-md-4 col-sm-6 col-xs-6 portfolio-cat4">
-                    <figure>
-                        <a href="images/portfolio/image4.jpg" class="hover-zoom">
-                            <img src="images/portfolio/image4.jpg" class="img-responsive" alt="">
-                        </a>
-                    </figure>
-                </div>
+	var manager = new THREE.LoadingManager();
+	
+	var scene = new THREE.Scene();
+	var renderer = new THREE.WebGLRenderer({
+		canvas : document.querySelector('#can${portfolioVo.portNo}'),
+		antialias : true
+	});
+	renderer.outputEncoding = THREE.sRGBEncoding;
+	
+	var camera = new THREE.PerspectiveCamera(30,1);
+	camera.position.set(0,0,5)
+	
+	let controls = new THREE.OrbitControls(camera, renderer.domElement);
+	controls.update();
 
-                <!-- Portfolio Item -->
-                <div class="element col-md-4 col-sm-6 col-xs-6 portfolio-cat1">
-                    <figure>
-                        <a href="images/portfolio/image5.jpg" class="hover-zoom">
-                            <img src="images/portfolio/image5.jpg" class="img-responsive" alt="">
-                        </a>
-                    </figure>
-                </div>
+	scene.background = new THREE.Color('white');
 
-                <!-- Portfolio Item -->
-                <div class="element col-md-4 col-sm-6 col-xs-6 portfolio-cat2">
-                    <figure>
-                        <a href="images/portfolio/image6.jpg" class="hover-zoom">
-                            <img src="images/portfolio/image6.jpg" class="img-responsive" alt="">
-                        </a>
-                    </figure>
+
+	const grid = new THREE.GridHelper( 20, 20, 0x000000, 0x000000 );
+	grid.material.opacity = 0.2;
+	grid.material.transparent = true;
+	grid.position.y = -1;
+	scene.add( grid );
+
+	new Promise( function( resolve, reject ) {
+
+		if ( url.match( /\.zip$/ ) ) {
+
+			new THREE.ZipLoader().load( url ).then( function( zip ) {
+
+				manager.setURLModifier( zip.urlResolver );
+
+				resolve( zip.find( /\.(gltf|glb)$/i )[ 0 ] );
+
+			} );
+
+		} else {
+
+			resolve( url );
+
+		}
+
+	} ).then( function ( file ) {
+
+		new THREE.GLTFLoader( manager ).load( file, function ( gltf ) {
+
+			scene.add( gltf.scene );
+			function animate(){
+				requestAnimationFrame(animate)
+				controls.update();
+				renderer.render(scene,camera);
+				gltf.scene.rotation.y += 0.005;
+			}
+			animate();
+
+
+		} );
+
+	} );
+</script>
+                    
                 </div>
+                
+                </c:forEach>
+				
 
             </div>
             <!-- End of Portfolio Grid -->
-
-            <div class="row">
-                <div class="col-md-12 text-center mt20">
-                    <a href="#" class="btn btn-blue btn-effect">show more</a>
-                </div>
-            </div>
 
         </div>
     </section>
@@ -292,9 +243,28 @@
         <div class="container">
 
             <div class="col-md-12 text-center">
-                <h3 class="pb60">Education</h3>
+                <h3 class="pb60">Contracts</h3>
             </div>
+			
+			<c:if test="${empty contactList }">
+			<!-- Start of Education Column -->
+            <div class="col-md-12">
+                <div class="item-block shadow-hover">
 
+                    <!-- Start of Education Header -->
+                    
+                    <div class="education-body" style="text-align:center">
+                        <h5>계약 기록이 없습니다</h5>
+                    </div>
+                    <!-- End of Education Body -->
+
+                </div>
+            </div>
+            <!-- End of Education Column -->
+			</c:if>
+			
+			<c:if test="${!empty contactList }">
+			<c:forEach var="contactVo" items="${contactList }">
             <!-- Start of Education Column -->
             <div class="col-md-12">
                 <div class="item-block shadow-hover">
@@ -303,134 +273,28 @@
                     <div class="education-header clearfix">
                         <img src="images/companies/envato.svg" alt="">
                         <div>
-                            <h4>Master <small>- Computer Science</small></h4>
-                            <h5>Massachusetts Institute of Technology</h5>
+                            <h4>${contactVo.comName }</h4>
+                            <h5>${contactVo.recTitle }</h5>
                         </div>
-                        <h6 class="time">2014 - 2016</h6>
+                        <h6 class="time">${contactVo.conDonedate}</h6>
                     </div>
                     <!-- End of Education Header -->
 
                     <!-- Start of Education Body -->
                     <div class="education-body">
-                        <p>The mission of MIT is to advance knowledge and educate students in science, technology, and other areas of scholarship that will best serve the nation and the world in the 21st century. The Institute is committed to generating, disseminating, and preserving knowledge, and to working with others to bring this knowledge to bear on the world's great challenges.</p>
+                        <p>${contactVo.recContent }</p>
                     </div>
                     <!-- End of Education Body -->
 
                 </div>
             </div>
             <!-- End of Education Column -->
-
-
-            <!-- Start of Education Column -->
-            <div class="col-md-12 mt40">
-                <div class="item-block shadow-hover">
-
-                    <!-- Start of Education Header -->
-                    <div class="education-header clearfix">
-                        <img src="images/companies/envato.svg" alt="">
-                        <div>
-                            <h4>Bachelor <small>- Computer Science</small></h4>
-                            <h5>Massachusetts Institute of Technology</h5>
-                        </div>
-                        <h6 class="time">2009 - 2013</h6>
-                    </div>
-                    <!-- End of Education Header -->
-
-                    <!-- Start of Education Body -->
-                    <div class="education-body">
-                        <p>The mission of MIT is to advance knowledge and educate students in science, technology, and other areas of scholarship that will best serve the nation and the world in the 21st century. The Institute is committed to generating, disseminating, and preserving knowledge, and to working with others to bring this knowledge to bear on the world's great challenges.</p>
-                    </div>
-                    <!-- End of Education Body -->
-
-                </div>
-            </div>
-            <!-- End of Education Column -->
+			</c:forEach>
+			</c:if>
 
         </div>
     </section>
     <!-- ===== End of Education Section ===== -->
-
-
-
-
-
-    <!-- ===== Start of Work Experience Section ===== -->
-    <section class="work-experience ptb80">
-        <div class="container">
-
-            <div class="col-md-12 text-center">
-                <h3 class="pb60">Work Experience</h3>
-            </div>
-
-            <!-- Start of Work Experience Column -->
-            <div class="col-md-12">
-                <div class="item-block shadow-hover">
-
-                    <!-- Start of Work Experience Header -->
-                    <div class="experience-header clearfix">
-                        <img src="images/companies/envato.svg" alt="">
-                        <div>
-                            <h4>Envato</h4>
-                            <h5><small>Theme Developer</small></h5>
-                        </div>
-                        <h6 class="time">2014 - present</h6>
-                    </div>
-                    <!-- End of Work Experience Header -->
-
-                    <!-- Start of Work Experience Body -->
-                    <div class="experience-body">
-                        <p>Responsibilities:</p>
-                        <ul class="list mt10">
-                            <li>Designing modern and minimal PSD Templates</li>
-
-                            <li>Converting PSD into HTML5 & CSS3</li>
-
-                            <li>WordPress Theme Development</li>
-
-                            <li>Troubleshooting, testing and maintaining web Themes</li>
-                        </ul>
-                    </div>
-                    <!-- End of Work Experience Body -->
-
-                </div>
-            </div>
-            <!-- End of Work Experience Column -->
-
-
-            <!-- Start of Work Experience Column -->
-            <div class="col-md-12 mt40">
-                <div class="item-block shadow-hover">
-
-                    <!-- Start of Work Experience Header -->
-                    <div class="experience-header clearfix">
-                        <img src="images/companies/envato.svg" alt="">
-                        <div>
-                            <h4>Envato</h4>
-                            <h5><small>Theme Developer</small></h5>
-                        </div>
-                        <h6 class="time">2010 - 2014</h6>
-                    </div>
-                    <!-- End of Work Experience Header -->
-
-                    <!-- Start of Work Experience Body -->
-                    <div class="experience-body">
-                        <p>Responsibilities:</p>
-                        <ul class="list mt10">
-                            <li>Designing modern and minimal PSD Templates</li>
-
-                            <li>Converting PSD into HTML5 & CSS3</li>
-                        </ul>
-                    </div>
-                    <!-- End of Work Experience Body -->
-
-                </div>
-            </div>
-            <!-- End of Work Experience Column -->
-
-
-        </div>
-    </section>
-    <!-- ===== End of Work Experience Section ===== -->
 
 
 
