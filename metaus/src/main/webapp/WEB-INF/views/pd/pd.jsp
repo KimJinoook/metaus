@@ -26,8 +26,8 @@
 
         </div>
     </section>
+    <c:import url="/pd/categoryList"></c:import>
     <!-- =============== End of Page Header 1 Section =============== -->
-    <div class="sketchfab-embed-wrapper"> <iframe title="Love Is War - Shinomiya Kaguya" frameborder="0" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking execution-while-out-of-viewport execution-while-not-rendered web-share src="https://sketchfab.com/models/662e0168a6ba470fa0941c8d6daad904/embed"> </iframe> <p style="font-size: 13px; font-weight: normal; margin: 5px; color: #4A4A4A;"> <a href="https://sketchfab.com/3d-models/love-is-war-shinomiya-kaguya-662e0168a6ba470fa0941c8d6daad904?utm_medium=embed&utm_campaign=share-popup&utm_content=662e0168a6ba470fa0941c8d6daad904" target="_blank" style="font-weight: bold; color: #1CAAD9;"> Love Is War - Shinomiya Kaguya </a> by <a href="https://sketchfab.com/baniracoffee?utm_medium=embed&utm_campaign=share-popup&utm_content=662e0168a6ba470fa0941c8d6daad904" target="_blank" style="font-weight: bold; color: #1CAAD9;"> vanilla_coffee_ice </a> on <a href="https://sketchfab.com?utm_medium=embed&utm_campaign=share-popup&utm_content=662e0168a6ba470fa0941c8d6daad904" target="_blank" style="font-weight: bold; color: #1CAAD9;">Sketchfab</a></p></div>
 <!-- Section-->
         <section class="py-5">
             <div class="container px-4 px-lg-5 mt-5">
@@ -52,7 +52,7 @@
                     </div>
                     <div class="col mb-5">
                         <div class="card h-100">
-                        <a href="<c:url value='/pd/pdDetail?classNo=${classNo }'/>">
+                        <a href="<c:url value='/pd/pdDetail?pdNo=${vo.pdNo }'/>">
                             <!-- Product image-->
                             <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
                             <!-- Product details-->
@@ -78,7 +78,7 @@
                     </div>
                     <div class="col mb-5">
                         <div class="card h-100">
-                        <a href="<c:url value='/pd/pdDetail?classNo=${classNo }'/>">
+                        <a href="<c:url value='/pd/pdDetail?pdNo=${vo.pdNo }'/>">
                             <!-- Product image-->
                             <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
                             <!-- Product details-->
@@ -96,7 +96,7 @@
                     </div>
                     <div class="col mb-5">
                         <div class="card h-100">
-                        	<a href="<c:url value='/pd/pdDetail?classNo=${classNo }'/>">
+                        	<a href="<c:url value='/pd/pdDetail?pdNo=${vo.pdNo }'/>">
                             <!-- Product image-->
                             <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
                             <!-- Product details-->
@@ -121,7 +121,5 @@
                     </div>
                                                             
                     </div>
-                </div>
-            </div>
         </section>
 <%@ include file="../inc/footer.jsp"%>

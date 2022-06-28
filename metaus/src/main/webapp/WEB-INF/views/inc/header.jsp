@@ -210,17 +210,15 @@ $(function(){
                                     </li> -->
 
                                     <!-- Dropdown Submenu-->
-                                    <!-- <li class="dropdown-submenu">
-                                        <a href="#">page headers<i class="fa fa-angle-right"></i></a>
+                                     <li class="dropdown-submenu">
+                                        <a href="<c:url value='/pd/pd'/>">3D Model 목록<i class="fa fa-angle-right"></i></a>
                                         <ul class="dropdown-menu">
-                                            <li><a href="page-header1.html">default</a></li>
-                                            <li><a href="page-header2.html">light</a></li>
-                                            <li><a href="page-header3.html">dark</a></li>
-                                            <li><a href="page-header4.html">parallax</a></li>
+                                            <li><a href="page-header1.html">
+											<c:import url="/pd/categoryList"></c:import></a></li>
                                         </ul>
-                                    </li> -->
+                                    </li>
 
-                                    <li><a href="<c:url value='/pd/pd'/>">3D Model 목록</a></li>
+                                    <%-- <li><a href="<c:url value='/pd/pd'/>">3D Model 목록</a></li> --%>
                                     <li><a href="<c:url value='/pd/pdPost'/>">3D Model 등록</a></li>
                                     <li><a href="<c:url value='/etc/create'/>">3D Model 제작</a></li>
                                     <!-- <li><a href="typography.html">typography</a></li> -->

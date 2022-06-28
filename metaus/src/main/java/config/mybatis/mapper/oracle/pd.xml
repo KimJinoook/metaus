@@ -14,8 +14,8 @@
 		<selectKey resultType="int" keyProperty="pdNo" order="BEFORE">
 			select fp_pd_seq.nextval from dual
 		</selectKey>
-		insert into fp_pd(pd_no, pd_name, pd_pre, pd_filename, pd_originname, pd_filesize)
-		values(#{pdNo},#{pdName},#{pdPre},#{pdFilename},#{pdOriginname},#{pdFilesize});
+		insert into fp_pd(pd_no, cate_no, mem_no, pd_name, pd_pre, pd_filename, pd_originname, pd_filesize)
+		values(#{pdNo},#{cateNo},#{mem_no},#{pdName},#{pdPre},#{pdFilename},#{pdOriginname},#{pdFilesize})
 	</insert>
 	
 	<select id="selectByCategory" parameterType="int"
