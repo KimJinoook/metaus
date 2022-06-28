@@ -28,7 +28,7 @@
                     		width: 240px; 
                     		height:240px; 
                     		border-radius:100%;
-                    	"><img src="<c:url value='/images/createrProfile/${memVo.memPic}'/>" class="img-responsive" alt="" style="height:100%;widht:100%;" onerror="this.onerror=null; this.src='<c:url value='/images/createrProfile/user.png'/>'">
+                    	"><img src="<c:url value='/images/createrProfile/${memVo.memPic}'/>" class="img-responsive" alt="" style="height:100%;width:100%;" onerror="this.onerror=null; this.src='<c:url value='/images/createrProfile/user.png'/>'">
                     	</div>
                     </div>
 
@@ -48,42 +48,24 @@
 
                         <!-- Start of Social Media Buttons -->
                         <ul class="social-btns list-inline mt20">
+                        
                             <!-- Social Media -->
                             <li>
                                 <a href="#" class="social-btn-roll facebook transparent">
                                     <div class="social-btn-roll-icons">
-                                        <i class="social-btn-roll-icon fa fa-facebook"></i>
-                                        <i class="social-btn-roll-icon fa fa-facebook"></i>
+                                        <i class="social-btn-roll-icon fa fa-envelope-o"></i>
+                                        <i class="social-btn-roll-icon fa fa-envelope-o"></i>
                                     </div>
                                 </a>
                             </li>
 
-                            <!-- Social Media -->
-                            <li>
-                                <a href="#" class="social-btn-roll twitter transparent">
-                                    <div class="social-btn-roll-icons">
-                                        <i class="social-btn-roll-icon fa fa-twitter"></i>
-                                        <i class="social-btn-roll-icon fa fa-twitter"></i>
-                                    </div>
-                                </a>
-                            </li>
-
-                            <!-- Social Media -->
-                            <li>
-                                <a href="#" class="social-btn-roll google-plus transparent">
-                                    <div class="social-btn-roll-icons">
-                                        <i class="social-btn-roll-icon fa fa-google-plus"></i>
-                                        <i class="social-btn-roll-icon fa fa-google-plus"></i>
-                                    </div>
-                                </a>
-                            </li>
 
                             <!-- Social Media -->
                             <li>
                                 <a href="#" class="social-btn-roll instagram transparent">
                                     <div class="social-btn-roll-icons">
-                                        <i class="social-btn-roll-icon fa fa-instagram"></i>
-                                        <i class="social-btn-roll-icon fa fa-instagram"></i>
+                                        <i class="social-btn-roll-icon fa fa-file-text"></i>
+                                        <i class="social-btn-roll-icon fa fa-file-text"></i>
                                     </div>
                                 </a>
                             </li>
@@ -92,8 +74,8 @@
                             <li>
                                 <a href="#" class="social-btn-roll linkedin transparent">
                                     <div class="social-btn-roll-icons">
-                                        <i class="social-btn-roll-icon fa fa-linkedin"></i>
-                                        <i class="social-btn-roll-icon fa fa-linkedin"></i>
+                                        <i class="social-btn-roll-icon fa fa-shopping-basket"></i>
+                                        <i class="social-btn-roll-icon fa fa-shopping-basket"></i>
                                     </div>
                                 </a>
                             </li>
