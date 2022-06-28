@@ -316,15 +316,14 @@
                 <!-- Start of Profile Picture -->
                 <div class="col-md-12" style="">
                     <div class="profile-photo jinphoto">
-                        <%-- <img src="<c:url value='/img_upload/고양이.jpg'/>" class="img-responsive" alt="" height="800px" width="800px"> --%>
+                        
                     	<div style="
                     		width: 240px; 
                     		height:240px; 
                     		border-radius:100%;
-                    		background-image:url('<c:url value='/img_upload/고양이.jpg'/>');
-                    		background-size: auto 100%;
-                    		background
-                    	"></div>
+                    		
+                    		
+                    	"><img src="<c:url value='/img_upload/고양이.jpg'/>" class="img-responsive" alt="" style="height:100%;widht:100%;"></div>
                     </div>
 
                 </div>

@@ -54,6 +54,10 @@
 		<![CDATA[	
 		and RNUM<=#{firstRecordIndex} + #{recordCountPerPage} ]]>
 	</select>
+	
+	<select id="selectPortByMenNo" resultType="PortfolioVO" parameterType="int">
+		select * from fp_port where mem_no = #{memNo}
+	</select>
    	
    	<select id="getTotalRecord" resultType="int" parameterType="SearchVO">
 		

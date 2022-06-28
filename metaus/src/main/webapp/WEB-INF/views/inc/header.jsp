@@ -138,12 +138,8 @@ $(function(){
 
                             <!-- Simple Menu Item -->
                             <li class="dropdown simple-menu">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">크리에이터 찾기<i class="fa fa-angle-down"></i></a>
-                                <ul class="dropdown-menu" role="menu">
-                                    <li><a href="find-candidate-1.html">find a candidate 1</a></li>
-                                    <li><a href="find-candidate-2.html">find a candidate 2</a></li>
-                                    <li><a href="post-job.html">post a job</a></li>
-                                </ul>
+                                <a href="<c:url value='/creater/createrList'/>" class="dropdown-toggle" data-toggle="dropdown" role="button">크리에이터 찾기</a>
+                     
                             </li>
 
                             <!-- Mega Menu Item -->
@@ -210,17 +206,15 @@ $(function(){
                                     </li> -->
 
                                     <!-- Dropdown Submenu-->
-                                    <!-- <li class="dropdown-submenu">
-                                        <a href="#">page headers<i class="fa fa-angle-right"></i></a>
+                                     <li class="dropdown-submenu">
+                                        <a href="<c:url value='/pd/pd'/>">3D Model 목록<i class="fa fa-angle-right"></i></a>
                                         <ul class="dropdown-menu">
-                                            <li><a href="page-header1.html">default</a></li>
-                                            <li><a href="page-header2.html">light</a></li>
-                                            <li><a href="page-header3.html">dark</a></li>
-                                            <li><a href="page-header4.html">parallax</a></li>
+                                            <li><a href="page-header1.html">
+											<c:import url="/pd/categoryList"></c:import></a></li>
                                         </ul>
-                                    </li> -->
+                                    </li>
 
-                                    <li><a href="<c:url value='/pd/pd'/>">3D Model 목록</a></li>
+                                    <%-- <li><a href="<c:url value='/pd/pd'/>">3D Model 목록</a></li> --%>
                                     <li><a href="<c:url value='/pd/pdPost'/>">3D Model 등록</a></li>
                                     <li><a href="<c:url value='/etc/create'/>">3D Model 제작</a></li>
                                     <!-- <li><a href="typography.html">typography</a></li> -->

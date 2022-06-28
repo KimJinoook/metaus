@@ -56,6 +56,7 @@
 
                     <!-- Start of Candidates Wrapper -->
                     <div class="candidate-wrapper">
+                    
 						<c:if test="${empty list }">
 							<img alt="게시글 내용이 없습니다"
 								src="<c:url value='/images/board/no_board.gif'/>"
@@ -79,7 +80,7 @@
 
                                 <!-- Candidate Name -->
                                 <div class="candidate-name">
-                                    <a href="<c:url value='/creater/createrDetail'/>"><h5>${vo.memNick }</h5></a>
+                                    <a href="<c:url value='/creater/createrDetail?memNo=${vo.memNo}'/>"><h5>${vo.memNick }</h5></a>
                                 </div>
 
                                 <!-- Candidate Info -->
@@ -104,7 +105,7 @@
                             <!-- CTA -->
                             <div class="col-md-2 col-xs-3">
                                 <div class="candidate-cta ptb30">
-                                    <a href="<c:url value='/creater/createrDetail'/>" class="btn btn-blue btn-small btn-effect">상세보기</a>
+                                    <a href="<c:url value='/creater/createrDetail?memNo=${vo.memNo}'/>" class="btn btn-blue btn-small btn-effect">상세보기</a>
                                 </div>
                             </div>
 
