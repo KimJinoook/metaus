@@ -23,7 +23,8 @@
 			}
 		});
 
-		$('#ajaxBt').click(function() {
+		$('#ajaxBt').click(
+				function() {
 
 					if ($('#memId').val() == "" || $('#memId').val() == null) {
 						alert('로그인 후 이용 가능합니다.');
@@ -39,12 +40,11 @@
 								+ memId + "&cmtContent=" + cmtContent
 								+ "&boardNo=" + boardNo,
 						type : 'GET',
-						dataType:'json',
+						dataType : 'json',
 						async : false,
 
 						success : function(res) {
 							var message = "댓글 등록 성공";
-							alert(res);
 							alert(message);
 						},
 						error : function(xhr, status, error) {
@@ -52,35 +52,57 @@
 						}
 					});
 				});
-		
-		$('form[name=delFrm] button').click(function(){
-			var rlt = confirm('댓글을 삭제하시겠습니까?');
 
-			if (rlt) {
-				//확인 눌렀을시 실행문
-				
-				var cmtNo=$(this).find('input').val();
-				
-				$.ajax({
-					url : "<c:url value='/board/commentAjaxDelete'/>" + "?cmtNo="
-							+ cmtNo,
-					type : 'GET',
-					async : false,
-					success : function(res) {
-						var message = "댓글 삭제 성공";
+		$('form[name=delFrm] button').click(
+				function() {
+					var rlt = confirm('댓글을 삭제하시겠습니까?');
 
-						alert(message);
-					},
-					error : function(xhr, status, error) {
-						alert('error:' + error);
+					if (rlt) {
+						//확인 눌렀을시 실행문
+
+						var cmtNo = $(this).find('input').val();
+
+						$.ajax({
+							url : "<c:url value='/board/commentAjaxDelete'/>"
+									+ "?cmtNo=" + cmtNo,
+							type : 'GET',
+							async : false,
+							success : function(res) {
+								var message = "댓글 삭제 성공";
+
+								alert(message);
+							},
+							error : function(xhr, status, error) {
+								alert('error:' + error);
+							}
+						});
+					} else {
+						// 취소 눌렀을시 
+						return false;
 					}
 				});
-			} else {
-				// 취소 눌렀을시 
-				return false;
-			}
-		});
+		$('input[name=cmtContent]').click(
+				function() {
 
+						var cmtNo = $(this).find('input').val();
+						var cmtContent = $('input[name=cmtContent]').val();
+
+						$.ajax({
+							url : "<c:url value='/board/commentAjaxUpdate'/>"
+									+ "?cmtNo=" + cmtNo + "&cmtContent=" + cmtContent,
+							type : 'GET',
+							async : false,
+							success : function(res) {
+								var message = "댓글 수정 성공";
+
+								alert(message);
+							},
+							error : function(xhr, status, error) {
+								alert('error:' + error);
+							}
+						});
+						// 취소 눌렀을시 
+				});
 	});
 </script>
 <!-- =============== Start of Page Header 1 Section =============== -->
@@ -206,7 +228,7 @@
 				<div class="mt60" id="blog-comments">
 					<div class="main-content">
 
-						<h5>${count }개의댓글이 달렸습니다.</h5>
+						<h5>${count }개의댓글이달렸습니다.</h5>
 
 						<!-- Start of Comment List -->
 						<ul class="comments-list">
@@ -220,7 +242,7 @@
 											<!-- Comment Wrapper -->
 											<div class="comment-content-wrapper">
 												<div class="media-heading clearfix">
-													
+
 													<!-- Commenters Name -->
 													<h6 class="commenter-name">${map['MEM_ID'] }</h6>
 
@@ -234,14 +256,21 @@
 
 													<c:if test="${map['MEM_ID'] == memVo.memId }">
 														<div>
-															
-
-															<form name="delFrm" id="cmtDelete" style="display: inline-block;">
+															<div class="form-group">
+																<input class="form-control" type="text"
+																	placeholder="수정할 내용을 입력해주세요" required
+																	style="color: black;" name="cmtContent">
+															</div>
+															<button class="btn btn-large btn-blue btn-effect mt30"
+																id=""><input id="cmtNo" type="hidden"
+																		value="${map['CMT_NO'] }">수정</button>
+															<form name="delFrm" id="cmtDelete"
+																style="display: inline-block;">
 																<button class="btn btn-large btn-blue btn-effect mt30"
-																	 type="button">
-																	 <input id="cmtNo" type="hidden" value="${map['CMT_NO'] }">
-																	 삭제
-																	 </button>
+																	type="button">
+																	<input id="cmtNo" type="hidden"
+																		value="${map['CMT_NO'] }"> 삭제
+																</button>
 															</form>
 														</div>
 													</c:if>

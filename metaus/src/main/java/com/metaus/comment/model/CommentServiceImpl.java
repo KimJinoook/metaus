@@ -18,8 +18,6 @@ public class CommentServiceImpl implements CommentService {
 		return commentDao.insertComment(vo);
 	}
 
-	
-
 	@Override
 	public int deleteComment(int cmtNo) {
 		return commentDao.deleteComment(cmtNo);
@@ -35,6 +33,13 @@ public class CommentServiceImpl implements CommentService {
 	@Override
 	public List<Map<String, Object>> selectComment(int boardNo) {
 		return commentDao.selectComment(boardNo);
+	}
+
+
+
+	@Override
+	public int updateComment(CommentVO vo) {
+		return commentDao.updateComment(vo);
 	}
 	
 	

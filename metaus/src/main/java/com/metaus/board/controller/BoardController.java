@@ -576,4 +576,15 @@ public class BoardController {
 		
 		return cnt;
 	}
+	
+	@ResponseBody
+	@RequestMapping("/commentAjaxUpdate")
+	public int commentAjax_update(CommentVO vo) {
+		logger.info("ajax 댓글 수정 - vo={}", vo);
+		
+		int cnt = commentService.updateComment(vo);
+		logger.info("댓글 수정 결과, cnt={}", cnt);
+		
+		return cnt;
+	}
 }

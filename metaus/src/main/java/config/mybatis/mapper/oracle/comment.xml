@@ -28,4 +28,10 @@
 		select count(*) from fp_comment
 		where board_no=#{boardNo}
 	</select>
+	
+	<update id="updateComment" parameterType="commentVo">
+		update fp_comment
+		set cmt_content=#{cmtContent}
+		where cmt_no=#{cmtNo}
+	</update>
 </mapper>
