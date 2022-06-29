@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.metaus.common.SearchVO;
+
 @Mapper
 public interface PdDAO {
 	int insertPd(PdVO vo);
@@ -11,4 +13,6 @@ public interface PdDAO {
 	List<PdVO> selectByCategory(int cateNo);
 	int deletePd(int pdNo);
 	List<PdVO> selectPdByMemNo(int memNo);
+	List<PdVO> selectAll(SearchVO searchVo);
+	int selectTotalRecord(SearchVO searchVo);
 }

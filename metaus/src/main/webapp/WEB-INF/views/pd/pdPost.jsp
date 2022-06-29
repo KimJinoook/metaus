@@ -2,9 +2,8 @@
     pageEncoding="utf-8"%>
 <%@ include file="../inc/header.jsp"%>
 
-
     <!-- =============== Start of Page Header 1 Section =============== -->
-    <section class="page-header">
+    <section class="page-header" style="margin-top: 150px;">
         <div class="container">
 
             <!-- Start of Page Title -->

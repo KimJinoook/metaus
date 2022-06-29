@@ -1,10 +1,12 @@
 package com.metaus.pd.model;
 
+import com.metaus.common.SearchVO;
+
 import lombok.Data;
 
 @Data
 /* 모델링상품 */
-public class PdVO {
+public class PdVO extends SearchVO{
 	private int pdNo; /* 모델번호 */
 	private int cateNo; /* 카테고리번호 */
 	private int memNo; /* 회원번호 */

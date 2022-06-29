@@ -2,13 +2,13 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="../inc/header.jsp"%>
 <!-- =============== Start of Page Header 1 Section =============== -->
-    <section class="page-header">
+    <section class="page-header" style= "margin-top: 150px;">
         <div class="container">
 
             <!-- Start of Page Title -->
             <div class="row">
                 <div class="col-md-12">
-                    <h2>${className }</h2>
+                    <h2>3D 모델</h2>
                 </div>
             </div>
             <!-- End of Page Title -->

@@ -21,6 +21,7 @@ import com.metaus.category.model.CategoryService;
 import com.metaus.category.model.CategoryVO;
 import com.metaus.common.ConstUtil;
 import com.metaus.common.FileUploadUtil;
+import com.metaus.common.PaginationInfo;
 import com.metaus.pd.model.PdService;
 import com.metaus.pd.model.PdVO;
 
@@ -38,9 +39,26 @@ public class PdController {
 	private final CategoryService cateService;
 	
 	@RequestMapping("/pd")
-	public String pd() {
-		logger.info("pd 페이지");
-		
+	public String pd(@ModelAttribute PdVO searchVo, Model model) {
+		logger.info("pd 목록 페이지, 파라미터 searchVo={}",searchVo);
+		PaginationInfo pagingInfo = new PaginationInfo();
+		pagingInfo.setBlockSize(ConstUtil.BLOCKSIZE);
+		pagingInfo.setRecordCountPerPage(ConstUtil.RECORD_COUNT);
+		pagingInfo.setCurrentPage(searchVo.getCurrentPage());
+
+		searchVo.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
+		searchVo.setRecordCountPerPage(ConstUtil.RECORD_COUNT);
+
+		List<PdVO> list=pdService.selectAll(searchVo);
+		logger.info("상품 목록 조회 결과, list.size={}", list.size());
+
+		int totalRecord=pdService.selectTotalRecord(searchVo);
+		logger.info("상품 목록 조회-레코드개수, totalRecord={}", totalRecord);		
+		pagingInfo.setTotalRecord(totalRecord);
+
+		model.addAttribute("list", list);
+		model.addAttribute("pagingInfo", pagingInfo);
+
 		return "/pd/pd";
 	}
 	
@@ -60,11 +78,6 @@ public class PdController {
 		List<CategoryVO> list=cateService.selectCategory();
 		logger.info("pd 등록 카테고리 조회 결과 list.size={}",list.size());
 		
-		int memNo=(int)session.getAttribute("memNo");
-		logger.info("pd 등록 페이지, 파라미터 memNo={}",memNo);
-		String memId=(String)session.getAttribute("memId");
-		logger.info("pd 등록 페이지, 파라미터 memId={}",memId);
-		
 		model.addAttribute("list",list);
 	}
 	
@@ -80,10 +93,11 @@ public class PdController {
 
 		try {
 			List<Map<String, Object>> fileList
-			=fileUploadUtil.fileUpload(request, ConstUtil.UPLOAD_IMAGE_FLAG);
+			=fileUploadUtil.fileUpload(request, ConstUtil.UPLOAD_PRODUCT_FLAG);
 
 			for(Map<String, Object> fileMap : fileList) { 
 				fileName=(String) fileMap.get("fileName");
+				logger.info("pd 등록처리, fileName={}",fileName);
 			}
 		} catch (IllegalStateException | IOException e) {
 			e.printStackTrace();
@@ -95,7 +109,7 @@ public class PdController {
 		int cnt=pdService.insertPd(vo);
 		logger.info("상품 등록 처리 결과, cnt={}",cnt);
 
-		return "redirect:/pd/pd";
+		return "redirect:/pd/pdDetail?pdNo="+vo.getPdNo();
 	}
 	
 	@RequestMapping("/pdByCategory")
