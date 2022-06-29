@@ -58,7 +58,7 @@ public class LoginController {
 			//[1] session에 저장
 			HttpSession session=request.getSession();
 			session.setAttribute("isLogin", "member");
-			session.setAttribute("memNo", vo.getMemNo());
+			session.setAttribute("memNo", memVo.getMemNo());
 			session.setAttribute("memId", vo.getMemId());
 			session.setAttribute("memName", memVo.getMemName());
 			
@@ -105,7 +105,7 @@ public class LoginController {
 			//[1] session에 저장
 			HttpSession session=request.getSession();
 			session.setAttribute("isLogin", "company");
-			session.setAttribute("comNo", vo.getComNo());
+			session.setAttribute("comNo", comVo.getComNo());
 			session.setAttribute("comId", vo.getComId());
 			session.setAttribute("comName", comVo.getComName());
 			
