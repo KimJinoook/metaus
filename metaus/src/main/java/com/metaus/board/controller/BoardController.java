@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.metaus.board.model.BoardAtcVO;
 import com.metaus.board.model.BoardService;
@@ -410,6 +411,7 @@ public class BoardController {
 			@RequestParam(defaultValue = "0") int btypeNo,
 			Model model) {
 		String memName=(String)session.getAttribute("memName");
+		String memId=(String)session.getAttribute("memId");
 		logger.info("게시글 조회수 증가, 파라미터 boardNO={}, btypeNo={}", boardNo, btypeNo);
 		
 		int cnt = boardService.updateBoardReadCount(boardNo);
@@ -423,7 +425,7 @@ public class BoardController {
 		BoardAtcVO AtcVo = boardService.selectBoardAtcByNo(boardNo);
 		logger.info("게시글 상세조회 파일 결과, AtcVo={}", AtcVo);
 		
-		List<CommentVO> list = commentService.selectComment(vo.getBoardNo());
+		List<Map<String, Object>> list = commentService.selectComment(vo.getBoardNo());
 		logger.info("게시글 댓글 list.size={}", list.size());
 		
 		int count = commentService.countComment(vo.getBoardNo());
@@ -432,6 +434,7 @@ public class BoardController {
 		MemberVO memVo = memberService.selectByMemNo(vo.getMemNo());
 		
 		model.addAttribute("memName",memName);
+		model.addAttribute("memId",memId);
 		model.addAttribute("memVo", memVo);
 		model.addAttribute("vo", vo);
 		model.addAttribute("AtcVo", AtcVo);
@@ -539,5 +542,38 @@ public class BoardController {
 			return "redirect:/board/requestBoard?btypeNo=7";
 		}
 		return "/";
+	}
+	
+	@ResponseBody
+	@RequestMapping("/commentAjax")
+	public CommentVO commentAjax_insert(String memId, String cmtContent, int boardNo, Model model) {
+		logger.info("ajax 댓글달기");
+		
+		MemberVO memVo = memberService.selectByUserid(memId);
+		logger.info("memvo={}",memVo);
+		
+		CommentVO vo = new CommentVO();
+		vo.setCmtContent(cmtContent);
+		vo.setMemNo(memVo.getMemNo());
+		vo.setBoardNo(boardNo);
+		logger.info("vo={}",vo);
+		
+		int cnt = commentService.insertComment(vo);
+		logger.info("댓글 등록 결과 cnt={}", cnt);
+		
+		model.addAttribute("memId", memVo.getMemId());
+		
+		return vo;
+	}
+	
+	@ResponseBody
+	@RequestMapping("/commentAjaxDelete")
+	public int commentAjax_delete(int cmtNo) {
+		logger.info("ajax 댓글삭제 - cmtNo={}", cmtNo);
+		
+		int cnt = commentService.deleteComment(cmtNo);
+		logger.info("댓글 삭제 결과, cnt={}", cnt);
+		
+		return cnt;
 	}
 }

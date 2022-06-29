@@ -8,12 +8,14 @@
 			order="BEFORE">
 			select fp_comment_seq.nextval from dual
 	</selectKey>
-		insert into fp_comment(cmt_no, cmt_content, board_no, mem_no)
-		values(cmtNo, #{cmtContent}, #{boardNo}, #{memNo})
+		insert into fp_comment(cmt_no, cmt_content, board_no, mem_no, cmt_regdate)
+		values(#{cmtNo}, #{cmtContent}, #{boardNo}, #{memNo}, sysdate)
 	</insert>
 	
-	<select id="selectComment" parameterType="int" resultType="commentVo">
-		select * from fp_comment
+	<select id="selectComment" parameterType="int" resultType="map">
+		select c.*, m.mem_id
+		from fp_comment c left join fp_mem m
+		on c.mem_no = m.mem_no
 		where board_no=#{boardNo}
 	</select>
 	
