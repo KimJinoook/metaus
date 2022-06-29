@@ -55,20 +55,27 @@ public class PdController {
 	}
 	
 	@GetMapping("/pdPost")
-	public void pd_get(Model model) {
-		logger.info("pd Post 페이지");		
+	public void pd_get(HttpSession session,Model model) {
+		logger.info("pd 등록 페이지");
 		List<CategoryVO> list=cateService.selectCategory();
-		logger.info("카테고리 조회 결과 list.size={}",list.size());
+		logger.info("pd 등록 카테고리 조회 결과 list.size={}",list.size());
+		
+		int memNo=(int)session.getAttribute("memNo");
+		logger.info("pd 등록 페이지, 파라미터 memNo={}",memNo);
+		String memId=(String)session.getAttribute("memId");
+		logger.info("pd 등록 페이지, 파라미터 memId={}",memId);
 		
 		model.addAttribute("list",list);
 	}
 	
 	@PostMapping("/pdPost")
-	public String pd_Post(@ModelAttribute PdVO vo, HttpServletRequest request, Model model) {
-		HttpSession session=request.getSession();
-		int memNo=(int)session.getAttribute("memNo");
+	public String pd_Post(@ModelAttribute PdVO vo, HttpSession session,
+			HttpServletRequest request, Model model) {
 		
-		logger.info("pd Post 등록처리, 파라미터 vo={}",vo);
+		int memNo=(int)session.getAttribute("memNo");
+		logger.info("pd 등록처리, 파라미터 memNo={}",memNo);
+		
+		logger.info("pd 등록처리, 파라미터 vo={}",vo);
 		String fileName="";
 
 		try {

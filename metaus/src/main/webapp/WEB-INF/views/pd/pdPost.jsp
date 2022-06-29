@@ -87,7 +87,7 @@
                             <div class="upload-file-btn">
                                 <span><i class="fa fa-upload"></i> Upload</span>
                                 <input class="form-control" type="file" id="pdFilename"
-                                name="pdFilename" accept=".jpg,.png,.gif">
+                                name="upfile" accept=".jpg,.png,.gif,.gltf">
                             </div>
                         </div>
 
