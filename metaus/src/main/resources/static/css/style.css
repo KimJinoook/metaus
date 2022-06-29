@@ -4295,7 +4295,7 @@ section#company-profile2 .company-profile {
 }
 
 section#company-profile2 .company-profile .profile-photo {
-    background: #f0f0f0;
+    background: #f2f4f7;
     overflow: hidden;
     width: 240px;
     -webkit-border-radius: 50%;
@@ -4348,9 +4348,9 @@ section#company-profile2 .company-profile .profile-photo:after {
 }
 
 section#company-profile2 .profile-info {
-    border: 1px solid #e3e3e3;
+    border: 1px solid #f2f4f7;
     padding: 40px;
-    background: #f0f0f0;
+    background: #f2f4f7;
 }
 
 section#company-profile2 .profile-info li {
@@ -4480,6 +4480,16 @@ section#candidate-profile .candidate-profile {
     -moz-border-radius: 5px;
     border-radius: 5px;
 }
+section#candidate-profile2 .candidate-profile2 {
+    position: relative;
+    margin-top: -150px;
+    z-index: 10;
+    background: #f0f0f0;
+    padding: 40px 20px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
 
 section#candidate-profile .candidate-profile .profile-photo {
     border: 1px solid #e3e3e3;
@@ -4587,11 +4597,17 @@ section#candidate-profile .profile-info li i {
 section.portfolio {
     background: #f0f0f0;
 }
+section.portfolio2 {
+    background: #fff;
+}
 
 
 /* Filters */
 
 section.portfolio ul#portfolio-sorting li {
+    padding: 0 10px;
+}
+section.portfolio2 ul#portfolio-sorting li {
     padding: 0 10px;
 }
 
@@ -4604,6 +4620,18 @@ section.portfolio ul#portfolio-sorting li a {
 }
 
 section.portfolio ul#portfolio-sorting li a.current {
+    color: #29b2fe;
+    opacity: 1;
+}
+section.portfolio2 ul#portfolio-sorting li a {
+    color: #323232;
+    font-weight: 700;
+    display: block;
+    opacity: .8;
+    line-height: 30px;
+}
+
+section.portfolio2 ul#portfolio-sorting li a.current {
     color: #29b2fe;
     opacity: 1;
 }
@@ -4648,6 +4676,44 @@ section.portfolio .portfolio-grid .element:hover figure img {
     opacity: 0.4;
 }
 
+/* Portfolio2 Items */
+
+section.portfolio2 .portfolio-grid .element {
+    margin-bottom: 40px;
+    overflow: hidden;
+}
+
+section.portfolio2 .portfolio-grid .element figure {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    background: -moz-linear-gradient(left, #29b2fe -20%, #443088 120%);
+    background: -webkit-linear-gradient(left, #29b2fe -20%, #443088 120%);
+    background: linear-gradient(to right, #29b2fe -20%, #443088 120%);
+}
+
+section.portfolio2 .portfolio-grid .element figure img {
+    -webkit-transition: all .8s ease;
+    -moz-transition: all .8s ease;
+    -ms-transition: all .8s ease;
+    -o-transition: all .8s ease;
+    transition: all .8s ease;
+}
+
+section.portfolio2 .portfolio-grid .element:hover figure img {
+    -webkit-transform: scale(1.2);
+    -moz-transform: scale(1.2);
+    -ms-transform: scale(1.2);
+    -o-transform: scale(1.2);
+    transform: scale(1.2);
+    -webkit-filter: blur(3px);
+    -moz-filter: blur(3px);
+    -ms-filter: blur(3px);
+    -o-filter: blur(3px);
+    filter: blur(3px);
+    opacity: 0.4;
+}
 
 /* Education */
 
@@ -4793,9 +4859,9 @@ section#candidate-profile2 .candidate-profile .profile-photo:after {
 }
 
 section#candidate-profile2 .profile-info {
-    border: 1px solid #e3e3e3;
+    border: 1px solid #f2f4f7;
     padding: 40px;
-    background: #f0f0f0;
+    background: #f2f4f7;
 }
 
 section#candidate-profile2 .profile-info li {
@@ -6776,7 +6842,7 @@ section.shop .panel-group .panel .panel-heading h4 a {
     font-size: 18px;
 }
 
-/* vod css*/
+/* ----------------------------------pd css*/
 .py-5 {
   padding-top: 3rem !important;
   padding-bottom: 3rem !important;
@@ -6864,4 +6930,19 @@ h5.fw-bolder {
     font-size: 16px;
     font-weight: bold;
     color: #5c5c5c;
+}
+
+li.catelist {
+    display: inline-block;
+    margin-left: 11px;
+    font-size: larger;
+}
+
+a {
+    color: #666;
+}
+
+nav.cateMenu {
+    margin-top: 23px;
+    text-align-last: center;
 }

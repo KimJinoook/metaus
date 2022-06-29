@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.metaus.common.SearchVO;
+import com.metaus.resume.model.PortfolioVO;
 
 import lombok.RequiredArgsConstructor;
 
@@ -84,6 +85,10 @@ public class MemberServiceImpl implements MemberService {
 	
 	public int getTotalRecord(SearchVO vo) {
 		return memberDao.getTotalRecord(vo);
+	}
+	
+	public List<PortfolioVO> selectPortByMenNo(int menNo) {
+		return memberDao.selectPortByMenNo(menNo);
 	}
 
 }

@@ -10,7 +10,7 @@
             <!-- Start of Page Title -->
             <div class="row">
                 <div class="col-md-12">
-                    <h2>Portfolio</h2>
+                    <h1>Portfolio</h1>
                 </div>
             </div>
             <!-- End of Page Title -->
@@ -41,6 +41,7 @@
                             <div class="upload-file-btn">
                                 <span><i class="fa fa-upload"></i> Upload</span>
                                 <input type="file" name="upfile" accept=".zip">
+                               
                             </div>
                         </div>
 

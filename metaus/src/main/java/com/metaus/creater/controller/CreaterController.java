@@ -8,12 +8,18 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.metaus.common.ConstUtil;
 import com.metaus.common.PaginationInfo;
 import com.metaus.common.SearchVO;
+import com.metaus.contact.model.ContactService;
+import com.metaus.contact.model.ContactVO;
 import com.metaus.member.model.MemberService;
 import com.metaus.member.model.MemberVO;
+import com.metaus.resume.model.PortfolioVO;
+import com.metaus.resume.model.ResumeService;
+import com.metaus.resume.model.ResumeVO;
 
 import lombok.RequiredArgsConstructor;
 
@@ -25,6 +31,8 @@ public class CreaterController {
 	private static final Logger logger = LoggerFactory.getLogger(CreaterController.class);
 
 	private final MemberService memberService;
+	private final ResumeService resumeService;
+	private final ContactService contactService;
 
 	
 	@RequestMapping("/createrList")
@@ -55,6 +63,33 @@ public class CreaterController {
 		model.addAttribute("searchVo",searchVo);
 		model.addAttribute("pagingInfo", pagingInfo);
 		model.addAttribute("list",list);
+	}
+	
+	@RequestMapping("/createrDetail")
+	public void createrDetail(@RequestParam int memNo, Model model) {
+		logger.info("크리에이터 디테일 뷰 memNo={}",memNo);
+		
+		MemberVO memVo = memberService.selectByMemNo(memNo);
+		logger.info("크리에이터 디테일 뷰 memvo={}",memVo);
+		
+		ResumeVO resumeVo = resumeService.selectBymemNo(memNo); 
+		logger.info("크리에이터 디테일 뷰 resumevo={}",resumeVo);
+		
+		List<PortfolioVO> portfolioList = memberService.selectPortByMenNo(memNo);
+		logger.info("크리에이터 디테일 뷰 portfolioList={}",portfolioList);
+		
+		List<ContactVO> contactList = contactService.selectContactByMemNo(memNo);
+		logger.info("크리에이터 디테일 뷰 contactList={}",contactList);
+		
+		model.addAttribute("memVo",memVo);
+		model.addAttribute("resumeVo", resumeVo);
+		model.addAttribute("portfolioList", portfolioList);
+		model.addAttribute("contactList",contactList);
+		
+	}
+	@RequestMapping("/createrDetail2")
+	public void createrDetail2() {
+		
 	}
 	
 }

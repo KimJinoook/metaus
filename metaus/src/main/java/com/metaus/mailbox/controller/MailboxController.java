@@ -52,8 +52,9 @@ public class MailboxController {
 		logger.info("메세지 전송 처리, 파라미터 vo={}, msgaddAdsee={}", vo, msgaddAdsee);
 		
 		//쪽지 등록 처리
-//		String userid=(String) session.getAttribute("userid");
-//		vo.setMsgaddAdser(userid);
+		String userid=(String) session.getAttribute("userid");
+		logger.info("userid={}", userid);
+		//vo.setMsgaddAdser(userid);
 		//임시 sender
 		vo.setMsgaddAdser("test@naver.com");
 		

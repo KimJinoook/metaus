@@ -144,4 +144,6 @@
 		set board_delFlag='Y'
 		where board_no=#{boardNo}
 	</delete>
+	
+	
 </mapper>

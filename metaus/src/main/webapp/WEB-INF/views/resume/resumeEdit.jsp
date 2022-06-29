@@ -29,14 +29,14 @@
 			}
 	}); 
 	
-		
-	$('#resTitle').keyup(function(){
+	
+	$('#resTitle').keyup(function(){				
 		var img="";
 		if($('#resTitle').val()==""){
-			img="<img scr='../images/portfolio/엑스.png'>";
+			img="제목을 입력하세요";
 			$('#chkId1').val('N');
 		}else{
-			img="<img scr='../images/portfolio/체크.png'>";
+			img="";
 			$('#chkId1').val('Y');
 		}	
 		$('.error').text(img);
@@ -62,15 +62,18 @@
 	            <!-- Start of Page Title -->
 	            <div class="row">
 	                <div class="col-md-12">
-	                    <h2>Resume</h2>
+	                    <h1>Resume</h1>
 	                </div>
 	            </div>
 	        </div>
 	    </section>
 			<div>
 				<input type="text" class="live-search-box form-control mt20 ss" 
-				name="resTitle" id="resTitle" placeholder="제목을 입력하세요" value="${rvo.resTitle }">
+				name="resTitle" id="resTitle" placeholder="제목을 입력하세요" value="${rvo.resTitle }">				
+			<%-- <c:if test="${empty rrvo}">
+				<img src="<c:url value='/images/portfolio/엑스.png'/>"> --%>
 				<span class="error"></span>
+			<%-- </c:if> --%>
 			</div>
                         
         <div class="container">
@@ -84,13 +87,12 @@
                         <!-- Profile Title -->
                         
                         <div class="form-group">
-                            <label>이름 : </label><span>${mvo.memName}</span>
-                          
+                            <label>이름&nbsp; : &nbsp;</label><span>${mvo.memName}</span>                          
                         </div>
                     
                         <div class="form-group">
-                        	<label>주소 : </label><span>${mvo.memAdd}</span><br>
-                        	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        	<label>주소&nbsp; : &nbsp;</label><span>${mvo.memAdd}</span><br>
+                        	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         	<span>${mvo.memAdd2}</span>                                                                                                                                                    
                         </div>
 
@@ -192,7 +194,7 @@
             
 					
 			<div class="form-group pt30 nomargin" id="last">
-                    <input type="submit" class="btn btn-blue btn-effect" value="등록">
+                    <input type="submit" class="btn btn-blue btn-effect" value="수정">
 			<a href="<c:url value='/resume/resumeDetail'/>" class="btn btn-blue btn-effect">취소</a>
             </div>
         </div>
