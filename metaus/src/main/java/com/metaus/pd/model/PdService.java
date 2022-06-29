@@ -7,4 +7,5 @@ public interface PdService {
 	PdVO selectPdByNo(int pdNo);
 	List<PdVO> selectByCategory(int cateNo);
 	int deletePd(int pdNo);
+	List<PdVO> selectPdByMemNo(int memNo);
 }

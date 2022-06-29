@@ -26,7 +26,15 @@
 
         </div>
     </section>
-    <c:import url="/pd/categoryList"></c:import>
+    <!-- container -->
+		<div id="container">
+			<nav class="cateMenu">
+				<dl id="leftNavi">
+					<!-- category list -->
+				    <c:import url="/pd/categoryList"></c:import>
+					
+				</dl>
+			</nav>
     <!-- =============== End of Page Header 1 Section =============== -->
 <!-- Section-->
         <section class="py-5">
@@ -36,7 +44,7 @@
                         <div class="card h-100">
                             <a href="">
                             <!-- Product image-->
-                            <img class="card-img-top" src="" alt="..."/>
+                            <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..."/>
                             
                             <!-- Product details-->
                             <div class="card-body p-4">

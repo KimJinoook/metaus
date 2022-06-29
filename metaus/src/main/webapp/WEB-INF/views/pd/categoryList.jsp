@@ -4,9 +4,9 @@
 
 <c:forEach var="vo" items="${cgList }">
 	<!-- 반복 시작 -->
-	<li>
+	<li class="catelist">
 		<a href
-="<c:url value='/pd/pdByCategory?cateNo=${vo.cateNo }&cateName=${vo.cateName}'/>">
+="<c:url value='/pd/pdByCategory?cateNo=${vo.cateNo }&cateName=${vo.cateName}'/>" >
 			${vo.cateName }
 		</a>
 	</li>

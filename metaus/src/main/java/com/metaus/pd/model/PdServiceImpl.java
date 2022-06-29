@@ -30,5 +30,10 @@ public class PdServiceImpl implements PdService{
 	public int deletePd(int pdNo) {
 		return pdDao.deletePd(pdNo);
 	}
+
+	@Override
+	public List<PdVO> selectPdByMemNo(int memNo) {
+		return pdDao.selectPdByMemNo(memNo);
+	}
 	
 }
