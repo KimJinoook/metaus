@@ -56,7 +56,7 @@
                         <!-- Form Group -->
                         <div class="form-group">
                             <label>포트폴리오 제목</label>
-                            <input class="form-control" type="text"  name="portTitle" id="portTitle" placeholder="제목을 입력하세요" required>
+                            <input class="form-control" type="text"  name="portTitle" id="portTitle" placeholder="제목" required>
                         	<span class="error1"></span>
                         </div>               
 

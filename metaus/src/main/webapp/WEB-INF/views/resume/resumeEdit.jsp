@@ -76,7 +76,7 @@
         		<div class="col-md-12">
 					<div class="form-group" align="center">
 						<input type="text" class="live-search-box form-control mt20 ss" 
-						name="resTitle" id="resTitle" placeholder="제목을 입력하세요" value="${rvo.resTitle }">				
+						name="resTitle" id="resTitle" placeholder="제목" value="${rvo.resTitle }">				
 						<div style="width:1070px" align="left">
 							<span class="error1"></span>
 						</div>			
