@@ -149,7 +149,7 @@ public class ResumeController {
 		
 		String fileName = "", originFileName = "";		
 		try {
-			List<Map<String, Object>> fileList = fileUploadUtil.fileUpload(request, ConstUtil.UPLOAD_FILE_FLAG);
+			List<Map<String, Object>> fileList = fileUploadUtil.fileUpload(request, ConstUtil.UPLOAD_PORTFOLIO_FLAG);
 
 			for (Map<String, Object> fileMap : fileList) {
 				originFileName = (String) fileMap.get("originalFileName");

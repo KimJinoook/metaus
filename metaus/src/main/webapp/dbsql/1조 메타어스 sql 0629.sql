@@ -913,6 +913,7 @@ ALTER TABLE fp_cate
 
 /* 구매상품 */
 CREATE TABLE fp_buy (
+    buy_no NUMBER NOT NULL, /* 구매번호 */
 	mem_no NUMBER NOT NULL, /* 회원번호 */
 	pd_no NUMBER /* 모델번호 */
 );
@@ -921,7 +922,7 @@ ALTER TABLE fp_buy
 	ADD
 		CONSTRAINT PK_fp_buy
 		PRIMARY KEY (
-			mem_no
+			buy_no
 		);
 
 
@@ -1233,120 +1234,131 @@ ALTER TABLE fp_buy
 
 
 -- 시퀀스 삭제 생성
-drop sequence fp_mem_seq;
 
+--일반회원 시퀀스
+drop sequence fp_mem_seq;
 create sequence fp_mem_seq
 increment by 1
 start with 1
 nocache;
 
-drop sequence fp_port_seq;
 
+--포트폴리오 시퀀스
+drop sequence fp_port_seq;
 create sequence fp_port_seq
 increment by 1
 start with 1
 nocache;
 
-drop sequence fp_scrap_seq;
 
+--기업의뢰 스크랩 시퀀스
+drop sequence fp_scrap_seq;
 create sequence fp_scrap_seq
 increment by 1
 start with 1
 nocache;
 
-drop sequence fp_manager_seq;
 
+--관리자 시퀀스
+drop sequence fp_manager_seq;
 create sequence fp_manager_seq
 increment by 1
 start with 1
 nocache;
 
-drop sequence fp_boardType_seq;
 
+--게시판 타입 시퀀스
+drop sequence fp_boardType_seq;
 create sequence fp_boardType_seq
 increment by 1
 start with 1
 nocache;
 
-drop sequence fp_board_seq;
 
+--게시글 시퀀스
+drop sequence fp_board_seq;
 create sequence fp_board_seq
 increment by 1
 start with 1
 nocache;
 
-drop sequence fp_boardatc_seq;
 
+--게시판 첨부파일 시퀀스
+drop sequence fp_boardatc_seq;
 create sequence fp_boardatc_seq
 increment by 1
 start with 1
 nocache;
 
-drop sequence fp_report_seq;
 
+--신고 시퀀스
+drop sequence fp_report_seq;
 create sequence fp_report_seq
 increment by 1
 start with 1
 nocache;
 
-drop sequence fp_comment_seq;
 
+--댓글 시퀀스
+drop sequence fp_comment_seq;
 create sequence fp_comment_seq
 increment by 1
 start with 1
 nocache;
 
 
-drop sequence fp_msgadd_seq;
 
+--쪽지 송수신 시퀀스
+drop sequence fp_msgadd_seq;
 create sequence fp_msgadd_seq
 increment by 1
 start with 1
 nocache;
 
 
+--쪽지 시퀀스
 drop sequence fp_msg_seq;
-
 create sequence fp_msg_seq
 increment by 1
 start with 1
 nocache;
 
 
+--쪽지 타입 시퀀스
 drop sequence fp_msgtype_seq;
-
 create sequence fp_msgtype_seq
 increment by 1
 start with 1
 nocache;
 
 
+--기업회원 시퀀스
 drop sequence fp_com_seq;
-
 create sequence fp_com_seq
 increment by 1
 start with 1
 nocache;
 
 
-drop sequence fp_rec_seq;
 
+--기업 의뢰 시퀀스
+drop sequence fp_rec_seq;
 create sequence fp_rec_seq
 increment by 1
 start with 1
 nocache;
 
 
+--기업의뢰 첨부파일 시퀀스
 drop sequence fp_recatc_seq;
-
 create sequence fp_recatc_seq
 increment by 1
 start with 1
 nocache;
 
 
+--기업 지원현황 시퀀스
 drop sequence fp_recpre_seq;
-
 create sequence fp_recpre_seq
 increment by 1
 start with 1
@@ -1362,13 +1374,13 @@ drop sequence fp_cscrap_seq;
 
 
 
-
+--장바구니 시퀀스
 drop sequence fp_cart_seq;
-
 create sequence fp_cart_seq
 increment by 1
 start with 1
 nocache;
+
 
 
 drop sequence fp_classatc_seq;
@@ -1385,37 +1397,38 @@ drop sequence fp_classcate_seq;
 
 
 
-
+--결제내역 시퀀스
 drop sequence fp_pay_seq;
-
 create sequence fp_pay_seq
 increment by 1
 start with 1
 nocache;
 
-drop sequence fp_pd_seq;
 
+--상품 시퀀스
+drop sequence fp_pd_seq;
 create sequence fp_pd_seq
 increment by 1
 start with 1
 nocache;
 
+--구매상품 시퀀스
 drop sequence fp_buy_seq;
-
 create sequence fp_buy_seq
 increment by 1
 start with 1
 nocache;
 
+--카테고리 시퀀스
 drop sequence fp_cate_seq;
-
 create sequence fp_cate_seq
 increment by 1
 start with 1
 nocache;
 
-select * from fp_com;
 
+
+select * from fp_com;
 insert into fp_mem
 values(fp_mem_seq.nextval,'테스터','test@naver.com','1234','닉네임1','941215','01030843045','15151','서울시영등포구시흥대로','상세주소','프사경로',sysdate,null,null,null,null,null,null,null);
 

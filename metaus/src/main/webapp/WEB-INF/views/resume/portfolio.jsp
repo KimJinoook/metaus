@@ -69,8 +69,8 @@
                             <label>작업 파일<span>(zip,Gltf파일만 가능)</span></label>
 							
                             <!-- Upload Button -->
-                            <div class="upload-file-btn">
-                                <span><i class="fa fa-upload"></i> Upload</span>
+                            <div class="upload-file-btn" style="width:140px">
+                                <!-- <span><i class="fa fa-upload"></i> Upload</span> -->
                                 <input type="file" name="upfile" accept=".zip">
                                
                             </div>
