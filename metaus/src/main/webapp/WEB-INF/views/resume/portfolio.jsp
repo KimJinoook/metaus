@@ -9,28 +9,24 @@
 
 <script type="text/javascript">
 	$(function(){
-		$('form[name=frm1]').submit(function(){
-			if($('#chkId1').val()!='Y'){
-				alert("제목을 입력 하세요");
-				$("#portTitle").focus();
-				event.preventDefault();	
-			}
-	}); 
-	
-	
-	$('#portTitle').keyup(function(){				
 		var img="";
-		if($('#portTitle').val()==""){
+		if($('#portTitle').val().length<1){
 			img="제목을 입력하세요";
-			$('#chkId1').val('N');
+			$('.error1').text(img);
 		}else{
-			img="";
-			$('#chkId1').val('Y');
-		}	
-		$('.error1').text(img);
+			img="";		
+		}
+				
+		$('#portTitle').keyup(function(){
+			if($('#portTitle').val().length<1){
+				img="제목을 입력하세요";
+			}else{
+				img="";
+			}
+			$('.error1').text(img);
+		}); 
+		
 	});
-
-});
 
 </script>
 
@@ -81,17 +77,18 @@
                             <label>작업 내용</label>
                             <textarea class="tinymce" name="portContent"></textarea>
                         </div>
-
+				<section class="portfolio ptb7">
+       	 			<div class="container">
                         <!-- Form Group -->
                         <div class="form-group pt30 nomargin" id="last">
                             <button class="btn btn-blue btn-effect">등록</button>
                             <a href="<c:url value='/resume/resumeDetail'/>" class="btn btn-blue btn-effect">취소</a>
                         </div> 
-
+					</div>
+				</section>
                     </div>
                 </div>
                 <!-- End of Resume Details -->
-				<input type="hidden" name="chkId" id="chkId1">
             </form>
             <!-- End of Post Resume Form -->
 		</div>

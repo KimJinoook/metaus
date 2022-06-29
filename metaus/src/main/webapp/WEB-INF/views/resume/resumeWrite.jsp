@@ -8,9 +8,25 @@
 
 <script type="text/javascript">
 	$(function(){
+		var img="";
+		if($('#resTitle').val().length<1){
+			img="제목을 입력하세요";
+			$('.error1').text(img);
+		}else{
+			img="";		
+		}
+				
+		$('#resTitle').keyup(function(){
+			if($('#resTitle').val().length<1){
+				img="제목을 입력하세요";
+			}else{
+				img="";
+			}
+			$('.error1').text(img);
+		}); 
 		$('form[name=frm1]').submit(function(){
 			var content = $("#resContent").val();
-			if($('#chkId1').val()!='Y'){
+			if($('#resTitle').val().length<1){
 				alert("제목을 입력 하세요");
 				$("#resTitle").focus();
 				event.preventDefault();	
@@ -22,26 +38,8 @@
 				alert("연락가능 시간을 입력 하세요");
 				$("[name=resTime2]").focus();
 				event.preventDefault();
-			}else if(content=="" || content ==null || content == "&nbsp;" || content == "<p>&nbsp;</p>"){
-				alert("자기소개서를 입력 하세요");
-				$("#resContent").focus();
-				event.preventDefault();
 			}
 	}); 
-	
-		
-	$('#resTitle').keyup(function(){
-		var img="";
-		if($('#resTitle').val()==""){
-			img="<img scr='../images/portfolio/엑스.png'>";
-			$('#chkId1').val('N');
-		}else{
-			img="<img scr='../images/portfolio/체크.png'>";
-			$('#chkId1').val('Y');
-		}	
-		$('.error').text(img);
-	});
-
 });
 
 </script>
@@ -67,11 +65,20 @@
 	            </div>
 	        </div>
 	    </section>
-			<div>
-				<input type="text" class="live-search-box form-control mt20 ss" 
-				name="resTitle" id="resTitle" placeholder="제목을 입력하세요">
-				<span class="error"></span>
+	    <div class="container">
+	    	<div class="row">
+        		<div class="col-md-12">
+					<div class="form-group" align="center">
+						<input type="text" class="live-search-box form-control mt20 ss" 
+						name="resTitle" id="resTitle" placeholder="제목을 입력하세요">				
+						<div style="width:1070px" align="left">
+							<span class="error1"></span>
+						</div>			
+					</div>
+				</div>
 			</div>
+		</div>
+
                         
         <div class="container">
 				
