@@ -30,21 +30,16 @@
     </section>
     <!-- =============== End of Page Header 1 Section =============== -->
 
-
-
-
-
     <!-- ===== Start of Main Wrapper Section ===== -->
     <section class="ptb80" id="post-job">
         <div class="container">
 
             <h3 class="uppercase text-blue">내용을 입력해주세요.</h3>
 
-            <!-- Start of Post Job Form -->
-            
-           
+            <!-- Start of Post Job Form -->           
              
-            <form method="post" action="<c:url value='/pd/pdPost'/>" class="post-job-resume mt50">
+            <form method="post" action="<c:url value='/pd/pdPost'/>" class="post-job-resume mt50"
+             enctype="multipart/form-data">
 
                 <!-- Start of Job Details -->
              <h3 class="capitalize pb20">모델 정보</h3>
@@ -53,38 +48,30 @@
                     <div class="col-md-12">
 
                         <!-- Form Group -->
-
-                        <!-- Form Group -->
                         <div class="form-group">
                             <label>모델 제목</label>
-                            <input class="form-control" name="rec_title" id="rec_title" type="text" required>
+                            <input class="form-control" name="pdName" id="pdName" type="text" required>
                         </div>
 
                         <!-- Form Group -->
-                     
-
-                        <!-- Form Group -->
-                      <!--   <div class="form-group">
+						   <div class="form-group">
                             <label>카테고리</label>
-                            <select name="job-type" class="selectpicker" data-size="5" data-container="body" required>
+                            <select id="cateNo" name="cateNo" class="selectpicker" data-size="5" data-container="body" required>
                                 <option value="">카테고리 선택</option>
-                                <option value="1">Accountance</option>
-                                <option value="2">Banking</option>
-                                <option value="3">Design & Art</option>
-                                <option value="4">Developement</option>
-                                <option value="5">Insurance</option>
-                                <option value="6">IT Engineer</option>
-                                <option value="7">Healthcare</option>
-                                <option value="8">Marketing</option>
-                                <option value="9">Management</option>
+                                <!-- 반복문 시작 -->
+								<c:forEach var="vo" items="${list}">
+									<option value="${vo.cateNo}">
+										${vo.cateName}
+									</option>
+								</c:forEach>
+								<!-- 반복문 끝 -->
                             </select>
                         </div>
-                         -->
                     
                         <!-- Form Group -->
                         <div class="form-group">
                             <label>모델 설명 <span>(선택사항)</span></label>
-                            <textarea class="tinymce" name="rec_content" id="rec_content"></textarea>
+                            <textarea class="tinymce" name="pdPre" id="pdPre"></textarea>
                         </div>
                         
                         <!-- Form Group -->
@@ -99,7 +86,8 @@
                             <!-- Upload Button -->
                             <div class="upload-file-btn">
                                 <span><i class="fa fa-upload"></i> Upload</span>
-                                <input class="form-control" type="file" name="application_attachment" accept=".jpg,.png,.gif">
+                                <input class="form-control" type="file" id="pdFilename"
+                                name="pdFilename" accept=".jpg,.png,.gif">
                             </div>
                         </div>
 

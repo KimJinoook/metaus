@@ -43,7 +43,7 @@ public interface ConstUtil {
 	
 	//포트폴리오 첨부파일
 	String PORTFOLIO_FILE_UPLOAD_PATH="portfolio";
-	String PORTFOLIO_FILE_UPLOAD_PATH_TEST="src/main/resources/static/portfolio";
+	String PORTFOLIO_FILE_UPLOAD_PATH_TEST="src/main/resources/static/gltfmodel";
 	
 	//기업의뢰 첨부파일
 	String RECRUIT_FILE_UPLOAD_PATH="recruit";

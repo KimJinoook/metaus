@@ -8,9 +8,25 @@
 
 <script type="text/javascript">
 	$(function(){
+		var img="";
+		if($('#resTitle').val().length<1){
+			img="제목을 입력하세요";
+			$('.error1').text(img);
+		}else{
+			img="";		
+		}
+				
+		$('#resTitle').keyup(function(){
+			if($('#resTitle').val().length<1){
+				img="제목을 입력하세요";
+			}else{
+				img="";
+			}
+			$('.error1').text(img);
+		}); 
 		$('form[name=frm1]').submit(function(){
 			var content = $("#resContent").val();
-			if($('#chkId1').val()!='Y'){
+			if($('#resTitle').val().length<1){
 				alert("제목을 입력 하세요");
 				$("#resTitle").focus();
 				event.preventDefault();	
@@ -28,19 +44,6 @@
 				event.preventDefault();
 			}
 	}); 
-	
-	
-	$('#resTitle').keyup(function(){				
-		var img="";
-		if($('#resTitle').val()==""){
-			img="제목을 입력하세요";
-			$('#chkId1').val('N');
-		}else{
-			img="";
-			$('#chkId1').val('Y');
-		}	
-		$('.error').text(img);
-	});
 
 });
 
@@ -67,14 +70,20 @@
 	            </div>
 	        </div>
 	    </section>
-			<div>
-				<input type="text" class="live-search-box form-control mt20 ss" 
-				name="resTitle" id="resTitle" placeholder="제목을 입력하세요" value="${rvo.resTitle }">				
-			<%-- <c:if test="${empty rrvo}">
-				<img src="<c:url value='/images/portfolio/엑스.png'/>"> --%>
-				<span class="error"></span>
-			<%-- </c:if> --%>
+	    
+	    <div class="container">
+	    	<div class="row">
+        		<div class="col-md-12">
+					<div class="form-group" align="center">
+						<input type="text" class="live-search-box form-control mt20 ss" 
+						name="resTitle" id="resTitle" placeholder="제목" value="${rvo.resTitle }">				
+						<div style="width:1070px" align="left">
+							<span class="error1"></span>
+						</div>			
+					</div>
+				</div>
 			</div>
+		</div>
                         
         <div class="container">
 				
@@ -200,7 +209,7 @@
         </div>
                         
     </section>
-    <input type="text" name="chkId" id="chkId1">
+    <input type="hidden" name="chkId" id="chkId1">
   </form>	
 
 <%@ include file="../inc/footer.jsp" %>
