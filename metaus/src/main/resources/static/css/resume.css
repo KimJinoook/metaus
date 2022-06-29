@@ -112,11 +112,11 @@ form.post-job-resume .upload-file-btn input[type=file] {
     position: absolute;
     width: 150%;
     height: 45%;
-    top: 23px;
+    top: 24px;
     left: -75px;
     opacity: 1;
     cursor: pointer;
-    color: black;
+    color: #f6f6f6;
 }
 
 form.post-job-resume .upload-file-btn {
@@ -135,5 +135,9 @@ form.post-job-resume .upload-file-btn {
 }
 .error{
 	margin: 432px;
+	color: red;
+}
+.error1{
+	margin: 0px;
 	color: red;
 }

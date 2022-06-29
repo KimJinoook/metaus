@@ -156,13 +156,7 @@
                 <h3 class="text-center pb60">포트폴리오</h3>
 
                 <!-- Filter Buttons -->
-                <ul class="list-inline text-center uppercase" id="portfolio-sorting">
-                    <li><a href="#0" data-filter="*" class="current">all</a></li>
-                    <li><a href="#0" data-filter=".portfolio-cat1">logos</a></li>
-                    <li><a href="#0" data-filter=".portfolio-cat2">websites</a></li>
-                    <li><a href="#0" data-filter=".portfolio-cat3">ui</a></li>
-                    <li><a href="#0" data-filter=".portfolio-cat4">printings</a></li>
-                </ul>
+                
             </div>
 
             <!-- Start of Portfolio Grid -->

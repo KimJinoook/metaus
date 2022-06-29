@@ -200,7 +200,7 @@
         </div>
                         
     </section>
-    <input type="text" name="chkId" id="chkId1">
+    <input type="hidden" name="chkId" id="chkId1">
   </form>	
 
 <%@ include file="../inc/footer.jsp" %>
