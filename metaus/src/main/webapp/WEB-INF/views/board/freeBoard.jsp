@@ -99,12 +99,7 @@
 														src="<c:url value='/img_upload/${vo.bfileFilename }'/>"
 														class="img-responsive" />
 												</c:if>
-												<c:if test="${vo.boardNo!=map['BOARD_NO'] }">
-													<img
-														src="<c:url value='/images/board/noimg.png'/>"
-														class="img-responsive"/>
-												</c:if>
-											</c:forEach>
+									</c:forEach>
 								</a>
 							</div>
 
