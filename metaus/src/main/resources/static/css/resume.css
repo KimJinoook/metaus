@@ -111,8 +111,8 @@ ul {
 form.post-job-resume .upload-file-btn input[type=file] {
     position: absolute;
     width: 150%;
-    height: 45%;
-    top: 24px;
+    height: 85%;
+    top: 4px;
     left: -75px;
     opacity: 1;
     cursor: pointer;
