@@ -185,18 +185,11 @@
                 </c:if>
                 
 				
-            </div>
-            <!-- End of Portfolio Grid -->
-
-             <div class="row">
-                <div class="col-md-12 text-center mt20">
-                    <a href="#" class="btn btn-blue btn-effect">show more</a>
-                </div>
             </div> 
 					
 			<div class="form-group pt30 nomargin" id="last">
                     <input type="submit" class="btn btn-blue btn-effect" value="수정">
-			<a href="<c:url value='/'/>" class="btn btn-blue btn-effect">취소</a>
+			<a href="<c:url value='/'/>" class="btn btn-blue btn-effect">뒤로</a>
             </div>
         </div>
                         

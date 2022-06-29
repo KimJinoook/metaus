@@ -1,6 +1,7 @@
 package com.metaus.comment.model;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
@@ -17,10 +18,7 @@ public class CommentServiceImpl implements CommentService {
 		return commentDao.insertComment(vo);
 	}
 
-	@Override
-	public List<CommentVO> selectComment(int boardNo) {
-		return commentDao.selectComment(boardNo);
-	}
+	
 
 	@Override
 	public int deleteComment(int cmtNo) {
@@ -30,6 +28,13 @@ public class CommentServiceImpl implements CommentService {
 	@Override
 	public int countComment(int boardNo) {
 		return commentDao.countComment(boardNo);
+	}
+
+
+
+	@Override
+	public List<Map<String, Object>> selectComment(int boardNo) {
+		return commentDao.selectComment(boardNo);
 	}
 	
 	
