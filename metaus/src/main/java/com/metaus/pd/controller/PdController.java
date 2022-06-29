@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,6 +17,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.metaus.category.model.CategoryService;
+import com.metaus.category.model.CategoryVO;
 import com.metaus.common.ConstUtil;
 import com.metaus.common.FileUploadUtil;
 import com.metaus.pd.model.PdService;
@@ -32,6 +35,7 @@ public class PdController {
 	
 	private final PdService pdService;
 	private final FileUploadUtil fileUploadUtil;
+	private final CategoryService cateService;
 	
 	@RequestMapping("/pd")
 	public String pd() {
@@ -51,14 +55,19 @@ public class PdController {
 	}
 	
 	@GetMapping("/pdPost")
-	public String pd_get() {
+	public void pd_get(Model model) {
 		logger.info("pd Post 페이지");		
+		List<CategoryVO> list=cateService.selectCategory();
+		logger.info("카테고리 조회 결과 list.size={}",list.size());
 		
-		return "/pd/pdPost";
+		model.addAttribute("list",list);
 	}
 	
 	@PostMapping("/pdPost")
 	public String pd_Post(@ModelAttribute PdVO vo, HttpServletRequest request, Model model) {
+		HttpSession session=request.getSession();
+		int memNo=(int)session.getAttribute("memNo");
+		
 		logger.info("pd Post 등록처리, 파라미터 vo={}",vo);
 		String fileName="";
 
@@ -74,7 +83,8 @@ public class PdController {
 		}
 
 		vo.setPdFilename(fileName);
-
+		vo.setMemNo(memNo);
+		
 		int cnt=pdService.insertPd(vo);
 		logger.info("상품 등록 처리 결과, cnt={}",cnt);
 
