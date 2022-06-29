@@ -45,7 +45,9 @@
 	<c:if test="${!empty list }">	
 	   <!-- 반복 시작 -->
 	   <c:forEach var="vo" items="${list }">
-
+		<div>
+		<a href="<c:url value='/pd/pdDetail?pdNo=${vo.pdNo }'/>"></a>
+		</div>
 	   </c:forEach>
 	   <!-- 반복 끝 -->
 	</c:if>	   
