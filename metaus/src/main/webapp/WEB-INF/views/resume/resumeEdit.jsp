@@ -10,7 +10,7 @@
 	$(function(){
 		$('form[name=frm1]').submit(function(){
 			var content = $("#resContent").val();
-			if($('#chkId1').val()!='Y'){
+			if($('#chkId1').val().length<1){
 				alert("제목을 입력 하세요");
 				$("#resTitle").focus();
 				event.preventDefault();	
@@ -39,7 +39,7 @@
 			img="";
 			$('#chkId1').val('Y');
 		}	
-		$('.error').text(img);
+		$('.error1').text(img);
 	});
 
 });
@@ -67,13 +67,22 @@
 	            </div>
 	        </div>
 	    </section>
-			<div>
+	    
+	    <div class="container">
+	    <div class="row">
+                    <div class="col-md-12">
+			<div class="form-group" align="center">
 				<input type="text" class="live-search-box form-control mt20 ss" 
 				name="resTitle" id="resTitle" placeholder="제목을 입력하세요" value="${rvo.resTitle }">				
 			<%-- <c:if test="${empty rrvo}">
 				<img src="<c:url value='/images/portfolio/엑스.png'/>"> --%>
-				<span class="error"></span>
+				<div style="width:1070px" align="left">
+				<span class="error1"></span>
+				</div>
 			<%-- </c:if> --%>
+			</div>
+			</div>
+			</div>
 			</div>
                         
         <div class="container">
