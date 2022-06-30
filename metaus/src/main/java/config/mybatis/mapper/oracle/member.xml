@@ -98,7 +98,9 @@
 			#{memNick},#{memBirth}, #{memTel},#{memZipcode}, #{memAdd}, 
 			#{memAdd2}, sysdate)
 	</insert>
-   	
+   	<select id="selectAll" resultType="memberVo">
+   		select * from fp_mem
+   	</select>
 	
 </mapper>
 
