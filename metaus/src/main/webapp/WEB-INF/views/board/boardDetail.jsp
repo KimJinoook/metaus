@@ -4,12 +4,34 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ include file="../inc/header.jsp"%>
+<style>
+button#ajaxBt{
+	margin-right: 18px;
+}
+</style>
 <script type="text/javascript"
 	src="<c:url value='/js/jquery-3.6.0.min.js'/>">
 	
 </script>
 <script>
+	function shareFacebook() {
+		window.open('http://www.facebook.com/sharer.php?u=www.naver.com');
+	}
 	$(function() {
+		var bool = true;
+		
+		$('#replyArea div').hide();
+		$('form[name=replyFrm] button').click(function(){
+			if(bool){
+				$(this).parent().parent().parent().find('div').show();
+				bool= !bool;
+			}else{
+				$(this).parent().parent().parent().find('#replyArea').hide();
+				bool= !bool;
+			}
+		});
+		
+		
 		$('#boardDeleteBt').click(function() {
 			var rlt = confirm('삭제하시겠습니까?');
 
@@ -81,12 +103,12 @@
 						return false;
 					}
 				});
-		
-		
+
 		$('form[name=upFrm] button').click(
 				function(e) {
 					var cmtNo = $(this).find('input[name=cmtNo]').val();
-					var cmtContent = $(this).parent().find($('input[name=cmtContent]')).val();
+					var cmtContent = $(this).parent().find(
+							$('input[name=cmtContent]')).val();
 					//console.log($(this).parent().parent().parent().find("p"));
 					//let element = $($(this).parent().parent().parent().parent()[0]).find("p");
 					//console.log(this);
@@ -101,9 +123,9 @@
 							var message = "댓글 수정 성공";
 							//let con = res.content;
 							//console.log(res);
-							
+
 							//element[0].innerText = con;
-							
+
 							alert(message);
 							e.preventDefault();
 						},
@@ -111,8 +133,40 @@
 							alert('error:' + error);
 						}
 					});
-					
+
 				});
+		
+		$('form[name=replyBox] button').click(
+				function(){
+					
+					var boardNo = "${vo.boardNo}";
+					var memId = "${memId}";
+					var cmtContent = $(this).parent().find(
+							$('textarea[name=cmtContent]')).val();
+					var cmtGroupNo = $(this).parent().find($('input[name=cmtGroupNo]')).val();
+					var cmtStep = $(this).parent().find($('input[name=cmtStep]')).val();
+					var cmtSortNo = $(this).parent().find($('input[name=cmtSortNo]')).val();
+					
+					$.ajax({
+						url : "<c:url value='/board/commentReplyAjax'/>"
+								+ "?boardNo=" + boardNo + "&memId=" + memId 
+										+ "&cmtContent="+ cmtContent
+										+ "&cmtGroupNo="+ cmtGroupNo
+										+ "&cmtStep="+ cmtStep
+										+ "&cmtSortNo="+ cmtSortNo,
+						type : 'GET',
+						async : false,
+						success : function(res) {
+							var message = "답글 작성 성공";
+
+							alert(message);
+							e.preventDefault();
+						},
+						error : function(xhr, status, error) {
+							alert('error:' + error);
+						}
+					});
+		});
 	});
 </script>
 <!-- =============== Start of Page Header 1 Section =============== -->
@@ -208,7 +262,8 @@
 				<!-- Start of Social Media Buttons -->
 				<ul class="social-btns list-inline mt20">
 					<!-- Social Media -->
-					<li><a href="#" class="social-btn-roll facebook">
+					<li onclick="shareFacebook()"><a href="#"
+						class="social-btn-roll facebook">
 							<div class="social-btn-roll-icons">
 								<i class="social-btn-roll-icon fa fa-facebook"></i> <i
 									class="social-btn-roll-icon fa fa-facebook"></i>
@@ -263,9 +318,9 @@
 
 													<!-- Comment -->
 													<p>${map['CMT_CONTENT'] }</p>
-
-													<c:if test="${map['MEM_ID'] == memId }">
-														<div>
+													
+													<div>
+														<c:if test="${map['MEM_ID'] == memId }">
 															<form name="upFrm" id="cmtUpdate"
 																style="display: inline-block; width: 66px;">
 																<div class="form-group">
@@ -273,7 +328,8 @@
 																		placeholder="수정할 내용을 입력해주세요" required
 																		style="color: black; width: 500px;" name="cmtContent">
 																</div>
-																<button onclick="edit()" class="btn btn-large btn-blue btn-effect mt30">
+																<button onclick="edit()"
+																	class="btn btn-large btn-blue btn-effect mt30">
 																	<input id="cmtNo" type="hidden"
 																		value="${map['CMT_NO'] }" name="cmtNo">수정
 																</button>
@@ -286,8 +342,48 @@
 																		value="${map['CMT_NO'] }"> 삭제
 																</button>
 															</form>
-														</div>
-													</c:if>
+														</c:if>
+														<form name="replyFrm" style="display: inline-block;">
+														<button class="btn btn-large btn-blue btn-effect mt30"
+															type="button" style="display: inline-block;" id="replyBt">
+															답글</button>
+														</form>
+													</div>
+													<div id="replyArea">
+													<div>
+														<!-- Start of Comment Submit Form -->
+														<h4 class="pt40">답글 남기기</h4>
+
+														<form class="row" id="comment-form" name="replyBox">
+															<div class="col-md-6 form-group">
+																<input class="form-control input-box" type="text"
+																	name="memName" id="memName" disabled="disabled"
+																	value="${memName }">
+															</div>
+															<div class="col-md-6 form-group">
+																<input class="form-control input-box" type="text"
+																	name="memId" id="memId" disabled="disabled"
+																	value="${memId }">
+															</div>
+
+															<div class="col-md-12 form-group mb30">
+																<textarea class="form-control textarea-box" rows="8"
+																	name="cmtContent" placeholder="여기에 답글을 써주세요..."
+																	></textarea>
+															</div>
+															<div class="col-md-6 col-xs-6 comment-require">
+																<p>욕설 및 상대방을 비하하는 댓글은 삭제될 수 있습니다.</p>
+															</div>
+															<div class="col-md-6 col-xs-6 comment">
+																<button class="btn btn-blue btn-effect pull-right"
+																	id="replyBtAjax" type="button">답글 쓰기</button>
+															</div>
+															<input type="hidden" name="cmtGroupNo" value="${map['CMT_GROUPNO'] }">
+															<input type="hidden" name="cmtStep" value="${map['CMT_STEP'] }">
+															<input type="hidden" name="cmtSortNo" value="${map['CMT_SORTNO'] }">
+														</form>
+														<!-- End of Comment Submit Form -->
+													</div>
 												</div>
 								</c:forEach>
 						</ul>

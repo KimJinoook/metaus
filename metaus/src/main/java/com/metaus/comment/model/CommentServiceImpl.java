@@ -41,6 +41,11 @@ public class CommentServiceImpl implements CommentService {
 	public int updateComment(CommentVO vo) {
 		return commentDao.updateComment(vo);
 	}
+
+	@Override
+	public int reply(CommentVO vo) {
+		return commentDao.reply(vo);
+	}
 	
 	
 }

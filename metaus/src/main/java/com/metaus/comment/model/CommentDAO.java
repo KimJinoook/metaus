@@ -12,4 +12,5 @@ public interface CommentDAO {
 	int deleteComment(int cmtNo);
 	int countComment(int boardNo);
 	int updateComment(CommentVO vo);
+	int reply(CommentVO vo);
 }
