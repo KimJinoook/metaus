@@ -598,4 +598,23 @@ public class BoardController {
 		
 		return map;
 	}
+	
+	@RequestMapping("/commentReplyAjax")
+	public CommentVO commentReplyAjax_reply(CommentVO vo) {
+		logger.info("ajax 답글 작성 - vo={}", vo);
+		
+		MemberVO memVo = memberService.selectByMemNo(vo.getMemNo());
+		
+		CommentVO nVo = new CommentVO();
+		nVo.setBoardNo(vo.getBoardNo());
+		nVo.setCmtContent(vo.getCmtContent());
+		nVo.setCmtGroupNo(vo.getCmtGroupNo());
+		nVo.setMemNo(vo.getMemNo());
+		
+		int cnt = commentService.reply(nVo);
+		logger.info("ajax 답글 작성 결과 - cnt={}", cnt);
+		
+		return nVo;
+		
+	}
 }

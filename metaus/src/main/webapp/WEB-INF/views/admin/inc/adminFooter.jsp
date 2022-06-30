@@ -61,6 +61,14 @@
     <!-- Page level custom scripts -->
     <script src="<c:url value='/admin/js/demo/datatables-demo.js'/>"></script>
 
+
+    <!-- Page level plugins -->
+    <script src="<c:url value='/admin/vendor/chart.js/Chart.min.js'/>"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="<c:url value='/admin/js/demo/chart-area-demo.js'/>"></script>
+    <script src="<c:url value='/admin/js/demo/chart-pie-demo.js'/>"></script>
+
 </body>
 
 </html>

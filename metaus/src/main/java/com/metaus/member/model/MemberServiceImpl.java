@@ -91,4 +91,10 @@ public class MemberServiceImpl implements MemberService {
 		return memberDao.selectPortByMenNo(menNo);
 	}
 
+	@Override
+	public List<MemberVO> selectAll() {
+		return memberDao.selectAll();
+
+	}
+
 }

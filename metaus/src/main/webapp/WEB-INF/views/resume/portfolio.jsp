@@ -30,6 +30,7 @@
 
 </script>
 
+<form name="frm1" action="<c:url value='/resume/portfolio'/>" class="post-job-resume mt50" method="post" enctype="multipart/form-data">
  <section class="ptb80" id="job-page">
  	<section class="page-header">
         <div class="container">
@@ -47,7 +48,6 @@
     
  <section class="ptb80" id="post-job">
         <div class="container">
-            <form name="frm1" action="<c:url value='/resume/portfolio'/>" class="post-job-resume mt50" method="post" enctype="multipart/form-data">
             <input type="hidden" name="memNo" value="${mvo.memNo }">
                 <!-- Start of Resume Details -->
                 <div class="row">
