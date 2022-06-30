@@ -16,6 +16,7 @@ $(function(){
 	});
 });
 </script>
+ <form name="frmDelete" action="<c:url value='/resume/portfolioDetail'/>" class="post-job-resume mt50" method="post" enctype="multipart/form-data">
  <section class="ptb80" id="job-page">
  	<section class="page-header">
         <div class="container">
@@ -33,7 +34,6 @@ $(function(){
     
  <section class="ptb80" id="post-job">
         <div class="container">
-            <form name="frmDelete" action="<c:url value='/resume/portfolioDetail'/>" class="post-job-resume mt50" method="post" enctype="multipart/form-data">
             <input type="hidden" name="portNo"  value="${pvo.portNo }">
                <div class="row candidate-profile nomargin">            
                 <!-- Start of Profile Description -->

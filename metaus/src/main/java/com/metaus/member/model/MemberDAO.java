@@ -25,5 +25,6 @@ public interface MemberDAO {
 	public List<MemberVO> selectAllCreater(SearchVO vo);
 	public int getTotalRecord(SearchVO vo);
 	public List<PortfolioVO> selectPortByMenNo(int memNo);
+	List<MemberVO> selectAll();
 
 }
