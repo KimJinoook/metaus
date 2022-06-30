@@ -81,27 +81,37 @@
 						return false;
 					}
 				});
-		$('input[name=cmtContent]').click(
-				function() {
+		
+		
+		$('form[name=upFrm] button').click(
+				function(e) {
+					var cmtNo = $(this).find('input[name=cmtNo]').val();
+					var cmtContent = $(this).parent().find($('input[name=cmtContent]')).val();
+					//console.log($(this).parent().parent().parent().find("p"));
+					//let element = $($(this).parent().parent().parent().parent()[0]).find("p");
+					//console.log(this);
 
-						var cmtNo = $(this).find('input').val();
-						var cmtContent = $('input[name=cmtContent]').val();
-
-						$.ajax({
-							url : "<c:url value='/board/commentAjaxUpdate'/>"
-									+ "?cmtNo=" + cmtNo + "&cmtContent=" + cmtContent,
-							type : 'GET',
-							async : false,
-							success : function(res) {
-								var message = "댓글 수정 성공";
-
-								alert(message);
-							},
-							error : function(xhr, status, error) {
-								alert('error:' + error);
-							}
-						});
-						// 취소 눌렀을시 
+					$.ajax({
+						url : "<c:url value='/board/commentAjaxUpdate'/>"
+								+ "?cmtNo=" + cmtNo + "&cmtContent="
+								+ cmtContent,
+						type : 'GET',
+						async : false,
+						success : function(res) {
+							var message = "댓글 수정 성공";
+							//let con = res.content;
+							//console.log(res);
+							
+							//element[0].innerText = con;
+							
+							alert(message);
+							e.preventDefault();
+						},
+						error : function(xhr, status, error) {
+							alert('error:' + error);
+						}
+					});
+					
 				});
 	});
 </script>
@@ -254,16 +264,20 @@
 													<!-- Comment -->
 													<p>${map['CMT_CONTENT'] }</p>
 
-													<c:if test="${map['MEM_ID'] == memVo.memId }">
+													<c:if test="${map['MEM_ID'] == memId }">
 														<div>
-															<div class="form-group">
-																<input class="form-control" type="text"
-																	placeholder="수정할 내용을 입력해주세요" required
-																	style="color: black;" name="cmtContent">
-															</div>
-															<button class="btn btn-large btn-blue btn-effect mt30"
-																id=""><input id="cmtNo" type="hidden"
-																		value="${map['CMT_NO'] }">수정</button>
+															<form name="upFrm" id="cmtUpdate"
+																style="display: inline-block; width: 66px;">
+																<div class="form-group">
+																	<input class="form-control" type="text"
+																		placeholder="수정할 내용을 입력해주세요" required
+																		style="color: black; width: 500px;" name="cmtContent">
+																</div>
+																<button onclick="edit()" class="btn btn-large btn-blue btn-effect mt30">
+																	<input id="cmtNo" type="hidden"
+																		value="${map['CMT_NO'] }" name="cmtNo">수정
+																</button>
+															</form>
 															<form name="delFrm" id="cmtDelete"
 																style="display: inline-block;">
 																<button class="btn btn-large btn-blue btn-effect mt30"

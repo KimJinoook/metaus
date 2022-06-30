@@ -27,11 +27,11 @@ public class AdminLoginInterceptor extends HandlerInterceptorAdapter{
 		- 컨트롤러 수행이전에 먼저 수행되는 메서드
 		- 클라이언트의 요청을 컨트롤러에 전달하기 전에 호출됨*/
 		
-		String isLogin=(String) request.getSession().getAttribute("isLogin");
-		logger.info("isLogin = {}", isLogin);
+		String isAdmin=(String) request.getSession().getAttribute("isAdmin");
+		logger.info("isAdmin = {}", isAdmin);
 		
 		//로그인 안된 경우
-		if(!("admin").equals(isLogin)) {
+		if(!("admin").equals(isAdmin)) {
 			
 			response.setContentType("text/html;charset=utf-8");
 			PrintWriter out = response.getWriter();
