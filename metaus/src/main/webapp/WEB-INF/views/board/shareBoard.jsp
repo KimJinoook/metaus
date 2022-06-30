@@ -50,7 +50,7 @@
 <!-- =============== End of Page Header 1 Section =============== -->
 
 <!-- 검색 시작 -->
-<form id="searchFrm" method="post" action="<c:url value='/board/qna?btypeNo=6'/>">
+<form id="searchFrm" method="post" action="<c:url value='/board/shareBoard?btypeNo=6'/>">
 	<div id="searchBox">
 		<div class="col-md-3 col-sm-12 search-categories"
 			style="display: contents;">
@@ -165,6 +165,8 @@
 				<form name="frmPage" method="post"
 					action="<c:url value='/board/shareBoard?btypeNo=6'/>">
 					<input type="hidden" name="currentPage">
+					<input type="hidden" name="searchKeyword" value="${searchVo.searchKeyword }">
+					<input type="hidden" name="searchCondition" value="${searchVo.searchCondition }">
 				</form>
 				<!-- 페이징 처리 form 끝 -->
 
@@ -277,26 +279,7 @@
 
 
 
-<!-- ===== Start of Get Started Section ===== -->
-<section class="get-started ptb40">
-	<div class="container">
-		<div class="row ">
 
-			<!-- Column -->
-			<div class="col-md-10 col-sm-9 col-xs-12">
-				<h3 class="text-white">20,000+ People trust Cariera! Be one of
-					them today.</h3>
-			</div>
-
-			<!-- Column -->
-			<div class="col-md-2 col-sm-3 col-xs-12">
-				<a href="#" class="btn btn-blue btn-effect">get start now</a>
-			</div>
-
-		</div>
-	</div>
-</section>
-<!-- ===== End of Get Started Section ===== -->
 
 
 

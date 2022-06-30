@@ -186,14 +186,19 @@
                 
 				
             </div> 
-					
-			<div class="form-group pt30 nomargin" id="last">
-                    <input type="submit" class="btn btn-blue btn-effect" value="수정">
-			<a href="<c:url value='/'/>" class="btn btn-blue btn-effect">뒤로</a>
-            </div>
+			
         </div>
                         
     </section>
+		<section class="portfolio ptb80">
+        	<div class="container">
+			
+				<div class="form-group pt30 nomargin" id="last">
+	                    <input type="submit" class="btn btn-blue btn-effect" value="수정">
+				<a href="<c:url value='/'/>" class="btn btn-blue btn-effect">뒤로</a>
+	            </div>
+	      	</div>
+	    </section>
   </form>	
 
 <%@ include file="../inc/footer.jsp" %>

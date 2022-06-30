@@ -1,6 +1,7 @@
 package com.metaus.board.controller;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -72,6 +73,7 @@ public class BoardController {
 		logger.info("notice 목록 조회-pagingInfo, pagingInfo.getFirstPage={}", pagingInfo.getFirstPage());
 		logger.info("notice 목록 조회-pagingInfo, pagingInfo.getLastPage={}", pagingInfo.getLastPage());
 		
+		model.addAttribute("searchVo",searchVo);
 		model.addAttribute("pagingInfo", pagingInfo);
 		model.addAttribute("list",list);
 		model.addAttribute("atcList",atcList);
@@ -125,6 +127,7 @@ public class BoardController {
 		logger.info("news 목록 조회-pagingInfo, pagingInfo.getFirstPage={}", pagingInfo.getFirstPage());
 		logger.info("news 목록 조회-pagingInfo, pagingInfo.getLastPage={}", pagingInfo.getLastPage());
 		
+		model.addAttribute("searchVo",searchVo);
 		model.addAttribute("pagingInfo", pagingInfo);
 		model.addAttribute("list",list);
 		model.addAttribute("atcList",atcList);
@@ -163,6 +166,7 @@ public class BoardController {
 		logger.info("freeBoard 목록 조회-pagingInfo, pagingInfo.getFirstPage={}", pagingInfo.getFirstPage());
 		logger.info("freeBoard 목록 조회-pagingInfo, pagingInfo.getLastPage={}", pagingInfo.getLastPage());
 		
+		model.addAttribute("searchVo",searchVo);
 		model.addAttribute("pagingInfo", pagingInfo);
 		model.addAttribute("list",list);
 		model.addAttribute("atcList",atcList);
@@ -202,6 +206,7 @@ public class BoardController {
 		logger.info("QuestionBoard 목록 조회-pagingInfo, pagingInfo.getFirstPage={}", pagingInfo.getFirstPage());
 		logger.info("QuestionBoard 목록 조회-pagingInfo, pagingInfo.getLastPage={}", pagingInfo.getLastPage());
 		
+		model.addAttribute("searchVo",searchVo);
 		model.addAttribute("pagingInfo", pagingInfo);
 		model.addAttribute("list",list);
 		model.addAttribute("atcList",atcList);
@@ -243,6 +248,7 @@ public class BoardController {
 		logger.info("searchVo.getRecordCountPerPage={}", searchVo.getRecordCountPerPage());
 		logger.info("pagingInfo.getRecordCountPerPage={}", pagingInfo.getRecordCountPerPage());
 		
+		model.addAttribute("searchVo",searchVo);
 		model.addAttribute("pagingInfo", pagingInfo);
 		model.addAttribute("list",list);
 		model.addAttribute("atcList",atcList);
@@ -283,6 +289,7 @@ public class BoardController {
 		logger.info("shareBoard 목록 조회-pagingInfo, pagingInfo.getFirstPage={}", pagingInfo.getFirstPage());
 		logger.info("shareBoard 목록 조회-pagingInfo, pagingInfo.getLastPage={}", pagingInfo.getLastPage());
 		
+		model.addAttribute("searchVo",searchVo);
 		model.addAttribute("pagingInfo", pagingInfo);
 		model.addAttribute("list",list);
 		model.addAttribute("atcList",atcList);
@@ -322,6 +329,7 @@ public class BoardController {
 		logger.info("requestBoard 목록 조회-pagingInfo, pagingInfo.getFirstPage={}", pagingInfo.getFirstPage());
 		logger.info("requestBoard 목록 조회-pagingInfo, pagingInfo.getLastPage={}", pagingInfo.getLastPage());
 		
+		model.addAttribute("searchVo",searchVo);
 		model.addAttribute("pagingInfo", pagingInfo);
 		model.addAttribute("list",list);
 		model.addAttribute("atcList",atcList);
@@ -579,12 +587,15 @@ public class BoardController {
 	
 	@ResponseBody
 	@RequestMapping("/commentAjaxUpdate")
-	public int commentAjax_update(CommentVO vo) {
+	public Map<String, Object> commentAjax_update(CommentVO vo) {
 		logger.info("ajax 댓글 수정 - vo={}", vo);
 		
 		int cnt = commentService.updateComment(vo);
 		logger.info("댓글 수정 결과, cnt={}", cnt);
 		
-		return cnt;
+		Map<String, Object> map = new HashMap<>();
+		map.put("content", vo.getCmtContent());
+		
+		return map;
 	}
 }
