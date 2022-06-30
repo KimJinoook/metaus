@@ -215,7 +215,7 @@ $(function(){
                                     </li>
 
                                     <%-- <li><a href="<c:url value='/pd/pd'/>">3D Model 목록</a></li> --%>
-                                    <li><a href="<c:url value='/pd/pdPost'/>">3D Model 등록</a></li>
+                                    <%-- <li><a href="<c:url value='/pd/pdPost'/>">3D Model 등록</a></li> --%>
                                     <li><a href="<c:url value='/etc/create'/>">3D Model 제작</a></li>
                                     <!-- <li><a href="typography.html">typography</a></li> -->
                                 </ul>
