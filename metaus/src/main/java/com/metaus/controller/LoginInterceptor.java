@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
-import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
@@ -27,20 +26,19 @@ public class LoginInterceptor extends HandlerInterceptorAdapter{
 		- 컨트롤러 수행이전에 먼저 수행되는 메서드
 		- 클라이언트의 요청을 컨트롤러에 전달하기 전에 호출됨*/
 		
-		String userid=(String) request.getSession().getAttribute("userid");
-		logger.info("userid = {}", userid);
+		String isLogin=(String) request.getSession().getAttribute("isLogin");
+		logger.info("isLogin = {}", isLogin);
 		
 		//로그인 안된 경우
-		if(userid==null || userid.isEmpty()) {
-			request.setAttribute("msg", "먼저 로그인하세요");
-			request.setAttribute("url", "/login/login");
+		if(isLogin==null || isLogin.isEmpty()) {
+
 			
 			response.setContentType("text/html;charset=utf-8");
 			PrintWriter out = response.getWriter();
 			out.print("<script>");
-			out.print("alert('먼저 로그인하세요');");
-			out.print("location.href='"+request.getContextPath()
-				+ "/login/login';");			
+			out.print("alert('로그인이 필요한 서비스 입니다.');history.back();");
+			//out.print("location.href='"+request.getContextPath() + "/';");			
+			//out.print("history.back();");			
 			out.print("</script>");
 			
 			return false;

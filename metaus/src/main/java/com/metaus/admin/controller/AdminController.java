@@ -3,6 +3,7 @@ package com.metaus.admin.controller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import lombok.RequiredArgsConstructor;
@@ -17,6 +18,11 @@ public class AdminController {
 	@RequestMapping("/")
 	public String index() {
 		return "/admin/index";
+	}
+	
+	@GetMapping("/login/adminLogin")
+	public void adminLogin_get() {
+		
 	}
 
 }
