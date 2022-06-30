@@ -4,15 +4,12 @@
 
 <mapper namespace="com.metaus.pd.model.PdDAO">
 	<sql id="searchWhere">
-		<if test="searchKeyword !=null and searchKeyword !=''">
-			<if test="searchCondition == 'memName'">
-				and m.mem_name like '%' || #{searchKeyword} || '%'
-			</if>
+		<if test="searchKeyword !=null and searchKeyword !=''">			
 			<if test="searchCondition == 'pdName'">
-				and b.board_title like '%' || #{searchKeyword} || '%'
+				where pd_name like '%' || #{searchKeyword} || '%'
 			</if>
 			<if test="searchCondition == 'pdPre'">
-				and b.board_content like '%' || #{searchKeyword} || '%'
+				where pd_pre like '%' || #{searchKeyword} || '%'
 			</if>
         </if>
 	</sql>

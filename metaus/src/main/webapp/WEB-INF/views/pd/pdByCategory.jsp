@@ -56,7 +56,6 @@ $(function(){
 				name="searchCondition" class="selectpicker" id="searchCondition"
 				data-live-search="true" title="검색 조건" data-size="3"
 				data-container="body" style="display: flow-root;">
-				<option value="memName">작성자</option>
 				<option value="pdName">제목</option>
 				<option value="pdPre">내용</option>
 			</select> <input type="text" class="live-search-box form-control mt20"
@@ -79,7 +78,6 @@ $(function(){
             <div class="container px-4 px-lg-5 mt-5">
             <c:if test="${!empty list }">
             <c:forEach var="vo" items="${list }">
-                <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
                     <div class="col mb-5">        
                                       
                         <div class="card h-100">
@@ -99,7 +97,6 @@ $(function(){
                             </a>
                         </div>
                     </div>                                        
-                  </div>
             </c:forEach>
             </c:if>
                                                             
