@@ -203,6 +203,8 @@
 			<form name="frmPage" method="post"
 				action="<c:url value='/board/qna?btypeNo=3'/>">
 				<input type="hidden" name="currentPage">
+				<input type="hidden" name="searchKeyword" value="${searchVo.searchKeyword }">
+				<input type="hidden" name="searchCondition" value="${searchVo.searchCondition }">
 			</form>
 			<!-- 페이징 처리 form 끝 -->
 			<!-- End of Candidates Wrapper -->

@@ -41,24 +41,26 @@
 <!-- =============== End of Page Header 1 Section =============== -->
 
 <!-- 검색 시작 -->
-<div id="searchBox">
-	<div class="col-md-3 col-sm-12 search-categories"
-		style="display: contents;">
-		<label for="search-categories"></label> <select name="searchCondition"
-			class="selectpicker" id="search-categories" data-live-search="true"
-			title="검색 조건" data-size="3" data-container="body"
-			style="display: flow-root;">
-			<option value="3">작성자</option>
-			<option value="8">제목</option>
-			<option value="5">내용</option>
-		</select> <input type="text" class="live-search-box form-control mt20"
-			placeholder="검색하실 내용을 입력해주세요" name="searchKeyword" id=""searchKeyword"">
-		<a href="/metaus/board/boardWrite?btypeNo=8">
-			<button class="btn btn-large btn-blue btn-effect mt30" id="searchBt">
-				검색</button>
-		</a>
+<form id="searchFrm" method="post" action="<c:url value='/board/news?btypeNo=4'/>">
+	<div id="searchBox">
+		<div class="col-md-3 col-sm-12 search-categories"
+			style="display: contents;">
+			<label for="search-categories"></label> <select
+				name="searchCondition" class="selectpicker" id="searchCondition"
+				data-live-search="true" title="검색 조건" data-size="3"
+				data-container="body" style="display: flow-root;">
+				<option value="memName">작성자</option>
+				<option value="boardTitle">제목</option>
+				<option value="boardContent">내용</option>
+			</select> <input type="text" class="live-search-box form-control mt20"
+				placeholder="검색하실 내용을 입력해주세요" name="searchKeyword"
+				id="searchKeyword"> <input type="hidden" name="btypeNo"
+				value="4">
+			<button class="btn btn-large btn-blue btn-effect mt30" id="searchBt"
+				type="submit">검색</button>
+		</div>
 	</div>
-</div>
+</form>
 <!-- 검색 끝 -->
 
 <!-- ===== Start of Blog Listing Section ===== -->
@@ -149,6 +151,8 @@
 				<form name="frmPage" method="post"
 					action="<c:url value='/board/news?btypeNo=4'/>">
 					<input type="hidden" name="currentPage">
+					<input type="hidden" name="searchKeyword" value="${searchVo.searchKeyword }">
+					<input type="hidden" name="searchCondition" value="${searchVo.searchCondition }">
 				</form>
 				<!-- 페이징 처리 form 끝 -->
 
@@ -164,26 +168,7 @@
 
 
 
-<!-- ===== Start of Get Started Section ===== -->
-<section class="get-started ptb40">
-	<div class="container">
-		<div class="row ">
 
-			<!-- Column -->
-			<div class="col-md-10 col-sm-9 col-xs-12">
-				<h3 class="text-white">20,000+ People trust Cariera! Be one of
-					them today.</h3>
-			</div>
-
-			<!-- Column -->
-			<div class="col-md-2 col-sm-3 col-xs-12">
-				<a href="#" class="btn btn-blue btn-effect">get start now</a>
-			</div>
-
-		</div>
-	</div>
-</section>
-<!-- ===== End of Get Started Section ===== -->
 
 
 <%@ include file="../inc/footer.jsp"%>
