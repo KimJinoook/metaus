@@ -8,15 +8,18 @@
 			order="BEFORE">
 			select fp_comment_seq.nextval from dual
 	</selectKey>
-		insert into fp_comment(cmt_no, cmt_content, board_no, mem_no, cmt_regdate)
-		values(#{cmtNo}, #{cmtContent}, #{boardNo}, #{memNo}, sysdate)
+		insert into fp_comment(cmt_no, cmt_content, board_no, mem_no, cmt_regdate , cmt_groupNo)
+		values(#{cmtNo}, #{cmtContent}, #{boardNo}, #{memNo}, sysdate, #{cmtNo})
 	</insert>
 	
 	<select id="selectComment" parameterType="int" resultType="map">
+		
 		select c.*, m.mem_id
 		from fp_comment c left join fp_mem m
 		on c.mem_no = m.mem_no
 		where board_no=#{boardNo}
+		order by cmt_groupNo desc, cmt_sortNo
+		
 	</select>
 	
 	<delete id="deleteComment" parameterType="int">
@@ -34,4 +37,14 @@
 		set cmt_content=#{cmtContent}
 		where cmt_no=#{cmtNo}
 	</update>
+	
+	<insert id="reply" parameterType="commentVo">
+		<selectKey resultType="int" keyProperty="cmtNo" order="BEFORE">
+			select fp_comment_seq.nextval from dual
+		</selectKey>
+		insert into fp_comment(cmt_no, cmt_regdate, cmt_content, board_no, memNo, 
+			cmt_groupNo, cmt_step, cmt_sortno)
+		values(#{cmtNo}, sysdate, #{cmtContent}, #{boardNo}, #{memNo}, 
+			#{cmtGroupNo}, #{cmtStep}+1, #{cmtSortNo}+1)
+	</insert>
 </mapper>
