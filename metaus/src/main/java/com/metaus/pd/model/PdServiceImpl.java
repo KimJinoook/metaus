@@ -24,8 +24,8 @@ public class PdServiceImpl implements PdService{
 	}
 
 	@Override
-	public List<PdVO> selectByCategory(int cateNo) {
-		return pdDao.selectByCategory(cateNo);
+	public List<PdVO> selectByCategory(SearchVO searchVo) {
+		return pdDao.selectByCategory(searchVo);
 	}
 
 	@Override
