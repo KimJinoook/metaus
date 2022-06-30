@@ -3,7 +3,20 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.metaus.pd.model.PdDAO">
-
+	<sql id="searchWhere">
+		<if test="searchKeyword !=null and searchKeyword !=''">
+			<if test="searchCondition == 'memName'">
+				and m.mem_name like '%' || #{searchKeyword} || '%'
+			</if>
+			<if test="searchCondition == 'pdName'">
+				and b.board_title like '%' || #{searchKeyword} || '%'
+			</if>
+			<if test="searchCondition == 'pdPre'">
+				and b.board_content like '%' || #{searchKeyword} || '%'
+			</if>
+        </if>
+	</sql>
+	
 	<select id="selectPdByNo" parameterType="int"
 		resultType="PdVo">
 		select * from fp_pd
@@ -20,14 +33,42 @@
 		<selectKey resultType="int" keyProperty="pdNo" order="BEFORE">
 			select fp_pd_seq.nextval from dual
 		</selectKey>
-		insert into fp_pd(pd_no, cate_no, mem_no, pd_name, pd_pre, pd_filename, pd_originname, pd_filesize)
-		values(#{pdNo},#{cateNo},#{memNo},#{pdName},#{pdPre},#{pdFilename},#{pdOriginname},#{pdFilesize})
+		insert into fp_pd(pd_no, cate_no, mem_no, pd_name, pd_pre, pd_filename, pd_filesize)
+		values(#{pdNo},#{cateNo},#{memNo},#{pdName},#{pdPre},#{pdFilename},#{pdFilesize})
 	</insert>
 	
 	<select id="selectByCategory" parameterType="int"
 		resultType="pdVo">
 		select * from fp_pd
 		where cate_no=#{cateNo}
+	</select>
+	
+	<select id="selectAll" parameterType="searchVo" resultType="pdVo">
+		select *
+		from
+		(
+		    select rownum as RNUM, A.*
+		    from
+		    (
+		        select * from fp_pd 
+		        <include refid="searchWhere"></include>
+		        order by pd_no desc
+		    )A
+		)
+		where RNUM>#{firstRecordIndex} 
+		<![CDATA[
+		and RNUM<=#{firstRecordIndex} + #{recordCountPerPage} ]]>
+	</select>
+	
+	<select id="selectTotalRecord" parameterType="pdVO"
+		resultType="int">
+		<if test="pdName==null or pdName==''">
+    		select count(*) from fp_pd 
+		</if>
+    	<if test="pdName!=null and pdName!=''">
+			select count(*) from fp_pd
+			where pdName=#{pdName}
+		</if>
 	</select>
 	
 	<delete id="deletePd" parameterType="int">

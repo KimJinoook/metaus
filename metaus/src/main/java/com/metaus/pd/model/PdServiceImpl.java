@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.metaus.common.SearchVO;
+
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -34,6 +36,16 @@ public class PdServiceImpl implements PdService{
 	@Override
 	public List<PdVO> selectPdByMemNo(int memNo) {
 		return pdDao.selectPdByMemNo(memNo);
+	}
+
+	@Override
+	public List<PdVO> selectAll(SearchVO searchVo) {
+		return pdDao.selectAll(searchVo);
+	}
+
+	@Override
+	public int selectTotalRecord(SearchVO searchVo) {
+		return pdDao.selectTotalRecord(searchVo);
 	}
 	
 }

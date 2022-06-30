@@ -2,9 +2,8 @@
     pageEncoding="utf-8"%>
 <%@ include file="../inc/header.jsp"%>
 
-
     <!-- =============== Start of Page Header 1 Section =============== -->
-    <section class="page-header">
+    <section class="page-header" style="margin-top: 150px;">
         <div class="container">
 
             <!-- Start of Page Title -->
@@ -87,7 +86,7 @@
                             <div class="upload-file-btn">
                                 <span><i class="fa fa-upload"></i> Upload</span>
                                 <input class="form-control" type="file" id="pdFilename"
-                                name="pdFilename" accept=".jpg,.png,.gif">
+                                name="upfile" accept=".jpg,.png,.gif,.gltf">
                             </div>
                         </div>
 
