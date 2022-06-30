@@ -30,6 +30,7 @@
 
 </script>
 
+<form name="frm1" action="<c:url value='/resume/portfolio'/>" class="post-job-resume mt50" method="post" enctype="multipart/form-data">
  <section class="ptb80" id="job-page">
  	<section class="page-header">
         <div class="container">
@@ -47,7 +48,6 @@
     
  <section class="ptb80" id="post-job">
         <div class="container">
-            <form name="frm1" action="<c:url value='/resume/portfolio'/>" class="post-job-resume mt50" method="post" enctype="multipart/form-data">
             <input type="hidden" name="memNo" value="${mvo.memNo }">
                 <!-- Start of Resume Details -->
                 <div class="row">
@@ -77,7 +77,17 @@
                             <label>작업 내용</label>
                             <textarea class="tinymce" name="portContent"></textarea>
                         </div>
-				<section class="portfolio ptb7">
+                    </div>
+                </div>
+                <!-- End of Resume Details -->
+            <!-- End of Post Resume Form -->
+		</div>
+        
+    </section>
+    <!-- ===== End of Main Wrapper Section ===== -->
+ </section>           
+
+				<section class="portfolio ptb80">
        	 			<div class="container">
                         <!-- Form Group -->
                         <div class="form-group pt30 nomargin" id="last">
@@ -86,17 +96,7 @@
                         </div> 
 					</div>
 				</section>
-                    </div>
-                </div>
-                <!-- End of Resume Details -->
             </form>
-            <!-- End of Post Resume Form -->
-		</div>
-        
-    </section>
-    <!-- ===== End of Main Wrapper Section ===== -->
- </section>           
-
 
  
      

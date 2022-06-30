@@ -16,6 +16,7 @@ $(function(){
 	});
 });
 </script>
+ <form name="frmDelete" action="<c:url value='/resume/portfolioDetail'/>" class="post-job-resume mt50" method="post" enctype="multipart/form-data">
  <section class="ptb80" id="job-page">
  	<section class="page-header">
         <div class="container">
@@ -33,7 +34,6 @@ $(function(){
     
  <section class="ptb80" id="post-job">
         <div class="container">
-            <form name="frmDelete" action="<c:url value='/resume/portfolioDetail'/>" class="post-job-resume mt50" method="post" enctype="multipart/form-data">
             <input type="hidden" name="portNo"  value="${pvo.portNo }">
                <div class="row candidate-profile nomargin">            
                 <!-- Start of Profile Description -->
@@ -96,18 +96,11 @@ $(function(){
                                      
                       
                         <br>             
-
-                        <!-- Form Group -->
-                        <div class="form-group pt30 nomargin" id="last">
-                            <input type="submit" class="btn btn-blue btn-effect" value="삭제">
-                            <a href="<c:url value='/resume/resumeDetail'/>" class="btn btn-blue btn-effect">취소</a>
-                        </div> 
 					  </div>	
                     </div>
                 </div>
                 <!-- End of Resume Details -->
 
-            </form>
             <!-- End of Post Resume Form -->
 		</div>
         
@@ -116,6 +109,17 @@ $(function(){
  </section>           
 
 
+				<section class="portfolio ptb80">
+        			<div class="container">
+						
+                        <!-- Form Group -->
+                        <div class="form-group pt30 nomargin" id="last">
+                            <input type="submit" class="btn btn-blue btn-effect" value="삭제">
+                            <a href="<c:url value='/resume/resumeDetail'/>" class="btn btn-blue btn-effect">취소</a>
+                        </div>
+                    </div>
+                </section> 
+            </form>
  
      
 

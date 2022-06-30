@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.metaus.admin.model.ManagerDAO">
+	<sql id="searchAndWhere">
+		<if test="searchKeyword !=null and searchKeyword !=''">
+			and (mem_nick like '%' || #{searchKeyword} || '%' or mem_id like '%' || #{searchKeyword} || '%')
+        </if>
+	</sql>
+	
+	<select id="selectPwd" parameterType="string" resultType="String">
+		select manager_pwd from fp_manager
+		where manager_id=#{managerId}
+	</select>
+	
+	<select id="selectByUserid" parameterType="string" 
+		resultType="ManagerVO">
+      select * from fp_manager where manager_id=#{managerId}
+   	</select>
+   	
+   	<select id="selectBySocialid" parameterType="string" 
+		resultType="memberVo">
+      select * from fp_mem where mem_id like #{memId} || '%'
+   	</select>
+   	
+   	<select id="findId" parameterType="MemberVO" resultType="string">
+   		select mem_id from fp_mem where mem_name=#{memName} and mem_tel = #{memTel}
+   	</select>
+   	
+   	<select id="findPw" parameterType="MemberVO" resultType="string">
+   		select mem_pw from fp_mem where mem_name=#{memName} and mem_tel = #{memTel} and mem_id = #{memId}
+   	</select>
+   	
+   	<select id="selectByMemNo" parameterType="int" 
+		resultType="memberVo">
+      select * from fp_mem where mem_no=#{memNo}
+   	</select>
+   	
+   	<select id="duplicateId" parameterType="String" resultType="int">
+		select count(*) from fp_manager
+		where manager_id=#{managerId}
+	</select>
+	
+	<select id="selectAllCreater" resultType="MemberVO" parameterType="SearchVO">
+		select * from (
+			select rownum as RNUM, R.* from(
+				select A.*, (select count(*) from fp_port B where A.mem_no = B.mem_no) as memItem, (select count(*) from fp_contact C where A.mem_no = C.mem_no) as memComplete  from fp_mem A where mem_no in (select mem_no from fp_port)
+				<include refid="searchAndWhere"></include>
+			) R
+		)
+		where
+		RNUM>#{firstRecordIndex} 
+		<![CDATA[	
+		and RNUM<=#{firstRecordIndex} + #{recordCountPerPage} ]]>
+	</select>
+	
+	<select id="selectPortByMenNo" resultType="PortfolioVO" parameterType="int">
+		select * from fp_port where mem_no = #{memNo}
+	</select>
+   	
+   	<select id="getTotalRecord" resultType="int" parameterType="SearchVO">
+		
+		select count(*) from fp_mem A where mem_no in (select mem_no from fp_port)
+		<include refid="searchAndWhere"></include>
+	
+	</select>
+   	
+   	
+   	<update id="updatePw" parameterType="MemberVO">
+		update fp_mem
+		set mem_pw = #{memPw}
+		where mem_id=#{memId}
+	</update>
+	
+	<update id="updateKakao" parameterType="int">
+		update fp_mem
+		set mem_kakao = 'Y'
+		where mem_no=#{memNo}
+	</update>
+	<update id="updateNaver" parameterType="int">
+		update fp_mem
+		set mem_naver = 'Y'
+		where mem_no=#{memNo}
+	</update>
+	<update id="updateFacebook" parameterType="int">
+		update fp_mem
+		set mem_facebook = 'Y'
+		where mem_no=#{memNo}
+	</update>
+	
+	<insert id="insertManager" parameterType="ManagerVO">
+		<selectKey resultType="int" keyProperty="managerNo" order="BEFORE">
+			select fp_manager_seq.nextval from dual
+		</selectKey>
+		insert into fp_manager(manager_no,manager_name,manager_id,manager_pwd,manager_regdate)
+		values(#{managerNo}, #{managerName}, #{managerId}, #{managerPwd},sysdate)
+	</insert>
+   	
+	
+</mapper>
+
+
+
+
+
