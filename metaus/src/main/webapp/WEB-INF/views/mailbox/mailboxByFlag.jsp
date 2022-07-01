@@ -119,7 +119,7 @@
 								  </c:choose>
 	                          </td>
 	                          <td class="mailbox-attachment"></td>
-	                          <td class="mailbox-date">5 mins ago</td>
+	                          <td class="mailbox-date">${map['SEND_DATE']} 5 mins ago</td>
 	                        </tr>
                         </c:forEach>
                         <!-- 메세지 목록 반복 끝 -->

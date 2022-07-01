@@ -661,7 +661,7 @@ CREATE TABLE fp_msg (
 	msgadd_adser VARCHAR2(50), /* 보낸사람 */
 	msg_content CLOB, /* 쪽지내용 */
 	msgtype_no NUMBER, /* 타입 번호 */
-	send_date DATE, /* 보낸시간 */
+	send_date DATE default sysdate, /* 보낸시간 */
     star_flag VARCHAR2(10) default 'N' not null, /* 별표 플래그 */
     temporary_flag VARCHAR2(10) default 'N' not null, /* 임시 저장 플래그 */
 	trash_flag VARCHAR2(10) default 'N' not null /* 삭제 플래그 */

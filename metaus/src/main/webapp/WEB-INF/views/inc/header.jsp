@@ -229,10 +229,10 @@ $(function(){
 	
 	                                    <!-- Dropdown Submenu -->
 	                                    <li class="dropdown-submenu">
-	                                        <a href="#">blog right sidebar<i class="fa fa-angle-right"></i></a>
+	                                        <a href="#">의뢰<i class="fa fa-angle-right"></i></a>
 	                                        <ul class="dropdown-menu">
-	                                            <li><a href="blog-right-sidebar-v1.html">version 1</a></li>
-	                                            <li><a href="blog-right-sidebar-v2.html">version 2</a></li>
+	                                            <li><a href="<c:url value='/commission/commissionList'/>">의뢰목록</a></li>
+	                                            <li><a href="<c:url value='/commission/progressSchedule'/>">의뢰진행상황</a></li>
 	                                        </ul>
 	                                    </li>
 	
@@ -252,11 +252,10 @@ $(function(){
 	
 	                                    <!-- Dropdown Submenu -->
 	                                    <li class="dropdown-submenu">
-	                                        <a href="#">masonry<i class="fa fa-angle-right"></i></a>
+	                                        <a href="#">3D모델<i class="fa fa-angle-right"></i></a>
 	                                        <ul class="dropdown-menu">
-	                                            <li><a href="blog-masonry-4col.html">4 columns</a></li>
-	                                            <li><a href="blog-masonry-3col.html">3 columns</a></li>
-	                                            <li><a href="blog-masonry-2col.html">2 columns</a></li>
+	                                            <li><a href="<c:url value='/lecture/lectureList'/>">모델목록</a></li>
+	                                            <li><a href="<c:url value='/lecture/salesChart'/>">모델매출</a></li>
 	                                        </ul>
 	                                    </li>
 	
