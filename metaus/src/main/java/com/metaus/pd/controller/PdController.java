@@ -113,14 +113,30 @@ public class PdController {
 	}
 	
 	@RequestMapping("/pdByCategory")
-	public void pdByCategory(@RequestParam String cateName,
+	public void pdByCategory(@ModelAttribute PdVO searchVo, @RequestParam String cateName,
 			@RequestParam int cateNo, Model model) {
+		logger.info("pd 목록 페이지, 파라미터 searchVo={}",searchVo);
+		
 		logger.info("카테고리 상품 화면, 파라미터 categoryName={}, categoryNo={}"
 				,cateName, cateNo);
+		
+		PaginationInfo pagingInfo = new PaginationInfo();
+		pagingInfo.setBlockSize(ConstUtil.BLOCKSIZE);
+		pagingInfo.setRecordCountPerPage(ConstUtil.RECORD_COUNT);
+		pagingInfo.setCurrentPage(searchVo.getCurrentPage());
 
-		List<PdVO> list=pdService.selectByCategory(cateNo);
+		searchVo.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
+		searchVo.setRecordCountPerPage(ConstUtil.RECORD_COUNT);
+
+		List<PdVO> list=pdService.selectByCategory(searchVo);
+		logger.info("상품 목록 조회 결과, list.size={}", list.size());
+
+		int totalRecord=pdService.selectTotalRecord(searchVo);
+		logger.info("상품 목록 조회-레코드개수, totalRecord={}", totalRecord);		
+		pagingInfo.setTotalRecord(totalRecord);
 
 		model.addAttribute("list", list);
-
+		model.addAttribute("pagingInfo", pagingInfo);
+		
 	}
 }

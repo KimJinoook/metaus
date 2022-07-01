@@ -4,6 +4,10 @@
 <link rel="stylesheet" type="text/css"
 	href="<c:url value='/css/search.css'/>">
 <script type="text/javascript">
+function pdList(curPage){
+	$('input[name=currentPage]').val(curPage);
+	$('form[name=frmPage]').submit();
+}
 $(function(){
 	$('#pdPost').click(function(){
 		if($('#memId').val()=="" || $('#memId').val()==null){
@@ -117,7 +121,7 @@ $(function(){
 									<li class="active"><a>${i }</a></li>
 								</c:if>
 								<c:if test="${i!=pagingInfo.currentPage }">
-									<li><a href="#" onclick="boardList(${i})">${i } </a></li>
+									<li><a href="#" onclick="pdList(${i})">${i } </a></li>
 								</c:if>
 							</c:forEach>
 
