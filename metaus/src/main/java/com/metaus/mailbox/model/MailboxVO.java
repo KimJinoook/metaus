@@ -11,5 +11,8 @@ public class MailboxVO {
 	private String msgaddAdser;
 	private String msgContent;
 	private String msgtypeNo;
-	
+	private Timestamp sendDate;
+	private String starFlag;
+	private String temporaryFlag;
+	private String trashFlag;
 }
