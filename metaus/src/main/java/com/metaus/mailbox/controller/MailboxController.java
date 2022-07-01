@@ -79,12 +79,24 @@ public class MailboxController {
 		long fileSize=0;
 		try {
 			List<Map<String, Object>> list
-				=fileUploadUtil.fileUpload(request, ConstUtil.UPLOAD_MESSAGE_FLAG);
+				=fileUploadUtil.multiFileUpload(request, ConstUtil.UPLOAD_MESSAGE_FLAG);
 			logger.info("업로드된 파일 목록 list={}", list);
 			
 			for(Map<String, Object> fileMap : list) {
 				//다중 파일 업로드 처리
+				originalFileName=(String) fileMap.get("originalFileName");
+				fileName=(String) fileMap.get("fileName");
+				fileSize= (long) fileMap.get("fileSize");	
 				
+				logger.info("파일 업로드 성공, fileName={}, fileSize={}", fileName,	fileSize);
+				
+				/*
+				 * vo.setFileName(fileName); vo.setOriginalFileName(originFileName);
+				 * vo.setFileSize(fileSize);
+				 * 
+				 * int cnt=reBoardService.insertReBoard(vo);
+				 */
+				logger.info("글쓰기 처리 결과, cnt={}", cnt);
 			}
 			
 		} catch(Exception e) {
