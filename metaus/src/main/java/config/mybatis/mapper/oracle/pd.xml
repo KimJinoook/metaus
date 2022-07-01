@@ -34,10 +34,25 @@
 		values(#{pdNo},#{cateNo},#{memNo},#{pdName},#{pdPre},#{pdFilename},#{pdFilesize})
 	</insert>
 	
-	<select id="selectByCategory" parameterType="int"
+	<select id="selectByCategory" parameterType="searchVo"
 		resultType="pdVo">
-		select * from fp_pd
-		where cate_no=#{cateNo}
+		select *
+		from
+		(
+		    select rownum as RNUM, A.*
+		    from
+		    (
+		        select *
+		        from fp_pd p join fp_cate c
+		        on p.cate_no=c.cate_no 
+		        <include refid="searchWhere"></include>
+		        where p.cate_no=#{cateNo}
+		        order by p.pd_no desc
+		    )A
+		)
+		where RNUM>#{firstRecordIndex} 
+		<![CDATA[
+		and RNUM<=#{firstRecordIndex} + #{recordCountPerPage} ]]>
 	</select>
 	
 	<select id="selectAll" parameterType="searchVo" resultType="pdVo">

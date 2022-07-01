@@ -10,7 +10,7 @@ import com.metaus.common.SearchVO;
 public interface PdDAO {
 	int insertPd(PdVO vo);
 	PdVO selectPdByNo(int pdNo);
-	List<PdVO> selectByCategory(int cateNo);
+	List<PdVO> selectByCategory(SearchVO searchVo);
 	int deletePd(int pdNo);
 	List<PdVO> selectPdByMemNo(int memNo);
 	List<PdVO> selectAll(SearchVO searchVo);
