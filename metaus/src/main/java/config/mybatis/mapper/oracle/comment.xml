@@ -21,10 +21,23 @@
 		order by cmt_groupNo desc, cmt_sortNo
 		
 	</select>
-	
-	<delete id="deleteComment" parameterType="int">
+
+	<parameterMap type="map" id="commentDeleteParam">
+		<parameter property="cmtGroupNo" javaType="string" jdbcType="VARCHAR" 
+			mode="IN"/>
+		<parameter property="cmtStep" javaType="string" jdbcType="VARCHAR" 
+			mode="IN"/>
+		<parameter property="cmtNo" javaType="string" jdbcType="VARCHAR" 
+			mode="IN"/>		
+	</parameterMap>	
+
+	<!-- <delete id="deleteComment" parameterType="int">
 		delete fp_comment
 		where cmt_no=#{cmtNo}
+	</delete> -->
+	
+	<delete id="deleteComment" parameterMap="commentDeleteParam">
+		call commentDelete(?,?,?)
 	</delete>
 	
 	<select id="countComment" parameterType="int" resultType="int">
@@ -42,8 +55,8 @@
 		<selectKey resultType="int" keyProperty="cmtNo" order="BEFORE">
 			select fp_comment_seq.nextval from dual
 		</selectKey>
-		insert into fp_comment(cmt_no, cmt_regdate, cmt_content, board_no, memNo, 
-			cmt_groupNo, cmt_step, cmt_sortno)
+		insert into fp_comment(cmt_no, cmt_regdate, cmt_content, board_no, mem_no, 
+			cmt_groupNo, cmt_step, cmt_sortNo)
 		values(#{cmtNo}, sysdate, #{cmtContent}, #{boardNo}, #{memNo}, 
 			#{cmtGroupNo}, #{cmtStep}+1, #{cmtSortNo}+1)
 	</insert>
