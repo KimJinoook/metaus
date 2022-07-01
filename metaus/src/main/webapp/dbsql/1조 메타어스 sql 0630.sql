@@ -928,6 +928,19 @@ ALTER TABLE fp_buy
 		PRIMARY KEY (
 			buy_no
 		);
+        
+/* 방문자수 */
+CREATE TABLE fp_visit (
+    visit_no NUMBER NOT NULL, /* 방문번호 */
+	visit_date DATE NOT NULL /* 방문일자 */
+);
+
+ALTER TABLE fp_visit
+	ADD
+		CONSTRAINT PK_fp_visit
+		PRIMARY KEY (
+			visit_no
+		);        
 
 
 
@@ -1430,6 +1443,12 @@ increment by 1
 start with 1
 nocache;
 
+--방문자수 시퀀스
+drop sequence fp_visit_seq;
+create sequence fp_visit_seq
+increment by 1
+start with 1
+nocache;
 
 
 select * from fp_com;
