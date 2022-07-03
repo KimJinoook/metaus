@@ -31,7 +31,7 @@ $(function(){
     </section>
     
     <!-- Start of Post Resume Form -->
-    
+ 
  <section class="ptb80" id="post-job">
         <div class="container">
             <input type="hidden" name="portNo"  value="${pvo.portNo }">
@@ -68,6 +68,77 @@ $(function(){
 									</ul>
 									
 				                </div>
+				                <div class="col-md-12 text-center" >
+<script src="https://rawgit.com/mrdoob/three.js/dev/build/three.js"></script>
+<script src="https://rawgit.com/mrdoob/three.js/dev/examples/js/loaders/GLTFLoader.js"></script>
+<script src="https://cdn.rawgit.com/takahirox/THREE.ZipLoader/v0.0.1/build/ziploader.min.js"></script>
+<script src="https://unpkg.com/three@0.141.0/examples/js/controls/OrbitControls.js"></script>
+<canvas id="can${pvo.portNo }" width="700px" height="700px" style="margin-bottom:0"></canvas>
+
+<script type="module">
+
+	var url = "<c:url value='/gltfmodel/${pvo.portFilename}'/>";
+
+	var manager = new THREE.LoadingManager();
+	
+	var scene = new THREE.Scene();
+	var renderer = new THREE.WebGLRenderer({
+		canvas : document.querySelector('#can${pvo.portNo}'),
+		antialias : true
+	});
+	renderer.outputEncoding = THREE.sRGBEncoding;
+	
+	var camera = new THREE.PerspectiveCamera(30,1);
+	camera.position.set(0,0,5)
+	
+	let controls = new THREE.OrbitControls(camera, renderer.domElement);
+	controls.update();
+
+	scene.background = new THREE.Color('white');
+
+
+	const grid = new THREE.GridHelper( 20, 20, 0x000000, 0x000000 );
+	grid.material.opacity = 0.2;
+	grid.material.transparent = true;
+	grid.position.y = -1;
+	scene.add( grid );
+
+	new Promise( function( resolve, reject ) {
+
+		if ( url.match( /\.zip$/ ) ) {
+
+			new THREE.ZipLoader().load( url ).then( function( zip ) {
+
+				manager.setURLModifier( zip.urlResolver );
+
+				resolve( zip.find( /\.(gltf|glb)$/i )[ 0 ] );
+
+			} );
+
+		} else {
+
+			resolve( url );
+
+		}
+
+	} ).then( function ( file ) {
+
+		new THREE.GLTFLoader( manager ).load( file, function ( gltf ) {
+
+			scene.add( gltf.scene );
+			function animate(){
+				requestAnimationFrame(animate)
+				controls.update();
+				renderer.render(scene,camera);
+			}
+			animate();
+
+
+		} );
+
+	} );
+</script>
+</div>
 							</div>
 						</div>
                         

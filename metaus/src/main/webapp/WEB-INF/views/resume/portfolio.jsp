@@ -67,7 +67,7 @@
                             <!-- Upload Button -->
                             <div class="upload-file-btn" style="width:140px">
                                 <!-- <span><i class="fa fa-upload"></i> Upload</span> -->
-                                <input type="file" name="upfile" accept=".zip">
+                                <input type="file" name="upfile" accept=".zip,.gltf">
                                
                             </div>
                         </div>
