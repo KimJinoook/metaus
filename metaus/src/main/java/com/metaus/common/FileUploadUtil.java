@@ -69,6 +69,55 @@ public class FileUploadUtil {
 		return list;
 	}
 	
+	public List<Map<String, Object>> multiFileUpload(HttpServletRequest request,
+			int uploadFlag) 
+					throws IllegalStateException, IOException {
+		MultipartHttpServletRequest multiRequest 
+		= (MultipartHttpServletRequest)request;
+		
+		Map<String, List<MultipartFile>> fileMap=multiRequest.getMultiFileMap();
+		logger.info("업로드할 파일 목록, fileMap={}", fileMap);
+		
+		//업로드 파일 정보 저장할 List 선언
+		List<Map<String, Object>> list = new ArrayList<>();
+		
+		Iterator<String> keyIter=fileMap.keySet().iterator();
+		while(keyIter.hasNext()) {
+			String key=keyIter.next();
+			List<MultipartFile> tempFileList = fileMap.get(key);
+			//=> 업로드된 파일을 임시파일 형태로 제공
+			
+			if(!tempFileList.isEmpty()) {
+				for(MultipartFile tempFile : tempFileList) {
+					long fileSize=tempFile.getSize(); //파일 크기
+					String oName = tempFile.getOriginalFilename(); //원래 파일명
+					
+					//변경된 파일이름 구하기
+					String fileName = getUniqueFileName(oName);
+					
+					//파일 업로드 처리
+					//업로드할 폴더 구하기
+					String uploadPath 
+					= getUploadPath(request, uploadFlag);
+					File file = new File(uploadPath, fileName); 
+					tempFile.transferTo(file);
+					
+					//업로드된 파일 정보 저장
+					//[1] Map에 저장
+					Map<String, Object> resultMap = new HashMap<>();
+					resultMap.put("fileName", fileName);
+					resultMap.put("fileSize", fileSize);
+					resultMap.put("originalFileName", oName);
+					
+					//[2] 여러 개의 Map을 List에 저장
+					list.add(resultMap);
+				}
+			}//if
+		}//while
+		
+		return list;
+	}
+	
 	public List<Map<String, Object>> multipleFileUpload(HttpServletRequest request,
 			int uploadFlag) 
 					throws IllegalStateException, IOException {

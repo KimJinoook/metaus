@@ -1233,12 +1233,131 @@ ALTER TABLE fp_buy
 			pd_no
 		);       
         
+ALTER TABLE fp_msgadd
+	DROP
+		CONSTRAINT FK_fp_msg_TO_fp_msgadd
+		CASCADE;
+
+ALTER TABLE fp_msg
+	DROP
+		CONSTRAINT FK_fp_msgtype_TO_fp_msg
+		CASCADE;
+
+ALTER TABLE fp_msgatc
+	DROP
+		CONSTRAINT FK_fp_msg_TO_fp_msgatc
+		CASCADE;
+
+ALTER TABLE fp_msg
+	DROP
+		PRIMARY KEY
+		CASCADE
+		KEEP INDEX;
+
+ALTER TABLE fp_msgtype
+	DROP
+		PRIMARY KEY
+		CASCADE
+		KEEP INDEX;
+
+/* 쪽지 송수신 */
+DROP TABLE fp_msgadd 
+	CASCADE CONSTRAINTS;
+
+/* 쪽지 */
+DROP TABLE fp_msg 
+	CASCADE CONSTRAINTS;
+
+/* 쪽지 타입 */
+DROP TABLE fp_msgtype 
+	CASCADE CONSTRAINTS;
+
+/* 첨부파일 */
+DROP TABLE fp_msgatc 
+	CASCADE CONSTRAINTS;
+
+/* 쪽지 송수신 */
+CREATE TABLE fp_msgadd (
+	msgadd_no NUMBER NOT NULL, /* 송수신번호 */
+	msg_no NUMBER NOT NULL, /* 쪽지번호 */
+	msgadd_adsee VARCHAR2(50) NOT NULL, /* 받는사람 */
+	msgadd_date DATE /* 읽은시간 */
+);
+
+/* 쪽지 */
+CREATE TABLE fp_msg (
+	msg_no NUMBER NOT NULL, /* 쪽지번호 */
+	msgadd_adser VARCHAR2(50), /* 보낸사람 */
+	msg_title VARCHAR2(50), /* 쪽지제목 */
+	msg_content CLOB, /* 쪽지내용 */
+	msg_adsee VARCHAR2(50), /* 받는사람 */
+	msgtype_no NUMBER, /* 타입 번호 */
+	star_flag VARCHAR2(10) DEFAULT 'N', /* 별표 플래그 */
+	temporary_flag VARCHAR2(10) DEFAULT 'N', /* 임시 플래그 */
+	spam_flag VARCHAR2(10) DEFAULT 'N', /* 스팸 플래그 */
+	trash_flag VARCHAR2(10) DEFAULT 'N' /* 휴지통 플래그 */
+);
+
+ALTER TABLE fp_msg
+	ADD
+		CONSTRAINT PK_fp_msg
+		PRIMARY KEY (
+			msg_no
+		);
+
+/* 쪽지 타입 */
+CREATE TABLE fp_msgtype (
+	msgtype_no NUMBER NOT NULL, /* 타입 번호 */
+	msgtype_name VARCHAR2(50) /* 타입 이름 */
+);
+
+ALTER TABLE fp_msgtype
+	ADD
+		CONSTRAINT PK_fp_msgtype
+		PRIMARY KEY (
+			msgtype_no
+		);
+
+/* 첨부파일 */
+CREATE TABLE fp_msgatc (
+	mfile_no NUMBER, /* 파일번호 */
+	msg_no NUMBER, /* 쪽지번호 */
+	mfile_filename CLOB, /* 파일명 */
+	mfile_originname CLOB, /* 원본파일명 */
+	mfile_filesize CLOB /* 파일사이즈 */
+);
+
+ALTER TABLE fp_msgadd
+	ADD
+		CONSTRAINT FK_fp_msg_TO_fp_msgadd
+		FOREIGN KEY (
+			msg_no
+		)
+		REFERENCES fp_msg (
+			msg_no
+		);
+
+ALTER TABLE fp_msg
+	ADD
+		CONSTRAINT FK_fp_msgtype_TO_fp_msg
+		FOREIGN KEY (
+			msgtype_no
+		)
+		REFERENCES fp_msgtype (
+			msgtype_no
+		);
+
+ALTER TABLE fp_msgatc
+	ADD
+		CONSTRAINT FK_fp_msg_TO_fp_msgatc
+		FOREIGN KEY (
+			msg_no
+		)
+		REFERENCES fp_msg (
+			msg_no
+		);
         
         
-        
-
-
-
 --시퀀스
 
 
@@ -1340,6 +1459,12 @@ increment by 1
 start with 1
 nocache;
 
+--쪽지 첨부파일 시퀀스
+drop sequence fp_msgatc_seq;
+create sequence fp_msgatc_seq
+increment by 1
+start with 1
+nocache;
 
 --기업회원 시퀀스
 drop sequence fp_com_seq;

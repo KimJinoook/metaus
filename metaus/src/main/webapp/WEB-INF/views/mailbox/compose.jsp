@@ -20,7 +20,7 @@
         <section class="content">
           <div class="row">
             <div class="col-md-3">
-              <a href="mailbox.html" class="btn btn-primary btn-block margin-bottom">받은 메세지함</a>
+              <a href="<c:url value='/mailbox/mailbox'/>" class="btn btn-primary btn-block margin-bottom">받은 메세지함</a>
               <div class="box box-solid">
                 <div class="box-header with-border">
                   <h3 class="box-title">Folders</h3>
