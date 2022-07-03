@@ -8,6 +8,9 @@
 button#ajaxBt{
 	margin-right: 18px;
 }
+button#replyBtAjax{
+	margin-right: 19px;
+}
 </style>
 <script type="text/javascript"
 	src="<c:url value='/js/jquery-3.6.0.min.js'/>">
@@ -51,6 +54,7 @@ button#ajaxBt{
 					if ($('#memId').val() == "" || $('#memId').val() == null) {
 						alert('로그인 후 이용 가능합니다.');
 						event.preventDefault();
+						return false;
 					}
 
 					var boardNo = "${vo.boardNo}";
@@ -83,10 +87,13 @@ button#ajaxBt{
 						//확인 눌렀을시 실행문
 
 						var cmtNo = $(this).find('input').val();
-
+						var cmtGroupNo = $(this).parent().parent().parent().find($('input[name=cmtGroupNo]')).val();
+						var cmtStep = $(this).parent().parent().parent().find($('input[name=cmtStep]')).val();
 						$.ajax({
 							url : "<c:url value='/board/commentAjaxDelete'/>"
-									+ "?cmtNo=" + cmtNo,
+									+ "?cmtNo=" + cmtNo
+									+ "?cmtGroupNo=" + cmtGroupNo
+									+ "?cmtStep=" + cmtStep,
 							type : 'GET',
 							async : false,
 							success : function(res) {
@@ -140,16 +147,16 @@ button#ajaxBt{
 				function(){
 					
 					var boardNo = "${vo.boardNo}";
-					var memId = "${memId}";
-					var cmtContent = $(this).parent().find(
+					var memNo = "${memVo.memNo}";
+					var cmtContent = $(this).parent().parent().find(
 							$('textarea[name=cmtContent]')).val();
-					var cmtGroupNo = $(this).parent().find($('input[name=cmtGroupNo]')).val();
-					var cmtStep = $(this).parent().find($('input[name=cmtStep]')).val();
-					var cmtSortNo = $(this).parent().find($('input[name=cmtSortNo]')).val();
+					var cmtGroupNo = $(this).parent().parent().find($('input[name=cmtGroupNo]')).val();
+					var cmtStep = $(this).parent().parent().find($('input[name=cmtStep]')).val();
+					var cmtSortNo = $(this).parent().parent().find($('input[name=cmtSortNo]')).val();
 					
 					$.ajax({
 						url : "<c:url value='/board/commentReplyAjax'/>"
-								+ "?boardNo=" + boardNo + "&memId=" + memId 
+								+ "?boardNo=" + boardNo + "&memNo=" + memNo 
 										+ "&cmtContent="+ cmtContent
 										+ "&cmtGroupNo="+ cmtGroupNo
 										+ "&cmtStep="+ cmtStep
@@ -302,10 +309,23 @@ button#ajaxBt{
 							<!-- Start of Comment 1 -->
 							<c:if test="${!empty list }">
 								<c:forEach var="map" items="${list }">
-									<li class="comment">
-										<div class="media-body comment-bo dy">
+										<c:if test="${map['CMT_STEP']>0 }">
+											<c:forEach begin="1" end="${map['CMT_STEP'] }">
+												<li class="comment" style="margin-left: 60px;">
+											</c:forEach>
+											
+										</c:if>
+										<c:if test="${map['CMT_STEP']==0 }">
+											<li class="comment">
+										</c:if>
+										
+										<div class="media-body comment-bo dy" id="rightMargin">
 											<!-- Comment Wrapper -->
 											<div class="comment-content-wrapper">
+										<c:if test="${map['CMT_STEP']>0 }">
+										<img src="<c:url value='/images/board/reply.png'/>" style="width: 50px;
+										float: left; margin-right: 10px;">
+										</c:if>
 												<div class="media-heading clearfix">
 
 													<!-- Commenters Name -->
@@ -318,7 +338,6 @@ button#ajaxBt{
 
 													<!-- Comment -->
 													<p>${map['CMT_CONTENT'] }</p>
-													
 													<div>
 														<c:if test="${map['MEM_ID'] == memId }">
 															<form name="upFrm" id="cmtUpdate"
@@ -343,11 +362,13 @@ button#ajaxBt{
 																</button>
 															</form>
 														</c:if>
+														<c:if test="${!empty memId }">
 														<form name="replyFrm" style="display: inline-block;">
 														<button class="btn btn-large btn-blue btn-effect mt30"
 															type="button" style="display: inline-block;" id="replyBt">
 															답글</button>
 														</form>
+														</c:if>
 													</div>
 													<div id="replyArea">
 													<div>

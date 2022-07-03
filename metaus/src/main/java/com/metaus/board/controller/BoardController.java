@@ -576,13 +576,15 @@ public class BoardController {
 	
 	@ResponseBody
 	@RequestMapping("/commentAjaxDelete")
-	public int commentAjax_delete(int cmtNo) {
-		logger.info("ajax 댓글삭제 - cmtNo={}", cmtNo);
+	public void commentAjax_delete(CommentVO vo) {
+		logger.info("ajax 댓글삭제 - vo={}", vo);
 		
-		int cnt = commentService.deleteComment(cmtNo);
-		logger.info("댓글 삭제 결과, cnt={}", cnt);
+		Map<String, String> map = new HashMap<>();
+		map.put("no", vo.getCmtNo()+"");
+		map.put("groupNo", vo.getCmtGroupNo()+"");
+		map.put("step", vo.getCmtStep()+"");
 		
-		return cnt;
+		commentService.deleteComment(map);	
 	}
 	
 	@ResponseBody

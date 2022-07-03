@@ -19,11 +19,6 @@ public class CommentServiceImpl implements CommentService {
 	}
 
 	@Override
-	public int deleteComment(int cmtNo) {
-		return commentDao.deleteComment(cmtNo);
-	}
-
-	@Override
 	public int countComment(int boardNo) {
 		return commentDao.countComment(boardNo);
 	}
@@ -46,6 +41,10 @@ public class CommentServiceImpl implements CommentService {
 	public int reply(CommentVO vo) {
 		return commentDao.reply(vo);
 	}
-	
+
+	@Override
+	public void deleteComment(Map<String, String> map) {
+		commentDao.deleteComment(map);
+	}
 	
 }
