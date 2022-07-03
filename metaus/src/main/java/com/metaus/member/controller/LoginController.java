@@ -1,5 +1,8 @@
 package com.metaus.member.controller;
 
+import java.sql.Timestamp;
+import java.util.Date;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -54,6 +57,22 @@ public class LoginController {
 			//회원정보 조회
 			MemberVO memVo=memberService.selectByUserid(vo.getMemId());
 			logger.info("로그인 처리-회원정보 조회결과 memVo={}", memVo);
+			
+			if(memVo.getMemCutdate()!=null) {
+				Timestamp cutdate = memVo.getMemCutdate();
+				Date cutdate2 = new Date(cutdate.getTime());
+				Date today = new Date();
+				
+				long gap = cutdate2.getTime()-today.getTime();
+				System.out.println(gap);
+				if(gap>0) {
+					msg=cutdate+" 까지 이용이 차단된 계정입니다.";
+					model.addAttribute("msg", msg);
+					model.addAttribute("url", url);
+					return "/common/message";
+				}
+				
+			}
 			
 			//[1] session에 저장
 			HttpSession session=request.getSession();
@@ -138,6 +157,22 @@ public class LoginController {
 			//[1] session에 저장
 			MemberVO memVo = memberService.selectByMemNo(kakaoVo.getMemNo());
 			
+			if(memVo.getMemCutdate()!=null) {
+				Timestamp cutdate = memVo.getMemCutdate();
+				Date cutdate2 = new Date(cutdate.getTime());
+				Date today = new Date();
+				
+				long gap = cutdate2.getTime()-today.getTime();
+				System.out.println(gap);
+				if(gap>0) {
+					msg=cutdate+" 까지 이용이 차단된 계정입니다.";
+					model.addAttribute("msg", msg);
+					model.addAttribute("url", url);
+					return "/common/message";
+				}
+				
+			}
+			
 			HttpSession session=request.getSession();
 			session.setAttribute("isLogin", "kakao");
 			session.setAttribute("memNo", memVo.getMemNo());
@@ -179,6 +214,22 @@ public class LoginController {
 			//[1] session에 저장
 			MemberVO memVo = memberService.selectByMemNo(naverVo.getMemNo());
 			
+			if(memVo.getMemCutdate()!=null) {
+				Timestamp cutdate = memVo.getMemCutdate();
+				Date cutdate2 = new Date(cutdate.getTime());
+				Date today = new Date();
+				
+				long gap = cutdate2.getTime()-today.getTime();
+				System.out.println(gap);
+				if(gap>0) {
+					msg=cutdate+" 까지 이용이 차단된 계정입니다.";
+					model.addAttribute("msg", msg);
+					model.addAttribute("url", url);
+					return "/common/message";
+				}
+				
+			}
+			
 			HttpSession session=request.getSession();
 			session.setAttribute("isLogin", "naver");
 			session.setAttribute("memNo", memVo.getMemNo());
@@ -219,6 +270,22 @@ public class LoginController {
 		if(facebookVo != null) {
 			//[1] session에 저장
 			MemberVO memVo = memberService.selectByMemNo(facebookVo.getMemNo());
+			
+			if(memVo.getMemCutdate()!=null) {
+				Timestamp cutdate = memVo.getMemCutdate();
+				Date cutdate2 = new Date(cutdate.getTime());
+				Date today = new Date();
+				
+				long gap = cutdate2.getTime()-today.getTime();
+				System.out.println(gap);
+				if(gap>0) {
+					msg=cutdate+" 까지 이용이 차단된 계정입니다.";
+					model.addAttribute("msg", msg);
+					model.addAttribute("url", url);
+					return "/common/message";
+				}
+				
+			}
 			
 			HttpSession session=request.getSession();
 			session.setAttribute("isLogin", "facebook");
