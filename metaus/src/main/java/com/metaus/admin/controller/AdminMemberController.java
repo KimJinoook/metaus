@@ -1,5 +1,6 @@
 package com.metaus.admin.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -37,5 +38,8 @@ public class AdminMemberController {
 		List<MemberVO> list=memberService.selectAll();
 		logger.info("list={}",list);
 		model.addAttribute("list",list);
+		
+		Date today = new Date();
+		model.addAttribute("today",today);
 	}
 }
