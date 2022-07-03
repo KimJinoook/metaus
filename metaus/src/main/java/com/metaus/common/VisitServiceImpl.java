@@ -19,6 +19,9 @@ public class VisitServiceImpl implements VisitService {
 	public int totalVisit() {
 		return visitDao.totalVisit();
 	}
+	public int selectVisitByDate(String date) {
+		return visitDao.selectVisitByDate(date);
+	}
 	
 	
 }

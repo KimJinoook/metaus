@@ -24,6 +24,17 @@
 
     <!-- Custom styles for this template-->
     <link href="<c:url value='/admin/css/sb-admin-2.min.css'/>" rel="stylesheet">
+    
+    
+    <!-- Bootstrap core JavaScript-->
+    <script src="<c:url value='/admin/vendor/jquery/jquery.min.js'/>"></script>
+    <script src="<c:url value='/admin/vendor/bootstrap/js/bootstrap.bundle.min.js'/>"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="<c:url value='/admin/vendor/jquery-easing/jquery.easing.min.js'/>"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="<c:url value='/admin/js/sb-admin-2.min.js'/>"></script>
 
 </head>
 
@@ -48,7 +59,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link" href="index.html">
+                <a class="nav-link" href="<c:url value='/admin/'/>">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>MetaUs 현황</span></a>
             </li>

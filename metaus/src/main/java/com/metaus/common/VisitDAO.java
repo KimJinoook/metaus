@@ -8,5 +8,6 @@ public interface VisitDAO {
 	public int insertVisit();
 	public int totalVisit();
 	public int todayVisit();
+	public int selectVisitByDate(String date);
 
 }

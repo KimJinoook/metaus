@@ -27,6 +27,25 @@
    		select com_pw from fp_com where com_ceo=#{comCeo} and com_rrn = #{comRrn} and com_id = #{comId}
    	</select>
    	
+   	
+   	<select id="selectAllCount" resultType="int">
+   		select count(*) from fp_com
+   	</select>
+   	
+   	<select id="selectRecCount" resultType="int">
+   		select count(*) from fp_rec
+   	</select>
+   	<select id="selectConCount" resultType="int">
+   		select count(*) from fp_contact
+   	</select>
+   	<select id="selectConCountNotEnd" resultType="int">
+   		select count(*) from fp_contact where con_donedate is null
+   	</select>
+   	<select id="selectConCountEnd" resultType="int">
+   		select count(*) from fp_contact where con_donedate is not null
+   	</select>
+   	
+   	
    	<update id="updatePw" parameterType="CompanyVO">
 		update fp_com
 		set com_pw = #{comPw}

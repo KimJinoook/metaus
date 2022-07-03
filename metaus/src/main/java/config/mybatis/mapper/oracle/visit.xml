@@ -12,6 +12,11 @@
 		select count(*) from fp_visit
 	</select>
 	
+	<select id="selectVisitByDate"  resultType="int" parameterType="String">
+		select count(*) from fp_visit
+		where to_char(visit_date,'mm-dd') = #{date}
+	</select>
+	
 	<insert id="insertVisit">
 		<selectKey resultType="int" keyProperty="visitNo" order="BEFORE">
 			select fp_visit_seq.nextval from dual

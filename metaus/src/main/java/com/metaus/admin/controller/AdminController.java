@@ -1,5 +1,10 @@
 package com.metaus.admin.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -15,6 +20,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.metaus.admin.model.ManagerService;
 import com.metaus.admin.model.ManagerVO;
+import com.metaus.common.VisitListener;
+import com.metaus.common.VisitService;
+import com.metaus.member.model.CompanyService;
 import com.metaus.member.model.MemberService;
 
 import lombok.RequiredArgsConstructor;
@@ -27,9 +35,88 @@ public class AdminController {
 	=LoggerFactory.getLogger(AdminController.class);
 	
 	private final ManagerService managerService;
+	private final VisitService visitService;
+	private final MemberService memberService;
+	private final CompanyService companyService;
 	
 	@RequestMapping("/")
-	public String index() {
+	public String index(Model model) {
+		int todayVisit = visitService.todayVisit();
+		int totalVisit = visitService.totalVisit();
+		
+		
+		
+		Date d = new Date();
+		System.out.println(d);
+		SimpleDateFormat sdf = new SimpleDateFormat("MM-dd");
+		String a = sdf.format(d);
+		System.out.println(a);
+		
+		Calendar today = Calendar.getInstance();
+		System.out.println(today.MONTH+"월 "+today.DATE+"일");
+		d = today.getTime();
+		
+		ArrayList<String> list = new ArrayList<String>();
+		ArrayList<Integer> visitList = new ArrayList<Integer>();
+		
+		String days = sdf.format(d);
+		System.out.println(days);
+		list.add(days);
+		int visit = visitService.selectVisitByDate(days);
+		System.out.println(visit);
+		visitList.add(visit);
+		for(int i=0; i<6; i++) {
+			today.add(Calendar.DATE, -1);
+			d = today.getTime();
+			days = sdf.format(d);
+			System.out.println(today.get(Calendar.MONTH)+1+"-"+today.get(Calendar.DATE));
+			list.add(days);
+			visit = visitService.selectVisitByDate(days);
+			visitList.add(visit);
+		}
+		System.out.println(list);
+		
+		int totalMem = memberService.getAllMemNoPort();
+		int totalCre = memberService.getTotalRecord(null);
+		int totalCom = companyService.selectAllCount();
+		
+		int a1=6;
+		int a2=1;
+		int a3 = a2*100/a1;
+		System.out.println(a3);
+		
+		int totalRec = companyService.selectRecCount();
+		int totalCon = companyService.selectConCount();
+		int totalConNotEnd = companyService.selectConCountNotEnd();
+		int totalConEnd = companyService.selectConCountEnd();
+		
+		int conRate = 0;
+		int conEndRate = 0;
+		if(totalRec>0) {
+			conRate = totalCon*100/totalRec;
+		}
+		if(totalCon>0) {
+			conEndRate = totalConEnd*100/totalCon;
+		}
+		
+		String sumPayToday = memberService.sumPayToday();
+		if(sumPayToday == null || sumPayToday.isEmpty()) {
+			sumPayToday="0";
+		}
+		
+		model.addAttribute("todayVisit",todayVisit);
+		model.addAttribute("totalVisit",totalVisit);
+		model.addAttribute("daysforvisit",list);
+		model.addAttribute("visitfordays",visitList);
+		model.addAttribute("curVisit",VisitListener.getActiveSessions());
+		model.addAttribute("totalMem",totalMem);
+		model.addAttribute("totalCre",totalCre);
+		model.addAttribute("totalCom",totalCom);
+		model.addAttribute("conRate",conRate);
+		model.addAttribute("conEndRate",conEndRate);
+		model.addAttribute("sumPayToday",sumPayToday);
+		
+		
 		return "/admin/index";
 	}
 	

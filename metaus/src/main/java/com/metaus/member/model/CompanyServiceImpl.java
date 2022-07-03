@@ -57,5 +57,20 @@ public class CompanyServiceImpl implements CompanyService {
 	public int updatePw(CompanyVO vo) {
 		return companyDao.updatePw(vo);
 	}
+	public int selectAllCount() {
+		return companyDao.selectAllCount();
+	}
+	public int selectRecCount() {
+		return companyDao.selectRecCount();
+	}
+	public int selectConCount() {
+		return companyDao.selectConCount();
+	}
+	public int selectConCountNotEnd() {
+		return companyDao.selectConCountNotEnd();
+	}
+	public int selectConCountEnd() {
+		return companyDao.selectConCountEnd();
+	}
 
 }

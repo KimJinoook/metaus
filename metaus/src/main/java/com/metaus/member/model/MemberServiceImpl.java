@@ -96,5 +96,11 @@ public class MemberServiceImpl implements MemberService {
 		return memberDao.selectAll();
 
 	}
+	public int getAllMemNoPort() {
+		return memberDao.getAllMemNoPort();
+	}
+	public String sumPayToday() {
+		return memberDao.sumPayToday();
+	}
 
 }

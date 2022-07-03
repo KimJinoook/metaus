@@ -30,5 +30,7 @@ public interface MemberService {
 	public int getTotalRecord(SearchVO vo);
 	public List<PortfolioVO> selectPortByMenNo(int memNo);
 	List<MemberVO> selectAll();
+	public int getAllMemNoPort();
+	public String sumPayToday();
 
 }

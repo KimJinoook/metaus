@@ -11,4 +11,9 @@ public interface CompanyDAO {
 	public String findId(CompanyVO vo);
 	public String findPw(CompanyVO vo);
 	public int updatePw(CompanyVO vo);
+	public int selectAllCount();
+	public int selectRecCount();
+	public int selectConCount();
+	public int selectConCountNotEnd();
+	public int selectConCountEnd();
 }

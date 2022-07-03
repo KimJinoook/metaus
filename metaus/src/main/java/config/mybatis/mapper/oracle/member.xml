@@ -65,6 +65,15 @@
 		<include refid="searchAndWhere"></include>
 	
 	</select>
+	
+	<select id="getAllMemNoPort" resultType="int">
+		select * from fp_mem A where mem_no not in (select mem_no from fp_port)
+	</select>
+	
+	<select id="sumPayToday" resultType="String">
+		select sum(nvl(pay_price,0)) from fp_pay
+		where pay_date > to_date(sysdate,'yy-MM-dd')
+	</select>
    	
    	
    	<update id="updatePw" parameterType="MemberVO">
