@@ -67,7 +67,7 @@
 	</select>
 	
 	<select id="getAllMemNoPort" resultType="int">
-		select * from fp_mem A where mem_no not in (select mem_no from fp_port)
+		select count(*) from fp_mem A where mem_no not in (select mem_no from fp_port)
 	</select>
 	
 	<select id="sumPayToday" resultType="String">
