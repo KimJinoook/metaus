@@ -436,11 +436,11 @@ public class BoardController {
 		logger.info("게시글 댓글 개수 count={}", count);
 
 		MemberVO memVo = memberService.selectByMemNo(vo.getMemNo());
-		MemberVO smemVo = memberService.selectByUserid(memId);
+		
 
 		model.addAttribute("memName",memName);
 		model.addAttribute("memId",memId);
-		model.addAttribute("smemVo", smemVo);
+		
 		model.addAttribute("memVo", memVo);
 		model.addAttribute("vo", vo);
 		model.addAttribute("AtcVo", AtcVo);
@@ -597,6 +597,8 @@ public class BoardController {
 		return map;
 	}
 
+	
+	@ResponseBody
 	@RequestMapping("/commentReplyAjax")
 	public CommentVO commentReplyAjax_reply(CommentVO vo) {
 		logger.info("ajax 답글 작성 - vo={}", vo);
@@ -607,6 +609,8 @@ public class BoardController {
 		nVo.setBoardNo(vo.getBoardNo());
 		nVo.setCmtContent(vo.getCmtContent());
 		nVo.setCmtGroupNo(vo.getCmtGroupNo());
+		nVo.setCmtStep(vo.getCmtStep());
+		nVo.setCmtSortNo(vo.getCmtSortNo());
 		nVo.setMemNo(vo.getMemNo());
 
 		int cnt = commentService.reply(nVo);

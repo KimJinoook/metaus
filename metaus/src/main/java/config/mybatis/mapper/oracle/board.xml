@@ -6,7 +6,7 @@
 	<sql id="searchandWhere">
 		<if test="searchKeyword !=null and searchKeyword !=''">
 			<if test="searchCondition == 'memName'">
-				and m.mem_name like '%' || #{searchKeyword} || '%'
+				and m.mem_nick like '%' || #{searchKeyword} || '%'
 			</if>
 			<if test="searchCondition == 'boardTitle'">
 				and b.board_title like '%' || #{searchKeyword} || '%'
@@ -50,7 +50,7 @@
 			select rownum as RNUM, A.*
 			from
 				(
-					select b.*, m.mem_name, f.bfile_filename
+					select b.*, m.mem_nick, f.bfile_filename
 					from fp_board b join fp_mem m
 					on b.mem_no=m.mem_no
 					left join fp_boardatc f

@@ -111,7 +111,7 @@
 										${map['BOARD_TITLE'] }</a>
 								</h5>
 								<div class="post-detail pt10 pb20">
-									<span><i class="fa fa-user"></i>${map['MEM_NAME'] }</span> <span><i
+									<span><i class="fa fa-user"></i>${map['MEM_NICK'] }</span> <span><i
 										class="fa fa-clock-o"></i> <fmt:formatDate
 											value="${map['BOARD_REGDATE'] }" pattern="yyyy-MM-dd" /> </span> <span><img
 										src="<c:url value='/images/board/eye.png'/>"
