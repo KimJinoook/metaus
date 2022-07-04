@@ -45,5 +45,15 @@ public class MailboxServiceImpl implements MailboxService{
 	public int insertMailboxAtc(MailboxAtcVO mailboxAtcVo) {
 		return mailboxDao.insertMailboxAtc(mailboxAtcVo);
 	}
+
+	@Override
+	public int findReceivedNo(String msgaddAdsee) {
+		return mailboxDao.findReceivedNo(msgaddAdsee);
+	}
+
+	@Override
+	public int findSentNo(String msgaddAdser) {
+		return mailboxDao.findSentNo(msgaddAdser);
+	}
 	
 }

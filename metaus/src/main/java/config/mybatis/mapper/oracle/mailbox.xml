@@ -76,4 +76,14 @@
 		insert into fp_msgatc
 		values(#{mfileNo}, #{msgNo}, #{mfileFilename}, #{mfileOriginname}, #{mfileFilesize})
 	</insert>
+	
+	<select id="findReceivedNo" parameterType="string" resultType="int">
+		select count(*) from msgView
+		where msgadd_adsee=#{msgaddAdsee}
+	</select>
+	
+	<select id="findSentNo" parameterType="string" resultType="int">
+		select count(*) from msgView
+		where msgadd_adser=#{msgaddAdser}
+	</select>
 </mapper>

@@ -27,8 +27,8 @@
                 </div>
                 <div class="box-body no-padding">
                   <ul class="nav nav-pills nav-stacked">
-                    <li><a href="<c:url value='/mailbox/receivedMail'/>"><i class="fa fa-inbox"></i> 받은 메세지 <span class="label label-primary pull-right">12</span></a></li>
-                    <li><a href="<c:url value='/mailbox/sentMail'/>"><i class="fa fa-envelope-o"></i> 보낸 메세지</a></li>
+                    <li><a href="<c:url value='/mailbox/receivedMail'/>"><i class="fa fa-inbox"></i> 받은 메세지 <span class="label label-primary pull-right">${receivedNo }</span></a></li>
+                    <li><a href="<c:url value='/mailbox/sentMail'/>"><i class="fa fa-envelope-o"></i> 보낸 메세지 <span class="label label-success pull-right">${sentNo }</span></a></li>
                     <li><a href="#"><i class="fa fa-star"></i> 별표 메세지</a></li>
                     <li><a href="#"><i class="fa fa-file-text-o"></i> 임시보관함</a></li>
                     <li><a href="#"><i class="fa fa-filter"></i> 스팸함 <span class="label label-waring pull-right">65</span></a></li>

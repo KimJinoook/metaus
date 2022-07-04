@@ -10,4 +10,6 @@ public interface MailboxService {
 	List<Map<String, Object>> selectMsgView(String userId, int msgFlag);
 	Map<String, Object> selectByMsgNo(int msgNo);
 	int insertMailboxAtc(MailboxAtcVO mailboxAtcVo);
+	int findReceivedNo(String msgaddAdsee);
+	int findSentNo(String msgaddAdser);
 }

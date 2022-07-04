@@ -9,10 +9,13 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.support.RequestContextUtils;
 
 import com.metaus.common.ConstUtil;
 import com.metaus.common.FileUploadUtil;
@@ -110,7 +113,7 @@ public class MailboxController {
 	}
 	
 	@RequestMapping("/receivedMail")
-	public String receivedMail(HttpSession session, ModelMap model) {
+	public String receivedMail(HttpSession session, RedirectAttributes redirect) {
 		String memId=(String) session.getAttribute("memId");
 		logger.info("memId={}", memId);
 		
@@ -118,23 +121,50 @@ public class MailboxController {
 			= mailboxService.selectMsgView(memId, MailboxUtil.MSG_RECEIVED_FLAG);
 		logger.info("메세지 목록 조회, list.size={}", list.size());
 		
-		model.addAttribute("list", list);
-		model.addAttribute("flag", "received");
+		redirect.addFlashAttribute("list", list);
+		redirect.addFlashAttribute("flag", "received");
 		
-		return "/mailbox/mailboxByFlag";
+		return "redirect:/mailbox/mailNoByFlag";
 	}
 	
 	@RequestMapping("/sentMail")
-	public String sentMail(HttpSession session, ModelMap model) {
+	public String sentMail(HttpSession session, RedirectAttributes redirect) {
 		String memId=(String) session.getAttribute("memId");
 		logger.info("memId={}", memId);
 		
 		List<Map<String, Object>> list 
-			= mailboxService.selectMsgView(memId, MailboxUtil.MSG_SENT_FLAG);
+		= mailboxService.selectMsgView(memId, MailboxUtil.MSG_SENT_FLAG);
 		logger.info("메세지 목록 조회, list.size={}", list.size());
 		
-		model.addAttribute("list", list);
-		model.addAttribute("flag", "sent");
+		redirect.addFlashAttribute("list", list);
+		redirect.addFlashAttribute("flag", "sent");
+		
+		return "redirect:/mailbox/mailNoByFlag";
+	}
+	
+	@RequestMapping("/mailNoByFlag")
+	public String mailNoByFlag(HttpSession session , HttpServletRequest request, Model model) {
+		String memId=(String) session.getAttribute("memId");
+		logger.info("memId={}", memId);
+		
+		Map<String, ?> flashMap = RequestContextUtils.getInputFlashMap(request);
+		
+		if(flashMap != null) {
+			List<Map<String, Object>> list = (List<Map<String, Object>>) flashMap.get("list");
+			String flag = (String) flashMap.get("flag");
+			
+			model.addAttribute("list", list);
+			model.addAttribute("flag", flag);
+		}
+		
+		int receivedNo = mailboxService.findReceivedNo(memId);
+		logger.info("받은 메세지 개수, receivedNo={}", receivedNo);
+		
+		int sentNo = mailboxService.findSentNo(memId);
+		logger.info("보낸 메세지 개수, sentNo={}", sentNo);
+		
+		model.addAttribute("receivedNo", receivedNo);
+		model.addAttribute("sentNo", sentNo);
 		
 		return "/mailbox/mailboxByFlag";
 	}
