@@ -84,6 +84,7 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="<c:url value='/admin/member/memberList'/>">일반회원 조회</a>
                         <a class="collapse-item" href="#">차단 회원 관리</a>
+                        <a class="collapse-item" href="#">공지 발송</a>
                     </div>
                 </div>
             </li>
@@ -98,10 +99,8 @@
                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="utilities-color.html">Colors</a>
-                        <a class="collapse-item" href="utilities-border.html">Borders</a>
-                        <a class="collapse-item" href="utilities-animation.html">Animations</a>
-                        <a class="collapse-item" href="utilities-other.html">Other</a>
+                        <a class="collapse-item" href="#">기업 회원 조회</a>
+                        
                     </div>
                 </div>
             </li>
@@ -116,10 +115,8 @@
                 <div id="collapseManager" class="collapse" aria-labelledby="headingUtilities"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="#">관리자 조회</a>
                         <a class="collapse-item" href="#">관리자 등록</a>
-                        <a class="collapse-item" href="#">관리자 수정</a>
-                        <a class="collapse-item" href="#">관리자 삭제</a>
+                        <a class="collapse-item" href="#">관리자 조회</a>
                     </div>
                 </div>
             </li>
