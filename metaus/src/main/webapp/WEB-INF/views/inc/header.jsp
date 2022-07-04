@@ -18,8 +18,8 @@
     <meta name="author" content="GnoDesign">
 
     <!-- Website Title -->
-    <title>Cariera - Job Board HTML Template</title>
-    <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
+    <title>MetaUs</title>
+    <link rel="shortcut icon" href="<c:url value='/images/metaus_favicon.png'/>" type="image/x-icon">
     <link rel="apple-touch-icon-precomposed" href="images/apple-touch-icon.png">
 
     <!-- Google Fonts -->

@@ -180,7 +180,7 @@
                <!-- Portfolio Item -->
                 <div class="element col-md-4 col-sm-6 col-xs-6 portfolio-cat1">
                     <a href="<c:url value='/resume/portfolioDetail?portNo=${vo.portNo }'/>" class="">
-                    	<canvas id="can${vo.portNo }" width="293px" height="293px" style="margin-bottom:0"></canvas>
+                    	<canvas id="can${vo.portNo }" width="360px" height="360px" style="margin-bottom:0" class="img-responsive" id="portfolio"></canvas>
 					</a>
 <script type="module">
 

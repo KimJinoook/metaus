@@ -14,7 +14,8 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Dashboard</title>
+    <title>MetaUs Admin</title>
+    <link rel="shortcut icon" href="<c:url value='/images/metaus_favicon.png'/>" type="image/x-icon">
 
     <!-- Custom fonts for this template-->
     <link href="<c:url value='/admin/vendor/fontawesome-free/css/all.min.css'/>" rel="stylesheet" type="text/css">
@@ -33,8 +34,8 @@
     <!-- Core plugin JavaScript-->
     <script src="<c:url value='/admin/vendor/jquery-easing/jquery.easing.min.js'/>"></script>
 
-    <!-- Custom scripts for all pages-->
-    <script src="<c:url value='/admin/js/sb-admin-2.min.js'/>"></script>
+    
+   
 
 </head>
 
