@@ -17,6 +17,9 @@
 			if($('#memId').val()=="" || $('#memId').val()==null){
 				alert('로그인 후 이용가능합니다!');
 				event.preventDefault();
+			}else{
+				location.href="<c:url value='/board/boardWrite?btypeNo=3'/>";
+				return false;
 			}
 		});
 	});
@@ -77,13 +80,13 @@
 						value="3">
 					<button class="btn btn-large btn-blue btn-effect mt30"
 						id="searchBt" type="submit">검색</button>
+		<a href="<c:url value='/board/boardWrite?btypeNo=3'/>" id="writeBoard">
+			<button class="btn btn-large btn-blue btn-effect mt30"
+				>글쓰기</button>
+		</a>
 				</div>
 			</div>
 		</form>
-		<a href="/metaus/board/boardWrite?btypeNo=3" id="writeBoard">
-			<button class="btn btn-large btn-blue btn-effect mt30"
-				id="writeBoard" style="float: right;">글쓰기</button>
-		</a>
 		<!-- 검색 끝 -->
 
 		<!-- Start of Row -->

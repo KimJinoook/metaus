@@ -4,6 +4,8 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ include file="../inc/header.jsp"%>
+<link rel="stylesheet" type="text/css"
+	href="<c:url value='/css/search.css'/>">
 <script type="text/javascript">
 	function boardList(curPage) {
 		$('input[name=currentPage]').val(curPage);
