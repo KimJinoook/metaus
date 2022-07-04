@@ -96,7 +96,9 @@
 		insert into fp_manager(manager_no,manager_name,manager_id,manager_pwd,manager_regdate)
 		values(#{managerNo}, #{managerName}, #{managerId}, #{managerPwd},sysdate)
 	</insert>
-   	
+   	<select id="selectAll" resultType="ManagerVO">
+   		select * from fp_manager
+   	</select>
 	
 </mapper>
 

@@ -1,5 +1,7 @@
 package com.metaus.admin.model;
 
+import java.util.List;
+
 public interface ManagerService {
 	public static final int USABLE_ID=1;  //사용가능한 아이디
 	public static final int UNUSABLE_ID=2; //이미 존재해서 사용불가능한 아이디
@@ -13,5 +15,6 @@ public interface ManagerService {
 	public ManagerVO selectByUserid(String memId);
 	public int duplicateId(String managerId);
 	public int insertMember(ManagerVO vo);
+	List<ManagerVO> selectAll();
 
 }

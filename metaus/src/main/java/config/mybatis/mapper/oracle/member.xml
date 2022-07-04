@@ -110,6 +110,7 @@
    	<select id="selectAll" resultType="memberVo">
    		select * from fp_mem
    	</select>
+   	
 	
 </mapper>
 

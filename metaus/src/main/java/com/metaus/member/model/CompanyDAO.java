@@ -1,5 +1,7 @@
 package com.metaus.member.model;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
@@ -16,4 +18,5 @@ public interface CompanyDAO {
 	public int selectConCount();
 	public int selectConCountNotEnd();
 	public int selectConCountEnd();
+	List<CompanyVO> selectAll();
 }

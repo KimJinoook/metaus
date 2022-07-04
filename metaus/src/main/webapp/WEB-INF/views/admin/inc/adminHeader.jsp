@@ -99,7 +99,7 @@
                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="#">기업 회원 조회</a>
+                        <a class="collapse-item" href="<c:url value='/admin/member/comList'/>">기업 회원 조회</a>
                         
                     </div>
                 </div>
@@ -116,7 +116,7 @@
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="#">관리자 등록</a>
-                        <a class="collapse-item" href="#">관리자 조회</a>
+                        <a class="collapse-item" href="<c:url value='/admin/member/managerList'/>">관리자 조회</a>
                     </div>
                 </div>
             </li>
