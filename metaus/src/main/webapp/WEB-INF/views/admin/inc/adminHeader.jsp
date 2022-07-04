@@ -115,7 +115,7 @@
                 <div id="collapseManager" class="collapse" aria-labelledby="headingUtilities"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="#">관리자 등록</a>
+                        <a class="collapse-item" href="<c:url value='/admin/member/register'/>">관리자 등록</a>
                         <a class="collapse-item" href="<c:url value='/admin/member/managerList'/>">관리자 조회</a>
                     </div>
                 </div>

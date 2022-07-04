@@ -99,7 +99,6 @@
    	<select id="selectAll" resultType="ManagerVO">
    		select * from fp_manager
    	</select>
-	
 </mapper>
 
 
