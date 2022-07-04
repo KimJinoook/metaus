@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.metaus.common.ConstUtil;
 import com.metaus.common.FileUploadUtil;
+import com.metaus.mailbox.model.MailboxAtcVO;
 import com.metaus.mailbox.model.MailboxDAO;
 import com.metaus.mailbox.model.MailboxService;
 import com.metaus.mailbox.model.MailboxUtil;
@@ -62,11 +63,11 @@ public class MailboxController {
 		int cnt=mailboxService.insertMailbox(vo);
 		logger.info("메세지 등록 결과 cnt={}", cnt);
 		
-		//수신자 등록 처리
+		//수신자 셋팅
 		RecipientVO recipientVo = new RecipientVO();
 		recipientVo.setMsgaddAdsee(msgaddAdsee);
 		
-		//등록한 쪽지 번호 셋팅
+		//수신자 번호 셋팅 - 등록한 쪽지 번호 셋팅
 		int msgNo=mailboxService.selectMsgNo();
 		recipientVo.setMsgNo(msgNo);
 		logger.info("수신자 등록 처리 파라미터, recipientVo={}", recipientVo);
@@ -90,13 +91,15 @@ public class MailboxController {
 				
 				logger.info("파일 업로드 성공, fileName={}, fileSize={}", fileName,	fileSize);
 				
-				/*
-				 * vo.setFileName(fileName); vo.setOriginalFileName(originFileName);
-				 * vo.setFileSize(fileSize);
-				 * 
-				 * int cnt=reBoardService.insertReBoard(vo);
-				 */
-				logger.info("글쓰기 처리 결과, cnt={}", cnt);
+				MailboxAtcVO mailboxAtcVo = new MailboxAtcVO();
+				mailboxAtcVo.setMsgNo(msgNo);
+				mailboxAtcVo.setMfileFilename(fileName);
+				mailboxAtcVo.setMfileOriginname(originalFileName);
+				mailboxAtcVo.setMfileFilesize(fileSize);
+				
+				int cnt3=mailboxService.insertMailboxAtc(mailboxAtcVo);
+				logger.info("메세지 첨부파일 처리 결과 cnt3={}", cnt3);
+
 			}
 			
 		} catch(Exception e) {

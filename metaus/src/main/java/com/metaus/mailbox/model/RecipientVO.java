@@ -10,4 +10,8 @@ public class RecipientVO {
 	int msgNo;
 	String msgaddAdsee;
 	Timestamp msgaddDate;
+	private String starFlag;
+	private String temporaryFlag;
+	private String spamFlag;
+	private String trashFlag;
 }
