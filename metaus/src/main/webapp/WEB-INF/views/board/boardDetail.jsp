@@ -66,12 +66,12 @@ button#replyBtAjax{
 								+ memId + "&cmtContent=" + cmtContent
 								+ "&boardNo=" + boardNo,
 						type : 'GET',
-						dataType : 'json',
 						async : false,
 
 						success : function(res) {
 							var message = "댓글 등록 성공";
 							alert(message);
+							location.reload();
 						},
 						error : function(xhr, status, error) {
 							alert('error:' + error);
@@ -87,19 +87,15 @@ button#replyBtAjax{
 						//확인 눌렀을시 실행문
 
 						var cmtNo = $(this).find('input').val();
-						var cmtGroupNo = $(this).parent().parent().parent().find($('input[name=cmtGroupNo]')).val();
-						var cmtStep = $(this).parent().parent().parent().find($('input[name=cmtStep]')).val();
 						$.ajax({
 							url : "<c:url value='/board/commentAjaxDelete'/>"
-									+ "?cmtNo=" + cmtNo
-									+ "?cmtGroupNo=" + cmtGroupNo
-									+ "?cmtStep=" + cmtStep,
+									+ "?cmtNo=" + cmtNo,
 							type : 'GET',
-							async : false,
 							success : function(res) {
 								var message = "댓글 삭제 성공";
 
 								alert(message);
+								location.reload();
 							},
 							error : function(xhr, status, error) {
 								alert('error:' + error);
@@ -134,6 +130,7 @@ button#replyBtAjax{
 							//element[0].innerText = con;
 
 							alert(message);
+							location.reload();
 							e.preventDefault();
 						},
 						error : function(xhr, status, error) {
@@ -144,10 +141,10 @@ button#replyBtAjax{
 				});
 		
 		$('form[name=replyBox] button').click(
-				function(){
+				function(e){
 					
 					var boardNo = "${vo.boardNo}";
-					var memNo = "${memVo.memNo}";
+					var memNo = "${sessionScope.memNo}";
 					var cmtContent = $(this).parent().parent().find(
 							$('textarea[name=cmtContent]')).val();
 					var cmtGroupNo = $(this).parent().parent().find($('input[name=cmtGroupNo]')).val();
@@ -167,6 +164,8 @@ button#replyBtAjax{
 							var message = "답글 작성 성공";
 
 							alert(message);
+							
+							location.reload();
 							e.preventDefault();
 						},
 						error : function(xhr, status, error) {
@@ -216,7 +215,7 @@ button#replyBtAjax{
 				<h2>${vo.boardTitle }</h2>
 				<!-- Post Details -->
 				<div class="post-detail">
-					<span id="memVoName"><i class="fa fa-user"></i>${memVo.memName }</span>
+					<span id="memVoName"><i class="fa fa-user"></i>${memVo.memNick }</span>
 					<span><i class="fa fa-clock-o"></i> <fmt:formatDate
 							value="${vo.boardRegdate }" pattern="yyyy년MM월dd HH시mm분" />
 						&nbsp; <img src="<c:url value='/images/board/eye.png'/>"
@@ -267,33 +266,41 @@ button#replyBtAjax{
 				</c:if>
 
 				<!-- Start of Social Media Buttons -->
-				<ul class="social-btns list-inline mt20">
-					<!-- Social Media -->
-					<li onclick="shareFacebook()"><a href="#"
-						class="social-btn-roll facebook">
-							<div class="social-btn-roll-icons">
-								<i class="social-btn-roll-icon fa fa-facebook"></i> <i
-									class="social-btn-roll-icon fa fa-facebook"></i>
-							</div>
-					</a></li>
+                        <ul class="social-btns list-inline mt20">
+                        
+                            <!-- Social Media -->
+                            <li>
+                                <a href="#" class="social-btn-roll facebook transparent">
+                                    <div class="social-btn-roll-icons">
+                                        <i class="social-btn-roll-icon fa fa-envelope-o"></i>
+                                        <i class="social-btn-roll-icon fa fa-envelope-o"></i>
+                                    </div>
+                                </a>
+                            </li>
 
-					<!-- Social Media -->
-					<li><a href="#" class="social-btn-roll twitter">
-							<div class="social-btn-roll-icons">
-								<i class="social-btn-roll-icon fa fa-twitter"></i> <i
-									class="social-btn-roll-icon fa fa-twitter"></i>
-							</div>
-					</a></li>
 
-					<!-- Social Media -->
-					<li><a href="#" class="social-btn-roll google-plus">
-							<div class="social-btn-roll-icons">
-								<i class="social-btn-roll-icon fa fa-google-plus"></i> <i
-									class="social-btn-roll-icon fa fa-google-plus"></i>
-							</div>
-					</a></li>
-				</ul>
-				<!-- End of Social Media Buttons -->
+                            <!-- Social Media -->
+                            <li>
+                                <a href="<c:url value='/board/freeBoard?btypeNo=8&memName=${memVo.memNick }'/>" class="social-btn-roll instagram transparent">
+                                    <div class="social-btn-roll-icons">
+                                        <i class="social-btn-roll-icon fa fa-file-text"></i>
+                                        <i class="social-btn-roll-icon fa fa-file-text"></i>
+                                    </div>
+                                </a>
+                            </li>
+
+                            <!-- Social Media -->
+                            <li>
+                                <a href="#" class="social-btn-roll linkedin transparent">
+                                    <div class="social-btn-roll-icons">
+                                        <i class="social-btn-roll-icon fa fa-shopping-basket"></i>
+                                        <i class="social-btn-roll-icon fa fa-shopping-basket"></i>
+                                    </div>
+                                </a>
+                            </li>
+
+                        </ul>
+                        <!-- End of Social Media Buttons -->
 
 
 				<!-- Start of Blog Post Comments -->
@@ -309,11 +316,17 @@ button#replyBtAjax{
 							<!-- Start of Comment 1 -->
 							<c:if test="${!empty list }">
 								<c:forEach var="map" items="${list }">
-										<c:if test="${map['CMT_STEP']>0 }">
-											<c:forEach begin="1" end="${map['CMT_STEP'] }">
+										<c:if test="${map['CMT_STEP']==1 }">
+												<li class="comment" style="margin-left: 30px;">
+										</c:if>
+										<c:if test="${map['CMT_STEP']==2 }">
 												<li class="comment" style="margin-left: 60px;">
-											</c:forEach>
-											
+										</c:if>
+										<c:if test="${map['CMT_STEP']==3 }">
+												<li class="comment" style="margin-left: 90px;">
+										</c:if>
+										<c:if test="${map['CMT_STEP']==4 }">
+												<li class="comment" style="margin-left: 120px;">
 										</c:if>
 										<c:if test="${map['CMT_STEP']==0 }">
 											<li class="comment">
@@ -399,13 +412,22 @@ button#replyBtAjax{
 																<button class="btn btn-blue btn-effect pull-right"
 																	id="replyBtAjax" type="button">답글 쓰기</button>
 															</div>
-															<input type="hidden" name="cmtGroupNo" value="${map['CMT_GROUPNO'] }">
+															<input  style="margin-left: 10px;" type="hidden" name="cmtGroupNo" value="${map['CMT_GROUPNO'] }">
 															<input type="hidden" name="cmtStep" value="${map['CMT_STEP'] }">
 															<input type="hidden" name="cmtSortNo" value="${map['CMT_SORTNO'] }">
 														</form>
 														<!-- End of Comment Submit Form -->
 													</div>
 												</div>
+										<c:if test="${map['CMT_STEP']>0 }">
+											<c:forEach begin="1" end="${map['CMT_STEP'] }">
+												</li>
+											</c:forEach>
+											
+										</c:if>
+										<c:if test="${map['CMT_STEP']==0 }">
+											</li>
+										</c:if>
 								</c:forEach>
 						</ul>
 						<!-- ==== End of Comment Replies ==== -->

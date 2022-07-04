@@ -40,5 +40,10 @@ public class MailboxServiceImpl implements MailboxService{
 	public Map<String, Object> selectByMsgNo(int msgNo) {
 		return mailboxDao.selectByMsgNo(msgNo);
 	}
+
+	@Override
+	public int insertMailboxAtc(MailboxAtcVO mailboxAtcVo) {
+		return mailboxDao.insertMailboxAtc(mailboxAtcVo);
+	}
 	
 }

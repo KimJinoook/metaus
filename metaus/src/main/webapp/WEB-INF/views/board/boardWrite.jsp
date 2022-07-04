@@ -4,6 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ include file="../inc/header.jsp"%>
+<link rel="stylesheet" type="text/css" href="<c:url value='/css/resume.css'/>">
 
 <script src="<c:url value='/js/jquery-3.6.0.min.js'/>"></script>
 <script type="text/javascript">
@@ -16,14 +17,16 @@
 	});
 </script>
 <style>
-  .ck-editor__editable { height: 500px; }
+.ck-editor__editable {
+	height: 500px;
+}
 </style>
 <!-- =============== Start of Page Header 1 Section =============== -->
 <section class="page-header" style="margin-top: 150px;">
 	<div class="container">
 
 		<!-- Start of Page Title -->
-		<div class="row" >
+		<div class="row">
 			<div class="col-md-12">
 				<h2>게시판 글작성</h2>
 			</div>
@@ -51,52 +54,60 @@
 	<div class="container">
 
 		<!-- Start of Post Resume Form -->
-		<form action="<c:url value='/board/boardWrite'/>" 
-			class="post-job-resume mt50" 
-			style="margin-top: 0px;" method="post"
+		<form action="<c:url value='/board/boardWrite'/>"
+			class="post-job-resume mt50" style="margin-top: 0px;" method="post"
 			enctype="multipart/form-data">
 
 			<!-- Start of Resume Details -->
 			<div class="row">
 				<div class="col-md-12">
-				
-				<!-- Start of category input -->
-                <div class="col-md-3 col-sm-12 search-categories" style="display: contents;">
-                    <label for="search-categories">게시판 종류</label>
-                    <select name="search-categories" class="selectpicker" 
-                    id="search-categories" data-live-search="true" 
-                    title="게시판을 선택해주세요" data-size="5" 
-                    data-container="body" style="display: flow-root">
-                    
-                        <option value="3" 
-                        <c:if test="${param.btypeNo==3 }">selected="selected"</c:if>>QNA 게시판</option>
-                        <option value="8"
-                        <c:if test="${param.btypeNo==8 }">selected="selected"</c:if>>자유 게시판</option>
-                        <option value="5"
-                        <c:if test="${param.btypeNo==5 }">selected="selected"</c:if>>질문 게시판</option>
-                        <option value="6"
-                        <c:if test="${param.btypeNo==6 }">selected="selected"</c:if>>공유/정보 게시판</option>
-                        <option value="7"
-                        <c:if test="${param.btypeNo==7 }">selected="selected"</c:if>>개인의뢰 게시판</option>
-                    </select>
-                </div>
-                	<input type="hidden" name="btypeNo" id="btypeNo" value="${param.btypeNo }">
-                	<input type="hidden" name="memId" value="${memId }">
+
+					<!-- Start of category input -->
+					<div class="col-md-3 col-sm-12 search-categories"
+						style="display: contents;">
+						<label for="search-categories">게시판 종류</label> <select
+							name="search-categories" class="selectpicker"
+							id="search-categories" data-live-search="true"
+							title="게시판을 선택해주세요" data-size="5" data-container="body"
+							style="display: flow-root">
+
+							<option value="3"
+								<c:if test="${param.btypeNo==3 }">selected="selected"</c:if>>QNA
+								게시판</option>
+							<option value="8"
+								<c:if test="${param.btypeNo==8 }">selected="selected"</c:if>>자유
+								게시판</option>
+							<option value="5"
+								<c:if test="${param.btypeNo==5 }">selected="selected"</c:if>>질문
+								게시판</option>
+							<option value="6"
+								<c:if test="${param.btypeNo==6 }">selected="selected"</c:if>>공유/정보
+								게시판</option>
+							<option value="7"
+								<c:if test="${param.btypeNo==7 }">selected="selected"</c:if>>개인의뢰
+								게시판</option>
+						</select>
+					</div>
+					<input type="hidden" name="btypeNo" id="btypeNo"
+						value="${param.btypeNo }"> <input type="hidden"
+						name="memId" value="${memId }">
 					<!-- Form Group -->
-					
+
 					<div class="form-group">
 						<label>글 제목</label> <input class="form-control" type="text"
 							placeholder="글 제목을 입력해주세요" required style="color: black;"
 							name="boardTitle">
 					</div>
-					
+
 					<!-- Form Group -->
 					<div class="form-group">
 						<label>글 내용</label>
-						<textarea name="boardContent" id="editor"></textarea>	
-						<script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/ckeditor.js"></script>
-						<script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/translations/ko.js"></script>
-					    <script>
+						<textarea name="boardContent" id="editor"></textarea>
+						<script
+							src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/ckeditor.js"></script>
+						<script
+							src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/translations/ko.js"></script>
+						<script>
 					      	ClassicEditor.create( document.querySelector( '#editor' ), {
 					      		language: "ko"
 					      	});
@@ -104,15 +115,15 @@
 					</div>
 
 					<!-- Form Group -->
-					
+
 					<div class="form-group" id="upDiv">
 						<label>사진 업로드</label>
 
 						<!-- Upload Button -->
-						<div class="form-group">
-							<span><i class="fa fa-upload"></i> Upload</span><input
-								type="file" name="application_attachment"
-								accept=".jpg,.png,.gif">
+						<div class="upload-file-btn" style="width: 140px">
+							<!-- <span><i class="fa fa-upload"></i> Upload</span> -->
+							<input type="file" name="upfile" accept=".gif,.png,.jpg">
+
 						</div>
 					</div>
 

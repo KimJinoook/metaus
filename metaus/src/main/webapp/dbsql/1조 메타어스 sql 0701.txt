@@ -1248,6 +1248,12 @@ ALTER TABLE fp_msgatc
 		CONSTRAINT FK_fp_msg_TO_fp_msgatc
 		CASCADE;
 
+ALTER TABLE fp_msgadd
+	DROP
+		PRIMARY KEY
+		CASCADE
+		KEEP INDEX;
+
 ALTER TABLE fp_msg
 	DROP
 		PRIMARY KEY
@@ -1255,6 +1261,12 @@ ALTER TABLE fp_msg
 		KEEP INDEX;
 
 ALTER TABLE fp_msgtype
+	DROP
+		PRIMARY KEY
+		CASCADE
+		KEEP INDEX;
+
+ALTER TABLE fp_msgatc
 	DROP
 		PRIMARY KEY
 		CASCADE
@@ -1281,21 +1293,28 @@ CREATE TABLE fp_msgadd (
 	msgadd_no NUMBER NOT NULL, /* 송수신번호 */
 	msg_no NUMBER NOT NULL, /* 쪽지번호 */
 	msgadd_adsee VARCHAR2(50) NOT NULL, /* 받는사람 */
-	msgadd_date DATE /* 읽은시간 */
-);
-
-/* 쪽지 */
-CREATE TABLE fp_msg (
-	msg_no NUMBER NOT NULL, /* 쪽지번호 */
-	msgadd_adser VARCHAR2(50), /* 보낸사람 */
-	msg_title VARCHAR2(50), /* 쪽지제목 */
-	msg_content CLOB, /* 쪽지내용 */
-	msg_adsee VARCHAR2(50), /* 받는사람 */
-	msgtype_no NUMBER, /* 타입 번호 */
+	msgadd_date DATE, /* 읽은시간 */
 	star_flag VARCHAR2(10) DEFAULT 'N', /* 별표 플래그 */
 	temporary_flag VARCHAR2(10) DEFAULT 'N', /* 임시 플래그 */
 	spam_flag VARCHAR2(10) DEFAULT 'N', /* 스팸 플래그 */
 	trash_flag VARCHAR2(10) DEFAULT 'N' /* 휴지통 플래그 */
+);
+
+ALTER TABLE fp_msgadd
+	ADD
+		CONSTRAINT PK_fp_msgadd
+		PRIMARY KEY (
+			msgadd_no
+		);
+
+/* 쪽지 */
+CREATE TABLE fp_msg (
+	msg_no NUMBER NOT NULL, /* 쪽지번호 */
+	msgadd_adser VARCHAR2(50) NOT NULL, /* 보낸사람 */
+	msg_title VARCHAR2(50), /* 쪽지제목 */
+	msg_content CLOB, /* 쪽지내용 */
+	send_date DATE DEFAULT sysdate NOT NULL, /* 보낸시간 */
+	msgtype_no NUMBER /* 타입 번호 */
 );
 
 ALTER TABLE fp_msg
@@ -1320,12 +1339,19 @@ ALTER TABLE fp_msgtype
 
 /* 첨부파일 */
 CREATE TABLE fp_msgatc (
-	mfile_no NUMBER, /* 파일번호 */
-	msg_no NUMBER, /* 쪽지번호 */
+	mfile_no NUMBER NOT NULL, /* 파일번호 */
+	msg_no NUMBER NOT NULL, /* 쪽지번호 */
 	mfile_filename CLOB, /* 파일명 */
 	mfile_originname CLOB, /* 원본파일명 */
 	mfile_filesize CLOB /* 파일사이즈 */
 );
+
+ALTER TABLE fp_msgatc
+	ADD
+		CONSTRAINT PK_fp_msgatc
+		PRIMARY KEY (
+			mfile_no
+		);
 
 ALTER TABLE fp_msgadd
 	ADD
@@ -1564,6 +1590,7 @@ nocache;
 create or replace view msgView
 as
 select a.*, b.msgadd_adsee, b.msgadd_date
+, b.star_flag, b.temporary_flag, b.spam_flag, b.trash_flag
 from fp_msg a join fp_msgadd b
 on a.msg_no=b.msg_no;
 

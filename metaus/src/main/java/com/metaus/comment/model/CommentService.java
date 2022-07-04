@@ -9,5 +9,5 @@ public interface CommentService {
 	int countComment(int boardNo);
 	int updateComment(CommentVO vo);
 	int reply(CommentVO vo);
-	public void deleteComment(Map<String, String> map);
+	int deleteComment(int cmtNo);
 }
