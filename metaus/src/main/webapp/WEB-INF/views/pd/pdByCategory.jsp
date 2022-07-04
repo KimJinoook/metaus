@@ -4,6 +4,7 @@
 <link rel="stylesheet" type="text/css"
 	href="<c:url value='/css/search.css'/>">
 <script type="text/javascript">
+
 function pdList(curPage){
 	$('input[name=currentPage]').val(curPage);
 	$('form[name=frmPage]').submit();
@@ -25,7 +26,7 @@ $(function(){
             <!-- Start of Page Title -->
             <div class="row">
                 <div class="col-md-12">
-                    <h2>3D ${param.cateName } 목록</h2>
+                    <h2>3D 모델 ${param.cateName } 목록</h2>
                 </div>
             </div>
             <!-- End of Page Title -->
@@ -53,7 +54,7 @@ $(function(){
 				</dl>
 			</nav>
  <!-- 검색 시작 -->
-<form id="searchFrm" method="post" action="<c:url value='/pd/pd'/>">
+<form id="searchFrm" method="post" action="<c:url value='/pd/pdByCategory?cateNo=${param.cateNo }&cateName=${param.cateName }'/>">
 	<div id="searchBox">
 		<div class="col-md-3 col-sm-12 search-categories"
 			style="display: contents;">
@@ -66,7 +67,7 @@ $(function(){
 			</select> <input type="text" class="live-search-box form-control mt20"
 				placeholder="검색하실 내용을 입력해주세요" name="searchKeyword"
 				id="searchKeyword">
-				<input type="hidden" name="btypeNo" value="8">
+				<input type="hidden" name="cateNo" value="${param.cateNo }">
 			<button class="btn btn-large btn-blue btn-effect mt30" id="searchBt"
 				type="submit">검색</button>
 		</div>
@@ -110,7 +111,7 @@ $(function(){
 						<ul class="pagination list-inline text-center">
 							<c:if test="${pagingInfo.firstPage>1 }">
 								<li><a href="#"
-									onclick="boardList(${pagingInfo.firstPage-1})">prev</a></li>
+									onclick="pdList(${pagingInfo.firstPage-1})">prev</a></li>
 							</c:if>
 
 							<!-- [1][2][3][4][5][6][7][8][9][10] -->
@@ -126,7 +127,7 @@ $(function(){
 
 							<c:if test="${pagingInfo.lastPage<pagingInfo.totalPage }">
 								<li><a href="#"
-									onclick="boardList(${pagingInfo.lastPage+1})">Next</a></li>
+									onclick="pdList(${pagingInfo.lastPage+1})">Next</a></li>
 							</c:if>
 							<!--  페이지 번호 끝 -->
 						</ul>
@@ -134,8 +135,10 @@ $(function(){
 					<!-- End of Pagination -->
                     <!-- 페이징 처리를 위한 form 시작-->
 				<form name="frmPage" method="post"
-					action="<c:url value='/pd/pd'/>">
+					action="<c:url value='/pd/pdByCategory?cateNo=${param.cateNo }&cateName=${param.cateName }'/>">
 					<input type="hidden" name="currentPage">
+					<input type="hidden" name="searchKeyword" value="${searchVo.searchKeyword }">
+					<input type="hidden" name="searchCondition" value="${searchVo.searchCondition }">
 				</form>
 				<!-- 페이징 처리 form 끝 -->
         </section>
