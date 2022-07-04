@@ -1,5 +1,7 @@
 package com.metaus.member.model;
 
+import java.util.List;
+
 public interface CompanyService {
 	public static final int USABLE_ID=1;  //사용가능한 아이디
 	public static final int UNUSABLE_ID=2; //이미 존재해서 사용불가능한 아이디
@@ -21,4 +23,5 @@ public interface CompanyService {
 	public int selectConCount();
 	public int selectConCountNotEnd();
 	public int selectConCountEnd();
+	List<CompanyVO> selectAll();
 }

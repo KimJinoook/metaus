@@ -1,5 +1,7 @@
 package com.metaus.member.model;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
@@ -71,6 +73,11 @@ public class CompanyServiceImpl implements CompanyService {
 	}
 	public int selectConCountEnd() {
 		return companyDao.selectConCountEnd();
+	}
+
+	@Override
+	public List<CompanyVO> selectAll() {
+		return companyDao.selectAll();
 	}
 
 }

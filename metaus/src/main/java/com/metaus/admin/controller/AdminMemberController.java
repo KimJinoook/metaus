@@ -15,6 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.metaus.admin.model.ManagerService;
+import com.metaus.admin.model.ManagerVO;
+import com.metaus.member.model.CompanyService;
+import com.metaus.member.model.CompanyVO;
 import com.metaus.member.model.MemberService;
 import com.metaus.member.model.MemberVO;
 
@@ -30,6 +33,7 @@ public class AdminMemberController {
 	
 	private final ManagerService managerService;
 	private final MemberService memberService;
+	private final CompanyService comService;
 	
 	@RequestMapping("/memberList")
 	public void memberList(@ModelAttribute MemberVO mvo,Model model) {
@@ -41,5 +45,22 @@ public class AdminMemberController {
 		
 		Date today = new Date();
 		model.addAttribute("today",today);
+	}
+	
+	@RequestMapping("/comList")
+	public void comList(Model model) {
+		logger.info("기업 회원 조회 페이지");
+		
+		List<CompanyVO> list=comService.selectAll();
+		model.addAttribute("list",list);
+		
+	}
+	
+	@RequestMapping("/managerList")
+	public void managerList(Model model) {
+		logger.info("관리자 조회 페이지");
+		
+		List<ManagerVO> list=managerService.selectAll();
+		model.addAttribute("list",list);
 	}
 }

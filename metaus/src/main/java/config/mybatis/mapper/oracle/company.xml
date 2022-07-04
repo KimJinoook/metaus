@@ -60,6 +60,9 @@
 		values(#{comNo},#{comId},#{comPw},#{comName},#{comPreview},#{comCeo},#{comAdd},#{comLati},#{comLongi},#{comRrn},0,#{comTel},sysdate)
 	</insert>
    	
+   	<select id="selectAll" resultType="CompanyVO">
+   		select * from fp_com
+   	</select>
 	
 </mapper>
 

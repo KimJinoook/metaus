@@ -102,5 +102,8 @@ public class MemberServiceImpl implements MemberService {
 	public String sumPayToday() {
 		return memberDao.sumPayToday();
 	}
+	public int unlockMember(int memNo) {
+		return memberDao.unlockMember(memNo);
+	}
 
 }

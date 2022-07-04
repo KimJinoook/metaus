@@ -20,16 +20,7 @@
             <li class="mobile-title">
                 <h4>main menu</h4></li>
 
-            <!-- Simple Menu Item -->
-            <li class="dropdown simple-menu">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">home<i class="fa fa-angle-down"></i></a>
-                <ul class="dropdown-menu" role="menu">
-                    <li><a href="<c:url value='/'/>">home 1</a></li>
-                    <li><a href="index-02.html">home 2 - slider</a></li>
-                    <li><a href="index-03.html">home 3</a></li>
-                    <li><a href="index-04.html">boxed version</a></li>
-                </ul>
-            </li>
+            
 
             <!-- Simple Menu Item -->
             <li class="dropdown simple-menu">
@@ -130,6 +121,14 @@
 	             <li class="dropdown simple-menu">
 	                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">마이페이지<i class="fa fa-angle-down"></i></a>
 	                 <ul class="dropdown-menu" role="menu">
+	                 
+	                 <!-- Dropdown Submenu -->
+	                     <li class="dropdown-submenu">                               
+	                         <a href="<c:url value='/resume/resumeDetail'/>">내 정보 변경</a>                                      
+	                     </li>
+	                     <li class="dropdown-submenu">                               
+	                         <a href="<c:url value='/resume/resumeDetail'/>">이력서</a>                                      
+	                     </li>
 	
 	                     <!-- Dropdown Submenu -->
 	                     <li class="dropdown-submenu">
@@ -138,11 +137,6 @@
 	                             <li><a href="<c:url value='/commission/commissionList'/>">의뢰목록</a></li>
 	                             <li><a href="<c:url value='/commission/progressSchedule'/>">의뢰진행상황</a></li>
 	                         </ul>
-	                     </li>
-	
-	                     <!-- Dropdown Submenu -->
-	                     <li class="dropdown-submenu">                               
-	                         <a href="<c:url value='/resume/resumeDetail'/>">이력서<i class="fa fa-angle-right"></i></a>                                      
 	                     </li>
 	
 	                     <!-- Dropdown Submenu -->
@@ -160,16 +154,6 @@
 	                         <ul class="dropdown-menu">
 	                             <li><a href="<c:url value='/lecture/lectureList'/>">모델목록</a></li>
 	                             <li><a href="<c:url value='/lecture/salesChart'/>">모델매출</a></li>
-	                         </ul>
-	                     </li>
-	
-	                     <!-- Dropdown Submenu -->
-	                     <li class="dropdown-submenu">
-	                         <a href="#">single post<i class="fa fa-angle-right"></i></a>
-	                         <ul class="dropdown-menu">
-	                             <li><a href="blog-post-right-sidebar.html">post - right sidebar</a></li>
-	                             <li><a href="blog-post-left-sidebar.html">post - left sidebar</a></li>
-	                             <li><a href="blog-post.html">post - fullwidth</a></li>
 	                         </ul>
 	                     </li>
 	                 </ul>
