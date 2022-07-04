@@ -35,6 +35,15 @@ public class AdminMemberManageController {
 		
 		return "redirect:/admin/member/memberList";
 	}
+	@RequestMapping("/cutmemberUnlock")
+	public String cutmemberUnlock(int memNo) {
+		logger.info("일반회원 차단해제");
+		
+		int cnt = memberService.unlockMember(memNo);
+		logger.info("일반회원 차단해제 cnt={}",cnt);
+		
+		return "redirect:/admin/member/cutmemberList";
+	}
 	@RequestMapping("/memberLock")
 	public String memberLock(@ModelAttribute MemberVO vo) {
 		logger.info("일반회원 차단 vo={}",vo);
@@ -50,5 +59,16 @@ public class AdminMemberManageController {
 		logger.info("일반회원 차단 cnt={}",cnt);
 		
 		return "redirect:/admin/member/memberList";
+	}
+	
+	@RequestMapping("/managerDelete")
+	public String managerDelete(int managerNo) {
+		logger.info("관리자 삭제 managerNo={}",managerNo);
+		
+		
+		int cnt = managerService.deleteByManagerNo(managerNo);
+		logger.info("관리자 삭제 cnt={}",cnt);
+		
+		return "redirect:/admin/member/managerList";
 	}
 }

@@ -16,5 +16,6 @@ public interface ManagerService {
 	public int duplicateId(String managerId);
 	public int insertMember(ManagerVO vo);
 	List<ManagerVO> selectAll();
+	public int deleteByManagerNo(int managerNo);
 
 }

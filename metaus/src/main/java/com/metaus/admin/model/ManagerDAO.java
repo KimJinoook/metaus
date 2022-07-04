@@ -12,4 +12,5 @@ public interface ManagerDAO {
 	ManagerVO selectByUserid(String managerId) ;
 	public int duplicateId(String managerId);
 	List<ManagerVO> selectAll();
+	public int deleteByManagerNo(int managerNo);
 }

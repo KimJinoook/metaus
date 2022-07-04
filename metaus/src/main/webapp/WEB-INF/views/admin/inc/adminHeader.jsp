@@ -83,7 +83,7 @@
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="<c:url value='/admin/member/memberList'/>">일반회원 조회</a>
-                        <a class="collapse-item" href="#">차단 회원 관리</a>
+                        <a class="collapse-item" href="<c:url value='/admin/member/cutmemberList'/>">차단 회원 관리</a>
                         <a class="collapse-item" href="#">공지 발송</a>
                     </div>
                 </div>
@@ -407,7 +407,7 @@
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="#">
+                                <a class="dropdown-item" href="<c:url value='/admin/member/managerEdit'/>">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                     사용자정보
                                 </a>

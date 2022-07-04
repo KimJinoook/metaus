@@ -49,6 +49,17 @@ public class AdminMemberController {
 		Date today = new Date();
 		model.addAttribute("today",today);
 	}
+	@RequestMapping("/cutmemberList")
+	public void cutmemberList(@ModelAttribute MemberVO mvo,Model model) {
+		logger.info("차단 회원 조회 페이지");
+		
+		List<MemberVO> list=memberService.selectAll();
+		logger.info("list={}",list);
+		model.addAttribute("list",list);
+		
+		Date today = new Date();
+		model.addAttribute("today",today);
+	}
 	
 	@RequestMapping("/comList")
 	public void comList(Model model) {
@@ -65,6 +76,16 @@ public class AdminMemberController {
 		
 		List<ManagerVO> list=managerService.selectAll();
 		model.addAttribute("list",list);
+	}
+	@GetMapping("/managerEdit")
+	public void managerEdit_get(Model model, HttpSession session) {
+		logger.info("관리자 조회 페이지");
+
+		String userid = (String)session.getAttribute("managerId");
+		ManagerVO managerVo = managerService.selectByUserid(userid);
+		model.addAttribute("managerVo",managerVo);
+		
+		
 	}
 	@GetMapping("/register")
 	public void get_manager() {

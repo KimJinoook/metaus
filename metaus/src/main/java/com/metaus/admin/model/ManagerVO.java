@@ -11,4 +11,5 @@ public class ManagerVO {
 	private String managerName;
 	private String managerPwd;
 	private Timestamp managerRegdate;
+	private String managerPic;
 }
