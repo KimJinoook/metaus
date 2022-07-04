@@ -13,4 +13,5 @@ public interface MailboxDAO {
 	List<Map<String, Object>> selectMsgViewBySender(String msgaddAdser);
 	List<Map<String, Object>> selectMsgViewByRecipient(String msgaddAdser);
 	Map<String, Object> selectByMsgNo(int msgNo);
+	int insertMailboxAtc(MailboxAtcVO mailboxAtcVo);
 }

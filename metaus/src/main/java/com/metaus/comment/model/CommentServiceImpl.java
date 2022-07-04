@@ -43,8 +43,8 @@ public class CommentServiceImpl implements CommentService {
 	}
 
 	@Override
-	public void deleteComment(Map<String, String> map) {
-		commentDao.deleteComment(map);
+	public int deleteComment(int cmtNo) {
+		return commentDao.deleteComment(cmtNo);
 	}
 	
 }

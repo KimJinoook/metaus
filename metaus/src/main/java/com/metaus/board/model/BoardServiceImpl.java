@@ -71,6 +71,10 @@ public class BoardServiceImpl implements BoardService {
 	public int deleteBoard(BoardVO vo) {
 		return boardDao.deleteBoard(vo);
 	}
+	@Override
+	public List<BoardVO> PopularSelect(int btypeNo) {
+		return boardDao.PopularSelect(btypeNo);
+	}
 	
 	
 

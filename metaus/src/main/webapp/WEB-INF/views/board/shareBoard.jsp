@@ -50,7 +50,8 @@
 <!-- =============== End of Page Header 1 Section =============== -->
 
 <!-- 검색 시작 -->
-<form id="searchFrm" method="post" action="<c:url value='/board/shareBoard?btypeNo=6'/>">
+<form id="searchFrm" method="post"
+	action="<c:url value='/board/shareBoard?btypeNo=6'/>">
 	<div id="searchBox">
 		<div class="col-md-3 col-sm-12 search-categories"
 			style="display: contents;">
@@ -95,16 +96,12 @@
 							<!-	- Blog Post Thumbnail -->
 							<div class="col-md-12 blog-thumbnail">
 								<a
-									href="<c:url value='/board/readCountUp?boardNo=${map["BOARD_NO"] }&btypeNo=6'/>">
+									href="<c:url value='/board/readCountUp?boardNo=${map["BOARD_NO"] }&btypeNo=8'/>">
 									<c:forEach var="vo" items="${atcList }">
-										<c:if test="${vo.boardNo==map['BOARD_NO'] }">
-											<img src="<c:url value='/img_upload/${vo.bfileFilename }'/>"
-												class="img-responsive" alt="이미지" />
-										</c:if>
-										<c:if test="${vo.boardNo!=map['BOARD_NO'] }">
+												<c:if test="${vo.boardNo==map['BOARD_NO'] }">
 													<img
-														src="<c:url value='/images/board/noimg.png'/>"
-														class="img-responsive"/>
+														src="<c:url value='/img_upload/${vo.bfileFilename }'/>"
+														class="img-responsive" />
 												</c:if>
 									</c:forEach>
 								</a>
@@ -164,9 +161,10 @@
 				<!-- 페이징 처리를 위한 form 시작-->
 				<form name="frmPage" method="post"
 					action="<c:url value='/board/shareBoard?btypeNo=6'/>">
-					<input type="hidden" name="currentPage">
-					<input type="hidden" name="searchKeyword" value="${searchVo.searchKeyword }">
-					<input type="hidden" name="searchCondition" value="${searchVo.searchCondition }">
+					<input type="hidden" name="currentPage"> <input
+						type="hidden" name="searchKeyword"
+						value="${searchVo.searchKeyword }"> <input type="hidden"
+						name="searchCondition" value="${searchVo.searchCondition }">
 				</form>
 				<!-- 페이징 처리 form 끝 -->
 
@@ -181,25 +179,33 @@
 				<!-- Start of Popular Posts -->
 				<div class="col-md-12 clearfix mt40">
 					<h4 class="widget-title">인기글</h4>
-
+					<c:forEach var="vo" items="${pList }">
 					<!-- Blog Post 1 -->
 					<div class="sidebar-blog-post">
 						<!-- Thumbnail -->
 						<div class="thumbnail-post">
-							<a href="blog-post-right-sidebar.html"> <img
-								src="images/blog/blog1.jpg" alt="">
-							</a>
+							<a
+									href="<c:url value='/board/readCountUp?boardNo=${vo.boardNo }&btypeNo=8'/>">
+									<c:forEach var="atcVo" items="${atcList }">
+												<c:if test="${atcVo.boardNo==vo.boardNo }">
+													<img
+														src="<c:url value='/img_upload/${atcVo.bfileFilename }'/>"
+														class="img-responsive" />
+												</c:if>
+									</c:forEach>
+								</a>
 						</div>
 
 						<!-- Link -->
 						<div class="post-info">
-							<a href="blog-post-right-sidebar.html">top 10 tips for web
-								developers</a> <span>1 day ago</span>
+							<a href="blog-post-right-sidebar.html">${vo.boardTitle }</a>
 						</div>
+						<span><img
+										src="<c:url value='/images/board/eye.png'/>"
+										style="width: 14px; height: 14.4px;">
+										${vo.boardReadcount }</span>
 					</div>
-
-
-
+					</c:forEach>
 				</div>
 				<!-- End of Popular Posts -->
 

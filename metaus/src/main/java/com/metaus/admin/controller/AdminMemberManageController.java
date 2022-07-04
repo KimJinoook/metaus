@@ -1,12 +1,17 @@
 package com.metaus.admin.controller;
 
+import java.sql.Timestamp;
+import java.util.Date;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.metaus.admin.model.ManagerService;
 import com.metaus.member.model.MemberService;
+import com.metaus.member.model.MemberVO;
 
 import lombok.RequiredArgsConstructor;
 
@@ -22,11 +27,27 @@ public class AdminMemberManageController {
 	private final MemberService memberService;
 	
 	@RequestMapping("/memberUnlock")
-	public String memberList(int memNo) {
+	public String memberUnlock(int memNo) {
 		logger.info("일반회원 차단해제");
 		
 		int cnt = memberService.unlockMember(memNo);
 		logger.info("일반회원 차단해제 cnt={}",cnt);
+		
+		return "redirect:/admin/member/memberList";
+	}
+	@RequestMapping("/memberLock")
+	public String memberLock(@ModelAttribute MemberVO vo) {
+		logger.info("일반회원 차단 vo={}",vo);
+		
+		Date date = new Date();
+		long cutTime = (long)(vo.getMemWarncnt()*24*60*60*1000);		
+		Timestamp timestamp = new Timestamp(date.getTime()+cutTime);
+		
+		
+		vo.setMemCutdate(timestamp);
+		
+		int cnt = memberService.lockMember(vo);
+		logger.info("일반회원 차단 cnt={}",cnt);
 		
 		return "redirect:/admin/member/memberList";
 	}

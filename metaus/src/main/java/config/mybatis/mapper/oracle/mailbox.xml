@@ -68,4 +68,12 @@
 		select * from msgview
 		where msg_no=#{msg_no}
 	</select>
+	
+	<insert id="insertMailboxAtc" parameterType="mailboxAtcVo">
+		<selectKey resultType="int" keyProperty="mfileNo" order="BEFORE">
+			select fp_msgatc_seq.nextval from dual
+		</selectKey>
+		insert into fp_msgatc
+		values(#{mfileNo}, #{msgNo}, #{mfileFilename}, #{mfileOriginname}, #{mfileFilesize})
+	</insert>
 </mapper>

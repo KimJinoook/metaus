@@ -29,5 +29,6 @@ public interface MemberDAO {
 	public int getAllMemNoPort();
 	public String sumPayToday();
 	public int unlockMember(int memNo);
+	public int lockMember(MemberVO vo);
 
 }

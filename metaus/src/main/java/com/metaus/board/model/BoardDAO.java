@@ -24,4 +24,5 @@ public interface BoardDAO {
 	BoardVO selectByBoardNo(int boardNo);
 	BoardAtcVO selectByBfileNo(int bfileNo);
 	int deleteBoard(BoardVO vo);
+	List<BoardVO> PopularSelect(int btypeNo);
 }
