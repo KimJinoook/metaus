@@ -3,6 +3,16 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.metaus.pd.model.PdDAO">
+	<sql id="searchandWhere">
+		<if test="searchKeyword !=null and searchKeyword !=''">			
+			<if test="searchCondition == 'pdName'">
+				where p.pd_name like '%' || #{searchKeyword} || '%'
+			</if>
+			<if test="searchCondition == 'pdPre'">
+				where p.pd_pre like '%' || #{searchKeyword} || '%'
+			</if>
+        </if>
+	</sql>
 	<sql id="searchWhere">
 		<if test="searchKeyword !=null and searchKeyword !=''">			
 			<if test="searchCondition == 'pdName'">
@@ -45,8 +55,8 @@
 		        select *
 		        from fp_pd p join fp_cate c
 		        on p.cate_no=c.cate_no 
-		        <include refid="searchWhere"></include>
-		        where p.cate_no=#{cateNo}
+		        <include refid="searchandWhere"></include>
+		        and p.cate_no=#{cateNo}
 		        order by p.pd_no desc
 		    )A
 		)

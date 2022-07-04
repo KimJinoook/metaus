@@ -98,6 +98,12 @@
 		where mem_no=#{memNo}
 	</update>
 	
+	<update id="unlockMember" parameterType="int">
+		update fp_mem
+		set mem_cutdate = null
+		where mem_no=#{memNo}
+	</update>
+	
 	<insert id="insertMember" parameterType="memberVo">
 		<selectKey resultType="int" keyProperty="memNo" order="BEFORE">
 			select fp_mem_seq.nextval from dual

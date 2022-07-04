@@ -8,6 +8,7 @@ function pdList(curPage){
 	$('input[name=currentPage]').val(curPage);
 	$('form[name=frmPage]').submit();
 }
+
 $(function(){
 	$('#pdPost').click(function(){
 		if($('#memId').val()=="" || $('#memId').val()==null){
@@ -24,7 +25,7 @@ $(function(){
             <!-- Start of Page Title -->
             <div class="row">
                 <div class="col-md-12">
-                    <h2>3D 모델 목록</h2>
+                    <h2>3D 모델 전체 목록</h2>
                 </div>
             </div>
             <!-- End of Page Title -->
@@ -111,7 +112,7 @@ $(function(){
 						<ul class="pagination list-inline text-center">
 							<c:if test="${pagingInfo.firstPage>1 }">
 								<li><a href="#"
-									onclick="boardList(${pagingInfo.firstPage-1})">prev</a></li>
+									onclick="pdList(${pagingInfo.firstPage-1})">prev</a></li>
 							</c:if>
 
 							<!-- [1][2][3][4][5][6][7][8][9][10] -->
@@ -127,7 +128,7 @@ $(function(){
 
 							<c:if test="${pagingInfo.lastPage<pagingInfo.totalPage }">
 								<li><a href="#"
-									onclick="boardList(${pagingInfo.lastPage+1})">Next</a></li>
+									onclick="pdList(${pagingInfo.lastPage+1})">Next</a></li>
 							</c:if>
 							<!--  페이지 번호 끝 -->
 						</ul>

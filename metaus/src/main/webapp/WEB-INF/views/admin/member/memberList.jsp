@@ -4,13 +4,28 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ include file="../inc/adminHeader.jsp" %>
+
 <link href="<c:url value='/admin/vendor/datatables/dataTables.bootstrap4.min.css'/>" rel="stylesheet">
+
 <!-- Sheet JS -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.14.3/xlsx.full.min.js"></script>
 <!--FileSaver savaAs 이용 -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.8/FileSaver.min.js"></script>
+
+<script src="<c:url value='/js/jquery-3.6.0.min.js'/>"></script>
+
 <script>
 
+function memLock(num){
+}
+
+function memUnLock(num){
+	var con = confirm('해당 회원을 차단해제 하시겠습니까?');
+	
+	if(con){
+		location.href="<c:url value='/manage/memberUnlock?memNo='/>"+num;
+	}
+}
 
 function exportExcel(){ 
   // step 1. workbook 생성
@@ -107,7 +122,18 @@ function s2ab(s) {
                                             <td>${mvo.memAdd }</td>
                                             <td>${mvo.memJoindate }</td>
                                             <td>차단</td>
-                                            <td></td>
+                                            <td style="padding:10px">
+                                            	<a href="javascript:memUnLock(${mvo.memNo })" class="btn btn-success btn-icon-split btn-sm" style="margin:0px;height:27px">
+                                        			<span class="icon text-white" style="margin:0px">
+                                            			<i class="fas fa-unlock"></i>
+                                        			</span>
+                                    			</a>	
+                                    			<a href="#" class="btn btn-primary btn-icon-split btn-sm" style="margin:0px;height:27px">
+                                        			<span class="icon text-white" style="margin:0px">
+                                            			<i class="fas fa-envelope"></i>
+                                        			</span>
+                                    			</a>
+                                    		</td>
                                         </tr>
                                         </c:if>
                                         <c:if test="${(mvo.memCutdate.getTime() < today.getTime()) || mvo.memCutdate ==null }">
@@ -119,7 +145,18 @@ function s2ab(s) {
                                             <td>${mvo.memAdd }</td>
                                             <td>${mvo.memJoindate }</td>
                                             <td>${mvo.memWarncnt }</td>
-                                            <td></td>
+                                            <td style="padding:10px">
+                                            	<a href="#" class="btn btn-danger btn-icon-split btn-sm" style="margin:0px;height:27px">
+                                        			<span class="icon text-white" style="margin:0px">
+                                            			<i class="fas fa-lock"></i>
+                                        			</span>
+                                    			</a>	
+                                    			<a href="#" class="btn btn-primary btn-icon-split btn-sm" style="margin:0px;height:27px">
+                                        			<span class="icon text-white" style="margin:0px">
+                                            			<i class="fas fa-envelope"></i>
+                                        			</span>
+                                    			</a>
+                                    		</td>
                                         </tr>
                                         </c:if>
                                     </c:forEach>
