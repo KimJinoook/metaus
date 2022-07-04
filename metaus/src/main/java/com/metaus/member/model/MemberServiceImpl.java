@@ -105,5 +105,8 @@ public class MemberServiceImpl implements MemberService {
 	public int unlockMember(int memNo) {
 		return memberDao.unlockMember(memNo);
 	}
+	public int lockMember(MemberVO vo) {
+		return memberDao.lockMember(vo);
+	}
 
 }

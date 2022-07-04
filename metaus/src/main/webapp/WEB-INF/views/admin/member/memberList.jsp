@@ -16,7 +16,12 @@
 
 <script>
 
-function memLock(num){
+function memLock(num,cnt){
+	var con = confirm('해당 회원을 차단 하시겠습니까?');
+	
+	if(con){
+		location.href="<c:url value='/manage/memberLock?memNo='/>"+num+"&memWarncnt="+cnt;
+	}
 }
 
 function memUnLock(num){
@@ -146,7 +151,7 @@ function s2ab(s) {
                                             <td>${mvo.memJoindate }</td>
                                             <td>${mvo.memWarncnt }</td>
                                             <td style="padding:10px">
-                                            	<a href="#" class="btn btn-danger btn-icon-split btn-sm" style="margin:0px;height:27px">
+                                            	<a href="javascript:memLock(${mvo.memNo },${mvo.memWarncnt })" class="btn btn-danger btn-icon-split btn-sm" style="margin:0px;height:27px">
                                         			<span class="icon text-white" style="margin:0px">
                                             			<i class="fas fa-lock"></i>
                                         			</span>
