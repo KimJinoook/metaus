@@ -183,28 +183,39 @@
 				<!-- Start of Popular Posts -->
 				<div class="col-md-12 clearfix mt40">
 					<h4 class="widget-title">인기글</h4>
-
+					<c:forEach var="vo" items="${pList }">
+					
 					<!-- Blog Post 1 -->
 					<div class="sidebar-blog-post">
 						<!-- Thumbnail -->
 						<div class="thumbnail-post">
-							<a href="blog-post-right-sidebar.html"> <img
-								src="<c:url value='/images/board/TOP.jpg'/>" alt="">
-							</a>
+							<a
+									href="<c:url value='/board/readCountUp?boardNo=${vo.boardNo }&btypeNo=8'/>">
+									<c:forEach var="atcVo" items="${atcList }">
+												<c:if test="${atcVo.boardNo==vo.boardNo }">
+													<img
+														src="<c:url value='/img_upload/${atcVo.bfileFilename }'/>"
+														class="img-responsive" />
+												</c:if>
+									</c:forEach>
+								</a>
 						</div>
 
 						<!-- Link -->
 						<div class="post-info">
-							<a href="blog-post-right-sidebar.html">세계에서 가장유명한 프로그래머 10명 </a>
-							<span>1 day ago</span>
+							<a href="blog-post-right-sidebar.html">${vo.boardTitle }</a>
 						</div>
+						<span><img
+										src="<c:url value='/images/board/eye.png'/>"
+										style="width: 14px; height: 14.4px;">
+										${vo.boardReadcount }</span>
 					</div>
-
+					</c:forEach>
 
 
 				</div>
 				<!-- End of Popular Posts -->
-
+				
 				<!-- Start of Social Media -->
 				<div class="col-md-12 mt40">
 					<h4 class="widget-title">공유하기</h4>

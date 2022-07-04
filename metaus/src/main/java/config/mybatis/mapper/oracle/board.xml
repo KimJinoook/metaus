@@ -66,6 +66,20 @@
 		and RNUM<=#{firstRecordIndex} + #{recordCountPerPage} ]]>
 	</select>
 	
+	<select id="PopularSelect" parameterType="int" resultType="boardVo">
+		select *
+		from
+		(
+		    select rownum as RNUM, A.*
+		    from
+		    (
+		        select * from fp_board 
+		        order by board_readcount desc
+		    )A
+		)
+		where RNUM between 1 and 5 and board_delFlag='N' and btype_no=#{btypeNo}
+	</select>
+	
 	<select id="selectBoardFaq" parameterType="boardVo" resultType="boardVo">
 		select b.*, m.mem_name, f.bfile_filename
 		from fp_board b join fp_mem m

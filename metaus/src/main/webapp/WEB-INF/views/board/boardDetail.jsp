@@ -66,7 +66,6 @@ button#replyBtAjax{
 								+ memId + "&cmtContent=" + cmtContent
 								+ "&boardNo=" + boardNo,
 						type : 'GET',
-						dataType : 'json',
 						async : false,
 
 						success : function(res) {
@@ -87,15 +86,10 @@ button#replyBtAjax{
 						//확인 눌렀을시 실행문
 
 						var cmtNo = $(this).find('input').val();
-						var cmtGroupNo = $(this).parent().parent().parent().find($('input[name=cmtGroupNo]')).val();
-						var cmtStep = $(this).parent().parent().parent().find($('input[name=cmtStep]')).val();
 						$.ajax({
 							url : "<c:url value='/board/commentAjaxDelete'/>"
-									+ "?cmtNo=" + cmtNo
-									+ "?cmtGroupNo=" + cmtGroupNo
-									+ "?cmtStep=" + cmtStep,
+									+ "?cmtNo=" + cmtNo,
 							type : 'GET',
-							async : false,
 							success : function(res) {
 								var message = "댓글 삭제 성공";
 
@@ -144,10 +138,10 @@ button#replyBtAjax{
 				});
 		
 		$('form[name=replyBox] button').click(
-				function(){
+				function(e){
 					
 					var boardNo = "${vo.boardNo}";
-					var memNo = "${memVo.memNo}";
+					var memNo = "${smemVo.memNo}";
 					var cmtContent = $(this).parent().parent().find(
 							$('textarea[name=cmtContent]')).val();
 					var cmtGroupNo = $(this).parent().parent().find($('input[name=cmtGroupNo]')).val();
@@ -311,7 +305,7 @@ button#replyBtAjax{
 								<c:forEach var="map" items="${list }">
 										<c:if test="${map['CMT_STEP']>0 }">
 											<c:forEach begin="1" end="${map['CMT_STEP'] }">
-												<li class="comment" style="margin-left: 60px;">
+												<li class="comment" style="margin-left: 30px;">
 											</c:forEach>
 											
 										</c:if>
@@ -399,9 +393,9 @@ button#replyBtAjax{
 																<button class="btn btn-blue btn-effect pull-right"
 																	id="replyBtAjax" type="button">답글 쓰기</button>
 															</div>
-															<input type="hidden" name="cmtGroupNo" value="${map['CMT_GROUPNO'] }">
-															<input type="hidden" name="cmtStep" value="${map['CMT_STEP'] }">
-															<input type="hidden" name="cmtSortNo" value="${map['CMT_SORTNO'] }">
+															<input  style="margin-left: 10px;" type="text" name="cmtGroupNo" value="${map['CMT_GROUPNO'] }">
+															<input type="text" name="cmtStep" value="${map['CMT_STEP'] }">
+															<input type="text" name="cmtSortNo" value="${map['CMT_SORTNO'] }">
 														</form>
 														<!-- End of Comment Submit Form -->
 													</div>
