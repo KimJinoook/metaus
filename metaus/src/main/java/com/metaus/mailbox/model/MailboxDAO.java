@@ -12,8 +12,13 @@ public interface MailboxDAO {
 	int insertRecipient(RecipientVO vo);
 	List<Map<String, Object>> selectMsgViewBySender(String msgaddAdser);
 	List<Map<String, Object>> selectMsgViewByRecipient(String msgaddAdser);
-	Map<String, Object> selectByMsgNo(int msgNo);
+	Map<String, Object> selectByMsgAddNo(int msgaddNo);
 	int insertMailboxAtc(MailboxAtcVO mailboxAtcVo);
 	int findReceivedNo(String msgaddAdsee);
 	int findSentNo(String msgaddAdser);
+	int findStarNo(String msgaddAdser);
+	int findTemporaryNo(String msgaddAdser);
+	int findSpamNo(String msgaddAdser);
+	int findTrashNo(String msgaddAdser);
+	int updateStarFlag(Map<String, String> map);
 }

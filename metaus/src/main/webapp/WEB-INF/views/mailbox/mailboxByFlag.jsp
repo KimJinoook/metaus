@@ -2,6 +2,40 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../layout/sidebar.jsp" %>
 
+<script type=text/javascript>
+		$(function(){
+			$('.star').click(function(){
+				var msgaddNo = $(this).closest('tr').find('input[type=hidden]').val();
+				//console.log(msgNo);
+				
+				if($(this).hasClass('fa-star')){
+					//console.log("색칠된 별");
+					var emptyFlag = false;
+					$(this).removeClass('fa-star').addClass('fa-star-o');
+				}else{
+					//console.log("빈 별");
+					var emptyFlag = true;
+					$(this).removeClass('fa-star-o').addClass('fa-star');
+				}
+				
+				$.ajax({
+					url: "<c:url value='/mailbox/starFlagUpdate'/>",
+					type: "GET",
+					data: {
+						msgaddNo : msgaddNo,
+						emptyFlag : emptyFlag
+					},
+					success: function(res){
+						//alert(res);
+						$('.starNo').text(res);
+					},
+					error: function(xhr, status, error){
+						alert('error:' + error);
+					}
+				});//ajax
+			})
+		});
+</script>
       <!-- Right side column. Contains the navbar and content of the page -->
       <div class="content-wrapper">
         <!-- Content Header (Page header) -->
@@ -29,10 +63,10 @@
                   <ul class="nav nav-pills nav-stacked">
                     <li><a href="<c:url value='/mailbox/receivedMail'/>"><i class="fa fa-inbox"></i> 받은 메세지 <span class="label label-primary pull-right">${receivedNo }</span></a></li>
                     <li><a href="<c:url value='/mailbox/sentMail'/>"><i class="fa fa-envelope-o"></i> 보낸 메세지 <span class="label label-success pull-right">${sentNo }</span></a></li>
-                    <li><a href="#"><i class="fa fa-star"></i> 별표 메세지</a></li>
-                    <li><a href="#"><i class="fa fa-file-text-o"></i> 임시보관함</a></li>
-                    <li><a href="#"><i class="fa fa-filter"></i> 스팸함 <span class="label label-waring pull-right">65</span></a></li>
-                    <li><a href="#"><i class="fa fa-trash-o"></i> 휴지통</a></li>
+                    <li><a href="#"><i class="fa fa-star"></i> 별표 메세지 <span class="label label-waring pull-right starNo">${starNo }</span></a></li>
+                    <li><a href="#"><i class="fa fa-file-text-o"></i> 임시보관함 <span class="label label-info pull-right">${temporaryNo }</span></a></li>
+                    <li><a href="#"><i class="fa fa-filter"></i> 스팸함 <span class="label label-danger pull-right">${spamNo }</span></a></li>
+                    <li><a href="#"><i class="fa fa-trash-o"></i> 휴지통 <span class="label label-danger pull-right">${trashNo }</span></a></li>
                   </ul>
                 </div><!-- /.box-body -->
               </div><!-- /. box -->
@@ -81,10 +115,19 @@
                       	<!-- 메세지 목록 반복 시작 -->
                       	<c:forEach var="map" items="${list }">
 	                        <tr>
+	                          <input type="hidden" value="${map['MSGADD_NO']}">
 	                          <td><input type="checkbox" /></td>
-	                          <td class="mailbox-star"><a href="#"><i class="fa fa-star text-yellow"></i></a></td>
+	                          <td class="mailbox-star">
+	                          	<a href="#">
+	                          		<c:if test="${map['STAR_FLAG'] eq 'Y'}">
+	                          			<i class="fa fa-star text-yellow star"></i>
+	                          		</c:if>
+	                          		<c:if test="${map['STAR_FLAG'] eq 'N'}">
+	                          			<i class="fa fa-star-o text-yellow star"></i>
+	                          		</c:if>
+	                          	</a></td>
 	                          <td class="mailbox-name">
-		                          <a href='<c:url value="/mailbox/mailDetail?msgNo=${map['MSG_NO']}" />'>
+		                          <a href='<c:url value="/mailbox/mailDetail?msgaddNo=${map['MSGADD_NO']}" />'>
 			                          <c:choose>
 										  <c:when test="${flag eq 'received'}">
 										  	<!-- 받은 메세지일 때 -->
@@ -125,7 +168,7 @@
                         <!-- 메세지 목록 반복 끝 -->
                         <tr>
                           <td><input type="checkbox" /></td>
-                          <td class="mailbox-star"><a href="#"><i class="fa fa-star-o text-yellow"></i></a></td>
+                          <td class="mailbox-star"><a href="#"><i class="fa fa-star-o text-yellow star"></i></a></td>
                           <td class="mailbox-name"><a href="read-mail.html">Alexander Pierce</a></td>
                           <td class="mailbox-subject"><b>첨부파일 있을 때</b> - Trying to find a solution to this problem...</td>
                           <td class="mailbox-attachment"><i class="fa fa-paperclip"></i></td>
@@ -166,7 +209,7 @@
         <strong>Copyright &copy; 2014-2015 <a href="http://almsaeedstudio.com">Almsaeed Studio</a>.</strong> All rights reserved.
       </footer>
     </div><!-- ./wrapper -->
-	
+    
 	<%@ include file="../layout/sidebar_function_bottom.jsp" %>
   </body>
 </html>

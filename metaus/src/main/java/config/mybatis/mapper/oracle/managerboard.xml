@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.metaus.admin.model.ManagerBoardDAO">
+	<select id="selectBoardByBtypeNo" resultType="ManagerBoardVO" parameterType="int">
+		select B.*,(select mem_id from fp_mem A where A.mem_no = B.mem_no) mem_id
+		from fp_board B where btype_no = #{btypeNo}
+	</select>
+	
+	<select id="selectBtypeByBtypeNo" resultType="ManagerBoardVO" parameterType="int">
+		select * from fp_boardtype where btype_no = #{btypeNo}
+	</select>
+	
+	<select id="selectBoardByBoardNo" resultType="ManagerBoardVO" parameterType="int">
+		select * from fp_board where board_no = #{boardNo}
+	</select>
+	
+	
+	<select id="selectReport" resultType="ManagerBoardVO">
+		select B.*,(select mem_id from fp_mem A where A.mem_no = B.mem_no) mem_id,
+		(select report_no from fp_report C where B.board_no = C.board_no) report_no,
+		(select report_date from fp_report D where B.board_no = D.board_no) report_date
+		from fp_board B where board_no in (select board_no from fp_report)
+	</select>
+	
+	
+	
+	<insert id="insertBoard" parameterType="ManagerBoardVO">
+		<selectKey resultType="int" keyProperty="boardNo"
+			order="BEFORE">
+			select fp_board_seq.nextval from dual
+		</selectKey>
+		insert into fp_board(board_no, mem_no, board_title, board_content,
+		btype_no)
+		values(#{boardNo}, 0, #{boardTitle}, #{boardContent},
+		#{btypeNo})
+	</insert>
+	
+	
+	
+	<update id="updateBoard" parameterType="ManagerBoardVO">
+		update fp_board
+		set board_title=#{boardTitle}, board_content = #{boardContent}, btype_no = #{btypeNo}
+		where board_no=#{boardNo}
+	</update>
+	
+	<update id="deleteBoard" parameterType="int">
+		update fp_board
+		set board_delFlag='Y'
+		where board_no=#{boardNo}
+	</update>
+	
+	
+</mapper>
