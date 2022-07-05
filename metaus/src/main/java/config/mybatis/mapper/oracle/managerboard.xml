@@ -12,9 +12,30 @@
 		select * from fp_boardtype where btype_no = #{btypeNo}
 	</select>
 	
+	<select id="selectBoardByBoardNo" resultType="ManagerBoardVO" parameterType="int">
+		select * from fp_board where board_no = #{boardNo}
+	</select>
 	
 	
 	
+	<insert id="insertBoard" parameterType="ManagerBoardVO">
+		<selectKey resultType="int" keyProperty="boardNo"
+			order="BEFORE">
+			select fp_board_seq.nextval from dual
+		</selectKey>
+		insert into fp_board(board_no, mem_no, board_title, board_content,
+		btype_no)
+		values(#{boardNo}, 0, #{boardTitle}, #{boardContent},
+		#{btypeNo})
+	</insert>
+	
+	
+	
+	<update id="updateBoard" parameterType="ManagerBoardVO">
+		update fp_board
+		set board_title=#{boardTitle}, board_content = #{boardContent}, btype_no = #{btypeNo}
+		where board_no=#{boardNo}
+	</update>
 	
 	<update id="deleteBoard" parameterType="int">
 		update fp_board

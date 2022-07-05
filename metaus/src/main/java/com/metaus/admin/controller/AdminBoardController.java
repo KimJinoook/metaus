@@ -8,6 +8,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -61,6 +63,10 @@ public class AdminBoardController {
 			return "redirect:/admin/board/memberBoardList?btypeNo=6";
 		}else if(btypeNo==3) {
 			return "redirect:/admin/board/memberBoardList?btypeNo=3";
+		}else if(btypeNo==1) {
+			return "redirect:/admin/board/managerBoardList?btypeNo=1";
+		}else if(btypeNo==2) {
+			return "redirect:/admin/board/managerBoardList?btypeNo=2";
 		}else {
 			return "redirect:/admin/";
 		}
@@ -79,8 +85,37 @@ public class AdminBoardController {
 	}
 	
 	@GetMapping("/managerBoardWrite")
-	public void managerBoardwrite() {
+	public void managerBoardwrite_get() {
 		logger.info("관리자 글 작성 페이지");
 	}
 	
+	@PostMapping("/managerBoardWrite")
+	public String managerBoardwrite_post(@ModelAttribute ManagerBoardVO vo) {
+		logger.info("관리자 글 작성 포스트 vo={}",vo);
+		
+		int cnt = managerBoardService.insertBoard(vo);
+		logger.info("관리자 글 작성 결과 cnt={}",cnt);
+		
+		int btypeNo = vo.getBtypeNo();
+		return "redirect:/admin/board/managerBoardList?btypeNo="+btypeNo;
+	}
+	
+	@GetMapping("/managerBoardEdit")
+	public void managerBoardEdit_get(int boardNo, Model model) {
+		logger.info("관리자 글 수정 페이지 boardNo={}",boardNo);
+		
+		ManagerBoardVO vo = managerBoardService.selectBoardByBoardNo(boardNo);
+		model.addAttribute("vo",vo);
+	}
+	
+	@PostMapping("/managerBoardEdit")
+	public String managerBoardEdit_post(@ModelAttribute ManagerBoardVO vo) {
+		logger.info("관리자 글 수정 포스트 vo={}",vo);
+		
+		int cnt = managerBoardService.updateBoard(vo);
+		logger.info("관리자 글 수정 결과 cnt={}",cnt);
+		
+		int btypeNo = vo.getBtypeNo();
+		return "redirect:/admin/board/managerBoardList?btypeNo="+btypeNo;
+	}
 }

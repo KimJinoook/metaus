@@ -24,10 +24,7 @@ function delBoard(no,typeno){
 	}
 }
 
-function openBoard(no,typeno){
-	var url = "<c:url value='/board/readCountUp'/>"+"?boardNo="+no+"&btypeNo="+typeno;
-	window.open(url,"metaus");
-}
+
 
 
 function exportExcel(){ 
@@ -148,9 +145,9 @@ function s2ab(s) {
                                             			<i class="fas fa-trash"></i>
                                         			</span>
                                     			</a>	
-                                    			<a href="javascript:openBoard(${vo.boardNo },${btype.btypeNo })" class="btn btn-primary btn-icon-split btn-sm" style="margin:0px;height:27px">
+                                    			<a href="<c:url value='/admin/board/managerBoardEdit?boardNo=${vo.boardNo }'/>" class="btn btn-primary btn-icon-split btn-sm" style="margin:0px;height:27px">
                                         			<span class="icon text-white" style="margin:0px">
-                                            			<i class="fas fa-arrow-pen"></i>
+                                            			<i class="fas fa-pen"></i>
                                         			</span>
                                     			</a>
                                     		</td>

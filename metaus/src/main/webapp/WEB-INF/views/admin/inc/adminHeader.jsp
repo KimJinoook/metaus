@@ -34,7 +34,12 @@
     <!-- Core plugin JavaScript-->
     <script src="<c:url value='/admin/vendor/jquery-easing/jquery.easing.min.js'/>"></script>
 
-    
+<style>
+
+.ck-editor__editable {
+    min-height: 400px;
+}
+</style>
    
 
 </head>
@@ -139,7 +144,7 @@
                 <div id="collapseMBoard" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="<c:url value='/admin/board/managerBoardList?btypeNo=1'/>">게시글 조회</a>
-                        <a class="collapse-item" href="register.html">게시글 등록</a>
+                        <a class="collapse-item" href="<c:url value='/admin/board/managerBoardWrite'/>">게시글 등록</a>
                     </div>
                 </div>
             </li>

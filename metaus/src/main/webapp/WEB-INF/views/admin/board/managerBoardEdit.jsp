@@ -17,6 +17,15 @@
 
 <script>
 $(function(){
+	
+	var btno = $('#btypeNo').val();
+	
+	if(btno==1){
+		$('#navbarDropdown').html('공지사항');
+	}else if(btno==2){
+		$('#navbarDropdown').html('FAQ');
+	}
+	
 	$('#writeBtn').click(function(){
 		if($('#boardTitle').val().length < 1){
 			alert('제목을 입력하세요');
@@ -49,12 +58,12 @@ function selectF(){
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                    <h1 class="h3 mb-2 text-gray-800">글 등록</h1>
+                    <h1 class="h3 mb-2 text-gray-800">글 수정</h1>
                     </div>
                     
                 
                     
-						<form method="post" action="<c:url value='/admin/board/managerBoardWrite'/>" id="frm-write">
+						<form method="post" action="<c:url value='/admin/board/managerBoardEdit'/>" id="frm-write">
                     	<div class="row">
 
 	                        <div class="col-lg-8">
@@ -67,7 +76,7 @@ function selectF(){
 	                                <div class="card-body">
 		                                
 	                                    <input type="text" class="form-control bg-white border-1 small border-left-info" placeholder="글 제목을 입력하세요..."
-                                		aria-label="Search" aria-describedby="basic-addon2" name="boardTitle" id="boardTitle">
+                                		aria-label="Search" aria-describedby="basic-addon2" name="boardTitle" id="boardTitle" value="${vo.boardTitle }">
 	                                   
 	                                </div>
 	                            </div>
@@ -81,7 +90,7 @@ function selectF(){
 	                                
 		                                
 	                                    <textarea class="form-control bg-white border-1 small border-left-info" placeholder="글 내용을 입력하세요..."
-                                		aria-label="Search" aria-describedby="basic-addon2" rows="18" name="boardContent" id="boardContent"></textarea>
+                                		aria-label="Search" aria-describedby="basic-addon2" rows="18" name="boardContent" id="boardContent">${vo.boardContent }</textarea>
                                 		
                                 		
 									    <script>
@@ -255,7 +264,8 @@ function selectF(){
 	                                            </li>
 	                                        </ul>
 	                                    </nav>
-	                                    <input type="hidden" name="btypeNo" id="btypeNo">
+	                                    <input type="hidden" name="btypeNo" id="btypeNo" value="${vo.btypeNo }">
+	                                    <input type="hidden" name="boardNo" id="boardNo" value="${vo.boardNo }">
                                         
                                         
                                         <button class="btn btn-primary btn-lg btn-block mt-4" type="button" id="writeBtn">

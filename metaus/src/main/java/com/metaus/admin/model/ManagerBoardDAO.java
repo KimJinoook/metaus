@@ -10,4 +10,7 @@ public interface ManagerBoardDAO {
 	List<ManagerBoardVO> selectBoardByBtypeNo(int btypeNo);
 	ManagerBoardVO selectBtypeByBtypeNo(int btypeNo);
 	int deleteBoard(int boardNo);
+	int insertBoard(ManagerBoardVO vo);
+	ManagerBoardVO selectBoardByBoardNo(int boardNo);
+	int updateBoard(ManagerBoardVO vo);
 }

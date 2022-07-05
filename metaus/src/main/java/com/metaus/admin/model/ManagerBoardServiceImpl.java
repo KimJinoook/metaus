@@ -22,6 +22,17 @@ public class ManagerBoardServiceImpl implements ManagerBoardService {
 	public int deleteBoard(int boardNo) {
 		return managerBoardDao.deleteBoard(boardNo);
 	}
+	public int insertBoard(ManagerBoardVO vo) {
+		return managerBoardDao.insertBoard(vo);
+	}
+	
+	public ManagerBoardVO selectBoardByBoardNo(int boardNo) {
+		return managerBoardDao.selectBoardByBoardNo(boardNo);
+	}
+	
+	public int updateBoard(ManagerBoardVO vo) {
+		return managerBoardDao.updateBoard(vo);
+	}
 	
 	
 }
