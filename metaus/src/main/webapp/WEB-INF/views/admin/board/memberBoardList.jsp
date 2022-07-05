@@ -16,21 +16,19 @@
 
 <script>
 
-function memLock(num,cnt){
-	var con = confirm('해당 회원을 차단 하시겠습니까?');
+function delBoard(no,typeno){
+	var con = confirm('해당 게시글을 삭제 하시겠습니까?');
 	
 	if(con){
-		location.href="<c:url value='/manage/memberLock?memNo='/>"+num+"&memWarncnt="+cnt;
+		location.href="<c:url value='/admin/board/memberBoardDelete?boardNo='/>"+no+"&btypeNo="+typeno;
 	}
 }
 
-function memUnLock(num){
-	var con = confirm('해당 회원을 차단해제 하시겠습니까?');
-	
-	if(con){
-		location.href="<c:url value='/manage/memberUnlock?memNo='/>"+num;
-	}
+function openBoard(no,typeno){
+	var url = "<c:url value='/board/readCountUp'/>"+"?boardNo="+no+"&btypeNo="+typeno;
+	window.open(url,"metaus");
 }
+
 
 function exportExcel(){ 
   // step 1. workbook 생성
@@ -51,10 +49,10 @@ function exportExcel(){
 
 var excelHandler = {
     getExcelFileName : function(){
-        return '일반회원조회.xlsx';	//파일명
+        return '게시판 조회 결과.xlsx';	//파일명
     },
     getSheetName : function(){
-        return '일반회원';	//시트명
+        return '게시판';	//시트명
     },
     getExcelData : function(){
         return document.getElementById('dataTable'); 	//TABLE id
@@ -76,15 +74,32 @@ function s2ab(s) {
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                    <h1 class="h3 mb-2 text-gray-800">일반 회원 조회</h1>
+                    <h1 class="h3 mb-2 text-gray-800">사용자 게시판 조회</h1>
                     <a href="javascript:exportExcel()" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" id="excelDownload"><i
                                 class="fas fa-download fa-sm text-white-50"></i> 엑셀 다운로드</a>
                     </div>
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
-                        <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">일반 회원 조회 결과
-                            </h6>
+                        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                            <h6 class="m-0 font-weight-bold text-primary">${btype.btypeName } 조회 결과</h6>
+                            
+                                        <ul class="navbar-nav ml-auto">
+                                            <li class="nav-item dropdown">
+                                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+                                                    role="button" data-toggle="dropdown" aria-haspopup="true"
+                                                    aria-expanded="false">
+                                                    ${btype.btypeName }
+                                                </a>
+                                                <div class="dropdown-menu dropdown-menu-right animated--fade-in"
+                                                    aria-labelledby="navbarDropdown">
+                                                    <a class="dropdown-item" href="<c:url value='/admin/board/memberBoardList?btypeNo=8'/>">자유게시판</a>
+                                                    <a class="dropdown-item" href="<c:url value='/admin/board/memberBoardList?btypeNo=5'/>">질문게시판</a>
+                                                    <a class="dropdown-item" href="<c:url value='/admin/board/memberBoardList?btypeNo=6'/>">공유게시판</a>
+                                                    <a class="dropdown-item" href="<c:url value='/admin/board/memberBoardList?btypeNo=3'/>">Q&A</a>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                   
                         </div>
                         
                         <div class="card-body">
@@ -94,71 +109,54 @@ function s2ab(s) {
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
-                                           <th>이름</th>
+                                            <th>글번호</th>
                                             <th>아이디</th>
-                                            <th>닉네임</th>
-                                            <th>전화번호</th>
-                                            <th>주소</th>
-                                            <th>가입날짜</th>
-                                            <th>경고 수</th>
+                                            <th>제목</th>
+                                            <th>작성일</th>
+                                            <th>삭제여부</th>
                                             <th>관리</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
-                                            <th>이름</th>
+                                            <th>글번호</th>
                                             <th>아이디</th>
-                                            <th>닉네임</th>
-                                            <th>전화번호</th>
-                                            <th>주소</th>
-                                            <th>가입날짜</th>
-                                            <th>경고 수</th>                                            
+                                            <th>제목</th>
+                                            <th>작성일</th>
+                                            <th>삭제여부</th>
                                             <th>관리</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
-                                    <c:forEach var="mvo" items="${list}" begin="1">
-                                        <c:if test="${mvo.memCutdate.getTime() > today.getTime() }">
+                                    <c:forEach var="vo" items="${list}">
+                                        <c:if test="${vo.boardDelFlag eq 'Y' }">
                                         <tr style="color:red">
-                                            <td>${mvo.memName }</td>
-                                            <td>${mvo.memId }</td>
-                                            <td>${mvo.memNick }</td>
-                                            <td>${mvo.memTel }</td>
-                                            <td>${mvo.memAdd }</td>
-                                            <td>${mvo.memJoindate }</td>
-                                            <td>차단</td>
+                                            <th>${vo.boardNo }</th>
+                                            <th>${vo.memId }</th>
+                                            <th>${vo.boardTitle }</th>
+                                            <th>${vo.boardRegdate }</th>
+                                            <th>삭제</th>
                                             <td style="padding:10px">
-                                            	<a href="javascript:memUnLock(${mvo.memNo })" class="btn btn-success btn-icon-split btn-sm" style="margin:0px;height:27px">
-                                        			<span class="icon text-white" style="margin:0px">
-                                            			<i class="fas fa-unlock"></i>
-                                        			</span>
-                                    			</a>	
-                                    			<a href="#" class="btn btn-primary btn-icon-split btn-sm" style="margin:0px;height:27px">
-                                        			<span class="icon text-white" style="margin:0px">
-                                            			<i class="fas fa-envelope"></i>
-                                        			</span>
-                                    			</a>
+                                            	
                                     		</td>
                                         </tr>
                                         </c:if>
-                                        <c:if test="${(mvo.memCutdate.getTime() < today.getTime()) || mvo.memCutdate ==null }">
+                                        <c:if test="${vo.boardDelFlag ne 'Y'}">
                                         <tr>
-                                            <td>${mvo.memName }</td>
-                                            <td>${mvo.memId }</td>
-                                            <td>${mvo.memNick }</td>
-                                            <td>${mvo.memTel }</td>
-                                            <td>${mvo.memAdd }</td>
-                                            <td>${mvo.memJoindate }</td>
-                                            <td>${mvo.memWarncnt }</td>
+                                            <th>${vo.boardNo }</th>
+                                            <th>${vo.memId }</th>
+                                            <th>${vo.boardTitle }</th>
+                                            <th>${vo.boardRegdate }</th>
+                                            <th>&nbsp;</th>
                                             <td style="padding:10px">
-                                            	<a href="javascript:memLock(${mvo.memNo },${mvo.memWarncnt })" class="btn btn-danger btn-icon-split btn-sm" style="margin:0px;height:27px">
+                                            	<a href="javascript:delBoard(${vo.boardNo },${btype.btypeNo })" class="btn btn-danger btn-icon-split btn-sm" style="margin:0px;height:27px">
                                         			<span class="icon text-white" style="margin:0px">
-                                            			<i class="fas fa-lock"></i>
+                                            			<i class="fas fa-trash"></i>
                                         			</span>
                                     			</a>	
-                                    			<a href="#" class="btn btn-primary btn-icon-split btn-sm" style="margin:0px;height:27px">
+                                    			<a href="javascript:openBoard(${vo.boardNo },${btype.btypeNo })" class="btn btn-primary btn-icon-split btn-sm" style="margin:0px;height:27px">
                                         			<span class="icon text-white" style="margin:0px">
-                                            			<i class="fas fa-envelope"></i>
+                                            			<i class="fas fa-arrow-right"></i>
                                         			</span>
                                     			</a>
                                     		</td>

@@ -1454,6 +1454,10 @@ nocache;
 
 
 select * from fp_com;
+
+insert into fp_mem
+values(0,'관리자','admin','admin','관리자',null,null,null,null,null,null,null,null,null,null,null,null,null,null);
+
 insert into fp_mem
 values(fp_mem_seq.nextval,'테스터','test@naver.com','1234','닉네임1','941215','01030843045','15151','서울시영등포구시흥대로','상세주소','프사경로',sysdate,null,null,null,null,null,null,null);
 

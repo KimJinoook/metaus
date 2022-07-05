@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.metaus.admin.model.ManagerBoardDAO">
+	<select id="selectBoardByBtypeNo" resultType="ManagerBoardVO" parameterType="int">
+		select B.*,(select mem_id from fp_mem A where A.mem_no = B.mem_no) mem_id
+		from fp_board B where btype_no = #{btypeNo}
+	</select>
+	
+	<select id="selectBtypeByBtypeNo" resultType="ManagerBoardVO" parameterType="int">
+		select * from fp_boardtype where btype_no = #{btypeNo}
+	</select>
+	
+	
+	
+	
+	
+	<update id="deleteBoard" parameterType="int">
+		update fp_board
+		set board_delFlag='Y'
+		where board_no=#{boardNo}
+	</update>
+	
+	
+</mapper>
