@@ -1586,13 +1586,36 @@ increment by 1
 start with 1
 nocache;
 
---msgView
+--뷰 msgView
 create or replace view msgView
 as
-select a.*, b.msgadd_adsee, b.msgadd_date
+select a.*, b.msgadd_no, b.msgadd_adsee, b.msgadd_date
 , b.star_flag, b.temporary_flag, b.spam_flag, b.trash_flag
 from fp_msg a join fp_msgadd b
 on a.msg_no=b.msg_no;
+
+--프로시져 updateStarFlag
+create or replace procedure updateStarFlag
+(
+    p_msgadd_adsee fp_msgadd.msgadd_adsee%type,
+    p_empty_flag varchar2,
+    p_msgadd_no fp_msgadd.msgadd_no%type
+)
+is
+begin
+    --비어있는 별을 눌렀으면
+    if p_empty_flag='true' then
+        --star_flag 'Y'로 업데이트
+        update fp_msgadd
+        set star_flag='Y'
+        where msgadd_no=p_msgadd_no;
+    else --색칠된 별을 눌렀으면
+        --star_flag 'N'으로 업데이트
+        update fp_msgadd
+        set star_flag='N'
+        where msgadd_no=p_msgadd_no;
+    end if;
+end;
 
 select * from fp_com;
 insert into fp_mem
