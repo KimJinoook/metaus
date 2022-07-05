@@ -13,6 +13,12 @@
 	function upfileClick(){
 		$('#inputPic').click();
 	}
+	$(function(){
+		$('#inputPic').change(function(){
+			$('#filename').html($('#inputPic').val());			
+		});
+		
+	});
 </script>
 
 <!-- Begin Page Content -->
@@ -42,7 +48,8 @@
 	                                    
 	                                    </div>
 	                                    <div class="text-center">
-	                                    	JPG, PNG 파일 업로드
+	                                    	JPG, PNG 파일 업로드<br>
+	                                    	<span id="filename">&nbsp;</span>
 	                                    </div>
 	                                    <br>
 	                                    <div class="text-center">
@@ -72,40 +79,49 @@
 			                                        <div class="form-group">
 			                                        	<span>아이디</span>
 			                                            <input type="text" class="form-control form-control-user"
-			                                                aria-describedby="emailHelp" value="${managerVo.managerId }"
+			                                                value="${managerVo.managerId }"
 			                                                placeholder="Id" name="managerId" readonly="readonly">
 			                                                
 			                                        </div>
 			                                        <br/>
 			                                        <div class="form-group">
+			                                        	<span>비밀번호</span>
 			                                            <input type="password" class="form-control form-control-user"
 			                                                id="exampleInputPassword" placeholder="Password" name="managerPwd">
 			                                        </div>
 			                                        <br/>
-			                                        <button type="button" class="btn btn-primary btn-user btn-block" id="adminLoginBtn">Login</button>
-			                                        <br/><br/><br/>
+			                                        <div class="form-group">
+			                                        	<span>비밀번호 확인</span>
+			                                            <input type="password" class="form-control form-control-user"
+			                                                id="exampleInputPassword" placeholder="Password" name="managerPwdChk">
+			                                        </div>
+			                                        
+			                                        <br/>
 			                               
 		                                   		</div>
 		                                		<div class="col-md-6">
 	                             
 			                                        <div class="form-group">
+			                                        	<span>이름</span>
 			                                            <input type="text" class="form-control form-control-user"
-			                                                id="exampleInputEmail" aria-describedby="emailHelp"
-			                                                placeholder="Id" name="managerId">
+			                                            	value="${managerVo.managerName }"
+			                                                placeholder="name" name="managerName">
 			                                                
 			                                        </div>
 			                                        <br/>
 			                                        <div class="form-group">
-			                                            <input type="password" class="form-control form-control-user"
-			                                                id="exampleInputPassword" placeholder="Password" name="managerPwd">
+			                                        	<span>전화번호</span>
+			                                            <input type="tel" class="form-control form-control-user"
+			                                            	value="${managerVo.managerTel }"
+			                                                placeholder="tel" name="managerTel">
 			                                        </div>
 			                                        <br/>
-			                                        <button type="button" class="btn btn-primary btn-user btn-block" id="adminLoginBtn">Login</button>
-			                                        <br/><br/><br/>
+			                                        
+			                                        
 			                               
 		                                   		</div>
 		                                		<div class="col-lg-2">
-			                                        <button type="button" class="btn btn-primary btn-user btn-block" id="adminLoginBtn">Login</button>
+			                                        <button type="button" class="btn btn-primary btn-user btn-block" id="adminLoginBtn">저장</button>
 			                               
 		                                   		</div>
 	                                   		</div>

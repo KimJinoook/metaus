@@ -856,7 +856,9 @@ CREATE TABLE fp_manager (
 	manager_id VARCHAR2(50), /* 아이디 */
 	manager_name VARCHAR2(20), /* 이름 */
 	manager_pwd VARCHAR2(50), /* 비밀번호 */
-	manager_regdate DATE /* 등록일 */
+	manager_regdate DATE, /* 등록일 */
+    manager_pic CLOB,
+    manager_tel VARCHAR2(30)
 );
 
 ALTER TABLE fp_manager
@@ -1521,7 +1523,7 @@ insert into fp_port
 values(FP_PORT_SEQ.nextval,2,'1','1.zip','1','1');
 
 insert into fp_manager
-values(fp_manager_seq.nextval,'test','김진욱','1234',sysdate);
+values(fp_manager_seq.nextval,'test','김진욱','1234',sysdate,'1.jpg','01030843045');
 
 commit;
 select * from fp_mem where mem_id like 'kimjin0132%';

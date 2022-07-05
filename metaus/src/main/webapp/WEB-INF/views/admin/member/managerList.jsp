@@ -85,6 +85,7 @@ function managerDelete(num){
                                             <th>번호</th>
                                             <th>아이디</th>
                                             <th>이름</th>                                          
+                                            <th>전화번호</th>
                                             <th>등록일</th>
                                             <th>관리</th>                                           
                                         </tr>
@@ -95,6 +96,7 @@ function managerDelete(num){
                                             <td>${mavo.managerNo }</td>
                                             <td>${mavo.managerId }</td>
                                             <td>${mavo.managerName }</td>
+                                            <td>${mavo.managerTel }</td>
                                             <td>${mavo.managerRegdate }</td>
                                             <td style="padding:10px">	
                                     			<a href="javascript:managerDelete(${mavo.managerNo })" class="btn btn-danger btn-icon-split btn-sm" style="margin:0px;height:27px">
@@ -112,6 +114,7 @@ function managerDelete(num){
                                             <th>번호</th>
                                             <th>아이디</th>
                                             <th>이름</th>                                          
+                                            <th>전화번호</th>
                                             <th>등록일</th>
                                             <th>관리</th>
                                         </tr>
