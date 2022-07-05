@@ -28,7 +28,7 @@
                     		width: 240px; 
                     		height:240px; 
                     		border-radius:100%;
-                    	"><img src="<c:url value='/images/createrProfile/${memVo.memPic}'/>" class="img-responsive" alt="" style="height:100%;width:100%;" onerror="this.onerror=null; this.src='<c:url value='/images/createrProfile/user.png'/>'">
+                    	"><img src="<c:url value='/mem_profile/${memVo.memPic}'/>" class="img-responsive" alt="" style="height:100%;width:100%;" onerror="this.onerror=null; this.src='<c:url value='/images/createrProfile/user.png'/>'">
                     	</div>
                     </div>
 

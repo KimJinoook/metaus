@@ -87,6 +87,20 @@ public class AdminMemberController {
 		
 		
 	}
+	
+	@PostMapping("/managerEdit")
+	public String managerEdit_post() {
+		logger.info("");
+		
+		
+		
+		return "redirect:/admin/member/managerEdit";
+	}
+	
+	
+	
+	
+	
 	@GetMapping("/register")
 	public void get_manager() {
 		logger.info("관리자 등록 페이지");

@@ -214,6 +214,9 @@ public class FileUploadUtil {
 			}else if(pathFlag==ConstUtil.UPLOAD_PRODUCT_FLAG) {
 				path=ConstUtil.PRODUCT_FILE_UPLOAD_PATH_TEST; //상품모델링 첨부파일
 				
+			}else if(pathFlag==ConstUtil.UPLOAD_MANAGER_PROFILE_FLAG) {
+				path=ConstUtil.MANAGER_FILE_UPLOAD_PATH_TEST; //상품모델링 첨부파일
+				
 			}
 			
 		}else {  //deploy
@@ -237,6 +240,9 @@ public class FileUploadUtil {
 				
 			}else if(pathFlag==ConstUtil.UPLOAD_PRODUCT_FLAG) {
 				path=ConstUtil.PRODUCT_FILE_UPLOAD_PATH; //상품모델링 첨부파일
+				
+			}else if(pathFlag==ConstUtil.UPLOAD_MANAGER_PROFILE_FLAG) {
+				path=ConstUtil.MANAGER_FILE_UPLOAD_PATH; //상품모델링 첨부파일
 				
 			}
 			//실제 물리적인 경로 구하기
