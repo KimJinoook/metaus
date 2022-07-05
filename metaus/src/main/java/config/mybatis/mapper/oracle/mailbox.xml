@@ -55,18 +55,14 @@
 		where msgadd_adsee=#{msgaddAdsee} order by msg_no desc
 	</select>
 	
-	<!-- selectByMsgNo -->
-	<resultMap id="getByMsgNo" type="HashMap">
-		<result property="MSG_NO" column="MSG_NO" />
-		<result property="MSG_TITLE" column="MSG_TITLE" />
-		<result property="MSGADD_ADSER" column="MSGADD_ADSER" />
-		<result property="MSGADD_ADSEE" column="MSGADD_ADSEE" />
+	<!-- selectByMsgAddNo -->
+	<resultMap id="getByMsgAddNo" type="HashMap">
 		<result property="MSG_CONTENT" column="MSG_CONTENT" jdbcType="CLOB" javaType="java.lang.String" />
 	</resultMap>
 	
-	<select id="selectByMsgNo" parameterType="int" resultMap="getByMsgNo">
+	<select id="selectByMsgAddNo" parameterType="int" resultMap="getByMsgAddNo">
 		select * from msgview
-		where msg_no=#{msg_no}
+		where msgadd_no=#{msgadd_no}
 	</select>
 	
 	<insert id="insertMailboxAtc" parameterType="mailboxAtcVo">
@@ -86,4 +82,37 @@
 		select count(*) from msgView
 		where msgadd_adser=#{msgaddAdser}
 	</select>
+	
+	<select id="findStarNo" parameterType="string" resultType="int">
+		select count(*) from msgView
+		where msgadd_adser=#{msgaddAdser} and star_flag='Y'
+	</select>
+	
+	<select id="findTemporaryNo" parameterType="string" resultType="int">
+		select count(*) from msgView
+		where msgadd_adser=#{msgaddAdser} and temporary_flag='Y'
+	</select>
+	
+	<select id="findSpamNo" parameterType="string" resultType="int">
+		select count(*) from msgView
+		where msgadd_adser=#{msgaddAdser} and spam_flag='Y'
+	</select>
+	
+	<select id="findTrashNo" parameterType="string" resultType="int">
+		select count(*) from msgView
+		where msgadd_adser=#{msgaddAdser} and trash_flag='Y'
+	</select>
+
+	<parameterMap type="map" id="mailStarUpdateParam">
+		<parameter property="msgaddAdsee" javaType="string" jdbcType="VARCHAR" 
+			mode="IN"/>
+		<parameter property="emptyFlag" javaType="string" jdbcType="VARCHAR" 
+			mode="IN"/>
+		<parameter property="msgaddNo" javaType="string" jdbcType="VARCHAR" 
+			mode="IN"/>	
+	</parameterMap>
+	
+	<update id="updateStarFlag" parameterMap="mailStarUpdateParam">
+		call updateStarFlag(?,?,?)
+	</update>
 </mapper>

@@ -37,8 +37,8 @@ public class MailboxServiceImpl implements MailboxService{
 	}
 
 	@Override
-	public Map<String, Object> selectByMsgNo(int msgNo) {
-		return mailboxDao.selectByMsgNo(msgNo);
+	public Map<String, Object> selectByMsgAddNo(int msgaddNo) {
+		return mailboxDao.selectByMsgAddNo(msgaddNo);
 	}
 
 	@Override
@@ -54,6 +54,31 @@ public class MailboxServiceImpl implements MailboxService{
 	@Override
 	public int findSentNo(String msgaddAdser) {
 		return mailboxDao.findSentNo(msgaddAdser);
+	}
+
+	@Override
+	public int findStarNo(String msgaddAdser) {
+		return mailboxDao.findStarNo(msgaddAdser);
+	}
+
+	@Override
+	public int findTemporaryNo(String msgaddAdser) {
+		return mailboxDao.findTemporaryNo(msgaddAdser);
+	}
+
+	@Override
+	public int findSpamNo(String msgaddAdser) {
+		return mailboxDao.findSpamNo(msgaddAdser);
+	}
+
+	@Override
+	public int findTrashNo(String msgaddAdser) {
+		return mailboxDao.findSpamNo(msgaddAdser);
+	}
+
+	@Override
+	public int updateStarFlag(Map<String, String> map) {
+		return mailboxDao.updateStarFlag(map);
 	}
 	
 }
