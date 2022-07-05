@@ -137,4 +137,9 @@ public class AdminMemberController {
 		
 		return result;
 	}
+	
+	@GetMapping("/lostAccount")
+	public void get_lostAccount() {
+		logger.info("관리자 계정 찾기 페이지");
+	}
 }
