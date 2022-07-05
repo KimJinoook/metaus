@@ -83,7 +83,7 @@
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="<c:url value='/admin/member/memberList'/>">일반회원 조회</a>
-                        <a class="collapse-item" href="#">차단 회원 관리</a>
+                        <a class="collapse-item" href="<c:url value='/admin/member/cutmemberList'/>">차단 회원 관리</a>
                         <a class="collapse-item" href="#">공지 발송</a>
                     </div>
                 </div>
@@ -115,7 +115,7 @@
                 <div id="collapseManager" class="collapse" aria-labelledby="headingUtilities"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="#">관리자 등록</a>
+                        <a class="collapse-item" href="<c:url value='/admin/member/register'/>">관리자 등록</a>
                         <a class="collapse-item" href="<c:url value='/admin/member/managerList'/>">관리자 조회</a>
                     </div>
                 </div>
@@ -402,12 +402,12 @@
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">${sessionScope.managerName }</span>
                                 <img class="img-profile rounded-circle"
-                                    src="<c:url value='/admin/img/undraw_profile.svg'/>">
+                                    src="<c:url value='/manager_profile/${managerVo.managerPic }'/>" alt="..." onerror="this.onerror=null; this.src='<c:url value='/admin/img/undraw_profile.svg'/>'">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="#">
+                                <a class="dropdown-item" href="<c:url value='/admin/member/managerEdit'/>">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                     사용자정보
                                 </a>

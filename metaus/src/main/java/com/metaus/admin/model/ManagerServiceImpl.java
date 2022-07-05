@@ -55,4 +55,7 @@ public class ManagerServiceImpl implements ManagerService {
 	public List<ManagerVO> selectAll() {
 		return managerDao.selectAll();
 	}
+	public int deleteByManagerNo(int managerNo) {
+		return managerDao.deleteByManagerNo(managerNo);
+	}
 }

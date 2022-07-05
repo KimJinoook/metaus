@@ -71,7 +71,7 @@
                             <!-- Candidate Image -->
                             <div class="col-md-2 col-xs-3">
                                 <div class="candidate-img" >
-                                        <img src="<c:url value='/images/createrProfile/${vo.memPic}'/>" class="img-responsive" alt="" onerror="this.onerror=null; this.src='<c:url value='/images/createrProfile/user.png'/>'">
+                                        <img src="<c:url value='/mem_profile/${vo.memPic}'/>" class="img-responsive" alt="" onerror="this.onerror=null; this.src='<c:url value='/images/createrProfile/user.png'/>'">
                                 </div>
                             </div>
 

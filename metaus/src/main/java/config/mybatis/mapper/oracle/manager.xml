@@ -32,9 +32,9 @@
    		select mem_pw from fp_mem where mem_name=#{memName} and mem_tel = #{memTel} and mem_id = #{memId}
    	</select>
    	
-   	<select id="selectByMemNo" parameterType="int" 
+   	<select id="selectByManagerNo" parameterType="int" 
 		resultType="memberVo">
-      select * from fp_mem where mem_no=#{memNo}
+      select * from fp_manager where manager_no=#{managerNo}
    	</select>
    	
    	<select id="duplicateId" parameterType="String" resultType="int">
@@ -99,7 +99,11 @@
    	<select id="selectAll" resultType="ManagerVO">
    		select * from fp_manager
    	</select>
-	
+   	
+   	<delete id="deleteByManagerNo" parameterType="int">
+   		delete fp_manager
+   		where manager_no = #{managerNo}
+   	</delete>
 </mapper>
 
 

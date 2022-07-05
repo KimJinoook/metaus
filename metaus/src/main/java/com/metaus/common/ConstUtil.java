@@ -18,6 +18,7 @@ public interface ConstUtil {
 	int UPLOAD_PORTFOLIO_FLAG=6; //포트폴리오 첨부파일
 	int UPLOAD_RECRUIT_FLAG=7; //기업 의뢰 첨부파일
 	int UPLOAD_PRODUCT_FLAG=8; //모델링 상품 첨부파일
+	int UPLOAD_MANAGER_PROFILE_FLAG=9; //관리자 프로필 첨부파일
 	
 	
 	//자료실 - 파일 저장 경로 - 게시판
@@ -52,6 +53,10 @@ public interface ConstUtil {
 	//모델링 상품 첨부파일
 	String PRODUCT_FILE_UPLOAD_PATH="product";
 	String PRODUCT_FILE_UPLOAD_PATH_TEST="src/main/resources/static/product";
+
+	//관리자 프로필사진
+	String MANAGER_FILE_UPLOAD_PATH="manager_profile";
+	String MANAGER_FILE_UPLOAD_PATH_TEST="src/main/resources/static/manager_profile";
 		
 		
 	//관리자 페이지 - 상품 등록시 상품 이미지 저장 경로
