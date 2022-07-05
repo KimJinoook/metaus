@@ -118,4 +118,14 @@ public class AdminBoardController {
 		int btypeNo = vo.getBtypeNo();
 		return "redirect:/admin/board/managerBoardList?btypeNo="+btypeNo;
 	}
+	
+	@RequestMapping("/reportList")
+	public void reportList(Model model) {
+		logger.info("신고게시판 조회");
+		
+		List<ManagerBoardVO> list=managerBoardService.selectReport();
+		logger.info("list={}",list);
+		model.addAttribute("list",list);
+		
+	}
 }

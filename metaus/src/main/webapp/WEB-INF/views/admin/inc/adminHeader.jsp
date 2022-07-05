@@ -159,7 +159,7 @@
                 <div id="collapseUBoard" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="<c:url value='/admin/board/memberBoardList'/>">게시글 조회</a>
-                        <a class="collapse-item" href="register.html">신고게시글 조회</a>
+                        <a class="collapse-item" href="<c:url value='/admin/board/reportList'/>">신고게시글 조회</a>
                     </div>
                 </div>
             </li>

@@ -24,4 +24,7 @@ public class ManagerBoardVO {
 	private String btypeReply;
 	
 	private String memId;
+	
+	private int reportNo;
+	private Timestamp reportDate;
 }

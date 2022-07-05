@@ -13,4 +13,5 @@ public interface ManagerBoardDAO {
 	int insertBoard(ManagerBoardVO vo);
 	ManagerBoardVO selectBoardByBoardNo(int boardNo);
 	int updateBoard(ManagerBoardVO vo);
+	List<ManagerBoardVO> selectReport();
 }

@@ -17,6 +17,14 @@
 	</select>
 	
 	
+	<select id="selectReport" resultType="ManagerBoardVO">
+		select B.*,(select mem_id from fp_mem A where A.mem_no = B.mem_no) mem_id,
+		(select report_no from fp_report C where B.board_no = C.board_no) report_no,
+		(select report_date from fp_report D where B.board_no = D.board_no) report_date
+		from fp_board B where board_no in (select board_no from fp_report)
+	</select>
+	
+	
 	
 	<insert id="insertBoard" parameterType="ManagerBoardVO">
 		<selectKey resultType="int" keyProperty="boardNo"

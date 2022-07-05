@@ -34,5 +34,9 @@ public class ManagerBoardServiceImpl implements ManagerBoardService {
 		return managerBoardDao.updateBoard(vo);
 	}
 	
+	public List<ManagerBoardVO> selectReport(){
+		return managerBoardDao.selectReport();
+	}
+	
 	
 }
