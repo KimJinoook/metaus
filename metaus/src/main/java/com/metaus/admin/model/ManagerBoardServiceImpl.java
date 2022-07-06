@@ -42,4 +42,12 @@ public class ManagerBoardServiceImpl implements ManagerBoardService {
 		return managerBoardDao.reportConfirmBoard(boardNo);
 	}
 	
+	public int reportBoard(ManagerBoardVO vo) {
+		return managerBoardDao.reportBoard(vo);
+	}
+	
+	public int selectIsReportByBoardNo(int boardNo) {
+		return managerBoardDao.selectIsReportByBoardNo(boardNo);
+	}
+	
 }

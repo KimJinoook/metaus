@@ -1,6 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="../inc/header.jsp"%>
+<!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+        <!-- Bootstrap icons-->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="<c:url value='/css/styles.css'/>" rel="stylesheet" />
 <!-- =============== Start of Page Header 1 Section =============== -->
     <section class="page-header" style= "margin-top: 150px;">
         <div class="container">
@@ -26,10 +32,34 @@
 
         </div>
     </section>
-<div class="sketchfab-embed-wrapper"> <iframe title="Male Armour -4- Game Ready - Ultra Factory" frameborder="0" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking execution-while-out-of-viewport execution-while-not-rendered web-share src="https://sketchfab.com/models/cd19678c5bb0430fb7e0e0cf0c9a7bbe/embed" style=" width: 47%" height="500px"> </iframe>
-<p style="font-size: 13px; font-weight: normal; margin: 5px; color: #4A4A4A;">
-<a href="https://sketchfab.com/3d-models/male-armour-4-game-ready-ultra-factory-cd19678c5bb0430fb7e0e0cf0c9a7bbe?utm_medium=embed&utm_campaign=share-popup&utm_content=cd19678c5bb0430fb7e0e0cf0c9a7bbe" target="_blank" style="font-weight: bold; color: #1CAAD9;"> Male Armour -4- Game Ready - Ultra Factory </a>
- by <a href="https://sketchfab.com/kaanpirate?utm_medium=embed&utm_campaign=share-popup&utm_content=cd19678c5bb0430fb7e0e0cf0c9a7bbe" target="_blank" style="font-weight: bold; color: #1CAAD9;"> Kaan Tezcan 
- </a> on <a href="https://sketchfab.com?utm_medium=embed&utm_campaign=share-popup&utm_content=cd19678c5bb0430fb7e0e0cf0c9a7bbe" target="_blank" style="font-weight: bold; color: #1CAAD9;">Sketchfab</a></p></div>
-</div>
+<!-- Product section-->
+        <section class="py-5">
+            <div class="container px-4 px-lg-5 my-5">
+                <div class="row gx-4 gx-lg-5 align-items-center">
+                    <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="https://dummyimage.com/600x700/dee2e6/6c757d.jpg" alt="..." /></div>
+                    <div class="col-md-6">
+                        <div class="small mb-1">SKU: BST-498</div>
+                        <h1 class="display-5 fw-bolder">${vo.pdName }</h1>
+                        <div class="fs-5 mb-5">
+                            <span>$40.00</span>
+                        </div>
+                        <p class="lead">Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium at dolorem quidem modi. Nam sequi consequatur obcaecati excepturi alias magni, accusamus eius blanditiis delectus ipsam minima ea iste laborum vero?</p>
+                        <div class="d-flex">
+                            <input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 3rem" />
+                            <button class="btn btn-outline-dark flex-shrink-0" type="button">
+                                <i class="bi-cart-fill me-1"></i>
+                                Add to cart
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Related items section-->
+        <!-- 카테고리별 판매가 가장 많은 상품 include -->
+	   <div id="viewBest">
+	   		<c:import url="/pd/best3">
+	   			<c:param name="pdNo" value="${vo.pdNo}"></c:param>
+	   		</c:import>
+	   </div>
 <%@ include file="../inc/footer.jsp"%>

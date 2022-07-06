@@ -3,15 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%@ include file="../inc/header.jsp"%>
-<style>
-button#ajaxBt{
-	margin-right: 18px;
-}
-button#replyBtAjax{
-	margin-right: 19px;
-}
-</style>
+<%@ include file="../inc/header.jsp" %>
+
 <script type="text/javascript"
 	src="<c:url value='/js/jquery-3.6.0.min.js'/>">
 	
@@ -20,6 +13,26 @@ button#replyBtAjax{
 	function shareFacebook() {
 		window.open('http://www.facebook.com/sharer.php?u=www.naver.com');
 	}
+	
+	function reportBoard(no){
+		$.ajax({
+			url : "<c:url value='/board/report'/>" + "?boardNo="+no,
+			type : 'GET',
+			async : false,
+
+			success : function(res) {
+				if(res==1){
+					alert('이미 신고된 게시글입니다.');
+				}else if(res==2){
+					alert('게시글이 신고되었습니다');
+				}
+			},
+			error : function(xhr, status, error) {
+				alert('error:' + error);
+			}
+		});
+	}
+	
 	$(function() {
 		var bool = true;
 		
@@ -32,6 +45,16 @@ button#replyBtAjax{
 				$(this).parent().parent().parent().find('#replyArea').hide();
 				bool= !bool;
 			}
+		});
+		$('#replyBt2').click(function(){
+			$('#replyBt').click();
+		});
+		
+		$('#cmtDelete2').click(function(){
+			$('#cmtDeleteBt').click();
+		});
+		$('#cmtEditBt2').click(function(){
+			$('#cmtEditBt').click();
 		});
 		
 		
@@ -176,7 +199,7 @@ button#replyBtAjax{
 	});
 </script>
 <!-- =============== Start of Page Header 1 Section =============== -->
-<section class="page-header" style="margin-top: 150px;">
+<section class="page-header" id="find-candidate" style="margin-top:150px">
 	<div class="container">
 
 		<!-- Start of Page Title -->
@@ -220,9 +243,11 @@ button#replyBtAjax{
 							value="${vo.boardRegdate }" pattern="yyyy년MM월dd HH시mm분" />
 						&nbsp; <img src="<c:url value='/images/board/eye.png'/>"
 						style="width: 14px; height: 14.4px;"> ${vo.boardReadcount }</span>
+					<i class="fa fa-bell"></i><a href="javascript:reportBoard(${vo.boardNo })">신고</a>
 				</div>
 			</div>
 			<!-- End of Post Title -->
+			
 			<!-- Post Image -->
 			<c:if test="${!empty AtcVo.bfileFilename }">
 				<div class="post-img" style="height: auto;">

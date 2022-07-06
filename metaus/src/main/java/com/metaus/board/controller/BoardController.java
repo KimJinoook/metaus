@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.metaus.admin.model.ManagerBoardService;
+import com.metaus.admin.model.ManagerBoardVO;
 import com.metaus.board.model.BoardAtcVO;
 import com.metaus.board.model.BoardService;
 import com.metaus.board.model.BoardVO;
@@ -44,6 +46,7 @@ public class BoardController {
 	private final FileUploadUtil fileUploadUtil;
 	private final MemberService memberService;
 	private final CommentService commentService;
+	private final ManagerBoardService managerBoardService;
 
 	@RequestMapping("/notice")
 	public String notice(@ModelAttribute SearchVO searchVo,
@@ -617,6 +620,29 @@ public class BoardController {
 		logger.info("ajax 답글 작성 결과 - cnt={}", cnt);
 
 		return nVo;
+
+	}
+	
+	
+	@ResponseBody
+	@RequestMapping("/report")
+	public int report(int boardNo) {
+		logger.info("ajax 게시글 신고 boardNo={}", boardNo);
+		
+		ManagerBoardVO managerBoardVo = managerBoardService.selectBoardByBoardNo(boardNo);
+		logger.info("ajax 게시글 신고 게시글 정보 managerBoardVo={}", managerBoardVo);
+		
+		int reportCnt = managerBoardService.selectIsReportByBoardNo(boardNo);
+		logger.info("ajax 게시글 신고 - 신고 유무 reportCnt={}", reportCnt);
+		
+		if(reportCnt>0) {
+			return 1;
+		}else {
+			int cnt = managerBoardService.reportBoard(managerBoardVo);
+			logger.info("ajax 게시글 신고 - 신고결과 cnt={}", cnt);
+			return 2;
+			
+		}
 
 	}
 }

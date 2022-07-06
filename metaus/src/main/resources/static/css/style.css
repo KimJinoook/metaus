@@ -6946,3 +6946,8 @@ nav.cateMenu {
     margin-top: 23px;
     text-align-last: center;
 }
+
+.align-items-center {
+  align-items: center !important;
+  display: inline-flex;
+}
