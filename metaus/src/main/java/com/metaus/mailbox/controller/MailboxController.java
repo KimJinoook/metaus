@@ -45,11 +45,6 @@ public class MailboxController {
 		return "/mailbox/compose";
 	}
 	
-	@RequestMapping("/mailbox")
-	public String mailbox() {
-		return "redirect:/mailbox/receivedMail";
-	}
-	
 	@RequestMapping("/readMail")
 	public String readMail() {
 		return "/mailbox/readMail";
@@ -111,11 +106,11 @@ public class MailboxController {
 			e.printStackTrace();
 		}
 		
-		return "redirect:/mailbox/receivedMail";
+		return "redirect:/mailbox/mailbox";
 	}
 	
 	@RequestMapping("/receivedMail")
-	public String receivedMail(HttpSession session, RedirectAttributes redirect) {
+	public String receivedMail(HttpSession session, ModelMap model) {
 		String memId=(String) session.getAttribute("memId");
 		logger.info("memId={}", memId);
 		
@@ -123,14 +118,14 @@ public class MailboxController {
 			= mailboxService.selectMsgView(memId, MailboxUtil.MSG_RECEIVED_FLAG);
 		logger.info("메세지 목록 조회, list.size={}", list.size());
 		
-		redirect.addFlashAttribute("list", list);
-		redirect.addFlashAttribute("flag", "received");
+		model.addAttribute("list", list);
+		model.addAttribute("flag", "received");
 		
-		return "redirect:/mailbox/mailNoByFlag";
+		return "/mailbox/ajaxMailbox";
 	}
 	
 	@RequestMapping("/sentMail")
-	public String sentMail(HttpSession session, RedirectAttributes redirect) {
+	public String sentMail(HttpSession session, ModelMap model) {
 		String memId=(String) session.getAttribute("memId");
 		logger.info("memId={}", memId);
 		
@@ -138,26 +133,16 @@ public class MailboxController {
 		= mailboxService.selectMsgView(memId, MailboxUtil.MSG_SENT_FLAG);
 		logger.info("메세지 목록 조회, list.size={}", list.size());
 		
-		redirect.addFlashAttribute("list", list);
-		redirect.addFlashAttribute("flag", "sent");
+		model.addAttribute("list", list);
+		model.addAttribute("flag", "sent");
 		
-		return "redirect:/mailbox/mailNoByFlag";
+		return "/mailbox/ajaxMailbox";
 	}
 	
-	@RequestMapping("/mailNoByFlag")
-	public String mailNoByFlag(HttpSession session , HttpServletRequest request, Model model) {
+	@RequestMapping("/mailbox")
+	public String mailNoByFlag(HttpSession session, Model model) {
 		String memId=(String) session.getAttribute("memId");
 		logger.info("memId={}", memId);
-		
-		Map<String, ?> flashMap = RequestContextUtils.getInputFlashMap(request);
-		
-		if(flashMap != null) {
-			List<Map<String, Object>> list = (List<Map<String, Object>>) flashMap.get("list");
-			String flag = (String) flashMap.get("flag");
-			
-			model.addAttribute("list", list);
-			model.addAttribute("flag", flag);
-		}
 		
 		int receivedNo = mailboxService.findReceivedNo(memId);
 		logger.info("받은 메세지 개수, receivedNo={}", receivedNo);
@@ -184,7 +169,7 @@ public class MailboxController {
 		model.addAttribute("spamNo", spamNo);
 		model.addAttribute("trashNo", trashNo);
 		
-		return "/mailbox/mailboxByFlag";
+		return "/mailbox/mailbox";
 	}
 	
 	@RequestMapping("/mailDetail")
