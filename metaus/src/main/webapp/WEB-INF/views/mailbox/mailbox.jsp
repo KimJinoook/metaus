@@ -67,7 +67,6 @@
 					url: "<c:url value='/mailbox/sentMail'/>",
 					type: "GET",
 					success: function(data){
-						//console.log(data);
 						$('.box.box-primary').html(data);
 					},
 					error: function(xhr, status, error){
@@ -75,6 +74,20 @@
 					}
 				});
 			});
+			
+			$('.starMail').click(function(){
+				$.ajax({
+					url: "<c:url value='/mailbox/starMail'/>",
+					type: "GET",
+					success: function(data){
+						$('.box.box-primary').html(data);
+					},
+					error: function(xhr, status, error){
+						alert('error:' + error);
+					}
+				});
+			});
+			
 		});
 </script>
       <!-- Right side column. Contains the navbar and content of the page -->
@@ -103,7 +116,7 @@
                   <ul class="nav nav-pills nav-stacked">
                     <li><a href="#" class="receivedMail"><i class="fa fa-inbox"></i> 받은 메세지 <span class="label label-primary pull-right">${receivedNo }</span></a></li>
                     <li><a href="#" class="sentMail"><i class="fa fa-envelope-o"></i> 보낸 메세지 <span class="label label-success pull-right">${sentNo }</span></a></li>
-                    <li><a href="#"><i class="fa fa-star"></i> 별표 메세지 <span class="label label-waring pull-right starNo">${starNo }</span></a></li>
+                    <li><a href="#" class="starMail"><i class="fa fa-star"></i> 별표 메세지 <span class="label label-waring pull-right starNo">${starNo }</span></a></li>
                     <li><a href="#"><i class="fa fa-file-text-o"></i> 임시보관함 <span class="label label-info pull-right">${temporaryNo }</span></a></li>
                     <li><a href="#"><i class="fa fa-filter"></i> 스팸함 <span class="label label-danger pull-right">${spamNo }</span></a></li>
                     <li><a href="#"><i class="fa fa-trash-o"></i> 휴지통 <span class="label label-danger pull-right">${trashNo }</span></a></li>

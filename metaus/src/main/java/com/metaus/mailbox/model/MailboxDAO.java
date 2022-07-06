@@ -12,6 +12,7 @@ public interface MailboxDAO {
 	int insertRecipient(RecipientVO vo);
 	List<Map<String, Object>> selectMsgViewBySender(String msgaddAdser);
 	List<Map<String, Object>> selectMsgViewByRecipient(String msgaddAdser);
+	List<Map<String, Object>> selectMsgViewByStar(String memId);
 	Map<String, Object> selectByMsgAddNo(int msgaddNo);
 	int insertMailboxAtc(MailboxAtcVO mailboxAtcVo);
 	int findReceivedNo(String msgaddAdsee);

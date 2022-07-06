@@ -13,6 +13,9 @@
 						  <c:when test="${flag eq 'sent'}">
 						  	보낸 메세지
 						  </c:when>
+						  <c:when test="${flag eq 'star'}">
+						  	별표 메세지
+						  </c:when>
 					  </c:choose>
                   </h3>
                   <div class="box-tools pull-right">

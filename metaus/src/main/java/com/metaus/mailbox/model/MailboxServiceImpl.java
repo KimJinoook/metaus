@@ -24,13 +24,15 @@ public class MailboxServiceImpl implements MailboxService{
 		return mailboxDao.insertRecipient(vo);
 	}
 
-	public List<Map<String, Object>> selectMsgView(String userId, int msgFlag) {
+	public List<Map<String, Object>> selectMsgView(String memId, int msgFlag) {
 		List<Map<String, Object>> list = null;
 		
 		if(msgFlag == MailboxUtil.MSG_SENT_FLAG) { //보낸 메세지
-			list = mailboxDao.selectMsgViewBySender(userId);
+			list = mailboxDao.selectMsgViewBySender(memId);
 		}else if(msgFlag == MailboxUtil.MSG_RECEIVED_FLAG) { //받은 메세지
-			list = mailboxDao.selectMsgViewByRecipient(userId);
+			list = mailboxDao.selectMsgViewByRecipient(memId);
+		}else if(msgFlag == MailboxUtil.MSG_STAR_FLAG) { //별표 메세지
+			list = mailboxDao.selectMsgViewByStar(memId);
 		}
 		
 		return list;
