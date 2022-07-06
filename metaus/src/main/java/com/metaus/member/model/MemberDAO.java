@@ -30,5 +30,6 @@ public interface MemberDAO {
 	public String sumPayToday();
 	public int unlockMember(int memNo);
 	public int lockMember(MemberVO vo);
+	int warnCntUp(MemberVO vo);
 
 }

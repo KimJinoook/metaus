@@ -34,5 +34,5 @@ public interface MemberService {
 	public String sumPayToday();
 	public int unlockMember(int memNo);
 	public int lockMember(MemberVO vo);
-
+	public int warnCntUp(MemberVO vo);
 }

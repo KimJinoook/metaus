@@ -51,5 +51,11 @@
 		where board_no=#{boardNo}
 	</update>
 	
+	<update id="reportConfirmBoard" parameterType="int">
+		update fp_report
+		set report_date=sysdate
+		where board_no=#{boardNo}
+	</update>
+	
 	
 </mapper>

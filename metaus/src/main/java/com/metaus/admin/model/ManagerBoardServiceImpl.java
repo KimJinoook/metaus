@@ -38,5 +38,8 @@ public class ManagerBoardServiceImpl implements ManagerBoardService {
 		return managerBoardDao.selectReport();
 	}
 	
+	public int reportConfirmBoard(int boardNo) {
+		return managerBoardDao.reportConfirmBoard(boardNo);
+	}
 	
 }

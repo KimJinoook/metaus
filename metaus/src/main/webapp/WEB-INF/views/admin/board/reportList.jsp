@@ -16,11 +16,18 @@
 
 <script>
 
-function delBoard(no,typeno){
-	var con = confirm('해당 게시글을 삭제 하시겠습니까?');
+function checkBoard(no){
+	var con = confirm('해당 게시글을 문제없음 처리하시겠습니까?');
 	
 	if(con){
-		location.href="<c:url value='/admin/board/memberBoardDelete?boardNo='/>"+no+"&btypeNo="+typeno;
+		location.href="<c:url value='/admin/board/reportGood?boardNo='/>"+no;
+	}
+}
+function warnBoard(no,typeno){
+	var con = confirm('해당 게시글 삭제 및 회원 차단 하시겠습니까?');
+	
+	if(con){
+		location.href="<c:url value='/admin/board/reportBad?boardNo='/>"+no;
 	}
 }
 
@@ -49,10 +56,10 @@ function exportExcel(){
 
 var excelHandler = {
     getExcelFileName : function(){
-        return '게시판 조회 결과.xlsx';	//파일명
+        return '신고게시판 조회 결과.xlsx';	//파일명
     },
     getSheetName : function(){
-        return '게시판';	//시트명
+        return '신고게시판';	//시트명
     },
     getExcelData : function(){
         return document.getElementById('dataTable'); 	//TABLE id
@@ -149,16 +156,22 @@ function s2ab(s) {
                                             <th>${vo.boardRegdate }</th>
                                             <th>미처리</th>
                                             <td style="padding:10px">
-                                            	<a href="javascript:delBoard(${vo.boardNo },${btype.btypeNo })" class="btn btn-danger btn-icon-split btn-sm" style="margin:0px;height:27px">
-                                        			<span class="icon text-white" style="margin:0px">
-                                            			<i class="fas fa-trash"></i>
-                                        			</span>
-                                    			</a>	
-                                    			<a href="javascript:openBoard(${vo.boardNo },${btype.btypeNo })" class="btn btn-primary btn-icon-split btn-sm" style="margin:0px;height:27px">
+                                            	<a href="javascript:openBoard(${vo.boardNo },${vo.btypeNo })" class="btn btn-primary btn-icon-split btn-sm" style="margin:0px;height:27px">
                                         			<span class="icon text-white" style="margin:0px">
                                             			<i class="fas fa-arrow-right"></i>
                                         			</span>
                                     			</a>
+                                    			<a href="javascript:checkBoard(${vo.boardNo })" class="btn btn-success btn-icon-split btn-sm" style="margin:0px;height:27px">
+                                        			<span class="icon text-white" style="margin:0px">
+                                            			<i class="fas fa-check"></i>
+                                        			</span>
+                                    			</a>
+                                            	<a href="javascript:warnBoard(${vo.boardNo })" class="btn btn-danger btn-icon-split btn-sm" style="margin:0px;height:27px">
+                                        			<span class="icon text-white" style="margin:0px">
+                                            			<i class="fas fa-trash"></i>
+                                        			</span>
+                                    			</a>	
+                                    			
                                     		</td>
                                         </tr>
                                         </c:if>

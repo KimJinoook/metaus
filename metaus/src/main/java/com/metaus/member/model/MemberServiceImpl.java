@@ -108,5 +108,8 @@ public class MemberServiceImpl implements MemberService {
 	public int lockMember(MemberVO vo) {
 		return memberDao.lockMember(vo);
 	}
+	public int warnCntUp(MemberVO vo) {
+		return memberDao.warnCntUp(vo);
+	}
 
 }

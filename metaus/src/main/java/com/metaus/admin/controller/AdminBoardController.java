@@ -1,5 +1,6 @@
 package com.metaus.admin.controller;
 
+import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 
@@ -18,6 +19,7 @@ import com.metaus.admin.model.ManagerBoardVO;
 import com.metaus.admin.model.ManagerService;
 import com.metaus.member.model.CompanyService;
 import com.metaus.member.model.MemberService;
+import com.metaus.member.model.MemberVO;
 
 import lombok.RequiredArgsConstructor;
 
@@ -127,5 +129,48 @@ public class AdminBoardController {
 		logger.info("list={}",list);
 		model.addAttribute("list",list);
 		
+	}
+	
+	@RequestMapping("/reportGood")
+	public String reportGood(int boardNo) {
+		logger.info("신고게시판 문제없음 처리 boardNo={}",boardNo);
+		int cnt = managerBoardService.reportConfirmBoard(boardNo);
+		logger.info("신고게시판 문제없음 처리 cnt={}",cnt);
+		
+		return "redirect:/admin/board/reportList";
+	}
+	@RequestMapping("/reportBad")
+	public String reportBad(int boardNo) {
+		logger.info("신고게시판 삭제 처리 boardNo={}",boardNo);
+		
+		int cnt = managerBoardService.deleteBoard(boardNo);
+		logger.info("게시글 삭제처리 cnt={}",cnt);
+		
+		ManagerBoardVO boardVo = managerBoardService.selectBoardByBoardNo(boardNo);
+		logger.info("게시글 정보 boardVo={}",boardVo);
+		
+		MemberVO memberVo = memberService.selectByMemNo(boardVo.getMemNo());
+		logger.info("작성자 정보 memberVo={}",memberVo);
+		
+		memberVo.setMemWarncnt(memberVo.getMemWarncnt()+1);
+		
+		cnt = memberService.warnCntUp(memberVo);
+		logger.info("사용자 경고수 증가 결과 cnt={}",cnt);
+		
+		Date date = new Date();
+		long cutTime = (long)(memberVo.getMemWarncnt()*24*60*60*1000);		
+		Timestamp timestamp = new Timestamp(date.getTime()+cutTime);
+		
+		
+		memberVo.setMemCutdate(timestamp);
+		
+		cnt = memberService.lockMember(memberVo);
+		logger.info("일반회원 차단 cnt={}",cnt);
+		
+		
+		cnt = managerBoardService.reportConfirmBoard(boardNo);
+		logger.info("신고게시판 confirm 처리 cnt={}",cnt);
+		
+		return "redirect:/admin/board/reportList";
 	}
 }
