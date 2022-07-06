@@ -1,7 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ include file="../inc/header.jsp"%>
- 
+ <script type="text/javascript">
+ function boardList(curPage){
+		$('input[name=currentPage]').val(curPage);
+		$('form[name=frmPage]').submit();
+	}
+	$(function(){
+		$('#writeRequest').click(function(){
+			if($('#comId').val()=="" || $('#comId').val()==null){
+				alert('기업회원 로그인 후 이용가능합니다!');
+				event.preventDefault();
+			}
+		});
+	});
+</script>
  
 
 
@@ -30,6 +46,7 @@
 
         </div>
     </section>
+       <input type="hidden" id="comId" name="comId" value="${comId }">
     <!-- =============== End of Page Header 1 Section =============== -->
 
 
@@ -41,16 +58,16 @@
         <div class="container">
 
             <!-- Start of Form -->
-            <form class="job-search-form row" action="#" method="get">
+            <form class="job-search-form row" action="<c:url value='/request/search'/>" method="post">
 
                 <!-- Start of keywords input -->
                 <div class="col-md-3 col-sm-12 search-keywords">
                     <label for="search-keywords">Keywords</label>
-                    <input type="text" name="search-keywords" class="form-control" id="search-keywords" placeholder="키워드">
+                    <input type="text" name="searchKeyword" id="search-keywords"  class="form-control" placeholder="키워드">
                 </div>
 
                 <!-- Start of category input -->
-                <div class="col-md-3 col-sm-12 search-categories">
+                <!-- <div class="col-md-3 col-sm-12 search-categories">
                     <label for="search-categories">Category</label>
                     <select name="search-categories" class="selectpicker" id="search-categories" data-live-search="true" title="모든 카테고리" data-size="5" data-container="body">
                         <option value="1">Accountance</option>
@@ -63,10 +80,10 @@
                         <option value="8">Marketing</option>
                         <option value="9">Management</option>
                     </select>
-                </div>
+                </div> -->
 
                 <!-- Start of location input -->
-                <div class="col-md-3 col-sm-12 search-categories">
+               <!--  <div class="col-md-3 col-sm-12 search-categories">
                     <label for="search-location">Location</label>
                      <select name="search-location" class="selectpicker" id="search-location" data-live-search="true" title="모든 지역" data-size="5" data-container="body">
                         <option value="1">서울</option>
@@ -87,7 +104,7 @@
                         <option value="16">강원</option>
                         <option value="17">제주</option>
                     </select>
-                </div>
+                </div> -->
 
                 <!-- Start of submit input -->
                 <div class="col-md-2 col-sm-12 search-submit">
@@ -101,29 +118,35 @@
             <!-- Start of Row -->
             <div class="row mt60">
 
-                <div class="col-md-12">
-                <a href="<c:url value='/request/post'/>" class="btn btn-blue btn-effect" style="float: right;">의뢰 작성</a>
-                    <h4>총 1건의 검색결과</h4>
+                <div class="col-md-12" id="writeRequest">
+                <a href="<c:url value='/request/post'/>" id="writeRequest" class="btn btn-blue btn-effect" style="float: right;">의뢰 작성</a>
+                    <h4>총 ${totalRecord }건의 의뢰</h4>
                     
                 </div>
                 <!-- ===== Start of Job Post Column 1 ===== -->
-                <c:forEach var="vo" items="${list }">
+                <c:if test="${empty reclist }">
+                	<img alt="게시글 내용이 없습니다"
+						src="<c:url value='/images/board/no_board.gif'/>"
+						style="width: 800px;">
+                </c:if>
+                <c:if test="${!empty reclist }">
+                 <c:forEach var="vo" items="${reclist }">
                 <div class="col-md-12 mt20">
+               
                     <div class="item-block shadow-hover">
-
                         <!-- Start of Job Post Header -->
                         <!-- 반복문 시작 -->
-                       
+                      
                         <div class="job-post-header clearfix">
-                            <a href="company-page-1.html"><img src="images/companies/envato.svg" alt=""></a>
+                            <a href="company-page-1.html"><img src="<c:url value='/images/companyProfile/'/>" alt=""></a>
                             <div>
-                                <a href="<c:url value='/request/detail'/>"><h4>3D 맵 개발자 구인</h4></a>
-                                <h5><small>Envato</small></h5>
+                                <a href="<c:url value='/request/detail?recNo=${vo.recNo }'/>"><h4>${vo.recTitle }</h4></a>
+                                <h5><small></small></h5>
                             </div>
 
                             <ul class="pull-right">
                                 <li>
-                                    <h6 class="time">등록일: 2022-06-14</h6></li>
+                                    <h6 class="time">등록일: <fmt:formatDate pattern="yyyy-MM-dd" value="${vo.recRegdate }"/></h6></li>
                                 <li>
                                     <a href="#" class="btn btn-green btn-small btn-effect">즉시 지원</a>
                                 </li>
@@ -134,15 +157,15 @@
 
                         <!-- Start of Job Post Body -->
                         <div class="job-post-body">
-                            <p>Responsibilities:</p>
                             <ul class="list mt10">
-                                <li>Designing modern and minimal PSD Templates</li>
+                                <!-- <li>Designing modern and minimal PSD Templates</li>
 
                                 <li>Converting PSD into HTML5 & CSS3</li>
 
                                 <li>WordPress Theme Development</li>
 
-                                <li>Troubleshooting, testing and maintaining web Themes</li>
+                                <li>Troubleshooting, testing and maintaining web Themes</li> -->
+                                <a>${vo.recContent }</a>
                             </ul>
                         </div>
                         <!-- End of Job Post Body -->
@@ -152,12 +175,12 @@
 
                             <div class="col-md-6 col-sm-6 col-xs-12">
                                 <i class="fa fa-map-marker"></i>
-                                <span>서울</span>
+                                <span></span>
                             </div>
 
                             <div class="col-md-6 col-sm-6 col-xs-12">
                                 <i>pay:</i>
-                                <span>$50,000 - $80,000</span>                          
+                                <span><fmt:formatNumber value = "${vo.recPay }" pattern="#,###"/>원</span>                          
                             </div>
                         </div>
                         <!-- End of Job Post Footer -->
@@ -165,18 +188,32 @@
                     </div>
                 </div>
                 </c:forEach>
+                </c:if>
                 <!-- ===== End of Job Post Column 1 ===== -->             
 
                 <!-- Start of Pagination -->
                 <div class="col-md-12 mt10">
-                    <ul class="pagination list-inline text-center">
-                        <li class="active"><a href="javascript:void(0)">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#">4</a></li>
-                        <li><a href="#">Next</a></li>
-                    </ul>
-                </div>
+                        <ul class="pagination list-inline text-center">
+                        	<c:if test="${pagingInfo.firstPage>1 }">
+								<li><a href="#"
+									onclick="boardList(${pagingInfo.firstPage-1})">이전</a></li>
+							</c:if>
+							<c:forEach var="i" begin="${pagingInfo.firstPage }"
+								end="${pagingInfo.lastPage }">
+								<c:if test="${i==pagingInfo.currentPage }">
+									<li class="active"><a>${i }</a></li>
+								</c:if>
+								<c:if test="${i!=pagingInfo.currentPage }">
+									<li><a href="#" onclick="boardList(${i})">${i } </a></li>
+								</c:if>
+							</c:forEach>
+
+							<c:if test="${pagingInfo.lastPage<pagingInfo.totalPage }">
+								<li><a href="#"
+									onclick="boardList(${pagingInfo.lastPage+1})">다음</a></li>
+							</c:if>
+                        </ul>
+                    </div>
                 <!-- End of Pagination -->
                 
 
@@ -184,6 +221,10 @@
             <!-- End of Row -->
 
         </div>
+    <form name="frmPage" method="post" action="<c:url value='/request/search'/>">
+		<input type="hidden" name="currentPage">
+		<input type="hidden" name="searchKeyword" value="${searchVo.searchKeyword }">
+	</form>
     </section>
     <!-- ===== End of Main Wrapper Section ===== -->
 

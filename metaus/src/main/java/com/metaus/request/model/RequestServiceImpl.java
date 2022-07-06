@@ -1,10 +1,12 @@
 package com.metaus.request.model;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
 import com.metaus.common.SearchVO;
+import com.metaus.member.model.CompanyVO;
 
 import lombok.RequiredArgsConstructor;
 
@@ -20,14 +22,46 @@ public class RequestServiceImpl implements RequestService {
 	}
 
 	@Override
-	public List<RequestVO> selectAll(SearchVO searchVo) {
+	public List<Map<String, Object>> selectAll(SearchVO searchVo) {
 		return requestDao.selectAll(searchVo);
 	}
 
 	@Override
-	public int getTotalRecord(SearchVO searchVo) {
-		return requestDao.getTotalRecord(searchVo);
+	public int selectTotalRecord(SearchVO searchVo) {
+		return requestDao.selectTotalRecord(searchVo);
 	}
+
+	@Override
+	public int insertRequestAtc(RequestAtcVO requestAtcVo) {
+		return requestDao.insertRequestAtc(requestAtcVo);
+	}
+
+	@Override
+	public List<RequestAtcVO> selectRequestAtc() {
+		return requestDao.selectRequestAtc();
+	}
+
+	@Override
+	public List<RequestVO> selectRequest(SearchVO searchVo) {
+		return requestDao.selectRequest(searchVo);
+	}
+
+	@Override
+	public List<CompanyVO> selectCom() {
+		return requestDao.selectCom();
+	}
+
+	@Override
+	public RequestVO selectRequestDetail(int recNo) {
+		return requestDao.selectRequestDetail(recNo);
+	}
+
+	@Override
+	public int requestDelete(int recNo) {
+		return requestDao.requestDelete(recNo);
+	}
+
+	
 	
 	
 }
