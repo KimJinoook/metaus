@@ -124,7 +124,7 @@
 	                 
 	                 <!-- Dropdown Submenu -->
 	                     <li class="dropdown-submenu">                               
-	                         <a href="<c:url value='/resume/resumeDetail'/>">내 정보 변경</a>                                      
+	                         <a href="<c:url value='/ModifyInfo/UpdateInfo'/>">내 정보 변경</a>                                      
 	                     </li>
 	                     <li class="dropdown-submenu">                               
 	                         <a href="<c:url value='/resume/resumeDetail'/>">이력서</a>                                      

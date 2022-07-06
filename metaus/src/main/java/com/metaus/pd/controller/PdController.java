@@ -139,4 +139,16 @@ public class PdController {
 		model.addAttribute("pagingInfo", pagingInfo);
 		
 	}
+	
+	@RequestMapping("/best3")
+	public String best(Model model) {
+		
+		List<PdVO> list=pdService.selectByBuyCnt();
+		logger.info("카테고리별 판매가 가장 많은 상품 조회, 결과 list.size={}",
+				list.size());
+		
+		model.addAttribute("list", list);
+		
+		return "/pd/best3";
+	}
 }

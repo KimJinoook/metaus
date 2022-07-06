@@ -3,7 +3,15 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-
+<style>
+	.star-message-type{
+		border-radius: 3px;
+		background-color: #dddddd9e;
+		color: black;
+		font-size: 3px;
+		padding: 2px;
+	}
+</style>
 <div class="box-header with-border">
                   <h3 class="box-title">
 	                  <c:choose>
@@ -12,6 +20,9 @@
 						  </c:when>
 						  <c:when test="${flag eq 'sent'}">
 						  	보낸 메세지
+						  </c:when>
+						  <c:when test="${flag eq 'star'}">
+						  	별표 메세지
 						  </c:when>
 					  </c:choose>
                   </h3>
@@ -59,6 +70,23 @@
 				                          	</c:if>
 				                          	<c:if test="${sessionScope.memId ne map['MSGADD_ADSEE']}">
 				                          		${map['MSGADD_ADSEE']}
+				                          	</c:if>
+										  </c:when>
+										  <c:when test="${flag eq 'star'}">
+										  	<!-- 별표 메세지일 때 -->
+										  	<!-- 보낸 메세지 -->
+				                          	<c:if test="${sessionScope.memId eq map['MSGADD_ADSER'] && sessionScope.memId ne map['MSGADD_ADSEE']}">
+				                          		<span class="star-message-type">Send</span> 
+				                          		${map['MSGADD_ADSEE']}
+				                          	</c:if>
+				                          	<!-- 받은 메세지 -->
+				                          	<c:if test="${sessionScope.memId eq map['MSGADD_ADSEE'] && sessionScope.memId ne map['MSGADD_ADSER']}">
+				                          		<span class="star-message-type">Receive</span> 
+				                          		${map['MSGADD_ADSER']}
+				                          	</c:if>
+				                          	<!-- 내가 보낸 메세지 -->
+				                          	<c:if test="${sessionScope.memId eq map['MSGADD_ADSEE'] && sessionScope.memId eq map['MSGADD_ADSER']}">
+				                          		나
 				                          	</c:if>
 										  </c:when>
 									  </c:choose>

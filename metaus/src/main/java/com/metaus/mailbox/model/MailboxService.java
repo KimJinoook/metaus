@@ -12,7 +12,7 @@ public interface MailboxService {
 	int insertMailboxAtc(MailboxAtcVO mailboxAtcVo);
 	int findReceivedNo(String msgaddAdsee);
 	int findSentNo(String msgaddAdser);
-	int findStarNo(String msgaddAdser);
+	int findStarNo(String memId);
 	int findTemporaryNo(String msgaddAdser);
 	int findSpamNo(String msgaddAdser);
 	int findTrashNo(String msgaddAdser);

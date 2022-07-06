@@ -59,8 +59,8 @@ $(function(){
 						
 					}else{
 						alert("회원님의 아이디는 "+data+" 입니다.");
-						$('#managerId').val(data);
-						$('#managerId').focus();
+						$('#managerPwId').val(data);
+						$('#managerPwId').focus();
 					}
 				},
 				error:function(){
@@ -71,29 +71,25 @@ $(function(){
 	});
 	
 	$('#menagerPwFind').click(function() {
-		if ($.trim($('#managerName').val()).length < 1) {
-			alert("이름을 입력해주세요");
-			$('#managerName').focus();
-			event.preventDefault();
-
-		} else if ($.trim($('#managerTel').val()).length < 1) {
-			alert("전화번호를 입력해주세요");
-			$('#managerTel').focus();
-			event.preventDefault();
-
-		} else if(!validate_tel($('#managerTel').val())){
-			alert("사업자번호는 숫자만 입력해주세요.");
-			$('#managerTel').focus();
-			event.preventDefault();				
-		} else if ($.trim($('#managerId').val()).length < 1) {
+		if($.trim($('#managerPwId').val()).length < 1){
 			alert("아이디를 입력해주세요");
-			$('#managerId').focus();
+			$('#managerPwId').focus();
 			event.preventDefault();
+			
+		} else if ($.trim($('#managerPwName').val()).length < 1) {
+			alert("이름을 입력해주세요");
+			$('#managerPwName').focus();
+			event.preventDefault();
+
+		} else if ($.trim($('#managerPwTel').val()).length < 1) {
+			alert("전화번호를 입력해주세요");
+			$('#managerPwTel').focus();
+			event.preventDefault();		
 
 		} else{
-			var name = $('#managerName').val();
-			var tel = $('#managerTel').val();
-			var id = $('#managerId').val();
+			var name = $('#managerPwName').val();
+			var tel = $('#managerPwTel').val();
+			var id = $('#managerPwId').val();
 			
 			$.ajax({
 				url: "<c:url value='/admin/member/findPw'/>",
@@ -109,7 +105,7 @@ $(function(){
 						alert('사용자의 정보와 일치하는 계정이 없습니다.');
 						
 					}else if(data==1){
-						document.querySelector('#maPwFindFrm').submit();
+						document.querySelector('#maPwFindFrm').submit();					
 					}
 				},
 				error:function(){
@@ -144,10 +140,7 @@ $(function(){
                         <div class="row">
                             <div class="col-lg-6 d-none d-lg-block bg-login-image"></div>
                             <div class="col-lg-6">
-                                <div class="p-5">
-                                
-	                                <form method="post" action="" id="" >
-	                                
+                                <div class="p-5">	                                
 	                                    <div class="form-group">
 	                                	<label style="color: black;">이름</label>                                    
 	                                        <input type="text" class="form-control form-control-user" id="managerName" name="managerName"
@@ -160,23 +153,22 @@ $(function(){
 	                                </div>
 	                                	<button type="button" class="btn btn-primary btn-user btn-block" id="managerIdFind">아이디 찾기</button>                             
 	                                <hr>
-	                                </form>
                            	
 		                            <form method="post" action="<c:url value='/admin/member/managerPwReset'/>" id="maPwFindFrm"> 
 		                                
 		                                <div class="form-group">
 		                                	<label style="color: black;">아이디</label>                                    
-		                                        <input type="text" class="form-control form-control-user" id="managerId"
+		                                        <input type="text" class="form-control form-control-user" name="managerId" id="managerPwId"
 		                                            placeholder="Id"> 
 		                                </div>
 		                                <div class="form-group">
 		                                	<label style="color: black;">이름</label>                                    
-		                                        <input type="text" class="form-control form-control-user" id="managerName"
+		                                        <input type="text" class="form-control form-control-user" id="managerPwName"
 		                                            placeholder="Name"> 
 		                                </div>
 		                                <div class="form-group">
 		                                	<label style="color: black;">전화번호</label>                                    
-		                                        <input type="text" class="form-control form-control-user" id="managerTel"
+		                                        <input type="text" class="form-control form-control-user" id="managerPwTel"
 		                                            placeholder="Tel"> 
 		                                </div>                                
 										<button type="button" class="btn btn-primary btn-user btn-block" id="menagerPwFind">비밀번호 찾기</button>                               

@@ -139,6 +139,21 @@ public class MailboxController {
 		return "/mailbox/ajaxMailbox";
 	}
 	
+	@RequestMapping("/starMail")
+	public String starMail(HttpSession session, ModelMap model) {
+		String memId=(String) session.getAttribute("memId");
+		logger.info("memId={}", memId);
+		
+		List<Map<String, Object>> list 
+		= mailboxService.selectMsgView(memId, MailboxUtil.MSG_STAR_FLAG);
+		logger.info("메세지 목록 조회, list.size={}", list.size());
+		
+		model.addAttribute("list", list);
+		model.addAttribute("flag", "star");
+		
+		return "/mailbox/ajaxMailbox";
+	}
+	
 	@RequestMapping("/mailbox")
 	public String mailNoByFlag(HttpSession session, Model model) {
 		String memId=(String) session.getAttribute("memId");

@@ -17,5 +17,8 @@ public interface ManagerService {
 	public int insertMember(ManagerVO vo);
 	List<ManagerVO> selectAll();
 	public int deleteByManagerNo(int managerNo);
+	public String findId(ManagerVO vo);
+	public String findPw(ManagerVO vo);
+	public int updatePw(ManagerVO vo);
 
 }
