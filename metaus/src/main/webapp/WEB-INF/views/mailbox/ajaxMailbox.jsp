@@ -11,6 +11,14 @@
 		font-size: 3px;
 		padding: 2px;
 	}
+	
+	.trash-spam-message{
+		border-radius: 3px;
+		background-color: red;
+		color: black;
+		font-size: 3px;
+		padding: 2px;
+	}
 </style>
 <div class="box-header with-border">
                   <h3 class="box-title">
@@ -25,7 +33,10 @@
 						  	별표 메세지
 						  </c:when>
 						  <c:when test="${flag eq 'trash'}">
-						  	삭제 메세지
+						  	휴지통
+						  </c:when>
+						  <c:when test="${flag eq 'spam'}">
+						  	스팸함
 						  </c:when>
 					  </c:choose>
                   </h3>
@@ -47,7 +58,7 @@
 	                          <td>
 	                          	<input type="checkbox" />
 	                          </td>
-	                          <c:if test="${flag ne 'trash' }">
+	                          <c:if test="${flag ne 'trash' && flag ne 'spam'}">
 		                          <td class="mailbox-star">
 		                          	<a href="#">
 		                          		<input type="hidden" value="${flag}">
@@ -61,10 +72,10 @@
 		                          </td>
 	                          </c:if>
 	                          <td class="mailbox-name">
-	                          	  <c:if test="${flag eq 'trash'}">&nbsp;</c:if>
+	                          	  <c:if test="${flag eq 'trash' || flag eq 'spam'}">&nbsp;</c:if>
 		                          <a href='<c:url value="/mailbox/mailDetail?msgaddNo=${map['MSGADD_NO']}" />'>
 			                          <c:choose>
-										  <c:when test="${flag eq 'received'}">
+										  <c:when test="${flag eq 'received' || flag eq 'spam'}">
 										  	<!-- 받은 메세지일 때 -->
 				                          	<c:if test="${sessionScope.memId eq map['MSGADD_ADSER']}">
 				                          		나
@@ -86,12 +97,15 @@
 										  	<!-- 별표 메세지일 때 -->
 										  	<!-- 보낸 메세지 -->
 				                          	<c:if test="${sessionScope.memId eq map['MSGADD_ADSER'] && sessionScope.memId ne map['MSGADD_ADSEE']}">
-				                          		<span class="star-message-type">Send</span> 
+				                          		<span class="star-message-type">Send</span>
 				                          		${map['MSGADD_ADSEE']}
 				                          	</c:if>
 				                          	<!-- 받은 메세지 -->
 				                          	<c:if test="${sessionScope.memId eq map['MSGADD_ADSEE'] && sessionScope.memId ne map['MSGADD_ADSER']}">
-				                          		<span class="star-message-type">Receive</span> 
+				                          		<span class="star-message-type">Receive</span>
+				                          		<c:if test="${map['TRASH_FLAG'] eq 'Y' && map['SPAM_FLAG'] eq 'Y'}">
+				                          			<span class="trash-spam-message">Spam</span>
+				                          		</c:if>
 				                          		${map['MSGADD_ADSER']}
 				                          	</c:if>
 				                          	<!-- 내가 보낸 메세지 -->
@@ -135,8 +149,11 @@
                       </c:if>
                       <!-- 받은 메세지에서만 스팸 버튼 활성화 -->
                       <c:if test="${flag eq 'received'}">
-                      	<button class="btn btn-default btn-sm"><i class="fa fa-filter"></i></button>
+                      	<button class="btn btn-default btn-sm btn-filter"><i class="fa fa-filter"></i></button>
                       </c:if>
+					  <c:if test="${flag eq 'spam'}">
+					  	<button class="btn btn-default btn-sm btn-filter btn-filter-up"><i class="fa-solid fa-filter-circle-xmark"></i></button>
+					  </c:if>
                       <button class="btn btn-default btn-sm"><i class="fa fa-reply"></i></button>
                       <button class="btn btn-default btn-sm"><i class="fa fa-share"></i></button>
                     </div><!-- /.btn-group -->

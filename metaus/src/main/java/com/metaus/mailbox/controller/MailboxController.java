@@ -170,6 +170,21 @@ public class MailboxController {
 		return "/mailbox/ajaxMailbox";
 	}
 	
+	@RequestMapping("/spamMail")
+	public String spamMail(HttpSession session, ModelMap model) {
+		String memId=(String) session.getAttribute("memId");
+		logger.info("memId={}", memId);
+		
+		List<Map<String, Object>> list 
+		= mailboxService.selectMsgView(memId, MailboxUtil.MSG_SPAM_FLAG);
+		logger.info("스팸 메세지 목록 조회, list.size={}", list.size());
+		
+		model.addAttribute("list", list);
+		model.addAttribute("flag", "spam");
+		
+		return "/mailbox/ajaxMailbox";
+	}
+	
 	@RequestMapping("/mailbox")
 	public String mailNoByFlag(HttpSession session, Model model) {
 		String memId=(String) session.getAttribute("memId");
@@ -235,9 +250,9 @@ public class MailboxController {
 	
 	@RequestMapping("/trashFlagUpdate")
 	@ResponseBody	
-	public Map<String, Integer> trashFlagUpdate(HttpSession session, @RequestParam List<String> msgaddNoList, @RequestParam String trashFlag) {
-		String memId=(String) session.getAttribute("memId");
-		logger.info("메세지 삭제 파라미터, msgaddNoList={}", msgaddNoList);
+	public Map<String, Integer> trashFlagUpdate(HttpSession session
+			, @RequestParam List<String> msgaddNoList, @RequestParam String trashFlag) {
+		logger.info("메세지 삭제 파라미터, msgaddNoList={}, trashFlag={}", msgaddNoList, trashFlag);
 		
 		for(String msgaddNo : msgaddNoList) {
 			Map<String, String> map = new HashMap<>();
@@ -247,6 +262,34 @@ public class MailboxController {
 			int cnt=mailboxService.updateTrashFlag(map);
 			logger.info("삭제 플래그 업데이트 결과, cnt={}", cnt);
 		}
+		
+		Map<String, Integer> map = getMailboxNoMap(session);
+		
+		return map;
+	}
+	
+	@RequestMapping("/spamFlagUpdate")
+	@ResponseBody
+	public Map<String, Integer> spamFlagUpdate(HttpSession session
+			, @RequestParam List<String> msgaddNoList, @RequestParam String spamFlag){
+		logger.info("메세지 스팸처리 파라미터, msgaddNoList={}, spamFlag={}", msgaddNoList, spamFlag);
+		
+		for(String msgaddNo : msgaddNoList) {
+			Map<String, String> map = new HashMap<>();
+			map.put("msgaddNo", msgaddNo);
+			map.put("spamFlag", spamFlag);
+			
+			int cnt=mailboxService.updateSpamFlag(map);
+			logger.info("스팸 플래그 업데이트 결과, cnt={}", cnt);
+		}
+		
+		Map<String, Integer> map = getMailboxNoMap(session);
+		
+		return map;
+	}
+	
+	public Map<String, Integer> getMailboxNoMap(HttpSession session){
+		String memId = (String) session.getAttribute("memId");
 		
 		int receivedNo = mailboxService.findReceivedNo(memId);
 		int sentNo = mailboxService.findSentNo(memId);

@@ -34,7 +34,7 @@
 	
 	<select id="selectMsgViewBySender" parameterType="string" resultMap="getMsgViewBySender">
 		select * from msgview
-		where msgadd_adser=#{msgaddAdser} and trash_flag='N' 
+		where msgadd_adser=#{msgaddAdser} and trash_flag='N' and spam_flag='N'
 		order by msgadd_no desc
 	</select>
 	
@@ -45,7 +45,7 @@
 	
 	<select id="selectMsgViewByRecipient" parameterType="string" resultMap="getMsgViewByRecipient">
 		select * from msgview
-		where msgadd_adsee=#{msgaddAdsee} and trash_flag='N' 
+		where msgadd_adsee=#{msgaddAdsee} and trash_flag='N' and spam_flag='N'
 		order by msgadd_no desc
 	</select>
 	
@@ -62,7 +62,7 @@
 		    where msgadd_adsee=#{memId} or msgadd_adser=#{memId}
 		    order by msg_no desc
 		)
-		where star_flag='Y' and trash_flag='N'
+		where star_flag='Y' and trash_flag='N' and spam_flag='N'
 		order by msgadd_no desc
 	</select>
 	
@@ -80,6 +80,23 @@
 		    order by msg_no desc
 		)
 		where trash_flag='Y'
+		order by msgadd_no desc
+	</select>
+	
+	<!-- selectMsgViewBySpam -->
+	<resultMap id="getMsgViewBySpam" type="HashMap">
+		<result property="MSG_CONTENT" column="MSG_CONTENT" jdbcType="CLOB" javaType="java.lang.String" />
+	</resultMap>
+	
+	<select id="selectMsgViewBySpam" parameterType="string" resultMap="getMsgViewBySpam">
+		select *
+		from
+		(
+		    select * from msgview
+		    where msgadd_adsee=#{memId} or msgadd_adser=#{memId}
+		    order by msg_no desc
+		)
+		where spam_flag='Y' and trash_flag='N'
 		order by msgadd_no desc
 	</select>
 	
@@ -103,12 +120,12 @@
 	
 	<select id="findReceivedNo" parameterType="string" resultType="int">
 		select count(*) from msgView
-		where msgadd_adsee=#{msgaddAdsee} and trash_flag='N'
+		where msgadd_adsee=#{msgaddAdsee} and trash_flag='N' and spam_flag='N'
 	</select>
 	
 	<select id="findSentNo" parameterType="string" resultType="int">
 		select count(*) from msgView
-		where msgadd_adser=#{msgaddAdser} and trash_flag='N'
+		where msgadd_adser=#{msgaddAdser} and trash_flag='N' and spam_flag='N'
 	</select>
 	
 	<select id="findStarNo" parameterType="string" resultType="int">
@@ -119,7 +136,7 @@
 		    where msgadd_adsee=#{memId} or msgadd_adser=#{memId}
 		    order by msg_no desc
 		)
-		where star_flag='Y' and trash_flag='N'
+		where star_flag='Y' and trash_flag='N' and spam_flag='N'
 		order by msgadd_no desc
 	</select>
 	
@@ -131,7 +148,7 @@
 		    where msgadd_adsee=#{memId} or msgadd_adser=#{memId}
 		    order by msg_no desc
 		)
-		where temporary_flag='Y' and trash_flag='N'
+		where temporary_flag='Y' and trash_flag='N' and spam_flag='N'
 		order by msgadd_no desc
 	</select>
 	
@@ -181,5 +198,17 @@
 	
 	<update id="updateTrashFlag" parameterMap="mailTrashUpdateParam">
 		call updateTrashFlag(?,?)
+	</update>
+	
+	<!-- updateSpamFlag -->
+	<parameterMap type="map" id="mailSpamUpdateParam">
+		<parameter property="spamFlag" javaType="string" jdbcType="VARCHAR" 
+			mode="IN"/>
+		<parameter property="msgaddNo" javaType="string" jdbcType="VARCHAR" 
+			mode="IN"/>	
+	</parameterMap>
+	
+	<update id="updateSpamFlag" parameterMap="mailSpamUpdateParam">
+		call updateSpamFlag(?,?)
 	</update>
 </mapper>

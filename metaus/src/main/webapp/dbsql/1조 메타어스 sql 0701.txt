@@ -1637,6 +1637,27 @@ begin
     end if;
 end;
 
+--프로시져 updateSpamFlag
+create or replace procedure updateSpamFlag
+(
+    p_spam_flag varchar2,
+    p_msgadd_no fp_msgadd.msgadd_no%type
+)
+is
+begin
+    if p_spam_flag='N' then
+        --spam_flag 'Y'로 업데이트
+        update fp_msgadd
+        set spam_flag='Y'
+        where msgadd_no=p_msgadd_no;
+    else 
+        --spam_flag 'N'으로 업데이트
+        update fp_msgadd
+        set spam_flag='N'
+        where msgadd_no=p_msgadd_no;
+    end if;
+end;
+
 select * from fp_com;
 insert into fp_mem
 values(fp_mem_seq.nextval,'테스터','test@naver.com','1234','닉네임1','941215','01030843045','15151','서울시영등포구시흥대로','상세주소','프사경로',sysdate,null,null,null,null,null,null,null);
