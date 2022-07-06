@@ -18,4 +18,6 @@ public interface ManagerDAO {
 	public String findId(ManagerVO vo);
 	public String findPw(ManagerVO vo);
 	public int updatePw(ManagerVO vo);
+	public int updatemanager(ManagerVO vo);
+	ManagerVO selectBymanagerNo(int managerNo);
 }

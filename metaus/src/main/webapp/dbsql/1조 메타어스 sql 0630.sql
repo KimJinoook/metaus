@@ -689,7 +689,7 @@ ALTER TABLE fp_boardType
 CREATE TABLE fp_comment (
 	cmt_no NUMBER NOT NULL, /* 댓글 번호 */
 	cmt_regdate DATE, /* 작성일 */
-	cmt_content CLOB, /* 내용 */
+	cmt_content VARCHAR2(2000), /* 내용 */
 	board_no NUMBER, /* 글 번호 */
 	mem_no NUMBER, /* 회원번호 */
 	cmt_groupNo NUMBER DEFAULT 0, /* 그룹번호 */

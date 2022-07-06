@@ -1,7 +1,9 @@
 package com.metaus.admin.controller;
 
+import java.io.IOException;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -19,6 +21,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.metaus.admin.model.ManagerService;
 import com.metaus.admin.model.ManagerVO;
+import com.metaus.common.ConstUtil;
+import com.metaus.common.FileUploadUtil;
 import com.metaus.member.model.CompanyService;
 import com.metaus.member.model.CompanyVO;
 import com.metaus.member.model.MemberService;
@@ -37,6 +41,7 @@ public class AdminMemberController {
 	private final ManagerService managerService;
 	private final MemberService memberService;
 	private final CompanyService comService;
+	private final FileUploadUtil fileUploadUtil;
 	
 	@RequestMapping("/memberList")
 	public void memberList(@ModelAttribute MemberVO mvo,Model model) {
@@ -83,18 +88,43 @@ public class AdminMemberController {
 
 		String userid = (String)session.getAttribute("managerId");
 		ManagerVO managerVo = managerService.selectByUserid(userid);
+		managerVo=managerService.selectBymanagerNo(managerVo.getManagerNo());
 		model.addAttribute("managerVo",managerVo);
 		
 		
 	}
 	
 	@PostMapping("/managerEdit")
-	public String managerEdit_post() {
-		logger.info("");
+	public String managerEdit_post(@ModelAttribute ManagerVO vo,HttpServletRequest request,Model model) {
+		logger.info("관리자 수정 처리,파라미터 vo={}",vo);
 		
 		
 		
-		return "redirect:/admin/member/managerEdit";
+		String fileName = "";		
+		try {
+			List<Map<String, Object>> fileList = fileUploadUtil.fileUpload(request, ConstUtil.UPLOAD_MANAGER_PROFILE_FLAG);
+
+			for (Map<String, Object> fileMap : fileList) {				
+				fileName = (String) fileMap.get("fileName");
+			}
+			logger.info("파일 업로드 성공, fileName={}", fileName);
+		} catch (IllegalStateException | IOException e) {
+			e.printStackTrace();
+		}
+		vo.setManagerNo(vo.getManagerNo());
+		vo.setManagerPic(fileName);
+		int cnt=managerService.updatemanager(vo);
+		String msg="실패",url="/admin/member/managerEdit";
+		if(cnt>0) {
+			msg="수정 성공";
+			url="/admin/member/managerEdit";	
+		}else {
+			msg="수정 실패";
+		}
+		model.addAttribute("msg",msg);
+		model.addAttribute("url",url);
+		
+		return "/common/message";
 	}
 	
 	

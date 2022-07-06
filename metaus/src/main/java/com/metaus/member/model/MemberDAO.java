@@ -31,5 +31,6 @@ public interface MemberDAO {
 	public int unlockMember(int memNo);
 	public int lockMember(MemberVO vo);
 	int warnCntUp(MemberVO vo);
-
+	//회원정보 수정 - 최재훈
+	int updateMember(MemberVO vo);
 }
