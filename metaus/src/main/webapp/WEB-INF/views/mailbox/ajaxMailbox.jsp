@@ -24,6 +24,9 @@
 						  <c:when test="${flag eq 'star'}">
 						  	별표 메세지
 						  </c:when>
+						  <c:when test="${flag eq 'trash'}">
+						  	삭제 메세지
+						  </c:when>
 					  </c:choose>
                   </h3>
                   <div class="box-tools pull-right">
@@ -40,18 +43,25 @@
                       	<!-- 메세지 목록 반복 시작 -->
                       	<c:forEach var="map" items="${list }">
 	                        <tr>
-	                          <input type="hidden" value="${map['MSGADD_NO']}">
-	                          <td><input type="checkbox" /></td>
-	                          <td class="mailbox-star">
-	                          	<a href="#">
-	                          		<c:if test="${map['STAR_FLAG'] eq 'Y'}">
-	                          			<i class="fa fa-star text-yellow star"></i>
-	                          		</c:if>
-	                          		<c:if test="${map['STAR_FLAG'] eq 'N'}">
-	                          			<i class="fa fa-star-o text-yellow star"></i>
-	                          		</c:if>
-	                          	</a></td>
+	                          <input type="hidden" value="${map['MSGADD_NO']}" class="msgaddNo">
+	                          <td>
+	                          	<input type="checkbox" />
+	                          </td>
+	                          <c:if test="${flag ne 'trash' }">
+		                          <td class="mailbox-star">
+		                          	<a href="#">
+		                          		<input type="hidden" value="${flag}">
+		                          		<c:if test="${map['STAR_FLAG'] eq 'Y'}">
+		                          			<i class="fa fa-star text-yellow star"></i>
+		                          		</c:if>
+		                          		<c:if test="${map['STAR_FLAG'] eq 'N'}">
+		                          			<i class="fa fa-star-o text-yellow star"></i>
+		                          		</c:if>
+		                          	</a>
+		                          </td>
+	                          </c:if>
 	                          <td class="mailbox-name">
+	                          	  <c:if test="${flag eq 'trash'}">&nbsp;</c:if>
 		                          <a href='<c:url value="/mailbox/mailDetail?msgaddNo=${map['MSGADD_NO']}" />'>
 			                          <c:choose>
 										  <c:when test="${flag eq 'received'}">
@@ -72,7 +82,7 @@
 				                          		${map['MSGADD_ADSEE']}
 				                          	</c:if>
 										  </c:when>
-										  <c:when test="${flag eq 'star'}">
+										  <c:when test="${flag eq 'star' || flag eq 'trash'}">
 										  	<!-- 별표 메세지일 때 -->
 										  	<!-- 보낸 메세지 -->
 				                          	<c:if test="${sessionScope.memId eq map['MSGADD_ADSER'] && sessionScope.memId ne map['MSGADD_ADSEE']}">
@@ -108,14 +118,6 @@
 	                        </tr>
                         </c:forEach>
                         <!-- 메세지 목록 반복 끝 -->
-                        <tr>
-                          <td><input type="checkbox" /></td>
-                          <td class="mailbox-star"><a href="#"><i class="fa fa-star-o text-yellow star"></i></a></td>
-                          <td class="mailbox-name"><a href="read-mail.html">Alexander Pierce</a></td>
-                          <td class="mailbox-subject"><b>첨부파일 있을 때</b> - Trying to find a solution to this problem...</td>
-                          <td class="mailbox-attachment"><i class="fa fa-paperclip"></i></td>
-                          <td class="mailbox-date">28 mins ago</td>
-                        </tr>
                       </tbody>
                     </table><!-- /.table -->
                   </div><!-- /.mail-box-messages -->
@@ -123,9 +125,18 @@
                 <div class="box-footer no-padding">
                   <div class="mailbox-controls">
                     <!-- Check all button -->
-                    <button class="btn btn-default btn-sm checkbox-toggle"><i class="fa fa-square-o"></i></button>                    
+                    <button class="btn btn-default btn-sm checkbox-toggle check-all"><i class="fa-regular fa-square"></i></button>                    
                     <div class="btn-group">
-                      <button class="btn btn-default btn-sm"><i class="fa fa-trash-o"></i></button>
+                      <c:if test="${flag ne 'trash' }">
+                      	<button class="btn btn-default btn-sm btn-trash"><i class="fa fa-trash-o"></i></button>
+                      </c:if>
+                      <c:if test="${flag eq 'trash' }">
+                      	<button class="btn btn-default btn-sm btn-trash btn-trash-up"><i class="fa-solid fa-trash-can-arrow-up"></i></button>
+                      </c:if>
+                      <!-- 받은 메세지에서만 스팸 버튼 활성화 -->
+                      <c:if test="${flag eq 'received'}">
+                      	<button class="btn btn-default btn-sm"><i class="fa fa-filter"></i></button>
+                      </c:if>
                       <button class="btn btn-default btn-sm"><i class="fa fa-reply"></i></button>
                       <button class="btn btn-default btn-sm"><i class="fa fa-share"></i></button>
                     </div><!-- /.btn-group -->

@@ -17,4 +17,5 @@ public interface MailboxService {
 	int findSpamNo(String msgaddAdser);
 	int findTrashNo(String msgaddAdser);
 	int updateStarFlag(Map<String, String> map);
+	int updateTrashFlag(Map<String, String> map);
 }

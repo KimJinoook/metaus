@@ -33,6 +33,8 @@ public class MailboxServiceImpl implements MailboxService{
 			list = mailboxDao.selectMsgViewByRecipient(memId);
 		}else if(msgFlag == MailboxUtil.MSG_STAR_FLAG) { //별표 메세지
 			list = mailboxDao.selectMsgViewByStar(memId);
+		}else if(msgFlag == MailboxUtil.MSG_TRASH_FLAG) { //삭제 메세지
+			list = mailboxDao.selectMsgViewByTrash(memId);
 		}
 		
 		return list;
@@ -75,12 +77,17 @@ public class MailboxServiceImpl implements MailboxService{
 
 	@Override
 	public int findTrashNo(String msgaddAdser) {
-		return mailboxDao.findSpamNo(msgaddAdser);
+		return mailboxDao.findTrashNo(msgaddAdser);
 	}
 
 	@Override
 	public int updateStarFlag(Map<String, String> map) {
 		return mailboxDao.updateStarFlag(map);
+	}
+
+	@Override
+	public int updateTrashFlag(Map<String, String> map) {
+		return mailboxDao.updateTrashFlag(map);
 	}
 	
 }
