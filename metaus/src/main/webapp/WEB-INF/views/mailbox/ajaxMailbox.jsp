@@ -14,7 +14,15 @@
 	
 	.trash-spam-message{
 		border-radius: 3px;
-		background-color: red;
+		background-color: #ff000040;
+		color: black;
+		font-size: 3px;
+		padding: 2px;
+	}
+	
+	.temporary-message{
+		border-radius: 3px;
+		background-color: #29b1fd3d;
 		color: black;
 		font-size: 3px;
 		padding: 2px;
@@ -37,6 +45,9 @@
 						  </c:when>
 						  <c:when test="${flag eq 'spam'}">
 						  	스팸함
+						  </c:when>
+						  <c:when test="${flag eq 'temporary'}">
+						  	임시보관함
 						  </c:when>
 					  </c:choose>
                   </h3>
@@ -73,7 +84,12 @@
 	                          </c:if>
 	                          <td class="mailbox-name">
 	                          	  <c:if test="${flag eq 'trash' || flag eq 'spam'}">&nbsp;</c:if>
-		                          <a href='<c:url value="/mailbox/mailDetail?msgaddNo=${map['MSGADD_NO']}" />'>
+	                          	  <c:if test="${map['TEMPORARY_FLAG'] ne 'Y'}">
+		                          	<a href='<c:url value="/mailbox/mailDetail?msgaddNo=${map['MSGADD_NO']}" />'>
+		                          </c:if>
+		                          <c:if test="${map['TEMPORARY_FLAG'] eq 'Y'}">
+		                          	<a href='<c:url value="/mailbox/compose?msgaddNo=${map['MSGADD_NO']}" />'>
+		                          </c:if>
 			                          <c:choose>
 										  <c:when test="${flag eq 'received' || flag eq 'spam'}">
 										  	<!-- 받은 메세지일 때 -->
@@ -84,7 +100,7 @@
 				                          		${map['MSGADD_ADSER']}
 				                          	</c:if>
 										  </c:when>
-										  <c:when test="${flag eq 'sent'}">
+										  <c:when test="${flag eq 'sent' || flag eq 'temporary'}">
 										  	<!-- 보낸 메세지일 때 -->
 				                          	<c:if test="${sessionScope.memId eq map['MSGADD_ADSEE']}">
 				                          		나
@@ -98,6 +114,9 @@
 										  	<!-- 보낸 메세지 -->
 				                          	<c:if test="${sessionScope.memId eq map['MSGADD_ADSER'] && sessionScope.memId ne map['MSGADD_ADSEE']}">
 				                          		<span class="star-message-type">Send</span>
+				                          		<c:if test="${map['TEMPORARY_FLAG'] eq 'Y'}">
+				                          			<span class="temporary-message">Temporary</span>
+				                          		</c:if>
 				                          		${map['MSGADD_ADSEE']}
 				                          	</c:if>
 				                          	<!-- 받은 메세지 -->
@@ -110,6 +129,9 @@
 				                          	</c:if>
 				                          	<!-- 내가 보낸 메세지 -->
 				                          	<c:if test="${sessionScope.memId eq map['MSGADD_ADSEE'] && sessionScope.memId eq map['MSGADD_ADSER']}">
+				                          		<c:if test="${map['TEMPORARY_FLAG'] eq 'Y'}">
+				                          			<span class="temporary-message">Temporary</span>
+				                          		</c:if>
 				                          		나
 				                          	</c:if>
 										  </c:when>

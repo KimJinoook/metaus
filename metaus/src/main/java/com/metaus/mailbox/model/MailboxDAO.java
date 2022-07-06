@@ -15,6 +15,7 @@ public interface MailboxDAO {
 	List<Map<String, Object>> selectMsgViewByStar(String memId);
 	List<Map<String, Object>> selectMsgViewByTrash(String memId);
 	List<Map<String, Object>> selectMsgViewBySpam(String memId);
+	List<Map<String, Object>> selectMsgViewByTemporary(String memId);
 	Map<String, Object> selectByMsgAddNo(int msgaddNo);
 	int insertMailboxAtc(MailboxAtcVO mailboxAtcVo);
 	int findReceivedNo(String msgaddAdsee);
@@ -26,4 +27,5 @@ public interface MailboxDAO {
 	int updateStarFlag(Map<String, String> map);
 	int updateTrashFlag(Map<String, String> map);
 	int updateSpamFlag(Map<String, String> map);
+	int delTemporaryMail(int msgaddNo);
 }

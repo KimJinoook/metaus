@@ -37,6 +37,8 @@ public class MailboxServiceImpl implements MailboxService{
 			list = mailboxDao.selectMsgViewByTrash(memId);
 		}else if(msgFlag == MailboxUtil.MSG_SPAM_FLAG) { //스팸 메세지
 			list = mailboxDao.selectMsgViewBySpam(memId);
+		}else if(msgFlag == MailboxUtil.MSG_TEMPORARY_FLAG) { //임시보관함
+			list = mailboxDao.selectMsgViewByTemporary(memId);
 		}
 		
 		return list;
@@ -96,5 +98,11 @@ public class MailboxServiceImpl implements MailboxService{
 	public int updateSpamFlag(Map<String, String> map) {
 		return mailboxDao.updateSpamFlag(map);
 	}
+
+	@Override
+	public int delTemporaryMail(int msgaddNo) {
+		return mailboxDao.delTemporaryMail(msgaddNo);
+	}
+
 	
 }

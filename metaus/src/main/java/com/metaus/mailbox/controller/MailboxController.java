@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -42,7 +43,11 @@ public class MailboxController {
 	private final FileUploadUtil fileUploadUtil;
 	
 	@RequestMapping("/compose")
-	public String compose() {
+	public String compose(@RequestParam(defaultValue = "0") int msgaddNo, Model model) {
+		Map<String, Object> map = mailboxService.selectByMsgAddNo(msgaddNo);
+		
+		model.addAttribute("map", map);
+		
 		return "/mailbox/compose";
 	}
 	
@@ -52,14 +57,26 @@ public class MailboxController {
 	}
 	
 	@RequestMapping("/sendMail")
-	public String sendMail(@ModelAttribute MailboxVO vo, @RequestParam String msgaddAdsee 
-			, HttpServletRequest request, HttpSession session){
-		//쪽지 등록 처리
+	public String sendMail(@ModelAttribute MailboxVO vo, @RequestParam(defaultValue = "temporary") String msgaddAdsee 
+			,@RequestParam(defaultValue = "N") String temporaryFlag , HttpServletRequest request, HttpSession session){
+		//임시저장 메세지 전송 처리
+		Map<String, ?> flashMap =RequestContextUtils.getInputFlashMap(request);
+		
+		if(flashMap!=null) {
+			MailboxVO mailboxVo = (MailboxVO) flashMap.get("mailboxVo");
+			String msgaddAdsee2 = (String) flashMap.get("msgaddAdsee");
+			logger.info("임시저장 메세지 전송 파라미터, mailboxVo={}, msgaddAdsee2={}", mailboxVo, msgaddAdsee2);
+			
+			msgaddAdsee = msgaddAdsee2;
+			vo = mailboxVo;
+		}
+		
+		//새 메세지 전송 처리
 		String memId=(String) session.getAttribute("memId");
 		logger.info("memId={}", memId);
 		vo.setMsgaddAdser(memId);
 		
-		logger.info("메세지 전송 처리, 파라미터 vo={}, msgaddAdsee={}", vo, msgaddAdsee);
+		logger.info("메세지 전송 처리, 파라미터 vo={}, msgaddAdsee={}, temporaryFlag={}", vo, msgaddAdsee, temporaryFlag);
 		
 		int cnt=mailboxService.insertMailbox(vo);
 		logger.info("메세지 등록 결과 cnt={}", cnt);
@@ -67,6 +84,8 @@ public class MailboxController {
 		//수신자 셋팅
 		RecipientVO recipientVo = new RecipientVO();
 		recipientVo.setMsgaddAdsee(msgaddAdsee);
+		recipientVo.setTemporaryFlag(temporaryFlag);
+		logger.info("수신자 셋팅 결과 recipientVo={}", recipientVo);
 		
 		//수신자 번호 셋팅 - 등록한 쪽지 번호 셋팅
 		int msgNo=mailboxService.selectMsgNo();
@@ -185,6 +204,21 @@ public class MailboxController {
 		return "/mailbox/ajaxMailbox";
 	}
 	
+	@RequestMapping("/temporaryMail")
+	public String temporaryMail(HttpSession session, ModelMap model) {
+		String memId=(String) session.getAttribute("memId");
+		logger.info("memId={}", memId);
+		
+		List<Map<String, Object>> list 
+		= mailboxService.selectMsgView(memId, MailboxUtil.MSG_TEMPORARY_FLAG);
+		logger.info("스팸 메세지 목록 조회, list.size={}", list.size());
+		
+		model.addAttribute("list", list);
+		model.addAttribute("flag", "temporary");
+		
+		return "/mailbox/ajaxMailbox";
+	}
+	
 	@RequestMapping("/mailbox")
 	public String mailNoByFlag(HttpSession session, Model model) {
 		String memId=(String) session.getAttribute("memId");
@@ -288,6 +322,22 @@ public class MailboxController {
 		return map;
 	}
 	
+	@RequestMapping("/temporaryFlagUpdate")
+	public String temporaryFlagUpdate(RedirectAttributes redirect
+			, @ModelAttribute MailboxVO mailboxVo, @RequestParam(defaultValue = "0") int msgaddNo
+			, @RequestParam String msgaddAdsee) {
+		logger.info("임시저장 메세지 삭제 파라미터, msgaddNo={}", msgaddNo);
+		logger.info("msgaddAdsee={}", msgaddAdsee);
+		
+		int cnt=mailboxService.delTemporaryMail(msgaddNo);
+		logger.info("임시저장 메세지 삭제 결과, cnt={}", cnt);
+		
+		redirect.addFlashAttribute("mailboxVo", mailboxVo);
+		redirect.addFlashAttribute("msgaddAdsee", msgaddAdsee);
+		
+		return "redirect:/mailbox/sendMail";
+	}
+	
 	public Map<String, Integer> getMailboxNoMap(HttpSession session){
 		String memId = (String) session.getAttribute("memId");
 		
@@ -305,7 +355,7 @@ public class MailboxController {
 		map.put("temporaryNo", temporaryNo);
 		map.put("spamNo", spamNo);
 		map.put("trashNo", trashNo);
-		
+
 		return map;
 	}
 }

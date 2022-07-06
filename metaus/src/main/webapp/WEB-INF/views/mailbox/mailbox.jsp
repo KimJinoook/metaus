@@ -225,6 +225,20 @@
 				});
 			});
 			
+			//임시보관함
+			$('.temporaryMail').click(function(){
+				$.ajax({
+					url: "<c:url value='/mailbox/temporaryMail'/>",
+					type: "GET",
+					success: function(data){
+						$('.box.box-primary').html(data);
+					},
+					error: function(xhr, status, error){
+						alert('error:' + error);
+					}
+				});
+			});
+			
 		});
 </script>
       <!-- Right side column. Contains the navbar and content of the page -->

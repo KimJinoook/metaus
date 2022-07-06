@@ -19,4 +19,5 @@ public interface MailboxService {
 	int updateStarFlag(Map<String, String> map);
 	int updateTrashFlag(Map<String, String> map);
 	int updateSpamFlag(Map<String, String> map);
+	int delTemporaryMail(int msgaddNo);
 }
