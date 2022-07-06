@@ -17,9 +17,8 @@
 			});
 			
 			$(document).on("click",".star", function(){
-			//$('.star').click(function(){
 				var msgaddNo = $(this).closest('tr').find('input[type=hidden]').val();
-				//console.log(msgNo);
+				//console.log(msgaddNo);
 				
 				if($(this).hasClass('fa-star')){
 					//console.log("색칠된 별");

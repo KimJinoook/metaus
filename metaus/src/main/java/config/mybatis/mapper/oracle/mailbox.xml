@@ -93,8 +93,15 @@
 	</select>
 	
 	<select id="findStarNo" parameterType="string" resultType="int">
-		select count(*) from msgView
-		where msgadd_adser=#{msgaddAdser} and star_flag='Y'
+		select count(*)
+		from
+		(
+		    select * from msgview
+		    where msgadd_adsee=#{memId} or msgadd_adser=#{memId}
+		    order by msg_no desc
+		)
+		where star_flag='Y'
+		order by msg_no desc
 	</select>
 	
 	<select id="findTemporaryNo" parameterType="string" resultType="int">
@@ -113,8 +120,6 @@
 	</select>
 
 	<parameterMap type="map" id="mailStarUpdateParam">
-		<parameter property="msgaddAdsee" javaType="string" jdbcType="VARCHAR" 
-			mode="IN"/>
 		<parameter property="emptyFlag" javaType="string" jdbcType="VARCHAR" 
 			mode="IN"/>
 		<parameter property="msgaddNo" javaType="string" jdbcType="VARCHAR" 
@@ -122,6 +127,6 @@
 	</parameterMap>
 	
 	<update id="updateStarFlag" parameterMap="mailStarUpdateParam">
-		call updateStarFlag(?,?,?)
+		call updateStarFlag(?,?)
 	</update>
 </mapper>

@@ -59,8 +59,8 @@ public class MailboxServiceImpl implements MailboxService{
 	}
 
 	@Override
-	public int findStarNo(String msgaddAdser) {
-		return mailboxDao.findStarNo(msgaddAdser);
+	public int findStarNo(String memId) {
+		return mailboxDao.findStarNo(memId);
 	}
 
 	@Override
