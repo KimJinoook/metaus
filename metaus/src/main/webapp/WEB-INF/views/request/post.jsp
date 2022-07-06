@@ -31,6 +31,7 @@
 
         </div>
     </section>
+ 
     <!-- =============== End of Page Header 1 Section =============== -->
 
 
@@ -47,8 +48,8 @@
             
            
              
-            <form method="post" action="<c:url value='/request/insertRequest'/>" class="post-job-resume mt50">
-
+            <form method="post" action="<c:url value='/request/post'/>" class="post-job-resume mt50">
+			<input type="hidden" name="comId" value="${comId }">
                 <!-- Start of Job Details -->
              <h3 class="capitalize pb20">의뢰 정보</h3>
              <br>
@@ -60,7 +61,7 @@
                         <!-- Form Group -->
                         <div class="form-group">
                             <label>의뢰 제목</label>
-                            <input class="form-control" name="rec_title" id="rec_title" type="text" required>
+                            <input class="form-control" name="recTitle" id="recTitle" type="text" required>
                         </div>
 
                         <!-- Form Group -->
@@ -87,13 +88,13 @@
                         <!-- Form Group -->
                         <div class="form-group">
                             <label>의뢰 설명 <span>(선택사항)</span></label>
-                            <textarea class="tinymce" name="rec_content" id="rec_content"></textarea>
+                            <textarea class="tinymce" name="recContent" id="recContent"></textarea>
                         </div>
                         
                         <!-- Form Group -->
                         <div class="form-group">
                             <label>페이 <span>(선택사항)</span></label>
-                            <input class="form-control" name="rec_pay" id="rec_pay" type="text" placeholder='5000$'>
+                            <input class="form-control" name="recPay" id="recPay" type="text" placeholder='5000$'>
                         </div>
                         <!-- Form Group -->
                         <div class="form-group">

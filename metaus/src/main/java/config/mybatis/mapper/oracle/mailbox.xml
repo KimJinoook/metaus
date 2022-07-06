@@ -29,10 +29,6 @@
 	<!-- ORACLE의 CLOB 타입의 데이터는 MyBatis를 이용해 처리할 때는 resultMap을 통해 타입 지정을 해야 함 -->
 	<!-- selectMsgViewBySender -->
 	<resultMap id="getMsgViewBySender" type="HashMap">
-		<result property="MSG_NO" column="MSG_NO" />
-		<result property="MSG_TITLE" column="MSG_TITLE" />
-		<result property="MSGADD_ADSER" column="MSGADD_ADSER" />
-		<result property="MSGADD_ADSEE" column="MSGADD_ADSEE" />
 		<result property="MSG_CONTENT" column="MSG_CONTENT" jdbcType="CLOB" javaType="java.lang.String" />
 	</resultMap>
 	
@@ -43,16 +39,29 @@
 	
 	<!-- selectMsgViewByRecipient -->
 	<resultMap id="getMsgViewByRecipient" type="HashMap">
-		<result property="MSG_NO" column="MSG_NO" />
-		<result property="MSG_TITLE" column="MSG_TITLE" />
-		<result property="MSGADD_ADSER" column="MSGADD_ADSER" />
-		<result property="MSGADD_ADSEE" column="MSGADD_ADSEE" />
 		<result property="MSG_CONTENT" column="MSG_CONTENT" jdbcType="CLOB" javaType="java.lang.String" />
 	</resultMap>
 	
 	<select id="selectMsgViewByRecipient" parameterType="string" resultMap="getMsgViewByRecipient">
 		select * from msgview
 		where msgadd_adsee=#{msgaddAdsee} order by msg_no desc
+	</select>
+	
+	<!-- selectMsgViewByStar -->
+	<resultMap id="getMsgViewByStar" type="HashMap">
+		<result property="MSG_CONTENT" column="MSG_CONTENT" jdbcType="CLOB" javaType="java.lang.String" />
+	</resultMap>
+	
+	<select id="selectMsgViewByStar" parameterType="string" resultMap="getMsgViewByStar">
+		select *
+		from
+		(
+		    select * from msgview
+		    where msgadd_adsee=#{memId} or msgadd_adser=#{memId}
+		    order by msg_no desc
+		)
+		where star_flag='Y'
+		order by msg_no desc
 	</select>
 	
 	<!-- selectByMsgAddNo -->
@@ -84,8 +93,15 @@
 	</select>
 	
 	<select id="findStarNo" parameterType="string" resultType="int">
-		select count(*) from msgView
-		where msgadd_adser=#{msgaddAdser} and star_flag='Y'
+		select count(*)
+		from
+		(
+		    select * from msgview
+		    where msgadd_adsee=#{memId} or msgadd_adser=#{memId}
+		    order by msg_no desc
+		)
+		where star_flag='Y'
+		order by msg_no desc
 	</select>
 	
 	<select id="findTemporaryNo" parameterType="string" resultType="int">
@@ -104,8 +120,6 @@
 	</select>
 
 	<parameterMap type="map" id="mailStarUpdateParam">
-		<parameter property="msgaddAdsee" javaType="string" jdbcType="VARCHAR" 
-			mode="IN"/>
 		<parameter property="emptyFlag" javaType="string" jdbcType="VARCHAR" 
 			mode="IN"/>
 		<parameter property="msgaddNo" javaType="string" jdbcType="VARCHAR" 
@@ -113,6 +127,6 @@
 	</parameterMap>
 	
 	<update id="updateStarFlag" parameterMap="mailStarUpdateParam">
-		call updateStarFlag(?,?,?)
+		call updateStarFlag(?,?)
 	</update>
 </mapper>

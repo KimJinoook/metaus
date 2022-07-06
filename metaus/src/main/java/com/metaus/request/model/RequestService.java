@@ -1,16 +1,24 @@
 package com.metaus.request.model;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
 import com.metaus.common.SearchVO;
+import com.metaus.member.model.CompanyVO;
 
 import lombok.RequiredArgsConstructor;
 
 public interface RequestService {
-	public int insertRequest(RequestVO vo);
-	public List<RequestVO> selectAll(SearchVO searchVo);
-	int getTotalRecord(SearchVO searchVo);
+	int insertRequest(RequestVO vo);
+	List<Map<String, Object>> selectAll(SearchVO searchVo);
+	int selectTotalRecord(SearchVO searchVo);
+	int insertRequestAtc(RequestAtcVO requestAtcVo);
+	List<RequestAtcVO> selectRequestAtc();
+	List<RequestVO> selectRequest(SearchVO searchVo);
+	List<CompanyVO> selectCom();
+	RequestVO selectRequestDetail(int recNo);
+	int requestDelete(int recNo);
 
 }

@@ -1597,7 +1597,6 @@ on a.msg_no=b.msg_no;
 --프로시져 updateStarFlag
 create or replace procedure updateStarFlag
 (
-    p_msgadd_adsee fp_msgadd.msgadd_adsee%type,
     p_empty_flag varchar2,
     p_msgadd_no fp_msgadd.msgadd_no%type
 )

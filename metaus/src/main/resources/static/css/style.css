@@ -6951,3 +6951,15 @@ nav.cateMenu {
   align-items: center !important;
   display: inline-flex;
 }
+
+button.btn.btn-outline-dark.flex-shrink-0 {
+    background: #5c6e7e;
+}
+
+input#inputQuantity {
+    display: inline-block;
+    margin-right: 7px;
+    padding: 0;
+    width: 30px;
+    height: 39px;
+}
