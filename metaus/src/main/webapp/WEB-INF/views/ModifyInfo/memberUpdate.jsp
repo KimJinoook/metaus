@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%@ include file="../layout/sidebar.jsp"%>
+<%@ include file="../inc/header.jsp"%>
 <link rel="stylesheet" type="text/css" href="<c:url value='/css/resume.css'/>">
 <style>
 .dellink {

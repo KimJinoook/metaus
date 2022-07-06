@@ -4,18 +4,23 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ include file="../inc/header.jsp" %>
-
+<style>
+.thumb {
+	width: 200px;
+	height: 140px;
+}
+</style>
 
 
 
 	<!-- =============== Start of Page Header 1 Section =============== -->
     <section class="page-header">
-        <div class="container">
+        <div class="container"  style="margin-top: 94px;">
 
             <!-- Start of Page Title -->
             <div class="row">
                 <div class="col-md-12">
-                    <h2>기업회원 - 정보수정</h2>
+                    <h2>기업회원 - (${comVo.comName })정보수정</h2>
                 </div>
             </div>
             <!-- End of Page Title -->
@@ -38,7 +43,8 @@
                         <!-- Start of Tabpanel for Company Account -->
                         <div role="tabpanel" class="tab-pane active" id="company">
                             <div class="row">
-                            <form method="post" action="<c:url value='/ModifyInfo/companyUpdate'/>">
+                            <form method="post" enctype="multipart/form-data" 
+                            action="<c:url value='/ModifyInfo/companyUpdate'/>">
 
                                 <!-- Start of the First Column -->
                                 <div class="col-md-6">
@@ -112,12 +118,21 @@
                                     	<input type="text" class="form-control" id="comOpen" placeholder="예) 20010101">
                                    	</div>
                                 </div>
+                                
+                                
                                 <div class="col-md-2">
                                 	 <!-- Form Group -->
                                     <div class="form-group">
                                 		<label> </label>
                                     	<button type="button" style="margin-top: 5px" id="comRrnCheck"  class="btn btn-blue btn-effect form-control">등록번호 확인</button>
                                    	</div>
+                                </div>
+                                <div class="col-md-6">
+                                <label>기업로고</label>
+                                	 <input type="file" class="hidden_input" id="imageSelector"
+												name="upfile" accept="image/jpeg, image/jpg, image/png"
+												multiple /> <img src="" class="thumb" /> <a
+												href="javascript:void(0);" class="dellink">[이미지 삭제]</a>
                                 </div>
                                 
                                 <div class="col-md-12">
@@ -154,6 +169,15 @@
 <script type="text/javascript" src="<c:url value='/js/jquery-3.6.0.min.js'/>"></script>
 <script type="text/javascript">
 	$(function() {
+		/*이미지 업로드*/
+		$('.thumb').hide();
+		$('#imageSelector').change(function(){
+			$('.thumb').show();
+		});
+		$('.dellink').click(function(){
+			$('#imageSelector').val('');
+			$('.thumb').hide();
+		});
 		/** 기업회원 유효성검사*/
 		$('#btnComSign').click(function() {
 			if ($.trim($('#comPw').val()).length < 1) {
