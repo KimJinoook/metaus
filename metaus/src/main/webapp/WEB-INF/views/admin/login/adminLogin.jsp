@@ -58,7 +58,7 @@ $(function(){
                             <div class="col-lg-6 d-none d-lg-block bg-login-image"></div>
                             <div class="col-lg-6">
                                 <div class="p-5">
-                                    <div class="text-center"><br/><br/><br/>
+                                    <div class="text-center"><br/>
                                         <h1 class="h4 text-gray-900 mb-4">MetaUs</h1><br/>
                                     </div>
                                     <form class="user" method="post" action="<c:url value='/admin/login/adminLogin'/>">
@@ -74,7 +74,10 @@ $(function(){
                                         </div>
                                         <br/>
                                         <button type="button" class="btn btn-primary btn-user btn-block" id="adminLoginBtn">Login</button>
-                                        <br/><br/><br/>
+                                        <br/>
+                                        <div class="text-center">
+	                                        <a class="small" href="<c:url value='/admin/member/lostAccount'/>">Forgot Password?</a>
+	                                    </div>
                                         
                                         
                                     </form>

@@ -22,7 +22,8 @@ public class MvcConfiguration implements WebMvcConfigurer{
 				 , "/mailbox/**", "/commission/**");
 		
 		registry.addInterceptor(new AdminLoginInterceptor())
-		.excludePathPatterns("/admin/login/adminLogin","/admin/css/**","/admin/js/**","/admin/img/**","/admin/scss/**","/admin/vendor/**")
+		.excludePathPatterns("/admin/login/adminLogin","/admin/member/lostAccount","/admin/member/findId","/admin/member/managerPwReset","/admin/member/findPw","/admin/member/updatePw",
+							"/admin/css/**","/admin/js/**","/admin/img/**","/admin/scss/**","/admin/vendor/**")
 		.addPathPatterns("/admin/**");
 		
 		

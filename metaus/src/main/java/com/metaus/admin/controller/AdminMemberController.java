@@ -142,4 +142,70 @@ public class AdminMemberController {
 	public void get_lostAccount() {
 		logger.info("관리자 계정 찾기 페이지");
 	}
+	
+	@ResponseBody
+	@RequestMapping("/findId")
+	public String findId(String managerName, String managerTel) {
+
+		ManagerVO vo = new ManagerVO();
+		vo.setManagerName(managerName);
+		vo.setManagerTel(managerTel);
+		logger.info("관리자 아이디 찾기 vo={}",vo);
+		String result = "";
+		String managerId = managerService.findId(vo);
+		if(managerId!=null && !managerId.isEmpty()) {
+			result=managerId;
+		
+			logger.info("아이디 중복확인 결과, result={}", result);
+		}
+		
+		return result;
+	}
+	
+	@ResponseBody
+	@RequestMapping("/findPw")
+	public int findPw(String managerName, String managerTel, String managerId) {
+
+		ManagerVO vo = new ManagerVO();
+		vo.setManagerName(managerName);
+		vo.setManagerTel(managerTel);
+		vo.setManagerId(managerId);
+		logger.info("관리자 비밀번호 찾기 vo={}",vo);
+		int result = 0;
+		String managerPw = managerService.findPw(vo);
+		if(managerPw!=null && !managerPw.isEmpty()) {
+			result=1;
+		
+			logger.info("비밀번호 확인 결과, result={}", result);
+		}
+		
+		return result;
+	}
+	
+	@RequestMapping("/managerPwReset")
+	public String managerPwReset(@ModelAttribute ManagerVO vo, Model model) {
+		model.addAttribute("managerId",vo.getManagerId());
+		return "/admin/member/managerPwReset";
+	}
+	
+	@PostMapping("/updatePw")
+	public String updatePw(@ModelAttribute ManagerVO vo, Model model) {
+		logger.info("관리자 비밀번호 변경 처리, 파라미터 vo={}", vo);
+		
+		int cnt=managerService.updatePw(vo);
+		logger.info("비밀번호 변경 결과, cnt={}", cnt);
+		
+		model.addAttribute("managerId",vo.getManagerId());
+		String msg="비밀번호 변경 실패", url="/admin/member/managerPwReset";
+		if(cnt>0) {
+			msg="비밀번호 변경 성공";
+			url="/admin/login/adminLogin";
+		}
+
+		model.addAttribute("msg", msg);
+		model.addAttribute("url", url);
+
+		return "/common/message";
+		
+	}
 }

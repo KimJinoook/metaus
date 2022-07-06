@@ -97,4 +97,10 @@
 		delete from fp_pd
 		where pd_no=#{pdNo}
 	</delete>
+	
+	<select id="selectByBuyCnt" resultType="pdVo">
+		select * from fp_pd
+		<![CDATA[		
+		where rownum <=3]]>
+	</select>
 </mapper>
