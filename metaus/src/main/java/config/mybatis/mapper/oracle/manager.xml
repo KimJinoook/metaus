@@ -55,8 +55,8 @@
 		and RNUM<=#{firstRecordIndex} + #{recordCountPerPage} ]]>
 	</select>
 	
-	<select id="selectPortByMenNo" resultType="PortfolioVO" parameterType="int">
-		select * from fp_port where mem_no = #{memNo}
+	<select id="selectBymanagerNo" resultType="managerVO" parameterType="int">
+		select * from fp_manager where manager_no = #{managerNo}
 	</select>
    	
    	<select id="getTotalRecord" resultType="int" parameterType="SearchVO">
@@ -93,8 +93,8 @@
 		<selectKey resultType="int" keyProperty="managerNo" order="BEFORE">
 			select fp_manager_seq.nextval from dual
 		</selectKey>
-		insert into fp_manager(manager_no,manager_name,manager_id,manager_pwd,manager_regdate)
-		values(#{managerNo}, #{managerName}, #{managerId}, #{managerPwd},sysdate)
+		insert into fp_manager(manager_no,manager_name,manager_id,manager_pwd,manager_regdate,manager_pic,manager_tel)
+		values(#{managerNo}, #{managerName}, #{managerId}, #{managerPwd},sysdate,#{managerPic},#{managerTel})
 	</insert>
    	<select id="selectAll" resultType="ManagerVO">
    		select * from fp_manager
@@ -104,6 +104,12 @@
    		delete fp_manager
    		where manager_no = #{managerNo}
    	</delete>
+   	
+   	<update id="updatemanager" parameterType="managerVo">
+		update fp_manager
+		set manager_name=#{managerName},manager_pic=#{managerPic} ,manager_tel=#{managerTel}
+		where manager_no=#{managerNo}
+	</update>
 </mapper>
 
 

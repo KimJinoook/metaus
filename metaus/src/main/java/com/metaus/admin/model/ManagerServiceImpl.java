@@ -73,4 +73,14 @@ public class ManagerServiceImpl implements ManagerService {
 	public int updatePw(ManagerVO vo) {
 		return managerDao.updatePw(vo);
 	}
+
+	@Override
+	public int updatemanager(ManagerVO vo) {
+		return managerDao.updatemanager(vo);
+	}
+
+	@Override
+	public ManagerVO selectBymanagerNo(int managerNo) {
+		return managerDao.selectBymanagerNo(managerNo);
+	}
 }

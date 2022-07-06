@@ -101,7 +101,7 @@
 	                                    <h6 class="m-0 font-weight-bold text-primary">프로필 정보</h6>
 	                                </div>
 	                                <div class="card-body">
-	                                    <form class="user" method="post" enctype="multipart/form-data" action="<c:url value=''/>">
+	                                    <form class="user" method="post" enctype="multipart/form-data" action="<c:url value='/admin/member/managerEdit'/>">
 	                                		<div class="row">
 		                                		<div class="col-md-6">
 	                             
@@ -110,7 +110,7 @@
 			                                            <input type="text" class="form-control form-control-user"
 			                                                value="${managerVo.managerId }"
 			                                                placeholder="Id" name="managerId" readonly="readonly">
-			                                                
+			                                            <input type="hidden" name="managerNo" value="${managerVo.managerNo }">    
 			                                        </div>
 			                                        <br/>
 			                                        <div class="form-group">
