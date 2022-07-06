@@ -43,13 +43,14 @@
                       	<!-- 메세지 목록 반복 시작 -->
                       	<c:forEach var="map" items="${list }">
 	                        <tr>
-	                          <input type="hidden" value="${map['MSGADD_NO']}">
+	                          <input type="hidden" value="${map['MSGADD_NO']}" class="msgaddNo">
 	                          <td>
 	                          	<input type="checkbox" />
 	                          </td>
 	                          <c:if test="${flag ne 'trash' }">
 		                          <td class="mailbox-star">
 		                          	<a href="#">
+		                          		<input type="hidden" value="${flag}">
 		                          		<c:if test="${map['STAR_FLAG'] eq 'Y'}">
 		                          			<i class="fa fa-star text-yellow star"></i>
 		                          		</c:if>
@@ -117,14 +118,6 @@
 	                        </tr>
                         </c:forEach>
                         <!-- 메세지 목록 반복 끝 -->
-                        <tr>
-                          <td><input type="checkbox" /></td>
-                          <td class="mailbox-star"><a href="#"><i class="fa fa-star-o text-yellow star"></i></a></td>
-                          <td class="mailbox-name"><a href="read-mail.html">Alexander Pierce</a></td>
-                          <td class="mailbox-subject"><b>첨부파일 있을 때</b> - Trying to find a solution to this problem...</td>
-                          <td class="mailbox-attachment"><i class="fa fa-paperclip"></i></td>
-                          <td class="mailbox-date">28 mins ago</td>
-                        </tr>
                       </tbody>
                     </table><!-- /.table -->
                   </div><!-- /.mail-box-messages -->

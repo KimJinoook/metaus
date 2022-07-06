@@ -36,7 +36,7 @@
 				}
 				
 				var msgaddNoList = []; 
-				$('input[type=checkbox]:checked').closest('tr').find('input[type=hidden]').each(function(idx, item){
+				$('input[type=checkbox]:checked').closest('tr').find('.msgaddNo').each(function(idx, item){
 					msgaddNoList.push($(this).val());
 				});
 				//console.log(msgaddNoList);
@@ -85,6 +85,10 @@
 					//console.log("빈 별");
 					var emptyFlag = true;
 					$(this).removeClass('fa-star-o').addClass('fa-star');
+				}
+				
+				if($(this).prev().val() == 'star'){
+					$(this).closest('tr').remove();
 				}
 				
 				$.ajax({
