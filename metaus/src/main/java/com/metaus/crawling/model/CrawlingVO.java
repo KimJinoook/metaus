@@ -16,6 +16,15 @@ public class CrawlingVO {
     Elements skillElements;
     String[] imageUrls;
     
+    String title;
+    String url;
+    String description;
+    String imageUrl;
+    String date;
+    String newsCom;
+    String month;
+    String day;
+    
     
    
 }

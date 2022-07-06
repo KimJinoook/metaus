@@ -50,7 +50,7 @@
                                     <li><a href="<c:url value='/board/notice?btypeNo=1'/>">공지사항</a></li>
                                     <li><a href="<c:url value='/board/faq?btypeNo=2'/>"> F A Q</a></li>
                                     <li><a href="<c:url value='/board/qna?btypeNo=3'/>"> Q N A</a></li>
-                                    <li><a href="<c:url value='/board/news?btypeNo=4'/>">기  사</a></li>
+                                    <li><a href="<c:url value='/board/news2'/>">기  사</a></li>
                                 </ul>
 
                                 <ul class="col-md-4">
