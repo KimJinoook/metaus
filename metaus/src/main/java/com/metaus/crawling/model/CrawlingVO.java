@@ -15,4 +15,7 @@ public class CrawlingVO {
     Elements descriptionElements;
     Elements skillElements;
     String[] imageUrls;
+    
+    
+   
 }

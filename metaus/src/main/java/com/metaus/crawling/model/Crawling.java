@@ -38,6 +38,9 @@ public class Crawling {
                 Elements skillElements = document.select("div.course_skills > span");
                 String[] imageUrls = new String[imageUrlElements.size()];
 
+                System.out.println(titleElements);
+                System.out.println(titleElements.size());
+                
                 int setIndex = 0;
                 int getIndex = 0;
 

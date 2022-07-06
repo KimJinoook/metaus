@@ -127,6 +127,14 @@
    		select * from fp_mem
    	</select>
    	
+   	<!-- 회원 정보 수정 - 최재훈  -->
+   	<update id="updateMember" parameterType="memberVo">
+   		update fp_mem
+		set mem_name=#{memName}, mem_nick=#{memNick}, mem_birth=#{memBirth},
+		mem_tel=#{memTel}, mem_zipcode=#{memZipcode}, mem_add=#{memAdd}, mem_add2=#{memAdd2},
+		mem_pic=#{memPic}
+		where mem_no=#{memNo}
+   	</update>
 	
 </mapper>
 

@@ -1,6 +1,36 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="../inc/header.jsp"%>
+<script type="text/javascript">
+$(function(){
+	$('#pdPost').click(function(){
+		if($('#memId').val()=="" || $('#memId').val()==null){
+			alert('로그인 후 이용가능합니다!');
+			event.preventDefault();
+		}
+	});	
+	
+});
+
+function btCart(){
+		
+	var result = confirm('장바구니에 추가하시겠습니까?');
+	
+	if(result){
+		location.href="<c:url value=''/>";
+		alert('추가되었습니다.');
+		result = confirm('지금 장바구니로 이동하시겠습니까?');
+		
+		if(result){
+			location.href="<c:url value=''/>";			
+		}else{
+			
+		}
+	}else{
+		
+	}
+}
+</script>
 <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
         <!-- Bootstrap icons-->
@@ -33,20 +63,20 @@
         </div>
     </section>
 <!-- Product section-->
+    <input type="hidden" name="pdNo" value="${vo.pdNo }">
         <section class="py-5">
             <div class="container px-4 px-lg-5 my-5">
                 <div class="row gx-4 gx-lg-5 align-items-center">
                     <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="https://dummyimage.com/600x700/dee2e6/6c757d.jpg" alt="..." /></div>
                     <div class="col-md-6">
-                        <div class="small mb-1">SKU: BST-498</div>
                         <h1 class="display-5 fw-bolder">${vo.pdName }</h1>
                         <div class="fs-5 mb-5">
                             <span>$40.00</span>
                         </div>
-                        <p class="lead">Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium at dolorem quidem modi. Nam sequi consequatur obcaecati excepturi alias magni, accusamus eius blanditiis delectus ipsam minima ea iste laborum vero?</p>
+                        <p class="lead">${vo.pdPre }</p>
                         <div class="d-flex">
-                            <input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 3rem" />
-                            <button class="btn btn-outline-dark flex-shrink-0" type="button">
+                            <input class="form-control text-center me-3" id="inputQuantity" type="text" value="1" style="max-width: 3rem" />
+                            <button class="btn btn-outline-dark flex-shrink-0" name="btCart" onclick="btCart()">
                                 <i class="bi-cart-fill me-1"></i>
                                 Add to cart
                             </button>

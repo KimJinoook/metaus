@@ -3,31 +3,86 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.metaus.request.model.RequestDAO">
-	<insert id="insertRequest" parameterType="RequestVo">
-		<selectKey resultType="int" keyProperty="rec_no" order="BEFORE">
+
+	<sql id="searchWhere">
+		<if test="searchKeyword !=null and searchKeyword !=''">
+        	 where rec_title like '%' || #{searchKeyword} || '%'
+        </if>
+	</sql>
+	
+	<insert id="insertRequest" parameterType="requestVo">
+		<selectKey resultType="int" keyProperty="recNo" order="BEFORE">
 			select fp_rec_seq.nextval from dual
 		</selectKey>
 		insert into fp_rec(rec_no, com_no, rec_title, rec_content, rec_pay, rec_regdate, rec_readcount)
-		values(#{rec_no},#{com_no},#{rec_title},#{rec_content},#{rec_pay},sysdate,#{rec_readcount})
+		values(#{recNo},#{comNo},#{recTitle},#{recContent},#{recPay},sysdate,#{recReadcount})
 	</insert>
 	
-	<select id="selectAll" parameterType="searchVo" resultType="RequestVo">
+	<!-- <resultMap type="requestVo" id="requestMap">
+		<result property="rec_no" column="rec_no"/>
+		<result property="com_no" column="com_no" jdbcType="number" javaType="int" />
+		<result property="rec_title" column="rec_title" jdbcType="varchar2" javaType="String" />
+		<result property="rec_content" column="rec_content" jdbcType="CLOB" javaType="String" />
+	</resultMap> -->
+	
+	<!-- <select id="selectAll" parameterType="searchVo" resultType="HashMap">
 		select * from
 		(
 			select rownum as RNUM, A.*
 			from
 				(
-					select b.*, m.mem_name, f.bfile_filename
-					from fp_rec r join fp_com c
-					on r.rec_no=c.com_no
-					left join fp_recatc f
-					on r.rec_no= f.rec_no
-					where r.rec_title like '%' ||  #{keyword} || '%'
+					select r.*, c.com_name, c.com_pic
+					from fp_rec r left join fp_com c
+					on r.com_no=c.com_no
+					<include refid="searchWhere"></include>
 					order by rec_regdate desc
 				)A
 		)
 		where RNUM>#{firstRecordIndex} 
 		<![CDATA[
 		and RNUM<=#{firstRecordIndex} + #{recordCountPerPage} ]]>
+	</select> -->
+	
+	<select id="selectRequest" parameterType="searchVo" resultType="requestVo">
+		select * from fp_rec
+		<include refid="searchWhere"></include>
+		order by rec_regdate desc
 	</select>
+	
+	<select id="selectCom" parameterType="companyVo" resultType="companyVo">
+		select * from fp_com
+	</select>
+	
+	<insert id="insertRequestAtc" parameterType="requestAtcVo">
+		<selectKey resultType="int" keyProperty="recfileNo" order="BEFORE">
+			select fp_recatc_seq.nextval from dual
+		</selectKey>
+		insert into fp_recatc(recfile_no, rec_no, recfile_filename, recfile_originname)
+		values(#{recfileNo}, #{recNo}, #{recfileName}, #(recfileOriginname))
+	</insert>
+	
+	<select id="selectRequestAtc" resultType="requestAtcVo">
+		select * from fp_recatc
+	</select>
+	
+	<select id="selectRequestAtcByNo" parameterType="int" resultType="requestAtcVo">
+		select * from fp_requestatc
+		where rec_no=#{recNo}
+	</select>
+	
+	<select id="selectTotalRecord" parameterType="searchVo"
+		resultType="int">
+		select count(*) from fp_rec
+	</select>
+	
+	<select id="selectRequestDetail" parameterType="int" resultType="requestVo">
+		select * from fp_rec
+		where rec_no=#{recNo}
+	</select>
+	
+	<delete id="requestDelete" parameterType="int">
+		delete fp_rec
+		where rec_no=#{recNo}
+	</delete>
+	
 </mapper>
