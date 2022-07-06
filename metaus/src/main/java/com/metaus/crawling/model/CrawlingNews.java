@@ -3,7 +3,6 @@ package com.metaus.crawling.model;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
@@ -17,92 +16,84 @@ import org.slf4j.LoggerFactory;
 public class CrawlingNews {
 
     private static final Logger log = LoggerFactory.getLogger(CrawlingNews.class);
-    private static final int FIRST_PAGE_INDEX = 1;
-    private static final int LAST_PAGE_INDEX = 10;
-    private static final String PLATFORM = "Inflearn";
 
-    public List<CrawlingVO> main(String[] args) {
+    public List<CrawlingVO> getNews(int page) {
     	List<CrawlingVO> list = new ArrayList<CrawlingVO>();
         try {
-            // 개발 강의 모든 페이징 순회
+
         	
-            for (int i = FIRST_PAGE_INDEX; i <= LAST_PAGE_INDEX; i++) {
+            for (int i = page; i <= page; i++) {
                 final String inflearnUrl = "https://search.seoul.co.kr/index.php?scope=title&sort=&cpCode=seoul;nownews&period=&sDate=&eDate=&keyword=%EB%A9%94%ED%83%80%EB%B2%84%EC%8A%A4&iCategory=&pCategory=undefined&pageNum=" + i;
                 Connection conn = Jsoup.connect(inflearnUrl);
                 Document document = conn.get();
 
                 System.out.println("페이지="+i);
                 
-                // 크롤링 항목 필요 리스트
-                //   - 썸네일 링크, 강의 제목, 가격(할인가격), 평점, 강의자, 강의 링크, 수강자 수, 플랫폼, 강의 세션 개수 + 시간
-                Elements imageUrlElements = document.select("dd > a > img");
-                Elements titleElements = document.select("dt > a");
-                Elements descriptionElements = document.select("dl > dd.sub");
-                Elements linkElements = document.select("dt > a");
-                //Elements priceElements = document.getElementsByClass("price");
-                //Elements instructorElements = document.getElementsByClass("instructor");
-                //Elements skillElements = document.select("div.course_skills > span");
-                String[] imageUrls = new String[imageUrlElements.size()];
+                Elements group = document.select("dl.article");
 
-              
-             
-              
-                
-                
-                int setIndex = 0;
-                int getIndex = 0;
 
-                for (Element e : imageUrlElements) {
-                    imageUrls[setIndex++] = e.attr("abs:src");
-                }
 
-                for (int j = 0; j < imageUrlElements.size(); j++) {
-                    final String title = titleElements.get(j).text();
-                    //final String price = priceElements.get(j).text();
-                    //final String realPrice = getRealPrice(price);
-                    //final String salePrice = getSalePrice(price);
-                    //final int realIntPrice = toInt(removeNotNumeric(realPrice));
-                    //final int saleIntPrice = toInt(removeNotNumeric(salePrice));
-                    //final String currency = String.valueOf(price.charAt(0));
-                    //final String instructor = instructorElements.get(j).text();
-                    final String url = linkElements.get(j).attr("abs:href");
-                    final String description = descriptionElements.get(j).text();
-                    //final String skills = removeWhiteSpace(skillElements.get(j).text());
+                for (int j = 0; j < group.size(); j++) {
+                	
+                	Element imageUrlElements = group.get(j).select("dd > a > img").first();
+                    Element titleElements = group.get(j).select("dt > a").first();
+                    Element descriptionElements = group.get(j).select("dl > dd.sub").first();
+                    Element linkElements = group.get(j).select("dt > a").first();
+                    Element dates = group.get(j).select("span[id=date]").first();
+                	
+                    final String title = titleElements.text();
+                    final String url = linkElements.attr("abs:href");
+                    
+                    
+                    
+                    final String description = descriptionElements.text();
+                    final String date = dates.text();
+                    final String sdate = date.substring(0,date.indexOf("|"));
+                    final String newsCom = date.substring(date.indexOf("|")+1);
+                    
+                    String[] dateRepl = sdate.split("\\. ");
+                    System.out.println(dateRepl[1]);
+                    System.out.println(dateRepl[2]);
+                    
+                    String month = "";
+                    switch(dateRepl[1]) {
+                    case "01" : month="Jan"; break;
+                    case "02" : month="Feb"; break;
+                    case "03" : month="Mar"; break;
+                    case "04" : month="Apr"; break;
+                    case "05" : month="May"; break;
+                    case "06" : month="Jun"; break;
+                    case "07" : month="Jul"; break;
+                    case "08" : month="Aug"; break;
+                    case "09" : month="Sep"; break;
+                    case "10" : month="Oct"; break;
+                    case "11" : month="Nov"; break;
+                    case "12" : month="Dec"; break;
+                    }
 
-                    System.out.println("썸네일: " + imageUrls[j]);
+
                     System.out.println("기사 제목: " + title);
-                    //System.out.println("가격: " + realIntPrice);
-                    //System.out.println("할인 가격: " + saleIntPrice);
-                    //System.out.println("원화: " + currency);
-                    //System.out.println("강의자: " + instructor);
                     System.out.println("기사 링크: " + url);
                     System.out.println("기사 프리뷰: " + description);
-                    //System.out.println("기술 스택: " + skills);
-
-                    /* 강의 링크 내부 */
-                    //Connection innerConn = Jsoup.connect(url);
-                    //Document innerDocument = innerConn.get();
-
-                    /* 평점 */
-                    //Element ratingElement = innerDocument.selectFirst("div.dashboard-star__num");
-                    //final float rating = Objects.isNull(ratingElement)
-                            //? toFloat("0")
-                            //: toFloat(ratingElement.text());
-                    //System.out.println("평점: " + rating);
-
-                    /* 수강자 수 */
-                    //Element listenerElement = innerDocument.selectFirst("div.cd-header__info-cover");
-                    //final String listener = Objects.isNull(listenerElement)
-                      //      ? innerDocument.selectFirst("span > strong").text()
-                        //    : innerDocument.select("div.cd-header__info-cover > span > strong").get(1).text();
-                    //System.out.println("수강자 수: " + removeNotNumeric(listener));
-                    //final int viewCount = Integer.parseInt(removeNotNumeric(listener));
-
-                    /* 강의 세션 개수 */
-                    //final String course = innerDocument.selectFirst("span.cd-curriculum__sub-title").text();
-                    //System.out.println("강의 세션 개수: " + getSessionCount(course));
-                    //final int sessionCount = Integer.parseInt(getSessionCount(course));
-                    //System.out.println();
+                    
+                    
+                    CrawlingVO vo = new CrawlingVO();
+                    
+                    if(imageUrlElements != null) {
+                    	final String imageUrl = imageUrlElements.attr("abs:src");
+                    	System.out.println("썸네일: " + imageUrl);
+                    	vo.setImageUrl(imageUrl);
+                    }
+                    
+                    vo.setTitle(title);
+                    vo.setUrl(url);
+                    vo.setDescription(description);
+                    
+                    vo.setDate(sdate);
+                    vo.setNewsCom(newsCom);
+                    vo.setDay(dateRepl[2].substring(0,2));
+                    vo.setMonth(month);
+                    list.add(vo);
 
                 }
             }
@@ -114,44 +105,5 @@ public class CrawlingNews {
         return list;
     }
 
-    private static String getRealPrice(final String price) {
-        final String[] pricesArray = price.split(" ");
-        return pricesArray[0];
-    }
-
-    private static String getSalePrice(final String price) {
-        final String[] pricesArray = price.split(" ");
-        return (pricesArray.length == 1) ? price : pricesArray[1];
-    }
-
-    // html 태그 제거
-    private static String stripHtml(final String html) {
-        return Jsoup.clean(html, Whitelist.none());
-    }
-
-    // 맨 앞, 맨 뒤 소괄호 제거
-    private static String removeBracket(final String str) {
-        return str.replaceAll("^[(]|[)]$", "");
-    }
-
-    private static String getSessionCount(final String course) {
-        return removeNotNumeric(course.substring(0, course.indexOf("개")));
-    }
-
-    private static String removeNotNumeric(final String str) {
-        return str.replaceAll("\\W", "");
-    }
-
-    private static String removeWhiteSpace(final String str) {
-        return str.replaceAll("\\s", "");
-    }
-
-    private static int toInt(final String str) {
-        return Integer.parseInt(str);
-    }
-
-    private static float toFloat(final String str) {
-        return Float.parseFloat(str);
-    }
 
 }

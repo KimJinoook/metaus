@@ -30,6 +30,8 @@ import com.metaus.common.ConstUtil;
 import com.metaus.common.FileUploadUtil;
 import com.metaus.common.PaginationInfo;
 import com.metaus.common.SearchVO;
+import com.metaus.crawling.model.CrawlingNews;
+import com.metaus.crawling.model.CrawlingVO;
 import com.metaus.member.model.MemberService;
 import com.metaus.member.model.MemberVO;
 
@@ -644,5 +646,13 @@ public class BoardController {
 			
 		}
 
+	}
+	
+	@RequestMapping("/news2")
+	public void news2(@RequestParam(defaultValue = "1") int page,Model model) {
+		CrawlingNews craw = new CrawlingNews();
+		List<CrawlingVO> list = craw.getNews(page);
+		model.addAttribute("list",list);
+		model.addAttribute("curPage",page);
 	}
 }
