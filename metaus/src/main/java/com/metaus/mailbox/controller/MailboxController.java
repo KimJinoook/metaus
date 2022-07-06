@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -146,10 +147,25 @@ public class MailboxController {
 		
 		List<Map<String, Object>> list 
 		= mailboxService.selectMsgView(memId, MailboxUtil.MSG_STAR_FLAG);
-		logger.info("메세지 목록 조회, list.size={}", list.size());
+		logger.info("별표 메세지 목록 조회, list.size={}", list.size());
 		
 		model.addAttribute("list", list);
 		model.addAttribute("flag", "star");
+		
+		return "/mailbox/ajaxMailbox";
+	}
+	
+	@RequestMapping("/trashMail")
+	public String trashMail(HttpSession session, ModelMap model) {
+		String memId=(String) session.getAttribute("memId");
+		logger.info("memId={}", memId);
+		
+		List<Map<String, Object>> list 
+		= mailboxService.selectMsgView(memId, MailboxUtil.MSG_TRASH_FLAG);
+		logger.info("삭제 메세지 목록 조회, list.size={}", list.size());
+		
+		model.addAttribute("list", list);
+		model.addAttribute("flag", "trash");
 		
 		return "/mailbox/ajaxMailbox";
 	}
@@ -203,10 +219,9 @@ public class MailboxController {
 	@ResponseBody
 	public int starFlagUpdate(HttpSession session, @RequestParam boolean emptyFlag, @RequestParam String msgaddNo) {
 		String memId=(String) session.getAttribute("memId");
-		logger.info("별표 메세지 처리 파라미터, memId={}, msgaddNo={}, emptyFlag={}", memId, msgaddNo, emptyFlag);
+		logger.info("별표 메세지 처리 파라미터, msgaddNo={}, emptyFlag={}", msgaddNo, emptyFlag);
 		
 		Map<String, String> map = new HashMap<>();
-		map.put("msgaddAdsee", memId);
 		map.put("emptyFlag", emptyFlag+"");
 		map.put("msgaddNo", msgaddNo);
 		
@@ -216,5 +231,38 @@ public class MailboxController {
 		int starNo=mailboxService.findStarNo(memId);
 		
 		return starNo;
+	}
+	
+	@RequestMapping("/trashFlagUpdate")
+	@ResponseBody	
+	public Map<String, Integer> trashFlagUpdate(HttpSession session, @RequestParam List<String> msgaddNoList, @RequestParam String trashFlag) {
+		String memId=(String) session.getAttribute("memId");
+		logger.info("메세지 삭제 파라미터, msgaddNoList={}", msgaddNoList);
+		
+		for(String msgaddNo : msgaddNoList) {
+			Map<String, String> map = new HashMap<>();
+			map.put("msgaddNo", msgaddNo);
+			map.put("trashFlag", trashFlag);
+			
+			int cnt=mailboxService.updateTrashFlag(map);
+			logger.info("삭제 플래그 업데이트 결과, cnt={}", cnt);
+		}
+		
+		int receivedNo = mailboxService.findReceivedNo(memId);
+		int sentNo = mailboxService.findSentNo(memId);
+		int starNo = mailboxService.findStarNo(memId);
+		int temporaryNo = mailboxService.findTemporaryNo(memId);
+		int spamNo = mailboxService.findSpamNo(memId);
+		int trashNo = mailboxService.findTrashNo(memId);
+		
+		Map<String, Integer> map = new HashMap<>();
+		map.put("receivedNo", receivedNo);
+		map.put("sentNo", sentNo);
+		map.put("starNo", starNo);
+		map.put("temporaryNo", temporaryNo);
+		map.put("spamNo", spamNo);
+		map.put("trashNo", trashNo);
+		
+		return map;
 	}
 }
