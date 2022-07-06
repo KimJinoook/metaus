@@ -109,16 +109,14 @@
                                 </div>
                                 <button type="submit" id="btnsing" class="btn btn-primary btn-user btn-block">등록</button>                   
                             </form>
-                            <hr>
-                            <div class="text-center">
-                                <a class="small" href="<c:url value='/admin/member/lostAccount'/>">Id/Password?</a>
-                            </div>                           
+                            <hr>                          
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
+    </div>
     </div>
 
     <!-- Bootstrap core JavaScript-->

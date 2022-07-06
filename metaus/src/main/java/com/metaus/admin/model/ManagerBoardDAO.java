@@ -15,4 +15,6 @@ public interface ManagerBoardDAO {
 	int updateBoard(ManagerBoardVO vo);
 	List<ManagerBoardVO> selectReport();
 	int reportConfirmBoard(int boardNo);
+	int reportBoard(ManagerBoardVO vo);
+	int selectIsReportByBoardNo(int boardNo);
 }

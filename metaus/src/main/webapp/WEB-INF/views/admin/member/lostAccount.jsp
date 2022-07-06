@@ -1,80 +1,28 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ include file="../inc/adminHeader.jsp" %>
-<link href="<c:url value='/admin/vendor/datatables/dataTables.bootstrap4.min.css'/>" rel="stylesheet">
-<link href="<c:url value='/admin/css/sb-admin-2.css'/>" rel="stylesheet">
-<!-- Sheet JS -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.14.3/xlsx.full.min.js"></script>
-<!--FileSaver savaAs 이용 -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.8/FileSaver.min.js"></script>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<!DOCTYPE html>
+<html lang="ko">
 
+<head>
 
-<body class="bg-gradient-primary">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-    <div class="container">
+    <title>Metaus - Login</title>
 
-        <div class="card o-hidden border-0 shadow-lg my-5">
-            <div class="card-body p-0">
-                <!-- Nested Row within Card Body -->
-                <div class="row">
-                    <div class="col-lg-5 d-none d-lg-block bg-login-image"></div>
-                    <div class="col-lg-7">
-                        <div class="p-5">                           
-                                <div class="form-group">
-                                	<label style="color: black;">이름</label>                                    
-                                        <input type="text" class="form-control form-control-user" id="managerName" name="managerName"
-                                            placeholder="Name"> 
-                                </div>
-                                <div class="form-group">
-                                	<label style="color: black;">전화번호</label>                                    
-                                        <input type="text" class="form-control form-control-user" id="managerTel"
-                                            placeholder="Tel"> 
-                                </div>
-                                	<button type="button" class="btn btn-primary btn-user btn-block" id="managerIdFind">아이디 찾기</button>                             
-                                <hr>
-                           	<form method="post" action="<c:url value='/admin/member/managerPwReset'/>" id="maPwFindFrm"> 
-                                
-                                <div class="form-group">
-                                	<label style="color: black;">아이디</label>                                    
-                                        <input type="text" class="form-control form-control-user" id="managerId"
-                                            placeholder="Id"> 
-                                </div>
-                                <div class="form-group">
-                                	<label style="color: black;">이름</label>                                    
-                                        <input type="text" class="form-control form-control-user" id="managerName"
-                                            placeholder="Name"> 
-                                </div>
-                                <div class="form-group">
-                                	<label style="color: black;">전화번호</label>                                    
-                                        <input type="text" class="form-control form-control-user" id="managerTel"
-                                            placeholder="Tel"> 
-                                </div>                                
-								<button type="button" class="btn btn-primary btn-user btn-block" id="menagerPwFind">비밀번호 찾기</button>                               
-                           	</form>
-                            
-                            <hr>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <!-- Custom fonts for this template-->
+    <link href="<c:url value='/admin/vendor/fontawesome-free/css/all.min.css'/>" rel="stylesheet" type="text/css">
+    
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
 
-    </div>
-
-    <!-- Bootstrap core JavaScript-->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-    <!-- Core plugin JavaScript-->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-
-    <!-- Custom scripts for all pages-->
-    <script src="js/sb-admin-2.min.js"></script>
-
-</body>
+    <!-- Custom styles for this template-->
+    <link href="<c:url value='/admin/css/sb-admin-2.css'/>" rel="stylesheet">
 <script type="text/javascript" src="<c:url value='/js/jquery-3.6.0.min.js'/>"></script>
 <script type="text/javascript">
 $(function(){
@@ -178,5 +126,85 @@ $(function(){
 }); 
 
 </script>
+</head>
 
-<%@ include file="../inc/adminFooter.jsp" %>
+<body class="bg-gradient-primary">
+
+    <div class="container">
+
+        <!-- Outer Row -->
+        <div class="row justify-content-center">
+
+            <div class="col-xl-12 col-lg-12 col-md-8">
+
+                <div class="card o-hidden border-0 shadow-lg my-5" >
+                    <div class="card-body p-0">
+                    
+                        <!-- Nested Row within Card Body -->
+                        <div class="row">
+                            <div class="col-lg-6 d-none d-lg-block bg-login-image"></div>
+                            <div class="col-lg-6">
+                                <div class="p-5">
+                                
+	                                <form method="post" action="" id="" >
+	                                
+	                                    <div class="form-group">
+	                                	<label style="color: black;">이름</label>                                    
+	                                        <input type="text" class="form-control form-control-user" id="managerName" name="managerName"
+	                                            placeholder="Name"> 
+	                                </div>
+	                                <div class="form-group">
+	                                	<label style="color: black;">전화번호</label>                                    
+	                                        <input type="text" class="form-control form-control-user" id="managerTel"
+	                                            placeholder="Tel"> 
+	                                </div>
+	                                	<button type="button" class="btn btn-primary btn-user btn-block" id="managerIdFind">아이디 찾기</button>                             
+	                                <hr>
+	                                </form>
+                           	
+		                            <form method="post" action="<c:url value='/admin/member/managerPwReset'/>" id="maPwFindFrm"> 
+		                                
+		                                <div class="form-group">
+		                                	<label style="color: black;">아이디</label>                                    
+		                                        <input type="text" class="form-control form-control-user" id="managerId"
+		                                            placeholder="Id"> 
+		                                </div>
+		                                <div class="form-group">
+		                                	<label style="color: black;">이름</label>                                    
+		                                        <input type="text" class="form-control form-control-user" id="managerName"
+		                                            placeholder="Name"> 
+		                                </div>
+		                                <div class="form-group">
+		                                	<label style="color: black;">전화번호</label>                                    
+		                                        <input type="text" class="form-control form-control-user" id="managerTel"
+		                                            placeholder="Tel"> 
+		                                </div>                                
+										<button type="button" class="btn btn-primary btn-user btn-block" id="menagerPwFind">비밀번호 찾기</button>                               
+		                           	</form>
+               
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Bootstrap core JavaScript-->
+    
+    <script src="<c:url value='/admin/vendor/jquery/jquery.min.js'/>"></script>
+    <script src="<c:url value='/admin/vendor/bootstrap/js/bootstrap.bundle.min.js'/>"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="<c:url value='/admin/vendor/jquery-easing/jquery.easing.min.js'/>"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="<c:url value='/admin/js/sb-admin-2.min.js'/>"></script>
+
+</body>
+
+</html>
