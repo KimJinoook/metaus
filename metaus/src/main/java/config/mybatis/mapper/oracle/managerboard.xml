@@ -24,6 +24,10 @@
 		from fp_board B where board_no in (select board_no from fp_report)
 	</select>
 	
+	<select id="selectIsReportByBoardNo" resultType="int" parameterType="int">
+		select count(*) from fp_report where board_no = #{boardNo}
+	</select>
+	
 	
 	
 	<insert id="insertBoard" parameterType="ManagerBoardVO">
@@ -35,6 +39,15 @@
 		btype_no)
 		values(#{boardNo}, 0, #{boardTitle}, #{boardContent},
 		#{btypeNo})
+	</insert>
+	
+	<insert id="reportBoard" parameterType="ManagerBoardVO">
+		<selectKey resultType="int" keyProperty="reportNo"
+			order="BEFORE">
+			select fp_report_seq.nextval from dual
+		</selectKey>
+		insert into fp_report(report_no,mem_no,board_no)
+		values(#{reportNo}, #{memNo}, #{boardNo})
 	</insert>
 	
 	
