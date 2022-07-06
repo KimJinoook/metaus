@@ -24,12 +24,12 @@
       select * from fp_mem where mem_id like #{memId} || '%'
    	</select>
    	
-   	<select id="findId" parameterType="MemberVO" resultType="string">
-   		select mem_id from fp_mem where mem_name=#{memName} and mem_tel = #{memTel}
+   	<select id="findId" parameterType="managerVO" resultType="string">
+   		select manager_id from fp_manager where manager_name=#{managerName} and manager_tel = #{managerTel}
    	</select>
    	
-   	<select id="findPw" parameterType="MemberVO" resultType="string">
-   		select mem_pw from fp_mem where mem_name=#{memName} and mem_tel = #{memTel} and mem_id = #{memId}
+   	<select id="findPw" parameterType="managerVO" resultType="string">
+   		select manager_pwd from fp_manager where manager_name=#{managerName} and manager_tel = #{managerTel} and manager_id = #{managerId}
    	</select>
    	
    	<select id="selectByManagerNo" parameterType="int" 
@@ -67,10 +67,10 @@
 	</select>
    	
    	
-   	<update id="updatePw" parameterType="MemberVO">
-		update fp_mem
-		set mem_pw = #{memPw}
-		where mem_id=#{memId}
+   	<update id="updatePw" parameterType="managerVO">
+		update fp_manager
+		set manager_pwd = #{managerPwd}
+		where manager_id=#{managerId}
 	</update>
 	
 	<update id="updateKakao" parameterType="int">

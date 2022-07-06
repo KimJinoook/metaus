@@ -58,4 +58,19 @@ public class ManagerServiceImpl implements ManagerService {
 	public int deleteByManagerNo(int managerNo) {
 		return managerDao.deleteByManagerNo(managerNo);
 	}
+
+	@Override
+	public String findId(ManagerVO vo) {
+		return managerDao.findId(vo);
+	}
+
+	@Override
+	public String findPw(ManagerVO vo) {
+		return managerDao.findPw(vo);
+	}
+
+	@Override
+	public int updatePw(ManagerVO vo) {
+		return managerDao.updatePw(vo);
+	}
 }
