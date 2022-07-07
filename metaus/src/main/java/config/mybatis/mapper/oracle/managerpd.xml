@@ -24,6 +24,31 @@
         </if>
 	</sql>
 	
+	
+	<select id="selectPdByCateNo" resultType="ManagerPdVO" parameterType="int">
+		select B.*,(select mem_id from fp_mem A where A.mem_no = B.mem_no) mem_id
+		from fp_pd B where cate_no = #{cateNo}
+	</select>
+	
+	<select id="selectPdAll" resultType="ManagerPdVO">
+		select B.*,(select mem_id from fp_mem A where A.mem_no = B.mem_no) mem_id
+		from fp_pd B
+	</select>
+	
+	<select id="selectCateByCateNo" resultType="ManagerPdVO" parameterType="int">
+		select * from fp_cate B where cate_no = #{cateNo}
+	</select>
+
+	<select id="selectCateAll" resultType="ManagerPdVO">
+		select * from fp_cate
+	</select>
+	
+	
+	
+	
+	
+	
+	
 	<select id="selectPdByNo" parameterType="int"
 		resultType="PdVo">
 		select * from fp_pd

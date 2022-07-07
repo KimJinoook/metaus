@@ -8,46 +8,23 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class ManagerPdServiceImpl implements ManagerBoardService {
+public class ManagerPdServiceImpl implements ManagerPdService {
 	
-	private final ManagerBoardDAO managerBoardDao;
+	private final ManagerPdDAO managerPdDao;
 	
-	public List<ManagerBoardVO> selectBoardByBtypeNo(int btypeNo){
-		return managerBoardDao.selectBoardByBtypeNo(btypeNo);
+	public List<ManagerPdVO> selectPdByCateNo(int cateNo) {
+		return managerPdDao.selectPdByCateNo(cateNo);
 	}
 	
-	public ManagerBoardVO selectBtypeByBtypeNo(int btypeNo) {
-		return managerBoardDao.selectBtypeByBtypeNo(btypeNo);
-	}
-	public int deleteBoard(int boardNo) {
-		return managerBoardDao.deleteBoard(boardNo);
-	}
-	public int insertBoard(ManagerBoardVO vo) {
-		return managerBoardDao.insertBoard(vo);
+	public ManagerPdVO selectCateByCateNo(int cateNo) {
+		return managerPdDao.selectCateByCateNo(cateNo);
 	}
 	
-	public ManagerBoardVO selectBoardByBoardNo(int boardNo) {
-		return managerBoardDao.selectBoardByBoardNo(boardNo);
+	public List<ManagerPdVO> selectPdAll() {
+		return managerPdDao.selectPdAll();
 	}
 	
-	public int updateBoard(ManagerBoardVO vo) {
-		return managerBoardDao.updateBoard(vo);
+	public List<ManagerPdVO> selectCateAll() {
+		return managerPdDao.selectCateAll();
 	}
-	
-	public List<ManagerBoardVO> selectReport(){
-		return managerBoardDao.selectReport();
-	}
-	
-	public int reportConfirmBoard(int boardNo) {
-		return managerBoardDao.reportConfirmBoard(boardNo);
-	}
-	
-	public int reportBoard(ManagerBoardVO vo) {
-		return managerBoardDao.reportBoard(vo);
-	}
-	
-	public int selectIsReportByBoardNo(int boardNo) {
-		return managerBoardDao.selectIsReportByBoardNo(boardNo);
-	}
-	
 }

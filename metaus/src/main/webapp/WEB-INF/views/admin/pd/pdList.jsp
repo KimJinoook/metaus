@@ -49,10 +49,10 @@ function exportExcel(){
 
 var excelHandler = {
     getExcelFileName : function(){
-        return '게시판 조회 결과.xlsx';	//파일명
+        return '모델링 상품 조회 결과.xlsx';	//파일명
     },
     getSheetName : function(){
-        return '게시판';	//시트명
+        return '모델링 상품';	//시트명
     },
     getExcelData : function(){
         return document.getElementById('dataTable'); 	//TABLE id
@@ -74,28 +74,45 @@ function s2ab(s) {
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                    <h1 class="h3 mb-2 text-gray-800">사용자 게시판 조회</h1>
+                    <h1 class="h3 mb-2 text-gray-800">모델링 상품 조회</h1>
                     <a href="javascript:exportExcel()" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" id="excelDownload"><i
                                 class="fas fa-download fa-sm text-white-50"></i> 엑셀 다운로드</a>
                     </div>
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                            <h6 class="m-0 font-weight-bold text-primary">${btype.btypeName } 조회 결과</h6>
+                        	<c:if test="${empty cate }">
+	                            <h6 class="m-0 font-weight-bold text-primary">전체 조회 결과</h6>
+                        	</c:if>
+                        	<c:if test="${!empty cate }">
+	                            <h6 class="m-0 font-weight-bold text-primary">${cate.cateName } 조회 결과</h6>
+                        	</c:if>
                             
                                         <ul class="navbar-nav ml-auto">
                                             <li class="nav-item dropdown">
-                                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
-                                                    role="button" data-toggle="dropdown" aria-haspopup="true"
-                                                    aria-expanded="false">
-                                                    ${btype.btypeName }
-                                                </a>
+                                            	<c:if test="${!empty cate }">
+	                                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+	                                                    role="button" data-toggle="dropdown" aria-haspopup="true"
+	                                                    aria-expanded="false">
+	                                                    ${cate.cateName }
+	                                                </a>
+                                                </c:if>
+                                            	<c:if test="${empty cate }">
+	                                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+	                                                    role="button" data-toggle="dropdown" aria-haspopup="true"
+	                                                    aria-expanded="false">
+	                                                    전체조회
+	                                                </a>
+                                                </c:if>
                                                 <div class="dropdown-menu dropdown-menu-right animated--fade-in"
                                                     aria-labelledby="navbarDropdown">
-                                                    <a class="dropdown-item" href="<c:url value='/admin/board/memberBoardList?btypeNo=8'/>">자유게시판</a>
-                                                    <a class="dropdown-item" href="<c:url value='/admin/board/memberBoardList?btypeNo=5'/>">질문게시판</a>
-                                                    <a class="dropdown-item" href="<c:url value='/admin/board/memberBoardList?btypeNo=6'/>">공유게시판</a>
-                                                    <a class="dropdown-item" href="<c:url value='/admin/board/memberBoardList?btypeNo=3'/>">Q&A</a>
+                                                    	<a class="dropdown-item" href="<c:url value='/admin/pd/pdList?cateNo=0'/>">전체조회</a>
+                                                    <c:forEach var="vo" items="${cateList }">
+                                                    
+                                                    	<a class="dropdown-item" href="<c:url value='/admin/pd/pdList?cateNo=${vo.cateNo }'/>">${vo.cateName }</a>
+                                                    
+                                                    </c:forEach>
+
                                                 </div>
                                             </li>
                                         </ul>
