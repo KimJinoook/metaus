@@ -15,6 +15,7 @@ public class ManagerPdVO {
 	private String pdOriginname; /* 모델원본파일명 */
 	private int pdFilesize; /* 모델파일사이즈 */
 	private int pdBuycnt; /* 구매수 */
+	private int pdPrice;
 	
 	private String cateName;
 	
