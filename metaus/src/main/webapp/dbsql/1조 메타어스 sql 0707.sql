@@ -127,6 +127,11 @@ ALTER TABLE fp_msgadd
 	DROP
 		CONSTRAINT FK_fp_msg_TO_fp_msgadd
 		CASCADE;
+        
+ALTER TABLE fp_msgatc
+	DROP
+		CONSTRAINT FK_fp_msg_TO_fp_msgatc
+		CASCADE;        
 
 ALTER TABLE fp_classatc
 	DROP
@@ -273,6 +278,12 @@ ALTER TABLE fp_msgtype
 		PRIMARY KEY
 		CASCADE
 		KEEP INDEX;
+        
+ALTER TABLE fp_msgatc
+	DROP
+		PRIMARY KEY
+		CASCADE
+		KEEP INDEX;        
 
 ALTER TABLE fp_recatc
 	DROP
@@ -364,6 +375,12 @@ ALTER TABLE fp_buy
 		PRIMARY KEY
 		CASCADE
 		KEEP INDEX;
+        
+ALTER TABLE fp_visit
+	DROP
+		PRIMARY KEY
+		CASCADE
+		KEEP INDEX;        
 
 /* 회원정보 */
 DROP TABLE fp_mem 
@@ -460,6 +477,10 @@ DROP TABLE fp_contact
 /* 쪽지 송수신 */
 DROP TABLE fp_msgadd 
 	CASCADE CONSTRAINTS;
+    
+/* 쪽지 첨부파일 */
+DROP TABLE fp_msgatc 
+	CASCADE CONSTRAINTS;    
 
 /* 컨텐츠 첨부파일 */
 DROP TABLE fp_classatc 
@@ -488,6 +509,10 @@ DROP TABLE fp_cate
 /* 구매상품 */
 DROP TABLE fp_buy 
 	CASCADE CONSTRAINTS;
+    
+/* 방문자수 */
+DROP TABLE fp_visit 
+	CASCADE CONSTRAINTS;    
     
 
 /* 회원정보 */
@@ -657,9 +682,10 @@ ALTER TABLE fp_recpre
 /* 쪽지 */
 CREATE TABLE fp_msg (
 	msg_no NUMBER NOT NULL, /* 쪽지번호 */
+	msgadd_adser VARCHAR2(50) NOT NULL, /* 보낸사람 */
 	msg_title VARCHAR2(50), /* 쪽지제목 */
-	msgadd_adser VARCHAR2(50), /* 보낸사람 */
 	msg_content CLOB, /* 쪽지내용 */
+	send_date DATE DEFAULT sysdate NOT NULL, /* 보낸시간 */
 	msgtype_no NUMBER /* 타입 번호 */
 );
 
@@ -836,9 +862,13 @@ ALTER TABLE fp_contact
 /* 쪽지 송수신 */
 CREATE TABLE fp_msgadd (
 	msgadd_no NUMBER NOT NULL, /* 송수신번호 */
-	msg_no NUMBER, /* 쪽지번호 */
-	msgadd_adsee VARCHAR2(50), /* 받는사람 */
-	msgadd_date DATE /* 읽은시간 */
+	msg_no NUMBER NOT NULL, /* 쪽지번호 */
+	msgadd_adsee VARCHAR2(50) NOT NULL, /* 받는사람 */
+	msgadd_date DATE, /* 읽은시간 */
+	star_flag VARCHAR2(10) DEFAULT 'N', /* 별표 플래그 */
+	temporary_flag VARCHAR2(10) DEFAULT 'N', /* 임시 플래그 */
+	spam_flag VARCHAR2(10) DEFAULT 'N', /* 스팸 플래그 */
+	trash_flag VARCHAR2(10) DEFAULT 'N' /* 휴지통 플래그 */
 );
 
 ALTER TABLE fp_msgadd
@@ -847,6 +877,22 @@ ALTER TABLE fp_msgadd
 		PRIMARY KEY (
 			msgadd_no
 		);
+        
+/* 쪽지 첨부파일 */
+CREATE TABLE fp_msgatc (
+	mfile_no NUMBER NOT NULL, /* 파일번호 */
+	msg_no NUMBER NOT NULL, /* 쪽지번호 */
+	mfile_filename CLOB, /* 파일명 */
+	mfile_originname CLOB, /* 원본파일명 */
+	mfile_filesize CLOB /* 파일사이즈 */
+);
+
+ALTER TABLE fp_msgatc
+	ADD
+		CONSTRAINT PK_fp_msgatc
+		PRIMARY KEY (
+			mfile_no
+		);        
 
 
 
@@ -1177,9 +1223,17 @@ ALTER TABLE fp_msgadd
 		)
 		REFERENCES fp_msg (
 			msg_no
-		)on delete cascade;
+		);
 
-
+ALTER TABLE fp_msgatc
+	ADD
+		CONSTRAINT FK_fp_msg_TO_fp_msgatc
+		FOREIGN KEY (
+			msg_no
+		)
+		REFERENCES fp_msg (
+			msg_no
+		);
 
 
 ALTER TABLE fp_cart
@@ -1453,6 +1507,10 @@ start with 1
 nocache;
 
 
+
+
+
+
 select * from fp_com;
 
 insert into fp_mem
@@ -1533,3 +1591,77 @@ commit;
 select * from fp_mem where mem_id like 'kimjin0132%';
 
 select * from fp_manager;
+
+
+
+--뷰 msgView
+create or replace view msgView
+as
+select a.*, b.msgadd_no, b.msgadd_adsee, b.msgadd_date
+, b.star_flag, b.temporary_flag, b.spam_flag, b.trash_flag
+from fp_msg a join fp_msgadd b
+on a.msg_no=b.msg_no;
+
+--프로시져 updateStarFlag
+create or replace procedure updateStarFlag
+(
+    p_empty_flag varchar2,
+    p_msgadd_no fp_msgadd.msgadd_no%type
+)
+is
+begin
+    --비어있는 별을 눌렀으면
+    if p_empty_flag='true' then
+        --star_flag 'Y'로 업데이트
+        update fp_msgadd
+        set star_flag='Y'
+        where msgadd_no=p_msgadd_no;
+    else --색칠된 별을 눌렀으면
+        --star_flag 'N'으로 업데이트
+        update fp_msgadd
+        set star_flag='N'
+        where msgadd_no=p_msgadd_no;
+    end if;
+end;
+
+--프로시져 updateTrashFlag
+create or replace procedure updateTrashFlag
+(
+    p_trash_flag varchar2,
+    p_msgadd_no fp_msgadd.msgadd_no%type
+)
+is
+begin
+    if p_trash_flag='N' then
+        --trash_flag 'Y'로 업데이트
+        update fp_msgadd
+        set trash_flag='Y'
+        where msgadd_no=p_msgadd_no;
+    else 
+        --trash_flag 'N'으로 업데이트
+        update fp_msgadd
+        set trash_flag='N'
+        where msgadd_no=p_msgadd_no;
+    end if;
+end;
+
+--프로시져 updateSpamFlag
+create or replace procedure updateSpamFlag
+(
+    p_spam_flag varchar2,
+    p_msgadd_no fp_msgadd.msgadd_no%type
+)
+is
+begin
+    if p_spam_flag='N' then
+        --spam_flag 'Y'로 업데이트
+        update fp_msgadd
+        set spam_flag='Y'
+        where msgadd_no=p_msgadd_no;
+    else 
+        --spam_flag 'N'으로 업데이트
+        update fp_msgadd
+        set spam_flag='N'
+        where msgadd_no=p_msgadd_no;
+    end if;
+end;
