@@ -940,6 +940,7 @@ CREATE TABLE fp_pd (
 	pd_filename CLOB, /* 모델파일명 */
 	pd_originname CLOB, /* 모델원본파일명 */
 	pd_filesize NUMBER, /* 모델파일사이즈 */
+    pd_price number,
 	pd_buycnt NUMBER /* 구매수 */
 );
 
@@ -1665,3 +1666,4 @@ begin
         where msgadd_no=p_msgadd_no;
     end if;
 end;
+commit;
