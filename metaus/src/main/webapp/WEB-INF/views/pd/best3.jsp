@@ -18,7 +18,7 @@
                                     <!-- Product name-->
                                     <h5 class="fw-bolder">${vo.pdName }</h5>
                                     <!-- Product price-->
-                                    $40.00 - $80.00
+                                    <fmt:formatNumber value="${vo.pdPrice }" pattern="#,###"/>
                                 </div>
                             </div>
                             </a>

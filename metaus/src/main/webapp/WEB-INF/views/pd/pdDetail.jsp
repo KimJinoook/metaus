@@ -60,7 +60,7 @@ function btCart(){
                     <div class="col-md-6">
                         <h1 class="display-5 fw-bolder">${vo.pdName }</h1>
                         <div class="fs-5 mb-5">
-                            <span>$40.00</span>
+                            <span><fmt:formatNumber value="${vo.pdPrice }" pattern="#,###"/></span>
                         </div>
                         <p class="lead">${vo.pdPre }</p>
                         <div class="d-flex">
