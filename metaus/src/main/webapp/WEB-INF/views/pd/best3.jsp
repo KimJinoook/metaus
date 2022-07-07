@@ -10,15 +10,19 @@
                         <div class="card h-100">
                             <a href="<c:url value='/pd/pdDetail?pdNo=${vo.pdNo }'/>">
                             <!-- Product image-->
+                            <c:if test="${empty vo.pdFilename }">
+		                    <img class="card-img-top mb-5 mb-md-0" src="<c:url value='/images/noPd.jpg'/>" alt="..." /></div>
+		                    </c:if>
+		                    <c:if test="${!empty vo.pdFilename }">
                             <img class="card-img-top" src="<c:url value='/product/${vo.pdFilename }'/>" alt="..."/>
-                            
+                            </c:if>
                             <!-- Product details-->
                             <div class="card-body p-4">
                                 <div class="text-center">
                                     <!-- Product name-->
                                     <h5 class="fw-bolder">${vo.pdName }</h5>
                                     <!-- Product price-->
-                                    <fmt:formatNumber value="${vo.pdPrice }" pattern="#,###"/>
+                                    <fmt:formatNumber value="${vo.pdPrice }" pattern="#,###"/>원
                                 </div>
                             </div>
                             </a>

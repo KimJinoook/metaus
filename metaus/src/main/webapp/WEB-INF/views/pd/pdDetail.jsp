@@ -56,11 +56,17 @@ function btCart(){
         <section class="py-5">
             <div class="container px-4 px-lg-5 my-5">
                 <div class="row gx-4 gx-lg-5 align-items-center">
-                    <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="<c:url value='/product/${vo.pdFilename }'/>" alt="..." /></div>
+                    <div class="col-md-6">
+                    <c:if test="${empty vo.pdFilename }">
+                    <img class="card-img-top mb-5 mb-md-0" src="<c:url value='/images/noPd.jpg'/>" alt="..." /></div>
+                    </c:if>
+                    <c:if test="${!empty vo.pdFilename }">
+                    <img class="card-img-top mb-5 mb-md-0" src="<c:url value='/product/${vo.pdFilename }'/>" alt="..." /></div>
+                    </c:if>
                     <div class="col-md-6">
                         <h1 class="display-5 fw-bolder">${vo.pdName }</h1>
                         <div class="fs-5 mb-5">
-                            <span><fmt:formatNumber value="${vo.pdPrice }" pattern="#,###"/></span>
+                            <span><fmt:formatNumber value="${vo.pdPrice }" pattern="#,###"/>원</span>
                         </div>
                         <p class="lead">${vo.pdPre }</p>
                         <div class="d-flex">
