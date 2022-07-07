@@ -178,7 +178,7 @@
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePd"
                     aria-expanded="true" aria-controls="collapsePd">
                     <i class="fas fa-fw fa-folder"></i>
-                    <span>Pages</span>
+                    <span>모델링 상품</span>
                 </a>
                 <div id="collapsePd" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">

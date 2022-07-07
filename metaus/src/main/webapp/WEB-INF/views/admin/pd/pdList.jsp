@@ -126,59 +126,45 @@ function s2ab(s) {
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
-                                            <th>글번호</th>
+                                            <th>모델번호</th>
                                             <th>아이디</th>
-                                            <th>제목</th>
-                                            <th>작성일</th>
-                                            <th>삭제여부</th>
+                                            <th>모델이름</th>
+                                            <th>가격</th>
+                                            <th>판매수</th>
+                                            <th>총매출</th>
                                             <th>관리</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
-                                            <th>글번호</th>
+                                            <th>모델번호</th>
                                             <th>아이디</th>
-                                            <th>제목</th>
-                                            <th>작성일</th>
-                                            <th>삭제여부</th>
+                                            <th>모델이름</th>
+                                            <th>가격</th>
+                                            <th>판매수</th>
+                                            <th>총매출</th>
                                             <th>관리</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
                                     <c:forEach var="vo" items="${list}">
-                                        <c:if test="${vo.boardDelFlag eq 'Y' }">
-                                        <tr style="color:red">
-                                            <th>${vo.boardNo }</th>
-                                            <th>${vo.memId }</th>
-                                            <th>${vo.boardTitle }</th>
-                                            <th>${vo.boardRegdate }</th>
-                                            <th>삭제</th>
-                                            <td style="padding:10px">
-                                            	
-                                    		</td>
-                                        </tr>
-                                        </c:if>
-                                        <c:if test="${vo.boardDelFlag ne 'Y'}">
+                                        
                                         <tr>
-                                            <th>${vo.boardNo }</th>
+                                            <th>${vo.pdNo }</th>
                                             <th>${vo.memId }</th>
-                                            <th>${vo.boardTitle }</th>
-                                            <th>${vo.boardRegdate }</th>
-                                            <th>&nbsp;</th>
+                                            <th>${vo.pdName }</th>
+                                            <th>${vo.pdPrice }</th>
+                                            <th>${vo.pdBuycnt }</th>
+                                            <th>${vo.pdPrice * vo.pdBuycnt }</th>
                                             <td style="padding:10px">
-                                            	<a href="javascript:delBoard(${vo.boardNo },${btype.btypeNo })" class="btn btn-danger btn-icon-split btn-sm" style="margin:0px;height:27px">
+                                            	<a href="<c:url value='/admin/pd/pdDetail?pdNo=${vo.pdNo }'/>" class="btn btn-primary btn-icon-split btn-sm" style="margin:0px;height:27px">
                                         			<span class="icon text-white" style="margin:0px">
-                                            			<i class="fas fa-trash"></i>
-                                        			</span>
-                                    			</a>	
-                                    			<a href="javascript:openBoard(${vo.boardNo },${btype.btypeNo })" class="btn btn-primary btn-icon-split btn-sm" style="margin:0px;height:27px">
-                                        			<span class="icon text-white" style="margin:0px">
-                                            			<i class="fas fa-arrow-right"></i>
+                                            			<i class="fas fa-search"></i>
                                         			</span>
                                     			</a>
                                     		</td>
                                         </tr>
-                                        </c:if>
+                                        
                                     </c:forEach>
                                       
                                     </tbody>
