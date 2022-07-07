@@ -80,4 +80,9 @@ public class CompanyServiceImpl implements CompanyService {
 		return companyDao.selectAll();
 	}
 
+	@Override
+	public int updateCompany(CompanyVO vo) {
+		return companyDao.updateCompany(vo);
+	}
+
 }
