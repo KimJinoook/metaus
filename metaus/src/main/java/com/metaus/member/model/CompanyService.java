@@ -24,4 +24,6 @@ public interface CompanyService {
 	public int selectConCountNotEnd();
 	public int selectConCountEnd();
 	List<CompanyVO> selectAll();
+	/*기업 회원 정보 수정 - 최재훈*/
+	int updateCompany(CompanyVO vo);
 }

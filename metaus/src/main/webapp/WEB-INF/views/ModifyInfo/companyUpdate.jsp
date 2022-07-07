@@ -4,6 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ include file="../inc/header.jsp" %>
+<script type="text/javascript" src="<c:url value='/js/upload.js'/>"></script>
 <style>
 .thumb {
 	width: 200px;
@@ -48,11 +49,12 @@
 
                                 <!-- Start of the First Column -->
                                 <div class="col-md-6">
-
+									<input type="hidden" name="comNo" id="comNo" value="${comVo.comNo}">
+									<input type="hidden" name="comId" id="comId" value="${comVo.comId}">
                                     <!-- Form Group -->
                                     <div class="form-group">
                                         <label>아이디</label>
-                                        <input type="text" class="form-control" id="comId" name="comId" disabled="disabled"
+                                        <input type="text" class="form-control" disabled="disabled"
                                         value="${comVo.comId }">
                                     </div>
 
@@ -218,7 +220,7 @@
 				$('#comRrn').focus();
 				event.preventDefault();
 
-			}
+			} 
 		});
 		
 		/** 기업회원 사업자 등록번호 확인 */

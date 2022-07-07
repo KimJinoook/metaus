@@ -73,6 +73,52 @@
 				}
 			});
 			
+			//체크된 항목 스팸함 이동 / 복구
+			$(document).on("click",".btn-filter",function(){
+				var spamFlag = "N";
+				if($(this).hasClass("btn-filter-up")){
+					spamFlag = "Y";
+				}
+				
+				var msgaddNoList = []; 
+				$('input[type=checkbox]:checked').closest('tr').find('.msgaddNo').each(function(idx, item){
+					msgaddNoList.push($(this).val());
+				});
+				//console.log(msgaddNoList);
+				
+				if($('input[type=checkbox]:checked').length<1){
+					alert('한 개 이상의 항목을 체크해야 합니다.');
+					return false;
+				}else{
+					//목록에서 삭제
+					$('input[type=checkbox]:checked').closest('tr').remove();
+					
+					$.ajax({
+						url: "<c:url value='/mailbox/spamFlagUpdate'/>",
+						type: "GET",
+						data: {
+							"spamFlag" : spamFlag,
+							"msgaddNoList" : msgaddNoList
+						},
+						dataType: "JSON",
+						traditional :true,
+						success: function(data){
+							//console.log(data);
+							$('.receivedNo').text(data.receivedNo);
+							$('.sentNo').text(data.sentNo);
+							$('.starNo').text(data.starNo);
+							$('.temporaryNo').text(data.temporaryNo);
+							$('.spamNo').text(data.spamNo);
+							$('.trashNo').text(data.trashNo);
+						},
+						error: function(xhr, status, error){
+							alert('error:' + error);
+						}
+					});
+				}
+			});
+			
+			
 			$(document).on("click",".star", function(){
 				var msgaddNo = $(this).closest('tr').find('input[type=hidden]').val();
 				//console.log(msgaddNo);
@@ -108,6 +154,7 @@
 				});//ajax
 			});
 			
+			//받은 메세지
 			$('.receivedMail').click(function(){
 				$.ajax({
 					url: "<c:url value='/mailbox/receivedMail'/>",
@@ -122,6 +169,7 @@
 				});
 			});
 			
+			//보낸 메세지
 			$('.sentMail').click(function(){
 				$.ajax({
 					url: "<c:url value='/mailbox/sentMail'/>",
@@ -135,6 +183,7 @@
 				});
 			});
 			
+			//별표 메세지
 			$('.starMail').click(function(){
 				$.ajax({
 					url: "<c:url value='/mailbox/starMail'/>",
@@ -148,9 +197,38 @@
 				});
 			});
 			
+			//휴지통
 			$('.trashMail').click(function(){
 				$.ajax({
 					url: "<c:url value='/mailbox/trashMail'/>",
+					type: "GET",
+					success: function(data){
+						$('.box.box-primary').html(data);
+					},
+					error: function(xhr, status, error){
+						alert('error:' + error);
+					}
+				});
+			});
+			
+			//스팸함
+			$('.spamMail').click(function(){
+				$.ajax({
+					url: "<c:url value='/mailbox/spamMail'/>",
+					type: "GET",
+					success: function(data){
+						$('.box.box-primary').html(data);
+					},
+					error: function(xhr, status, error){
+						alert('error:' + error);
+					}
+				});
+			});
+			
+			//임시보관함
+			$('.temporaryMail').click(function(){
+				$.ajax({
+					url: "<c:url value='/mailbox/temporaryMail'/>",
 					type: "GET",
 					success: function(data){
 						$('.box.box-primary').html(data);
@@ -190,8 +268,8 @@
                     <li><a href="#" class="receivedMail"><i class="fa fa-inbox"></i> 받은 메세지 <span class="label label-primary pull-right receivedNo">${receivedNo }</span></a></li>
                     <li><a href="#" class="sentMail"><i class="fa fa-envelope-o"></i> 보낸 메세지 <span class="label label-success pull-right sentNo">${sentNo }</span></a></li>
                     <li><a href="#" class="starMail"><i class="fa fa-star"></i> 별표 메세지 <span class="label label-waring pull-right starNo">${starNo }</span></a></li>
-                    <li><a href="#"><i class="fa fa-file-text-o"></i> 임시보관함 <span class="label label-info pull-right temporaryNo">${temporaryNo }</span></a></li>
-                    <li><a href="#"><i class="fa fa-filter"></i> 스팸함 <span class="label label-danger pull-right spamNo">${spamNo }</span></a></li>
+                    <li><a href="#" class="temporaryMail"><i class="fa fa-file-text-o"></i> 임시보관함 <span class="label label-info pull-right temporaryNo">${temporaryNo }</span></a></li>
+                    <li><a href="#" class="spamMail"><i class="fa fa-filter"></i> 스팸함 <span class="label label-danger pull-right spamNo">${spamNo }</span></a></li>
                     <li><a href="#" class="trashMail"><i class="fa fa-trash-o"></i> 휴지통 <span class="label label-danger pull-right trashNo">${trashNo }</span></a></li>
                   </ul>
                 </div><!-- /.box-body -->

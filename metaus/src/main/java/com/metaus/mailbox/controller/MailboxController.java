@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -42,7 +43,11 @@ public class MailboxController {
 	private final FileUploadUtil fileUploadUtil;
 	
 	@RequestMapping("/compose")
-	public String compose() {
+	public String compose(@RequestParam(defaultValue = "0") int msgaddNo, Model model) {
+		Map<String, Object> map = mailboxService.selectByMsgAddNo(msgaddNo);
+		
+		model.addAttribute("map", map);
+		
 		return "/mailbox/compose";
 	}
 	
@@ -52,14 +57,26 @@ public class MailboxController {
 	}
 	
 	@RequestMapping("/sendMail")
-	public String sendMail(@ModelAttribute MailboxVO vo, @RequestParam String msgaddAdsee 
-			, HttpServletRequest request, HttpSession session){
-		//쪽지 등록 처리
+	public String sendMail(@ModelAttribute MailboxVO vo, @RequestParam(defaultValue = "temporary") String msgaddAdsee 
+			,@RequestParam(defaultValue = "N") String temporaryFlag , HttpServletRequest request, HttpSession session){
+		//임시저장 메세지 전송 처리
+		Map<String, ?> flashMap =RequestContextUtils.getInputFlashMap(request);
+		
+		if(flashMap!=null) {
+			MailboxVO mailboxVo = (MailboxVO) flashMap.get("mailboxVo");
+			String msgaddAdsee2 = (String) flashMap.get("msgaddAdsee");
+			logger.info("임시저장 메세지 전송 파라미터, mailboxVo={}, msgaddAdsee2={}", mailboxVo, msgaddAdsee2);
+			
+			msgaddAdsee = msgaddAdsee2;
+			vo = mailboxVo;
+		}
+		
+		//새 메세지 전송 처리
 		String memId=(String) session.getAttribute("memId");
 		logger.info("memId={}", memId);
 		vo.setMsgaddAdser(memId);
 		
-		logger.info("메세지 전송 처리, 파라미터 vo={}, msgaddAdsee={}", vo, msgaddAdsee);
+		logger.info("메세지 전송 처리, 파라미터 vo={}, msgaddAdsee={}, temporaryFlag={}", vo, msgaddAdsee, temporaryFlag);
 		
 		int cnt=mailboxService.insertMailbox(vo);
 		logger.info("메세지 등록 결과 cnt={}", cnt);
@@ -67,6 +84,8 @@ public class MailboxController {
 		//수신자 셋팅
 		RecipientVO recipientVo = new RecipientVO();
 		recipientVo.setMsgaddAdsee(msgaddAdsee);
+		recipientVo.setTemporaryFlag(temporaryFlag);
+		logger.info("수신자 셋팅 결과 recipientVo={}", recipientVo);
 		
 		//수신자 번호 셋팅 - 등록한 쪽지 번호 셋팅
 		int msgNo=mailboxService.selectMsgNo();
@@ -170,6 +189,36 @@ public class MailboxController {
 		return "/mailbox/ajaxMailbox";
 	}
 	
+	@RequestMapping("/spamMail")
+	public String spamMail(HttpSession session, ModelMap model) {
+		String memId=(String) session.getAttribute("memId");
+		logger.info("memId={}", memId);
+		
+		List<Map<String, Object>> list 
+		= mailboxService.selectMsgView(memId, MailboxUtil.MSG_SPAM_FLAG);
+		logger.info("스팸 메세지 목록 조회, list.size={}", list.size());
+		
+		model.addAttribute("list", list);
+		model.addAttribute("flag", "spam");
+		
+		return "/mailbox/ajaxMailbox";
+	}
+	
+	@RequestMapping("/temporaryMail")
+	public String temporaryMail(HttpSession session, ModelMap model) {
+		String memId=(String) session.getAttribute("memId");
+		logger.info("memId={}", memId);
+		
+		List<Map<String, Object>> list 
+		= mailboxService.selectMsgView(memId, MailboxUtil.MSG_TEMPORARY_FLAG);
+		logger.info("스팸 메세지 목록 조회, list.size={}", list.size());
+		
+		model.addAttribute("list", list);
+		model.addAttribute("flag", "temporary");
+		
+		return "/mailbox/ajaxMailbox";
+	}
+	
 	@RequestMapping("/mailbox")
 	public String mailNoByFlag(HttpSession session, Model model) {
 		String memId=(String) session.getAttribute("memId");
@@ -235,9 +284,9 @@ public class MailboxController {
 	
 	@RequestMapping("/trashFlagUpdate")
 	@ResponseBody	
-	public Map<String, Integer> trashFlagUpdate(HttpSession session, @RequestParam List<String> msgaddNoList, @RequestParam String trashFlag) {
-		String memId=(String) session.getAttribute("memId");
-		logger.info("메세지 삭제 파라미터, msgaddNoList={}", msgaddNoList);
+	public Map<String, Integer> trashFlagUpdate(HttpSession session
+			, @RequestParam List<String> msgaddNoList, @RequestParam String trashFlag) {
+		logger.info("메세지 삭제 파라미터, msgaddNoList={}, trashFlag={}", msgaddNoList, trashFlag);
 		
 		for(String msgaddNo : msgaddNoList) {
 			Map<String, String> map = new HashMap<>();
@@ -247,6 +296,50 @@ public class MailboxController {
 			int cnt=mailboxService.updateTrashFlag(map);
 			logger.info("삭제 플래그 업데이트 결과, cnt={}", cnt);
 		}
+		
+		Map<String, Integer> map = getMailboxNoMap(session);
+		
+		return map;
+	}
+	
+	@RequestMapping("/spamFlagUpdate")
+	@ResponseBody
+	public Map<String, Integer> spamFlagUpdate(HttpSession session
+			, @RequestParam List<String> msgaddNoList, @RequestParam String spamFlag){
+		logger.info("메세지 스팸처리 파라미터, msgaddNoList={}, spamFlag={}", msgaddNoList, spamFlag);
+		
+		for(String msgaddNo : msgaddNoList) {
+			Map<String, String> map = new HashMap<>();
+			map.put("msgaddNo", msgaddNo);
+			map.put("spamFlag", spamFlag);
+			
+			int cnt=mailboxService.updateSpamFlag(map);
+			logger.info("스팸 플래그 업데이트 결과, cnt={}", cnt);
+		}
+		
+		Map<String, Integer> map = getMailboxNoMap(session);
+		
+		return map;
+	}
+	
+	@RequestMapping("/temporaryFlagUpdate")
+	public String temporaryFlagUpdate(RedirectAttributes redirect
+			, @ModelAttribute MailboxVO mailboxVo, @RequestParam(defaultValue = "0") int msgaddNo
+			, @RequestParam String msgaddAdsee) {
+		logger.info("임시저장 메세지 삭제 파라미터, msgaddNo={}", msgaddNo);
+		logger.info("msgaddAdsee={}", msgaddAdsee);
+		
+		int cnt=mailboxService.delTemporaryMail(msgaddNo);
+		logger.info("임시저장 메세지 삭제 결과, cnt={}", cnt);
+		
+		redirect.addFlashAttribute("mailboxVo", mailboxVo);
+		redirect.addFlashAttribute("msgaddAdsee", msgaddAdsee);
+		
+		return "redirect:/mailbox/sendMail";
+	}
+	
+	public Map<String, Integer> getMailboxNoMap(HttpSession session){
+		String memId = (String) session.getAttribute("memId");
 		
 		int receivedNo = mailboxService.findReceivedNo(memId);
 		int sentNo = mailboxService.findSentNo(memId);
@@ -262,7 +355,7 @@ public class MailboxController {
 		map.put("temporaryNo", temporaryNo);
 		map.put("spamNo", spamNo);
 		map.put("trashNo", trashNo);
-		
+
 		return map;
 	}
 }

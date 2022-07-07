@@ -64,6 +64,15 @@
    		select * from fp_com
    	</select>
 	
+	<!-- 기업 회원 정보 수정 - 최재훈 -->
+	<update id="updateCompany" parameterType="CompanyVO">
+		update fp_com
+		set com_name=#{comName}, com_add=#{comAdd}, com_rrn=#{comRrn},
+		com_preview=#{comPreview}, com_ceo=#{comCeo}, com_tel=#{comTel},
+		com_pic=#{comPic}
+		where com_no=#{comNo}
+	</update>
+	
 </mapper>
 
 
