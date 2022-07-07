@@ -10,7 +10,7 @@
                         <div class="card h-100">
                             <a href="<c:url value='/pd/pdDetail?pdNo=${vo.pdNo }'/>">
                             <!-- Product image-->
-                            <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..."/>
+                            <img class="card-img-top" src="<c:url value='/product/${vo.pdFilename }'/>" alt="..."/>
                             
                             <!-- Product details-->
                             <div class="card-body p-4">
