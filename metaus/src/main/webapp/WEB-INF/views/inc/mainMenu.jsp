@@ -40,7 +40,7 @@
             <!-- Mega Menu Item -->
             <li class="dropdown mega-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">게시판<i class="fa fa-angle-down"></i></a>
-                <ul class="dropdown-menu" role="menu">
+                <ul class="dropdown-menu" role="menu" >
                     <li>
                         <!-- Start of Mega Menu Inner -->
                         <div class="mega-menu-inner">
@@ -61,10 +61,9 @@
                                  </ul>
 
                                 <ul class="col-md-4">
-                                    <li class="<c:url value='/board/realTimeChatting'/>">실시간 채팅</li>
-                                    <li><a href="<c:url value='/board/individualChatting'/>">개인회원 채팅</a></li>
-                                    <li><a href="<c:url value='/board/EnterChatting'/>">기업회원 채팅</a></li>
-                                    <li><a href="<c:url value='/board/managerChatting'/>">관리자 채팅</a></li>
+                                    <li class="menu-title">실시간 채팅</li>
+                                    <li><a href="<c:url value='/chatting/Chatting'/>">일반회원 채팅</a></li>
+                                    <li><a href="<c:url value='/chatting/Chatting'/>">기업회원 채팅</a></li>
                                 </ul>
                             </div>
                         </div>

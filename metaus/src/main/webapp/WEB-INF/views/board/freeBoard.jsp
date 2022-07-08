@@ -172,14 +172,6 @@
 			<!-- Start of Blog Sidebar -->
 			<div class="col-md-4 col-xs-12 blog-sidebar">
 
-				<!-- Start of Search -->
-				<div class="col-md-12">
-					<form action="#" method="get">
-						<input type="text" class="form-control" placeholder="search...">
-					</form>
-				</div>
-				<!-- End of Search -->
-
 				<!-- Start of Popular Posts -->
 				<div class="col-md-12 clearfix mt40">
 					<h4 class="widget-title">인기글</h4>
@@ -216,65 +208,6 @@
 				</div>
 				<!-- End of Popular Posts -->
 				
-				<!-- Start of Social Media -->
-				<div class="col-md-12 mt40">
-					<h4 class="widget-title">공유하기</h4>
-
-					<ul class="social-btns list-inline">
-						<!-- Social Media -->
-						<li><a href="#" class="social-btn-roll facebook">
-								<div class="social-btn-roll-icons">
-									<i class="social-btn-roll-icon fa fa-facebook"></i> <i
-										class="social-btn-roll-icon fa fa-facebook"></i>
-								</div>
-						</a></li>
-
-						<!-- Social Media -->
-						<li><a href="#" class="social-btn-roll twitter">
-								<div class="social-btn-roll-icons">
-									<i class="social-btn-roll-icon fa fa-twitter"></i> <i
-										class="social-btn-roll-icon fa fa-twitter"></i>
-								</div>
-						</a></li>
-
-						<!-- Social Media -->
-						<li><a href="#" class="social-btn-roll google-plus">
-								<div class="social-btn-roll-icons">
-									<i class="social-btn-roll-icon fa fa-google-plus"></i> <i
-										class="social-btn-roll-icon fa fa-google-plus"></i>
-								</div>
-						</a></li>
-
-						<!-- Social Media -->
-						<li><a href="#" class="social-btn-roll instagram">
-								<div class="social-btn-roll-icons">
-									<i class="social-btn-roll-icon fa fa-instagram"></i> <i
-										class="social-btn-roll-icon fa fa-instagram"></i>
-								</div>
-						</a></li>
-
-						<!-- Social Media -->
-						<li><a href="#" class="social-btn-roll linkedin">
-								<div class="social-btn-roll-icons">
-									<i class="social-btn-roll-icon fa fa-linkedin"></i> <i
-										class="social-btn-roll-icon fa fa-linkedin"></i>
-								</div>
-						</a></li>
-
-						<!-- Social Media -->
-						<li><a href="#" class="social-btn-roll rss">
-								<div class="social-btn-roll-icons">
-									<i class="social-btn-roll-icon fa fa-rss"></i> <i
-										class="social-btn-roll-icon fa fa-rss"></i>
-								</div>
-						</a></li>
-					</ul>
-				</div>
-				<!-- Start of Social Media -->
-
-
-
-
 			</div>
 			<!-- End of Blog Sidebar -->
 
