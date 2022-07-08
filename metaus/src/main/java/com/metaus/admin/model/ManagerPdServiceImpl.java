@@ -16,6 +16,10 @@ public class ManagerPdServiceImpl implements ManagerPdService {
 		return managerPdDao.selectPdByCateNo(cateNo);
 	}
 	
+	public ManagerPdVO selectPdByPdNo(int pdNo) {
+		return managerPdDao.selectPdByPdNo(pdNo);
+	}
+	
 	public ManagerPdVO selectCateByCateNo(int cateNo) {
 		return managerPdDao.selectCateByCateNo(cateNo);
 	}
@@ -26,5 +30,9 @@ public class ManagerPdServiceImpl implements ManagerPdService {
 	
 	public List<ManagerPdVO> selectCateAll() {
 		return managerPdDao.selectCateAll();
+	}
+	
+	public int selectBuyCntByMonth(ManagerPdVO vo) {
+		return managerPdDao.selectBuyCntByMonth(vo);
 	}
 }

@@ -224,11 +224,11 @@
     <!-- Page level custom scripts -->
     <script src="<c:url value='/admin/js/demo/datatables-demo.js'/>"></script>
     <script src="<c:url value='/admin/vendor/chart.js/Chart.min.js'/>"></script>
-    <script src="<c:url value='/admin/js/demo/chart-area-index.js'/>"></script>
+    <script src="<c:url value='/admin/js/chart-area-index.js'/>"></script>
     
 
     <!-- Page level custom scripts -->
     
-    <script src="<c:url value='/admin/js/demo/chart-pie-index.js'/>"></script>
+    <script src="<c:url value='/admin/js/chart-pie-index.js'/>"></script>
             <!-- End of Main Content -->
 <%@ include file="inc/adminFooter.jsp" %>

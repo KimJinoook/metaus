@@ -18,7 +18,7 @@
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                    <h1 class="h3 mb-2 text-gray-800">사용자 정보</h1>
+                    <h1 class="h3 mb-2 text-gray-800">모델 정보</h1>
                     </div>
                     
                 
@@ -31,11 +31,11 @@
 	                            <!-- Basic Card Example -->
 	                            <div class="card shadow mb-4">
 	                                <div class="card-header py-3">
-	                                    <h6 class="m-0 font-weight-bold text-primary">프로필 사진</h6>
+	                                    <h6 class="m-0 font-weight-bold text-primary">3D 모델</h6>
 	                                </div>
 	                                
 	                                    
-	                                    	<canvas id="canvas1" width="500px" height="500px"></canvas>
+	                                    	<canvas id="canvas1" width="500px" height="470px"></canvas>
 	                                    
 	                                    <script src="https://rawgit.com/mrdoob/three.js/dev/build/three.js"></script>
 <script src="https://rawgit.com/mrdoob/three.js/dev/examples/js/loaders/GLTFLoader.js"></script>
@@ -47,7 +47,7 @@
 
 	//var url = "<c:url value='/gltfmodel/bathroom_interior.zip'/>";
 
-	var url = "<c:url value='/gltfmodel/2.zip'/>";
+	var url = "<c:url value='/gltfmodel/${pdVo.pdFilename}'/>";
 
 	//var url = 'models/gltf/BoomBox.gltf';
 
@@ -120,7 +120,7 @@
 	                            <!-- Basic Card Example -->
 	                            <div class="card shadow mb-4">
 	                                <div class="card-header py-3">
-	                                    <h6 class="m-0 font-weight-bold text-primary">프로필 정보</h6>
+	                                    <h6 class="m-0 font-weight-bold text-primary">모델 정보</h6>
 	                                </div>
 	                                <div class="card-body">
 	                                    <form class="user" method="post" enctype="multipart/form-data" action="<c:url value='/admin/member/managerEdit'/>">
@@ -128,52 +128,46 @@
 		                                		<div class="col-md-6">
 	                             
 			                                        <div class="form-group">
-			                                        	<span>아이디</span>
-			                                            <input type="text" class="form-control form-control-user"
-			                                                value="${managerVo.managerId }"
-			                                                placeholder="Id" name="managerId" readonly="readonly">
-			                                            <input type="hidden" name="managerNo" value="${managerVo.managerNo }">    
+			                                        	<span>모델명</span>
+			                                            <input type="text" class="form-control"
+			                                                value="${pdVo.pdName }" readonly="readonly" style="background-color: white;">    
 			                                        </div>
 			                                        <br/>
 			                                        <div class="form-group">
-			                                        	<span>비밀번호</span>
-			                                            <input type="password" class="form-control form-control-user"
-			                                                id="pw" placeholder="Password" name="managerPwd">
+			                                        	<span>제작자</span>
+			                                            <input type="text" class="form-control"
+			                                                value="${pdVo.memId }" readonly="readonly" style="background-color: white;">
 			                                        </div>
 			                                        <br/>
-			                                        <div class="form-group">
-			                                        	<span>비밀번호 확인</span><span id="memPwCheckLb" style="color: red"></span>
-			                                            <input type="password" class="form-control form-control-user"
-			                                                id="pwc" placeholder="Password" name="managerPwdChk">
-			                                        </div>
 			                                        
-			                                        <br/>
 			                               
 		                                   		</div>
 		                                		<div class="col-md-6">
 	                             
 			                                        <div class="form-group">
-			                                        	<span>이름</span>
-			                                            <input type="text" class="form-control form-control-user"
-			                                            	value="${managerVo.managerName }"
-			                                                placeholder="name" name="managerName">
+			                                        	<span>파일명</span>
+			                                            <input type="text" class="form-control"
+			                                            	value="${pdVo.pdOriginname }"
+			                                                readonly="readonly" style="background-color: white;">
 			                                                
 			                                        </div>
 			                                        <br/>
 			                                        <div class="form-group">
-			                                        	<span>전화번호</span>
-			                                            <input type="tel" class="form-control form-control-user"
-			                                            	value="${managerVo.managerTel }"
-			                                                placeholder="tel" name="managerTel">
+			                                        	<span>가격</span>
+			                                            <input type="tel" class="form-control"
+			                                            	value="${pdVo.pdPrice }"
+			                                                readonly="readonly" style="background-color: white;">
 			                                        </div>
 			                                        <br/>
-			                                        <div style="display:none;"><input type="file" name="upfile" id="inputPic" accept="image/gif, image/jpg, image/JPG, image/jpeg, image/png, image/PNG"></div>
-			                                        <input type="hidden" value="${managerVo.managerPic }" name="managerPic">
+			                                        
 			                                        
 			                               
 		                                   		</div>
-		                                		<div class="col-lg-2">
-			                                        <button type="submit" class="btn btn-primary btn-user btn-block" id="adminEditBtn">저장</button>
+		                                		<div class="col-lg-12">
+			                                        <div class="form-group">
+			                                        	<span>설명</span>
+			                                            <textarea class="form-control" rows="6">${pdVo.pdPre }</textarea>
+			                                        </div>
 			                               
 		                                   		</div>
 	                                   		</div>
@@ -217,11 +211,24 @@
             </div>
             <!-- End of Main Content -->
             
+            
+            
+            
+            <c:forEach var="i" begin="1" end="12">
+            	<input type="hidden" id="m${i }" value="${monthForSell[i-1] }">
+            	<input type="hidden" id="s${i }" value="${sellForMonth[i-1] }">
+            </c:forEach>
+            
+            
+            
 	<!-- Page level plugins -->
 	<script src="<c:url value='/admin/vendor/datatables/jquery.dataTables.min.js'/>"></script>
 	<script src="<c:url value='/admin/vendor/datatables/dataTables.bootstrap4.min.js'/>"></script>
 	
+
 	<!-- Page level custom scripts -->
-	<script src="<c:url value='/admin/js/demo/datatables-demo.js'/>"></script>
+    <script src="<c:url value='/admin/js/demo/datatables-demo.js'/>"></script>
+    <script src="<c:url value='/admin/vendor/chart.js/Chart.min.js'/>"></script>
+    <script src="<c:url value='/admin/js/chart-area-pdDetail.js'/>"></script>
 
 <%@ include file="../inc/adminFooter.jsp" %>
