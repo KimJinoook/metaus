@@ -968,7 +968,8 @@ ALTER TABLE fp_cate
 CREATE TABLE fp_buy (
     buy_no NUMBER NOT NULL, /* 구매번호 */
 	mem_no NUMBER NOT NULL, /* 회원번호 */
-	pd_no NUMBER /* 모델번호 */
+	pd_no NUMBER, /* 모델번호 */
+    buy_date DATE
 );
 
 ALTER TABLE fp_buy
@@ -1574,9 +1575,9 @@ values(fp_cate_seq.nextval, '스포츠');
 
 select * from fp_pd;
 insert into fp_pd
-values(fp_pd_seq.nextval,1,1,'시바견','시바견입니다','1.zip',null,null,1500,2);
+values(fp_pd_seq.nextval,1,1,'시바견','시바견입니다','2.zip',null,null,1500,3);
 insert into fp_pd
-values(fp_pd_seq.nextval,10,2,'화장실','화장실입니다','2.zip',null,null,1500,null);
+values(fp_pd_seq.nextval,10,2,'화장실','화장실입니다','1.zip',null,null,1500,null);
 
 
 insert into fp_resume
@@ -1593,6 +1594,17 @@ values(FP_PORT_SEQ.nextval,2,'1','1.zip','1','1');
 
 insert into fp_manager
 values(fp_manager_seq.nextval,'test','김진욱','1234',sysdate,'1.jpg','01030843045');
+
+select * from fp_buy;
+
+insert into fp_buy
+values(fp_buy_seq.nextval,1,1,sysdate);
+
+insert into fp_buy
+values(fp_buy_seq.nextval,1,1,'2022-06-06');
+
+insert into fp_buy
+values(fp_buy_seq.nextval,1,1,sysdate);
 
 commit;
 select * from fp_mem where mem_id like 'kimjin0132%';

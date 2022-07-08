@@ -13,6 +13,10 @@
 		resultType="CompanyVO">
       select * from fp_com where com_id=#{comId}
    	</select>
+	<select id="selectByComNo" parameterType="int" 
+		resultType="CompanyVO">
+      select * from fp_com where com_no=#{comNo}
+   	</select>
    	
    	<select id="duplicateId" parameterType="String" resultType="int">
 		select count(*) from fp_com 

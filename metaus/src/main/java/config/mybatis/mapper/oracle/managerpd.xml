@@ -29,6 +29,11 @@
 		select B.*,(select mem_id from fp_mem A where A.mem_no = B.mem_no) mem_id
 		from fp_pd B where cate_no = #{cateNo}
 	</select>
+
+	<select id="selectPdByPdNo" resultType="ManagerPdVO" parameterType="int">
+		select B.*,(select mem_id from fp_mem A where A.mem_no = B.mem_no) mem_id
+		from fp_pd B where pd_no = #{pdNo}
+	</select>
 	
 	<select id="selectPdAll" resultType="ManagerPdVO">
 		select B.*,(select mem_id from fp_mem A where A.mem_no = B.mem_no) mem_id
@@ -41,6 +46,10 @@
 
 	<select id="selectCateAll" resultType="ManagerPdVO">
 		select * from fp_cate
+	</select>
+	
+	<select id="selectBuyCntByMonth" resultType="int" parameterType="ManagerPdVO">
+		select count(*) from fp_buy where pd_no = #{pdNo} and extract(month from buy_date) = #{buyMonth} and extract(year from buy_date)=#{buyYear}
 	</select>
 	
 	

@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Mapper;
 public interface CompanyDAO {
 	String selectPwd(String memId);
 	CompanyVO selectByUserid(String memId) ;
+	CompanyVO selectByComNo(int memNo) ;
 	public int duplicateId(String comId);
 	public int insertCompany(CompanyVO vo);
 	public String findId(CompanyVO vo);
