@@ -8,6 +8,8 @@ import org.apache.ibatis.annotations.Mapper;
 public interface CompanyDAO {
 	String selectPwd(String memId);
 	CompanyVO selectByUserid(String memId) ;
+	CompanyVO selectByComNo(int memNo) ;
+	List<CompanyVO> selectRecByComNo(int comNo);
 	public int duplicateId(String comId);
 	public int insertCompany(CompanyVO vo);
 	public String findId(CompanyVO vo);
@@ -19,4 +21,6 @@ public interface CompanyDAO {
 	public int selectConCountNotEnd();
 	public int selectConCountEnd();
 	List<CompanyVO> selectAll();
+	/*기업 회원 정보 수정 - 최재훈*/
+	int updateCompany(CompanyVO vo);
 }

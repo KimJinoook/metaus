@@ -43,10 +43,10 @@ function exportExcel(){
 
 var excelHandler = {
     getExcelFileName : function(){
-        return '일반회원조회.xlsx';	//파일명
+        return '차단회원조회.xlsx';	//파일명
     },
     getSheetName : function(){
-        return '일반회원';	//시트명
+        return '차단회원';	//시트명
     },
     getExcelData : function(){
         return document.getElementById('dataTable'); 	//TABLE id
@@ -68,14 +68,14 @@ function s2ab(s) {
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                    <h1 class="h3 mb-2 text-gray-800">일반 회원 조회</h1>
+                    <h1 class="h3 mb-2 text-gray-800">차단 회원 조회</h1>
                     <a href="javascript:exportExcel()" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" id="excelDownload"><i
                                 class="fas fa-download fa-sm text-white-50"></i> 엑셀 다운로드</a>
                     </div>
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">일반 회원 조회 결과
+                            <h6 class="m-0 font-weight-bold text-primary">차단 회원 조회 결과
                             </h6>
                         </div>
                         

@@ -75,8 +75,8 @@
                         
                         <!-- Form Group -->
                         <div class="form-group">
-                            <label>페이 <span>(선택사항)</span></label>
-                            <input class="form-control" name="rec_pay" id="rec_pay" type="text" placeholder='5000$'>
+                            <label>페이 </label>
+                            <input class="form-control" name="pdPrice" id="pdPrice" type="text" placeholder='5000$'>
                         </div>
                         <!-- Form Group -->
                         <div class="form-group">

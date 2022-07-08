@@ -21,4 +21,17 @@ public class CompanyVO {
 	private String comTel; /* 전화번호 */
 	private Timestamp comJoindate; /* 가입일 */
 	private Timestamp comOutdate; /* 탈퇴일 */
+	
+	//의뢰정보
+	private int recNo;
+	private String recTitle;
+	private String recContent;
+	private int recPay;
+	private Timestamp recRegdate;
+	private int recReadcount;
+	
+	//계약의뢰
+	private int memNo;
+	private int conPay;
+	private Timestamp conDonedate;
 }

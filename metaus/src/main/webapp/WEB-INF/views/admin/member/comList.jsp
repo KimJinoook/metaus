@@ -81,6 +81,7 @@ function s2ab(s) {
                                             <th>사업자등록번호</th>
                                             <th>주소</th>
                                             <th>가입날짜</th>                                           
+                                            <th>관리</th>                                           
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -93,6 +94,13 @@ function s2ab(s) {
                                             <td>${cvo.comRrn }</td>
                                             <td>${cvo.comAdd }</td>
                                             <td>${cvo.comJoindate }</td>
+                                            <td style="padding:10px">
+                                            	<a href="<c:url value='/admin/member/comDetail?comNo=${cvo.comNo }'/>" class="btn btn-primary btn-icon-split btn-sm" style="margin:0px;height:27px">
+                                        			<span class="icon text-white" style="margin:0px">
+                                            			<i class="fas fa-search"></i>
+                                        			</span>
+                                    			</a>
+                                    		</td>
                                         </tr> 
                                     </c:forEach>
                                       
@@ -106,6 +114,7 @@ function s2ab(s) {
                                             <th>사업자등록번호</th>
                                             <th>주소</th>
                                             <th>가입날짜</th>
+                                            <th>관리</th>
                                         </tr>
                                     </tfoot>
                                 </table>

@@ -40,8 +40,8 @@
 		<selectKey resultType="int" keyProperty="pdNo" order="BEFORE">
 			select fp_pd_seq.nextval from dual
 		</selectKey>
-		insert into fp_pd(pd_no, cate_no, mem_no, pd_name, pd_pre, pd_filename, pd_filesize)
-		values(#{pdNo},#{cateNo},#{memNo},#{pdName},#{pdPre},#{pdFilename},#{pdFilesize})
+		insert into fp_pd(pd_no, cate_no, mem_no, pd_name, pd_pre, pd_filename, pd_filesize, pd_price)
+		values(#{pdNo},#{cateNo},#{memNo},#{pdName},#{pdPre},#{pdFilename},#{pdFilesize},#{pdPrice})
 	</insert>
 	
 	<select id="selectByCategory" parameterType="searchVo"

@@ -111,16 +111,26 @@ public class UpdateController {
 	}
 	
 	@PostMapping("/companyUpdate")
-	public String companyUpdate_post(HttpSession session, Model model) {
-		logger.info("기업 회원 - 정보수정페이지");
+	public String companyUpdate_post(@ModelAttribute CompanyVO vo, HttpServletRequest request, Model model) {
+		logger.info("기업 회원 - 정보수정페이지, vo={}", vo);
 		
-		String comId = (String)session.getAttribute("comId");
-		CompanyVO vo = companyService.selectByUserid(comId);
+		String fileName = "";
+		try {
+			List<Map<String, Object>> fileList = fileUploadUtil.fileUpload(request, ConstUtil.UPLOAD_COMPANY_PROFILE_FLAG);
+			
+			for (Map<String, Object> fileMap : fileList) {
+				fileName = (String) fileMap.get("fileName");
+			}
+			logger.info("파일 업로드 성공, fileName={}", fileName);
+		} catch (IllegalStateException | IOException e) {
+			e.printStackTrace();
+		}
+		vo.setComPic(fileName);
 		
-		model.addAttribute("comVo", vo);
-		logger.info("comVo={}", vo);
+		int cnt = companyService.updateCompany(vo);
+		logger.info("기업 회원 정보 수정 결과, cnt={}", cnt);
 		
-		return "/ModifyInfo/companyUpdate";
+		return "redirect:/ModifyInfo/companyUpdate";
 	}
 	
 }

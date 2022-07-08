@@ -15,5 +15,6 @@ public class PdVO extends SearchVO {
 	private String pdFilename; /* 모델파일명 */
 	private String pdOriginname; /* 모델원본파일명 */
 	private int pdFilesize; /* 모델파일사이즈 */
+	private int pdPrice; /* 모델 금액 */
 	private int pdBuycnt; /* 구매수 */
 }
