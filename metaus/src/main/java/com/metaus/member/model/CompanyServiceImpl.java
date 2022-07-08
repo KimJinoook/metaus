@@ -87,5 +87,9 @@ public class CompanyServiceImpl implements CompanyService {
 	public CompanyVO selectByComNo(int memNo) {
 		return companyDao.selectByComNo(memNo);
 	}
+	
+	public List<CompanyVO> selectRecByComNo(int comNo){
+		return companyDao.selectRecByComNo(comNo);
+	}
 
 }

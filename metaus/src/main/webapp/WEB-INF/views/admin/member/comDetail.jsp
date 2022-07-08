@@ -140,73 +140,71 @@ var marker = new kakao.maps.Marker({
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
-                                           <th>이름</th>
-                                            <th>아이디</th>
-                                            <th>닉네임</th>
-                                            <th>전화번호</th>
-                                            <th>주소</th>
-                                            <th>가입날짜</th>
-                                            <th>경고 수</th>
+                                           <th>의뢰 번호</th>
+                                            <th>의뢰 제목</th>
+                                            <th>페이</th>
+                                            <th>등록일</th>
+                                            <th>진행상태</th>
                                             <th>관리</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
-                                            <th>이름</th>
-                                            <th>아이디</th>
-                                            <th>닉네임</th>
-                                            <th>전화번호</th>
-                                            <th>주소</th>
-                                            <th>가입날짜</th>
-                                            <th>경고 수</th>                                            
+                                            <th>의뢰 번호</th>
+                                            <th>의뢰 제목</th>
+                                            <th>페이</th>
+                                            <th>등록일</th>
+                                            <th>진행상태</th>
                                             <th>관리</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
-                                    <c:forEach var="mvo" items="${list}" begin="1">
-                                        <c:if test="${mvo.memCutdate.getTime() > today.getTime() }">
-                                        <tr style="color:red">
-                                            <td>${mvo.memName }</td>
-                                            <td>${mvo.memId }</td>
-                                            <td>${mvo.memNick }</td>
-                                            <td>${mvo.memTel }</td>
-                                            <td>${mvo.memAdd }</td>
-                                            <td>${mvo.memJoindate }</td>
-                                            <td>차단</td>
+                                    <c:forEach var="vo" items="${recList}">
+                                        <c:if test="${vo.memNo==0 }">
+                                        <tr>
+                                            <td>${vo.recNo }</td>
+                                            <td>${vo.recTitle }</td>
+                                            <td>${vo.recPay }</td>
+                                            <td>${vo.recRegdate }</td>
+                                            <td>모집중</td>
                                             <td style="padding:10px">
-                                            	<a href="javascript:memUnLock(${mvo.memNo })" class="btn btn-success btn-icon-split btn-sm" style="margin:0px;height:27px">
+                                            	<a href="javascript:void(0)" class="btn btn-primary btn-icon-split btn-sm" style="margin:0px;height:27px">
                                         			<span class="icon text-white" style="margin:0px">
-                                            			<i class="fas fa-unlock"></i>
+                                            			<i class="fas fa-arrow-right"></i>
                                         			</span>
                                     			</a>	
-                                    			<a href="#" class="btn btn-primary btn-icon-split btn-sm" style="margin:0px;height:27px">
-                                        			<span class="icon text-white" style="margin:0px">
-                                            			<i class="fas fa-envelope"></i>
-                                        			</span>
-                                    			</a>
                                     		</td>
                                         </tr>
                                         </c:if>
-                                        <c:if test="${(mvo.memCutdate.getTime() < today.getTime()) || mvo.memCutdate ==null }">
-                                        <tr>
-                                            <td>${mvo.memName }</td>
-                                            <td>${mvo.memId }</td>
-                                            <td>${mvo.memNick }</td>
-                                            <td>${mvo.memTel }</td>
-                                            <td>${mvo.memAdd }</td>
-                                            <td>${mvo.memJoindate }</td>
-                                            <td>${mvo.memWarncnt }</td>
+                                        <c:if test="${not empty vo.conDonedate }">
+                                        <tr style="color:green">
+                                            <td>${vo.recNo }</td>
+                                            <td>${vo.recTitle }</td>
+                                            <td>${vo.recPay }</td>
+                                            <td>${vo.recRegdate }</td>
+                                            <td>작업완료</td>
                                             <td style="padding:10px">
-                                            	<a href="javascript:memLock(${mvo.memNo },${mvo.memWarncnt })" class="btn btn-danger btn-icon-split btn-sm" style="margin:0px;height:27px">
+                                            	<a href="javascript:void(0)" class="btn btn-primary btn-icon-split btn-sm" style="margin:0px;height:27px">
                                         			<span class="icon text-white" style="margin:0px">
-                                            			<i class="fas fa-lock"></i>
+                                            			<i class="fas fa-arrow-right"></i>
                                         			</span>
                                     			</a>	
-                                    			<a href="#" class="btn btn-primary btn-icon-split btn-sm" style="margin:0px;height:27px">
+                                    		</td>
+                                        </tr>
+                                        </c:if>
+                                        <c:if test="${empty vo.conDonedate && vo.memNo != 0 }">
+                                        <tr style="color:orange;">
+                                            <td>${vo.recNo }</td>
+                                            <td>${vo.recTitle }</td>
+                                            <td>${vo.recPay }</td>
+                                            <td>${vo.recRegdate }</td>
+                                            <td>작업중</td>
+                                            <td style="padding:10px">
+                                            	<a href="javascript:void(0)" class="btn btn-primary btn-icon-split btn-sm" style="margin:0px;height:27px">
                                         			<span class="icon text-white" style="margin:0px">
-                                            			<i class="fas fa-envelope"></i>
+                                            			<i class="fas fa-arrow-right"></i>
                                         			</span>
-                                    			</a>
+                                    			</a>	
                                     		</td>
                                         </tr>
                                         </c:if>

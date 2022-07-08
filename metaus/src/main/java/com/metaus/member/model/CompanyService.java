@@ -14,6 +14,7 @@ public interface CompanyService {
 	public int checkLogin(String userid, String pwd);
 	public CompanyVO selectByUserid(String comId);
 	CompanyVO selectByComNo(int memNo) ;
+	List<CompanyVO> selectRecByComNo(int comNo);
 	public int duplicateId(String comId);
 	public int insertCompany(CompanyVO vo);
 	public String findId(CompanyVO vo);

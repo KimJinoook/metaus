@@ -16,6 +16,12 @@ public class IndexController {
 		
 		return "/index";
 	}
+	@RequestMapping("/index_ex")
+	public String index_ex() {
+		logger.info("index 페이지");
+		
+		return "/index_ex";
+	}
 	@RequestMapping("/test/test")
 	public String test() {
 		logger.info("test 페이지");

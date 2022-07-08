@@ -80,6 +80,9 @@ public class AdminMemberController {
 		
 		CompanyVO comVo = comService.selectByComNo(comNo);
 		model.addAttribute("comVo",comVo);
+		List<CompanyVO> recList = comService.selectRecByComNo(comNo);
+		logger.info("의뢰 리스트 list={}",recList);
+		model.addAttribute("recList",recList);
 		
 	}
 	
