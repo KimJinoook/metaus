@@ -69,18 +69,18 @@
                     
                         <!-- Form Group -->
                         <div class="form-group">
-                            <label>모델 설명 <span>(선택사항)</span></label>
+                            <label>모델 설명 <span></span></label>
                             <textarea class="tinymce" name="pdPre" id="pdPre"></textarea>
                         </div>
                         
                         <!-- Form Group -->
                         <div class="form-group">
-                            <label>페이 </label>
+                            <label>모델 가격 </label>
                             <input class="form-control" name="pdPrice" id="pdPrice" type="text" placeholder='5000$'>
                         </div>
                         <!-- Form Group -->
                         <div class="form-group">
-                            <label>헤더 이미지 <span>(선택사항)</span></label>
+                            <label>모델 업로드 <span></span></label>
                             
                             <!-- Upload Button -->
                             <div class="upload-file-btn">

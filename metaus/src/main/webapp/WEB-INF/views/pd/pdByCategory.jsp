@@ -78,39 +78,59 @@ $(function(){
 </a>
 <!-- 검색 끝 -->
 <input type="hidden" id="memId" name="memId" value="${memId }">
-    <!-- =============== End of Page Header 1 Section =============== -->
-<!-- Section-->
-        <section class="py-5">        
-            <div class="container px-4 px-lg-5 mt-5">
-            <c:if test="${empty list }">
-            <p class="noPd2" style="text-align: center;"><img src="<c:url value='/images/noPd2.jpg'/>" alt="..." /></p>            
+<!-- ===== Start of Shop Section ===== -->
+    <section class="shop ptb80">
+        <div class="container">
+            <div class="row">
+
+                <!-- Start of Shop Product Wrapper -->
+                <div class="col-md-12 col-xs-12 shop-products-wrapper">
+				<c:if test="${empty list }">
+            <p class="noPd2" style="text-align: center;"><img src="<c:url value='/images/noPd2.png'/>" alt="..." width="40%"/></p>            
             </c:if>
             <c:if test="${!empty list }">
+             <!-- 반복 시작 -->
             <c:forEach var="vo" items="${list }">
-                    <div class="col mb-5">        
-                                      
-                        <div class="card h-100">
-                            <a href="<c:url value='/pd/pdDetail?pdNo=${vo.pdNo }'/>">
-                            <!-- Product image-->
-                            <c:if test="${empty vo.pdFilename }">
-		                    <img class="card-img-top mb-5 mb-md-0" src="<c:url value='/images/noPd.jpg'/>" alt="..." /></div>
-		                    </c:if>
-                            <c:if test="${!empty vo.pdFilename }">
-                            <img class="card-img-top" src="<c:url value='/product/${vo.pdFilename }'/>" alt="..."/>
-                            </c:if>
-                            <!-- Product details-->
-                            <div class="card-body p-4">
-                                <div class="text-center">
-                                    <!-- Product name-->
-                                    <h5 class="fw-bolder">${vo.pdName }</h5>
-                                    <!-- Product price-->
-                                    <fmt:formatNumber value="${vo.pdPrice }" pattern="#,###"/>원
+                    <!-- Start of Products -->
+                    <div class="row">
+
+                        <!-- Start of Product 1 -->
+                        <div class="col-md-4 col-sm-6 col-xs-12">
+                            <div class="product">
+
+                                <!-- Product Image -->
+                                <div class="product-image">
+
+                                    <a href="<c:url value='/images/shop/product1.jpg'/>" class="hover-zoom">
+                                        <img src="<c:url value='/images/shop/product1.jpg'/>" class="img-responsive" alt="">
+                                    </a>
+
+                                    <!-- Product overlay -->
+                                    <div class="product-overlay">
+                                        <a href="<c:url value='/cart/cart'/>"><i class="fa fa-shopping-cart"></i>Add to Cart</a>
+                                    </div>
+
                                 </div>
+
+                                <!-- Product Description -->
+                                <div class="product-descr">
+
+                                    <a href="<c:url value='/pd/pdDetail?pdNo=${vo.pdNo }'/>">
+                                        <h4>${vo.pdName }</h4>
+
+                                        <!-- Price -->
+                                        <span class="price">
+								            <del><span class="amount">$39.99</span></del>
+                                        <span class="amount">$<fmt:formatNumber value="${vo.pdPrice }" pattern="#,###"/></span>
+                                        </span>
+                                    </a>
+                                </div>
+
                             </div>
-                            </a>
                         </div>
-                    </div>                                        
-            </c:forEach>
+                        <!-- End of Product 1 -->
+						 </c:forEach>
+            <!-- 반복 끝 -->
             </c:if>
                                                             
                     <!-- Start of Pagination -->
