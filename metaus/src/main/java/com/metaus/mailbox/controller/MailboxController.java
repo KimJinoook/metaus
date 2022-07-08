@@ -17,7 +17,9 @@ import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.support.RequestContextUtils;
 
@@ -43,12 +45,13 @@ public class MailboxController {
 	private final FileUploadUtil fileUploadUtil;
 	
 	@RequestMapping("/compose")
-	public String compose(@RequestParam(defaultValue = "0") int msgaddNo, Model model) {
-		Map<String, Object> map = mailboxService.selectByMsgAddNo(msgaddNo);
-		
-		model.addAttribute("map", map);
-		
+	public String compose() {
 		return "/mailbox/compose";
+	}
+	
+	@RequestMapping("/ajaxCompose")
+	public String ajaxCompose() {
+		return "/mailbox/ajaxCompose";
 	}
 	
 	@RequestMapping("/readMail")
@@ -59,6 +62,8 @@ public class MailboxController {
 	@RequestMapping("/sendMail")
 	public String sendMail(@ModelAttribute MailboxVO vo, @RequestParam(defaultValue = "temporary") String msgaddAdsee 
 			,@RequestParam(defaultValue = "N") String temporaryFlag , HttpServletRequest request, HttpSession session){
+		//test
+		
 		//임시저장 메세지 전송 처리
 		Map<String, ?> flashMap =RequestContextUtils.getInputFlashMap(request);
 		
@@ -126,7 +131,7 @@ public class MailboxController {
 			e.printStackTrace();
 		}
 		
-		return "redirect:/mailbox/mailbox";
+		return "redirect:/mailbox/receivedMail";
 	}
 	
 	@RequestMapping("/receivedMail")

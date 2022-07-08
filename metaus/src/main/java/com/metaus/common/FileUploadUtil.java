@@ -89,28 +89,30 @@ public class FileUploadUtil {
 			
 			if(!tempFileList.isEmpty()) {
 				for(MultipartFile tempFile : tempFileList) {
-					long fileSize=tempFile.getSize(); //파일 크기
-					String oName = tempFile.getOriginalFilename(); //원래 파일명
-					
-					//변경된 파일이름 구하기
-					String fileName = getUniqueFileName(oName);
-					
-					//파일 업로드 처리
-					//업로드할 폴더 구하기
-					String uploadPath 
-					= getUploadPath(request, uploadFlag);
-					File file = new File(uploadPath, fileName); 
-					tempFile.transferTo(file);
-					
-					//업로드된 파일 정보 저장
-					//[1] Map에 저장
-					Map<String, Object> resultMap = new HashMap<>();
-					resultMap.put("fileName", fileName);
-					resultMap.put("fileSize", fileSize);
-					resultMap.put("originalFileName", oName);
-					
-					//[2] 여러 개의 Map을 List에 저장
-					list.add(resultMap);
+					if(tempFile!=null && !tempFile.isEmpty()) {
+						long fileSize=tempFile.getSize(); //파일 크기
+						String oName = tempFile.getOriginalFilename(); //원래 파일명
+						
+						//변경된 파일이름 구하기
+						String fileName = getUniqueFileName(oName);
+						
+						//파일 업로드 처리
+						//업로드할 폴더 구하기
+						String uploadPath 
+						= getUploadPath(request, uploadFlag);
+						File file = new File(uploadPath, fileName); 
+						tempFile.transferTo(file);
+						
+						//업로드된 파일 정보 저장
+						//[1] Map에 저장
+						Map<String, Object> resultMap = new HashMap<>();
+						resultMap.put("fileName", fileName);
+						resultMap.put("fileSize", fileSize);
+						resultMap.put("originalFileName", oName);
+						
+						//[2] 여러 개의 Map을 List에 저장
+						list.add(resultMap);
+					}
 				}
 			}//if
 		}//while
