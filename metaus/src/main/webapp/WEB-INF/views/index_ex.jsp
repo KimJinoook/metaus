@@ -6,7 +6,7 @@
 
                     <!-- ===== Start of Main Search Section ===== -->
                     <section class="main overlay-black">
-                        <img src="../images/mainlogo_daemunjjack.png" alt="">
+                        <img src="../images/mainlogo_d.png" alt="">
                     </section>
                     <!-- ===== End of Main Search Section ===== -->
 
