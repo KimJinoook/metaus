@@ -118,13 +118,13 @@
 				}
 			});
 			
-			
+			//별표 클릭
 			$(document).on("click",".star", function(){
 				var msgaddNo = $(this).closest('tr').find('input[type=hidden]').val();
-				//console.log(msgaddNo);
+				console.log(msgaddNo);
 				
 				if($(this).hasClass('fa-star')){
-					//console.log("색칠된 별");
+					console.log("색칠된 별");
 					var emptyFlag = false;
 					$(this).removeClass('fa-star').addClass('fa-star-o');
 				}else{
@@ -152,6 +152,7 @@
 						alert('error:' + error);
 					}
 				});//ajax
+				
 			});
 			
 			//받은 메세지
@@ -239,6 +240,91 @@
 				});
 			});
 			
+			//메세지 작성
+			$('.btn-compose').click(function(){
+				if($(this).text()=='메세지 작성'){
+					$.ajax({
+						url: "<c:url value='/mailbox/ajaxCompose'/>",
+						type: "GET",
+						success: function(data){
+							$('.box.box-primary').html(data);
+							$('.btn-compose').text("받은 메세지");
+						},
+						error: function(xhr, status, error){
+							alert('error:' + error);
+						}
+					});
+				}else{
+					$.ajax({
+						url: "<c:url value='/mailbox/receivedMail'/>",
+						type: "GET",
+						success: function(data){
+							$('.box.box-primary').html(data);
+							$('.btn-compose').text("메세지 작성");
+						},
+						error: function(xhr, status, error){
+							alert('error:' + error);
+						}
+					});
+				}
+			});
+			
+			//ajaxCompose event
+			//임시저장 or 보내기 버튼 클릭
+			$(document).on("click",".btn-message",function(){
+				event.preventDefault();
+				
+				if($(this).hasClass("temporary")){
+					$('form[name=frm]').find('#temporaryFlag').attr("value", "Y");
+					
+					if($.trim($('#msgaddAdsee').val())<1){
+						$('form[name=frm]').find('#msgaddAdsee').val("임시저장");
+					}
+				}else{
+				
+					if($.trim($('#msgaddAdsee').val())<1){
+						alert("받는 사람을 입력하세요.");
+						return false;
+					}
+					
+					if(${not empty map}){
+						var temporaryFlagUpdate = "${pageContext.request.contextPath}/mailbox/temporaryFlagUpdate?msgaddNo="+${map['MSGADD_NO']}
+						$('form[name=frm]').attr("action", temporaryFlagUpdate);
+						$('form[name=frm]').submit();
+						return false;
+					}
+				
+				}
+				
+				var form = document.querySelector("form");
+			    var formData = new FormData(form);
+			    for (var i = 0; i < filesArr.length; i++) {
+			        // 삭제되지 않은 파일만 폼데이터에 담기
+			        if (!filesArr[i].is_delete) {
+			            formData.append("attachment", filesArr[i]);
+			        }
+			    }
+			    
+				$.ajax({
+					url: "<c:url value='/mailbox/sendMail'/>",
+					type: "POST",
+					data: formData,
+					cache: false,
+					contentType : false,
+					processData : false,
+					success: function(data){
+						var temporaryNo = $('.temporaryNo').text();
+						temporaryNo = Number(temporaryNo) + 1;
+						$('.temporaryNo').text(temporaryNo);
+						
+						$('.box.box-primary').html(data);
+					},
+					error: function(xhr, status, error){
+						alert('error:' + error);
+					}
+				});
+			});
+			
 		});
 </script>
       <!-- Right side column. Contains the navbar and content of the page -->
@@ -258,7 +344,7 @@
         <section class="content">
           <div class="row">
             <div class="col-md-3">
-              <a href="<c:url value='/mailbox/compose'/>" class="btn btn-primary btn-block margin-bottom">메세지 작성</a>
+              <a href="#" class="btn btn-primary btn-block margin-bottom btn-compose">메세지 작성</a>
               <div class="box box-solid">
                 <div class="box-header with-border">
                   <h3 class="box-title">Folders</h3>

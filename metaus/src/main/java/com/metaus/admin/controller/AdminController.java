@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.metaus.admin.model.ManagerMailboxService;
 import com.metaus.admin.model.ManagerService;
 import com.metaus.admin.model.ManagerVO;
 import com.metaus.common.VisitListener;
@@ -38,6 +40,7 @@ public class AdminController {
 	private final VisitService visitService;
 	private final MemberService memberService;
 	private final CompanyService companyService;
+	private final ManagerMailboxService managerMailboxService;
 	
 	@RequestMapping("/")
 	public String index(Model model) {
@@ -146,6 +149,10 @@ public class AdminController {
 			session.setAttribute("managerNo", managerVo.getManagerNo());
 			session.setAttribute("managerId", vo.getManagerId());
 			session.setAttribute("managerName", managerVo.getManagerName());
+			session.setAttribute("managerPic", managerVo.getManagerPic());
+
+			
+			VisitListener.managerMap.put(vo.getManagerId(),"1");
 			
 			msg=managerVo.getManagerName() +"님 로그인되었습니다.";
 			url="/admin/";
@@ -163,7 +170,10 @@ public class AdminController {
 	@RequestMapping("/login/adminLogout")
 	public String logout(HttpSession session) {
 		logger.info("로그아웃");		
+
+		VisitListener.managerMap.remove((String)session.getAttribute("managerId"));
 		session.invalidate();
+		
 
 		return "redirect:/admin/login/adminLogin";
 	}
