@@ -4,7 +4,9 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.HashMap;
 
+import javax.servlet.ServletContext;
 import javax.servlet.annotation.WebListener;
 import javax.servlet.http.HttpSessionEvent;
 import javax.servlet.http.HttpSessionListener;
@@ -17,6 +19,7 @@ public class VisitListener implements HttpSessionListener {
 	private static final Logger logger = LoggerFactory.getLogger(VisitListener.class);
 	
 	static private int activeSession = 0;
+	static public HashMap<String, String> managerMap = new HashMap<String,String>();
 
 	public static int getActiveSessions() {
 		return activeSession;
@@ -32,6 +35,7 @@ public class VisitListener implements HttpSessionListener {
 	public void sessionDestroyed(HttpSessionEvent e) {
 		activeSession--;
 		logger.info("destroy sessionId={}",e.getSession().getId());
+		VisitListener.managerMap.remove((String)e.getSession().getAttribute("managerId"));
 	}
 	
 	public int insertVisit() {
