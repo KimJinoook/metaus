@@ -121,7 +121,7 @@ $(function(){
 
 <script type="module">
 
-	var url = "<c:url value='/gltfmodel/${vo.pdFilename}'/>";
+	var url = "<c:url value='/product/${vo.pdFilename}'/>";
 
 	var manager = new THREE.LoadingManager();
 	
