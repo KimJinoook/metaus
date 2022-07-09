@@ -29,7 +29,7 @@
     <link rel="stylesheet" type="text/css" href="<c:url value='/css/bootstrap.min.css'/>">
     <link rel="stylesheet" type="text/css" href="<c:url value='/css/font-awesome.min.css'/>">
     <link rel="stylesheet" type="text/css" href="<c:url value='/css/owl.carousel.min.css'/>">
-    <link rel="stylesheet" type="text/css" href="<c:url value='/css/style-ta.css'/>">
+    <link rel="stylesheet" type="text/css" href="<c:url value='/css/style_ex.css'/>">
     <link rel="stylesheet" type="text/css" href="<c:url value='/css/responsive.css'/>">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->

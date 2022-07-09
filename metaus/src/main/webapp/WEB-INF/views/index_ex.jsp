@@ -2,11 +2,11 @@
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
         <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
             <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-                <%@ include file="inc/header.jsp" %>
+                <%@ include file="inc/header-ta.jsp" %>
 
                     <!-- ===== Start of Main Search Section ===== -->
                     <section class="main overlay-black">
-                        <img src="../images/mainlogo_daemunjjack.png" alt="">
+                        <img src="/images/mainlogo_daemunjjack.png" alt="">
                     </section>
                     <!-- ===== End of Main Search Section ===== -->
 
