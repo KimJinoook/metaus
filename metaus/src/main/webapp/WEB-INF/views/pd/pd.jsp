@@ -1,8 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file="../inc/header.jsp"%>
-<link rel="stylesheet" type="text/css"
-	href="<c:url value='/css/search.css'/>">
+ <%@ include file="../inc/header.jsp"%>   
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,400i,700,800|Varela+Round" rel="stylesheet">
+
+    <!-- CSS links -->
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="css/owl.carousel.min.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/responsive.css">
+    <link rel="stylesheet" type="text/css" href="<c:url value='/css/search.css'/>">
 <script type="text/javascript">
 function pdList(curPage){
 	$('input[name=currentPage]').val(curPage);
@@ -17,8 +25,8 @@ $(function(){
 		}
 	});
 });
-</script>
-<!-- =============== Start of Page Header 1 Section =============== -->
+</script>    
+    <!-- =============== Start of Page Header 1 Section =============== -->
     <section class="page-header" style="margin-top: 150px;">
         <div class="container">
 
@@ -42,8 +50,8 @@ $(function(){
             <!-- End of Breadcrumb -->
 
         </div>
-    </section>
-    <!-- container -->
+        </section>
+        <!-- container -->
 		<div id="container">
 			<nav class="cateMenu">
 				<dl id="leftNavi">
@@ -52,8 +60,9 @@ $(function(){
 					
 				</dl>
 			</nav>
-			
+			</div>
 <!-- 검색 시작 -->
+
 <form id="searchFrm" method="post" action="<c:url value='/pd/pd'/>">
 	<div id="searchBox">
 		<div class="col-md-3 col-sm-12 search-categories"
@@ -77,44 +86,317 @@ $(function(){
 	<button class="btn btn-large btn-blue btn-effect mt30" id="pdPost">상품 등록</button>
 </a>
 <!-- 검색 끝 -->
+
 <input type="hidden" id="memId" name="memId" value="${memId }">
-    <!-- =============== End of Page Header 1 Section =============== -->
-<!-- Section-->
-        <section class="py-5">        
-            <div class="container px-4 px-lg-5 mt-5">
-            <c:if test="${empty list }">
-            <p class="noPd2" style="text-align: center;"><img src="<c:url value='/images/noPd2.jpg'/>" alt="..." /></p>            
+<!-- ===== Start of Shop Section ===== -->
+    <section class="shop ptb80">
+        <div class="container">
+            <div class="row">
+
+                <!-- Start of Shop Product Wrapper -->
+                <div class="col-md-12 col-xs-12 shop-products-wrapper">
+				<c:if test="${empty list }">
+            <p class="noPd2" style="text-align: center;"><img src="<c:url value='/images/noPd2.png'/>" alt="..." width="40%"/></p>            
             </c:if>
             <c:if test="${!empty list }">
-            <!-- 반복 시작 -->
+             <!-- 반복 시작 -->
             <c:forEach var="vo" items="${list }">
-                    <div class="col mb-5">
-                        <div class="card h-100">
-                            <a href="<c:url value='/pd/pdDetail?pdNo=${vo.pdNo }'/>">
-                            <!-- Product image-->
-                            <c:if test="${empty vo.pdFilename }">
-		                    <img class="card-img-top mb-5 mb-md-0" src="<c:url value='/images/noPd.jpg'/>" alt="..." /></div>
-		                    </c:if>
-		                    <c:if test="${!empty vo.pdFilename }">
-                            <img class="card-img-top" src="<c:url value='/product/${vo.pdFilename }'/>" alt="..."/>
-                            </c:if>
-                            <!-- Product details-->
-                            <div class="card-body p-4">
-                                <div class="text-center">
-                                    <!-- Product name-->
-                                    <h5 class="fw-bolder">${vo.pdName }</h5>
-                                    <!-- Product price-->
-                                    <fmt:formatNumber value="${vo.pdPrice }" pattern="#,###"/>원
+                    <!-- Start of Products -->
+                    <div class="row">
+
+                        <!-- Start of Product 1 -->
+                        <div class="col-md-4 col-sm-6 col-xs-12">
+                            <div class="product">
+
+                                <!-- Product Image -->
+                                <div class="product-image">
+
+                                    <a href="<c:url value='/images/shop/product1.jpg'/>" class="hover-zoom">
+                                        <img src="<c:url value='/images/shop/product1.jpg'/>" class="img-responsive" alt="">
+                                    </a>
+
+                                    <!-- Product overlay -->
+                                    <div class="product-overlay">
+                                        <a href="<c:url value='/cart/cart'/>"><i class="fa fa-shopping-cart"></i>Add to Cart</a>
+                                    </div>
+
                                 </div>
+
+                                <!-- Product Description -->
+                                <div class="product-descr">
+
+                                    <a href="<c:url value='/pd/pdDetail?pdNo=${vo.pdNo }'/>">
+                                        <h4>${vo.pdName }</h4>
+
+                                        <!-- Price -->
+                                        <span class="price">
+								            <del><span class="amount">$39.99</span></del>
+                                        <span class="amount">$<fmt:formatNumber value="${vo.pdPrice }" pattern="#,###"/></span>
+                                        </span>
+                                    </a>
+                                </div>
+
                             </div>
-                            </a>
                         </div>
-                    </div>                                        
-            </c:forEach>
+                        <!-- End of Product 1 -->
+						 </c:forEach>
             <!-- 반복 끝 -->
             </c:if>
-                                                            
-                    <!-- Start of Pagination -->
+<!-- 
+                        Start of Product 2
+                        <div class="col-md-4 col-sm-6 col-xs-12">
+                            <div class="product">
+
+                                Product Image
+                                <div class="product-image">
+
+                                    <a href="images/shop/product2.jpg" class="hover-zoom">
+                                        <img src="images/shop/product2.jpg" class="img-responsive" alt="">
+                                    </a>
+
+                                    Product overlay
+                                    <div class="product-overlay">
+                                        <a href="cart.html"><i class="fa fa-shopping-cart"></i>Add to Cart</a>
+                                    </div>
+
+                                </div>
+
+                                Product Description
+                                <div class="product-descr">
+
+                                    <a href="shop-product.html">
+                                        <h4>Cariera Cap</h4>
+
+                                        Price
+                                        <span class="price">
+                                            <span class="amount">$19.99</span>
+                                        </span>
+                                    </a>
+                                </div>
+
+                            </div>
+                        </div>
+                        End of Product 2
+
+
+                        Start of Product 3
+                        <div class="col-md-4 col-sm-6 col-xs-12">
+                            <div class="product">
+
+                                Product Image
+                                <div class="product-image">
+
+                                    <a href="images/shop/product3.jpg" class="hover-zoom">
+                                        <img src="images/shop/product3.jpg" class="img-responsive" alt="">
+                                    </a>
+
+                                    Product overlay
+                                    <div class="product-overlay">
+                                        <a href="cart.html"><i class="fa fa-shopping-cart"></i>Add to Cart</a>
+                                    </div>
+
+                                </div>
+
+                                Product Description
+                                <div class="product-descr">
+
+                                    <a href="shop-product.html">
+                                        <h4>Cariera T-Shirt</h4>
+
+                                        Price
+                                        <span class="price">
+								            <del><span class="amount">$39.99</span></del>
+                                        <span class="amount">$29.99</span>
+                                        </span>
+                                    </a>
+                                </div>
+
+                            </div>
+                        </div>
+                        End of Product 3
+
+
+                        Start of Product 4
+                        <div class="col-md-4 col-sm-6 col-xs-12">
+                            <div class="product">
+
+                                Product Image
+                                <div class="product-image">
+
+                                    <a href="images/shop/product4.jpg" class="hover-zoom">
+                                        <img src="images/shop/product4.jpg" class="img-responsive" alt="">
+                                    </a>
+
+                                    Product overlay
+                                    <div class="product-overlay">
+                                        <a href="cart.html"><i class="fa fa-shopping-cart"></i>Add to Cart</a>
+                                    </div>
+
+                                </div>
+
+                                Product Description
+                                <div class="product-descr">
+
+                                    <a href="shop-product.html">
+                                        <h4>Cariera Mug</h4>
+
+                                        Price
+                                        <span class="price">
+                                            <span class="amount">$9.99</span>
+                                        </span>
+                                    </a>
+                                </div>
+
+                            </div>
+                        </div>
+                        End of Product 4
+
+
+                        Start of Product 5
+                        <div class="col-md-4 col-sm-6 col-xs-12">
+                            <div class="product">
+
+                                Product Image
+                                <div class="product-image">
+
+                                    <a href="images/shop/product5.jpg" class="hover-zoom">
+                                        <img src="images/shop/product5.jpg" class="img-responsive" alt="">
+                                    </a>
+
+                                    Product overlay
+                                    <div class="product-overlay">
+                                        <a href="cart.html"><i class="fa fa-shopping-cart"></i>Add to Cart</a>
+                                    </div>
+
+                                </div>
+
+                                Product Description
+                                <div class="product-descr">
+
+                                    <a href="shop-product.html">
+                                        <h4>Rubber Stamp</h4>
+
+                                        Price
+                                        <span class="price">
+                                            <span class="amount">$5.99</span>
+                                        </span>
+                                    </a>
+                                </div>
+
+                            </div>
+                        </div>
+                        End of Product 5
+
+
+                        Start of Product 6
+                        <div class="col-md-4 col-sm-6 col-xs-12">
+                            <div class="product">
+
+                                Product Image
+                                <div class="product-image">
+
+                                    <a href="images/shop/product6.jpg" class="hover-zoom">
+                                        <img src="images/shop/product6.jpg" class="img-responsive" alt="">
+                                    </a>
+
+                                    Product overlay
+                                    <div class="product-overlay">
+                                        <a href="cart.html"><i class="fa fa-shopping-cart"></i>Add to Cart</a>
+                                    </div>
+
+                                </div>
+
+                                Product Description
+                                <div class="product-descr">
+
+                                    <a href="shop-product.html">
+                                        <h4>Cariera T-Shirt</h4>
+
+                                        Price
+                                        <span class="price">
+                                            <span class="amount">$24.99</span>
+                                        </span>
+                                    </a>
+                                </div>
+
+                            </div>
+                        </div>
+                        End of Product 6
+
+
+                        Start of Product 7
+                        <div class="col-md-4 col-sm-6 col-xs-12">
+                            <div class="product">
+
+                                Product Image
+                                <div class="product-image">
+
+                                    <a href="images/shop/product3.jpg" class="hover-zoom">
+                                        <img src="images/shop/product3.jpg" class="img-responsive" alt="">
+                                    </a>
+
+                                    Product overlay
+                                    <div class="product-overlay">
+                                        <a href="cart.html"><i class="fa fa-shopping-cart"></i>Add to Cart</a>
+                                    </div>
+
+                                </div>
+
+                                Product Description
+                                <div class="product-descr">
+
+                                    <a href="shop-product.html">
+                                        <h4>Cariera T-Shirt</h4>
+
+                                        Price
+                                        <span class="price">
+								            <del><span class="amount">$39.99</span></del>
+                                        <span class="amount">$29.99</span>
+                                        </span>
+                                    </a>
+                                </div>
+
+                            </div>
+                        </div>
+                        End of Product 7
+
+
+                        Start of Product 8
+                        <div class="col-md-4 col-sm-6 col-xs-12">
+                            <div class="product">
+
+                                Product Image
+                                <div class="product-image">
+
+                                    <a href="images/shop/product1.jpg" class="hover-zoom">
+                                        <img src="images/shop/product1.jpg" class="img-responsive" alt="">
+                                    </a>
+
+                                    Product overlay
+                                    <div class="product-overlay">
+                                        <a href="cart.html"><i class="fa fa-shopping-cart"></i>Add to Cart</a>
+                                    </div>
+
+                                </div>
+
+                                Product Description
+                                <div class="product-descr">
+
+                                    <a href="shop-product.html">
+                                        <h4>Cariera T-Shirt</h4>
+
+                                        Price
+                                        <span class="price">
+								            <del><span class="amount">$39.99</span></del>
+                                        <span class="amount">$29.99</span>
+                                        </span>
+                                    </a>
+                                </div>
+
+                            </div>
+                        </div> -->
+                        <!-- End of Product 8 -->
+                        <!-- Start of Pagination -->
 					<div class="col-md-12">
 						<ul class="pagination list-inline text-center">
 							<c:if test="${pagingInfo.firstPage>1 }">
@@ -147,5 +429,11 @@ $(function(){
 					<input type="hidden" name="currentPage">
 				</form>
 				<!-- 페이징 처리 form 끝 -->
-        </section>
-<%@ include file="../inc/footer.jsp"%>
+                </div>
+                <!-- End of Shop Product Wrapper -->
+
+            </div>
+        </div>
+    </section>
+    <!-- ===== End of Shop Section ===== -->
+    <%@ include file="../inc/footer.jsp"%>

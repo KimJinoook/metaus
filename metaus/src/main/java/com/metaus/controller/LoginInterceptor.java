@@ -1,21 +1,41 @@
 package com.metaus.controller;
 
 import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
+
+import com.metaus.admin.controller.AdminController;
+import com.metaus.admin.model.ManagerMailboxService;
+import com.metaus.admin.model.ManagerMailboxVO;
+import com.metaus.admin.model.ManagerService;
+import com.metaus.common.VisitService;
+import com.metaus.member.model.CompanyService;
+import com.metaus.member.model.MemberService;
+
+import lombok.RequiredArgsConstructor;
 
 @Component
 //public class LoginInterceptor implements HandlerInterceptor{
 public class LoginInterceptor extends HandlerInterceptorAdapter{
 	private static final Logger logger
 	=LoggerFactory.getLogger(LoginInterceptor.class);
+	
 	
 	@Override
 	public boolean preHandle(HttpServletRequest request, 
@@ -51,12 +71,18 @@ public class LoginInterceptor extends HandlerInterceptorAdapter{
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
 			ModelAndView modelAndView) throws Exception {
 		logger.info("postHandle() 실행! - 컨트롤러 실행 후");
+		
 	}
 
 	@Override
 	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)
 			throws Exception {
 		logger.info("afterCompletion() 실행! - 뷰 생성 후");
+		
 	}
+	
+	
+	
+	
 	
 }

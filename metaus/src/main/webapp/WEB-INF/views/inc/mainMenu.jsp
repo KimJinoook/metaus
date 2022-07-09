@@ -126,6 +126,9 @@
 	                         <a href="<c:url value='/ModifyInfo/UpdateInfo'/>">내 정보 변경</a>                                      
 	                     </li>
 	                     <li class="dropdown-submenu">                               
+	                         <a href="<c:url value='/cart/cart'/>">장바구니</a>                                      
+	                     </li>
+	                     <li class="dropdown-submenu">                               
 	                         <a href="<c:url value='/resume/resumeDetail'/>">이력서</a>                                      
 	                     </li>
 	

@@ -93,8 +93,8 @@
 		<selectKey resultType="int" keyProperty="managerNo" order="BEFORE">
 			select fp_manager_seq.nextval from dual
 		</selectKey>
-		insert into fp_manager(manager_no,manager_name,manager_id,manager_pwd,manager_regdate,manager_pic,manager_tel)
-		values(#{managerNo}, #{managerName}, #{managerId}, #{managerPwd},sysdate,#{managerPic},#{managerTel})
+		insert into fp_manager(manager_no,manager_name,manager_id,manager_pwd,manager_regdate)
+		values(#{managerNo}, #{managerName}, #{managerId}, #{managerPwd},sysdate)
 	</insert>
    	<select id="selectAll" resultType="ManagerVO">
    		select * from fp_manager

@@ -139,10 +139,20 @@
 
 					<div role="tabpanel" class="tab-pane active" id="personal">
 						<div class="row">
-							<form method="post" enctype="multipart/form-data"
+							<form method="post" class="post-job-resume mt50" enctype="multipart/form-data"
 								action="<c:url value='/ModifyInfo/memberUpdate'/>">
 								<div class="col-md-6 col-md-offset-3">
+									<div class="form-group">
+			                            <label>작업 파일<span>(Png,aaa파일만 가능)</span></label>
+										
+			                            <!-- Upload Button -->
+			                            <div class="upload-file-btn" style="width:140px">
+			                                <input type="file" name="upfile" accept=".zip,.gltf">
+                               
+				                        </div>
+				                     </div>
 
+		
 											<input type="file" class="hidden_input" id="imageSelector"
 												name="upfile" accept="image/jpeg, image/jpg, image/png"
 												multiple /> <img src="<c:url value='/mem_profile/${memVo.memPic }'/>" class="thumb" /> <a
