@@ -118,13 +118,13 @@
 				}
 			});
 			
-			
+			//별표 클릭
 			$(document).on("click",".star", function(){
 				var msgaddNo = $(this).closest('tr').find('input[type=hidden]').val();
-				//console.log(msgaddNo);
+				console.log(msgaddNo);
 				
 				if($(this).hasClass('fa-star')){
-					//console.log("색칠된 별");
+					console.log("색칠된 별");
 					var emptyFlag = false;
 					$(this).removeClass('fa-star').addClass('fa-star-o');
 				}else{
@@ -152,10 +152,11 @@
 						alert('error:' + error);
 					}
 				});//ajax
+				
 			});
 			
 			//받은 메세지
-			$('.receivedMail').click(function(){
+			$(document).on("click",".receivedMail",function(){
 				$.ajax({
 					url: "<c:url value='/mailbox/receivedMail'/>",
 					type: "GET",
@@ -170,7 +171,7 @@
 			});
 			
 			//보낸 메세지
-			$('.sentMail').click(function(){
+			$(document).on("click",".sentMail",function(){
 				$.ajax({
 					url: "<c:url value='/mailbox/sentMail'/>",
 					type: "GET",
@@ -184,7 +185,7 @@
 			});
 			
 			//별표 메세지
-			$('.starMail').click(function(){
+			$(document).on("click",".starMail",function(){
 				$.ajax({
 					url: "<c:url value='/mailbox/starMail'/>",
 					type: "GET",
@@ -198,7 +199,7 @@
 			});
 			
 			//휴지통
-			$('.trashMail').click(function(){
+			$(document).on("click",".trashMail",function(){
 				$.ajax({
 					url: "<c:url value='/mailbox/trashMail'/>",
 					type: "GET",
@@ -212,7 +213,7 @@
 			});
 			
 			//스팸함
-			$('.spamMail').click(function(){
+			$(document).on("click",".spamMail",function(){
 				$.ajax({
 					url: "<c:url value='/mailbox/spamMail'/>",
 					type: "GET",
@@ -226,12 +227,205 @@
 			});
 			
 			//임시보관함
-			$('.temporaryMail').click(function(){
+			$(document).on("click",".temporaryMail",function(){
 				$.ajax({
 					url: "<c:url value='/mailbox/temporaryMail'/>",
 					type: "GET",
 					success: function(data){
 						$('.box.box-primary').html(data);
+					},
+					error: function(xhr, status, error){
+						alert('error:' + error);
+					}
+				});
+			});
+			
+			//메세지 작성
+			$(document).on("click",".btn-compose",function(){
+				if($(this).text()=='메세지 작성'){
+					$.ajax({
+						url: "<c:url value='/mailbox/ajaxCompose'/>",
+						type: "GET",
+						success: function(data){
+							$('.box.box-primary').html(data);
+							$('.btn-compose').text("받은 메세지");
+						},
+						error: function(xhr, status, error){
+							alert('error:' + error);
+						}
+					});
+				}else{
+					$.ajax({
+						url: "<c:url value='/mailbox/receivedMail'/>",
+						type: "GET",
+						success: function(data){
+							$('.box.box-primary').html(data);
+							$('.btn-compose').text("메세지 작성");
+						},
+						error: function(xhr, status, error){
+							alert('error:' + error);
+						}
+					});
+				}
+			});
+			
+			//ajaxCompose event
+			//임시저장 or 보내기 버튼 클릭
+			$(document).on("click",".btn-message",function(){
+				event.preventDefault();
+				
+				if($(this).hasClass("temporary")){
+					$('form[name=frm]').find('#temporaryFlag').attr("value", "Y");
+					
+					if($.trim($('#msgaddAdsee').val())<1){
+						$('form[name=frm]').find('#msgaddAdsee').val("임시저장");
+					}
+					
+					var temporaryNo = $('.temporaryNo').text();
+					temporaryNo = Number(temporaryNo) + 1;
+					$('.temporaryNo').text(temporaryNo);
+				}else{
+					if($.trim($('#msgaddAdsee').val())<1){
+						alert("받는 사람을 입력하세요.");
+						return false;
+					}
+					
+					/* if($('#ajaxTemporaryFlag').val() == 'Y'){
+						url = "<c:url value='/mailbox/temporaryFlagUpdate' />";
+					} */
+				
+					var sentNo = $('.sentNo').text();
+					sentNo = Number(sentNo) + 1;
+					$('.sentNo').text(sentNo);
+					
+					if("${memId}" == $('#msgaddAdsee').val()){
+						var receivedNo = $('.receivedNo').text();
+						receivedNo = Number(receivedNo) + 1;
+						$('.receivedNo').text(receivedNo);
+					}
+				}
+				
+				var form = document.querySelector("form");
+			    var formData = new FormData(form);
+			    for (var i = 0; i < filesArr.length; i++) {
+			        // 삭제되지 않은 파일만 폼데이터에 담기
+			        if (!filesArr[i].is_delete) {
+			            formData.append("attachment", filesArr[i]);
+			        }
+			    }
+			    
+				$.ajax({
+					url: "<c:url value='/mailbox/sendMail'/>",
+					type: "POST",
+					data: formData,
+					cache: false,
+					contentType : false,
+					processData : false,
+					success: function(data){
+						$('.btn-compose').text("메세지 작성");
+						$('.box.box-primary').html(data);
+						$.ajax({
+							url: "<c:url value='/mailbox/updateMailboxNo'/>",
+							type: "GET",
+							dataType: "JSON",
+							traditional :true,
+							success: function(data){
+								//console.log(data);
+								$('.receivedNo').text(data.receivedNo);
+								$('.sentNo').text(data.sentNo);
+								$('.starNo').text(data.starNo);
+								$('.temporaryNo').text(data.temporaryNo);
+								$('.spamNo').text(data.spamNo);
+								$('.trashNo').text(data.trashNo);
+							},
+							error: function(xhr, status, error){
+								alert('error:' + error);
+							}
+						});
+					},
+					error: function(xhr, status, error){
+						alert('error:' + error);
+					}
+				});
+			});
+			
+			//메세지 상세보기
+			$(document).on("click", ".message-detail", function(){
+				var msgaddNo = $(this).closest('tr').find('.msgaddNo').val();
+				var msgNo = $(this).closest('tr').find('.msgNo').val();
+				//alert(msgaddNo);
+				$.ajax({
+					url: "<c:url value='/mailbox/mailDetail'/>",
+					type: "GET",
+					data: {
+						"msgaddNo" : msgaddNo,
+						"msgNo" : msgNo
+					},
+					success: function(data){
+						$('.btn-compose').text("메세지 작성");
+						$('.box.box-primary').html(data);
+					},
+					error: function(xhr, status, error){
+						alert('error:' + error);
+					}
+				});
+			});
+			
+			//임시보관함에서 메세지 클릭했을 때
+			$(document).on("click", ".message-detail-temporary", function(){
+				var msgaddNo = $(this).closest('tr').find(".msgaddNo").val();
+				var msgNo = $(this).closest('tr').find(".msgNo").val();
+				//console.log(msgaddNo);
+				//console.log(msgNo);
+				$.ajax({
+					url: "<c:url value='/mailbox/selectTemporaryMail'/>",
+					type: "GET",
+					data: {
+						"msgaddNo" : msgaddNo,
+						"msgNo" : msgNo
+					},
+					success: function(data){
+						$('.btn-compose').text("받은 메세지");
+						$('.box.box-primary').html(data);
+					},
+					error: function(xhr, status, error){
+						alert('error:' + error);
+					}
+				}); 
+			}); 
+			
+			//상세페이지 삭제 버튼 눌렀을 때
+			$(document).on("click", ".detail-trash", function(){
+				var msgaddNo = $(this).closest('div').find('#msgaddNo').val();
+				//console.log(msgaddNo);
+				var trashFlag = "N";
+				if($(this).hasClass("detail-trash-up")){
+					trashFlag = "Y";
+				}
+				
+				$.ajax({
+					url: "<c:url value='/mailbox/updatDetailTrashFlag'/>",
+					type: "GET",
+					data: {
+						"msgaddNo" : msgaddNo,
+						"trashFlag" : trashFlag
+					},
+					success: function(data){
+						//mailbox 다시 가져오기
+						$('.content-wrapper').empty();
+						$('.content-wrapper').append(data);
+						
+						$.ajax({ //페이지 로드 시 받은 메세지함 표시
+							url: "<c:url value='/mailbox/receivedMail'/>",
+							type: "GET",
+							success: function(data){
+								//console.log(data);
+								$('.box.box-primary').html(data);
+							},
+							error: function(xhr, status, error){
+								alert('error:' + error);
+							}
+						});
 					},
 					error: function(xhr, status, error){
 						alert('error:' + error);
@@ -258,7 +452,7 @@
         <section class="content">
           <div class="row">
             <div class="col-md-3">
-              <a href="<c:url value='/mailbox/compose'/>" class="btn btn-primary btn-block margin-bottom">메세지 작성</a>
+              <a href="#" class="btn btn-primary btn-block margin-bottom btn-compose">메세지 작성</a>
               <div class="box box-solid">
                 <div class="box-header with-border">
                   <h3 class="box-title">Folders</h3>

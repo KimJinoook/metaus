@@ -13,6 +13,10 @@
 		resultType="CompanyVO">
       select * from fp_com where com_id=#{comId}
    	</select>
+	<select id="selectByComNo" parameterType="int" 
+		resultType="CompanyVO">
+      select * from fp_com where com_no=#{comNo}
+   	</select>
    	
    	<select id="duplicateId" parameterType="String" resultType="int">
 		select count(*) from fp_com 
@@ -62,6 +66,9 @@
    	
    	<select id="selectAll" resultType="CompanyVO">
    		select * from fp_com
+   	</select>
+   	<select id="selectRecByComNo" resultType="CompanyVO" parameterType="int">
+   		select A.*, B.mem_no, B.con_pay, B.con_donedate from fp_rec A left join fp_contact B on A.rec_no = B.rec_no where A.com_no = #{comNo}
    	</select>
 	
 	<!-- 기업 회원 정보 수정 - 최재훈 -->

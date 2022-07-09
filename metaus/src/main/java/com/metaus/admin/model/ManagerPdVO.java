@@ -16,8 +16,12 @@ public class ManagerPdVO {
 	private int pdFilesize; /* 모델파일사이즈 */
 	private int pdBuycnt; /* 구매수 */
 	private int pdPrice;
+	private Timestamp buyDate;
 	
 	private String cateName;
 	
 	private String memId;
+	
+	private String buyYear;
+	private String buyMonth;
 }

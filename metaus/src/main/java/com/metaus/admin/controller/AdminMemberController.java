@@ -74,6 +74,17 @@ public class AdminMemberController {
 		model.addAttribute("list",list);
 		
 	}
+	@RequestMapping("/comDetail")
+	public void comDetail(@RequestParam(defaultValue = "0") int comNo,Model model) {
+		logger.info("기업 회원 디테일 페이지 comNo={}",comNo);
+		
+		CompanyVO comVo = comService.selectByComNo(comNo);
+		model.addAttribute("comVo",comVo);
+		List<CompanyVO> recList = comService.selectRecByComNo(comNo);
+		logger.info("의뢰 리스트 list={}",recList);
+		model.addAttribute("recList",recList);
+		
+	}
 	
 	@RequestMapping("/managerList")
 	public void managerList(Model model) {
