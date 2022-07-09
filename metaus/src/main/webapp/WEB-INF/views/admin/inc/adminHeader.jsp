@@ -263,7 +263,7 @@
                                 
                                 </c:forEach>
                                 <c:if test="${empty sessionScope.navMsg }">
-                                	<a class="dropdown-item align-items-center" href="#">
+                                	<a class="dropdown-item align-items-center" href="<c:url value='/admin/mail/mailList'/>">
 	                                   <div class="text-center">
 	                                    
 	                                        새로운 메세지가 없습니다.
@@ -276,7 +276,7 @@
                                 
                                 
                                
-                                <a class="dropdown-item text-center small text-gray-500" href="#">더보기</a>
+                                <a class="dropdown-item text-center small text-gray-500" href="<c:url value='/admin/mail/mailList'/>">더보기</a>
                             </div>
                         </li>
 
