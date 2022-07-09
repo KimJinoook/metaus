@@ -28,4 +28,5 @@ public interface MailboxDAO {
 	int updateTrashFlag(Map<String, String> map);
 	int updateSpamFlag(Map<String, String> map);
 	int delTemporaryMail(int msgaddNo);
+	List<MailboxAtcVO> selectMsgAtcByMsgNo(int msgNo);
 }
