@@ -152,8 +152,4 @@ public class PdController {
 		return "/pd/best3";
 	}
 	
-	@RequestMapping("/pd2")
-	public String model() {
-		return "/pd/pd2";
-	}
 }
