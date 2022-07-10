@@ -109,5 +109,10 @@ public class MailboxServiceImpl implements MailboxService{
 		return mailboxDao.selectMsgAtcByMsgNo(msgNo);
 	}
 
+	@Override
+	public int updateMsgaddDate(int msgaddNo) {
+		return mailboxDao.updateMsgaddDate(msgaddNo);
+	}
+
 	
 }

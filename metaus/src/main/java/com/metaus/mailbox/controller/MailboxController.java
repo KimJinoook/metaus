@@ -1,5 +1,6 @@
 package com.metaus.mailbox.controller;
 
+import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -280,6 +281,13 @@ public class MailboxController {
 		
 		Map<String, Object> map = mailboxService.selectByMsgAddNo(msgaddNo);
 		logger.info("메세지 상세 조회 결과, map={}", map);
+		
+		Timestamp msgaddDate = (Timestamp) map.get("MSGADD_DATE");
+		if(msgaddDate == null) {
+			int cnt = mailboxService.updateMsgaddDate(msgaddNo);
+			map = mailboxService.selectByMsgAddNo(msgaddNo);
+			logger.info("메세지 읽은 날짜 업데이트 결과, cnt={}, map={}", cnt, map);
+		}
 		
 		List<MailboxAtcVO> list = mailboxService.selectMsgAtcByMsgNo(msgNo);
 		logger.info("메세지 첨부파일 조회 결과, list.size={}", list.size());

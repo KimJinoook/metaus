@@ -163,6 +163,7 @@
 					success: function(data){
 						//console.log(data);
 						$('.box.box-primary').html(data);
+						$('.btn-compose').text("메세지 작성");
 					},
 					error: function(xhr, status, error){
 						alert('error:' + error);
@@ -177,6 +178,7 @@
 					type: "GET",
 					success: function(data){
 						$('.box.box-primary').html(data);
+						$('.btn-compose').text("메세지 작성");
 					},
 					error: function(xhr, status, error){
 						alert('error:' + error);
@@ -191,6 +193,7 @@
 					type: "GET",
 					success: function(data){
 						$('.box.box-primary').html(data);
+						$('.btn-compose').text("메세지 작성");
 					},
 					error: function(xhr, status, error){
 						alert('error:' + error);
@@ -205,6 +208,7 @@
 					type: "GET",
 					success: function(data){
 						$('.box.box-primary').html(data);
+						$('.btn-compose').text("메세지 작성");
 					},
 					error: function(xhr, status, error){
 						alert('error:' + error);
@@ -219,6 +223,7 @@
 					type: "GET",
 					success: function(data){
 						$('.box.box-primary').html(data);
+						$('.btn-compose').text("메세지 작성");
 					},
 					error: function(xhr, status, error){
 						alert('error:' + error);
@@ -233,6 +238,7 @@
 					type: "GET",
 					success: function(data){
 						$('.box.box-primary').html(data);
+						$('.btn-compose').text("메세지 작성");
 					},
 					error: function(xhr, status, error){
 						alert('error:' + error);
@@ -426,6 +432,22 @@
 								alert('error:' + error);
 							}
 						});
+					},
+					error: function(xhr, status, error){
+						alert('error:' + error);
+					}
+				});
+			});
+			
+			//메세지 작성 시 취소버튼 눌렀을 때
+			$(document).on("click", ".btn-cancel", function(){
+				event.preventDefault();
+				
+				$.ajax({
+					url: "<c:url value='/mailbox/receivedMail'/>",
+					type: "GET",
+					success: function(data){
+						$('.box.box-primary').html(data);
 					},
 					error: function(xhr, status, error){
 						alert('error:' + error);
