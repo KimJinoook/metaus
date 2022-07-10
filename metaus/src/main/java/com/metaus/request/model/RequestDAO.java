@@ -5,6 +5,8 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.metaus.board.model.BoardAtcVO;
+import com.metaus.board.model.BoardVO;
 import com.metaus.common.SearchVO;
 import com.metaus.member.model.CompanyVO;
 
@@ -19,4 +21,8 @@ public interface RequestDAO {
 	List<CompanyVO> selectCom();
 	RequestVO selectRequestDetail(int recNo);
 	int requestDelete(int recNo);
+	RequestVO selectByRequestNo(int recNo);
+	RequestAtcVO selectByrecfileNo(int recfileNo);
+	int updateRequest(RequestVO vo);
+	int updateRequestAtc(RequestAtcVO requestAtcVo);
 }

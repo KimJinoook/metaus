@@ -10,8 +10,14 @@
 	
 </script>
 
+<br>
+<br>
+<br>
+<br>
 
 
+<c:forEach var="cvo" items="${comlist }">
+     <c:if test="${vo.comNo == cvo.comNo }">
 
     <!-- ===== Start of Job Header Section ===== -->
     <section class="job-header ptb60">
@@ -27,12 +33,20 @@
                 <div class="col-md-6 col-xs-12 clearfix">
                     <a href="#" class="btn btn-blue btn-effect pull-right mt15"><i class="fa fa-star"></i>관심 의뢰 등록</a>
                 </div>
+                <c:if test="${cvo.comId==comId }">
+                <form id="requestUpdate"
+                	action ="<c:url value='/request/update?recNo=${vo.recNo }&recfileNo=${recfileNo }'/>" style="float:right; margin-right: 20px; margin-bottom: 10px;">
+                <div class="mt20">
+                			<input type="hidden" name="recNo" value="${vo.recNo }">
+                            <a href="#" class="btn btn-blue btn-effect" id="requestUpdate">수정</a>
+                        </div>
+                </form>
                 <form id="requestDelete"
-							action="<c:url value='/request/requestDelete'/>" style="float: right; margin-right: 20px; margin-top: 10px;">
+							action="<c:url value='/request/requestDelete'/>" style="float: right; margin-right: 20px; margin-top: 20px;">
 							<input type="hidden" name="recNo" value="${vo.recNo }">
 							<a href="#" class="btn btn-red btn-effect" id="requestDelete">삭제하기</a>
 						</form>
-
+				</c:if>
             </div>
             <!-- End of Row -->
 
@@ -61,7 +75,9 @@
                         <div class="col-md-3">
                             <div class="job-company">
                                 <a href="company-page.html">
-                                    <img src="images/companies/envato.svg" alt="">
+                                
+                                    <img src="<c:url value='/com_profile/${cvo.comPic}'/>" alt="">
+                               
                                 </a>
                             </div>
                         </div>
@@ -69,73 +85,67 @@
                         <!-- Job Company Info -->
                         <div class="col-md-9">
                             <div class="job-company-info mt30">
-                                <h3 class="capitalize">envato</h3>
+                                <h3 class="capitalize">${cvo.comName }</h3>
 
                                 <ul class="list-inline mt10">
-                                    <li><a href="#"><i class="fa fa-link" aria-hidden="true"></i>Website</a></li>
-                                    <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i>Twitter</a></li>
+                                    <li><a href="${vo.recWeb }"><i class="fa fa-link" aria-hidden="true"></i>Website</a></li>
+                                    <li><a href="${vo.recTwitter }"><i class="fa fa-twitter" aria-hidden="true"></i>Twitter</a></li>
                                 </ul>
                             </div>
                         </div>
-
+						    
                     </div>
+                     
                     <!-- End of Company Info -->
 
 
                     <!-- Start of Job Details -->
                     <div class="row job-details mt40">
+                    
                         <div class="col-md-12">
-
-                            <!-- Vimeo Video -->
-                           <!--  <div class="embed-responsive embed-responsive-16by9">
-                                <iframe class="embed-responsive-item" src="https://player.vimeo.com/video/176916362?title=0&amp;byline=0&amp;portrait=0" allowfullscreen=""></iframe>
-                            </div> -->
-
-                            <!-- Div wrapper -->
+								<c:forEach var="atcvo" items="${ratcList }">
+									<c:if test="${atcvo.recNo == vo.recNo }">
+										<img src="<c:url value='/recruit/${atcvo.recfileFilename }'/>"
+											class="img-responsive" />
+									</c:if>
+								</c:forEach>
+								<!-- Div wrapper -->
+                          <ul class="list mt20">
+                           <li>
                             <div class="pt40">
-                                <h5>의뢰 개요</h5>
+                            <h4 class="widget-title">의뢰 개요</h4>
 
                                 <p class="mt20">${vo.recContent }</p>
                             </div>
-
+                           </li>
+<hr>
                             <!-- Div wrapper -->
+                            <li>
                             <div class="pt40">
-                                <h5 class="mt40">주요 요구 사항</h5>
-
+                            <h4 class="widget-title">주요 요구 사항</h4>
+								<p class="mt20">${vo.recContent2 }
+							 </div>
+							</li>
                                 <!-- Start of List -->
-                                <ul class="list mt20">
-                                    <li></li>
-
-                                    <li></li>
-
-                                    <li></li>
-
-                                    <li></li>
-                                </ul>
+                                
+                                
                                 <!-- End of List -->
-
-                            </div>
-
+<hr>
+                            
                             <!-- Div wrapper -->
+                             <li>
                             <div class="pt40">
-                                <h5 class="mt40">제안 사항</h5>
-
+                            <h4 class="widget-title">제안 사항</h4>
+								<p class="mt20">${vo.recContent3 }
                                 <!-- Start of List -->
-                                <ul class="list mt20">
-                                    <li></li>
-
-                                    <li></li>
-
-                                    <li></li>
-
-                                    <li></li>
-                                </ul>
                                 <!-- End of List -->
-
-                                <p class="mt40"></p>
-                            </div>
-
+                                </div>
+                            </li>
+<hr>
+                            
+ 						</ul>
                         </div>
+                      
                     </div>
                     <!-- End of Job Details -->
 
@@ -156,20 +166,12 @@
                         <hr>
 
                         <!-- Start of Social Media ul -->
-                        <!-- <ul class="social-btns list-inline mt20">
-                            Social Media
-                            <li>
-                                <a href="#" class="social-btn-roll facebook transparent">
-                                    <div class="social-btn-roll-icons">
-                                        <i class="social-btn-roll-icon fa fa-facebook"></i>
-                                        <i class="social-btn-roll-icon fa fa-facebook"></i>
-                                    </div>
-                                </a>
-                            </li>
+                        <ul class="social-btns list-inline mt20">
+                            <!-- Social Media -->
 
-                            Social Media
+                            <!-- Social Media -->
                             <li>
-                                <a href="#" class="social-btn-roll twitter transparent">
+                                <a href="${vo.recTwitter }" class="social-btn-roll twitter transparent">
                                     <div class="social-btn-roll-icons">
                                         <i class="social-btn-roll-icon fa fa-twitter"></i>
                                         <i class="social-btn-roll-icon fa fa-twitter"></i>
@@ -177,16 +179,16 @@
                                 </a>
                             </li>
 
-                            Social Media
+                            <!-- Social Media -->
                             <li>
-                                <a href="#" class="social-btn-roll google-plus transparent">
+                                <a href="${vo.recWeb }" class="social-btn-roll google-plus transparent">
                                     <div class="social-btn-roll-icons">
                                         <i class="social-btn-roll-icon fa fa-google-plus"></i>
                                         <i class="social-btn-roll-icon fa fa-google-plus"></i>
                                     </div>
                                 </a>
                             </li>
-                        </ul> -->
+                        </ul>
                         <!-- End of Social Media ul -->
 
 
@@ -229,7 +231,7 @@
                     <script>
 				        var container = document.getElementById('map');
 						var options = {
-							center: new kakao.maps.LatLng(33.450701, 126.570667),
+							center: new kakao.maps.LatLng(${cvo.comLati}, ${cvo.comLongi}),
 							level: 3
 						};
 				
@@ -257,7 +259,8 @@
     </section>
     <!-- ===== End of Main Wrapper Job Section ===== -->
 
-	
+</c:if>
+                     </c:forEach>
 
 <script>
 	$(function(){
@@ -269,6 +272,15 @@
 				$('#requestDelete').submit();
 			} else {
 				return false;
+			}
+		});
+		
+		$('#requestUpdate').click(function() {
+			var msg = confirm('수정하시겠습니까?');
+
+			if (msg) {
+				alert('수정 페이지로 이동');
+				$('#requestUpdate').submit();
 			}
 		});
 	});

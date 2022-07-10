@@ -14,8 +14,8 @@
 		<selectKey resultType="int" keyProperty="recNo" order="BEFORE">
 			select fp_rec_seq.nextval from dual
 		</selectKey>
-		insert into fp_rec(rec_no, com_no, rec_title, rec_content, rec_pay, rec_regdate, rec_readcount)
-		values(#{recNo},#{comNo},#{recTitle},#{recContent},#{recPay},sysdate,#{recReadcount})
+		insert into fp_rec(rec_no, com_no, rec_title, rec_content, rec_pay, rec_regdate, rec_readcount, rec_content2, rec_content3, rec_web, rec_twitter)
+		values(#{recNo},#{comNo},#{recTitle},#{recContent},#{recPay},sysdate,#{recReadcount},#{recContent2},#{recContent3},#{recWeb},#{recTwitter})
 	</insert>
 	
 	<!-- <resultMap type="requestVo" id="requestMap">
@@ -58,7 +58,7 @@
 			select fp_recatc_seq.nextval from dual
 		</selectKey>
 		insert into fp_recatc(recfile_no, rec_no, recfile_filename, recfile_originname)
-		values(#{recfileNo}, #{recNo}, #{recfileName}, #(recfileOriginname))
+		values(#{recfileNo}, #{recNo}, #{recfileFilename}, #{recfileOriginname})
 	</insert>
 	
 	<select id="selectRequestAtc" resultType="requestAtcVo">
@@ -66,7 +66,7 @@
 	</select>
 	
 	<select id="selectRequestAtcByNo" parameterType="int" resultType="requestAtcVo">
-		select * from fp_requestatc
+		select * from fp_recatc
 		where rec_no=#{recNo}
 	</select>
 	
@@ -84,5 +84,29 @@
 		delete fp_rec
 		where rec_no=#{recNo}
 	</delete>
+	
+	<select id="selectByRequestNo" parameterType="int" resultType="requestVo">
+		select * from fp_rec
+		where rec_no=#{recNo}
+	</select>
+	
+	<select id="selectByrecfileNo" parameterType="int" resultType="requestAtcVo">
+		select * from fp_rec
+		where recfile_no=#{recfileNo}
+	</select>
+	
+	<update id="updateRequest" parameterType="requestVo">
+		update fp_rec
+		set rec_title=#{recTitle}, rec_content=#{recContent}, rec_pay=#{recPay},
+		 rec_content2=#{recContent2}, rec_content3=#{recContent3}, rec_web=#{recWeb}, rec_twitter=#{recTwitter}
+		where rec_no=#{recNo}
+	</update>
+	
+	
+	<update id="updateRequestAtc" parameterType="RequestAtcVo">
+		update fp_recatc
+		set recfile_filename=#{recfileFilename}, recfile_originname=#{recfileOriginname}
+		where recfile_no=#{recfileNo}
+	</update>
 	
 </mapper>
