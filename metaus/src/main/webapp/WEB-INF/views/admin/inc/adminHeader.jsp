@@ -126,6 +126,12 @@
                 </div>
             </li>
             
+            <li class="nav-item">
+                <a class="nav-link" href="<c:url value='/admin/mail/sendAll'/>">
+                    <i class="fas fa-mail-bulk"></i>
+                    <span>공지발송</span></a>
+            </li>
+            
             <!-- Divider -->
             <hr class="sidebar-divider">
 
@@ -242,7 +248,7 @@
                                 
                                 
                                 
-	                                <a class="dropdown-item d-flex align-items-center" href="#">
+	                                <a class="dropdown-item d-flex align-items-center" href="<c:url value='/admin/mail/mailDetail?msgNo=${vo.msgNo }&msgaddNo=${vo.msgaddNo }'/>">
 	                                    <div class="dropdown-list-image mr-3">
 	                                        <img class="rounded-circle" src="<c:url value='/manager_profile/${vo.managerPic }'/>" alt="..." onerror="this.onerror=null; this.src='<c:url value='/admin/img/undraw_profile.svg'/>'">
 	                                            
@@ -255,8 +261,13 @@
 	                                        
 	                                    </div>
 	                                    <div class="font-weight-bold">
-	                                        <div class="text-truncate">${vo.msgContent }</div>
+	                                        <div class="text-truncate">${vo.msgTitle }</div>
+	                                        <c:if test="${not empty vo.managerName }">
 	                                        <div class="small text-gray-500">${vo.managerName }</div>
+	                                        </c:if>
+	                                        <c:if test="${empty vo.managerName }">
+	                                        <div class="small text-gray-500">${vo.msgaddAdser }</div>
+	                                        </c:if>
 	                                    </div>
 	                                </a>
                                 

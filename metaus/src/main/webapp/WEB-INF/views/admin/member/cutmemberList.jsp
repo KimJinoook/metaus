@@ -125,7 +125,7 @@ function s2ab(s) {
                                             			<i class="fas fa-unlock"></i>
                                         			</span>
                                     			</a>	
-                                    			<a href="#" class="btn btn-primary btn-icon-split btn-sm" style="margin:0px;height:27px">
+                                    			<a href="<c:url value='/admin/mail/mailList?msgaddAdsee=${mvo.memId }&getinFlag=7'/>" class="btn btn-primary btn-icon-split btn-sm" style="margin:0px;height:27px">
                                         			<span class="icon text-white" style="margin:0px">
                                             			<i class="fas fa-envelope"></i>
                                         			</span>
