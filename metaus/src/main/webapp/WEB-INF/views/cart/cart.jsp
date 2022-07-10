@@ -44,7 +44,7 @@
                                     <th class="cart-product-thumbnail">&nbsp;</th>
                                     <th class="cart-product-name">Product</th>
                                     <th class="cart-product-price">Unit Price</th>
-                                    <th class="cart-product-quantity">Quantity</th>
+                                    <!-- <th class="cart-product-quantity">Quantity</th> -->
                                     <th class="cart-product-subtotal">Total</th>
                                 </tr>
                             </thead>
@@ -76,13 +76,13 @@
                                     </td>
 
                                     <!-- Cart Product Quantity -->
-                                    <td class="cart-product-quantity">
+                                    <!-- <td class="cart-product-quantity">
                                         <div class="quantity clearfix">
                                             <input type="button" value="-" class="minus">
                                             <input type="text" name="quantity" value="2" class="qty">
                                             <input type="button" value="+" class="plus">
                                         </div>
-                                    </td>
+                                    </td> -->
 
                                     <!-- Cart Subtotal -->
                                     <td class="cart-product-subtotal">
@@ -93,31 +93,31 @@
 
 
                                 <!-- Start of Cart Item 2 -->
-                                <tr class="cart-item">
+                                <!-- <tr class="cart-item">
 
-                                    <!-- Cart Remove Product -->
+                                    Cart Remove Product
                                     <td class="cart-product-remove">
                                         <a href="#" class="remove" title="Remove this item"><i class="fa fa-times"></i></a>
                                     </td>
 
-                                    <!-- Cart Product Thumbnail -->
+                                    Cart Product Thumbnail
                                     <td class="cart-product-thumbnail">
                                         <a href="#">
                                             <img width="64" height="64" src="images/shop/product2.jpg" alt="">
                                         </a>
                                     </td>
 
-                                    <!-- Cart Product Name -->
+                                    Cart Product Name
                                     <td class="cart-product-name">
                                         <a href="#">Cariera Cap</a>
                                     </td>
 
-                                    <!-- Cart Product Price -->
+                                    Cart Product Price
                                     <td class="cart-product-price">
                                         <span class="amount">$19.99</span>
                                     </td>
 
-                                    <!-- Cart Product Quantity -->
+                                    Cart Product Quantity
                                     <td class="cart-product-quantity">
                                         <div class="quantity clearfix">
                                             <input type="button" value="-" class="minus">
@@ -126,11 +126,11 @@
                                         </div>
                                     </td>
 
-                                    <!-- Cart Subtotal -->
+                                    Cart Subtotal
                                     <td class="cart-product-subtotal">
                                         <span class="amount">$19.99</span>
                                     </td>
-                                </tr>
+                                </tr> -->
                                 <!-- End of Cart Item 2 -->
 
 
