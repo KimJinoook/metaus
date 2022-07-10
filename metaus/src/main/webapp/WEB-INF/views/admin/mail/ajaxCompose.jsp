@@ -32,13 +32,14 @@
 	color: #f65f5fd6;
 }
 </style>
+<form name="frm" id="frm" action="<c:url value='/mailbox/sendMail' />" method="post" enctype="multipart/form-data">
 <div class="card shadow mb-4">
 	                        <div class="card-header py-3">
 	                            <h6 class="m-0 font-weight-bold text-primary">
 									<c:if test="${not empty map}">
 									  	<input type="hidden" name="ajaxTemporaryFlag" value="${map['TEMPORARY_FLAG'] }" id="ajaxTemporaryFlag">
 									  	<input type="hidden" name="msgNo" value="${map['MSG_NO'] }" class="msgNo">
-									  	<input type="hidden" name="msgaddNo" value="${map['MSGADD_NO'] }" class="msgaddNo">
+									  	<input type="hidden" id="msgaddNo" name="msgaddNo" value="${map['MSGADD_NO'] }" class="msgaddNo">
 								  		임시저장
 								  	</c:if>
 								  	<c:if test="${empty map}">
@@ -48,12 +49,17 @@
 	                        </div>
 	                        
 	                        <div class="card-body" id="tablecard">
-<form name="frm" id="frm" action="<c:url value='/mailbox/sendMail' />" method="post" enctype="multipart/form-data">
 
 		<div class="box-body">
 		  <div class="form-group">
+		  	<c:if test="${not empty map}">
 		    <input type="text" class="form-control" name="msgaddAdsee" id="msgaddAdsee" 
 		    	placeholder="받는사람: example@example.com" value="${map['MSGADD_ADSEE'] }"/>
+		    </c:if>
+		    <c:if test="${empty map}">
+		  	<input type="text" class="form-control" name="msgaddAdsee" id="msgaddAdsee" 
+		    	placeholder="받는사람: example@example.com" value="${msgaddAdsee }"/>
+		  	</c:if>
 		  </div>
 		  <div class="form-group">
 		    <input type="text" class="form-control" name="msgTitle" placeholder="제목:" value="${map['MSG_TITLE'] }"/>
@@ -78,7 +84,12 @@
 		  </div>
 		  	<div></div>
 		  	<div>
-		    <button class="btn btn-default temporary btn-message btn-secondary"><i class="fa fa-pencil"></i> 임시저장</button>
+		  	<c:if test="${not empty map}">
+			    <button type="button" id="temDelBtn" class="btn btn-default btn-secondary"><i class="fa fa-pencil"></i> 삭제</button>
+		  	</c:if>
+		  	<c:if test="${empty map}">
+			    <button class="btn btn-default temporary btn-message btn-secondary"><i class="fa fa-pencil"></i> 임시저장</button>
+		  	</c:if>
 		    <button type="submit" class="btn btn-primary btn-message"><i class="fa fa-envelope-o"></i> 보내기</button>
 		    </div>
 		  </div>

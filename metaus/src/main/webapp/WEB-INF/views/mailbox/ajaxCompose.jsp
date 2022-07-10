@@ -72,7 +72,7 @@
 		    <button class="btn btn-default temporary btn-message"><i class="fa fa-pencil"></i> 임시저장</button>
 		    <button type="submit" class="btn btn-primary btn-message"><i class="fa fa-envelope-o"></i> 보내기</button>
 		  </div>
-		  <button class="btn btn-default"><i class="fa fa-times"></i> 취소</button>
+		  <button class="btn btn-default btn-cancel"><i class="fa fa-times"></i> 취소</button>
 		</div><!-- /.box-footer -->
 	</div><!-- /. box -->
 <input type="hidden" value="N" name="temporaryFlag" id="temporaryFlag">

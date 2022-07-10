@@ -104,6 +104,11 @@ function managerDelete(num){
                                             			<i class="fas fa-trash"></i>
                                         			</span>
                                     			</a>
+                                    			<a href="<c:url value='/admin/mail/mailList?msgaddAdsee=${mavo.managerId }&getinFlag=7'/>" class="btn btn-primary btn-icon-split btn-sm" style="margin:0px;height:27px">
+                                        			<span class="icon text-white" style="margin:0px">
+                                            			<i class="fas fa-envelope"></i>
+                                        			</span>
+                                    			</a>
                                     		</td>
                                         </tr> 
                                     </c:forEach>

@@ -244,4 +244,11 @@
 		select * from fp_msgatc
 		where msg_no=#{msgNo}
 	</select>
+	
+	<!-- updateMsgaddDate -->
+	<update id="updateMsgaddDate" parameterType="int">
+		update fp_msgadd
+		set msgadd_date = sysdate
+		where msgadd_no=${msgaddNo}
+	</update>
 </mapper>

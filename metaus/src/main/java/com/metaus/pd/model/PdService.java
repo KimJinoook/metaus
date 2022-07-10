@@ -12,5 +12,5 @@ public interface PdService {
 	List<PdVO> selectPdByMemNo(int memNo);
 	List<PdVO> selectAll(SearchVO searchVo);
 	int selectTotalRecord(SearchVO searchVo);
-	List<PdVO> selectByBuyCnt();
+	List<PdVO> selectByBuyCnt(int pdNo);
 }

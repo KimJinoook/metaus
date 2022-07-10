@@ -83,7 +83,7 @@ public class RequestController {
 		logger.info("의뢰 작성 페이지");
 		
 		CompanyVO comVo=companyService.selectByUserid(comId);
-		logger.info("커뮤니티 글 작성 페이지, 파라미터 comId={}",comId);
+		logger.info("커뮤니티 글 작성 페이지, 파라미터 comId={}, requestVo={}, recAtcVo={}",comId, requestVo, recAtcVo);
 		requestVo.setComNo(comVo.getComNo());
 		
 		String fileName = "", originFileName = "";

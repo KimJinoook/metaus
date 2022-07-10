@@ -17,7 +17,15 @@
         <thead>
             <tr>
                	<td>&nbsp;</td>
+               	
+               	<c:if test="${flag eq 1 || flag eq 3 || flag eq 6}">
                 <th>보낸사람</th>
+                </c:if>
+               	<c:if test="${flag eq 2 || flag eq 4}">
+                <th>받는사람</th>
+                </c:if>
+                
+                
                 <th>제목</th>
                 <th>내용</th>
                 <th>보낸시간</th>
@@ -39,7 +47,13 @@
         </tfoot>
         <tbody>
         <c:forEach var="map" items="${list }">
+        	<c:if test="${empty map['MSGADD_DATE']}">
+            <tr style="font-weight: bold;color:blue;">
+            </c:if>
+        	<c:if test="${not empty map['MSGADD_DATE']}">
             <tr>
+            </c:if>
+        	
 	                <input type="hidden" value="${map['MSGADD_NO']}" class="msgaddNo">
 	                <input type="hidden" value="${map['MSG_NO']}" class="msgNo">
                 <td>
@@ -57,10 +71,36 @@
                  		</c:if>
                  	</a>
                 </c:if>
-                 </td>
-                <td>${map['MSGADD_ADSER']}</td>
-                <td>${map['MSG_TITLE']}</td>
-                <td>
+                </td>
+                
+                <c:if test="${map['TEMPORARY_FLAG'] ne 'Y'}">
+	            <td class="message-detail">
+	            </c:if>
+	        	<c:if test="${map['TEMPORARY_FLAG'] eq 'Y'}">
+	            <td class="message-detail-temporary">
+	            </c:if>
+	            <c:if test="${flag eq 1 || flag eq 3 || flag eq 6}">
+	            ${map['MSGADD_ADSER']}
+	            </c:if>
+	            <c:if test="${flag eq 2 || flag eq 4}">
+	            ${map['MSGADD_ADSEE']}
+	            </c:if>
+	            
+	            </td>
+	            
+                <c:if test="${map['TEMPORARY_FLAG'] ne 'Y'}">
+	            <td class="message-detail">
+	            </c:if>
+	        	<c:if test="${map['TEMPORARY_FLAG'] eq 'Y'}">
+	            <td class="message-detail-temporary">
+	            </c:if>${map['MSG_TITLE']}</td>
+	            
+                <c:if test="${map['TEMPORARY_FLAG'] ne 'Y'}">
+	            <td class="message-detail">
+	            </c:if>
+	        	<c:if test="${map['TEMPORARY_FLAG'] eq 'Y'}">
+	            <td class="message-detail-temporary">
+	            </c:if>
                 	<c:choose>
 						  <c:when test="${fn:length(fn:replace(map['MSG_CONTENT'], newLine, '<br>')) gt 40}">
 						  	<c:out value="${fn:substring(fn:replace(map['MSG_CONTENT'], newLine, ' '), 0, 39)}"></c:out>...
@@ -70,7 +110,12 @@
 						  </c:otherwise>
 					  </c:choose>
 				</td> 
-                <td>
+                <c:if test="${map['TEMPORARY_FLAG'] ne 'Y'}">
+	            <td class="message-detail">
+	            </c:if>
+	        	<c:if test="${map['TEMPORARY_FLAG'] eq 'Y'}">
+	            <td class="message-detail-temporary">
+	            </c:if>
                 	<jsp:useBean id="now" class="java.util.Date" />
                    	<fmt:parseNumber value="${map['SEND_DATE'].time}" var="sendDate"/>
                    	<fmt:parseNumber value="${now.time }" integerOnly="true" var="today"/>

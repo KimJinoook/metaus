@@ -83,6 +83,18 @@
 		                          	</a>
 		                          </td>
 	                          </c:if>
+	                          <td>
+		                          <c:if test="${flag eq 'sent' && flag ne 'trash' && flag ne 'spam'}">
+		                          	<c:if test="${sessionScope.memId ne map['MSGADD_ADSEE']}">
+		                          		<c:if test="${not empty map['MSGADD_DATE']  }">
+				                        	<i class="fa-solid fa-eye""></i>
+		                          		</c:if>
+		                          		<c:if test="${empty map['MSGADD_DATE']  }">
+				                        	<i class="fa-solid fa-eye-slash" style="color: #ddd;"></i>
+		                          		</c:if>
+		                          	</c:if>
+		                          </c:if>
+	                          </td>
 	                          <td class="mailbox-name">
 	                          	  <c:if test="${flag eq 'trash' || flag eq 'spam'}">&nbsp;</c:if>
 	                          	  <c:if test="${map['TEMPORARY_FLAG'] ne 'Y'}">
