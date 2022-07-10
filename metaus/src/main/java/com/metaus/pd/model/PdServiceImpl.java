@@ -49,8 +49,8 @@ public class PdServiceImpl implements PdService{
 	}
 
 	@Override
-	public List<PdVO> selectByBuyCnt() {
-		return pdDao.selectByBuyCnt();
+	public List<PdVO> selectByBuyCnt(int pdNo) {
+		return pdDao.selectByBuyCnt(pdNo);
 	}
 	
 }

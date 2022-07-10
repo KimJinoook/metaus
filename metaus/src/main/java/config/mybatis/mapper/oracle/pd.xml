@@ -89,7 +89,7 @@
 		</if>
     	<if test="pdName!=null and pdName!=''">
 			select count(*) from fp_pd
-			where pdName=#{pdName}
+			where pd_name=#{pdName}
 		</if>
 	</select>
 	
@@ -98,9 +98,9 @@
 		where pd_no=#{pdNo}
 	</delete>
 	
-	<select id="selectByBuyCnt" resultType="pdVo">
+	<select id="selectByBuyCnt" resultType="pdVo" parameterType="int">
 		select * from fp_pd
 		<![CDATA[		
-		where rownum <=3]]>
+		where rownum <=3 and not pd_no=#{pdNo}]]>
 	</select>
 </mapper>
