@@ -3,9 +3,9 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.metaus.cart.model.CartDAO">
-	<select id="selectCartCount" parameterType="int" resultType="CartVo">
+	<select id="selectCartCount" parameterType="CartVo" resultType="int">
 		select count(*) from fp_cart
-		where mem_no=#{memNo} and pd_No=#{pdNo};
+		where mem_no=#{memNo} and pd_No=#{pdNo}
 	</select>
 	
 	<insert id="insertCart" parameterType="CartVo">
@@ -17,12 +17,18 @@
 		values(#{cartNo}, #{memNo}, #{pdNo})
 	</insert>
 	
-	<select id="selectCartList" parameterType="int" resultType="map">
+	<select id="selectCartList" parameterType="int" resultType="CartVo">
 		select c.cart_no, c.pd_no, c.mem_no,
 		p.pd_name, p.pd_price
 		from fp_cart c join fp_pd p
 		on c.pd_no=p.pd_no
-		where p.mem_no=#{memNo}
+		where c.mem_no=#{memNo}
+	</select>
+	
+	<select id="totalCartPrice">
+		select sum(pd_price) from fp_pd f join fp_cart c
+		on f.pd_no=c.pd_no
+		where c.mem_no=${memNo}
 	</select>
 	
 	<delete id="deleteCartByMemNo" parameterType="int">

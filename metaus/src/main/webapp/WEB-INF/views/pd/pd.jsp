@@ -30,7 +30,7 @@ $(function(){
 			alert('로그인 후 이용가능합니다!');
 			event.preventDefault();
 		}else{
-			location.href="<c:url value='/cart/cartAdd'/>"; 
+			location.href="<c:url value='/cart/cartAdd?pdNo=${vo.pdNo}'/>"; 
 				
 		}		 
 	 })

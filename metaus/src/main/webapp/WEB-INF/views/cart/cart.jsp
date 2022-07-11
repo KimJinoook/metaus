@@ -49,8 +49,15 @@
                                 </tr>
                             </thead>
                             <tbody>
-
-                                <!-- Start of Cart Item 1 -->
+								<c:if test="${empty list }">
+								<tr class="align_center">
+									<td colspan="5" style="text-align: center;">장바구니가 비었습니다.</td>
+								</tr>		
+							</c:if>
+							<!--반복 시작 -->
+							<c:if test="${!empty list }">
+						<c:forEach var="vo" items="${list }">
+	                                <!-- Start of Cart Item 1 -->
                                 <tr class="cart-item">
 
                                     <!-- Cart Remove Product -->
@@ -67,12 +74,12 @@
 
                                     <!-- Cart Product Name -->
                                     <td class="cart-product-name">
-                                        <a href="#">Cariera T-Shirt</a>
+                                        <a href="#">${vo.pdName }</a>
                                     </td>
 
                                     <!-- Cart Product Price -->
                                     <td class="cart-product-price">
-                                        <span class="amount">$29.99</span>
+                                        <span class="amount">${vo.pdPrice }</span>
                                     </td>
 
                                     <!-- Cart Product Quantity -->
@@ -86,9 +93,11 @@
 
                                     <!-- Cart Subtotal -->
                                     <td class="cart-product-subtotal">
-                                        <span class="amount">$59.98</span>
+                                        <span class="amount">${vo.pdPrice }</span>
                                     </td>
                                 </tr>
+                                </c:forEach>
+                                </c:if>
                                 <!-- End of Cart Item 1 -->
 
 
@@ -448,13 +457,13 @@
 
                                         <!-- Start of Table Row -->
                                         <tr>
-                                            <td class="cart-product-name">
+                                            <!-- <td class="cart-product-name">
                                                 <strong>Shipping</strong>
                                             </td>
 
                                             <td class="cart-product-name">
                                                 <span class="amount">Free Delivery</span>
-                                            </td>
+                                            </td> -->
                                         </tr>
 
                                         <!-- Start of Table Row -->
@@ -465,7 +474,7 @@
 
                                             <td class="cart-product-name">
                                                 <span class="amount text-blue lead">
-                                                    <strong>$79.97</strong>
+                                                    <strong>${vo.pdPrice }</strong>
                                                 </span>
                                             </td>
                                         </tr>
