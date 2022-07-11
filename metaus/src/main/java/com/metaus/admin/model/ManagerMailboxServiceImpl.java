@@ -5,6 +5,8 @@ import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
+import com.metaus.mailbox.model.MailboxAtcVO;
+
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -104,5 +106,8 @@ public class ManagerMailboxServiceImpl implements ManagerMailboxService{
 		return mailboxDao.delTemporaryMail(msgaddNo);
 	}
 
+	public List<MailboxAtcVO> selectMsgAtcByMsgNo(int msgNo){
+		return mailboxDao.selectMsgAtcByMsgNo(msgNo);
+	}
 	
 }

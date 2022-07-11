@@ -27,6 +27,9 @@
     <link href="<c:url value='/admin/css/sb-admin-2.min.css'/>" rel="stylesheet">
     
     
+    <link href="<c:url value='/admin/css/pdlistSlider.css'/>" rel="stylesheet">
+    
+    
     <!-- Bootstrap core JavaScript-->
     <script src="<c:url value='/admin/vendor/jquery/jquery.min.js'/>"></script>
     <script src="<c:url value='/admin/vendor/bootstrap/js/bootstrap.bundle.min.js'/>"></script>

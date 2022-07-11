@@ -7,6 +7,7 @@
 
 <link href="<c:url value='/admin/vendor/datatables/dataTables.bootstrap4.min.css'/>" rel="stylesheet">
 
+
 <!-- Sheet JS -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.14.3/xlsx.full.min.js"></script>
 <!--FileSaver savaAs 이용 -->
@@ -68,6 +69,35 @@ function s2ab(s) {
   for (var i=0; i<s.length; i++) view[i] = s.charCodeAt(i) & 0xFF; //convert to octet
   return buf;    
 }
+
+
+function getVals(){
+	  // Get slider values
+	  var parent = this.parentNode;
+	  var slides = parent.getElementsByTagName("input");
+	    var slide1 = parseFloat( slides[0].value );
+	    var slide2 = parseFloat( slides[1].value );
+	  // Neither slider will clip the other, so make sure we determine which is larger
+	  if( slide1 > slide2 ){ var tmp = slide2; slide2 = slide1; slide1 = tmp; }
+	  
+	  var displayElement = parent.getElementsByClassName("rangeValues")[0];
+	      displayElement.innerHTML = slide1 + "원 - " + slide2 + "원";
+	}
+
+	window.onload = function(){
+	  // Initialize Sliders
+	  var sliderSections = document.getElementsByClassName("range-slider");
+	      for( var x = 0; x < sliderSections.length; x++ ){
+	        var sliders = sliderSections[x].getElementsByTagName("input");
+	        for( var y = 0; y < sliders.length; y++ ){
+	          if( sliders[y].type ==="range" ){
+	            sliders[y].oninput = getVals;
+	            // Manually trigger event first time to display values
+	            sliders[y].oninput();
+	          }
+	        }
+	      }
+	}
 </script>
 <!-- Begin Page Content -->
                 <div class="container-fluid">
@@ -78,15 +108,82 @@ function s2ab(s) {
                     <a href="javascript:exportExcel()" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" id="excelDownload"><i
                                 class="fas fa-download fa-sm text-white-50"></i> 엑셀 다운로드</a>
                     </div>
+                    
+                    <div class="row">
+                    
+                    
+                    <div class="col-lg-3">
+
+	                            <!-- Basic Card Example -->
+	                            <div class="card shadow mb-4">
+	                                <div class="card-header py-3">
+	                                    <h6 class="m-0 font-weight-bold text-primary">검색조건</h6>
+	                                </div>
+	                                <div class="card-body">
+	                                	
+	                                	
+	                                	<div class="range-slider text-align">
+										  <span class="rangeValues"></span>
+										  <input value="0" min="0" max="50000" step="500" type="range">
+										  <input value="50000" min="0" max="50000" step="500" type="range">
+										</div>
+										
+	                                     <br>   카테고리
+	                                	
+	                                	<div class="pull-right d-sm-flex align-items-center justify-content-between mb-4">
+	                                        <div class="form-group">
+											    <input class="" id="normal" type="checkbox" name="mailScope" value="1">
+											    <label class="form-check-label" for="normal">동물</label><br>
+											
+											    <input class="" id="company" type="checkbox" name="mailScope" value="2">
+											    <label class="form-check-label" for="company">식물</label><br>
+											
+											    <input class="" id="manager" type="checkbox" name="mailScope" value="3">
+											    <label class="form-check-label" for="manager">관리자</label><br>
+											</div><br>
+	                                        <div class="form-group">
+											    <input class="" id="normal" type="checkbox" name="mailScope" value="1">
+											    <label class="form-check-label" for="normal">일반회원</label><br>
+											
+											    <input class="" id="company" type="checkbox" name="mailScope" value="2">
+											    <label class="form-check-label" for="company">기업회원</label><br>
+											
+											    <input class="" id="manager" type="checkbox" name="mailScope" value="3">
+											    <label class="form-check-label" for="manager">관리자</label><br>
+											</div><br>
+	                                        <div class="form-group">
+											    <input class="" id="normal" type="checkbox" name="mailScope" value="1">
+											    <label class="form-check-label" for="normal">일반회원</label><br>
+											
+											    <input class="" id="company" type="checkbox" name="mailScope" value="2">
+											    <label class="form-check-label" for="company">기업회원</label><br>
+											
+											    <input class="" id="manager" type="checkbox" name="mailScope" value="3">
+											    <label class="form-check-label" for="manager">관리자</label><br>
+											</div><br>
+										</div>
+	                                    
+	                                    <input type="hidden" name="btypeNo" id="btypeNo">
+                                        
+                                        
+                                        <button class="btn btn-primary btn-lg btn-block mt-4" type="button" id="writeBtn">
+                                            검색
+                                        </button>
+                                
+	                                </div>
+	                            </div>
+	
+	                        </div>
+                    
+                    
+                    
+                    <div class="col-lg-9">
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                        	<c:if test="${empty cate }">
-	                            <h6 class="m-0 font-weight-bold text-primary">전체 조회 결과</h6>
-                        	</c:if>
-                        	<c:if test="${!empty cate }">
-	                            <h6 class="m-0 font-weight-bold text-primary">${cate.cateName } 조회 결과</h6>
-                        	</c:if>
+                        	
+	                            <h6 class="m-0 font-weight-bold text-primary">조회 결과</h6>
+                        	
                             
                                         <ul class="navbar-nav ml-auto">
                                             <li class="nav-item dropdown">
@@ -171,6 +268,11 @@ function s2ab(s) {
                                 </table>
                             </div>
                         </div>
+                    </div>
+                    </div>
+                    
+                    
+                    
                     </div>
 
                 </div>

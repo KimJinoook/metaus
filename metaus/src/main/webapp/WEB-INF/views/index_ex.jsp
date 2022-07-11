@@ -2,18 +2,9 @@
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
         <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
             <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-                <%@ include file="inc/header-ta.jsp" %>
-
-<<<<<<< HEAD
-                    <!-- ===== Start of Main Search Section ===== -->
-                    <section class="main overlay-black">
-                        <img src="/images/mainlogo_daemunjjack.png" alt="">
-                    </section>
-                    <!-- ===== End of Main Search Section ===== -->
-=======
+     
 <!DOCTYPE html>
 <html lang="en">
->>>>>>> branch 'main' of https://github.com/KimJinoook/metaus.git
 
 <head>
     <title>made by pond</title>

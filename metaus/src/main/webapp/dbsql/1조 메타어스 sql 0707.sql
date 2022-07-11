@@ -1406,6 +1406,12 @@ increment by 1
 start with 1
 nocache;
 
+drop sequence fp_msgatc_seq;
+create sequence fp_msgatc_seq
+increment by 1
+start with 1
+nocache;
+
 
 --기업회원 시퀀스
 drop sequence fp_com_seq;
@@ -1508,7 +1514,27 @@ increment by 1
 start with 1
 nocache;
 
+ALTER TABLE fp_rec
+   ADD
+        rec_content2
+      clob;
 
+ALTER TABLE fp_rec
+    ADD
+        rec_content3
+        clob;
+        
+ALTER TABLE fp_rec
+    ADD
+        rec_web
+        clob;
+        
+ALTER TABLE fp_rec
+    ADD
+        rec_twitter
+        clob;
+        
+        commit;
 
 
 
