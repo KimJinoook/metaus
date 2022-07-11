@@ -92,7 +92,6 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="<c:url value='/admin/member/memberList'/>">일반회원 조회</a>
                         <a class="collapse-item" href="<c:url value='/admin/member/cutmemberList'/>">차단 회원 관리</a>
-                        <a class="collapse-item" href="#">공지 발송</a>
                     </div>
                 </div>
             </li>

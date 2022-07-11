@@ -4,7 +4,11 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ include file="../inc/header.jsp" %>
-
+<style>
+button#replyBtAjax{
+	margin-right: 18px;
+}
+</style>
 <script type="text/javascript"
 	src="<c:url value='/js/jquery-3.6.0.min.js'/>">
 	

@@ -2,9 +2,17 @@
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
         <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
             <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<<<<<<< HEAD
      
+=======
+
+>>>>>>> branch 'main' of https://github.com/KimJinoook/metaus.git
 <!DOCTYPE html>
 <html lang="en">
+<<<<<<< HEAD
+=======
+
+>>>>>>> branch 'main' of https://github.com/KimJinoook/metaus.git
 
 <head>
     <title>made by pond</title>
@@ -218,6 +226,3 @@
 </body>
 
 </html>
-
-</html>
-                    <%@ include file="inc/footer.jsp" %>
