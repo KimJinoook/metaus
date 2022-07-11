@@ -5,7 +5,11 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ include file="../inc/header.jsp"%>
 <link rel="stylesheet" type="text/css" href="<c:url value='/css/resume.css'/>">
-
+<style>
+button#replyBtAjax{
+	margin-right: 18px;
+}
+</style>
 <script src="<c:url value='/js/jquery-3.6.0.min.js'/>"></script>
 <script type="text/javascript">
 	$(function(){
