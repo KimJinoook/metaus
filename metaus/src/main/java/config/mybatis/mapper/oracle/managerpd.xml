@@ -54,6 +54,26 @@
 	
 	
 	
+	<sql id="searchPdWhere">
+		<if test="cateNo !=null and cateNo !=''">
+				and B.cate_no IN 
+				<foreach collection="cateNo" item="item"  open="(" close=")" separator=",">
+					#{item}
+				</foreach>
+        </if>
+	</sql>
+	
+	<select id="selectSearch" resultType="ManagerPdVO" parameterType="ManagerPdSearchVO">
+		select B.*,(select mem_id from fp_mem A where A.mem_no = B.mem_no) mem_id
+		from fp_pd B
+		where B.pd_price between #{priceMin} and #{priceMax}
+		<include refid="searchPdWhere"/>
+	</select>
+	
+	<select id="selectMaxPrice" resultType="int">
+		select max(pd_price) from fp_pd
+	</select>
+	
 	
 	
 	

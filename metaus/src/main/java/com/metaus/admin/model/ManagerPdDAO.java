@@ -12,5 +12,7 @@ public interface ManagerPdDAO {
 	ManagerPdVO selectCateByCateNo(int cateNo);
 	List<ManagerPdVO> selectPdAll();
 	List<ManagerPdVO> selectCateAll();
+	List<ManagerPdVO> selectSearch(ManagerPdSearchVO vo);
 	int selectBuyCntByMonth(ManagerPdVO vo);
+	int selectMaxPrice();
 }
