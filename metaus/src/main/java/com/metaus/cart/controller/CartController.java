@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.metaus.cart.model.CartService;
 import com.metaus.cart.model.CartVO;
+import com.metaus.pd.model.PdVO;
 
 import lombok.RequiredArgsConstructor;
 
@@ -44,7 +45,7 @@ public class CartController {
 	}
 	
 	@RequestMapping("/cart")
-	public String cartList(HttpSession session, CartVO vo,Model model) {
+	public String cartList(HttpSession session,CartVO vo,Model model) {
 		int memNo=(int)session.getAttribute("memNo");
 		logger.info("장바구니 목록 조회 파라미터 memNo={}",memNo);
 		
@@ -60,5 +61,10 @@ public class CartController {
 	@RequestMapping("/checkOut")
 	public String checkOut() {
 		return "/cart/checkOut";
+	}
+	
+	@RequestMapping("/delete")
+	public String cartDel(HttpSession session, Model model ) {
+		return "";
 	}
 }

@@ -1,6 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../inc/header.jsp"%>
+<script type="text/javascript">
+	$(function(){
+		$('.remove').click(function(){
+			var res=confirm('삭제하시겠습니까?');
+			if(res===true){
+				location.href=''
+			}else{
+				alert('취소되었습니다.');
+			}
+		});
+	});
+</script>
 <!-- =============== Start of Page Header 1 Section =============== -->
     <section class="page-header" style="margin-top: 150px;">
         <div class="container">
@@ -25,7 +37,8 @@
             <!-- End of Breadcrumb -->
 
         </div>
-        </section>
+        </section>        
+
 <!-- ===== Start of Shop Cart Section ===== -->
     <section class="shop ptb80">
         <div class="container">
@@ -67,19 +80,20 @@
 
                                     <!-- Cart Product Thumbnail -->
                                     <td class="cart-product-thumbnail">
-                                        <a href="#">
-                                            <img width="64" height="64" src="images/shop/product1.jpg" alt="">
+                                    
+                                        <a href="<c:url value='/pd/pdDetail?pdNo=${vo.pdNo }'/>">
+                                            <img width="75" height="50" src="<c:url value='/images/cartimg.jpg'/>" alt="">
                                         </a>
                                     </td>
 
                                     <!-- Cart Product Name -->
                                     <td class="cart-product-name">
-                                        <a href="#">${vo.pdName }</a>
+                                        <a href="<c:url value='/pd/pdDetail?pdNo=${vo.pdNo }'/>">${vo.pdName }</a>
                                     </td>
 
                                     <!-- Cart Product Price -->
                                     <td class="cart-product-price">
-                                        <span class="amount">${vo.pdPrice }</span>
+                                        <span class="amount"><fmt:formatNumber value="${vo.pdPrice }" pattern="#,###"/>원</span>
                                     </td>
 
                                     <!-- Cart Product Quantity -->
@@ -93,7 +107,7 @@
 
                                     <!-- Cart Subtotal -->
                                     <td class="cart-product-subtotal">
-                                        <span class="amount">${vo.pdPrice }</span>
+                                        <span class="amount"><fmt:formatNumber value="${vo.pdPrice }" pattern="#,###"/>원</span>
                                     </td>
                                 </tr>
                                 </c:forEach>

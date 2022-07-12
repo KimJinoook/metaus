@@ -214,7 +214,7 @@ $(function(){
                                         <!-- Price -->
                                         <span class="price">
 								            <del><span class="amount">$39.99</span></del>
-                                        <span class="amount">$<fmt:formatNumber value="${vo.pdPrice }" pattern="#,###"/></span>
+                                        <span class="amount"><fmt:formatNumber value="${vo.pdPrice }" pattern="#,###"/>원</span>
                                         </span>
                                     </a>
                                 </div>
