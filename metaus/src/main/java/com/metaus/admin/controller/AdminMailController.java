@@ -1,6 +1,7 @@
 package com.metaus.admin.controller;
 
 import java.sql.Timestamp;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -156,8 +157,11 @@ public class AdminMailController {
 		String memId=(String) session.getAttribute("managerId");
 		logger.info("memId={}", memId);
 		
+		Map<String, Object> map = new HashMap<>();
+		map.put("memId", memId);
+		
 		List<Map<String, Object>> list 
-			= mailboxService.selectMsgView(memId, flag);
+			= mailboxService.selectMsgView(map, flag);
 		logger.info("메세지 목록 조회, list.size={}", list.size());
 		
 		model.addAttribute("list", list);

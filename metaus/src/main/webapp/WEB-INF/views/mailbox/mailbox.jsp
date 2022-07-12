@@ -10,6 +10,7 @@
 				success: function(data){
 					//console.log(data);
 					$('.box.box-primary').html(data);
+					getFlagNo();
 				},
 				error: function(xhr, status, error){
 					alert('error:' + error);
@@ -65,6 +66,7 @@
 							$('.temporaryNo').text(data.temporaryNo);
 							$('.spamNo').text(data.spamNo);
 							$('.trashNo').text(data.trashNo);
+							getPageList();
 						},
 						error: function(xhr, status, error){
 							alert('error:' + error);
@@ -110,6 +112,7 @@
 							$('.temporaryNo').text(data.temporaryNo);
 							$('.spamNo').text(data.spamNo);
 							$('.trashNo').text(data.trashNo);
+							getPageList();
 						},
 						error: function(xhr, status, error){
 							alert('error:' + error);
@@ -147,6 +150,7 @@
 					success: function(data){
 						//alert(data);
 						$('.starNo').text(data);
+						getPageList();
 					},
 					error: function(xhr, status, error){
 						alert('error:' + error);
@@ -157,6 +161,8 @@
 			
 			//받은 메세지
 			$(document).on("click",".receivedMail",function(){
+				$('.input-sm').val("");
+				
 				$.ajax({
 					url: "<c:url value='/mailbox/receivedMail'/>",
 					type: "GET",
@@ -173,12 +179,15 @@
 			
 			//보낸 메세지
 			$(document).on("click",".sentMail",function(){
+				$('.input-sm').val("");
+				
 				$.ajax({
 					url: "<c:url value='/mailbox/sentMail'/>",
 					type: "GET",
 					success: function(data){
 						$('.box.box-primary').html(data);
 						$('.btn-compose').text("메세지 작성");
+						findFlagNo();
 					},
 					error: function(xhr, status, error){
 						alert('error:' + error);
@@ -188,6 +197,8 @@
 			
 			//별표 메세지
 			$(document).on("click",".starMail",function(){
+				$('.input-sm').val("");
+				
 				$.ajax({
 					url: "<c:url value='/mailbox/starMail'/>",
 					type: "GET",
@@ -203,6 +214,8 @@
 			
 			//휴지통
 			$(document).on("click",".trashMail",function(){
+				$('.input-sm').val("");
+				
 				$.ajax({
 					url: "<c:url value='/mailbox/trashMail'/>",
 					type: "GET",
@@ -218,6 +231,8 @@
 			
 			//스팸함
 			$(document).on("click",".spamMail",function(){
+				$('.input-sm').val("");
+				
 				$.ajax({
 					url: "<c:url value='/mailbox/spamMail'/>",
 					type: "GET",
@@ -233,6 +248,8 @@
 			
 			//임시보관함
 			$(document).on("click",".temporaryMail",function(){
+				$('.input-sm').val("");
+				
 				$.ajax({
 					url: "<c:url value='/mailbox/temporaryMail'/>",
 					type: "GET",
@@ -248,6 +265,8 @@
 			
 			//메세지 작성
 			$(document).on("click",".btn-compose",function(){
+				$('.input-sm').val("");
+				
 				if($(this).text()=='메세지 작성'){
 					$.ajax({
 						url: "<c:url value='/mailbox/ajaxCompose'/>",
@@ -330,24 +349,7 @@
 					success: function(data){
 						$('.btn-compose').text("메세지 작성");
 						$('.box.box-primary').html(data);
-						$.ajax({
-							url: "<c:url value='/mailbox/updateMailboxNo'/>",
-							type: "GET",
-							dataType: "JSON",
-							traditional :true,
-							success: function(data){
-								//console.log(data);
-								$('.receivedNo').text(data.receivedNo);
-								$('.sentNo').text(data.sentNo);
-								$('.starNo').text(data.starNo);
-								$('.temporaryNo').text(data.temporaryNo);
-								$('.spamNo').text(data.spamNo);
-								$('.trashNo').text(data.trashNo);
-							},
-							error: function(xhr, status, error){
-								alert('error:' + error);
-							}
-						});
+						getFlagNo();
 					},
 					error: function(xhr, status, error){
 						alert('error:' + error);
@@ -455,19 +457,170 @@
 				});
 			});
 			
+			//메세지 검색
+			$(document).on("keyup",".input-sm", function(){
+				var searchKeyword = $('.input-sm').val();
+				var searchFlag = $('.searchFlag').val();
+				
+				$.ajax({
+					url: "<c:url value='/mailbox/"+searchFlag+"Mail'/>",
+					type: "GET",
+					data: {
+						"searchKeyword" : searchKeyword
+					},
+					success: function(data){
+						$('.box.box-primary').html(data);
+					},
+					error: function(xhr, status, error){
+						alert('error:' + error);
+					}
+				});
+			});
+			
+			//페이지 번호 클릭 시
+			$(document).on("click", ".btn-page", function(){
+				var searchKeyword = $('.input-sm').val();
+				var searchFlag = $('.searchFlag').val();
+				var currentPage = $(this).prev().val();
+				console.log(currentPage);
+				
+				$.ajax({
+					url: "<c:url value='/mailbox/"+searchFlag+"Mail'/>",
+					type: "GET",
+					data: {
+						"searchKeyword" : searchKeyword,
+						"currentPage" : currentPage
+					},
+					success: function(data){
+						$('.box.box-primary').html(data);
+					},
+					error: function(xhr, status, error){
+						alert('error:' + error);
+					}
+				});
+			});
+			
+			//새로고침
+			$(document).on("click", ".btn-refresh", function(){
+				$('.input-sm').val("");
+				
+				$.ajax({
+					url: "<c:url value='/mailbox/receivedMail'/>",
+					type: "GET",
+					success: function(data){
+						//console.log(data);
+						$('.box.box-primary').html(data);
+						$('.btn-compose').text("메세지 작성");
+						getFlagNo();
+					},
+					error: function(xhr, status, error){
+						alert('error:' + error);
+					}
+				});
+			});
+			
+			//답장
+			$(document).on("click", ".btn-reply", function(){
+				var msgaddNo = $('#msgaddNo').val();
+				
+				$.ajax({
+					url: "<c:url value='/mailbox/replyMail'/>",
+					type: "GET",
+					data: {
+						"msgaddNo" : msgaddNo 
+					},
+					success: function(data){
+						//console.log(data);
+						$('.box.box-primary').html(data);
+						$('.btn-compose').text("받은 메세지");
+					},
+					error: function(xhr, status, error){
+						alert('error:' + error);
+					}
+				});
+			});
+			
+			//전달
+			$(document).on("click", ".btn-share", function(){
+				var msgaddNo = $('#msgaddNo').val();
+				
+				$.ajax({
+					url: "<c:url value='/mailbox/shareMail'/>",
+					type: "GET",
+					data: {
+						"msgaddNo" : msgaddNo 
+					},
+					success: function(data){
+						//console.log(data);
+						$('.box.box-primary').html(data);
+						$('.btn-compose').text("받은 메세지");
+					},
+					error: function(xhr, status, error){
+						alert('error:' + error);
+					}
+				});
+			});
+			
+			function getFlagNo(){
+				$.ajax({
+					url: "<c:url value='/mailbox/updateMailboxNo'/>",
+					type: "GET",
+					dataType: "JSON",
+					traditional :true,
+					success: function(data){
+						//console.log(data);
+						$('.receivedNo').text(data.receivedNo);
+						$('.sentNo').text(data.sentNo);
+						$('.starNo').text(data.starNo);
+						$('.temporaryNo').text(data.temporaryNo);
+						$('.spamNo').text(data.spamNo);
+						$('.trashNo').text(data.trashNo);
+					},
+					error: function(xhr, status, error){
+						alert('error:' + error);
+					}
+				});
+			}
+			
+			function getPageList(){
+				var searchKeyword = $('.input-sm').val();
+				var searchFlag = $('.searchFlag').val();
+				var currentPage = $(this).prev().val();
+				//console.log(currentPage);
+				
+				$.ajax({
+					url: "<c:url value='/mailbox/"+searchFlag+"Mail'/>",
+					type: "GET",
+					data: {
+						"searchKeyword" : searchKeyword,
+						"currentPage" : currentPage
+					},
+					success: function(data){
+						$('.box.box-primary').html(data);
+					},
+					error: function(xhr, status, error){
+						alert('error:' + error);
+					}
+				});
+			}
 		});
 </script>
       <!-- Right side column. Contains the navbar and content of the page -->
       <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-          <h1>
-            Messagebox
-          </h1>
-          <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li class="active">Messagebox</li>
-          </ol>
+          <div class="left">
+	          <h3>
+	            Messagebox
+	          </h3>
+          </div>
+          <div class="box-tools pull-right">
+            <div class="has-feedback">
+	          <input type="text" class="form-control input-sm" placeholder="메세지 검색"/>
+	          <span class="glyphicon glyphicon-search form-control-feedback"></span>
+            </div>
+          </div><!-- /.box-tools -->
+          <div class="clear"></div>
         </section>
 
         <!-- Main content -->

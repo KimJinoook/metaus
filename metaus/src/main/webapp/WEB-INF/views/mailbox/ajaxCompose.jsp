@@ -35,11 +35,17 @@
 <form name="frm" id="frm" action="<c:url value='/mailbox/sendMail' />" method="post" enctype="multipart/form-data">
 		<div class="box-header with-border">
 		  <h3 class="box-title">
-		  	<c:if test="${not empty map}">
+		  	<c:if test="${not empty map && flag eq 'temporary'}">
 			  	<input type="hidden" name="ajaxTemporaryFlag" value="${map['TEMPORARY_FLAG'] }" id="ajaxTemporaryFlag">
 			  	<input type="hidden" name="msgNo" value="${map['MSG_NO'] }" class="msgNo">
 			  	<input type="hidden" name="msgaddNo" value="${map['MSGADD_NO'] }" class="msgaddNo">
 		  		임시저장
+		  	</c:if>
+		  	<c:if test="${not empty map && flag eq 'reply'}">
+		  		답장
+		  	</c:if>
+		  	<c:if test="${not empty map && flag eq 'share'}">
+		  		전달
 		  	</c:if>
 		  	<c:if test="${empty map}">
 		  		새 메세지
@@ -49,10 +55,24 @@
 		<div class="box-body">
 		  <div class="form-group">
 		    <input type="text" class="form-control" name="msgaddAdsee" id="msgaddAdsee" 
-		    	placeholder="받는사람: example@example.com" value="${map['MSGADD_ADSEE'] }"/>
+		    	placeholder="받는사람: example@example.com"
+				<c:if test="${flag eq 'temporary'}">
+		    		value="${map['MSGADD_ADSEE'] }"
+		    	</c:if>
+		    	<c:if test="${flag eq 'reply'}">
+		    		value="${map['MSGADD_ADSER'] }"
+		    	</c:if>		    	
+		    />
 		  </div>
 		  <div class="form-group">
-		    <input type="text" class="form-control" name="msgTitle" placeholder="제목:" value="${map['MSG_TITLE'] }"/>
+		    <input type="text" class="form-control" name="msgTitle" placeholder="제목:" 
+		    	<c:if test="${flag ne 'reply'}">
+		    		value="${map['MSG_TITLE'] }"
+		    	</c:if>
+		    	<c:if test="${flag eq 'reply'}">
+		    		value="Re: ${map['MSG_TITLE'] }"
+		    	</c:if>
+		    />
 		  </div>
 		  <div class="form-group">
 		    <textarea id="compose-textarea" name="msgContent" 

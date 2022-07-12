@@ -29,6 +29,7 @@
 	}
 </style>
 <div class="box-header with-border">
+				  <input type="hidden" value="${flag }" class="searchFlag">
                   <h3 class="box-title">
 	                  <c:choose>
 						  <c:when test="${flag eq 'received'}">
@@ -51,12 +52,7 @@
 						  </c:when>
 					  </c:choose>
                   </h3>
-                  <div class="box-tools pull-right">
-                    <div class="has-feedback">
-                      <input type="text" class="form-control input-sm" placeholder="메세지 검색"/>
-                      <span class="glyphicon glyphicon-search form-control-feedback"></span>
-                    </div>
-                  </div><!-- /.box-tools -->
+                  
                 </div><!-- /.box-header -->
                 <div class="box-body no-padding"><!-- box-body -->
                   <div class="table-responsive mailbox-messages">
@@ -87,7 +83,7 @@
 		                          <c:if test="${flag eq 'sent' && flag ne 'trash' && flag ne 'spam'}">
 		                          	<c:if test="${sessionScope.memId ne map['MSGADD_ADSEE']}">
 		                          		<c:if test="${not empty map['MSGADD_DATE']  }">
-				                        	<i class="fa-solid fa-eye""></i>
+				                        	<i class="fa-solid fa-eye"></i>
 		                          		</c:if>
 		                          		<c:if test="${empty map['MSGADD_DATE']  }">
 				                        	<i class="fa-solid fa-eye-slash" style="color: #ddd;"></i>
@@ -215,17 +211,43 @@
 					  <c:if test="${flag eq 'spam'}">
 					  	<button class="btn btn-default btn-sm btn-filter btn-filter-up"><i class="fa-solid fa-filter-circle-xmark"></i></button>
 					  </c:if>
-                      <button class="btn btn-default btn-sm"><i class="fa fa-reply"></i></button>
-                      <button class="btn btn-default btn-sm"><i class="fa fa-share"></i></button>
                     </div><!-- /.btn-group -->
                     <c:if test="${flag eq 'received'}">
-                    	<button class="btn btn-default btn-sm"><i class="fa fa-refresh"></i></button>
+                    	<button class="btn btn-default btn-sm btn-refresh"><i class="fa fa-refresh"></i></button>
                     </c:if>
                     <div class="pull-right">
-                      1-50/200
                       <div class="btn-group">
-                        <button class="btn btn-default btn-sm"><i class="fa fa-chevron-left"></i></button>
-                        <button class="btn btn-default btn-sm"><i class="fa fa-chevron-right"></i></button>
+                        <!-- 이전블럭으로 이동 -->
+						<c:if test="${pagingInfo.firstPage>1 }">
+							<input type="hidden" value="${pagingInfo.firstPage-1}" class="currentPage${i}">
+							<button class="btn btn-default btn-sm btn-page"><i class="fa fa-chevron-left"></i></button>
+						</c:if>
+						<!-- 페이지 번호 추가 -->						
+						<!-- [1][2][3][4][5][6][7][8][9][10] -->
+						<c:forEach var="i" begin="${pagingInfo.firstPage }" 
+							end="${pagingInfo.lastPage }">		
+							<c:if test="${i==pagingInfo.currentPage }">
+								<input type="hidden" value="${i}" class="currentPage${i}">
+								<button class="btn btn-default btn-sm btn-page" style="background-color:#ddd;">${i}</button>
+							</c:if>
+							<c:if test="${i!=pagingInfo.currentPage }">
+								<input type="hidden" value="${i}" class="currentPage${i}">			
+								<button class="btn btn-default btn-sm btn-page">${i}</button>
+							</c:if>		
+						</c:forEach>
+						<!--  페이지 번호 끝 -->
+						<!-- 다음 블럭으로 이동 -->
+						<c:if test="${pagingInfo.lastPage < pagingInfo.totalPage }">
+							<input type="hidden" value="${pagingInfo.lastPage+1}" class="currentPage${i}">	
+							<button class="btn btn-default btn-sm btn-page"><i class="fa fa-chevron-right"></i></button> 
+						</c:if>
+                      
+                      
+                        <!-- <button class="btn btn-default btn-sm"><i class="fa fa-chevron-left"></i></button>
+                        <button class="btn btn-default btn-sm">1</button>
+                        <button class="btn btn-default btn-sm">2</button>
+                        <button class="btn btn-default btn-sm">3</button>
+                        <button class="btn btn-default btn-sm"><i class="fa fa-chevron-right"></i></button> -->
                       </div><!-- /.btn-group -->
                     </div><!-- /.pull-right -->
                   </div>
