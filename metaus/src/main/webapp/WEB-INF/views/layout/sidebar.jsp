@@ -160,6 +160,9 @@
 	              </a>
 	            </li>
             </c:if>
+            
+            
+            <c:if test="${ 'company' ne sessionScope.isLogin }">
             <li class="treeview">
               <a href="#">
                 <i class="fa-solid fa-user-tie"></i>&nbsp;
@@ -171,6 +174,24 @@
                 <li><a href="<c:url value='/commission/progressSchedule'/>"><i class="fa fa-circle-o"></i> 의뢰진행상황</a></li>
               </ul>
             </li>
+            </c:if>
+            
+            <c:if test="${ 'company' eq sessionScope.isLogin }">
+            <li class="treeview">
+              <a href="#">
+                <i class="fa-solid fa-user-tie"></i>&nbsp;
+                <span>의뢰</span>
+                <i class="fa fa-angle-left pull-right"></i>
+              </a>
+              <ul class="treeview-menu">
+                <li><a href="<c:url value='/commission/commissionList'/>"><i class="fa fa-circle-o"></i> 의뢰목록</a></li>
+                <li><a href="<c:url value='/commission/progressSchedule'/>"><i class="fa fa-circle-o"></i> 의뢰진행상황</a></li>
+              </ul>
+            </li>
+            </c:if>
+            
+            
+            
             <li class="treeview">
               <a href="#">
                 <i class="fa fa-envelope"></i><span>메세지</span>
