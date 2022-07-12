@@ -23,7 +23,7 @@ $(function(){
 			alert('로그인 후 이용가능합니다!');
 			event.preventDefault();
 		}else{
-			location.href="<c:url value='/cart/cartAdd?pdNo=${param.pdNo}'/>"; 
+			location.href="<c:url value='/cart/cartAdd?pdNo=${vo.pdNo}'/>"; 
 				
 		}		 
 	 })
@@ -204,7 +204,7 @@ $(function(){
                                         <!-- Price -->
                                         <span class="price">
 								            <del><span class="amount">$39.99</span></del>
-                                        <span class="amount">$<fmt:formatNumber value="${vo.pdPrice }" pattern="#,###"/></span>
+                                        <span class="amount"><fmt:formatNumber value="${vo.pdPrice }" pattern="#,###"/>원</span>
                                         </span>
                                     </a>
                                 </div>
