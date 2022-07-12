@@ -407,11 +407,7 @@ function composeMail(msgaddAdsee){
 		<div class="box-footer ">
 		  <div class="pull-right d-sm-flex align-items-center justify-content-between mb-4">
 		  <div class="form-group">
-		    <div class="btn btn-default btn-file">
-		  	<a href="javascript:upfileClick()" class="btn btn-primary btn-icon-split"><span class="text">파일 업로드</span>
-		      	<input type="file" onchange="addFile(this);" id="attachment" name="attachment" style="display:none;"  multiple/>
-		    </a>
-		    </div>
+		   
 		  </div>
 		  	<div></div>
 		  	<div>
@@ -420,7 +416,17 @@ function composeMail(msgaddAdsee){
 		    </div>
 		  </div>
 		</div><!-- /.box-footer -->
-		<div class="file-list"></div>
+		<div class="file-list"><c:forEach var="vo" items="${list }">
+	                    <div class="filebox">
+	                      
+	                      <a href="<c:url value='/message_attachment/${vo.mfileFilename }'/>" download="${vo.mfileOriginname }" class="btn btn-default btn-xs pull-right">
+	                     <i class="fa fa-paperclip"></i> ${vo.mfileOriginname } &nbsp;&nbsp;
+	                        
+	                     
+	                      </a>
+	                      
+	                    </div>
+                    </c:forEach></div>
 
 <input type="hidden" value="N" name="temporaryFlag" id="temporaryFlag">
 

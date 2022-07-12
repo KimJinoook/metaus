@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.metaus.admin.model.ManagerBoardService;
 import com.metaus.admin.model.ManagerBoardVO;
+import com.metaus.admin.model.ManagerPdSearchVO;
 import com.metaus.admin.model.ManagerPdService;
 import com.metaus.admin.model.ManagerPdVO;
 import com.metaus.admin.model.ManagerService;
@@ -46,7 +47,7 @@ public class AdminPdController {
 	public void pdList(@RequestParam(defaultValue = "0") int cateNo, Model model) {
 		logger.info("모델링 상품 조회 페이지 cateNo={}",cateNo);
 		
-		List<ManagerPdVO> list;;
+		List<ManagerPdVO> list;
 		
 		if(cateNo == 0) {
 			list = managerPdService.selectPdAll();
@@ -62,6 +63,54 @@ public class AdminPdController {
 		List<ManagerPdVO> cateList = managerPdService.selectCateAll();
 		model.addAttribute("cate",cate);
 		model.addAttribute("cateList",cateList);
+		
+		
+		int maxP = managerPdService.selectMaxPrice();
+		model.addAttribute("maxP",maxP);
+	}
+	
+	@RequestMapping("/pdSearch")
+	public String pdSearch(@ModelAttribute ManagerPdSearchVO mpsVo, Model model) {
+		
+		System.out.println(mpsVo.getPriceMin());
+		System.out.println(mpsVo.getPriceMax());
+		
+		
+		if(mpsVo.getPriceMax() < mpsVo.getPriceMin()) {
+			int temp = mpsVo.getPriceMax();
+			mpsVo.setPriceMax(mpsVo.getPriceMin());
+			mpsVo.setPriceMin(temp);
+		}
+		
+		List<ManagerPdVO> list = managerPdService.selectSearch(mpsVo);
+		logger.info("list={}",list);
+		model.addAttribute("list",list);
+		
+		List<ManagerPdVO> cateList = managerPdService.selectCateAll();
+		model.addAttribute("cateList",cateList);
+		
+		return "/admin/pd/pdList";
+	}
+	@RequestMapping("/ajaxpdSearch")
+	public String ajaxpdSearch(@ModelAttribute ManagerPdSearchVO mpsVo, Model model) {
+		
+		System.out.println(mpsVo.getPriceMin());
+		System.out.println(mpsVo.getPriceMax());
+		
+		if(mpsVo.getPriceMax() < mpsVo.getPriceMin()) {
+			int temp = mpsVo.getPriceMax();
+			mpsVo.setPriceMax(mpsVo.getPriceMin());
+			mpsVo.setPriceMin(temp);
+		}
+		
+		List<ManagerPdVO> list = managerPdService.selectSearch(mpsVo);
+		logger.info("list={}",list);
+		model.addAttribute("list",list);
+		
+		List<ManagerPdVO> cateList = managerPdService.selectCateAll();
+		model.addAttribute("cateList",cateList);
+		
+		return "/admin/pd/ajaxPdList";
 	}
 	
 	

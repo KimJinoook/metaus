@@ -9,6 +9,6 @@ import org.apache.ibatis.annotations.Mapper;
 public interface CartDAO {
 	int selectCartCount(CartVO vo);
 	int insertCart(CartVO vo);
-	List<Map<String, Object>> selectCartList(int memNo);
+	List<CartVO> selectCartList(int memNo);
 	int deleteCartByMemNo(int memNo);
 }

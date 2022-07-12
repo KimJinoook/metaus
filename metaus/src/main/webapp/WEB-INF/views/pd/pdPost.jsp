@@ -1,7 +1,28 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="utf-8"%>
 <%@ include file="../inc/header.jsp"%>
-
+<script type="text/javascript" src="<c:url value='/js/jquery-3.6.0.min.js'/>"></script>
+<script type="text/javascript">
+	$(function(){
+		$('#pdPost').click(function(){
+			if($('#pdPrice').val()===""){
+				alert('모델 가격을 입력해주세요.');
+				$('#pdPrice').focus();
+				event.preventDefault();
+			}else if(!validate_pay($('#pdPrice').val())){
+				alert("모델 가격은 숫자만 입력해주세요.");
+				$('#pdPrice').focus();
+				event.preventDefault();
+			};
+			
+		});
+	});
+	
+	function validate_pay(pay) {
+		var pattern = new RegExp(/^[0-9]*$/g);
+		return pattern.test(pay);
+	}
+</script>
     <!-- =============== Start of Page Header 1 Section =============== -->
     <section class="page-header" style="margin-top: 150px;">
         <div class="container">
@@ -80,7 +101,7 @@
                         </div>
                         <!-- Form Group -->
                         <div class="form-group">
-                            <label>모델 업로드 <span></span></label>
+                            <label>모델 업로드 <span>(zip,Gltf파일만 가능)</span></label>
                             
                             <!-- Upload Button -->
                             <div class="upload-file-btn">
@@ -139,7 +160,7 @@
                         
  -->                        <!-- Form Group -->
                         <div class="form-group pt30 nomargin" id="last">
-                            <button type="submit" class="btn btn-blue btn-effect">등록</button>
+                            <button type="submit" class="btn btn-blue btn-effect" id="pdPost">등록</button>
                         </div>
                         
                         

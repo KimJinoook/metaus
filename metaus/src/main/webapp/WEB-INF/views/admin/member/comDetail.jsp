@@ -129,7 +129,7 @@ var marker = new kakao.maps.Marker({
                         <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">일반 회원 조회 결과
+                            <h6 class="m-0 font-weight-bold text-primary">등록 의뢰 목록
                             </h6>
                         </div>
                         

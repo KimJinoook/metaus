@@ -5,6 +5,8 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.metaus.mailbox.model.MailboxAtcVO;
+
 @Mapper
 public interface ManagerMailboxDAO {
 	int insertMailbox(ManagerMailboxVO vo);
@@ -28,4 +30,5 @@ public interface ManagerMailboxDAO {
 	int updateTrashFlag(Map<String, String> map);
 	int updateSpamFlag(Map<String, String> map);
 	int delTemporaryMail(int msgaddNo);
+	List<MailboxAtcVO> selectMsgAtcByMsgNo(int msgNo);
 }

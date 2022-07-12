@@ -192,6 +192,11 @@
 		where trash_flag='Y'
 		order by msgadd_no desc
 	</select>
+	
+	<select id="selectMsgAtcByMsgNo" parameterType="int" resultType="MailboxAtcVO">
+		select mfile_no, msg_no,mfile_filename,mfile_originname from fp_msgatc
+		where msg_no=#{msgNo}
+	</select>
 
 	<!-- updateStarFlag -->
 	<parameterMap type="map" id="mailStarUpdateParam">

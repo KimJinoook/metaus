@@ -7,6 +7,19 @@
 <script src="https://rawgit.com/mrdoob/three.js/dev/examples/js/loaders/GLTFLoader.js"></script>
 <script src="https://cdn.rawgit.com/takahirox/THREE.ZipLoader/v0.0.1/build/ziploader.min.js"></script>
 <script src="https://unpkg.com/three@0.141.0/examples/js/controls/OrbitControls.js"></script>
+<script type="text/javascript">
+$(function(){	
+	$('#addCart').click(function(){
+		 if($('#memId').val()=="" || $('#memId').val()==null){
+			alert('로그인 후 이용가능합니다!');
+			event.preventDefault();
+		}else{
+			location.href="<c:url value='/cart/cartAdd?pdNo=${param.pdNo}'/>"; 
+				
+		}
+	 })
+});
+</script>
     <!-- ===== Start of Portfolio Section ===== -->
     <section class="shop ptb80">
         <div class="container">
@@ -106,7 +119,7 @@
 
                                     <!-- Product overlay -->
                                     <div class="product-overlay">
-                                        <a href="<c:url value='/cart/cart'/>"><i class="fa fa-shopping-cart"></i>Add to Cart</a>
+                                        <a a href="#" id="addCart"><i class="fa fa-shopping-cart"></i>Add to Cart</a>
                                     </div>
 
                                 </div>

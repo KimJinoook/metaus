@@ -2,17 +2,23 @@
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
         <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
             <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-                <%@ include file="inc/header-ta.jsp" %>
+<<<<<<< HEAD
+                
+=======
+<<<<<<< HEAD
+     
+=======
+>>>>>>> branch 'main' of https://github.com/KimJinoook/metaus.git
 
 <<<<<<< HEAD
-                    <!-- ===== Start of Main Search Section ===== -->
-                    <section class="main overlay-black">
-                        <img src="/images/mainlogo_daemunjjack.png" alt="">
-                    </section>
-                    <!-- ===== End of Main Search Section ===== -->
 =======
+>>>>>>> branch 'main' of https://github.com/KimJinoook/metaus.git
 <!DOCTYPE html>
 <html lang="en">
+<<<<<<< HEAD
+=======
+
+>>>>>>> branch 'main' of https://github.com/KimJinoook/metaus.git
 >>>>>>> branch 'main' of https://github.com/KimJinoook/metaus.git
 
 <head>
@@ -227,6 +233,3 @@
 </body>
 
 </html>
-
-</html>
-                    <%@ include file="inc/footer.jsp" %>

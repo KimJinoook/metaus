@@ -32,7 +32,15 @@ public class ManagerPdServiceImpl implements ManagerPdService {
 		return managerPdDao.selectCateAll();
 	}
 	
+	public List<ManagerPdVO> selectSearch(ManagerPdSearchVO vo){
+		return managerPdDao.selectSearch(vo);
+	}
+	
 	public int selectBuyCntByMonth(ManagerPdVO vo) {
 		return managerPdDao.selectBuyCntByMonth(vo);
+	}
+	
+	public int selectMaxPrice() {
+		return managerPdDao.selectMaxPrice();
 	}
 }

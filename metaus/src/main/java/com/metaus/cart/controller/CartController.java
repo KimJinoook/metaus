@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.metaus.cart.model.CartService;
 import com.metaus.cart.model.CartVO;
@@ -27,26 +28,31 @@ public class CartController {
 	private final CartService cartService;
 	
 	@RequestMapping("/cartAdd")
-	public String cartAdd(@ModelAttribute CartVO cartVo, HttpSession session) {
+	public String cartAdd(@RequestParam int pdNo, @ModelAttribute CartVO cartVo, HttpSession session) {
 		int memNo=(int)session.getAttribute("memNo");
 		cartVo.setMemNo(memNo);
-		logger.info("장바구니 담기 파라미터 cartVo={}, memNo={}",cartVo, memNo);
+		cartVo.setPdNo(pdNo);
+		logger.info("장바구니 담기 파라미터 cartVo={}, memNo={}",cartVo, memNo, pdNo);
 		
 		int cnt=cartService.insertCart(cartVo);
 		logger.info("장바구니 담기 결과 cnt={}",cnt);
+		
+		List<CartVO> list=cartService.selectCartList(memNo);
+		logger.info("장바구니 목록, 결과 list.size={}", list.size());
 		
 		return "/cart/cart";
 	}
 	
 	@RequestMapping("/cart")
-	public String cartList(HttpSession session, Model model) {
+	public String cartList(HttpSession session, CartVO vo,Model model) {
 		int memNo=(int)session.getAttribute("memNo");
 		logger.info("장바구니 목록 조회 파라미터 memNo={}",memNo);
 		
-		List<Map<String, Object>>list=cartService.selectCartList(memNo);
+		List<CartVO> list=cartService.selectCartList(memNo);
 		logger.info("장바구니 목록, 결과 list.size={}", list.size());
 		
 		model.addAttribute("list", list);
+		model.addAttribute("vo", vo);
 		
 		return "/cart/cart";
 	}

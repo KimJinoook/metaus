@@ -54,6 +54,7 @@ public class AdminMailController {
 	private final ManagerBoardService managerBoardService;
 	private final ManagerPdService managerPdService;
 	private final MailboxService mailboxService;
+	private final ManagerMailboxService managermailboxService;
 	private final FileUploadUtil fileUploadUtil;
 	
 	@RequestMapping("/mailList")
@@ -282,7 +283,7 @@ public class AdminMailController {
 			logger.info("메세지 읽은 날짜 업데이트 결과, cnt={}, map={}", cnt, map);
 		}
 		
-		List<MailboxAtcVO> list = mailboxService.selectMsgAtcByMsgNo(msgNo);
+		List<MailboxAtcVO> list = managermailboxService.selectMsgAtcByMsgNo(msgNo);
 		logger.info("메세지 첨부파일 조회 결과, list.size={}", list.size());
 		
 		model.addAttribute("map", map);
@@ -305,7 +306,7 @@ public class AdminMailController {
 			logger.info("메세지 읽은 날짜 업데이트 결과, cnt={}, map={}", cnt, map);
 		}
 		
-		List<MailboxAtcVO> list = mailboxService.selectMsgAtcByMsgNo(msgNo);
+		List<MailboxAtcVO> list = managermailboxService.selectMsgAtcByMsgNo(msgNo);
 		logger.info("메세지 첨부파일 조회 결과, list.size={}", list.size());
 		
 		model.addAttribute("map", map);
