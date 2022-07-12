@@ -18,15 +18,13 @@ $(function(){
 		}
 	});
 	
-	$('#addCart').click(function(){
-		 if($('#memId').val()=="" || $('#memId').val()==null){
-			alert('로그인 후 이용가능합니다!');
-			event.preventDefault();
-		}else{
-			location.href="<c:url value='/cart/cartAdd?pdNo=${param.pdNo}'/>"; 
-				
-		}		 
-	 })
+	$('.addCart').click(function(){
+       if($('#memId').val()=="" || $('#memId').val()==null){
+         alert('로그인 후 이용가능합니다!');
+         event.preventDefault();
+       }
+	});
+	
 });
 </script>
 <!-- =============== Start of Page Header 1 Section =============== -->
@@ -191,7 +189,7 @@ $(function(){
 
                                     <!-- Product overlay -->
                                     <div class="product-overlay">
-                                        <a href="#" id="addCart"><i class="fa fa-shopping-cart"></i>Add to Cart</a>
+                                        <a href="<c:url value='/cart/cartAdd?pdNo=${vo.pdNo}'/>" class="addCart"><i class="fa fa-shopping-cart"></i>Add to Cart</a>
                                     </div>
 
                                 </div>
@@ -204,7 +202,7 @@ $(function(){
                                         <!-- Price -->
                                         <span class="price">
 								            <del><span class="amount">$39.99</span></del>
-                                        <span class="amount">$<fmt:formatNumber value="${vo.pdPrice }" pattern="#,###"/></span>
+                                        <span class="amount"><fmt:formatNumber value="${vo.pdPrice }" pattern="#,###"/>원</span>
                                         </span>
                                     </a>
                                 </div>

@@ -11,7 +11,7 @@
 			location.href="<c:url value='/cart/cartAdd?pdNo=${param.pdNo}'/>"; 
 				
 		}		 
-	 })
+	 });
  });
  </script>
  <!-- =============== Start of Page Header 1 Section =============== -->
@@ -179,7 +179,7 @@
                                 <!-- Start of Product Price -->
                                 <div class="product-price">
                                     <span><del>$39.99</del></span>
-                                    <span class="price">$<fmt:formatNumber value="${vo.pdPrice }" pattern="#,###"/></span>
+                                    <span class="price"><fmt:formatNumber value="${vo.pdPrice }" pattern="#,###"/>원</span>
                                 </div>
                                 <!-- End of Product Price -->
 
@@ -217,7 +217,7 @@
                                 <!-- Start of Nav Tabs -->
                                 <ul class="nav nav-tabs">
                                     <li class="active">
-                                        <a href="#productDescription" data-toggle="tab" aria-expanded="false"><h6>상세설명</h6></a>
+                                        <a href="#productDescription" data-toggle="tab" aria-expanded="false"><h6>상품설명</h6></a>
                                     </li>
 
                                     <li>

@@ -10,12 +10,12 @@ public interface MailboxDAO {
 	int insertMailbox(MailboxVO vo);
 	int selectMsgNo();
 	int insertRecipient(RecipientVO vo);
-	List<Map<String, Object>> selectMsgViewBySender(String msgaddAdser);
-	List<Map<String, Object>> selectMsgViewByRecipient(String msgaddAdser);
-	List<Map<String, Object>> selectMsgViewByStar(String memId);
-	List<Map<String, Object>> selectMsgViewByTrash(String memId);
-	List<Map<String, Object>> selectMsgViewBySpam(String memId);
-	List<Map<String, Object>> selectMsgViewByTemporary(String memId);
+	List<Map<String, Object>> selectMsgViewBySender(Map<String, Object> map);
+	List<Map<String, Object>> selectMsgViewByRecipient(Map<String, Object> map);
+	List<Map<String, Object>> selectMsgViewByStar(Map<String, Object> map);
+	List<Map<String, Object>> selectMsgViewByTrash(Map<String, Object> map);
+	List<Map<String, Object>> selectMsgViewBySpam(Map<String, Object> map);
+	List<Map<String, Object>> selectMsgViewByTemporary(Map<String, Object> map);
 	Map<String, Object> selectByMsgAddNo(int msgaddNo);
 	int insertMailboxAtc(MailboxAtcVO mailboxAtcVo);
 	int findReceivedNo(String msgaddAdsee);
@@ -30,4 +30,10 @@ public interface MailboxDAO {
 	int delTemporaryMail(int msgaddNo);
 	List<MailboxAtcVO> selectMsgAtcByMsgNo(int msgNo);
 	int updateMsgaddDate(int msgaddNo);
+	int getRecipientCount(Map<String, Object> map);
+	int getSenderCount(Map<String, Object> map);
+	int getStarCount(Map<String, Object> map);
+	int getTrashCount(Map<String, Object> map);
+	int getSpamCount(Map<String, Object> map);
+	int getTemporaryCount(Map<String, Object> map);
 }

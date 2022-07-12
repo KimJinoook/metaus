@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <!DOCTYPE html>
 <!-- ======== Start of Main Menu ======== -->
 <div class="col-md-10 col-sm-6 col-xs-4 nopadding">
@@ -20,14 +21,14 @@
             <li class="mobile-title">
                 <h4>main menu</h4></li>
 
-            
-
             <!-- Simple Menu Item -->
             <li class="dropdown simple-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">기업 찾기<i class="fa fa-angle-down"></i></a>
                 <ul class="dropdown-menu" role="menu">
                     <li><a href="<c:url value='/request/search'/>">기업 의뢰 게시판</a></li>
+                    <c:if test="${ 'company' eq sessionScope.isLogin }">
                     <li><a href="<c:url value='/request/post'/>">의뢰 등록</a></li>
+                    </c:if>
                 </ul>
             </li>
 
@@ -62,8 +63,7 @@
 
                                 <ul class="col-md-4">
                                     <li class="menu-title">실시간 채팅</li>
-                                    <li><a href="<c:url value='/chatting/Chatting'/>">일반회원 채팅</a></li>
-                                    <li><a href="<c:url value='/chatting/Chatting'/>">기업회원 채팅</a></li>
+                                    <li><a href="<c:url value='/chatting/Chatting'/>">실시간 채팅</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -125,13 +125,20 @@
 	                     <li class="dropdown-submenu">                               
 	                         <a href="<c:url value='/ModifyInfo/UpdateInfo'/>">내 정보 변경</a>                                      
 	                     </li>
+	                     
+	                     <c:if test="${ 'company' ne sessionScope.isLogin }">
 	                     <li class="dropdown-submenu">                               
 	                         <a href="<c:url value='/cart/cart'/>">장바구니</a>                                      
 	                     </li>
+	                     </c:if>
+	                     
+	                     <c:if test="${ 'company' ne sessionScope.isLogin }">
 	                     <li class="dropdown-submenu">                               
 	                         <a href="<c:url value='/resume/resumeDetail'/>">이력서</a>                                      
 	                     </li>
+	                     </c:if>
 	
+						 <c:if test="${ 'company' ne sessionScope.isLogin }">
 	                     <!-- Dropdown Submenu -->
 	                     <li class="dropdown-submenu">
 	                         <a href="#">의뢰<i class="fa fa-angle-right"></i></a>
@@ -140,16 +147,24 @@
 	                             <li><a href="<c:url value='/commission/progressSchedule'/>">의뢰진행상황</a></li>
 	                         </ul>
 	                     </li>
-	
+	                     </c:if>
+						 <c:if test="${ 'company' eq sessionScope.isLogin }">
 	                     <!-- Dropdown Submenu -->
 	                     <li class="dropdown-submenu">
-	                         <a href="#">메세지<i class="fa fa-angle-right"></i></a>
+	                         <a href="#">의뢰<i class="fa fa-angle-right"></i></a>
 	                         <ul class="dropdown-menu">
-	                             <li><a href="<c:url value='/mailbox/mailbox'/>">메세지 목록</a></li>
-	                             <li><a href="<c:url value='/mailbox/compose'/>">메세지 작성</a></li>
+	                             <li><a href="<c:url value='/commission/commissionList'/>">의뢰목록</a></li>
+	                             <li><a href="<c:url value='/commission/progressSchedule'/>">의뢰진행상황</a></li>
 	                         </ul>
 	                     </li>
+	                     </c:if>
+						 
+	                     <!-- Dropdown Submenu -->
+	                     <li class="dropdown-submenu">
+	                         <a href="<c:url value='/mailbox/mailbox'/>">메세지</a>
+	                     </li>
 	
+						 <c:if test="${ 'company' ne sessionScope.isLogin }">
 	                     <!-- Dropdown Submenu -->
 	                     <li class="dropdown-submenu">
 	                         <a href="#">3D모델<i class="fa fa-angle-right"></i></a>
@@ -158,6 +173,7 @@
 	                             <li><a href="<c:url value='/lecture/salesChart'/>">모델매출</a></li>
 	                         </ul>
 	                     </li>
+	                     </c:if>
 	                 </ul>
 	             </li>
 			 </c:if>

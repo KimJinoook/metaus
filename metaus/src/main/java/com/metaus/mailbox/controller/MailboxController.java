@@ -27,6 +27,8 @@ import org.springframework.web.servlet.support.RequestContextUtils;
 
 import com.metaus.common.ConstUtil;
 import com.metaus.common.FileUploadUtil;
+import com.metaus.common.PaginationInfo;
+import com.metaus.common.SearchVO;
 import com.metaus.mailbox.model.MailboxAtcVO;
 import com.metaus.mailbox.model.MailboxDAO;
 import com.metaus.mailbox.model.MailboxService;
@@ -81,9 +83,21 @@ public class MailboxController {
 		logger.info("임시저장 메세지 삭제 결과, cnt={}", cnt);
 		
 		//새 메세지 전송 처리
-		String memId=(String) session.getAttribute("memId");
+		/*String memId=(String) session.getAttribute("memId");
+		
 		logger.info("memId={}", memId);
-		vo.setMsgaddAdser(memId);
+		vo.setMsgaddAdser(memId);*/
+		
+		String user = "";
+		String isLogin = (String) session.getAttribute("isLogin");
+		if(isLogin.equals("member")) {
+			user = (String) session.getAttribute("memId");
+		}else {
+			user = (String) session.getAttribute("comId");
+		}
+		
+		logger.info("user={}", user);
+		vo.setMsgaddAdser(user);
 		
 		logger.info("메세지 전송 처리, 파라미터 vo={}, msgaddAdsee={}, temporaryFlag={}", vo, msgaddAdsee, temporaryFlag);
 		
@@ -138,92 +152,241 @@ public class MailboxController {
 		return "redirect:/mailbox/receivedMail";
 	}
 	
+	public PaginationInfo getPagingInfo(String sCurrentPage, int totalRecord) {
+		SearchVO searchVo = new SearchVO();
+		int currentPage =Integer.parseInt(sCurrentPage);
+		searchVo.setCurrentPage(currentPage);
+		
+		//[1] PaginationInfo 생성
+		PaginationInfo pagingInfo = new PaginationInfo();
+		pagingInfo.setBlockSize(ConstUtil.BLOCKSIZE);
+		pagingInfo.setRecordCountPerPage(ConstUtil.MESSEAGE_RECORD_COUNT);
+		pagingInfo.setCurrentPage(searchVo.getCurrentPage());
+
+		//[2] searchVo에 페이징 처리 관련 변수의 값 셋팅
+		searchVo.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
+		searchVo.setRecordCountPerPage(ConstUtil.RECORD_COUNT);
+
+		//totalRecord개수 구하기
+		logger.info("글목록 totalRecord={}", totalRecord);
+
+		pagingInfo.setTotalRecord(totalRecord);
+		
+		return pagingInfo;
+	}
+	
 	@RequestMapping("/receivedMail")
-	public String receivedMail(HttpSession session, ModelMap model) {
-		String memId=(String) session.getAttribute("memId");
+	public String receivedMail(HttpSession session
+			, @RequestParam(required = false) String searchKeyword
+			, @RequestParam(defaultValue = "1") String currentPage, ModelMap model) {
+		String memId="";
+		
+		String isLogin = (String) session.getAttribute("isLogin");
+		if(isLogin.equals("member")) {
+			memId = (String) session.getAttribute("memId");
+		}else {
+			memId = (String) session.getAttribute("comId");
+		}
 		logger.info("memId={}", memId);
 		
-		List<Map<String, Object>> list 
-			= mailboxService.selectMsgView(memId, MailboxUtil.MSG_RECEIVED_FLAG);
-		logger.info("메세지 목록 조회, list.size={}", list.size());
+		Map<String, Object> map = new HashMap<>();
+		map.put("memId", memId);
+		map.put("searchKeyword", searchKeyword);
+		
+		int totalRecord = mailboxService.getRecipientCount(map);
+		PaginationInfo pagingInfo = getPagingInfo(currentPage, totalRecord);
+		int firstRecordIndex = pagingInfo.getFirstRecordIndex();
+		int recordCountPerPage = pagingInfo.getRecordCountPerPage();
+		map.put("firstRecordIndex", firstRecordIndex);
+		map.put("recordCountPerPage", recordCountPerPage);
+		
+		List<Map<String, Object>> list
+			= mailboxService.selectMsgView(map, MailboxUtil.MSG_RECEIVED_FLAG);
+		logger.info("받은 메세지 목록 조회, list.size={}", list.size());
 		
 		model.addAttribute("list", list);
 		model.addAttribute("flag", "received");
+		model.addAttribute("pagingInfo", pagingInfo);
 		
 		return "/mailbox/ajaxMailbox";
 	}
 	
 	@RequestMapping("/sentMail")
-	public String sentMail(HttpSession session, ModelMap model) {
-		String memId=(String) session.getAttribute("memId");
+	public String sentMail(HttpSession session
+			, @RequestParam(required = false) String searchKeyword
+			, @RequestParam(defaultValue = "1") String currentPage, ModelMap model) {
+		String memId="";
+		
+		String isLogin = (String) session.getAttribute("isLogin");
+		if(isLogin.equals("member")) {
+			memId = (String) session.getAttribute("memId");
+		}else {
+			memId = (String) session.getAttribute("comId");
+		}
 		logger.info("memId={}", memId);
 		
+		Map<String, Object> map = new HashMap<>();
+		map.put("memId", memId);
+		map.put("searchKeyword", searchKeyword);
+		
+		int totalRecord = mailboxService.getSenderCount(map);
+		PaginationInfo pagingInfo = getPagingInfo(currentPage, totalRecord);
+		int firstRecordIndex = pagingInfo.getFirstRecordIndex();
+		int recordCountPerPage = pagingInfo.getRecordCountPerPage();
+		map.put("firstRecordIndex", firstRecordIndex);
+		map.put("recordCountPerPage", recordCountPerPage);
+		
 		List<Map<String, Object>> list 
-		= mailboxService.selectMsgView(memId, MailboxUtil.MSG_SENT_FLAG);
+		= mailboxService.selectMsgView(map, MailboxUtil.MSG_SENT_FLAG);
 		logger.info("메세지 목록 조회, list.size={}", list.size());
 		
 		model.addAttribute("list", list);
 		model.addAttribute("flag", "sent");
+		model.addAttribute("pagingInfo", pagingInfo);
 		
 		return "/mailbox/ajaxMailbox";
 	}
 	
 	@RequestMapping("/starMail")
-	public String starMail(HttpSession session, ModelMap model) {
-		String memId=(String) session.getAttribute("memId");
+	public String starMail(HttpSession session
+			, @RequestParam(required = false) String searchKeyword
+			, @RequestParam(defaultValue = "1") String currentPage, ModelMap model) {
+		String memId="";
+		
+		String isLogin = (String) session.getAttribute("isLogin");
+		if(isLogin.equals("member")) {
+			memId = (String) session.getAttribute("memId");
+		}else {
+			memId = (String) session.getAttribute("comId");
+		}
 		logger.info("memId={}", memId);
 		
+		Map<String, Object> map = new HashMap<>();
+		map.put("memId", memId);
+		map.put("searchKeyword", searchKeyword);
+		
+		int totalRecord = mailboxService.getStarCount(map);
+		PaginationInfo pagingInfo = getPagingInfo(currentPage, totalRecord);
+		int firstRecordIndex = pagingInfo.getFirstRecordIndex();
+		int recordCountPerPage = pagingInfo.getRecordCountPerPage();
+		map.put("firstRecordIndex", firstRecordIndex);
+		map.put("recordCountPerPage", recordCountPerPage);
+		
 		List<Map<String, Object>> list 
-		= mailboxService.selectMsgView(memId, MailboxUtil.MSG_STAR_FLAG);
+		= mailboxService.selectMsgView(map, MailboxUtil.MSG_STAR_FLAG);
 		logger.info("별표 메세지 목록 조회, list.size={}", list.size());
 		
 		model.addAttribute("list", list);
 		model.addAttribute("flag", "star");
+		model.addAttribute("pagingInfo", pagingInfo);
 		
 		return "/mailbox/ajaxMailbox";
 	}
 	
 	@RequestMapping("/trashMail")
-	public String trashMail(HttpSession session, ModelMap model) {
-		String memId=(String) session.getAttribute("memId");
+	public String trashMail(HttpSession session
+			, @RequestParam(required = false) String searchKeyword
+			, @RequestParam(defaultValue = "1") String currentPage, ModelMap model) {
+		String memId="";
+		
+		String isLogin = (String) session.getAttribute("isLogin");
+		if(isLogin.equals("member")) {
+			memId = (String) session.getAttribute("memId");
+		}else {
+			memId = (String) session.getAttribute("comId");
+		}
 		logger.info("memId={}", memId);
 		
+		Map<String, Object> map = new HashMap<>();
+		map.put("memId", memId);
+		map.put("searchKeyword", searchKeyword);
+		
+		int totalRecord = mailboxService.getTrashCount(map);
+		PaginationInfo pagingInfo = getPagingInfo(currentPage, totalRecord);
+		int firstRecordIndex = pagingInfo.getFirstRecordIndex();
+		int recordCountPerPage = pagingInfo.getRecordCountPerPage();
+		map.put("firstRecordIndex", firstRecordIndex);
+		map.put("recordCountPerPage", recordCountPerPage);
+		
 		List<Map<String, Object>> list 
-		= mailboxService.selectMsgView(memId, MailboxUtil.MSG_TRASH_FLAG);
+		= mailboxService.selectMsgView(map, MailboxUtil.MSG_TRASH_FLAG);
 		logger.info("삭제 메세지 목록 조회, list.size={}", list.size());
 		
 		model.addAttribute("list", list);
 		model.addAttribute("flag", "trash");
+		model.addAttribute("pagingInfo", pagingInfo);
 		
 		return "/mailbox/ajaxMailbox";
 	}
 	
 	@RequestMapping("/spamMail")
-	public String spamMail(HttpSession session, ModelMap model) {
-		String memId=(String) session.getAttribute("memId");
+	public String spamMail(HttpSession session
+			, @RequestParam(required = false) String searchKeyword
+			, @RequestParam(defaultValue = "1") String currentPage, ModelMap model) {
+		String memId="";
+		
+		String isLogin = (String) session.getAttribute("isLogin");
+		if(isLogin.equals("member")) {
+			memId = (String) session.getAttribute("memId");
+		}else {
+			memId = (String) session.getAttribute("comId");
+		}
 		logger.info("memId={}", memId);
 		
+		Map<String, Object> map = new HashMap<>();
+		map.put("memId", memId);
+		map.put("searchKeyword", searchKeyword);
+		
+		int totalRecord = mailboxService.getSpamCount(map);
+		PaginationInfo pagingInfo = getPagingInfo(currentPage, totalRecord);
+		int firstRecordIndex = pagingInfo.getFirstRecordIndex();
+		int recordCountPerPage = pagingInfo.getRecordCountPerPage();
+		map.put("firstRecordIndex", firstRecordIndex);
+		map.put("recordCountPerPage", recordCountPerPage);
+		
 		List<Map<String, Object>> list 
-		= mailboxService.selectMsgView(memId, MailboxUtil.MSG_SPAM_FLAG);
+		= mailboxService.selectMsgView(map, MailboxUtil.MSG_SPAM_FLAG);
 		logger.info("스팸 메세지 목록 조회, list.size={}", list.size());
 		
 		model.addAttribute("list", list);
 		model.addAttribute("flag", "spam");
+		model.addAttribute("pagingInfo", pagingInfo);
 		
 		return "/mailbox/ajaxMailbox";
 	}
 	
 	@RequestMapping("/temporaryMail")
-	public String temporaryMail(HttpSession session, ModelMap model) {
-		String memId=(String) session.getAttribute("memId");
+	public String temporaryMail(HttpSession session
+			, @RequestParam(required = false) String searchKeyword
+			, @RequestParam(defaultValue = "1") String currentPage, ModelMap model) {
+		String memId="";
+		
+		String isLogin = (String) session.getAttribute("isLogin");
+		if(isLogin.equals("member")) {
+			memId = (String) session.getAttribute("memId");
+		}else {
+			memId = (String) session.getAttribute("comId");
+		}
 		logger.info("memId={}", memId);
 		
+		Map<String, Object> map = new HashMap<>();
+		map.put("memId", memId);
+		map.put("searchKeyword", searchKeyword);
+		
+		int totalRecord = mailboxService.getTemporaryCount(map);
+		PaginationInfo pagingInfo = getPagingInfo(currentPage, totalRecord);
+		int firstRecordIndex = pagingInfo.getFirstRecordIndex();
+		int recordCountPerPage = pagingInfo.getRecordCountPerPage();
+		map.put("firstRecordIndex", firstRecordIndex);
+		map.put("recordCountPerPage", recordCountPerPage);
+		
 		List<Map<String, Object>> list 
-		= mailboxService.selectMsgView(memId, MailboxUtil.MSG_TEMPORARY_FLAG);
+		= mailboxService.selectMsgView(map, MailboxUtil.MSG_TEMPORARY_FLAG);
 		logger.info("스팸 메세지 목록 조회, list.size={}", list.size());
 		
 		model.addAttribute("list", list);
 		model.addAttribute("flag", "temporary");
+		model.addAttribute("pagingInfo", pagingInfo);
 		
 		return "/mailbox/ajaxMailbox";
 	}
@@ -243,7 +406,14 @@ public class MailboxController {
 	}
 	
 	public void getMailboxNoModel(HttpSession session, Model model) {
-		String memId=(String) session.getAttribute("memId");
+		String memId="";
+		
+		String isLogin = (String) session.getAttribute("isLogin");
+		if(isLogin.equals("member")) {
+			memId = (String) session.getAttribute("memId");
+		}else {
+			memId = (String) session.getAttribute("comId");
+		}
 		logger.info("memId={}", memId);
 		
 		int receivedNo = mailboxService.findReceivedNo(memId);
@@ -308,6 +478,7 @@ public class MailboxController {
 		
 		model.addAttribute("map", map);
 		model.addAttribute("list", list);
+		model.addAttribute("flag", "temporary");
 		
 		return "/mailbox/ajaxCompose";
 	}
@@ -328,7 +499,14 @@ public class MailboxController {
 	@RequestMapping("/starFlagUpdate")
 	@ResponseBody
 	public int starFlagUpdate(HttpSession session, @RequestParam boolean emptyFlag, @RequestParam String msgaddNo) {
-		String memId=(String) session.getAttribute("memId");
+		String memId="";
+		
+		String isLogin = (String) session.getAttribute("isLogin");
+		if(isLogin.equals("member")) {
+			memId = (String) session.getAttribute("memId");
+		}else {
+			memId = (String) session.getAttribute("comId");
+		}
 		logger.info("별표 메세지 처리 파라미터, msgaddNo={}, emptyFlag={}", msgaddNo, emptyFlag);
 		
 		Map<String, String> map = new HashMap<>();
@@ -408,7 +586,15 @@ public class MailboxController {
 	}
 	
 	public Map<String, Integer> getMailboxNoMap(HttpSession session){
-		String memId = (String) session.getAttribute("memId");
+		String memId="";
+		
+		String isLogin = (String) session.getAttribute("isLogin");
+		if(isLogin.equals("member")) {
+			memId = (String) session.getAttribute("memId");
+		}else {
+			memId = (String) session.getAttribute("comId");
+		}
+		logger.info("memId={}", memId);
 		
 		int receivedNo = mailboxService.findReceivedNo(memId);
 		int sentNo = mailboxService.findSentNo(memId);
@@ -426,5 +612,25 @@ public class MailboxController {
 		map.put("trashNo", trashNo);
 
 		return map;
+	}
+	
+	@RequestMapping("/replyMail")
+	public String replyMail(@RequestParam(defaultValue = "0") int msgaddNo, ModelMap model){
+		Map<String, Object> map = mailboxService.selectByMsgAddNo(msgaddNo);
+		
+		model.addAttribute("map", map);
+		model.addAttribute("flag", "reply");
+		
+		return "/mailbox/ajaxCompose";
+	}
+	
+	@RequestMapping("/shareMail")
+	public String shareMail(@RequestParam(defaultValue = "0") int msgaddNo, ModelMap model){
+		Map<String, Object> map = mailboxService.selectByMsgAddNo(msgaddNo);
+		
+		model.addAttribute("map", map);
+		model.addAttribute("flag", "share");
+		
+		return "/mailbox/ajaxCompose";
 	}
 }
