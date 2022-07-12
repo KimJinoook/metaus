@@ -333,6 +333,8 @@
                                                     <tr class="cart-item">
 
                                                         <!-- Cart Product Thumbnail -->
+                                                        <c:if test="${!empty list }">
+														<c:set var="sum" value="0"/>
                                                         <td class="cart-product-thumbnail">
                                                             <a href="#">
                                                                 <img width="64" height="64" src="images/shop/product1.jpg" alt="">
@@ -358,41 +360,42 @@
                                                         <td class="cart-product-subtotal">
                                                             <span class="amount">$59.98</span>
                                                         </td>
+                                                    </c:if>
                                                     </tr>
                                                     <!-- End of Cart Item 1 -->
-
+													
 
                                                     <!-- Start of Cart Item 2 -->
-                                                    <tr class="cart-item">
+                                                    <!-- <tr class="cart-item">
 
-                                                        <!-- Cart Product Thumbnail -->
+                                                        Cart Product Thumbnail
                                                         <td class="cart-product-thumbnail">
                                                             <a href="#">
                                                                 <img width="64" height="64" src="images/shop/product2.jpg" alt="">
                                                             </a>
                                                         </td>
 
-                                                        <!-- Cart Product Name -->
+                                                        Cart Product Name
                                                         <td class="cart-product-name">
                                                             <a href="#">Cariera Cap</a>
                                                         </td>
 
-                                                        <!-- Cart Product Price -->
+                                                        Cart Product Price
                                                         <td class="cart-product-price">
                                                             <span class="amount">$19.99</span>
                                                         </td>
 
-                                                        <!-- Cart Product Quantity -->
+                                                        Cart Product Quantity
                                                         <td class="cart-product-quantity">
                                                             <span>1</span>
                                                         </td>
 
-                                                        <!-- Cart Subtotal -->
+                                                        Cart Subtotal
                                                         <td class="cart-product-subtotal">
                                                             <span class="amount">$19.99</span>
                                                         </td>
                                                     </tr>
-                                                    <!-- End of Cart Item 2 -->
+ -->                                                    <!-- End of Cart Item 2 -->
 
                                                 </tbody>
                                             </table>

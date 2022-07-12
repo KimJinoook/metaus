@@ -41,13 +41,13 @@ public class CartController {
 		List<CartVO> list=cartService.selectCartList(memNo);
 		logger.info("장바구니 목록, 결과 list.size={}", list.size());
 		
-		return "/cart/cart";
+		return "redirect:/cart/cart";
 	}
 	
 	@RequestMapping("/cart")
-	public String cartList(HttpSession session,CartVO vo,Model model) {
+	public String cartList(HttpSession session, CartVO vo, Model model) {
 		int memNo=(int)session.getAttribute("memNo");
-		logger.info("장바구니 목록 조회 파라미터 memNo={}",memNo);
+		logger.info("장바구니 목록 조회 파라미터 vo={}, memNo={}",vo,memNo);
 		
 		List<CartVO> list=cartService.selectCartList(memNo);
 		logger.info("장바구니 목록, 결과 list.size={}", list.size());
@@ -59,12 +59,34 @@ public class CartController {
 	}
 	
 	@RequestMapping("/checkOut")
-	public String checkOut() {
+	public String checkOut(HttpSession session, CartVO vo, Model model) {
+		int memNo=(int)session.getAttribute("memNo");
+		logger.info("결제화면 조회 파라미터 memno={}",memNo);
+		
+		List<CartVO> list=cartService.selectCartList(memNo);
+		logger.info("장바구니 목록, 결과 list.size={}", list.size());
+		
+		model.addAttribute("list",list);
+		
 		return "/cart/checkOut";
 	}
 	
 	@RequestMapping("/delete")
-	public String cartDel(HttpSession session, Model model ) {
-		return "";
+	public String cartDel(HttpSession session,@RequestParam int pdNo, Model model ) {
+		int memNo=(int)session.getAttribute("memNo");
+		logger.info("장바구니 목록 삭제 파라미터 memNo={}",memNo);
+		
+		int cnt=cartService.deleteCartByMemNo(memNo, pdNo);
+		logger.info("장바구니 목록 삭제 결과 cnt={}",cnt);
+		
+		String msg="삭제 실패했습니다.", url="/cart/cart";
+		if(cnt>0) {
+			msg="삭제되었습니다.";
+		}
+		
+		model.addAttribute("msg",msg);
+		model.addAttribute("url",url);
+		
+		return "/common/message";
 	}
 }
