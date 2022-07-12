@@ -64,7 +64,7 @@
                         
                         <div role="tabpanel" class="tab-pane active" id="personal">
                             <div class="row">
-                            <form method="post" action="<c:url value='/member/memberRegister'/>">
+                            <form method="post" action="<c:url value='/member/memberRegister'/>"  id="registerFrm">
                             	<div class="col-md-4 col-md-offset-3">
 
                                     <!-- Form Group -->
@@ -161,7 +161,7 @@
 
                                     <!-- Form Group -->
                                     <div class="form-group text-center nomargin">
-                                        <button type="submit" id="btnMemSign" class="btn btn-blue btn-effect">회원가입</button>
+                                        <button type="button" id="btnMemSign" class="btn btn-blue btn-effect">회원가입</button>
                                     </div>
 
                                 </div>
@@ -291,9 +291,15 @@
             </div>
         </div>
     </section>
-    <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js?autoload=false"></script>
+<input type="hidden" id="publicKeyModule" value="${sessionScope.publicKeyModulus }">
+<input type="hidden" id="publicKeyExponent" value="${sessionScope.publicKeyExponent }">
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js?autoload=false"></script>
 <script type="text/javascript" src="http://dapi.kakao.com/v2/maps/sdk.js?appkey=48fd685b6c1070cc71f894be6653d843&libraries=services"></script>
 <script type="text/javascript" src="<c:url value='/js/jquery-3.6.0.min.js'/>"></script>
+<script type="text/javascript" src="http://www-cs-students.stanford.edu/~tjw/jsbn/jsbn.js"></script>        
+<script type="text/javascript" src="http://www-cs-students.stanford.edu/~tjw/jsbn/rsa.js"></script>        
+<script type="text/javascript" src="http://www-cs-students.stanford.edu/~tjw/jsbn/prng4.js"></script>        
+<script type="text/javascript" src="http://www-cs-students.stanford.edu/~tjw/jsbn/rng.js"></script>
 <script type="text/javascript">
 	var timer = null;
 	var isRunning = false;
@@ -301,6 +307,18 @@
 	$(function() {
 		/** 일반회원 유효성검사*/
 		$('#btnMemSign').click(function() {
+			/* var inputText = $('#memPw').val();
+			
+			var rsaPkModule = $('#publicKeyModule').val();
+			var rsaPkExponent = $('#publicKeyExponent').val();
+			
+			var rsa = new RSAKey();
+			rsa.setPublic(rsaPkModule,rsaPkExponent);
+			
+			var securedPw = rsa.encrypt(inputText);
+			$('#memPw').val(securedPw);
+			$('#registerFrm').submit(); */
+			
 			if ($('#ismailcodeCheck').val() != 'Y'){
 				alert("이메일 인증이 필요합니다.");
 				event.preventDefault();
@@ -332,7 +350,7 @@
 			}else if(!validate_tel($('#memTel').val())){
 				alert("휴대전화는 숫자만 입력해주세요.");
 				$('#memTel').focus();
-				event.preventDefault();				
+				event.preventDefault();
 			}
 		});
 		
