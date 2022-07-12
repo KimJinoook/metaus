@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ include file="../inc/header.jsp"%> 
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+    
     <!-- =============== Start of Page Header 1 Section =============== -->
     <section class="page-header" style="margin-top: 150px;">
         <div class="container">
@@ -315,53 +318,55 @@
                                     <!-- Start of Cart Table -->
                                     <div class="col-md-12 mt20">
                                         <div class="table-responsive">
-
                                             <table class="table cart">
                                                 <thead>
                                                     <tr>
                                                         <th class="cart-product-thumbnail">&nbsp;</th>
-                                                        <th class="cart-product-name">Product</th>
-                                                        <th class="cart-product-price">Unit Price</th>
-                                                        <th class="cart-product-quantity">Quantity</th>
-                                                        <th class="cart-product-subtotal">Total</th>
+                                                        <th class="cart-product-name">상품 목록</th>
+                                                        <th class="cart-product-price">상품 가격</th>
+                                                        <!-- <th class="cart-product-quantity">Quantity</th> -->
+                                                        <th class="cart-product-subtotal">합계</th>
                                                     </tr>
                                                 </thead>
 
                                                 <tbody>
 
                                                     <!-- Start of Cart Item 1 -->
+														<!--반복 시작 -->
+													<c:set var="sum" value="0"/>
+													<c:forEach var="vo" items="${list }">
                                                     <tr class="cart-item">
 
                                                         <!-- Cart Product Thumbnail -->
-                                                        <c:if test="${!empty list }">
-														<c:set var="sum" value="0"/>
                                                         <td class="cart-product-thumbnail">
-                                                            <a href="#">
-                                                                <img width="64" height="64" src="images/shop/product1.jpg" alt="">
+                                                            <a href="<c:url value='/pd/pdDetail?pdNo=${vo.pdNo }'/>">
+                                                                <img width="75" height="50" src="<c:url value='/images/cartimg.jpg'/>" alt="">
                                                             </a>
                                                         </td>
 
                                                         <!-- Cart Product Name -->
                                                         <td class="cart-product-name">
-                                                            <a href="#">Cariera T-Shirt</a>
+                                                            <a href="<c:url value='/pd/pdDetail?pdNo=${vo.pdNo }'/>">${vo.pdName }</a>
                                                         </td>
 
                                                         <!-- Cart Product Price -->
                                                         <td class="cart-product-price">
-                                                            <span class="amount">$29.99</span>
+                                                            <span class="amount"><fmt:formatNumber value="${vo.pdPrice }" pattern="#,###"/>원</span>
                                                         </td>
 
                                                         <!-- Cart Product Quantity -->
-                                                        <td class="cart-product-quantity">
+                                                        <!-- <td class="cart-product-quantity">
                                                             <span>2</span>
-                                                        </td>
+                                                        </td> -->
 
                                                         <!-- Cart Subtotal -->
                                                         <td class="cart-product-subtotal">
-                                                            <span class="amount">$59.98</span>
+                                                            <span class="amount"><fmt:formatNumber value="${vo.pdPrice }" pattern="#,###"/>원</span>
                                                         </td>
-                                                    </c:if>
+                                                    
                                                     </tr>
+                                                   <c:set var="sum" value="${sum+vo.pdPrice }"/>
+                                                   </c:forEach>
                                                     <!-- End of Cart Item 1 -->
 													
 
@@ -408,41 +413,41 @@
                                     <!-- Start of Cart Total -->
                                     <div class="col-md-12 cart-total clearfix mt20">
                                         <div class="table-responsive">
-                                            <h4 class="pb30">Cart Totals</h4>
+                                            <h4 class="pb30">장바구니 합계</h4>
 
                                             <!-- Start of Table -->
                                             <table class="table">
                                                 <tbody>
                                                     <!-- Start of Table Row -->
                                                     <tr>
-                                                        <td class="cart-product-name">
+                                                        <!-- <td class="cart-product-name">
                                                             <strong>Cart Subtotal</strong>
                                                         </td>
                                                         <td class="cart-product-name">
                                                             <span class="amount">$79.97</span>
-                                                        </td>
+                                                        </td> -->
                                                     </tr>
 
                                                     <!-- Start of Table Row -->
                                                     <tr>
-                                                        <td class="cart-product-name">
+                                                        <!-- <td class="cart-product-name">
                                                             <strong>Shipping</strong>
                                                         </td>
 
                                                         <td class="cart-product-name">
                                                             <span class="amount">Free Delivery</span>
-                                                        </td>
+                                                        </td> -->
                                                     </tr>
 
                                                     <!-- Start of Table Row -->
                                                     <tr>
-                                                        <td class="cart-product-name">
-                                                            <strong>Total</strong>
+                                                        <td class="cart-product-name" style="text-align: center;">
+                                                            <strong>합계</strong>
                                                         </td>
 
-                                                        <td class="cart-product-name">
-                                                            <span class="amount text-blue lead">
-                                                    <strong>$79.97</strong>
+                                                        <td class="cart-product-name" style="text-align: center;">
+                                                            <span class="amount text-blue lead" >
+                                                    <strong>${sum }원</strong>
                                                 </span>
                                                         </td>
                                                     </tr>
@@ -456,7 +461,7 @@
 
                                     <!-- Start of Form Div -->
                                     <div class="col-md-12 mtb20">
-                                        <h4 class="pb20">Payment</h4>
+                                        <h4 class="pb20">결제 방법</h4>
 
                                         <!-- Start of Form -->
                                         <form action="#" method="post">
@@ -465,8 +470,8 @@
                                             <div class="row">
                                                 <div class="col-md-12">
 
-                                                    <input type="checkbox" checked="checked" id="bank">
-                                                    <label for="bank">Direct Bank Transfer</label>
+                                                    <input type="checkbox" id="bank">
+                                                    <label for="bank">카드결제</label>
 
                                                 </div>
                                             </div>
@@ -474,23 +479,23 @@
 
                                             <!-- Start of Row -->
                                             <div class="row">
-                                                <div class="col-md-12">
+                                                <!-- <div class="col-md-12">
 
                                                     <input type="checkbox" id="cheque">
                                                     <label for="cheque">Cheque Payment</label>
 
-                                                </div>
+                                                </div> -->
                                             </div>
                                             <!-- End of Row -->
 
                                             <!-- Start of Row -->
                                             <div class="row">
-                                                <div class="col-md-12">
+                                                <!-- <div class="col-md-12">
 
                                                     <input type="checkbox" id="paypal">
                                                     <label for="paypal">PayPal</label>
 
-                                                </div>
+                                                </div> -->
                                             </div>
                                             <!-- End of Row -->
 
@@ -510,7 +515,7 @@
                     <!-- End of Panel Group -->
 
                     <div class="col-md-12 text-right" style="">
-                        <input type="submit" value="Place Order" name="proceed" class="btn btn-blue btn-effect">
+                        <input type="submit" value="결제 하기" name="proceed" id="checkOut" class="btn btn-blue btn-effect">
                     </div>
 
                 </div>
@@ -520,19 +525,19 @@
                 <!-- Start of Cart Total -->
                 <div class="col-md-3 clearfix cart-total" style="width: 40%">
                     <div class="table-responsive">
-                        <h4 class="pb30">Cart Totals</h4>
+                        <h4 class="pb30">장바구니 합계</h4>
 
                         <!-- Start of Table -->
                         <table class="table">
                             <tbody>
                                 <!-- Start of Table Row -->
                                 <tr>
-                                    <td class="cart-product-name">
+                                    <!-- <td class="cart-product-name">
                                         <strong>Cart Subtotal</strong>
                                     </td>
                                     <td class="cart-product-name">
                                         <span class="amount">$79.97</span>
-                                    </td>
+                                    </td> -->
                                 </tr>
 
                                 <!-- Start of Table Row -->
@@ -549,12 +554,12 @@
                                 <!-- Start of Table Row -->
                                 <tr>
                                     <td class="cart-product-name">
-                                        <strong>Total</strong>
+                                        <strong>합계</strong>
                                     </td>
 
-                                    <td class="cart-product-name">
+                                    <td class="cart-product-name" style="text-align: center;">
                                         <span class="amount text-blue lead">
-                                            <strong>$79.97</strong>
+                                            <strong>${sum }원</strong>
                                         </span>
                                     </td>
                                 </tr>
@@ -570,4 +575,55 @@
         </div>
     </section>
     <!-- ===== End of Shop Check Out Section ===== -->
+<script type="text/javascript">
+	$(function(){
+		$('#checkOut').click(function(){
+	         if(!$('#bank').is(':checked')){
+	            alert('결제 방식을 체크해주세요.');
+	            $('#bank').focus();
+	            event.preventDefault();
+	         }else{
+	        	 var IMP = window.IMP; // 생략가능
+	     		IMP.init('imp60165917'); 
+	     		// i'mport 관리자 페이지 -> 내정보 -> 가맹점식별코드
+	     		// ''안에 띄어쓰기 없이 가맹점 식별코드를 붙여넣어주세요. 안그러면 결제창이 안뜹니다.
+	     		IMP.request_pay({
+	     			pg: 'kakao',
+	     			pay_method: 'card',
+	     			merchant_uid: 'merchant_' + new Date().getTime(),
+	     			/* 
+	     			 *  merchant_uid에 경우 
+	     			 *  https://docs.iamport.kr/implementation/payment
+	     			 *  위에 url에 따라가시면 넣을 수 있는 방법이 있습니다.
+	     			 */
+	     			name: '주문명 : +이름추가+',
+	     			// 결제창에서 보여질 이름
+	     			// name: '주문명 : ${auction.a_title}',
+	     			// 위와같이 model에 담은 정보를 넣어 쓸수도 있습니다.
+	     			amount: ${sum},
+	     			// amount: ${bid.b_bid},
+	     			// 가격 
+	     			buyer_name: '이름',
+	     			// 구매자 이름, 구매자 정보도 model값으로 바꿀 수 있습니다.
+	     			// 구매자 정보에 여러가지도 있으므로, 자세한 내용은 맨 위 링크를 참고해주세요.
+	     			buyer_postcode: '123-456',
+	     			}, function (rsp) {
+	     				console.log(rsp);
+	     			if (rsp.success) {
+	     				var msg = '결제가 완료되었습니다.';
+	     				msg += '결제 금액 : ' + rsp.paid_amount;
+	     				location.href="<c:url value=''/>";
+	     				// success.submit();
+	     				// 결제 성공 시 정보를 넘겨줘야한다면 body에 form을 만든 뒤 위의 코드를 사용하는 방법이 있습니다.
+	     				// 자세한 설명은 구글링으로 보시는게 좋습니다.
+	     			} else {
+	     				var msg = '결제에 실패하였습니다.';
+	     				msg += '에러내용 : ' + rsp.error_msg;
+	     			}
+	     			alert(msg);
+	     		});
+	         }
+	      });
+	});
+</script>
     <%@ include file="../inc/footer.jsp"%>
