@@ -13,11 +13,7 @@
 			<!-- 1st Footer Column -->
 			-
 			<div class="col-md-3 col-sm-6 col-xs-6 footer-about">
-
-				<!-- Your Logo Here -->
-				<a href="index.html"> <img src="/images/logo-white.svg" alt="">
-				</a>
-
+				<h3>찾아오시는 길</h3>
 				<!-- Small Description -->
 				<div id="map" style="width:100%;height:200px;"></div>
 					<script type="text/javascript"
@@ -63,14 +59,14 @@
 				<!-- Info -->
 				<ul class="nopadding">
 					<li><i class="fa fa-map-marker"></i>서울특별시 서대문구, 104-48</li>
-					<li><i class="fa fa-phone"></i>(대표) 010 3084 3045</li>
+					<li><i class="fa fa-phone"></i>(대표) 010-3084-3045</li>
 					<li><i class="fa fa-envelope-o"></i>kimjin0132@naver.com</li>
 				</ul>
 			</div>
 
 			<!-- 2nd Footer Column -->
 			<div class="col-md-3 col-sm-6 col-xs-6 footer-links">
-				<h3>useful links</h3>
+				<h3>메타어스 링크</h3>
 
 				<!-- Links -->
 				<ul class="nopadding">
@@ -93,7 +89,7 @@
 
 			<!-- 3rd Footer Column -->
 			<div class="col-md-3 col-sm-6 col-xs-6 footer-posts">
-				<h3>popular posts</h3>
+				<h3>인기 글</h3>
 
 				<!-- Single Post 1 -->
 				<div class="footer-blog-post">
@@ -112,92 +108,31 @@
 					</div>
 				</div>
 
-				<!-- Single Post 2 -->
+			</div>
+
+						<!-- 3rd Footer Column -->
+			<div class="col-md-3 col-sm-6 col-xs-6 footer-posts">
+				<h3>인기 글</h3>
+
+				<!-- Single Post 1 -->
 				<div class="footer-blog-post">
 
 					<!-- Thumbnail -->
 					<div class="thumbnail-post">
 						<a href="blog-post-right-sidebar.html"> <img
-							src="images/blog/blog2.jpg" alt="">
+							src="images/blog/blog1.jpg" alt="">
 						</a>
 					</div>
 
 					<!-- Link -->
 					<div class="post-info">
-						<a href="blog-post-right-sidebar.html">blog post 2</a> <span>2
+						<a href="blog-post-right-sidebar.html">blog post 1</a> <span>1
 							day ago</span>
 					</div>
 				</div>
 
-				<!-- Single Post 3 -->
-				<div class="footer-blog-post">
-
-					<!-- Thumbnail -->
-					<div class="thumbnail-post">
-						<a href="blog-post-right-sidebar.html"> <img
-							src="images/blog/blog3.jpg" alt="">
-						</a>
-					</div>
-
-					<!-- Link -->
-					<div class="post-info">
-						<a href="blog-post-right-sidebar.html">blog post 3</a> <span>4
-							day ago</span>
-					</div>
-				</div>
 			</div>
 
-			<!-- 4th Footer Column -->
-			<div class="col-md-3 col-sm-6 col-xs-6 footer-newsletter">
-				<h3>newsletter</h3>
-				<p>Lorem Ipsum is simply dummy text of the printing and
-					typesetting industry. Lorem Ipsum has been the industry's standard
-					dummy text ever since the 1500s.</p>
-
-				<!-- Subscribe Form -->
-				<form action="#" class="form-inline mailchimp mtb30" novalidate>
-
-					<!-- Form -->
-					<div class="form-group">
-						<div class="input-group">
-							<input type="email" name="EMAIL" class="form-control"
-								id="mc-email" placeholder="Your Email" autocomplete="off">
-							<label for="mc-email"></label>
-							<button type="submit" class="btn btn-blue btn-effect">Submit</button>
-						</div>
-					</div>
-				</form>
-
-				<!-- Start of Live Chat -->
-				<div class="footer-chat row nomargin">
-
-					<!-- Supporter Image -->
-					<div class="col-md-4">
-						<div class="supporter-image">
-							<img src="images/clients/client4.jpg" alt="">
-						</div>
-					</div>
-
-					<!-- Chat details -->
-					<div class="col-md-8">
-						<div class="chat-details">
-							<span>Helpline Center</span>
-
-							<p class="pt10 nomargin">
-								Chat Live now! <br>Hello, my name is John Doe, how may i
-								help you?
-							</p>
-
-							<!-- Live Chat Link -->
-							<div class="text-right pt15">
-								<a href="#"><i class="fa fa-comments-o"></i>Live Chat</a>
-							</div>
-
-						</div>
-					</div>
-				</div>
-				<!-- End of Live Chat -->
-			</div>
 
 		</div>
 	</div>
@@ -209,7 +144,7 @@
 		<div class="container">
 
 			<div class="col-md-6 col-sm-6 col-xs-12">
-				<span>Copyright &copy; <a href="#">cariera</a>. All Rights
+				<span>Copyright &copy; <a href="#">metaus</a>. All Rights
 					Reserved
 				</span>
 			</div>
