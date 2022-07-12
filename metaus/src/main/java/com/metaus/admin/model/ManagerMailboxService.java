@@ -3,6 +3,8 @@ package com.metaus.admin.model;
 import java.util.List;
 import java.util.Map;
 
+import com.metaus.mailbox.model.MailboxAtcVO;
+
 public interface ManagerMailboxService {
 	int insertMailbox(ManagerMailboxVO vo);
 	int selectMsgNo();
@@ -20,4 +22,5 @@ public interface ManagerMailboxService {
 	int updateTrashFlag(Map<String, String> map);
 	int updateSpamFlag(Map<String, String> map);
 	int delTemporaryMail(int msgaddNo);
+	List<MailboxAtcVO> selectMsgAtcByMsgNo(int msgNo);
 }

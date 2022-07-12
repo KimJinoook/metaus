@@ -233,4 +233,22 @@
 	<delete id="delTemporaryMail" parameterType="int">
 		delete fp_msgadd where msgadd_no=#{msgaddNo}
 	</delete>
+	
+	<!-- selectMsgAtcByMsgNo -->
+	<resultMap id="getMsgAtcByMsgNo" type="HashMap">
+		<result property="MFILE_FILENAME" column="MFILE_FILENAME" jdbcType="CLOB" javaType="java.lang.String" />
+		<result property="MFILE_ORIGINNAME" column="MFILE_ORIGINNAME" jdbcType="CLOB" javaType="java.lang.String" />
+		<result property="MFILE_FILESIZE" column="MFILE_FILESIZE" jdbcType="CLOB" javaType="java.lang.String" />
+	</resultMap>
+	<select id="selectMsgAtcByMsgNo" parameterType="int" resultMap="getMsgAtcByMsgNo">
+		select * from fp_msgatc
+		where msg_no=#{msgNo}
+	</select>
+	
+	<!-- updateMsgaddDate -->
+	<update id="updateMsgaddDate" parameterType="int">
+		update fp_msgadd
+		set msgadd_date = sysdate
+		where msgadd_no=${msgaddNo}
+	</update>
 </mapper>

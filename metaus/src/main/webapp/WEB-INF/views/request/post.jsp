@@ -48,7 +48,7 @@
             
            
              
-            <form method="post" action="<c:url value='/request/post'/>" class="post-job-resume mt50">
+            <form method="post" action="<c:url value='/request/post'/>" class="post-job-resume mt50" enctype="multipart/form-data">
 			<input type="hidden" name="comId" value="${comId }">
                 <!-- Start of Job Details -->
              <h3 class="capitalize pb20">의뢰 정보</h3>
@@ -87,8 +87,18 @@
                     
                         <!-- Form Group -->
                         <div class="form-group">
-                            <label>의뢰 설명 <span>(선택사항)</span></label>
+                            <label>의뢰 설명</label>
                             <textarea class="tinymce" name="recContent" id="recContent"></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>주요 요구 사항</label>
+                            <textarea class="tinymce" name="recContent2" id="recContent2"></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>주요 제안 사항</label>
+                            <textarea class="tinymce" name="recContent3" id="recContent3"></textarea>
                         </div>
                         
                         <!-- Form Group -->
@@ -96,6 +106,17 @@
                             <label>페이 <span>(선택사항)</span></label>
                             <input class="form-control" name="recPay" id="recPay" type="text" placeholder='5000$'>
                         </div>
+                        
+                        <div class="form-group">
+                            <label>웹사이트 링크 <span>(선택사항)</span></label>
+                            <input class="form-control" type="text"  name="recWeb" id="recWeb" placeholder='http://your-company-website.com'>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>트위터 링크 <span>(선택사항)</span></label>
+                            <input class="form-control" type="text" name="recTwitter" id="recTwitter" placeholder='http://your-company-website.com'>
+                        </div>
+                        
                         <!-- Form Group -->
                         <div class="form-group">
                             <label>헤더 이미지 <span>(선택사항)</span></label>
@@ -103,7 +124,7 @@
                             <!-- Upload Button -->
                             <div class="upload-file-btn">
                                 <span><i class="fa fa-upload"></i> Upload</span>
-                                <input class="form-control" type="file" name="application_attachment" accept=".jpg,.png,.gif">
+                                <input class="form-control" type="file" id="upfile" name="upfile" accept=".jpg,.png,.gif">
                             </div>
                         </div>
 

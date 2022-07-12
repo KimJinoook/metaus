@@ -66,6 +66,7 @@
                       	<c:forEach var="map" items="${list }">
 	                        <tr>
 	                          <input type="hidden" value="${map['MSGADD_NO']}" class="msgaddNo">
+	                          <input type="hidden" value="${map['MSG_NO']}" class="msgNo">
 	                          <td>
 	                          	<input type="checkbox" />
 	                          </td>
@@ -82,13 +83,26 @@
 		                          	</a>
 		                          </td>
 	                          </c:if>
+	                          <td>
+		                          <c:if test="${flag eq 'sent' && flag ne 'trash' && flag ne 'spam'}">
+		                          	<c:if test="${sessionScope.memId ne map['MSGADD_ADSEE']}">
+		                          		<c:if test="${not empty map['MSGADD_DATE']  }">
+				                        	<i class="fa-solid fa-eye""></i>
+		                          		</c:if>
+		                          		<c:if test="${empty map['MSGADD_DATE']  }">
+				                        	<i class="fa-solid fa-eye-slash" style="color: #ddd;"></i>
+		                          		</c:if>
+		                          	</c:if>
+		                          </c:if>
+	                          </td>
 	                          <td class="mailbox-name">
 	                          	  <c:if test="${flag eq 'trash' || flag eq 'spam'}">&nbsp;</c:if>
 	                          	  <c:if test="${map['TEMPORARY_FLAG'] ne 'Y'}">
-		                          	<a href='<c:url value="/mailbox/mailDetail?msgaddNo=${map['MSGADD_NO']}" />'>
+			                          <!-- <c:url value="/mailbox/readMail?msgaddNo=${map['MSGADD_NO']}" /> -->
+		                          	<a href='#' class="message-detail">
 		                          </c:if>
 		                          <c:if test="${map['TEMPORARY_FLAG'] eq 'Y'}">
-		                          	<a href='<c:url value="/mailbox/compose?msgaddNo=${map['MSGADD_NO']}" />'>
+		                          	<a href='#' class="message-detail-temporary">
 		                          </c:if>
 			                          <c:choose>
 										  <c:when test="${flag eq 'received' || flag eq 'spam'}">
@@ -150,7 +164,32 @@
 								  </c:choose>
 	                          </td>
 	                          <td class="mailbox-attachment"></td>
-	                          <td class="mailbox-date">${map['SEND_DATE']} 5 mins ago</td>
+	                          <td class="mailbox-date">
+	                          	<jsp:useBean id="now" class="java.util.Date" />
+	                          	<fmt:parseNumber value="${map['SEND_DATE'].time}" var="sendDate"/>
+	                          	<fmt:parseNumber value="${now.time }" integerOnly="true" var="today"/>
+	                          	<c:set value="${(today - sendDate) / (1000*60) }" var="timeLag" />
+	                          	<c:choose>
+	                          		<c:when test="${timeLag < 1}">
+	                          			방금전
+	                          		</c:when>
+	                          		<c:when test="${timeLag < 60 && timeLag >=1}">
+		                          		<fmt:parseNumber value="${timeLag }" var="minute" integerOnly="true" />
+		                          		${minute }분전
+	                          		</c:when>
+	                          		<c:when test="${timeLag >= 60 && timeLag < 24*60 }">
+		                          		<fmt:parseNumber value="${timeLag / 60 }" var="hour" integerOnly="true" />
+		                          		${hour }시간전
+	                          		</c:when>
+	                          		<c:when test="${timeLag >= 24*60 && timeLag < 24*60*6 }">
+		                          		<fmt:parseNumber value="${timeLag / (60*24) }" var="day" integerOnly="true" />
+		                          		${day }일전
+	                          		</c:when>
+	                          		<c:otherwise>
+	                          			<fmt:formatDate value="${map['SEND_DATE'] }" dateStyle="full"/>
+	                          		</c:otherwise>
+	                          	</c:choose>
+	                          </td>
 	                        </tr>
                         </c:forEach>
                         <!-- 메세지 목록 반복 끝 -->
@@ -179,7 +218,9 @@
                       <button class="btn btn-default btn-sm"><i class="fa fa-reply"></i></button>
                       <button class="btn btn-default btn-sm"><i class="fa fa-share"></i></button>
                     </div><!-- /.btn-group -->
-                    <button class="btn btn-default btn-sm"><i class="fa fa-refresh"></i></button>
+                    <c:if test="${flag eq 'received'}">
+                    	<button class="btn btn-default btn-sm"><i class="fa fa-refresh"></i></button>
+                    </c:if>
                     <div class="pull-right">
                       1-50/200
                       <div class="btn-group">

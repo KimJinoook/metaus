@@ -61,6 +61,26 @@ public class RequestServiceImpl implements RequestService {
 		return requestDao.requestDelete(recNo);
 	}
 
+	@Override
+	public RequestVO selectByRequestNo(int recNo) {
+		return requestDao.selectByRequestNo(recNo);
+	}
+
+	@Override
+	public RequestAtcVO selectByrecfileNo(int recfileNo) {
+		return requestDao.selectByrecfileNo(recfileNo);
+	}
+
+	@Override
+	public int updateRequest(RequestVO vo) {
+		return requestDao.updateRequest(vo);
+	}
+
+	@Override
+	public int updateRequestAtc(RequestAtcVO requestAtcVo) {
+		return requestDao.updateRequestAtc(requestAtcVo);
+	}
+
 	
 	
 	

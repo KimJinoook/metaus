@@ -20,5 +20,9 @@ public interface RequestService {
 	List<CompanyVO> selectCom();
 	RequestVO selectRequestDetail(int recNo);
 	int requestDelete(int recNo);
+	RequestVO selectByRequestNo(int recNo);
+	RequestAtcVO selectByrecfileNo(int recfileNo);
+	int updateRequest(RequestVO vo);
+	int updateRequestAtc(RequestAtcVO requestAtcVo);
 
 }

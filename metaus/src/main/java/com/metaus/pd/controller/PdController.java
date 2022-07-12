@@ -141,9 +141,9 @@ public class PdController {
 	}
 	
 	@RequestMapping("/best3")
-	public String best(Model model) {
+	public String best(@RequestParam int pdNo ,Model model) {
 		
-		List<PdVO> list=pdService.selectByBuyCnt();
+		List<PdVO> list=pdService.selectByBuyCnt(pdNo);
 		logger.info("카테고리별 판매가 가장 많은 상품 조회, 결과 list.size={}",
 				list.size());
 		
@@ -151,4 +151,5 @@ public class PdController {
 		
 		return "/pd/best3";
 	}
+	
 }

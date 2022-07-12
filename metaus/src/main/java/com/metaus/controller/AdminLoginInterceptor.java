@@ -99,7 +99,7 @@ public class AdminLoginInterceptor extends HandlerInterceptorAdapter{
 			PreparedStatement ps = null;
 			ResultSet rs = null;
 			try {
-				String sql = "select A.*, B.*,(select manager_name from fp_manager C where A.msgadd_adser = C.manager_id) manager_name, (select manager_pic from fp_manager D where A.msgadd_adser = D.manager_id) manager_pic  from fp_msg A join fp_msgadd B on A.msg_no = B.msg_no where B.msgadd_adsee = ? and B.msgadd_date is null";
+				String sql = "select A.*, B.*,(select manager_name from fp_manager C where A.msgadd_adser = C.manager_id) manager_name, (select manager_pic from fp_manager D where A.msgadd_adser = D.manager_id) manager_pic  from fp_msg A join fp_msgadd B on A.msg_no = B.msg_no where B.msgadd_adsee = ? and B.msgadd_date is null and B.temporary_flag = 'N'";
 				
 				ps = con.prepareStatement(sql);
 				ps.setString(1, managerId);

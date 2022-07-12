@@ -27,6 +27,9 @@
     <link href="<c:url value='/admin/css/sb-admin-2.min.css'/>" rel="stylesheet">
     
     
+    <link href="<c:url value='/admin/css/pdlistSlider.css'/>" rel="stylesheet">
+    
+    
     <!-- Bootstrap core JavaScript-->
     <script src="<c:url value='/admin/vendor/jquery/jquery.min.js'/>"></script>
     <script src="<c:url value='/admin/vendor/bootstrap/js/bootstrap.bundle.min.js'/>"></script>
@@ -89,7 +92,6 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="<c:url value='/admin/member/memberList'/>">일반회원 조회</a>
                         <a class="collapse-item" href="<c:url value='/admin/member/cutmemberList'/>">차단 회원 관리</a>
-                        <a class="collapse-item" href="#">공지 발송</a>
                     </div>
                 </div>
             </li>
@@ -124,6 +126,12 @@
                         <a class="collapse-item" href="<c:url value='/admin/member/managerList'/>">관리자 조회</a>
                     </div>
                 </div>
+            </li>
+            
+            <li class="nav-item">
+                <a class="nav-link" href="<c:url value='/admin/mail/sendAll'/>">
+                    <i class="fas fa-mail-bulk"></i>
+                    <span>공지발송</span></a>
             </li>
             
             <!-- Divider -->
@@ -242,7 +250,7 @@
                                 
                                 
                                 
-	                                <a class="dropdown-item d-flex align-items-center" href="#">
+	                                <a class="dropdown-item d-flex align-items-center" href="<c:url value='/admin/mail/mailDetail?msgNo=${vo.msgNo }&msgaddNo=${vo.msgaddNo }'/>">
 	                                    <div class="dropdown-list-image mr-3">
 	                                        <img class="rounded-circle" src="<c:url value='/manager_profile/${vo.managerPic }'/>" alt="..." onerror="this.onerror=null; this.src='<c:url value='/admin/img/undraw_profile.svg'/>'">
 	                                            
@@ -255,15 +263,20 @@
 	                                        
 	                                    </div>
 	                                    <div class="font-weight-bold">
-	                                        <div class="text-truncate">${vo.msgContent }</div>
+	                                        <div class="text-truncate">${vo.msgTitle }</div>
+	                                        <c:if test="${not empty vo.managerName }">
 	                                        <div class="small text-gray-500">${vo.managerName }</div>
+	                                        </c:if>
+	                                        <c:if test="${empty vo.managerName }">
+	                                        <div class="small text-gray-500">${vo.msgaddAdser }</div>
+	                                        </c:if>
 	                                    </div>
 	                                </a>
                                 
                                 
                                 </c:forEach>
                                 <c:if test="${empty sessionScope.navMsg }">
-                                	<a class="dropdown-item align-items-center" href="#">
+                                	<a class="dropdown-item align-items-center" href="<c:url value='/admin/mail/mailList'/>">
 	                                   <div class="text-center">
 	                                    
 	                                        새로운 메세지가 없습니다.
@@ -276,7 +289,7 @@
                                 
                                 
                                
-                                <a class="dropdown-item text-center small text-gray-500" href="#">더보기</a>
+                                <a class="dropdown-item text-center small text-gray-500" href="<c:url value='/admin/mail/mailList'/>">더보기</a>
                             </div>
                         </li>
 

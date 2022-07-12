@@ -104,5 +104,15 @@ public class MailboxServiceImpl implements MailboxService{
 		return mailboxDao.delTemporaryMail(msgaddNo);
 	}
 
+	@Override
+	public List<MailboxAtcVO> selectMsgAtcByMsgNo(int msgNo) {
+		return mailboxDao.selectMsgAtcByMsgNo(msgNo);
+	}
+
+	@Override
+	public int updateMsgaddDate(int msgaddNo) {
+		return mailboxDao.updateMsgaddDate(msgaddNo);
+	}
+
 	
 }

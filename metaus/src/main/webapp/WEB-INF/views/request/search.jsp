@@ -19,7 +19,10 @@
 	});
 </script>
  
-
+<br>
+<br>
+<br>
+<br>
 
     <!-- =============== Start of Page Header 1 Section =============== -->
     <section class="page-header">
@@ -61,7 +64,7 @@
             <form class="job-search-form row" action="<c:url value='/request/search'/>" method="post">
 
                 <!-- Start of keywords input -->
-                <div class="col-md-3 col-sm-12 search-keywords">
+                <div class="col-md-6 col-md-offset-2 col-sm-6 col-sm-offset-2 col-xs-8">
                     <label for="search-keywords">Keywords</label>
                     <input type="text" name="searchKeyword" id="search-keywords"  class="form-control" placeholder="키워드">
                 </div>
@@ -120,7 +123,7 @@
 
                 <div class="col-md-12" id="writeRequest">
                 <a href="<c:url value='/request/post'/>" id="writeRequest" class="btn btn-blue btn-effect" style="float: right;">의뢰 작성</a>
-                    <h4>총 ${totalRecord }건의 의뢰</h4>
+                    <h4></h4>
                     
                 </div>
                 <!-- ===== Start of Job Post Column 1 ===== -->
@@ -132,16 +135,17 @@
                 <c:if test="${!empty reclist }">
                  <c:forEach var="vo" items="${reclist }">
                 <div class="col-md-12 mt20">
-               
+             		<c:forEach var="cvo" items="${comlist }">
+             		<c:if test="${vo.comNo == cvo.comNo }">
                     <div class="item-block shadow-hover">
                         <!-- Start of Job Post Header -->
                         <!-- 반복문 시작 -->
                       
                         <div class="job-post-header clearfix">
-                            <a href="company-page-1.html"><img src="<c:url value='/images/companyProfile/'/>" alt=""></a>
+                            <a href="company-page-1.html"><img src="<c:url value='/images/companyProfile/${cvo.comPic }'/>" alt=""></a>
                             <div>
                                 <a href="<c:url value='/request/detail?recNo=${vo.recNo }'/>"><h4>${vo.recTitle }</h4></a>
-                                <h5><small></small></h5>
+                                <h5><small>${cvo.comName }</small></h5>
                             </div>
 
                             <ul class="pull-right">
@@ -165,7 +169,7 @@
                                 <li>WordPress Theme Development</li>
 
                                 <li>Troubleshooting, testing and maintaining web Themes</li> -->
-                                <a>${vo.recContent }</a>
+                                <a>${vo.recContent3 }</a>
                             </ul>
                         </div>
                         <!-- End of Job Post Body -->
@@ -174,8 +178,7 @@
                         <div class="job-post-footer row" style="height: 50px;">
 
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                <i class="fa fa-map-marker"></i>
-                                <span></span>
+                                <i class="fa fa-user"></i><span>대표자: ${cvo.comCeo }</span>
                             </div>
 
                             <div class="col-md-6 col-sm-6 col-xs-12">
@@ -187,17 +190,21 @@
 
                     </div>
                 </div>
+                </c:if>
+                </c:forEach>
                 </c:forEach>
                 </c:if>
                 <!-- ===== End of Job Post Column 1 ===== -->             
 
                 <!-- Start of Pagination -->
-                <div class="col-md-12 mt10">
-                        <ul class="pagination list-inline text-center">
-                        	<c:if test="${pagingInfo.firstPage>1 }">
+                <div class="col-md-12">
+						<ul class="pagination list-inline text-center">
+							<c:if test="${pagingInfo.firstPage>1 }">
 								<li><a href="#"
-									onclick="boardList(${pagingInfo.firstPage-1})">이전</a></li>
+									onclick="boardList(${pagingInfo.firstPage-1})">prev</a></li>
 							</c:if>
+
+							<!-- [1][2][3][4][5][6][7][8][9][10] -->
 							<c:forEach var="i" begin="${pagingInfo.firstPage }"
 								end="${pagingInfo.lastPage }">
 								<c:if test="${i==pagingInfo.currentPage }">
@@ -210,10 +217,11 @@
 
 							<c:if test="${pagingInfo.lastPage<pagingInfo.totalPage }">
 								<li><a href="#"
-									onclick="boardList(${pagingInfo.lastPage+1})">다음</a></li>
+									onclick="boardList(${pagingInfo.lastPage+1})">Next</a></li>
 							</c:if>
-                        </ul>
-                    </div>
+							<!--  페이지 번호 끝 -->
+						</ul>
+					</div>
                 <!-- End of Pagination -->
                 
 

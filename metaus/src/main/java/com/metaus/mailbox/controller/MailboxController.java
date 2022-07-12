@@ -1,5 +1,6 @@
 package com.metaus.mailbox.controller;
 
+import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.support.RequestContextUtils;
 
@@ -60,12 +62,11 @@ public class MailboxController {
 	}
 	
 	@RequestMapping("/sendMail")
-	public String sendMail(@ModelAttribute MailboxVO vo, @RequestParam(defaultValue = "temporary") String msgaddAdsee 
+	public String sendMail(@ModelAttribute MailboxVO vo, @RequestParam(defaultValue = "temporary") String msgaddAdsee
+			,@RequestParam(defaultValue = "0") int msgaddNo
 			,@RequestParam(defaultValue = "N") String temporaryFlag , HttpServletRequest request, HttpSession session){
-		//test
-		
 		//임시저장 메세지 전송 처리
-		Map<String, ?> flashMap =RequestContextUtils.getInputFlashMap(request);
+		/*Map<String, ?> flashMap =RequestContextUtils.getInputFlashMap(request);
 		
 		if(flashMap!=null) {
 			MailboxVO mailboxVo = (MailboxVO) flashMap.get("mailboxVo");
@@ -74,7 +75,10 @@ public class MailboxController {
 			
 			msgaddAdsee = msgaddAdsee2;
 			vo = mailboxVo;
-		}
+		}*/
+		
+		int cnt=mailboxService.delTemporaryMail(msgaddNo);
+		logger.info("임시저장 메세지 삭제 결과, cnt={}", cnt);
 		
 		//새 메세지 전송 처리
 		String memId=(String) session.getAttribute("memId");
@@ -83,8 +87,8 @@ public class MailboxController {
 		
 		logger.info("메세지 전송 처리, 파라미터 vo={}, msgaddAdsee={}, temporaryFlag={}", vo, msgaddAdsee, temporaryFlag);
 		
-		int cnt=mailboxService.insertMailbox(vo);
-		logger.info("메세지 등록 결과 cnt={}", cnt);
+		int cnt1=mailboxService.insertMailbox(vo);
+		logger.info("메세지 등록 결과 cnt={}", cnt1);
 		
 		//수신자 셋팅
 		RecipientVO recipientVo = new RecipientVO();
@@ -226,6 +230,19 @@ public class MailboxController {
 	
 	@RequestMapping("/mailbox")
 	public String mailNoByFlag(HttpSession session, Model model) {
+		getMailboxNoModel(session, model);
+		
+		return "/mailbox/mailbox";
+	}
+	
+	@RequestMapping("/contentWrapper")
+	public String contentWrapper(HttpSession session, Model model) {
+		getMailboxNoModel(session, model);
+		
+		return "/mailbox/contentWrapper";
+	}
+	
+	public void getMailboxNoModel(HttpSession session, Model model) {
 		String memId=(String) session.getAttribute("memId");
 		logger.info("memId={}", memId);
 		
@@ -253,21 +270,60 @@ public class MailboxController {
 		model.addAttribute("temporaryNo", temporaryNo);
 		model.addAttribute("spamNo", spamNo);
 		model.addAttribute("trashNo", trashNo);
+		model.addAttribute("memId", memId);
 		
-		return "/mailbox/mailbox";
 	}
 	
 	@RequestMapping("/mailDetail")
-	public String mailDetail(@RequestParam(defaultValue = "0") int msgaddNo, ModelMap model) {
-		logger.info("메세지 상세 조회, 매개변수 msgaddNo={}", msgaddNo);
+	public String mailDetail(@RequestParam(defaultValue = "0") int msgaddNo, @RequestParam(defaultValue = "0") int msgNo
+			, ModelMap model) {
+		logger.info("메세지 상세 조회, 매개변수 msgaddNo={}, msgNo={}", msgaddNo, msgNo);
 		
 		Map<String, Object> map = mailboxService.selectByMsgAddNo(msgaddNo);
 		logger.info("메세지 상세 조회 결과, map={}", map);
 		
-		model.addAttribute("map", map);
+		Timestamp msgaddDate = (Timestamp) map.get("MSGADD_DATE");
+		if(msgaddDate == null) {
+			int cnt = mailboxService.updateMsgaddDate(msgaddNo);
+			map = mailboxService.selectByMsgAddNo(msgaddNo);
+			logger.info("메세지 읽은 날짜 업데이트 결과, cnt={}, map={}", cnt, map);
+		}
 		
-		return "/mailbox/readMail";
+		List<MailboxAtcVO> list = mailboxService.selectMsgAtcByMsgNo(msgNo);
+		logger.info("메세지 첨부파일 조회 결과, list.size={}", list.size());
+		
+		model.addAttribute("map", map);
+		model.addAttribute("list", list);
+		
+		return "/mailbox/ajaxReadMail";
 	}
+	
+	@RequestMapping("/selectTemporaryMail")
+	public String selectTemporaryMail(@RequestParam(defaultValue = "0") int msgaddNo
+			, @RequestParam(defaultValue = "0") int msgNo, Model model) {
+		logger.info("임시저장 메세지 상세보기, 파라미터 msgaddNo={}, msgNo={}", msgaddNo, msgNo);
+		
+		Map<String, Object> map = mailboxService.selectByMsgAddNo(msgaddNo);
+		List<MailboxAtcVO> list = mailboxService.selectMsgAtcByMsgNo(msgNo);
+		
+		model.addAttribute("map", map);
+		model.addAttribute("list", list);
+		
+		return "/mailbox/ajaxCompose";
+	}
+	
+	@RequestMapping("/updatDetailTrashFlag")
+	public String mailDetailDelete(@RequestParam String msgaddNo, @RequestParam String trashFlag) {
+		Map<String, String> map = new HashMap<>();
+		map.put("msgaddNo", msgaddNo);
+		map.put("trashFlag", trashFlag);
+		
+		int cnt=mailboxService.updateTrashFlag(map);
+		logger.info("삭제 플래그 업데이트 결과, cnt={}", cnt);
+		
+		return "redirect:/mailbox/contentWrapper";
+	}
+	
 	
 	@RequestMapping("/starFlagUpdate")
 	@ResponseBody
@@ -330,8 +386,9 @@ public class MailboxController {
 	@RequestMapping("/temporaryFlagUpdate")
 	public String temporaryFlagUpdate(RedirectAttributes redirect
 			, @ModelAttribute MailboxVO mailboxVo, @RequestParam(defaultValue = "0") int msgaddNo
+			, @RequestParam(defaultValue = "0") int msgNo
 			, @RequestParam String msgaddAdsee) {
-		logger.info("임시저장 메세지 삭제 파라미터, msgaddNo={}", msgaddNo);
+		logger.info("임시저장 메세지 삭제 파라미터, msgaddNo={}, msgNo={}", msgaddNo, msgNo);
 		logger.info("msgaddAdsee={}", msgaddAdsee);
 		
 		int cnt=mailboxService.delTemporaryMail(msgaddNo);
@@ -341,6 +398,13 @@ public class MailboxController {
 		redirect.addFlashAttribute("msgaddAdsee", msgaddAdsee);
 		
 		return "redirect:/mailbox/sendMail";
+	}
+	
+	@RequestMapping("/updateMailboxNo")
+	@ResponseBody
+	public Map<String, Integer> updateMailboxNo(HttpSession session){
+		Map<String, Integer> map =getMailboxNoMap(session);
+		return map;
 	}
 	
 	public Map<String, Integer> getMailboxNoMap(HttpSession session){
