@@ -22,17 +22,11 @@
 		p.pd_name, p.pd_price
 		from fp_cart c join fp_pd p
 		on c.pd_no=p.pd_no
-		where c.mem_no=#{memNo}
+		and c.mem_no=#{memNo}
 	</select>
-	
-	<select id="totalCartPrice">
-		select sum(pd_price) from fp_pd f join fp_cart c
-		on f.pd_no=c.pd_no
-		where c.mem_no=${memNo}
-	</select>
-	
+		
 	<delete id="deleteCartByMemNo" parameterType="int">
 		delete from fp_cart
-		where mem_no=#{mem_no}		
+		where mem_no=#{memNo} and pd_no=#{pdNo}	
 	</delete>
 </mapper>

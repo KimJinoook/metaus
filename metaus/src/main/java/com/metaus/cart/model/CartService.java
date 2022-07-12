@@ -6,4 +6,5 @@ import java.util.Map;
 public interface CartService {
 	int insertCart(CartVO vo);
 	List<CartVO> selectCartList(int memNo);
+	int deleteCartByMemNo(int memNo, int pdNo);
 }

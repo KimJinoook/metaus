@@ -33,4 +33,9 @@ public class CartServiceimpl implements CartService{
 		return cartDao.selectCartList(memNo);
 	}
 
+	@Override
+	public int deleteCartByMemNo(int memNo, int pdNo) {
+		return cartDao.deleteCartByMemNo(memNo, pdNo);
+	}
+
 }
