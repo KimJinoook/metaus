@@ -141,16 +141,25 @@
           <!-- sidebar menu: : style can be found in sidebar.less -->
           <ul class="sidebar-menu">
             <li class="treeview">
-              <a href="#">
+              <a href="<c:url value='/ModifyInfo/UpdateInfo'/>">
                 <i class="fa-solid fa-pen"></i> <span>내 정보 변경</span>
               </a>
             </li>
-            <li class="treeview">
-              <a href="#">
-                <i class="fa-solid fa-id-badge"></i>&nbsp;
-                <span>이력서</span>
-              </a>
-            </li>
+            <c:if test="${ 'company' ne sessionScope.isLogin }">
+	            <li class="treeview">
+	              <a href="<c:url value='/cart/cart'/>">
+	                <i class="fa-solid fa-cart-shopping"></i> <span>장바구니</span>
+	              </a>
+	            </li>
+            </c:if>
+            <c:if test="${ 'company' ne sessionScope.isLogin }">
+	            <li class="treeview">
+	              <a href="<c:url value='/resume/resumeDetail'/>">
+	                <i class="fa-solid fa-id-badge"></i>&nbsp;
+	                <span>이력서</span>
+	              </a>
+	            </li>
+            </c:if>
             <li class="treeview">
               <a href="#">
                 <i class="fa-solid fa-user-tie"></i>&nbsp;
@@ -165,23 +174,20 @@
             <li class="treeview">
               <a href="#">
                 <i class="fa fa-envelope"></i><span>메세지</span>
-                <i class="fa fa-angle-left pull-right"></i>
               </a>
-              <ul class="treeview-menu">
-                <li><a href="<c:url value='/mailbox/mailbox'/>"><i class="fa fa-circle-o"></i> 메세지 목록</a></li>
-                <li><a href="<c:url value='/mailbox/compose'/>"><i class="fa fa-circle-o"></i> 메세지 작성</a></li>
-              </ul>
             </li>
-            <li class="treeview">
-              <a href="#">
-                <i class="fa-solid fa-cube"></i></i> <span>3D모델</span>
-                <i class="fa fa-angle-left pull-right"></i>
-              </a>
-              <ul class="treeview-menu">
-                <li><a href="<c:url value='/lecture/lectureList'/>"><i class="fa fa-circle-o"></i> 3D모델목록</a></li>
-                <li><a href="<c:url value='/lecture/salesChart'/>"><i class="fa fa-circle-o"></i> 3D모델매출</a></li>
-              </ul>
-            </li>
+            <c:if test="${ 'company' ne sessionScope.isLogin }">
+	            <li class="treeview">
+	              <a href="#">
+	                <i class="fa-solid fa-cube"></i></i> <span>3D모델</span>
+	                <i class="fa fa-angle-left pull-right"></i>
+	              </a>
+	              <ul class="treeview-menu">
+	                <li><a href="<c:url value='/lecture/lectureList'/>"><i class="fa fa-circle-o"></i> 3D모델목록</a></li>
+	                <li><a href="<c:url value='/lecture/salesChart'/>"><i class="fa fa-circle-o"></i> 3D모델매출</a></li>
+	              </ul>
+	            </li>
+            </c:if>
           </ul>
         </section>
         <!-- /.sidebar -->
