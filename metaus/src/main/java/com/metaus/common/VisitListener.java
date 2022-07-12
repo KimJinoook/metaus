@@ -1,5 +1,13 @@
 package com.metaus.common;
 
+import java.security.KeyFactory;
+import java.security.KeyPair;
+import java.security.KeyPairGenerator;
+import java.security.NoSuchAlgorithmException;
+import java.security.PrivateKey;
+import java.security.PublicKey;
+import java.security.spec.InvalidKeySpecException;
+import java.security.spec.RSAPublicKeySpec;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -8,6 +16,7 @@ import java.util.HashMap;
 
 import javax.servlet.ServletContext;
 import javax.servlet.annotation.WebListener;
+import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpSessionEvent;
 import javax.servlet.http.HttpSessionListener;
 
@@ -31,6 +40,36 @@ public class VisitListener implements HttpSessionListener {
 		logger.info("create sessionId={}",e.getSession().getId());
 		int insertVisit = insertVisit();
 		logger.info("insertVisit={}",insertVisit);
+		
+		KeyPairGenerator generator;
+		try {
+			generator = KeyPairGenerator.getInstance("RSA");
+			
+			KeyPair keyPair = generator.genKeyPair();
+			KeyFactory keyFactory = KeyFactory.getInstance("RSA");
+			PublicKey publicKey = keyPair.getPublic();
+			PrivateKey privateKey = keyPair.getPrivate();
+			HttpSession session = e.getSession();
+			
+			// 세션에 공개키의 문자열을 키로하여 개인키를 저장한다.
+			session.setAttribute("__rsaPrivateKey__", privateKey);
+			
+			// 공개키를 문자열로 변환하여 JavaScript RSA 라이브러리 넘겨준다.
+			RSAPublicKeySpec publicSpec = (RSAPublicKeySpec) keyFactory.getKeySpec(publicKey, RSAPublicKeySpec.class);
+			String publicKeyModulus = publicSpec.getModulus().toString(16);
+			String publicKeyExponent = publicSpec.getPublicExponent().toString(16);
+			session.setAttribute("publicKeyModulus", publicKeyModulus);
+			session.setAttribute("publicKeyExponent", publicKeyExponent);
+			logger.info(publicKeyModulus);
+			logger.info(publicKeyExponent);
+		} catch (NoSuchAlgorithmException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (InvalidKeySpecException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
 	}
 	public void sessionDestroyed(HttpSessionEvent e) {
 		activeSession--;

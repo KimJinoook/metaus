@@ -6,11 +6,13 @@
 		$('.remove').click(function(){
 			var res=confirm('삭제하시겠습니까?');
 			if(res===true){
-				location.href=''
+				
 			}else{
 				alert('취소되었습니다.');
+				event.preventDefault();
 			}
 		});
+		
 	});
 </script>
 <!-- =============== Start of Page Header 1 Section =============== -->
@@ -67,15 +69,17 @@
 									<td colspan="5" style="text-align: center;">장바구니가 비었습니다.</td>
 								</tr>		
 							</c:if>
-							<!--반복 시작 -->
+							
 							<c:if test="${!empty list }">
+							<c:set var="sum" value="0"/>
+							<!--반복 시작 -->
 						<c:forEach var="vo" items="${list }">
-	                                <!-- Start of Cart Item 1 -->
+	                         <!-- Start of Cart Item 1 -->
                                 <tr class="cart-item">
 
                                     <!-- Cart Remove Product -->
                                     <td class="cart-product-remove">
-                                        <a href="#" class="remove" title="Remove this item"><i class="fa fa-times"></i></a>
+                                        <a href="<c:url value='/cart/delete?pdNo=${vo.pdNo }'/>" class="remove" title="Remove this item"><i class="fa fa-times"></i></a>
                                     </td>
 
                                     <!-- Cart Product Thumbnail -->
@@ -110,6 +114,7 @@
                                         <span class="amount"><fmt:formatNumber value="${vo.pdPrice }" pattern="#,###"/>원</span>
                                     </td>
                                 </tr>
+                                <c:set var="sum" value="${sum+vo.pdPrice }"/>
                                 </c:forEach>
                                 </c:if>
                                 <!-- End of Cart Item 1 -->
@@ -167,14 +172,14 @@
                                                     <input type="text" value="" class="form-control" placeholder="Enter Coupon Code..">
                                                 </div>
                                                 <div class="col-md-4 col-xs-5">
-                                                    <a href="#" class="btn btn-blue btn-effect">Apply Coupon</a>
+                                                    <a href="#" class="btn btn-blue btn-effect" >Apply Coupon</a>
                                                 </div>
                                             </div>
-
+											<c:if test="${!empty list }">
                                             <div class="col-md-6 col-xs-12 proceed-checkout text-right">
-                                                <a href="<c:url value='/cart/checkOut'/>" class="btn btn-purple btn-effect">Proceed to Checkout</a>
+                                                <a href="<c:url value='/cart/checkOut'/>" class="btn btn-purple btn-effect" id="checkOut">결제 하기</a>
                                             </div>
-
+                                            </c:if>
                                         </div>
                                     </td>
                                 </tr>
@@ -454,19 +459,19 @@
                         <!-- Start of Cart Total -->
                         <div class="col-md-6 clearfix cart-total" style="float: right;">
                             <div class="table-responsive">
-                                <h4 class="pb30">Cart Totals</h4>
+                                <h4 class="pb30">장바구니 합계</h4>
 
                                 <!-- Start of Table -->
                                 <table class="table">
                                     <tbody>
                                         <!-- Start of Table Row -->
                                         <tr>
-                                            <td class="cart-product-name">
+                                             <!-- <td class="cart-product-name">
                                                 <strong>Cart Subtotal</strong>
                                             </td>
                                             <td class="cart-product-name">
                                                 <span class="amount">$79.97</span>
-                                            </td>
+                                            </td> -->
                                         </tr>
 
                                         <!-- Start of Table Row -->
@@ -482,14 +487,21 @@
 
                                         <!-- Start of Table Row -->
                                         <tr>
-                                            <td class="cart-product-name">
-                                                <strong>Total</strong>
+                                            <td class="cart-product-name" style="text-align: center;">
+                                                <strong>합계</strong>
                                             </td>
 
-                                            <td class="cart-product-name">
+                                            <td class="cart-product-name" style="text-align: center;">
+                                                <c:if test="${!empty list }">
                                                 <span class="amount text-blue lead">
-                                                    <strong>${vo.pdPrice }</strong>
+                                                    <strong><fmt:formatNumber value="${sum }" pattern="#,###"/>원</strong>
                                                 </span>
+                                                </c:if>
+                                                <c:if test="${empty list }">
+                                                <span class="amount text-blue lead">
+                                                    <strong>0원</strong>
+                                                </span>
+                                                </c:if>
                                             </td>
                                         </tr>
                                     </tbody>

@@ -81,13 +81,25 @@
 	                          </c:if>
 	                          <td>
 		                          <c:if test="${flag eq 'sent' && flag ne 'trash' && flag ne 'spam'}">
-		                          	<c:if test="${sessionScope.memId ne map['MSGADD_ADSEE']}">
-		                          		<c:if test="${not empty map['MSGADD_DATE']  }">
-				                        	<i class="fa-solid fa-eye"></i>
-		                          		</c:if>
-		                          		<c:if test="${empty map['MSGADD_DATE']  }">
-				                        	<i class="fa-solid fa-eye-slash" style="color: #ddd;"></i>
-		                          		</c:if>
+		                          	<c:if test="${sessionScope.isLogin eq 'member' }">
+		                          		<c:if test="${sessionScope.memId ne map['MSGADD_ADSEE']}">
+			                          		<c:if test="${not empty map['MSGADD_DATE']  }">
+					                        	<i class="fa-solid fa-eye"></i>
+			                          		</c:if>
+			                          		<c:if test="${empty map['MSGADD_DATE']  }">
+					                        	<i class="fa-solid fa-eye-slash" style="color: #ddd;"></i>
+			                          		</c:if>
+			                          	</c:if>
+		                          	</c:if>
+		                          	<c:if test="${sessionScope.isLogin eq 'company' }">
+		                          		<c:if test="${sessionScope.comId ne map['MSGADD_ADSEE']}">
+			                          		<c:if test="${not empty map['MSGADD_DATE']  }">
+					                        	<i class="fa-solid fa-eye"></i>
+			                          		</c:if>
+			                          		<c:if test="${empty map['MSGADD_DATE']  }">
+					                        	<i class="fa-solid fa-eye-slash" style="color: #ddd;"></i>
+			                          		</c:if>
+			                          	</c:if>
 		                          	</c:if>
 		                          </c:if>
 	                          </td>
@@ -103,46 +115,93 @@
 			                          <c:choose>
 										  <c:when test="${flag eq 'received' || flag eq 'spam'}">
 										  	<!-- 받은 메세지일 때 -->
-				                          	<c:if test="${sessionScope.memId eq map['MSGADD_ADSER']}">
-				                          		나
+										  	<c:if test="${sessionScope.isLogin eq 'member' }">
+					                          	<c:if test="${sessionScope.memId eq map['MSGADD_ADSER']}">
+					                          		나
+					                          	</c:if>
+					                          	<c:if test="${sessionScope.memId ne map['MSGADD_ADSER']}">
+					                          		${map['MSGADD_ADSER']}
+					                          	</c:if>
 				                          	</c:if>
-				                          	<c:if test="${sessionScope.memId ne map['MSGADD_ADSER']}">
-				                          		${map['MSGADD_ADSER']}
+										  	<c:if test="${sessionScope.isLogin eq 'company' }">
+					                          	<c:if test="${sessionScope.comId eq map['MSGADD_ADSER']}">
+					                          		나
+					                          	</c:if>
+					                          	<c:if test="${sessionScope.comId ne map['MSGADD_ADSER']}">
+					                          		${map['MSGADD_ADSER']}
+					                          	</c:if>
 				                          	</c:if>
 										  </c:when>
 										  <c:when test="${flag eq 'sent' || flag eq 'temporary'}">
 										  	<!-- 보낸 메세지일 때 -->
-				                          	<c:if test="${sessionScope.memId eq map['MSGADD_ADSEE']}">
-				                          		나
+											<c:if test="${sessionScope.isLogin eq 'member' }">										  	
+					                          	<c:if test="${sessionScope.memId eq map['MSGADD_ADSEE']}">
+					                          		나
+					                          	</c:if>
+					                          	<c:if test="${sessionScope.memId ne map['MSGADD_ADSEE']}">
+					                          		${map['MSGADD_ADSEE']}
+					                          	</c:if>
 				                          	</c:if>
-				                          	<c:if test="${sessionScope.memId ne map['MSGADD_ADSEE']}">
-				                          		${map['MSGADD_ADSEE']}
+											<c:if test="${sessionScope.isLogin eq 'company' }">										  	
+					                          	<c:if test="${sessionScope.comId eq map['MSGADD_ADSEE']}">
+					                          		나
+					                          	</c:if>
+					                          	<c:if test="${sessionScope.comId ne map['MSGADD_ADSEE']}">
+					                          		${map['MSGADD_ADSEE']}
+					                          	</c:if>
 				                          	</c:if>
 										  </c:when>
 										  <c:when test="${flag eq 'star' || flag eq 'trash'}">
 										  	<!-- 별표 메세지일 때 -->
-										  	<!-- 보낸 메세지 -->
-				                          	<c:if test="${sessionScope.memId eq map['MSGADD_ADSER'] && sessionScope.memId ne map['MSGADD_ADSEE']}">
-				                          		<span class="star-message-type">Send</span>
-				                          		<c:if test="${map['TEMPORARY_FLAG'] eq 'Y'}">
-				                          			<span class="temporary-message">Temporary</span>
-				                          		</c:if>
-				                          		${map['MSGADD_ADSEE']}
+										  	<c:if test="${sessionScope.isLogin eq 'member' }">
+											  	<!-- 보낸 메세지 -->
+					                          	<c:if test="${sessionScope.memId eq map['MSGADD_ADSER'] && sessionScope.memId ne map['MSGADD_ADSEE']}">
+					                          		<span class="star-message-type">Send</span>
+					                          		<c:if test="${map['TEMPORARY_FLAG'] eq 'Y'}">
+					                          			<span class="temporary-message">Temporary</span>
+					                          		</c:if>
+					                          		${map['MSGADD_ADSEE']}
+					                          	</c:if>
+					                          	<!-- 받은 메세지 -->
+					                          	<c:if test="${sessionScope.memId eq map['MSGADD_ADSEE'] && sessionScope.memId ne map['MSGADD_ADSER']}">
+					                          		<span class="star-message-type">Receive</span>
+					                          		<c:if test="${map['TRASH_FLAG'] eq 'Y' && map['SPAM_FLAG'] eq 'Y'}">
+					                          			<span class="trash-spam-message">Spam</span>
+					                          		</c:if>
+					                          		${map['MSGADD_ADSER']}
+					                          	</c:if>
+					                          	<!-- 내가 보낸 메세지 -->
+					                          	<c:if test="${sessionScope.memId eq map['MSGADD_ADSEE'] && sessionScope.memId eq map['MSGADD_ADSER']}">
+					                          		<c:if test="${map['TEMPORARY_FLAG'] eq 'Y'}">
+					                          			<span class="temporary-message">Temporary</span>
+					                          		</c:if>
+					                          		나
+					                          	</c:if>
 				                          	</c:if>
-				                          	<!-- 받은 메세지 -->
-				                          	<c:if test="${sessionScope.memId eq map['MSGADD_ADSEE'] && sessionScope.memId ne map['MSGADD_ADSER']}">
-				                          		<span class="star-message-type">Receive</span>
-				                          		<c:if test="${map['TRASH_FLAG'] eq 'Y' && map['SPAM_FLAG'] eq 'Y'}">
-				                          			<span class="trash-spam-message">Spam</span>
-				                          		</c:if>
-				                          		${map['MSGADD_ADSER']}
-				                          	</c:if>
-				                          	<!-- 내가 보낸 메세지 -->
-				                          	<c:if test="${sessionScope.memId eq map['MSGADD_ADSEE'] && sessionScope.memId eq map['MSGADD_ADSER']}">
-				                          		<c:if test="${map['TEMPORARY_FLAG'] eq 'Y'}">
-				                          			<span class="temporary-message">Temporary</span>
-				                          		</c:if>
-				                          		나
+										  	<c:if test="${sessionScope.isLogin eq 'company' }">
+											  	<!-- 보낸 메세지 -->
+					                          	<c:if test="${sessionScope.comId eq map['MSGADD_ADSER'] && sessionScope.comId ne map['MSGADD_ADSEE']}">
+					                          		<span class="star-message-type">Send</span>
+					                          		<c:if test="${map['TEMPORARY_FLAG'] eq 'Y'}">
+					                          			<span class="temporary-message">Temporary</span>
+					                          		</c:if>
+					                          		${map['MSGADD_ADSEE']}
+					                          	</c:if>
+					                          	<!-- 받은 메세지 -->
+					                          	<c:if test="${sessionScope.comId eq map['MSGADD_ADSEE'] && sessionScope.comId ne map['MSGADD_ADSER']}">
+					                          		<span class="star-message-type">Receive</span>
+					                          		<c:if test="${map['TRASH_FLAG'] eq 'Y' && map['SPAM_FLAG'] eq 'Y'}">
+					                          			<span class="trash-spam-message">Spam</span>
+					                          		</c:if>
+					                          		${map['MSGADD_ADSER']}
+					                          	</c:if>
+					                          	<!-- 내가 보낸 메세지 -->
+					                          	<c:if test="${sessionScope.comId eq map['MSGADD_ADSEE'] && sessionScope.comId eq map['MSGADD_ADSER']}">
+					                          		<c:if test="${map['TEMPORARY_FLAG'] eq 'Y'}">
+					                          			<span class="temporary-message">Temporary</span>
+					                          		</c:if>
+					                          		나
+					                          	</c:if>
 				                          	</c:if>
 										  </c:when>
 									  </c:choose>

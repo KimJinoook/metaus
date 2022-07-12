@@ -83,9 +83,21 @@ public class MailboxController {
 		logger.info("임시저장 메세지 삭제 결과, cnt={}", cnt);
 		
 		//새 메세지 전송 처리
-		String memId=(String) session.getAttribute("memId");
+		/*String memId=(String) session.getAttribute("memId");
+		
 		logger.info("memId={}", memId);
-		vo.setMsgaddAdser(memId);
+		vo.setMsgaddAdser(memId);*/
+		
+		String user = "";
+		String isLogin = (String) session.getAttribute("isLogin");
+		if(isLogin.equals("member")) {
+			user = (String) session.getAttribute("memId");
+		}else {
+			user = (String) session.getAttribute("comId");
+		}
+		
+		logger.info("user={}", user);
+		vo.setMsgaddAdser(user);
 		
 		logger.info("메세지 전송 처리, 파라미터 vo={}, msgaddAdsee={}, temporaryFlag={}", vo, msgaddAdsee, temporaryFlag);
 		
@@ -167,7 +179,14 @@ public class MailboxController {
 	public String receivedMail(HttpSession session
 			, @RequestParam(required = false) String searchKeyword
 			, @RequestParam(defaultValue = "1") String currentPage, ModelMap model) {
-		String memId=(String) session.getAttribute("memId");
+		String memId="";
+		
+		String isLogin = (String) session.getAttribute("isLogin");
+		if(isLogin.equals("member")) {
+			memId = (String) session.getAttribute("memId");
+		}else {
+			memId = (String) session.getAttribute("comId");
+		}
 		logger.info("memId={}", memId);
 		
 		Map<String, Object> map = new HashMap<>();
@@ -196,7 +215,14 @@ public class MailboxController {
 	public String sentMail(HttpSession session
 			, @RequestParam(required = false) String searchKeyword
 			, @RequestParam(defaultValue = "1") String currentPage, ModelMap model) {
-		String memId=(String) session.getAttribute("memId");
+		String memId="";
+		
+		String isLogin = (String) session.getAttribute("isLogin");
+		if(isLogin.equals("member")) {
+			memId = (String) session.getAttribute("memId");
+		}else {
+			memId = (String) session.getAttribute("comId");
+		}
 		logger.info("memId={}", memId);
 		
 		Map<String, Object> map = new HashMap<>();
@@ -225,7 +251,14 @@ public class MailboxController {
 	public String starMail(HttpSession session
 			, @RequestParam(required = false) String searchKeyword
 			, @RequestParam(defaultValue = "1") String currentPage, ModelMap model) {
-		String memId=(String) session.getAttribute("memId");
+		String memId="";
+		
+		String isLogin = (String) session.getAttribute("isLogin");
+		if(isLogin.equals("member")) {
+			memId = (String) session.getAttribute("memId");
+		}else {
+			memId = (String) session.getAttribute("comId");
+		}
 		logger.info("memId={}", memId);
 		
 		Map<String, Object> map = new HashMap<>();
@@ -254,7 +287,14 @@ public class MailboxController {
 	public String trashMail(HttpSession session
 			, @RequestParam(required = false) String searchKeyword
 			, @RequestParam(defaultValue = "1") String currentPage, ModelMap model) {
-		String memId=(String) session.getAttribute("memId");
+		String memId="";
+		
+		String isLogin = (String) session.getAttribute("isLogin");
+		if(isLogin.equals("member")) {
+			memId = (String) session.getAttribute("memId");
+		}else {
+			memId = (String) session.getAttribute("comId");
+		}
 		logger.info("memId={}", memId);
 		
 		Map<String, Object> map = new HashMap<>();
@@ -283,7 +323,14 @@ public class MailboxController {
 	public String spamMail(HttpSession session
 			, @RequestParam(required = false) String searchKeyword
 			, @RequestParam(defaultValue = "1") String currentPage, ModelMap model) {
-		String memId=(String) session.getAttribute("memId");
+		String memId="";
+		
+		String isLogin = (String) session.getAttribute("isLogin");
+		if(isLogin.equals("member")) {
+			memId = (String) session.getAttribute("memId");
+		}else {
+			memId = (String) session.getAttribute("comId");
+		}
 		logger.info("memId={}", memId);
 		
 		Map<String, Object> map = new HashMap<>();
@@ -312,7 +359,14 @@ public class MailboxController {
 	public String temporaryMail(HttpSession session
 			, @RequestParam(required = false) String searchKeyword
 			, @RequestParam(defaultValue = "1") String currentPage, ModelMap model) {
-		String memId=(String) session.getAttribute("memId");
+		String memId="";
+		
+		String isLogin = (String) session.getAttribute("isLogin");
+		if(isLogin.equals("member")) {
+			memId = (String) session.getAttribute("memId");
+		}else {
+			memId = (String) session.getAttribute("comId");
+		}
 		logger.info("memId={}", memId);
 		
 		Map<String, Object> map = new HashMap<>();
@@ -352,7 +406,14 @@ public class MailboxController {
 	}
 	
 	public void getMailboxNoModel(HttpSession session, Model model) {
-		String memId=(String) session.getAttribute("memId");
+		String memId="";
+		
+		String isLogin = (String) session.getAttribute("isLogin");
+		if(isLogin.equals("member")) {
+			memId = (String) session.getAttribute("memId");
+		}else {
+			memId = (String) session.getAttribute("comId");
+		}
 		logger.info("memId={}", memId);
 		
 		int receivedNo = mailboxService.findReceivedNo(memId);
@@ -438,7 +499,14 @@ public class MailboxController {
 	@RequestMapping("/starFlagUpdate")
 	@ResponseBody
 	public int starFlagUpdate(HttpSession session, @RequestParam boolean emptyFlag, @RequestParam String msgaddNo) {
-		String memId=(String) session.getAttribute("memId");
+		String memId="";
+		
+		String isLogin = (String) session.getAttribute("isLogin");
+		if(isLogin.equals("member")) {
+			memId = (String) session.getAttribute("memId");
+		}else {
+			memId = (String) session.getAttribute("comId");
+		}
 		logger.info("별표 메세지 처리 파라미터, msgaddNo={}, emptyFlag={}", msgaddNo, emptyFlag);
 		
 		Map<String, String> map = new HashMap<>();
@@ -518,7 +586,15 @@ public class MailboxController {
 	}
 	
 	public Map<String, Integer> getMailboxNoMap(HttpSession session){
-		String memId = (String) session.getAttribute("memId");
+		String memId="";
+		
+		String isLogin = (String) session.getAttribute("isLogin");
+		if(isLogin.equals("member")) {
+			memId = (String) session.getAttribute("memId");
+		}else {
+			memId = (String) session.getAttribute("comId");
+		}
+		logger.info("memId={}", memId);
 		
 		int receivedNo = mailboxService.findReceivedNo(memId);
 		int sentNo = mailboxService.findSentNo(memId);

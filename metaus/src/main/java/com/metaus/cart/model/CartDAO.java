@@ -1,7 +1,6 @@
 package com.metaus.cart.model;
 
 import java.util.List;
-import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -10,5 +9,6 @@ public interface CartDAO {
 	int selectCartCount(CartVO vo);
 	int insertCart(CartVO vo);
 	List<CartVO> selectCartList(int memNo);
-	int deleteCartByMemNo(int memNo);
+	int deleteCartByMemNo(int memNo, int pdNo);
+	int totalCartPrice(int memNo);
 }
