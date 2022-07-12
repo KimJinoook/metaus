@@ -28,6 +28,12 @@ public class IndexController {
 		
 		return "/test/test";
 	}
+	@RequestMapping("/test/testgeo")
+	public String testgeo() {
+		logger.info("testgeo 페이지");
+		
+		return "/test/testgeo";
+	}
 	@RequestMapping("/indexzip")
 	public String indexzip() {
 		logger.info("test 페이지");
