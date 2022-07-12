@@ -21,8 +21,6 @@
             <li class="mobile-title">
                 <h4>main menu</h4></li>
 
-            
-
             <!-- Simple Menu Item -->
             <li class="dropdown simple-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">기업 찾기<i class="fa fa-angle-down"></i></a>
@@ -160,10 +158,10 @@
 	                         </ul>
 	                     </li>
 	                     </c:if>
-	
+						 
 	                     <!-- Dropdown Submenu -->
 	                     <li class="dropdown-submenu">
-	                         <a href="<c:url value='/mailbox/mailbox'/>">메세지
+	                         <a href="<c:url value='/mailbox/mailbox'/>">메세지</a>
 	                     </li>
 	
 						 <c:if test="${ 'company' ne sessionScope.isLogin }">
