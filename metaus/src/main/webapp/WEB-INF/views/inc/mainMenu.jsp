@@ -163,11 +163,7 @@
 	
 	                     <!-- Dropdown Submenu -->
 	                     <li class="dropdown-submenu">
-	                         <a href="#">메세지<i class="fa fa-angle-right"></i></a>
-	                         <ul class="dropdown-menu">
-	                             <li><a href="<c:url value='/mailbox/mailbox'/>">메세지 목록</a></li>
-	                             <li><a href="<c:url value='/mailbox/compose'/>">메세지 작성</a></li>
-	                         </ul>
+	                         <a href="<c:url value='/mailbox/mailbox'/>">메세지
 	                     </li>
 	
 						 <c:if test="${ 'company' ne sessionScope.isLogin }">
