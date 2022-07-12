@@ -7,7 +7,7 @@ public interface MailboxService {
 	int insertMailbox(MailboxVO vo);
 	int selectMsgNo();
 	int insertRecipient(RecipientVO vo);
-	List<Map<String, Object>> selectMsgView(String userId, int msgFlag);
+	List<Map<String, Object>> selectMsgView(Map<String, Object> map, int msgFlag);
 	Map<String, Object> selectByMsgAddNo(int msgaddNo);
 	int insertMailboxAtc(MailboxAtcVO mailboxAtcVo);
 	int findReceivedNo(String msgaddAdsee);
@@ -22,4 +22,10 @@ public interface MailboxService {
 	int delTemporaryMail(int msgaddNo);
 	List<MailboxAtcVO> selectMsgAtcByMsgNo(int msgNo);
 	int updateMsgaddDate(int msgaddNo);
+	int getRecipientCount(Map<String, Object> map);
+	int getSenderCount(Map<String, Object> map);
+	int getStarCount(Map<String, Object> map);
+	int getTrashCount(Map<String, Object> map);
+	int getSpamCount(Map<String, Object> map);
+	int getTemporaryCount(Map<String, Object> map);
 }

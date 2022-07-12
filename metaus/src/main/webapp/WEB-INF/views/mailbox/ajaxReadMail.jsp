@@ -85,8 +85,8 @@
                   <input type="hidden" value="${map['MSGADD_NO'] }" id="msgaddNo">
                   <c:if test="${map['TRASH_FLAG'] eq 'N'}">
                		<button class="btn btn-default detail-trash"><i class="fa fa-trash-o"></i> 삭제</button>
-	                <button class="btn btn-default"><i class="fa fa-reply"></i> 답장</button>
-	                <button class="btn btn-default"><i class="fa fa-share"></i> 전달</button>
+	                <button class="btn btn-default btn-reply"><i class="fa fa-reply"></i> 답장</button>
+	                <button class="btn btn-default btn-share"><i class="fa fa-share"></i> 전달</button>
                   </c:if>
                   <c:if test="${map['TRASH_FLAG'] eq 'Y'}">
                   	<button class="btn btn-default detail-trash detail-trash-up"><i class="fa-solid fa-trash-can-arrow-up"></i> 복구</button>
