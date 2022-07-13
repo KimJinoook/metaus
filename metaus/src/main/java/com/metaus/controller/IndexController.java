@@ -28,6 +28,24 @@ public class IndexController {
 		
 		return "/test/test";
 	}
+	@RequestMapping("/test/test3")
+	public String test3() {
+		logger.info("test3 페이지");
+		
+		return "/test/test3";
+	}
+	@RequestMapping("/test/test4")
+	public String test4() {
+		logger.info("test4 페이지");
+		
+		return "/test/test4";
+	}
+	@RequestMapping("/index-bak")
+	public String ib() {
+		logger.info("test4 페이지");
+		
+		return "/index-bak";
+	}
 	@RequestMapping("/test/testgeo")
 	public String testgeo() {
 		logger.info("testgeo 페이지");
