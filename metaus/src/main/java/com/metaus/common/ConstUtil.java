@@ -7,6 +7,9 @@ public interface ConstUtil {
 	
 	//메세지 페이징 관련 상수
 	int MESSEAGE_RECORD_COUNT=15;
+	
+	//의뢰 목록 페이지 관련 상수
+	int COMMISSION_RECORD_COUNT=6;
 
 	//파일 업로드 관련 상수
 	String FILE_UPLOAD_TYPE="test";   //테스트시
