@@ -75,6 +75,10 @@ public class BoardServiceImpl implements BoardService {
 	public List<BoardVO> PopularSelect(int btypeNo) {
 		return boardDao.PopularSelect(btypeNo);
 	}
+	@Override
+	public List<BoardVO> PopularSelect2() {
+		return boardDao.PopularSelect2();
+	}
 	
 	
 

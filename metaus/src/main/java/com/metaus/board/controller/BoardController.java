@@ -655,4 +655,6 @@ public class BoardController {
 		model.addAttribute("list",list);
 		model.addAttribute("curPage",page);
 	}
+	
+
 }
