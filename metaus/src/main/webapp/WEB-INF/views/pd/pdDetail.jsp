@@ -221,7 +221,7 @@
                                     </li>
 
                                     <li>
-                                        <a href="#productReviews" data-toggle="tab" aria-expanded="true"><h6>리뷰 (2)</h6></a>
+                                        <a href="#productReviews" data-toggle="tab" aria-expanded="true"><h6>리뷰</h6></a>
                                     </li>
                                 </ul>
                                 <!-- End of Nav Tabs -->
@@ -242,8 +242,15 @@
 
                                         <!-- Start of Comments -->
                                         <ul class="comments-list">
-
+											<c:if test="${empty list }">
+										<div class="align_center" style="text-align: center;">
+											<span>작성된 리뷰가 없습니다.<br><br><br></span>
+										</div>
+										</c:if>
                                             <!-- Start of Comment 1 -->
+											<c:if test="${!empty list }">
+											<!--반복 시작 -->
+											<c:forEach var="vo" items="${list }">
                                             <li class="comment">
                                                 <!-- Commenter Image -->
                                                 <a class="pull-left commenter" href="#">
@@ -254,10 +261,9 @@
                                                     <!-- Comment Wrapper -->
                                                     <div class="comment-content-wrapper">
                                                         <div class="media-heading clearfix">
-
                                                             <!-- Commenters Name -->
                                                             <h6 class="commenter-name">john doe</h6>
-
+			
                                                             <div class="comment-rating pull-right">
                                                                 <i class="fa fa-star" aria-hidden="true"></i>
                                                                 <i class="fa fa-star" aria-hidden="true"></i>
@@ -273,11 +279,15 @@
 
                                                             <!-- Comment -->
                                                             <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+                                                      
                                                         </div>
+                                                        
                                                     </div>
                                                     <!-- End of Comment Wrapper -->
                                                 </div>
                                             </li>
+                                                      </c:forEach>
+                                                      </c:if>
                                             <!-- End of Comment 1 -->
 
 
