@@ -10,12 +10,71 @@
 			from
 				(	
 		
-		select A.*, B.*, C.*,(select count(*) from fp_recpre D where B.rec_no = D.rec_no) rec_count  
+		select A.recpre_no,A.mem_no,A.recpre_date,A.recpre_content, B.rec_no,B.rec_title,B.rec_content,B.rec_content2,B.rec_content3,
+		B.rec_web,B.rec_twitter,B.rec_pay,B.rec_regdate,B.rec_readcount,
+		C.com_no,C.com_id,C.com_pw,C.com_name,C.com_preview,C.com_pic,C.com_ceo,C.com_add,C.com_lati,C.com_longi,C.com_rrn,
+		C.com_reccnt,C.com_tel,C.com_joindate,C.com_outdate,
+		(select count(*) from fp_recpre D where B.rec_no = D.rec_no) rec_count  
 		from fp_recpre A join fp_rec B 
 		on A.rec_no = B.rec_no 
 		join fp_com C 
 		on B.com_no = C.com_no 
-		where A.mem_no = #{memNo}
+		where A.mem_no = #{memNo} and B.rec_no not in (select rec_no from fp_contact)
+		order by A.rec_no desc
+		)R
+		)
+		where  
+		RNUM>#{firstRecordIndex} 
+		<![CDATA[	
+		and RNUM<=#{firstRecordIndex} + #{recordCountPerPage} ]]>
+ 	</select>
+ 	
+ 	<select id="getTotalRecord" resultType="int" parameterType="int">
+ 			
+		select count(*) from fp_recpre  where mem_no = #{memNo} and rec_no not in (select rec_no from fp_contact)
+	
+	</select>
+	
+	<select id="completion" parameterType="int" resultType="MypageVO">
+	select * from
+		(
+			select rownum as RNUM, R.*
+			from
+				(	
+		
+		select A.mem_no,A.con_pay,A.con_donedate, B.rec_no,B.rec_title,B.rec_content,B.rec_content2,B.rec_content3,
+		B.rec_web,B.rec_twitter,B.rec_pay,B.rec_regdate,B.rec_readcount,
+		C.com_no,C.com_id,C.com_pw,C.com_name,C.com_preview,C.com_pic,C.com_ceo,C.com_add,C.com_lati,C.com_longi,C.com_rrn,
+		C.com_reccnt,C.com_tel,C.com_joindate,C.com_outdate		  
+		from fp_contact A join fp_rec B 
+		on A.rec_no = B.rec_no 
+		join fp_com C 
+		on B.com_no = C.com_no
+		where A.mem_no = #{memNo} and A.con_donedate is null
+		order by A.rec_no desc
+		)R
+		)
+		where
+		RNUM>#{firstRecordIndex} 
+		<![CDATA[	
+		and RNUM<=#{firstRecordIndex} + #{recordCountPerPage} ]]>
+ 	</select>
+	<select id="completion1" parameterType="int" resultType="MypageVO">
+	select * from
+		(
+			select rownum as RNUM, R.*
+			from
+				(	
+		
+		select A.mem_no,A.con_pay,A.con_donedate, B.rec_no,B.rec_title,B.rec_content,B.rec_content2,B.rec_content3,
+		B.rec_web,B.rec_twitter,B.rec_pay,B.rec_regdate,B.rec_readcount,
+		C.com_no,C.com_id,C.com_pw,C.com_name,C.com_preview,C.com_pic,C.com_ceo,C.com_add,C.com_lati,C.com_longi,C.com_rrn,
+		C.com_reccnt,C.com_tel,C.com_joindate,C.com_outdate		  
+		from fp_contact A join fp_rec B 
+		on A.rec_no = B.rec_no 
+		join fp_com C 
+		on B.com_no = C.com_no
+		where A.mem_no = #{memNo} and A.con_donedate is not null
 		order by A.rec_no desc
 		)R
 		)
@@ -25,9 +84,9 @@
 		and RNUM<=#{firstRecordIndex} + #{recordCountPerPage} ]]>
  	</select>
  	
- 	<select id="getTotalRecord" resultType="int" parameterType="int">
+ 	<select id="getTotalRecord1" resultType="int" parameterType="int">
  			
-		select count(*) from fp_recpre  where mem_no = #{memNo}
+		select count(*) from fp_contact  where mem_no = #{memNo}
 	
 	</select>
 </mapper>

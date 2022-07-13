@@ -27,4 +27,25 @@ public class MypageServiceImpl implements MypageService{
 	public List<MypageVO> selectAll(MypageVO vo) {
 		return mypageDao.selectAll(vo);
 	}
+
+
+
+	@Override
+	public List<MypageVO> completion(MypageVO vo) {
+		return mypageDao.completion(vo);
+	}
+
+
+
+	@Override
+	public int getTotalRecord1(int memNo) {
+		return mypageDao.getTotalRecord1(memNo);
+	}
+
+
+
+	@Override
+	public List<MypageVO> completion1(MypageVO vo) {
+		return mypageDao.completion1(vo);
+	}
 }

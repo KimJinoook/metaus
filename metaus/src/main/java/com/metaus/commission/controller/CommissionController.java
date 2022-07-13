@@ -32,7 +32,38 @@ public class CommissionController {
 	private final MypageService mypageService;
 	
 	@RequestMapping("/progressSchedule")
-	public String progressSchedule() {
+	public String progressSchedule(@ModelAttribute MypageVO searchVo,HttpSession session,Model model) {
+		logger.info("의뢰 완료 목록 페이지");
+
+		int memNo = (int)session.getAttribute("memNo");
+		logger.info("memNo={}",memNo);
+		
+		PaginationInfo pagingInfo = new PaginationInfo();
+		pagingInfo.setBlockSize(ConstUtil.BLOCKSIZE);
+		pagingInfo.setBlockSize(ConstUtil.BLOCKSIZE);
+		pagingInfo.setRecordCountPerPage(ConstUtil.RECORD_COUNT);
+		pagingInfo.setCurrentPage(searchVo.getCurrentPage());
+		logger.info("t ={}",pagingInfo.getCurrentPage());
+		
+		searchVo.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
+		logger.info("t2={}",pagingInfo.getFirstRecordIndex());
+		logger.info("t3={}",searchVo.getFirstRecordIndex());
+		searchVo.setRecordCountPerPage(ConstUtil.RECORD_COUNT);
+		searchVo.setMemNo(memNo);
+		
+		List<MypageVO> list=mypageService.completion1(searchVo);
+		logger.info("list={}",list);
+		int totalRecord = mypageService.getTotalRecord1(memNo);
+		pagingInfo.setTotalRecord(totalRecord);
+		
+		logger.info(" totalRecord={}", totalRecord);
+		logger.info("목록 조회-pagingInfo, pagingInfo.getFirstPage={}", pagingInfo.getFirstPage());
+		logger.info("목록 조회-pagingInfo, pagingInfo.getLastPage={}", pagingInfo.getLastPage());
+		
+		model.addAttribute("searchVo",searchVo);
+		model.addAttribute("pagingInfo", pagingInfo);
+		model.addAttribute("list",list);
+		
 		return "/commission/progressSchedule";
 	}
 	
@@ -60,18 +91,56 @@ public class CommissionController {
 		searchVo.setMemNo(memNo);
 		
 		List<MypageVO> list=mypageService.selectAll(searchVo);
-		logger.info("크리에이터 찾기 list={}",list);
+		logger.info("list={}",list);
 		int totalRecord = mypageService.getTotalRecord(memNo);
 		pagingInfo.setTotalRecord(totalRecord);
 		
-		logger.info("크리에이터 목록 조회-레코드 개수, totalRecord={}", totalRecord);
-		logger.info("크리에이터 목록 조회-pagingInfo, pagingInfo.getFirstPage={}", pagingInfo.getFirstPage());
-		logger.info("크리에이터 목록 조회-pagingInfo, pagingInfo.getLastPage={}", pagingInfo.getLastPage());
+		logger.info("목록 조회-레코드 개수, totalRecord={}", totalRecord);
+		logger.info("목록 조회-pagingInfo, pagingInfo.getFirstPage={}", pagingInfo.getFirstPage());
+		logger.info("목록 조회-pagingInfo, pagingInfo.getLastPage={}", pagingInfo.getLastPage());
 		
 		model.addAttribute("searchVo",searchVo);
 		model.addAttribute("pagingInfo", pagingInfo);
 		model.addAttribute("list",list);
 		
 		return "/commission/commissionList";
+	}
+	
+	@RequestMapping("/Progress")
+	public String Progress(@ModelAttribute MypageVO searchVo,HttpSession session,Model model) {
+		logger.info("의뢰 진행 페이지");
+
+		int memNo = (int)session.getAttribute("memNo");
+		logger.info("memNo={}",memNo);
+		
+		PaginationInfo pagingInfo = new PaginationInfo();
+		pagingInfo.setBlockSize(ConstUtil.BLOCKSIZE);
+		pagingInfo.setBlockSize(ConstUtil.BLOCKSIZE);
+		pagingInfo.setRecordCountPerPage(ConstUtil.RECORD_COUNT);
+		pagingInfo.setCurrentPage(searchVo.getCurrentPage());
+		logger.info("t ={}",pagingInfo.getCurrentPage());
+		
+		searchVo.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
+		logger.info("t2={}",pagingInfo.getFirstRecordIndex());
+		logger.info("t3={}",searchVo.getFirstRecordIndex());
+		searchVo.setRecordCountPerPage(ConstUtil.RECORD_COUNT);		
+		searchVo.setMemNo(memNo);
+
+		List<MypageVO> list=mypageService.completion(searchVo);
+		
+		logger.info("list={}",list);
+		logger.info("list.size={}",list.size());
+		int totalRecord = mypageService.getTotalRecord1(memNo);
+		pagingInfo.setTotalRecord(totalRecord);
+		
+		logger.info(" totalRecord={}", totalRecord);
+		logger.info("목록 조회-pagingInfo, pagingInfo.getFirstPage={}", pagingInfo.getFirstPage());
+		logger.info("목록 조회-pagingInfo, pagingInfo.getLastPage={}", pagingInfo.getLastPage());
+		
+		model.addAttribute("searchVo",searchVo);
+		model.addAttribute("pagingInfo", pagingInfo);
+		model.addAttribute("list",list);
+		
+		return "/commission/Progress";
 	}
 }

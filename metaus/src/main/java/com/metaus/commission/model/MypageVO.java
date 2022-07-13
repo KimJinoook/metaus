@@ -44,6 +44,9 @@ public class MypageVO {
 	private Timestamp recpreDate;
 	private String recpreContent;
 	
+	//의뢰 완료
+	private int conPay;
+	private Timestamp conDonedate;
 	
 	/** 검색조건 */
 	private String searchCondition = "";
