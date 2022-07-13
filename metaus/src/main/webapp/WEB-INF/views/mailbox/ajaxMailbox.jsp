@@ -300,13 +300,6 @@
 							<input type="hidden" value="${pagingInfo.lastPage+1}" class="currentPage${i}">	
 							<button class="btn btn-default btn-sm btn-page"><i class="fa fa-chevron-right"></i></button> 
 						</c:if>
-                      
-                      
-                        <!-- <button class="btn btn-default btn-sm"><i class="fa fa-chevron-left"></i></button>
-                        <button class="btn btn-default btn-sm">1</button>
-                        <button class="btn btn-default btn-sm">2</button>
-                        <button class="btn btn-default btn-sm">3</button>
-                        <button class="btn btn-default btn-sm"><i class="fa fa-chevron-right"></i></button> -->
                       </div><!-- /.btn-group -->
                     </div><!-- /.pull-right -->
                   </div>

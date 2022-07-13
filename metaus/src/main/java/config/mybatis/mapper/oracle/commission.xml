@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.metaus.commission.model.CommissionDAO">
+	<!-- selectComNoByComId -->
+	<select id="selectComNoByComId" parameterType="string" resultType="int">
+		select com_no from fp_com where com_id=#{comId}
+	</select>
+	
+	<!-- selectComCommission -->
+	<resultMap id="getComCommission" type="HashMap">
+		<result property="REC_CONTENT" column="REC_CONTENT" jdbcType="CLOB" javaType="java.lang.String" />
+	</resultMap>
+	
+	<select id="selectComCommission" parameterType="HashMap" resultMap="getComCommission">
+		select *
+		from
+		(
+		    select rownum as RNUM, A.*
+		    from
+		    (
+		        select * from fp_rec where com_no=#{comNo} order by rec_no desc
+		    )A
+		)
+		where RNUM>#{firstRecordIndex} 
+		<![CDATA[
+		and RNUM<=#{firstRecordIndex} + #{recordCountPerPage} ]]>
+	</select>
+	
+	<!-- getComCommissionNo -->
+	<select id="getComCommissionNo" parameterType="int" resultType="int">
+		select count(*) from fp_rec where com_no=#{comNo}
+	</select>
+	
+	<!-- getApplicantNoByRecNo -->
+	<select id="getApplicantNoByRecNo" parameterType="int" resultType="int">
+		select count(*) from commissionView
+		where rec_no=#{recNo} and recpre_no is not null
+	</select>
+	
+	<!-- selectContractedComCom -->
+	<select id="selectContractedComCom" parameterType="int" resultType="map">
+		select * from commissionView
+		where com_no=#{comNo} and con_pay is not null
+	</select>
+	
+	
+</mapper>
