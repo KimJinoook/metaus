@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.metaus.pay.model.PayDAO">
+	<insert id="insertPay">
+		<selectKey keyProperty="payNo" resultType="int"
+			order="BEFORE">
+			select fp_pay_seq.nextval from dual
+		</selectKey>
+		insert into fp_pay(pay_no, mem_no, pay_kind, pay_price)
+		values(#{payNo},#{memNo},#{payKind},#{payPrice})
+	</insert>
+
+</mapper>
