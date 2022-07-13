@@ -352,7 +352,7 @@
 				var securedPw = rsa.encrypt(inputText);
 				$('#memPw').val(securedPw);
 				$('#registerFrm').submit();
-			}
+			} 
 		});
 		
 		/** 기업회원 유효성검사*/

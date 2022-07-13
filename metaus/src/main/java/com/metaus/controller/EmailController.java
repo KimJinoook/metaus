@@ -4,6 +4,7 @@ import javax.mail.MessagingException;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -76,7 +77,12 @@ public class EmailController {
 			MemberVO vo = new MemberVO();
 			vo.setMemId(receiver);
 			vo.setMemPw(pw);
+			BCryptPasswordEncoder encoder= new BCryptPasswordEncoder();
+			String memLock=encoder.encode(vo.getMemPw());
+			vo.setMemLock(memLock);
 			int cnt = memberService.updatePw(vo);
+			
+			
 			return result;
 		} catch (MessagingException e) {
 			e.printStackTrace();

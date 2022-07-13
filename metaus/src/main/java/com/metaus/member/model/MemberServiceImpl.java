@@ -2,6 +2,7 @@ package com.metaus.member.model;
 
 import java.util.List;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.metaus.common.SearchVO;
@@ -22,10 +23,20 @@ public class MemberServiceImpl implements MemberService {
 	
 	public int checkLogin(String userid, String pwd) {
 		String dbPwd = memberDao.selectPwd(userid);
+		String dbLock = memberDao.selectLock(userid);
+		BCryptPasswordEncoder encoder= new BCryptPasswordEncoder();
+		
 		
 		int result=0;
 		if(dbPwd !=null && !dbPwd.isEmpty()) {
-			if(dbPwd.equals(pwd)) {
+			/*
+			if(encoder.matches(pwd, dbLock)) {
+				result=MemberService.LOGIN_OK;
+			}else {
+				result=MemberService.DISAGREE_PWD;				
+			}
+			*/
+			if(pwd.equals(dbPwd)) {
 				result=MemberService.LOGIN_OK;
 			}else {
 				result=MemberService.DISAGREE_PWD;				
