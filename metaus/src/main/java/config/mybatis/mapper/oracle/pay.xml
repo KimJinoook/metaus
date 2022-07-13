@@ -3,7 +3,7 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.metaus.pay.model.PayDAO">
-	<insert id="insertPay">
+	<insert id="insertPay" parameterType="PayVO">
 		<selectKey keyProperty="payNo" resultType="int"
 			order="BEFORE">
 			select fp_pay_seq.nextval from dual

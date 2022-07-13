@@ -221,7 +221,7 @@
                                     </li>
 
                                     <li>
-                                        <a href="#productReviews" data-toggle="tab" aria-expanded="true"><h6>Reviews (2)</h6></a>
+                                        <a href="#productReviews" data-toggle="tab" aria-expanded="true"><h6>리뷰 (2)</h6></a>
                                     </li>
                                 </ul>
                                 <!-- End of Nav Tabs -->
@@ -282,7 +282,7 @@
 
 
                                             <!-- Start of Comment 2 -->
-                                            <li class="comment">
+                                            <%-- <li class="comment">
                                                 <!-- Commenter Image -->
                                                 <a class="pull-left commenter" href="#">
                                                     <img src="<c:url value='/images/clients/client2.jpg'/>" alt="" class="img-responsive">
@@ -315,7 +315,7 @@
                                                     </div>
                                                     <!-- End of Comment Wrapper -->
                                                 </div>
-                                            </li>
+                                            </li> --%>
                                             <!-- End of Comment 2 -->
 
                                         </ul>
@@ -327,12 +327,12 @@
                                             <div class="row">
                                                 <div class="form-group nomargin">
                                                     <div class="col-md-6 mt15">
-                                                        <label>Your name *</label>
-                                                        <input type="text" class="form-control" name="name" autocomplete="off">
+                                                        <label>작성자 *</label>
+                                                        <input type="text" class="form-control" name="memName" autocomplete="off" value="${memName }" readonly="readonly">
                                                     </div>
                                                     <div class="col-md-6 mt15">
-                                                        <label>Your email address *</label>
-                                                        <input type="email" class="form-control" name="email" autocomplete="off">
+                                                        <label>아이디 *</label>
+                                                        <input type="email" class="form-control" name="memId" autocomplete="off" value="${memId }" readonly="readonly">
                                                     </div>
                                                 </div>
                                             </div>
@@ -340,15 +340,15 @@
                                             <div class="row mt15">
                                                 <div class="form-group">
                                                     <div class="col-md-12">
-                                                        <label>Review *</label>
-                                                        <textarea class="form-control" rows="8" name="message" placeholder="Type your message..."></textarea>
+                                                        <label>리뷰 *</label>
+                                                        <textarea class="form-control" rows="8" name="message" placeholder="이곳에 적어주세요"></textarea>
                                                     </div>
                                                 </div>
                                             </div>
 
                                             <div class="row mt15">
                                                 <div class="col-md-12 text-center">
-                                                    <button type="submit" class="btn btn-blue btn-effect">submit</button>
+                                                    <button type="submit" id="review" class="btn btn-blue btn-effect">리뷰 등록</button>
                                                 </div>
                                             </div>
                                         </form>
