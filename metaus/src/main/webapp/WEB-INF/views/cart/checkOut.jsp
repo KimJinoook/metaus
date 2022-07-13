@@ -304,7 +304,7 @@
                             <div class="panel-heading">
                                 <h4 class="panel-title">
                                     <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false">
-                                        Review &amp; Payment
+                                        상품 &amp; 결제 목록
                                     </a>
                                 </h4>
                             </div>
@@ -516,7 +516,7 @@
                     </div>
                     <!-- End of Panel Group -->
 
-                    <div class="col-md-12 text-right" style="">
+                    <div class="col-md-12 text-right" style="margin-top: 20px;">
                         <input type="submit" value="결제 하기" name="proceed" id="checkOut" class="btn btn-blue btn-effect">
                     </div>
 
