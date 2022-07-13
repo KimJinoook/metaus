@@ -29,4 +29,9 @@
 		delete from fp_cart
 		where mem_no=#{memNo} and pd_no=#{pdNo}	
 	</delete>
+	
+	<delete id="deleteCartAllByMemNo" parameterType="int">
+		delete from fp_cart
+		where mem_no=#{memNo}
+	</delete>
 </mapper>

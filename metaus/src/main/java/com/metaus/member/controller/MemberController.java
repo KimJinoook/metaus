@@ -1,19 +1,18 @@
 package com.metaus.member.controller;
 
 import java.security.PrivateKey;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -63,6 +62,9 @@ public class MemberController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		BCryptPasswordEncoder encoder= new BCryptPasswordEncoder();
+		String memLock=encoder.encode(vo.getMemPw());
+		vo.setMemLock(memLock);
 		
 		logger.info("회원가입 전 vo={}", vo);
 		int cnt=memberService.insertMember(vo);

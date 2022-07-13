@@ -20,14 +20,14 @@ function pdList(curPage){
 $(function(){
 	$('#pdPost').click(function(){
 		if($('#memId').val()=="" || $('#memId').val()==null){
-			alert('로그인 후 이용가능합니다!');
+			alert('일반 회원 로그인 후 이용가능합니다!');
 			event.preventDefault();
 		}
 	});
 	 
 	 $('.addCart').click(function(){
        if($('#memId').val()=="" || $('#memId').val()==null){
-         alert('로그인 후 이용가능합니다!');
+         alert('일반 회원 로그인 후 이용가능합니다!');
          event.preventDefault();
        }
     });
@@ -96,6 +96,7 @@ $(function(){
 <!-- 검색 끝 -->
 
 <input type="hidden" id="memId" name="memId" value="${memId }">
+<input type="hidden" id="comId" name="comId" value="${comId }">
 <script src="https://rawgit.com/mrdoob/three.js/dev/build/three.js"></script>
 <script src="https://rawgit.com/mrdoob/three.js/dev/examples/js/loaders/GLTFLoader.js"></script>
 <script src="https://cdn.rawgit.com/takahirox/THREE.ZipLoader/v0.0.1/build/ziploader.min.js"></script>
@@ -193,9 +194,9 @@ $(function(){
 </script>
  							<!-- Product Image -->
 
-                                    <a href="<c:url value='/images/shop/product1.jpg'/>" class="hover-zoom">
+                                   <%--  <a href="<c:url value='/images/shop/product1.jpg'/>" class="hover-zoom">
                                         <img src="<c:url value='/images/shop/product1.jpg'/>" class="img-responsive" alt="">
-                                    </a>
+                                    </a> --%>
 
                                     <!-- Product overlay -->
                                     <div class="product-overlay">

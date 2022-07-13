@@ -4,8 +4,11 @@
 
 <mapper namespace="com.metaus.contact.model.ContactDAO">
 
-	<select id="selectContactByMemNo" parameterType="ContactVO" resultType="int">
-		select * from fp_contact A 
+	<select id="selectContactByMemNo" parameterType="int" resultType="ContactVO">
+		select A.rec_no, A.mem_no, A.con_pay, A.con_donedate, B.com_no, B.rec_title, B.rec_content, B.rec_pay, B.rec_regdate,B.rec_readcount, B.rec_content2, B.rec_content3, B.rec_web, B.rec_twitter,
+C.com_id, C.com_pw, C.com_name, C.com_preview, C.com_pic, C.com_ceo, C.com_add, C.com_lati, C.com_longi, C.com_rrn, C.com_reccnt, C.com_tel, C.com_joindate, C.com_outdate,
+D.mem_name, D.mem_id, D.mem_pw, D.mem_nick, D.mem_birth, D.mem_tel, D.mem_zipcode, D.mem_add, D.mem_add2, D.mem_pic, D.mem_joindate, D.mem_outdate, D.mem_cutdate, D.mem_warncnt, D.mem_lock, D.mem_kakao, D.mem_naver, D.mem_facebook 
+		from fp_contact A 
 		join fp_rec B
 		on A.rec_no=B.rec_no
 		join fp_com C

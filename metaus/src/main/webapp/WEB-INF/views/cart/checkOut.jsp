@@ -304,7 +304,7 @@
                             <div class="panel-heading">
                                 <h4 class="panel-title">
                                     <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false">
-                                        Review &amp; Payment
+                                        상품 &amp; 결제 목록
                                     </a>
                                 </h4>
                             </div>
@@ -366,6 +366,8 @@
                                                     
                                                     </tr>
                                                    <c:set var="sum" value="${sum+vo.pdPrice }"/>
+                                                   <c:set var="count" value="${list.size() }"/>
+                                                   <c:set var="pdName" value="${vo.pdName }"/>
                                                    </c:forEach>
                                                     <!-- End of Cart Item 1 -->
 													
@@ -514,7 +516,7 @@
                     </div>
                     <!-- End of Panel Group -->
 
-                    <div class="col-md-12 text-right" style="">
+                    <div class="col-md-12 text-right" style="margin-top: 20px;">
                         <input type="submit" value="결제 하기" name="proceed" id="checkOut" class="btn btn-blue btn-effect">
                     </div>
 
@@ -596,14 +598,14 @@
 	     			 *  https://docs.iamport.kr/implementation/payment
 	     			 *  위에 url에 따라가시면 넣을 수 있는 방법이 있습니다.
 	     			 */
-	     			name: '주문명 : +이름추가+',
+	     			name:' 3D 모델링 ${count}건',
 	     			// 결제창에서 보여질 이름
 	     			// name: '주문명 : ${auction.a_title}',
 	     			// 위와같이 model에 담은 정보를 넣어 쓸수도 있습니다.
 	     			amount: ${sum},
 	     			// amount: ${bid.b_bid},
 	     			// 가격 
-	     			buyer_name: '이름',
+	     			buyer_name: '${sessionScope.memName}',
 	     			// 구매자 이름, 구매자 정보도 model값으로 바꿀 수 있습니다.
 	     			// 구매자 정보에 여러가지도 있으므로, 자세한 내용은 맨 위 링크를 참고해주세요.
 	     			buyer_postcode: '123-456',
@@ -612,7 +614,8 @@
 	     			if (rsp.success) {
 	     				var msg = '결제가 완료되었습니다.';
 	     				msg += '결제 금액 : ' + rsp.paid_amount;
-	     				location.href="<c:url value=''/>";
+	     				$('#form-cart-pay input[name=payPrice]').val(${sum});
+	     				$('#form-cart-pay').submit();
 	     				// success.submit();
 	     				// 결제 성공 시 정보를 넘겨줘야한다면 body에 form을 만든 뒤 위의 코드를 사용하는 방법이 있습니다.
 	     				// 자세한 설명은 구글링으로 보시는게 좋습니다.
@@ -626,4 +629,9 @@
 	      });
 	});
 </script>
+    <form id="form-cart-pay" method="post" action="<c:url value='/pay/pay'/>">
+    <input type="hidden" name="payPrice">
+    <input type="hidden" name="memNo" value="${sessionScope.memNo}">
+    <input type="hidden" name="payKind" value="카드 결제">
+    </form>
     <%@ include file="../inc/footer.jsp"%>

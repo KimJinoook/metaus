@@ -57,10 +57,10 @@
                                 <tr>
                                     <th class="cart-product-remove">&nbsp;</th>
                                     <th class="cart-product-thumbnail">&nbsp;</th>
-                                    <th class="cart-product-name">Product</th>
-                                    <th class="cart-product-price">Unit Price</th>
+                                    <th class="cart-product-name">상품 목록</th>
+                                    <th class="cart-product-price">상품 가격</th>
                                     <!-- <th class="cart-product-quantity">Quantity</th> -->
-                                    <th class="cart-product-subtotal">Total</th>
+                                    <th class="cart-product-subtotal">합계</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -169,10 +169,10 @@
 
                                             <div class="col-md-6 col-xs-12">
                                                 <div class="col-md-8 col-xs-7">
-                                                    <input type="text" value="" class="form-control" placeholder="Enter Coupon Code..">
+                                                    <input type="text" value="" class="form-control" placeholder="쿠폰 번호 입력">
                                                 </div>
                                                 <div class="col-md-4 col-xs-5">
-                                                    <a href="#" class="btn btn-blue btn-effect" >Apply Coupon</a>
+                                                    <a href="#" class="btn btn-blue btn-effect" >쿠폰 입력</a>
                                                 </div>
                                             </div>
 											<c:if test="${!empty list }">

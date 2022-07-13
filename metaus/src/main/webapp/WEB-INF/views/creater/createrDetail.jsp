@@ -264,7 +264,7 @@
 			</c:if>
 			
 			<c:if test="${!empty contactList }">
-			<c:forEach var="contactVo" items="${contactList }">
+			<c:forEach var="contactVo" items="${contactList}">
             <!-- Start of Education Column -->
             <div class="col-md-12">
                 <div class="item-block shadow-hover">

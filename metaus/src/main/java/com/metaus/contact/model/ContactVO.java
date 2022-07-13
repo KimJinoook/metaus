@@ -50,4 +50,8 @@ public class ContactVO {
 	private String memFacebook;
 	private int memItem;
 	private int memComplete;
+	private String recContent2;
+	private String recContent3;
+	private String recWeb;
+	private String recTwitter;
 }
