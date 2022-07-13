@@ -243,11 +243,11 @@
 				</p>
 				<p class="fieldset">
 					<label class="image-replace cd-password" for="signin-password">Password</label>
-					<input class="full-width has-padding has-border" name="memPw"
+					<input class="full-width has-padding has-border" name="memPw" id="memPw"
 						type="password" placeholder="Password">
 				</p>
 				<p class="fieldset">
-					<button type="submit" value="Login" class="btn btn-blue btn-effect">Login</button>
+					<button type="button" value="Login" class="btn btn-blue btn-effect" id="memLoginBtn">Login</button>
 				</p>
 			</form>
 
@@ -297,7 +297,7 @@
 				</p>
 
 				<p class="fieldset">
-					<button class="btn btn-blue btn-effect" type="submit"
+					<button class="btn btn-blue btn-effect" type="button" id="comLoginBtn"
 						value="Create account">Login</button>
 				</p>
 			</form>
@@ -330,7 +330,12 @@
 		name="facebookName" />
 </form>
 <div id="naverIdLogin" style="display: none"></div>
-
+<input type="hidden" id="publicKeyModule" value="${sessionScope.publicKeyModulus }">
+<input type="hidden" id="publicKeyExponent" value="${sessionScope.publicKeyExponent }">
+<script type="text/javascript" src="http://www-cs-students.stanford.edu/~tjw/jsbn/jsbn.js"></script>        
+<script type="text/javascript" src="http://www-cs-students.stanford.edu/~tjw/jsbn/rsa.js"></script>        
+<script type="text/javascript" src="http://www-cs-students.stanford.edu/~tjw/jsbn/prng4.js"></script>        
+<script type="text/javascript" src="http://www-cs-students.stanford.edu/~tjw/jsbn/rng.js"></script>
 <script async defer crossorigin="anonymous"
 	src="https://connect.facebook.net/ko_KR/sdk.js#xfbml=1&version=v10.0&appId=550605189855072"
 	nonce="SiOBIhLG"></script>
@@ -338,6 +343,34 @@
 	src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js"
 	charset="utf-8"></script>
 <script type="text/javascript">	
+$(function(){
+	$('#memLoginBtn').click(function(){
+		var inputText = $('#memPw').val();
+		
+		var rsaPkModule = $('#publicKeyModule').val();
+		var rsaPkExponent = $('#publicKeyExponent').val();
+		
+		var rsa = new RSAKey();
+		rsa.setPublic(rsaPkModule,rsaPkExponent);
+		
+		var securedPw = rsa.encrypt(inputText);
+		$('#memPw').val(securedPw);
+		$('#memloginfrm').submit();
+	});
+	$('#comLoginBtn').click(function(){
+		var inputText = $('#signup-password').val();
+		
+		var rsaPkModule = $('#publicKeyModule').val();
+		var rsaPkExponent = $('#publicKeyExponent').val();
+		
+		var rsa = new RSAKey();
+		rsa.setPublic(rsaPkModule,rsaPkExponent);
+		
+		var securedPw = rsa.encrypt(inputText);
+		$('#signup-password').val(securedPw);
+		$('#comloginfrm').submit();
+	});
+});
 	function loginFormWithKakao(){
 		Kakao.init('48fd685b6c1070cc71f894be6653d843');
 

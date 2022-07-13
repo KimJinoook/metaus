@@ -1,5 +1,6 @@
 package com.metaus.member.controller;
 
+import java.security.PrivateKey;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.metaus.common.VisitListener;
 import com.metaus.member.model.FacebookService;
 import com.metaus.member.model.FacebookVO;
 import com.metaus.member.model.KakaoService;
@@ -50,9 +52,19 @@ public class MemberController {
 	}
 	
 	@PostMapping("/memberRegister")
-	public String memregister_post(@ModelAttribute MemberVO vo, Model model) {
+	public String memregister_post(@ModelAttribute MemberVO vo, Model model, HttpSession session) {
 		logger.info("일반회원 회원가입 처리, 파라미터 vo={}", vo);
 		
+		PrivateKey privateKey = (PrivateKey) session.getAttribute("__rsaPrivateKey__");
+		try {
+			String password = VisitListener.decryptRsa(privateKey, vo.getMemPw());
+			vo.setMemPw(password);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		logger.info("회원가입 전 vo={}", vo);
 		int cnt=memberService.insertMember(vo);
 		logger.info("회원가입 결과, cnt={}", cnt);
 

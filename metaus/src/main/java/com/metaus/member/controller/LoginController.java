@@ -1,5 +1,6 @@
 package com.metaus.member.controller;
 
+import java.security.PrivateKey;
 import java.sql.Timestamp;
 import java.util.Date;
 
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.metaus.common.VisitListener;
 import com.metaus.member.model.CompanyService;
 import com.metaus.member.model.CompanyVO;
 import com.metaus.member.model.FacebookService;
@@ -46,8 +48,19 @@ public class LoginController {
 	@RequestMapping("/memberlogin")
 	public String memlogin_post(@ModelAttribute MemberVO vo,
 			HttpServletRequest request,
-			HttpServletResponse response, Model model) {
+			HttpServletResponse response, Model model, HttpSession session) {
 		logger.info("로그인 처리, 파라미터 vo={}", vo);
+		
+		PrivateKey privateKey = (PrivateKey) session.getAttribute("__rsaPrivateKey__");
+		try {
+			String password = VisitListener.decryptRsa(privateKey, vo.getMemPw());
+			vo.setMemPw(password);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		logger.info("로그인 전 vo={}", vo);
 		
 		int result=memberService.checkLogin(vo.getMemId(), vo.getMemPw());
 		logger.info("로그인 처리 결과 result={}", result);
@@ -75,7 +88,6 @@ public class LoginController {
 			}
 			
 			//[1] session에 저장
-			HttpSession session=request.getSession();
 			session.setAttribute("isLogin", "member");
 			session.setAttribute("memNo", memVo.getMemNo());
 			session.setAttribute("memId", vo.getMemId());
@@ -109,8 +121,18 @@ public class LoginController {
 	@RequestMapping("/companylogin")
 	public String comlogin_post(@ModelAttribute CompanyVO vo,
 			HttpServletRequest request,
-			HttpServletResponse response, Model model) {
+			HttpServletResponse response, Model model, HttpSession session) {
 		logger.info("로그인 처리, 파라미터 vo={}", vo);
+		PrivateKey privateKey = (PrivateKey) session.getAttribute("__rsaPrivateKey__");
+		try {
+			String password = VisitListener.decryptRsa(privateKey, vo.getComPw());
+			vo.setComPw(password);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		logger.info("로그인 전 vo={}", vo);
 		
 		int result=companyService.checkLogin(vo.getComId(), vo.getComPw());
 		logger.info("로그인 처리 결과 result={}", result);
@@ -122,7 +144,7 @@ public class LoginController {
 			logger.info("로그인 처리-회원정보 조회결과 memVo={}", comVo);
 			
 			//[1] session에 저장
-			HttpSession session=request.getSession();
+			
 			session.setAttribute("isLogin", "company");
 			session.setAttribute("comNo", comVo.getComNo());
 			session.setAttribute("comId", vo.getComId());

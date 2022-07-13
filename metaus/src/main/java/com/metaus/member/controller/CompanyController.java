@@ -1,5 +1,9 @@
 package com.metaus.member.controller;
 
+import java.security.PrivateKey;
+
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -9,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.metaus.common.VisitListener;
 import com.metaus.member.model.CompanyService;
 import com.metaus.member.model.CompanyVO;
 import com.metaus.member.model.MemberVO;
@@ -25,8 +30,19 @@ public class CompanyController {
 	private final CompanyService companyService;
 	
 	@PostMapping("/companyRegister")
-	public String memregister_post(@ModelAttribute CompanyVO vo, Model model) {
+	public String memregister_post(@ModelAttribute CompanyVO vo, Model model, HttpSession session) {
 		logger.info("기업회원 회원가입 처리, 파라미터 vo={}", vo);
+		
+		PrivateKey privateKey = (PrivateKey) session.getAttribute("__rsaPrivateKey__");
+		try {
+			String password = VisitListener.decryptRsa(privateKey, vo.getComPw());
+			vo.setComPw(password);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		logger.info("회원가입 전 vo={}", vo);
 		
 		int cnt=companyService.insertCompany(vo);
 		logger.info("회원가입 결과, cnt={}", cnt);

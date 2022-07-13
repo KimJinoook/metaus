@@ -175,7 +175,7 @@
                         <!-- Start of Tabpanel for Company Account -->
                         <div role="tabpanel" class="tab-pane" id="company">
                             <div class="row">
-                            <form method="post" action="<c:url value='/company/companyRegister'/>">
+                            <form method="post" action="<c:url value='/company/companyRegister'/>" id="comregisterFrm">
 
                                 <!-- Start of the First Column -->
                                 <div class="col-md-6">
@@ -275,7 +275,7 @@
 
                                     <!-- Form Group -->
                                     <div class="form-group nomargin">
-                                        <button type="submit" id="btnComSign" class="btn btn-blue btn-effect">회원가입</button>
+                                        <button type="button" id="btnComSign" class="btn btn-blue btn-effect">회원가입</button>
                                     </div>
                                 </div>
                                 
@@ -291,8 +291,7 @@
             </div>
         </div>
     </section>
-<input type="hidden" id="publicKeyModule" value="${sessionScope.publicKeyModulus }">
-<input type="hidden" id="publicKeyExponent" value="${sessionScope.publicKeyExponent }">
+
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js?autoload=false"></script>
 <script type="text/javascript" src="http://dapi.kakao.com/v2/maps/sdk.js?appkey=48fd685b6c1070cc71f894be6653d843&libraries=services"></script>
 <script type="text/javascript" src="<c:url value='/js/jquery-3.6.0.min.js'/>"></script>
@@ -307,17 +306,7 @@
 	$(function() {
 		/** 일반회원 유효성검사*/
 		$('#btnMemSign').click(function() {
-			/* var inputText = $('#memPw').val();
-			
-			var rsaPkModule = $('#publicKeyModule').val();
-			var rsaPkExponent = $('#publicKeyExponent').val();
-			
-			var rsa = new RSAKey();
-			rsa.setPublic(rsaPkModule,rsaPkExponent);
-			
-			var securedPw = rsa.encrypt(inputText);
-			$('#memPw').val(securedPw);
-			$('#registerFrm').submit(); */
+			 
 			
 			if ($('#ismailcodeCheck').val() != 'Y'){
 				alert("이메일 인증이 필요합니다.");
@@ -351,6 +340,18 @@
 				alert("휴대전화는 숫자만 입력해주세요.");
 				$('#memTel').focus();
 				event.preventDefault();
+			}else{
+				var inputText = $('#memPw').val();
+				
+				var rsaPkModule = $('#publicKeyModule').val();
+				var rsaPkExponent = $('#publicKeyExponent').val();
+				
+				var rsa = new RSAKey();
+				rsa.setPublic(rsaPkModule,rsaPkExponent);
+				
+				var securedPw = rsa.encrypt(inputText);
+				$('#memPw').val(securedPw);
+				$('#registerFrm').submit();
 			}
 		});
 		
@@ -399,6 +400,18 @@
 				$('#comRrn').focus();
 				event.preventDefault();
 
+			}else{
+				var inputText = $('#comPw').val();
+				
+				var rsaPkModule = $('#publicKeyModule').val();
+				var rsaPkExponent = $('#publicKeyExponent').val();
+				
+				var rsa = new RSAKey();
+				rsa.setPublic(rsaPkModule,rsaPkExponent);
+				
+				var securedPw = rsa.encrypt(inputText);
+				$('#comPw').val(securedPw);
+				$('#comregisterFrm').submit();
 			}
 		});
 		

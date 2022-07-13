@@ -14,6 +14,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.HashMap;
 
+import javax.crypto.Cipher;
 import javax.servlet.ServletContext;
 import javax.servlet.annotation.WebListener;
 import javax.servlet.http.HttpSession;
@@ -125,7 +126,29 @@ public class VisitListener implements HttpSessionListener {
 		}
 		
 		return cnt;
-	};
+	}
+	
+	public static String decryptRsa(PrivateKey pk, String val) throws Exception{
+		Cipher cipher = Cipher.getInstance("RSA");
+		byte[] encryptedBytes = hexToByteArray(val);
+		cipher.init(Cipher.DECRYPT_MODE, pk);
+		byte[] decryptedBytes = cipher.doFinal(encryptedBytes);
+		String decryptedValue = new String(decryptedBytes,"utf-8");
+		return decryptedValue;
+	}
+	
+	public static  byte[] hexToByteArray(String hex) {
+		if(hex == null || hex.length() % 2 != 0) {
+			return new byte[] {};
+			
+		}
+		byte[] bytes = new byte[hex.length()/2];
+		for(int i=0; i<hex.length(); i+=2) {
+			byte value = (byte)Integer.parseInt(hex.substring(i,i+2),16);
+			bytes[(int)Math.floor(i/2)] = value;
+		}
+		return bytes;
+	}
 	
 	
 }
