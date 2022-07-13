@@ -7,6 +7,6 @@ import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
 public interface ContactDAO {
-	public List<ContactVO> selectContactByMemNo(int memNo);
+	List<ContactVO> selectContactByMemNo(int memNo);
 
 }

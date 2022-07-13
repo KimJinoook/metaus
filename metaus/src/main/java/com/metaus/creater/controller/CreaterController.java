@@ -81,6 +81,7 @@ public class CreaterController {
 		List<ContactVO> contactList = contactService.selectContactByMemNo(memNo);
 		logger.info("크리에이터 디테일 뷰 contactList={}",contactList);
 		
+		
 		model.addAttribute("memVo",memVo);
 		model.addAttribute("resumeVo", resumeVo);
 		model.addAttribute("portfolioList", portfolioList);
