@@ -1647,6 +1647,18 @@ select a.*, b.msgadd_no, b.msgadd_adsee, b.msgadd_date
 from fp_msg a join fp_msgadd b
 on a.msg_no=b.msg_no;
 
+--∫‰ commissionView
+create or replace view commissionView
+as
+select a.*, b.con_pay, b.con_donedate
+from
+(
+select a.*, b.recpre_no, b.mem_no, b.recpre_date, b.recpre_content
+from fp_rec a left join fp_recpre b
+on a.rec_no = b.rec_no
+) a left join fp_contact b
+on a.rec_no = b.rec_no and a.mem_no = b.mem_no;
+
 --«¡∑ŒΩ√¡Æ updateStarFlag
 create or replace procedure updateStarFlag
 (

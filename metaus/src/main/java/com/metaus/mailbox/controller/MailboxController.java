@@ -189,6 +189,7 @@ public class MailboxController {
 		}
 		logger.info("memId={}", memId);
 		
+		//페이징 처리
 		Map<String, Object> map = new HashMap<>();
 		map.put("memId", memId);
 		map.put("searchKeyword", searchKeyword);
