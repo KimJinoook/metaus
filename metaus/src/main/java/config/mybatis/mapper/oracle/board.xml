@@ -79,6 +79,19 @@
 		)
 		where RNUM between 1 and 5 and board_delFlag='N' and btype_no=#{btypeNo}
 	</select>
+	<select id="PopularSelect2" resultType="boardVo">
+		select *
+		from
+		(
+		    select rownum as RNUM, A.*
+		    from
+		    (
+		        select * from fp_board 
+		        order by board_readcount desc
+		    )A
+		)
+		where RNUM between 1 and 3 and board_delFlag='N'
+	</select>
 	
 	<select id="selectBoardFaq" parameterType="boardVo" resultType="boardVo">
 		select b.*, m.mem_name, f.bfile_filename

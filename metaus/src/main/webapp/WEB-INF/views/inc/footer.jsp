@@ -12,12 +12,51 @@
 
 			<!-- 1st Footer Column -->
 			-
-			<div class="col-md-3 col-sm-6 col-xs-6 footer-about">
-				<h3>찾아오시는 길</h3>
+			<div class="col-md-3 col-sm-6 col-xs-6 footer-about" style="width: 24%">
+				<a class="navbar-brand nomargin" href="<c:url value='/'/>" style="padding: 0px; "><img src="<c:url value='/images/metaus_logo2.png'/>" style=" margin-right: 50px; margin-bottom: 50px"   alt="logo"></a>
 				<!-- Small Description -->
-				<div id="map" style="width:100%;height:200px;"></div>
+				
+				<!-- Info -->
+				<ul class="nopadding">
+					<li><i class="fa fa-map-marker"></i>서울특별시 서대문구, 104-48</li>
+					<li><i class="fa fa-phone"></i>(대표) 010-3084-3045</li>
+					<li><i class="fa fa-envelope-o"></i>kimjin0132@naver.com</li>
+				</ul>
+			</div>
+
+			<!-- 2nd Footer Column -->
+			<div class="col-md-3 col-sm-6 col-xs-6 footer-links">
+				<h3>메타어스 링크</h3>
+
+				<!-- Links -->
+				<ul class="nopadding">
+					<li><a href="<c:url value='/request/search'/>"><i
+							class="fa fa-angle-double-right"></i>의뢰 찾기</a></li>
+					<li><a href="<c:url value='/creater/createrList'/>"><i
+							class="fa fa-angle-double-right"></i>크리에이터 찾기</a></li>
+					<li><a href="<c:url value='/board/notice?btypeNo=1'/>"><i
+							class="fa fa-angle-double-right"></i>공지사항</a></li>
+					<li><a href="<c:url value='/board/faq?btypeNo=2'/>"><i
+							class="fa fa-angle-double-right"></i>FAQ</a></li>
+					<li><a href="<c:url value='/board/news2'/>"><i
+							class="fa fa-angle-double-right"></i>기사</a></li>
+					<li><a href="<c:url value='/pd/pd'/>"><i
+							class="fa fa-angle-double-right"></i>3D Model 목록</a></li>
+					<li><a href="<c:url value='/member/register'/>"><i
+							class="fa fa-angle-double-right"></i>회원가입</a></li>
+				</ul>
+			</div>
+
+			
+			<div class="col-md-6 col-sm-6 col-xs-6 footer-posts">
+				<h3>찾아오시는 길</h3>
+
+				<!-- Single Post 1 -->
+				<div class="footer-blog-post">
+
+					<div id="map" style="width:100%;height:200px;"></div>
 					<script type="text/javascript"
-						src="//dapi.kakao.com/v2/maps/sdk.js?appkey=48fd685b6c1070cc71f894be6653d843&libraries=services"></script>
+						src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e35ee665202c956a80b8b31eaa6545be&libraries=services"></script>
 					<script>
 					var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 				    mapOption = {
@@ -56,81 +95,8 @@
 				    } 
 				}); 
 					</script>
-				<!-- Info -->
-				<ul class="nopadding">
-					<li><i class="fa fa-map-marker"></i>서울특별시 서대문구, 104-48</li>
-					<li><i class="fa fa-phone"></i>(대표) 010-3084-3045</li>
-					<li><i class="fa fa-envelope-o"></i>kimjin0132@naver.com</li>
-				</ul>
-			</div>
-
-			<!-- 2nd Footer Column -->
-			<div class="col-md-3 col-sm-6 col-xs-6 footer-links">
-				<h3>메타어스 링크</h3>
-
-				<!-- Links -->
-				<ul class="nopadding">
-					<li><a href="<c:url value='/request/search'/>"><i
-							class="fa fa-angle-double-right"></i>의뢰 찾기</a></li>
-					<li><a href="<c:url value='/creater/createrList'/>"><i
-							class="fa fa-angle-double-right"></i>크리에이터 찾기</a></li>
-					<li><a href="<c:url value='/board/notice?btypeNo=1'/>"><i
-							class="fa fa-angle-double-right"></i>공지사항</a></li>
-					<li><a href="<c:url value='/board/faq?btypeNo=2'/>"><i
-							class="fa fa-angle-double-right"></i>FAQ</a></li>
-					<li><a href="<c:url value='/board/news2'/>"><i
-							class="fa fa-angle-double-right"></i>기사</a></li>
-					<li><a href="<c:url value='/pd/pd'/>"><i
-							class="fa fa-angle-double-right"></i>3D Model 목록</a></li>
-					<li><a href="<c:url value='/member/register'/>"><i
-							class="fa fa-angle-double-right"></i>회원가입</a></li>
-				</ul>
-			</div>
-
-			<!-- 3rd Footer Column -->
-			<div class="col-md-3 col-sm-6 col-xs-6 footer-posts">
-				<h3>인기 글</h3>
-
-				<!-- Single Post 1 -->
-				<div class="footer-blog-post">
-
-					<!-- Thumbnail -->
-					<div class="thumbnail-post">
-						<a href="blog-post-right-sidebar.html"> <img
-							src="images/blog/blog1.jpg" alt="">
-						</a>
-					</div>
-
-					<!-- Link -->
-					<div class="post-info">
-						<a href="blog-post-right-sidebar.html">blog post 1</a> <span>1
-							day ago</span>
-					</div>
 				</div>
-
-			</div>
-
-						<!-- 3rd Footer Column -->
-			<div class="col-md-3 col-sm-6 col-xs-6 footer-posts">
-				<h3>인기 글</h3>
-
-				<!-- Single Post 1 -->
-				<div class="footer-blog-post">
-
-					<!-- Thumbnail -->
-					<div class="thumbnail-post">
-						<a href="blog-post-right-sidebar.html"> <img
-							src="images/blog/blog1.jpg" alt="">
-						</a>
-					</div>
-
-					<!-- Link -->
-					<div class="post-info">
-						<a href="blog-post-right-sidebar.html">blog post 1</a> <span>1
-							day ago</span>
-					</div>
-				</div>
-
+				<p>서울 서대문구 신촌로 141 은하빌딩 1,2,4층</p>
 			</div>
 
 

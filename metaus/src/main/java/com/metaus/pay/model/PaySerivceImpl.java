@@ -7,7 +7,7 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 public class PaySerivceImpl implements PayService{
-	private static PayDAO payDao;
+	private final PayDAO payDao;
 
 	@Override
 	public int insertPay(PayVO vo) {
