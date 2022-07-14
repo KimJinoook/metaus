@@ -34,16 +34,16 @@ public class PayController {
 	@RequestMapping("/pay")
 	public String pay(@RequestParam int pdNo, @RequestParam int payPrice,@RequestParam String payKind, HttpSession session, @ModelAttribute PayVO payVo) {
 		int memNo=(int)session.getAttribute("memNo");
-		logger.info("결제 완료 페이지 파라미터 payVo={},memNo={}",payVo,memNo);
+		logger.info("결제 완료 페이지 파라미터 payVo={},memNo={},pdNo={}",payVo,memNo, pdNo);
 		payVo.setMemNo(memNo);
 		payVo.setPayPrice(payPrice);
 		payVo.setPayKind(payKind);
-		int cnt=payService.insertPay(payVo);
+		int cnt=payService.insertPay(payVo);		
 		logger.info("결제 완료 파라미터 cnt={}",cnt);
-		List<CartVO> list=null;
+		
+		List<CartVO> list=cartService.selectCartList(memNo);
 		BuyVO buyVo= new BuyVO();
 		if(cnt>0) {
-			list=cartService.selectCartList(memNo);
 			for(int i=0;i<list.size();i++) {
 				buyVo.setMemNo(memNo);
 				buyVo.setPdNo(pdNo);

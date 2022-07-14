@@ -1604,6 +1604,10 @@ insert into fp_pd
 values(fp_pd_seq.nextval,1,1,'시바견','시바견입니다','2.zip',null,null,1500,3);
 insert into fp_pd
 values(fp_pd_seq.nextval,10,2,'화장실','화장실입니다','1.zip',null,null,1500,null);
+insert into fp_pd
+values(fp_pd_seq.nextval,6,1,'귀여운 소녀','귀여운 소녀입니다','kawai.zip',null,null,35000,null);
+insert into fp_pd
+values(fp_pd_seq.nextval,12,1,'삼지창','들면 멋있음','trident.zip',null,null,35000,null);
 
 
 insert into fp_resume
@@ -1623,14 +1627,14 @@ values(fp_manager_seq.nextval,'test','김진욱','1234',sysdate,'1.jpg','0103084304
 
 select * from fp_buy;
 
-insert into fp_buy
-values(fp_buy_seq.nextval,1,1,sysdate);
+--insert into fp_buy
+--values(fp_buy_seq.nextval,1,1,sysdate);
 
-insert into fp_buy
-values(fp_buy_seq.nextval,1,1,'2022-06-06');
+--insert into fp_buy
+--values(fp_buy_seq.nextval,1,2,'2022-06-06');
 
-insert into fp_buy
-values(fp_buy_seq.nextval,1,1,sysdate);
+--insert into fp_buy
+--values(fp_buy_seq.nextval,1,3,sysdate);
 
 commit;
 select * from fp_mem where mem_id like 'kimjin0132%';
