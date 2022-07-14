@@ -366,8 +366,9 @@
                                                     
                                                     </tr>
                                                    <c:set var="sum" value="${sum+vo.pdPrice }"/>
-                                                   <c:set var="count" value="${list.size() }"/>
+                                                   <c:set var="count" value="${list.size()-1 }"/>
                                                    <c:set var="pdName" value="${vo.pdName }"/>
+                                                   <c:set var="pdNo" value="${vo.pdNo }"/>
                                                    </c:forEach>
                                                     <!-- End of Cart Item 1 -->
 													
@@ -598,7 +599,7 @@
 	     			 *  https://docs.iamport.kr/implementation/payment
 	     			 *  위에 url에 따라가시면 넣을 수 있는 방법이 있습니다.
 	     			 */
-	     			name:' 3D 모델링 ${count}건',
+	     			name:'${pdName} 외 ${count}건',
 	     			// 결제창에서 보여질 이름
 	     			// name: '주문명 : ${auction.a_title}',
 	     			// 위와같이 model에 담은 정보를 넣어 쓸수도 있습니다.
@@ -613,8 +614,9 @@
 	     				console.log(rsp);
 	     			if (rsp.success) {
 	     				var msg = '결제가 완료되었습니다.';
-	     				msg += '결제 금액 : ' + rsp.paid_amount;
+	     				msg += '결제 금액 : ' + rsp.paid_amount+'원';
 	     				$('#form-cart-pay input[name=payPrice]').val(${sum});
+	     				$('#form-cart-pay input[name=pdNo]').val(${pdNo});
 	     				$('#form-cart-pay').submit();
 	     				// success.submit();
 	     				// 결제 성공 시 정보를 넘겨줘야한다면 body에 form을 만든 뒤 위의 코드를 사용하는 방법이 있습니다.
@@ -633,5 +635,6 @@
     <input type="hidden" name="payPrice">
     <input type="hidden" name="memNo" value="${sessionScope.memNo}">
     <input type="hidden" name="payKind" value="카드 결제">
+    <input type="hidden" name="pdNo" >
     </form>
     <%@ include file="../inc/footer.jsp"%>
