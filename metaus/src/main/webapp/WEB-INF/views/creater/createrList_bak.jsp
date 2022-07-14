@@ -5,6 +5,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ include file="../inc/header.jsp" %>
 
+
     <!-- =============== Start of Page Header 1 Section =============== -->
     <section class="page-header" id="find-candidate">
         <div class="container">
@@ -12,12 +13,7 @@
             <!-- Start of Page Title -->
             <div class="row">
                 <div class="col-md-12">
-               		<c:if test="${recNo eq 0 }">
-                    	<h2>크리에이터 찾기</h2>
-                    </c:if>
-                    <c:if test="${recNo > 0 }">
-                    	<h2>지원자 현황</h2>
-                    </c:if>
+                    <h2>크리에이터 찾기</h2>
                 </div>
             </div>
             <!-- End of Page Title -->
@@ -35,7 +31,8 @@
         <div class="container">
 
             <!-- Start of Form -->
-            <form class="row" action="<c:url value='/creater/createrList?recNo=${recNo }'/>" method="post">
+            <form class="row" action="<c:url value='/creater/createrList'/>" method="post">
+
                 <!-- Start of keywords input -->
                 <div class="col-md-6 col-md-offset-2 col-sm-6 col-sm-offset-2 col-xs-8">
                     <label for="search-keywords">Keywords</label>
@@ -107,11 +104,8 @@
 
                             <!-- CTA -->
                             <div class="col-md-2 col-xs-3">
-                                <div class="candidate-cta ptb30" style="width: 180px;">
+                                <div class="candidate-cta ptb30">
                                     <a href="<c:url value='/creater/createrDetail?memNo=${vo.memNo}'/>" class="btn btn-blue btn-small btn-effect">상세보기</a>
-                                    <c:if test="${recNo > 0 }">
-                                    	<button class="btn btn-green btn-small btn-effect">계약하기</button>
-                                    </c:if>
                                 </div>
                             </div>
 
