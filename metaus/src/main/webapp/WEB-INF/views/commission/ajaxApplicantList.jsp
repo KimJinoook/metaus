@@ -1,0 +1,105 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<!-- Start of Row -->
+            <div class="row mt60">
+
+                <!-- Start of Candidate Main -->
+                <div class="col-md-12 candidate-main">
+
+                    <!-- Start of Candidates Wrapper -->
+                    <div class="candidate-wrapper">
+                    
+						<c:if test="${empty list }">
+							<img alt="게시글 내용이 없습니다"
+								src="<c:url value='/images/board/no_board.gif'/>"
+								style="width: 800px;">
+						</c:if>
+				
+						<c:if test="${!empty list }">
+						<c:forEach var="vo" items="${list }">		
+                        <!-- ===== Start of Single Candidate 1 ===== -->
+                        <div class="single-candidate row nomargin">
+
+                            <!-- Candidate Image -->
+                            <div class="col-md-2 col-xs-3">
+                                <div class="candidate-img" >
+                                        <img src="<c:url value='/mem_profile/${vo.memPic}'/>" class="img-responsive" alt="" onerror="this.onerror=null; this.src='<c:url value='/images/createrProfile/user.png'/>'">
+                                </div>
+                            </div>
+
+                            <!-- Start of Candidate Name & Info -->
+                            <div class="col-md-8 col-xs-6 ptb20">
+
+                                <!-- Candidate Name -->
+                                <div class="candidate-name">
+                                    <a href="<c:url value='/creater/createrDetail?memNo=${vo.memNo}'/>"><h5>${vo.memNick }</h5></a>
+                                </div>
+
+                                <!-- Candidate Info -->
+                                <div class="candidate-info mt5">
+                                    <ul class="list-inline">
+                                        <li>
+                                            <span><i class="fa fa-envelope"></i>${vo.memId }</span>
+                                        </li>
+
+                                        <li>
+                                            <span><i class="fa fa-inbox"></i>${vo.memItem } items</span>
+                                        </li>
+
+                                        <li>
+                                            <span><i class="fa fa-handshake-o"></i>${vo.memComplete } contracts</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- End of Candidate Name & Info -->
+
+                            <!-- CTA -->
+                            <div class="col-md-2 col-xs-3">
+                                <div class="candidate-cta ptb30">
+                                    <a href="<c:url value='/creater/createrDetail?memNo=${vo.memNo}'/>" class="btn btn-blue btn-small btn-effect">상세보기</a>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!-- ===== End of Single Candidate 1 ===== -->
+                        </c:forEach>
+                        </c:if>
+
+
+                    </div>
+                    <!-- End of Candidates Wrapper -->
+
+                    <!-- Start of Pagination -->
+                    <div class="col-md-12 mt10">
+                        <ul class="pagination list-inline text-center">
+                        	<c:if test="${pagingInfo.firstPage>1 }">
+								<li><a href="#"
+									onclick="boardList(${pagingInfo.firstPage-1})">이전</a></li>
+							</c:if>
+							<c:forEach var="i" begin="${pagingInfo.firstPage }"
+								end="${pagingInfo.lastPage }">
+								<c:if test="${i==pagingInfo.currentPage }">
+									<li class="active"><a>${i }</a></li>
+								</c:if>
+								<c:if test="${i!=pagingInfo.currentPage }">
+									<li><a href="#" onclick="boardList(${i})">${i } </a></li>
+								</c:if>
+							</c:forEach>
+
+							<c:if test="${pagingInfo.lastPage<pagingInfo.totalPage }">
+								<li><a href="#"
+									onclick="boardList(${pagingInfo.lastPage+1})">다음</a></li>
+							</c:if>
+                        </ul>
+                    </div>
+                    <!-- End of Pagination -->
+
+                </div>
+                <!-- End of Candidate Main -->
+
+            </div>
+            <!-- End of Row -->
