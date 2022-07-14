@@ -33,7 +33,7 @@
 
                 <!-- Start of submit input -->
                 <div class="col-md-4 col-sm-12 search-submit">
-                    <button type="submit" class="btn btn-blue btn-effect btn-large"><i class="fa fa-search"></i>search</button>
+                    <button type="button" class="btn btn-blue btn-effect btn-large" id="selectBtn"><i class="fa fa-search"></i>search</button>
                 </div>
 				<br>
 				</form>
@@ -206,6 +206,18 @@ $( "old" ).on( "mousemove", function() {
    mesh2.rotation.x=pos2/10;
    mesh.rotation.x=pos2/10;
  });
+ 
+ 
+ $(function(){
+	 $('#selectBtn').click(function(){
+		 if($('#search-categories').val()==1){
+			 location.href="<c:url value='/request/search'/>";
+		 }else if($('#search-categories').val()==2){
+			 location.href="<c:url value='/creater/createrList'/>";
+			 
+		 }
+	 });
+ });
 </script>
 
 
@@ -219,161 +231,169 @@ $( "old" ).on( "mousemove", function() {
 
             <div class="row nomargin">
                 <!-- Start of Category div -->
+                <a href="<c:url value='/pd/pdByCategory?cateNo=1&cateName=동물'/>">
                 <div class="col-md-3 col-sm-6 col-xs-12 cat-wrapper">
                     <div class="category shadow-hover ptb30">
 
                         <!-- Icon -->
                         <div class="category-icon pt10">
-                            <img src="/metaus/images/icons/accounting.svg" alt="">
+                            <img src="/metaus/images/icons/animal.png" alt="">
                         </div>
 
                         <!-- Category Info - Title -->
                         <div class="category-info pt20">
-                            <a href="#">accountance</a>
-                            <p>(9 open positions)</p>
+                            <a href="<c:url value='/pd/pdByCategory?cateNo=1&cateName=동물'/>">동물</a>
+                            <p>( ${cateCnt.animalCnt } products )</p>
                         </div>
 
                     </div>
-                </div>
+                </div></a>
                 <!-- End of Category div -->
 
                 
                 <!-- Start of Category div -->
+                <a href="<c:url value='/pd/pdByCategory?cateNo=2&cateName=인물'/>">
                 <div class="col-md-3 col-sm-6 col-xs-12 cat-wrapper">
                     <div class="category shadow-hover ptb30">
 
                         <!-- Icon -->
                         <div class="category-icon pt10">
-                            <img src="/metaus/images/icons/banking.svg" alt="">
+                            <img src="/metaus/images/icons/human.png" alt="">
                         </div>
 
                         <!-- Category Info - Title -->
                         <div class="category-info pt20">
-                            <a href="#">banking</a>
-                            <p>(9 open positions)</p>
+                            <a href="<c:url value='/pd/pdByCategory?cateNo=2&cateName=인물'/>">인물</a>
+                            <p>( ${cateCnt.humanCnt } products )</p>
                         </div>
 
                     </div>
-                </div>
+                </div></a>
                 <!-- End of Category div -->
 
                 
                 <!-- Start of Category div -->
+                <a href="<c:url value='/pd/pdByCategory?cateNo=3&cateName=가구'/>">
                 <div class="col-md-3 col-sm-6 col-xs-12 cat-wrapper">
                     <div class="category shadow-hover ptb30">
 
                         <!-- Icon -->
                         <div class="category-icon pt10">
-                            <img src="/metaus/images/icons/design.svg" alt="">
+                            <img src="/metaus/images/icons/furniture.png" alt="">
                         </div>
 
                         <!-- Category Info - Title -->
                         <div class="category-info pt20">
-                            <a href="#">design & art</a>
-                            <p>(36 open positions)</p>
+                            <a href="<c:url value='/pd/pdByCategory?cateNo=3&cateName=가구'/>">가구</a>
+                            <p>( ${cateCnt.furnitureCnt } products )</p>
                         </div>
 
                     </div>
-                </div>
+                </div></a>
                 <!-- End of Category div -->
 
                 
                 <!-- Start of Category div -->
+                <a href="<c:url value='/pd/pdByCategory?cateNo=4&cateName=예술'/>">
                 <div class="col-md-3 col-sm-6 col-xs-12 cat-wrapper">
                     <div class="category shadow-hover ptb30">
 
                         <!-- Icon -->
                         <div class="category-icon pt10">
-                            <img src="/metaus/images/icons/insurance.svg" alt="">
+                            <img src="/metaus/images/icons/paint-palette.png" alt="">
                         </div>
 
                         <!-- Category Info - Title -->
                         <div class="category-info pt20">
-                            <a href="#">insurance</a>
-                            <p>(6 open positions)</p>
+                            <a href="<c:url value='/pd/pdByCategory?cateNo=4&cateName=예술'/>">예술</a>
+                            <p>( ${cateCnt.artCnt } products )</p>
                         </div>
 
                     </div>
-                </div>
+                </div></a>
                 <!-- End of Category div -->
             </div>
 
             
             <div class="row nomargin">
                 <!-- Start of Category div -->
+                <a href="<c:url value='/pd/pdByCategory?cateNo=5&cateName=탈것'/>">
                 <div class="col-md-3 col-sm-6 col-xs-12 cat-wrapper">
                     <div class="category shadow-hover ptb30">
 
                         <!-- Icon -->
                         <div class="category-icon pt10">
-                            <img src="/metaus/images/icons/laptop.svg" alt="">
+                            <img src="/metaus/images/icons/car.png" alt="">
                         </div>
 
                         <!-- Category Info - Title -->
                         <div class="category-info pt20">
-                            <a href="#">IT engineer</a>
-                            <p>(22 open positions)</p>
+                            <a href="<c:url value='/pd/pdByCategory?cateNo=5&cateName=탈것'/>">탈것</a>
+                            <p>( ${cateCnt.vehicleCnt } products )</p>
                         </div>
 
                     </div>
-                </div>
+                </div></a>
                 <!-- End of Category div -->
 
                 <!-- Start of Category div -->
+                <a href="<c:url value='/pd/pdByCategory?cateNo=6&cateName=캐릭터'/>">
                 <div class="col-md-3 col-sm-6 col-xs-12 cat-wrapper">
                     <div class="category shadow-hover ptb30">
 
                         <!-- Icon -->
                         <div class="category-icon pt10">
-                            <img src="/metaus/images/icons/healthcare.svg" alt="">
+                            <img src="/metaus/images/icons/knight.png" alt="">
                         </div>
 
                         <!-- Category Info - Title -->
                         <div class="category-info pt20">
-                            <a href="#">healthcare</a>
-                            <p>(14 open positions)</p>
+                            <a href="<c:url value='/pd/pdByCategory?cateNo=6&cateName=캐릭터'/>">캐릭터</a>
+                            <p>( ${cateCnt.characterCnt } products )</p>
                         </div>
 
                     </div>
-                </div>
+                </div></a>
                 <!-- End of Category div -->
 
                 <!-- Start of Category div -->
+                <a href="<c:url value='/pd/pdByCategory?cateNo=7&cateName=문화'/>">
                 <div class="col-md-3 col-sm-6 col-xs-12 cat-wrapper">
                     <div class="category shadow-hover ptb30">
 
                         <!-- Icon -->
                         <div class="category-icon pt10">
-                            <img src="/metaus/images/icons/marketing.svg" alt="">
+                            <img src="/metaus/images/icons/worldwide.png" alt="">
                         </div>
 
                         <!-- Category Info - Title -->
                         <div class="category-info pt20">
-                            <a href="#">marketing</a>
-                            <p>(7 open positions)</p>
+                            <a href="<c:url value='/pd/pdByCategory?cateNo=7&cateName=문화'/>">문화</a>
+                            <p>( ${cateCnt.cultureCnt } products )</p>
                         </div>
 
                     </div>
-                </div>
+                </div></a>
                 <!-- End of Category div -->
 
                 <!-- Start of Category div -->
+                <a href="<c:url value='/pd/pdByCategory?cateNo=8&cateName=패션'/>">
                 <div class="col-md-3 col-sm-6 col-xs-12 cat-wrapper">
                     <div class="category shadow-hover ptb30">
 
                         <!-- Icon -->
                         <div class="category-icon pt10">
-                            <img src="/metaus/images/icons/management.svg" alt="">
+                            <img src="/metaus/images/icons/fashion.png" alt="">
                         </div>
 
                         <!-- Category Info - Title -->
                         <div class="category-info pt20">
-                            <a href="#">management</a>
-                            <p>(4 open positions)</p>
+                            <a href="<c:url value='/pd/pdByCategory?cateNo=8&cateName=패션'/>">패션</a>
+                            <p>( ${cateCnt.fashionCnt } products )</p>
                         </div>
 
                     </div>
-                </div>
+                </div></a>
                 <!-- End of Category div -->
             </div>
 
@@ -398,7 +418,7 @@ $( "old" ).on( "mousemove", function() {
         <div class="container">
 
             <div class="section-title">
-                <h2>latest jobs</h2>
+                <h2>신규 의뢰</h2>
             </div>
 
             <!-- Start of Row -->
@@ -602,26 +622,26 @@ $( "old" ).on( "mousemove", function() {
 
             <!-- 1st Count up item -->
             <div class="col-md-3 col-sm-3 col-xs-12">
-                <span class="counter" data-from="0" data-to="743"></span>
-                <h4>members</h4>
+                <span class="counter" data-from="0" data-to="${footCnt.memCnt }"></span>
+                <h4>일반회원 수</h4>
             </div>
 
             <!-- 2nd Count up item -->
             <div class="col-md-3 col-sm-3 col-xs-12">
-                <span class="counter" data-from="0" data-to="579"></span>
-                <h4>jobs</h4>
+                <span class="counter" data-from="0" data-to="${footCnt.recCnt }"></span>
+                <h4>의뢰 수</h4>
             </div>
 
             <!-- 3rd Count up item -->
             <div class="col-md-3 col-sm-3 col-xs-12">
-                <span class="counter" data-from="0" data-to="251"></span>
-                <h4>resumes</h4>
+                <span class="counter" data-from="0" data-to="${footCnt.resumeCnt }"></span>
+                <h4>이력서 수</h4>
             </div>
 
             <!-- 4th Count up item -->
             <div class="col-md-3 col-sm-3 col-xs-12">
-                <span class="counter" data-from="0" data-to="330"></span>
-                <h4>companies</h4>
+                <span class="counter" data-from="0" data-to="${footCnt.comCnt }"></span>
+                <h4>기업회원 수</h4>
             </div>
 
         </div>

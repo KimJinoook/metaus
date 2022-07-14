@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.metaus.model.IndexDAO">
+	<sql id="searchAndWhere">
+		<if test="searchKeyword !=null and searchKeyword !=''">
+			and (mem_nick like '%' || #{searchKeyword} || '%' or mem_id like '%' || #{searchKeyword} || '%')
+        </if>
+	</sql>
+	
+	<select id="selectCateCnt" resultType="IndexVO">
+		select (select count(*) from fp_pd where cate_no = 1) animal_cnt, (select count(*) from fp_pd where cate_no = 2) human_cnt, (select count(*) from fp_pd where cate_no = 3) furniture_cnt, (select count(*) from fp_pd where cate_no = 4) art_cnt,
+		(select count(*) from fp_pd where cate_no = 5) vehicle_cnt, (select count(*) from fp_pd where cate_no = 6) character_cnt, (select count(*) from fp_pd where cate_no = 7) culture_cnt, (select count(*) from fp_pd where cate_no = 8) fashion_cnt from dual
+	</select>
+	
+	<select id="selectFooterCnt" resultType="IndexVO">
+		select (select count(*) from fp_mem) memCnt, (select count(*) from fp_com) comCnt, (select count(*) from fp_rec) recCnt, (select count(*) from fp_resume) resumeCnt from dual
+	</select>
+	
+	
+</mapper>
+
+
+
+
+
