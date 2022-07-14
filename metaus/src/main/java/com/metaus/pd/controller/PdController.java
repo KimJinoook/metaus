@@ -152,4 +152,10 @@ public class PdController {
 		return "/pd/best3";
 	}
 	
+	@RequestMapping("/myPdList")
+	public String myPdList() {
+		logger.info("구매한 상품 조회 페이지");
+		
+		return "/pd/myPdList";
+	}
 }

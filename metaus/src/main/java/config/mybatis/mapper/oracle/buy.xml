@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.metaus.buy.model.BuyDAO">
+	<insert id="insertBuy" parameterType="BuyVO">
+		<selectKey keyProperty="buyNo" resultType="int"
+			order="BEFORE">
+			select fp_buy_seq.nextval from dual
+		</selectKey>
+		insert into fp_buy(buy_no, mem_no, pd_no)
+		values(#{buyNo},#{memNo},#{pdNo})
+	</insert>
+	
+	<select id="selectBuyByMemNo" parameterType="int" resultType="BuyVo">
+		select * from fp_buy
+		where mem_no=#{memNo}
+	</select>
+</mapper>

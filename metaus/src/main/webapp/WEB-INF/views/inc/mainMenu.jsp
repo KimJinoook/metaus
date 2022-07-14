@@ -172,6 +172,7 @@
 	                         <ul class="dropdown-menu">
 	                             <li><a href="<c:url value='/lecture/lectureList'/>">모델목록</a></li>
 	                             <li><a href="<c:url value='/lecture/salesChart'/>">모델매출</a></li>
+	                             <li><a href="<c:url value='/pd/myPdList'/>">내가 구매한 모델</a></li>
 	                         </ul>
 	                     </li>
 	                     </c:if>

@@ -3,73 +3,220 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ include file="inc/header.jsp" %>
+<%@ include file="../inc/header.jsp" %>
 
-	 <!-- ===== Start of Main Search Section ===== -->
-    <section class="main overlay-black">
-        <img src="images/mainlogo_daemunjjack.png" alt="">
-    </section>
-    <!-- ===== End of Main Search Section ===== -->
+<section class="main overlay-black" style="height:90%">
 
-	<section>
-		<div>
-			<canvas id="canvas" width="300px" height="300px"></canvas>
+        <!-- Start of Wrapper -->
+        <div class="container wrapper">
+            <h1 class="capitalize text-center text-white">your career starts now</h1>
+
+            <!-- Start of Form -->
+            <form class="job-search-form row pt40" action="#" method="get">
+
+                <!-- Start of keywords input -->
+                <div class="col-md-3 col-sm-12 search-keywords">
+                    <label for="search-keywords">Keywords</label>
+                    <input type="text" name="search-keywords" id="search-keywords" placeholder="Keywords">
+                </div>
+
+                <!-- Start of category input -->
+                <div class="col-md-3 col-sm-12 search-categories">
+                    <label for="search-categories">Category</label>
+                    <select name="search-categories" class="selectpicker" id="search-categories" data-live-search="true" title="Any Category" data-size="5" data-container="body">
+                        <option value="1">Accountance</option>
+                        <option value="2">Banking</option>
+                        <option value="3">Design & Art</option>
+                        <option value="4">Developement</option>
+                        <option value="5">Insurance</option>
+                        <option value="6">IT Engineer</option>
+                        <option value="7">Healthcare</option>
+                        <option value="8">Marketing</option>
+                        <option value="9">Management</option>
+                    </select>
+                </div>
+
+                <!-- Start of location input -->
+                <div class="col-md-4 col-sm-12 search-location">
+                    <label for="search-location">Location</label>
+                    <input type="text" name="search-location" id="search-location" placeholder="Location">
+                </div>
+
+                <!-- Start of submit input -->
+                <div class="col-md-2 col-sm-12 search-submit">
+                    <button type="submit" class="btn btn-blue btn-effect btn-large"><i class="fa fa-search"></i>search</button>
+                </div>
+
+            </form>
+            <!-- End of Form -->
+
+            <div class="extra-info pt20">
+                <span class="text-left text-white"><b>36</b> job offers for <b>you.</b></span>
+                <a href="#" class="capitalize pull-right text-white">advanced search</a>
+            </div>
 			
-		</div>
-	</section>
-			<script async src="https://unpkg.com/es-module-shims@1.3.6/dist/es-module-shims.js"></script>
-			<script type="importmap">
-				{
-					"imports":{
-						"three": "<c:url value='/js/three.module.js'/>",
-						"GLTFLoader" : "https://unpkg.com/three@0.141.0/examples/jsm/loaders/GLTFLoader.js",
-						"OrbitControls" : "https://unpkg.com/three@0.141.0/examples/jsm/controls/OrbitControls.js"
-					}
-				}
-			</script>
-			<script type="module">
-				import {GLTFLoader} from 'GLTFLoader';
-				import { OrbitControls } from 'OrbitControls';
-				import * as THREE from 'three';
+        </div>
+<div id="canvas1" style="z-index: 0;position:relative;" >
+                           <!-- <img class="img-fluid" src="img/hero.png" alt=""> -->
+                     </div>
+        <!-- End of Wrapper -->
 
-				let scene = new THREE.Scene();
-				let renderer = new THREE.WebGLRenderer({
-					canvas : document.querySelector('#canvas'),
-					antialias : true
-				});
-				renderer.outputEncoding = THREE.sRGBEncoding;
-				
+    </section>
 
-				let camera = new THREE.PerspectiveCamera(30,1);
-				camera.position.set(0,0,5)
+<script src="https://rawgit.com/mrdoob/three.js/dev/build/three.js"></script>
+<script src="https://rawgit.com/mrdoob/three.js/dev/examples/js/loaders/GLTFLoader.js"></script>
 
-				let controls = new OrbitControls(camera, renderer.domElement);
-				controls.update();
+<script src="https://cdn.rawgit.com/takahirox/THREE.ZipLoader/v0.0.1/build/ziploader.min.js"></script>
+<script src="https://unpkg.com/three@0.141.0/examples/js/controls/OrbitControls.js"></script>
+<script type="text/javascript" src="<c:url value='/js/jquery-3.6.0.min.js'/>"></script>
+<script>
+var camera, scene, renderer;
+var image;
 
-				scene.background = new THREE.Color('white');
+init();
+animate();
 
+//add textureloader
 
-				const grid = new THREE.GridHelper( 20, 20, 0x000000, 0x000000 );
-				grid.material.opacity = 0.2;
-				grid.material.transparent = true;
-				grid.position.y = -1;
-				scene.add( grid );
+function init() {
 
-				let loader = new GLTFLoader();
-				loader.load('gltfmodel/shiba/scene.gltf', function(gltf){
-					scene.add(gltf.scene);
-					function animate(){
-						requestAnimationFrame(animate)
-						controls.update();
-						renderer.render(scene,camera);
-						gltf.scene.rotation.y += 0.005;
-					}
-					animate();
-				});
-
-			</script>
+  renderer = new THREE.WebGLRenderer( {alpha: true});
+	renderer.setSize(window.innerWidth/2, window.innerWidth/2); //handle pixel density stuff (currently being set in CSS
+  // renderer.setPixelRatio( window.devicePixelRatio );
+   renderer.setPixelRatio(2);
+  // console.log(window.devicePixelRatio );
+	document.querySelector('#canvas1').appendChild( renderer.domElement );
 
 
+	scene = new THREE.Scene();
+  camera = new THREE.OrthographicCamera( -10, 10, 10,  -10, - 10, 10); 
+  
+	// camera.position.set( 0, 0, 0 );
+
+
+	// controls = new THREE.OrbitControls( camera, document.getElementById("controller") );
+	// controls.minDistance = 1;
+    // controls.enablePan = false;
+  // controls.enableZoom = false;
+  // controls.minPolarAngle = 0;
+
+    // image = document.createElement( 'img' );
+   
+  // document.body.appendChild( image );
+  
+//       image2 = document.createElement( 'img' );
+   
+//   document.body.appendChild( image2 );
+
+
+    // var texture = new THREE.Texture( image );
+  var texture = new THREE.TextureLoader().load( '<c:url value="/forthree/metausout.png"/>' );
+    var texture2 = new THREE.TextureLoader().load( '<c:url value="/forthree/metausmiddle.png"/>' );
+  // var texture = new THREE.SVGLoader().load( 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/39255/face.svg' );
+  // texture.anisotropy = renderer.capabilities.getMaxAnisotropy();
+  // texture.anisotropy = renderer.maxAnisotropy;
+  // texture.magFilter = THREE.NearestFilter;
+// texture.minFilter = THREE.LinearMipMapLinearFilter;
+  
+    // var texture2 = new THREE.Texture( image2 );
+  
+//     image.addEventListener( 'load', function ( event ) { texture.needsUpdate = true; } );
+  
+//       image2.addEventListener( 'load', function ( event ) { texture2.needsUpdate = true; } );
+
+	var material = new THREE.MeshBasicMaterial( {
+		map: texture
+	} );
+  
+  	var material2 = new THREE.MeshBasicMaterial( {
+		map: texture2
+	} );
+  material.transparent = true;
+  material2.transparent = true;
+    // material2.opacity = 0.5;
+     // material.opacity = 0.5;
+  
+//   material2.map.transparent = true;
+//   material2.map.opacity = 0.5;
+
+	var geometry = new THREE.SphereGeometry(9.98, 50, 50 );
+  mesh = new THREE.Mesh( geometry, material);
+var geometry2 = new THREE.SphereGeometry( 10, 50, 50 );
+   mesh2 = new THREE.Mesh( geometry2, material2);
+	// scene.add( mesh );
+   mesh2.rotation.y= -Math.PI/2;
+    mesh.rotation.y= -Math.PI/2;
+  scene.add( mesh2 );
+  	scene.add( mesh );
+}
+
+function animate() {
+	requestAnimationFrame( animate );
+	render();
+}
+
+function render() {
+	renderer.render( scene, camera );
+  mesh2.rotation.y -=0.0009;
+   mesh.rotation.y +=0.0009;
+}
+
+// image.crossOrigin = "anonymous";
+// image2.crossOrigin = "";
+// image.src = 'http://maxim.is/test/outer.svg';
+// image2.src = 'https://s33.postimg.cc/rourh7anz/tester.png';
+// image.src = 'https://s33.postimg.cc/kvuekp6xb/Artboard.png';
+
+Math.radians = function(degrees) {
+  return degrees * Math.PI / 180;
+};
+
+ var offset = $( "canvas" ).offset();
+
+$( "old" ).on( "mousemove", function() {
+  // pos = ((360*(event.pageX - window.innerWidth/2)/window.innerWidth)* Math.PI / 180) - Math.PI/2;
+    pos = (((360*(event.pageX - window.innerWidth/2)/window.innerWidth)* Math.PI / 180)/2) - Math.PI/2;
+  
+   pos2 = ((360*(event.pageY - window.innerHeight/8)/window.innerHeight)* Math.PI / 180) - Math.PI/2;
+  // pos = (event.pageX / 2 / window.innerWidth) - 0.5;
+  // mesh.rotation.set(0, pos, 0); //add parallax here
+ 
+  // mesh2.material.map.offset.set(-pos, 0);
+
+  // mesh.material.map.offset.set(-pos/2, 0);
+
+  mesh2.rotation.y=-pos - Math.PI;
+    mesh.rotation.y=pos;
+  // mesh2.rotation.x=-pos2;
+   mesh2.rotation.x=pos2/10;
+   mesh.rotation.x=pos2/10;
+  
+  
+   // mesh.rotation.z=10;
+
+});
+
+ $(document).on("mousemove touchmove touchstart", function( e ) {
+
+        e.preventDefault();
+
+        var touchstart = e.type === 'touchstart' || e.type === 'touchmove',
+            e = touchstart ? e.originalEvent : e,
+            pageX = touchstart ? e.targetTouches[0].pageX : e.pageX,
+            pageY = touchstart ? e.targetTouches[0].pageY : e.pageY;
+
+     
+    pos = (((360*(event.pageX - window.innerWidth/2)/window.innerWidth)* Math.PI / 180)/2) - Math.PI/2;
+  
+   pos2 = ((360*(event.pageY - window.innerHeight/8)/window.innerHeight)* Math.PI / 180) - Math.PI/2;
+     
+   mesh2.rotation.y=-pos - Math.PI;
+    mesh.rotation.y=pos;
+
+   mesh2.rotation.x=pos2/10;
+   mesh.rotation.x=pos2/10;
+ });
+</script>
     <!-- ===== Start of Popular Categories Section ===== -->
 <section class="ptb80" id="categories">
     <div class="container">
@@ -792,4 +939,4 @@
     </div>
 </section>
 <!-- ===== End of Latest News Section ===== -->
-<%@ include file="inc/footer.jsp" %>
+<%@ include file="../inc/footer.jsp" %>

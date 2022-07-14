@@ -57,7 +57,7 @@
                                 <tr>
                                     <th class="cart-product-remove">&nbsp;</th>
                                     <th class="cart-product-thumbnail">&nbsp;</th>
-                                    <th class="cart-product-name">상품 목록</th>
+                                    <th class="cart-product-name">상품 이름</th>
                                     <th class="cart-product-price">상품 가격</th>
                                     <!-- <th class="cart-product-quantity">Quantity</th> -->
                                     <th class="cart-product-subtotal">합계</th>
