@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 						<!-- Start of Products -->
                     <div class="row ajaxProduct">
 						<c:forEach var="map" items="${list }">
@@ -13,7 +14,7 @@
                                 <!-- Product Image -->
                                 <div class="product-image" style="background: #fff;">
 									<!-- pop up for images 사용하려면 custom_mypage.js 364행 -->
-                                    <a href="commissionDetail" class="hover-zoom height-260">
+                                    <a href='<c:url value="/request/detail?recNo=${map['REC_NO'] }"/>' class="hover-zoom height-260">
 	                                    <div class="height-260">
                                     		<c:if test="${map['conFlag'] eq 'recruiting' }">
                                     			<div class="comList-cat left">
@@ -30,31 +31,47 @@
                                     				계약완료
                                     			</div>
                                     		</c:if>
+                                    		<c:if test="${map['conFlag'] ne 'recruiting' }">
+	                                    		<div class="right contractor">
+	                                    			계약자 : ${map['memName'] } ${map['memId'] }
+	                                    		</div>
+                                    		</c:if>
 	                                        <div class="clear"></div>
 	                                        <div class="font comList-title">${map['REC_TITLE'] }</div>
 	                                        <div class="comList-estimate">${map['REC_CONTENT'] }</div>
 										</div>
                                     </a>
-
-                                    <!-- Product overlay -->
-                                    <div class="product-overlay">
-                                        <a href="commissionCancel"><i class="fa-solid fa-circle-minus"></i>의뢰 취소</a>
-                                    </div>
+									
+									<c:if test="${map['conFlag'] eq 'recruiting'}">
+	                                    <!-- Product overlay -->
+	                                    <div class="product-overlay">
+	                                        <input type="hidden" value="${map['REC_NO'] }">
+	                                        <a role="button" class="cancel-commission"><i class="fa-solid fa-circle-minus"></i>의뢰 취소</a>
+	                                    </div>
+                                    </c:if>
 
                                 </div>
 
                                 <!-- Product Description -->
                                 <div class="product-descr">
 
-                                    <a href="shop-product.html">
-                                        <div class="com-decs-font com-decs-margin comList-avg-estimate left"><i class="fa-solid fa-sack-dollar"></i> 페이</div>
-										<div class="com-decs-font com-decs-margin-content left com-decs-font-bold">${map['REC_PAY'] }원 &nbsp;&nbsp;&nbsp;&nbsp;|</div>
-										<div class="com-decs-font com-decs-margin omList-avg-applicant left"><i class="fa-solid fa-user-tie"></i> 지원자수</div>
-										<div class="com-decs-font com-decs-margin-content left com-decs-font-bold">${map['applicantNo'] }명</div>
+                                    <a role="button">
+                                        <div class="com-decs-font com-decs-margin comList-avg-estimate left align-line"><i class="fa-solid fa-sack-dollar"></i> 페이</div>
+										<div class="com-decs-font com-decs-margin-content left com-decs-font-bold align-line">${map['REC_PAY'] }원 &nbsp;&nbsp;&nbsp;&nbsp;|</div>
+										<div class="com-decs-font com-decs-margin omList-avg-applicant left align-line"><i class="fa-solid fa-user-tie"></i> 지원자수</div>
+										<div class="com-decs-font com-decs-margin-content left com-decs-font-bold align-line">${map['applicantNo'] }명</div>
+										<c:if test="${map['applicantNo'] > 0}">
+											<div class="right">
+												<!-- btn-applicant trigger modal -->
+												<button type="button" class="btn btn-applicant">
+													<i class="fa-solid fa-eye"></i> 지원자 보기
+												</button>
+											</div>
+										</c:if>
 										<div class="clear"></div>
                                     </a>
                                 </div>
-
+								
                             </div>
                         </div>
                         <!-- End of Product 1 -->

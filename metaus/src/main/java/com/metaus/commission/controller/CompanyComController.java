@@ -11,7 +11,9 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -19,6 +21,8 @@ import com.metaus.commission.model.CommissionService;
 import com.metaus.common.ConstUtil;
 import com.metaus.common.PaginationInfo;
 import com.metaus.common.SearchVO;
+import com.metaus.member.model.MemberService;
+import com.metaus.member.model.MemberVO;
 
 import lombok.RequiredArgsConstructor;
 
@@ -30,6 +34,7 @@ public class CompanyComController {
 		= LoggerFactory.getLogger(CompanyComController.class);
 	
 	private final CommissionService commissionService;
+	private final MemberService memberService;
 	
 	public void addModelToComList(HttpSession session
 			, String searchKeyword, int currentPage, ModelMap model){
@@ -71,13 +76,23 @@ public class CompanyComController {
 			//계약된 의뢰 목록
 			List<Map<String, Object>> contractedList = commissionService.selectContractedComCom(comNo);
 			
+			//계약 플래그
 			String conFlag = "recruiting";
 			for(Map<String, Object> contractedMap : contractedList) {
-				int conRecNo= Integer.parseInt(String.valueOf(contractedMap.get("REC_NO")));
+				int conRecNo = Integer.parseInt(String.valueOf(contractedMap.get("REC_NO")));
+				int memNo = Integer.parseInt(String.valueOf(contractedMap.get("MEM_NO")));
 				Timestamp conDoneDate = (Timestamp) contractedMap.get("CON_DONEDATE");
 				
 				if(recNo == conRecNo) {
 					conFlag = "contracted";
+					
+					//계약된 회원 이름, 이메일
+					MemberVO memberVo = memberService.selectByMemNo(memNo);
+					String memName = memberVo.getMemName();
+					String memId = memberVo.getMemId();
+					map.put("memName", memName);
+					map.put("memId", memId);
+					
 					if(conDoneDate != null) {
 						conFlag ="done";
 						break;
@@ -110,4 +125,44 @@ public class CompanyComController {
 		return "/commission/ajaxCompanyComList";
 	}
 	
+	@RequestMapping("/cancelCommission")
+	public String cancelCommission(@RequestParam(defaultValue = "0") int recNo) {
+		logger.info("의뢰 삭제 매개변수, recNo={}", recNo);
+		
+		int cnt =commissionService.deleteCommissionByRecNo(recNo);
+		logger.info("의뢰 삭제 결과, cnt={}", cnt);
+		
+		return "redirect:/commission/ajaxCompanyComList";
+		
+	}
+	
+	/*@RequestMapping("/ajaxApplicantList")
+	public String ajaxApplicantList(@ModelAttribute SearchVO searchVo,Model model) {
+		PaginationInfo pagingInfo = new PaginationInfo();
+		pagingInfo.setBlockSize(ConstUtil.BLOCKSIZE);
+		pagingInfo.setBlockSize(ConstUtil.BLOCKSIZE);
+		pagingInfo.setRecordCountPerPage(ConstUtil.RECORD_COUNT);
+		pagingInfo.setCurrentPage(searchVo.getCurrentPage());
+		logger.info("t ={}",pagingInfo.getCurrentPage());
+		
+		searchVo.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
+		logger.info("t2={}",pagingInfo.getFirstRecordIndex());
+		logger.info("t3={}",searchVo.getFirstRecordIndex());
+		searchVo.setRecordCountPerPage(ConstUtil.RECORD_COUNT);
+		
+		List<MemberVO> list =  memberService.selectAllCreater(searchVo);
+		logger.info("크리에이터 찾기 list={}",list);
+		int totalRecord = memberService.getTotalRecord(searchVo);
+		pagingInfo.setTotalRecord(totalRecord);
+		
+		logger.info("크리에이터 목록 조회-레코드 개수, totalRecord={}", totalRecord);
+		logger.info("크리에이터 목록 조회-pagingInfo, pagingInfo.getFirstPage={}", pagingInfo.getFirstPage());
+		logger.info("크리에이터 목록 조회-pagingInfo, pagingInfo.getLastPage={}", pagingInfo.getLastPage());
+		
+		model.addAttribute("searchVo",searchVo);
+		model.addAttribute("pagingInfo", pagingInfo);
+		model.addAttribute("list",list);
+		
+		return "/commission/ajaxApplicantList";
+	}*/
 }

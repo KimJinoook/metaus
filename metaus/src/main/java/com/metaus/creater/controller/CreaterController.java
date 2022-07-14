@@ -33,7 +33,6 @@ public class CreaterController {
 	private final MemberService memberService;
 	private final ResumeService resumeService;
 	private final ContactService contactService;
-
 	
 	@RequestMapping("/createrList")
 	public void createrList(@ModelAttribute SearchVO searchVo,Model model) {

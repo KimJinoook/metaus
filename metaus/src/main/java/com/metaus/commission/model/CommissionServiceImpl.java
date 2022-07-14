@@ -37,5 +37,10 @@ public class CommissionServiceImpl implements CommissionService{
 		return commissionDao.getComCommissionNo(comNo);
 	}
 
+	@Override
+	public int deleteCommissionByRecNo(int recNo) {
+		return commissionDao.deleteCommissionByRecNo(recNo);
+	}
+
 
 }

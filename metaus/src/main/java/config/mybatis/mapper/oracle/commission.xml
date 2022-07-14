@@ -45,5 +45,8 @@
 		where com_no=#{comNo} and con_pay is not null
 	</select>
 	
-	
+	<!-- deleteCommissionByRecNo -->
+	<delete id="deleteCommissionByRecNo" parameterType="int">
+		delete fp_rec where rec_no = #{recNo}
+	</delete>
 </mapper>

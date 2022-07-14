@@ -1,6 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../layout/sidebar.jsp" %>
+<style>
+.contractor{
+	font-size: 20px;
+	color: black;
+	margin-top: 21px;
+    margin-right: 9px;
+}
+
+.btn-applicant{
+	margin-right: 11px;
+}
+
+.align-line{
+	line-height: 37px;
+}
+
+</style>
 <script type=text/javascript>
 	$(function(){
 		$(document).on("click", ".btn-commission", function(){
@@ -21,8 +38,29 @@
 				} 
 			});
 		});
+		
+		$(document).on("click",".cancel-commission",function(){
+			var recNo = $(this).prev().val();
+			//console.log(recNo);
+			$.ajax({
+				url: "<c:url value='/commission/cancelCommission'/>",
+				type: "GET",
+				data: {
+					"recNo" : recNo
+				},
+				success: function(data){
+					$('.shop-products-wrapper').html(data);
+				},
+				error: function(xhr, status, error){
+					alert('error:' + error);
+				} 
+			});
+		});
+		
+		
 	});
 </script>
+
 <div class="content-wrapper">
     <!-- ===== Start of Shop Section ===== -->
     <section class="shop ptb80">
@@ -43,7 +81,8 @@
                                 <!-- Product Image -->
                                 <div class="product-image" style="background: #fff;">
 									<!-- pop up for images 사용하려면 custom_mypage.js 364행 -->
-                                    <a href="commissionDetail" class="hover-zoom height-260">
+									<input type="hidden" value="${map['REC_NO'] }">
+                                    <a href='<c:url value="/request/detail?recNo=${map['REC_NO'] }"/>' class="hover-zoom height-260">
 	                                    <div class="height-260">
                                     		<c:if test="${map['conFlag'] eq 'recruiting' }">
                                     			<div class="comList-cat left">
@@ -60,29 +99,42 @@
                                     				계약완료
                                     			</div>
                                     		</c:if>
+                                    		<c:if test="${map['conFlag'] ne 'recruiting' }">
+	                                    		<div class="right contractor">
+	                                    			계약자 : ${map['memName'] } ${map['memId'] }
+	                                    		</div>
+                                    		</c:if>
 	                                        <div class="clear"></div>
 	                                        <div class="font comList-title">${map['REC_TITLE'] }</div>
 	                                        <div class="comList-estimate">${map['REC_CONTENT'] }</div>
 										</div>
                                     </a>
 
-                                    <!-- Product overlay -->
-                                    <div class="product-overlay">
-                                        <a href="commissionCancel"><i class="fa-solid fa-circle-minus"></i>의뢰 취소</a>
-                                    </div>
+									<c:if test="${map['conFlag'] eq 'recruiting'}">
+                                    	<!-- Product overlay -->
+	                                    <div class="product-overlay">
+	                                    	<input type="hidden" value="${map['REC_NO'] }">
+	                                        <a role="button" class="cancel-commission"><i class="fa-solid fa-circle-minus"></i>의뢰 취소</a>
+	                                    </div>
+                                    </c:if>
 
                                 </div>
 
                                 <!-- Product Description -->
                                 <div class="product-descr">
 
-                                    <a href="shop-product.html">
-                                        <div class="com-decs-font com-decs-margin comList-avg-estimate left"><i class="fa-solid fa-sack-dollar"></i> 페이</div>
-										<div class="com-decs-font com-decs-margin-content left com-decs-font-bold">${map['REC_PAY'] }원 &nbsp;&nbsp;&nbsp;&nbsp;|</div>
-										<div class="com-decs-font com-decs-margin omList-avg-applicant left"><i class="fa-solid fa-user-tie"></i> 지원자수</div>
-										<div class="com-decs-font com-decs-margin-content left com-decs-font-bold">${map['applicantNo'] }명</div>
+                                        <div class="com-decs-font com-decs-margin comList-avg-estimate left align-line"><i class="fa-solid fa-sack-dollar"></i> 페이</div>
+										<div class="com-decs-font com-decs-margin-content left com-decs-font-bold align-line">${map['REC_PAY'] }원 &nbsp;&nbsp;&nbsp;&nbsp;|</div>
+										<div class="com-decs-font com-decs-margin omList-avg-applicant left align-line"><i class="fa-solid fa-user-tie"></i> 지원자수</div>
+										<div class="com-decs-font com-decs-margin-content left com-decs-font-bold align-line">${map['applicantNo'] }명</div>
+										<c:if test="${map['applicantNo'] > 0}">
+											<div class="right">
+												<a role="button">
+													<button class="btn btn-applicant"><i class="fa-solid fa-eye"></i> 지원자 보기</button>
+												</a>
+											</div>
+										</c:if>
 										<div class="clear"></div>
-                                    </a>
                                 </div>
 
                             </div>
