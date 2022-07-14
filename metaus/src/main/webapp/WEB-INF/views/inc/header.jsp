@@ -31,6 +31,9 @@
     <link rel="stylesheet" type="text/css" href="<c:url value='/css/owl.carousel.min.css'/>">
     <link rel="stylesheet" type="text/css" href="<c:url value='/css/style.css'/>">
     <link rel="stylesheet" type="text/css" href="<c:url value='/css/responsive.css'/>">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500&display=swap" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->

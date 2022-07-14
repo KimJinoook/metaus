@@ -12,8 +12,18 @@
 		values(#{buyNo},#{memNo},#{pdNo})
 	</insert>
 	
-	<select id="selectBuyByMemNo" parameterType="int" resultType="BuyVo">
-		select * from fp_buy
+	<update id="insertBuyDetail" parameterType="BuyVo">
+		insert into fp_buy(buy_no,pd_no)
+		select #{buyNo},pd_no
+		from fp_cart
 		where mem_no=#{memNo}
+	</update>
+	
+	<select id="selectBuyByMemNo" parameterType="int" resultType="BuyVo">
+		select DISTINCT b.pd_no, p.pd_name, p.pd_price
+		from fp_buy b join fp_pay p
+		on b.mem_no=p.mem_no join fp_pd p
+		on p.pd_no=b.pd_no
+		where b.mem_no=#{memNo}
 	</select>
 </mapper>

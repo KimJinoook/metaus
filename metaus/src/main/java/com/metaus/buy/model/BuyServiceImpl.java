@@ -13,7 +13,7 @@ public class BuyServiceImpl implements BuyService{
 
 	@Override
 	public int insertBuy(BuyVO vo) {
-		return buyDao.insertBuy(vo);
+		return buyDao.insertBuy(vo);		
 	}
 
 	@Override

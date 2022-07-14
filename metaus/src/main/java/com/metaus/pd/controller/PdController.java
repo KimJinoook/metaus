@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.metaus.buy.model.BuyService;
+import com.metaus.buy.model.BuyVO;
 import com.metaus.category.model.CategoryService;
 import com.metaus.category.model.CategoryVO;
 import com.metaus.common.ConstUtil;
@@ -37,6 +39,7 @@ public class PdController {
 	private final PdService pdService;
 	private final FileUploadUtil fileUploadUtil;
 	private final CategoryService cateService;
+	private final BuyService buyService;
 	
 	@RequestMapping("/pd")
 	public String pd(@ModelAttribute PdVO searchVo, Model model) {
@@ -153,9 +156,14 @@ public class PdController {
 	}
 	
 	@RequestMapping("/myPdList")
-	public String myPdList() {
-		logger.info("구매한 상품 조회 페이지");
+	public String myPdList(HttpSession session, Model model) {
+		int memNo=(int)session.getAttribute("memNo");
+		logger.info("구매상품 조회 페이지 파라미터 memNo={}",memNo);
 		
+		List<BuyVO> list=buyService.selectBuyByMemNo(memNo);
+		logger.info("구매상품 조회 결과 파라미터 list.size={}",list.size());
+		
+		model.addAttribute("list",list);
 		return "/pd/myPdList";
 	}
 }

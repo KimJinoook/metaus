@@ -8,4 +8,5 @@ import org.apache.ibatis.annotations.Mapper;
 public interface BuyDAO {
 	int insertBuy(BuyVO vo);
 	List<BuyVO> selectBuyByMemNo(int memNo);
+	int insertBuyDetail(BuyVO vo);
 }
