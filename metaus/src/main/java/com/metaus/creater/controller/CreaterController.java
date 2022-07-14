@@ -69,7 +69,8 @@ public class CreaterController {
 	}*/
 	
 	@RequestMapping("/createrList")
-	public void createrList(@RequestParam(defaultValue = "0") int recNo, @ModelAttribute SearchVO searchVo,Model model) {
+	public void createrList(@RequestParam(required = false) String conFlag, @RequestParam(defaultValue = "0") int recNo
+			, @ModelAttribute SearchVO searchVo,Model model) {
 		logger.info("크리에이터 찾기 뷰");
 		
 		PaginationInfo pagingInfo = new PaginationInfo();
@@ -86,6 +87,7 @@ public class CreaterController {
 		
 		int totalRecord=0;
 		List<MemberVO> list=null;
+		int contractedMemNo=-1;
 		if(recNo < 1) {
 			//전체조회
 			list =  memberService.selectAllCreater(searchVo);
@@ -107,6 +109,11 @@ public class CreaterController {
 			logger.info("기업의뢰 지원자 현황, list.size={}", list.size());
 			
 			totalRecord = memberService.getTotalRecordByrecNo(map);
+			
+			//계약 멤버 조회
+			if(!conFlag.equals("recruiting")) {
+				contractedMemNo = commissionService.selectMemNoByRecNo(recNo);
+			}
 		}
 		
 		pagingInfo.setTotalRecord(totalRecord);
@@ -119,6 +126,8 @@ public class CreaterController {
 		model.addAttribute("pagingInfo", pagingInfo);
 		model.addAttribute("list",list);
 		model.addAttribute("recNo", recNo);
+		model.addAttribute("conFlag", conFlag);
+		model.addAttribute("contractedMemNo", contractedMemNo);
 	}
 	
 	@RequestMapping("/createrDetail")

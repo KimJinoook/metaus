@@ -52,6 +52,12 @@
 	
 	<!-- selectMemNoByRecNo -->
 	<select id="selectMemNoByRecNo" parameterType="int" resultType="int">
-		select mem_no from fp_recpre where rec_no=#{recNo} order by recpre_no
+		select mem_no from fp_contact where rec_no=#{recNo}
 	</select>
+	
+	<!-- insertContractByrecNoMemNo -->
+	<insert id="insertContractByrecNoMemNo" parameterType="HashMap">
+		insert into fp_contact(rec_no, mem_no, con_pay)
+		values(#{recNo}, #{memNo}, #{conPay})
+	</insert>
 </mapper>

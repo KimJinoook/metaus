@@ -43,8 +43,13 @@ public class CommissionServiceImpl implements CommissionService{
 	}
 
 	@Override
-	public List<Integer> selectMemNoByRecNo(int recNo) {
+	public int selectMemNoByRecNo(int recNo) {
 		return commissionDao.selectMemNoByRecNo(recNo);
+	}
+
+	@Override
+	public int insertContractByrecNoMemNo(Map<String, Integer> map) {
+		return commissionDao.insertContractByrecNoMemNo(map);
 	}
 
 

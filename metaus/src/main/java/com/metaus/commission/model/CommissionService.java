@@ -10,5 +10,6 @@ public interface CommissionService {
 	List<Map<String, Object>> selectContractedComCom(int comNo);
 	int getComCommissionNo(int comNo);
 	int deleteCommissionByRecNo(int recNo);
-	List<Integer> selectMemNoByRecNo(int recNo);
+	int selectMemNoByRecNo(int recNo);
+	int insertContractByrecNoMemNo(Map<String, Integer> map);
 }

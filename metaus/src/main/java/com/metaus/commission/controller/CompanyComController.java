@@ -136,4 +136,18 @@ public class CompanyComController {
 		
 	}
 	
+	@RequestMapping("/contractCommission")
+	public String contractCommission(@RequestParam(defaultValue = "0") int recNo
+			, @RequestParam(defaultValue = "0") int memNo, @RequestParam(defaultValue = "0") int conPay) {
+		Map<String, Integer> map = new HashMap<>();
+		map.put("recNo", recNo);
+		map.put("memNo", memNo);
+		map.put("conPay", conPay);
+		
+		int cnt = commissionService.insertContractByrecNoMemNo(map);
+		logger.info("기업의뢰 계약 결과, cnt={}", cnt);
+		
+		return "redirect:/commission/companyComList";
+	}
+	
 }
