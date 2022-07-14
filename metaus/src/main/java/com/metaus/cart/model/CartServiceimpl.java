@@ -1,7 +1,6 @@
 package com.metaus.cart.model;
 
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
@@ -9,8 +8,7 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class CartServiceimpl implements CartService{
-	
+public class CartServiceimpl implements CartService{	
 	private final CartDAO cartDao;	
 		
 	@Override
@@ -36,6 +34,11 @@ public class CartServiceimpl implements CartService{
 	@Override
 	public int deleteCartByMemNo(int memNo, int pdNo) {
 		return cartDao.deleteCartByMemNo(memNo, pdNo);
+	}
+
+	@Override
+	public int deleteCartAllByMemNo(int memNo) {
+		return cartDao.deleteCartAllByMemNo(memNo);
 	}
 
 }

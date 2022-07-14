@@ -1,98 +1,143 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ include file="../layout/sidebar.jsp" %>
+	pageEncoding="UTF-8"%>
+<%@ include file="../layout/sidebar.jsp"%>
+<script type="text/javascript" 
+	src="<c:url value='/js/jquery-3.6.0.min.js'/>"></script>
+<script type="text/javascript">
+	function List(curPage){
+		$('input[name=currentPage]').val(curPage);
+		$('form[name=frmPage]').submit();
+	}
+</script>
+<div class="content-wrapper">
+	<!-- ===== Start of Shop Section ===== -->
+	<section class="shop ptb80" style="background-color: #ffffff; margin-bottom: 24px;">
+		<div class="container">
+			<div class="row">
+			<c:if test="${empty list }">
+				<img src="<c:url value='/images/commission/조건에맞는.PNG'/>">
+				
+			</c:if>
+				<!-- Start of Shop Product Wrapper -->
+			<c:if test="${!empty list }">
+				<div class="col-md-12 col-xs-12 shop-products-wrapper">
 
-      <!-- Right side column. Contains the navbar and content of the page -->
-      <div class="content-wrapper">
-        <!-- Content Header (Page header) -->
-        <section class="content-header">
-          <h1>
-            Schedule
-            <small>Control panel</small>
-          </h1>
-          <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li class="active">Calendar</li>
-          </ol>
-        </section>
+					<!-- Start of Products -->
+					<div class="row">
 
-        <!-- Main content -->
-        <section class="content">
-          <div class="row">
-            <div class="col-md-3">
-              <div class="box box-solid">
-                <div class="box-header with-border">
-                  <h4 class="box-title">드래그로 일정 추가</h4>
-                </div>
-                <div class="box-body">
-                  <!-- the events -->
-                  <div id='external-events'>
-                    <div class='external-event bg-green'>Lunch</div>
-                    <div class='external-event bg-yellow'>Go home</div>
-                    <div class='external-event bg-aqua'>Do homework</div>
-                    <div class='external-event bg-light-blue'>Work on UI design</div>
-                    <div class='external-event bg-red'>Sleep tight</div>
-                    <div class="checkbox">
-                      <label for='drop-remove'>
-                        <input type='checkbox' id='drop-remove' style='border: 1px solid black;'/>
-                        드롭 후 삭제
-                      </label>
-                    </div>
-                  </div>
-                </div><!-- /.box-body -->
-              </div><!-- /. box -->
-              <div class="box box-solid">
-                <div class="box-header with-border">
-                  <h3 class="box-title">일정 생성</h3>
-                </div>
-                <div class="box-body">
-                  <div class="btn-group" style="width: 100%; margin-bottom: 10px;">
-                    <!--<button type="button" id="color-chooser-btn" class="btn btn-info btn-block dropdown-toggle" data-toggle="dropdown">Color <span class="caret"></span></button>-->
-                    <ul class="fc-color-picker" id="color-chooser">
-                      <li><a class="text-aqua" href="#"><i class="fa fa-square"></i></a></li>
-                      <li><a class="text-blue" href="#"><i class="fa fa-square"></i></a></li>
-                      <li><a class="text-light-blue" href="#"><i class="fa fa-square"></i></a></li>
-                      <li><a class="text-teal" href="#"><i class="fa fa-square"></i></a></li>																						
-                      <li><a class="text-yellow" href="#"><i class="fa fa-square"></i></a></li>
-                      <li><a class="text-orange" href="#"><i class="fa fa-square"></i></a></li>
-                      <li><a class="text-green" href="#"><i class="fa fa-square"></i></a></li>
-                      <li><a class="text-lime" href="#"><i class="fa fa-square"></i></a></li>
-                      <li><a class="text-red" href="#"><i class="fa fa-square"></i></a></li>
-                      <li><a class="text-purple" href="#"><i class="fa fa-square"></i></a></li>
-                      <li><a class="text-fuchsia" href="#"><i class="fa fa-square"></i></a></li>
-                      <li><a class="text-muted" href="#"><i class="fa fa-square"></i></a></li>
-                      <li><a class="text-navy" href="#"><i class="fa fa-square"></i></a></li>
-                    </ul>
-                  </div><!-- /btn-group -->
-                  <div class="input-group">
-                    <input id="new-event" type="text" class="form-control" placeholder="일정 제목">
-                    <div class="input-group-btn">
-                      <button id="add-new-event" type="button" class="btn btn-primary btn-flat">Add</button>
-                    </div><!-- /btn-group -->
-                  </div><!-- /input-group -->
-                </div>
-              </div>
-            </div><!-- /.col -->
-            <div class="col-md-9">
-              <div class="box box-primary">
-                <div class="box-body no-padding">
-                  <!-- THE CALENDAR -->
-                  <div id="calendar"></div>
-                </div><!-- /.box-body -->
-              </div><!-- /. box -->
-            </div><!-- /.col -->
-          </div><!-- /.row -->
-        </section><!-- /.content -->
-      </div><!-- /.content-wrapper -->
-      <footer class="main-footer">
-        <div class="pull-right hidden-xs">
-          <b>Version</b> 2.0
-        </div>
-        <strong>Copyright &copy; 2014-2015 <a href="http://almsaeedstudio.com">Almsaeed Studio</a>.</strong> All rights reserved.
-      </footer>
-    </div><!-- ./wrapper -->
+                	<c:forEach var="vo" items="${list }">
+						<!-- Start of Product 1 -->
+						<div class="col-md-6 col-xs-12">
+							<div class="product">
+								<!-- Product Image -->
+								<div class="product-image" style="background: #fff;">
+									<!-- pop up for images 사용하려면 custom_mypage.js 364행 -->
+									
+										<div class="height-260">
+												<div class="comList-company right" style="color: #000; font-size: 21px;">
+													${vo.comName }</div>
+												<div class="clear"></div>
+												<div class="font comList-title">${vo.recTitle }</div>
+												
+												<div class="left comList-estimate">의뢰 견적</div>
+												<div class="right font comList-price">
+												${vo.conPay}원
+												</div>
+												<div class="clear"></div>											
+										</div>
+									
 
-	<%@ include file="../layout/sidebar_function_bottom.jsp" %>
+									<!-- Product overlay -->
 
-  </body>
-</html>
+									<div class="product-overlay">
+										<a href="<c:url value='/request/detail?recNo=${vo.recNo }'/>" style="background: #28affa;"><i
+											class="fa-solid fa-circle-plus" ></i>상세 보기</a>
+									</div>
+								</div>
+							
+							
+							
+							
+							
+								
+							
+							
+							
+							
+							
+
+								<!-- Product Description -->
+								<div class="product-descr">
+
+									
+										<div
+											class="com-decs-font com-decs-margin omList-avg-applicant left">작업 완료</div>
+										
+										<div class="clear"></div>
+								
+								</div>
+							</div>
+						</div>
+					</c:forEach>					
+					</div>
+
+
+
+				</div>
+
+				<!-- End of Products -->
+
+
+				<!-- Start of Pagination -->
+				<div class="col-md-12">
+						<ul class="pagination list-inline text-center">
+							<c:if test="${pagingInfo.firstPage>1 }">
+								<li><a href="#"
+									onclick="List(${pagingInfo.firstPage-1})">prev</a></li>
+							</c:if>
+
+							<!-- [1][2][3][4][5][6][7][8][9][10] -->
+							<c:forEach var="i" begin="${pagingInfo.firstPage }"
+								end="${pagingInfo.lastPage }">
+								<c:if test="${i==pagingInfo.currentPage }">
+									<li class="active"><a>${i }</a></li>
+								</c:if>
+								<c:if test="${i!=pagingInfo.currentPage }">
+									<li><a href="#" onclick="List(${i})">${i } </a></li>
+								</c:if>
+							</c:forEach>
+
+							<c:if test="${pagingInfo.lastPage<pagingInfo.totalPage }">
+								<li><a href="#"
+									onclick="List(${pagingInfo.lastPage+1})">Next</a></li>
+							</c:if>
+							<!--  페이지 번호 끝 -->
+						</ul>
+					</div>
+					<!-- End of Pagination -->
+
+				</c:if>
+
+				<!-- 페이징 처리를 위한 form 시작-->
+				<form name="frmPage" method="post"
+					action="<c:url value='/commission/progressSchedule'/>">
+					<input type="hidden" name="currentPage">
+				</form>
+				<!-- 페이징 처리 form 끝 -->
+				<!-- End of Pagination -->
+
+			</div>
+			<!-- End of Shop Product Wrapper -->
+
+		</div>
+
+	</section>
+</div>
+
+<!-- ===== End of Shop Section ===== -->
+
+
+
+
+
+<%@ include file="../inc/footer.jsp"%>

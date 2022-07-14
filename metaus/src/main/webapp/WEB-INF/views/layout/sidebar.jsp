@@ -171,7 +171,8 @@
               </a>
               <ul class="treeview-menu">
                 <li><a href="<c:url value='/commission/commissionList'/>"><i class="fa fa-circle-o"></i> 의뢰목록</a></li>
-                <li><a href="<c:url value='/commission/progressSchedule'/>"><i class="fa fa-circle-o"></i> 의뢰진행상황</a></li>
+                <li><a href="<c:url value='/commission/Progress'/>"><i class="fa fa-circle-o"></i> 의뢰진행현황</a></li>
+                <li><a href="<c:url value='/commission/progressSchedule'/>"><i class="fa fa-circle-o"></i> 의뢰완료목록</a></li>
               </ul>
             </li>
             </c:if>
@@ -184,8 +185,13 @@
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
+<<<<<<< HEAD
                 <li><a href="<c:url value='/commission/companyComList'/>"><i class="fa fa-circle-o"></i> 등록의뢰목록</a></li>
                 <li><a href="<c:url value='/commission/commissionList'/>"><i class="fa fa-circle-o"></i> 지원자현황</a></li>
+=======
+                <li><a href="<c:url value='/commission/commissionList'/>"><i class="fa fa-circle-o"></i> 의뢰목록</a></li>
+                <li><a href="<c:url value='/commission/Progress'/>"><i class="fa fa-circle-o"></i> 의뢰진행현황</a></li>                
+>>>>>>> branch 'main' of https://github.com/KimJinoook/metaus.git
                 <li><a href="<c:url value='/commission/progressSchedule'/>"><i class="fa fa-circle-o"></i> 의뢰진행상황</a></li>
               </ul>
             </li>

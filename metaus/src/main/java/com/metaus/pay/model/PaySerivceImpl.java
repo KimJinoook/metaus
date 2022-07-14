@@ -2,7 +2,16 @@ package com.metaus.pay.model;
 
 import org.springframework.stereotype.Service;
 
-@Service
-public class PaySerivceImpl implements PayService{
+import lombok.RequiredArgsConstructor;
 
+@Service
+@RequiredArgsConstructor
+public class PaySerivceImpl implements PayService{
+	private final PayDAO payDao;
+
+	@Override
+	public int insertPay(PayVO vo) {
+		return payDao.insertPay(vo);
+	}
+	
 }

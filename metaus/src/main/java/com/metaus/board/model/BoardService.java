@@ -22,4 +22,6 @@ public interface BoardService {
 	BoardAtcVO selectByBfileNo(int bfileNo);
 	int deleteBoard(BoardVO vo);
 	List<BoardVO> PopularSelect(int btypeNo);
+	
+	List<BoardVO> PopularSelect2();
 }

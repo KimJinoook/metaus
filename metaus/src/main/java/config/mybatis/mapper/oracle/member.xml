@@ -13,6 +13,10 @@
 		select mem_pw from fp_mem
 		where mem_id=#{memId} and mem_outdate is null
 	</select>
+	<select id="selectLock" parameterType="string" resultType="String">
+		select mem_lock from fp_mem
+		where mem_id=#{memId} and mem_outdate is null
+	</select>
 	
 	<select id="selectByUserid" parameterType="string" 
 		resultType="memberVo">
@@ -29,7 +33,7 @@
    	</select>
    	
    	<select id="findPw" parameterType="MemberVO" resultType="string">
-   		select mem_pw from fp_mem where mem_name=#{memName} and mem_tel = #{memTel} and mem_id = #{memId}
+   		select mem_lock from fp_mem where mem_name=#{memName} and mem_tel = #{memTel} and mem_id = #{memId}
    	</select>
    	
    	<select id="selectByMemNo" parameterType="int" 
@@ -78,7 +82,7 @@
    	
    	<update id="updatePw" parameterType="MemberVO">
 		update fp_mem
-		set mem_pw = #{memPw}
+		set mem_pw = #{memPw}, mem_lock = #{memLock}
 		where mem_id=#{memId}
 	</update>
 	
@@ -118,10 +122,10 @@
 		<selectKey resultType="int" keyProperty="memNo" order="BEFORE">
 			select fp_mem_seq.nextval from dual
 		</selectKey>
-		insert into fp_mem(mem_no,mem_name,mem_id,mem_pw,mem_nick,mem_birth,mem_tel,mem_zipcode,mem_add,mem_add2,mem_joindate)
+		insert into fp_mem(mem_no,mem_name,mem_id,mem_pw,mem_nick,mem_birth,mem_tel,mem_zipcode,mem_add,mem_add2,mem_joindate, mem_lock)
 		values(#{memNo}, #{memName}, #{memId}, #{memPw}, 
 			#{memNick},#{memBirth}, #{memTel},#{memZipcode}, #{memAdd}, 
-			#{memAdd2}, sysdate)
+			#{memAdd2}, sysdate, #{memLock})
 	</insert>
    	<select id="selectAll" resultType="memberVo">
    		select * from fp_mem
