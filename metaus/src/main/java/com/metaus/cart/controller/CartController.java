@@ -45,15 +45,14 @@ public class CartController {
 	}
 	
 	@RequestMapping("/cart")
-	public String cartList(HttpSession session, CartVO vo, Model model) {
+	public String cartList(HttpSession session, Model model) {
 		int memNo=(int)session.getAttribute("memNo");
-		logger.info("장바구니 목록 조회 파라미터 vo={}, memNo={}",vo,memNo);
+		logger.info("장바구니 목록 조회 파라미터 memNo={}",memNo);
 		
 		List<CartVO> list=cartService.selectCartList(memNo);
 		logger.info("장바구니 목록, 결과 list.size={}", list.size());
 		
 		model.addAttribute("list", list);
-		model.addAttribute("vo", vo);
 		
 		return "/cart/cart";
 	}

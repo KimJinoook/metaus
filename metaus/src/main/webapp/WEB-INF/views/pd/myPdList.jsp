@@ -57,16 +57,15 @@
 							</c:if>
 							
 							<c:if test="${!empty list }">
-							<c:set var="sum" value="0"/>
 							<!--반복 시작 -->
 						<c:forEach var="vo" items="${list }">
 	                         <!-- Start of Cart Item 1 -->
                                 <tr class="cart-item">
 
                                     <!-- Cart Remove Product -->
-                                    <%-- <td class="cart-product-remove">
-                                        <a href="<c:url value='/cart/delete?pdNo=${vo.pdNo }'/>" class="remove" title="Remove this item"><i class="fa fa-times"></i></a>
-                                    </td> --%>
+                                     <td class="cart-product-remove">
+                                        <%-- <a href="<c:url value='/cart/delete?pdNo=${vo.pdNo }'/>" class="remove" title="Remove this item"><i class="fa fa-times"></i></a> --%>
+                                    </td> 
 
                                     <!-- Cart Product Thumbnail -->
                                     <td class="cart-product-thumbnail">
@@ -84,8 +83,8 @@
                                     <!-- Cart Product Price -->
                                     <td class="cart-product-price">
                                         <div class="col-md-6 col-xs-12 proceed-checkout text-right">
-                                                <a href="" class="btn btn-purple btn-effect" id="download">다운로드</a>
-                                            </div>
+                                        <span class="amount" style="margin-right: -38px;"><fmt:formatNumber value="" pattern="#,###"/>${vo.pdPrice }원</span>
+                                        </div>
                                     </td>
 
                                     <!-- Cart Product Quantity -->
@@ -99,10 +98,9 @@
 
                                     <!-- Cart Subtotal -->
                                     <td class="cart-product-subtotal">
-                                        <span class="amount"><fmt:formatNumber value="${vo.pdPrice }" pattern="#,###"/>원</span>
+                                                <a href="" class="btn btn-purple btn-effect" id="download">다운로드</a>
                                     </td>
                                 </tr>
-                                <c:set var="sum" value="${sum+vo.pdPrice }"/>
                                 </c:forEach>
                                 </c:if>
                                 <!-- End of Cart Item 1 -->
