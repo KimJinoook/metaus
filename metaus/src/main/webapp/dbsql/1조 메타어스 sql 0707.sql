@@ -1659,6 +1659,14 @@ on a.rec_no = b.rec_no
 ) a left join fp_contact b
 on a.rec_no = b.rec_no and a.mem_no = b.mem_no;
 
+--∫‰ memberViewByRecNo
+create or replace view memberViewByRecNo
+as
+select a.recpre_no, a.rec_no, b.* 
+from fp_recpre a join fp_mem b
+on a.mem_no = b.mem_no
+order by recpre_no;
+
 --«¡∑ŒΩ√¡Æ updateStarFlag
 create or replace procedure updateStarFlag
 (

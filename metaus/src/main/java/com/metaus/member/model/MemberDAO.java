@@ -1,6 +1,7 @@
 package com.metaus.member.model;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -34,4 +35,7 @@ public interface MemberDAO {
 	int warnCntUp(MemberVO vo);
 	//회원정보 수정 - 최재훈
 	int updateMember(MemberVO vo);
+	//의뢰 지원자 현황 - 한용민
+	public List<MemberVO> selectCreaterByRecNo(Map<String, Object> map);
+	public int getTotalRecordByrecNo(Map<String, Object> map);
 }

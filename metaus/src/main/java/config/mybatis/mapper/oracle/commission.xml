@@ -49,4 +49,9 @@
 	<delete id="deleteCommissionByRecNo" parameterType="int">
 		delete fp_rec where rec_no = #{recNo}
 	</delete>
+	
+	<!-- selectMemNoByRecNo -->
+	<select id="selectMemNoByRecNo" parameterType="int" resultType="int">
+		select mem_no from fp_recpre where rec_no=#{recNo} order by recpre_no
+	</select>
 </mapper>

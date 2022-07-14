@@ -136,33 +136,4 @@ public class CompanyComController {
 		
 	}
 	
-	/*@RequestMapping("/ajaxApplicantList")
-	public String ajaxApplicantList(@ModelAttribute SearchVO searchVo,Model model) {
-		PaginationInfo pagingInfo = new PaginationInfo();
-		pagingInfo.setBlockSize(ConstUtil.BLOCKSIZE);
-		pagingInfo.setBlockSize(ConstUtil.BLOCKSIZE);
-		pagingInfo.setRecordCountPerPage(ConstUtil.RECORD_COUNT);
-		pagingInfo.setCurrentPage(searchVo.getCurrentPage());
-		logger.info("t ={}",pagingInfo.getCurrentPage());
-		
-		searchVo.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
-		logger.info("t2={}",pagingInfo.getFirstRecordIndex());
-		logger.info("t3={}",searchVo.getFirstRecordIndex());
-		searchVo.setRecordCountPerPage(ConstUtil.RECORD_COUNT);
-		
-		List<MemberVO> list =  memberService.selectAllCreater(searchVo);
-		logger.info("크리에이터 찾기 list={}",list);
-		int totalRecord = memberService.getTotalRecord(searchVo);
-		pagingInfo.setTotalRecord(totalRecord);
-		
-		logger.info("크리에이터 목록 조회-레코드 개수, totalRecord={}", totalRecord);
-		logger.info("크리에이터 목록 조회-pagingInfo, pagingInfo.getFirstPage={}", pagingInfo.getFirstPage());
-		logger.info("크리에이터 목록 조회-pagingInfo, pagingInfo.getLastPage={}", pagingInfo.getLastPage());
-		
-		model.addAttribute("searchVo",searchVo);
-		model.addAttribute("pagingInfo", pagingInfo);
-		model.addAttribute("list",list);
-		
-		return "/commission/ajaxApplicantList";
-	}*/
 }

@@ -4,7 +4,11 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ include file="../inc/header.jsp" %>
-
+<style>
+	.candidate-cta.ptb30 {
+	    width: 180px;
+	}
+</style>
 
     <!-- =============== Start of Page Header 1 Section =============== -->
     <section class="page-header" id="find-candidate">
@@ -13,7 +17,12 @@
             <!-- Start of Page Title -->
             <div class="row">
                 <div class="col-md-12">
-                    <h2>크리에이터 찾기</h2>
+               		<c:if test="${recNo eq 0 }">
+                    	<h2>크리에이터 찾기</h2>
+                    </c:if>
+                    <c:if test="${recNo > 0 }">
+                    	<h2>지원자 현황</h2>
+                    </c:if>
                 </div>
             </div>
             <!-- End of Page Title -->
@@ -31,8 +40,7 @@
         <div class="container">
 
             <!-- Start of Form -->
-            <form class="row" action="<c:url value='/creater/createrList'/>" method="post">
-
+            <form class="row" action="<c:url value='/creater/createrList?recNo=${recNo }'/>" method="post">
                 <!-- Start of keywords input -->
                 <div class="col-md-6 col-md-offset-2 col-sm-6 col-sm-offset-2 col-xs-8">
                     <label for="search-keywords">Keywords</label>
@@ -106,6 +114,9 @@
                             <div class="col-md-2 col-xs-3">
                                 <div class="candidate-cta ptb30">
                                     <a href="<c:url value='/creater/createrDetail?memNo=${vo.memNo}'/>" class="btn btn-blue btn-small btn-effect">상세보기</a>
+                                    <c:if test="${recNo > 0 }">
+                                    	<button class="btn btn-green btn-small btn-effect">계약하기</button>
+                                    </c:if>
                                 </div>
                             </div>
 
@@ -155,6 +166,7 @@
 		action="<c:url value='/creater/createrList'/>">
 		<input type="hidden" name="currentPage">
 		<input type="hidden" name="searchKeyword" value="${searchVo.searchKeyword }">
+		<input type="hidden" name="recNo" value="${recNo}">
 	</form>
     <!-- ===== End of Main Wrapper Section ===== -->
     

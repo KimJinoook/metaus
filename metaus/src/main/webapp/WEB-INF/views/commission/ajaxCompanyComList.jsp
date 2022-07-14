@@ -62,10 +62,9 @@
 										<div class="com-decs-font com-decs-margin-content left com-decs-font-bold align-line">${map['applicantNo'] }명</div>
 										<c:if test="${map['applicantNo'] > 0}">
 											<div class="right">
-												<!-- btn-applicant trigger modal -->
-												<button type="button" class="btn btn-applicant">
-													<i class="fa-solid fa-eye"></i> 지원자 보기
-												</button>
+												<a href='<c:url value="/creater/createrList?recNo=${map['REC_NO'] }"/>'>
+													<button type="button" class="btn btn-applicant"><i class="fa-solid fa-eye"></i> 지원자 보기</button>
+												</a>
 											</div>
 										</c:if>
 										<div class="clear"></div>

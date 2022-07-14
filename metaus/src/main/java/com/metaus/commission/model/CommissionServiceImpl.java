@@ -42,5 +42,10 @@ public class CommissionServiceImpl implements CommissionService{
 		return commissionDao.deleteCommissionByRecNo(recNo);
 	}
 
+	@Override
+	public List<Integer> selectMemNoByRecNo(int recNo) {
+		return commissionDao.selectMemNoByRecNo(recNo);
+	}
+
 
 }

@@ -59,6 +59,24 @@
 		and RNUM<=#{firstRecordIndex} + #{recordCountPerPage} ]]>
 	</select>
 	
+	<!-- 의뢰 지원자 현황 - 한용민 -->
+	<select id="selectCreaterByRecNo" parameterType="HashMap" resultType="MemberVO">
+		select * from (
+			select rownum as RNUM, R.* from(
+				select A.mem_no, a.mem_name, a.mem_id, a.mem_pw, a.mem_nick, a.mem_birth, a.mem_tel, a.mem_zipcode, a.mem_add, a.mem_add2, a.mem_pic, a.mem_joindate
+				, a.mem_outdate, a.mem_cutdate, a.mem_warncnt, a.mem_lock, a.mem_kakao, a.mem_naver, a.mem_facebook,
+				(select count(*) from fp_port B where A.mem_no = B.mem_no) as memItem, 
+				(select count(*) from fp_contact C where A.mem_no = C.mem_no) as memComplete  
+				from memberViewByRecNo A where mem_no in (select mem_no from fp_port) and A.rec_no=#{recNo}
+				<include refid="searchAndWhere"></include>
+			) R
+		)
+		where
+		RNUM>#{firstRecordIndex} 
+		<![CDATA[	
+		and RNUM<=#{firstRecordIndex} + #{recordCountPerPage} ]]>
+	</select>
+	
 	<select id="selectPortByMenNo" resultType="PortfolioVO" parameterType="int">
 		select * from fp_port where mem_no = #{memNo}
 	</select>
@@ -68,6 +86,12 @@
 		select count(*) from fp_mem A where mem_no in (select mem_no from fp_port)
 		<include refid="searchAndWhere"></include>
 	
+	</select>
+	
+	<!-- 의뢰 지원자 현황 - 한용민 -->
+	<select id="getTotalRecordByrecNo" resultType="int" parameterType="map">
+		select count(*) from memberViewByRecNo where mem_no in (select mem_no from fp_port) and rec_no=#{recNo}
+		<include refid="searchAndWhere"></include>
 	</select>
 	
 	<select id="getAllMemNoPort" resultType="int">

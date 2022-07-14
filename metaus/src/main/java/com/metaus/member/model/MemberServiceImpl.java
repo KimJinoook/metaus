@@ -1,6 +1,7 @@
 package com.metaus.member.model;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -126,6 +127,16 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public int updateMember(MemberVO vo) {
 		return memberDao.updateMember(vo);
+	}
+
+	@Override
+	public List<MemberVO> selectCreaterByRecNo(Map<String, Object> map) {
+		return memberDao.selectCreaterByRecNo(map);
+	}
+
+	@Override
+	public int getTotalRecordByrecNo(Map<String, Object> map) {
+		return memberDao.getTotalRecordByrecNo(map);
 	}
 
 }
