@@ -18,6 +18,12 @@
 		select (select count(*) from fp_mem) memCnt, (select count(*) from fp_com) comCnt, (select count(*) from fp_rec) recCnt, (select count(*) from fp_resume) resumeCnt from dual
 	</select>
 	
+	<select id="selectRec" resultType="IndexVO">
+		select rownum, R.* from
+		(select A.rec_title, A.rec_regdate, A.rec_no, B.com_pic, B.com_name from fp_rec A join fp_com B on A.com_no = B.com_no order by A.rec_regdate desc) R
+		<![CDATA[	
+		where rownum<=5 ]]>
+	</select>
 	
 </mapper>
 

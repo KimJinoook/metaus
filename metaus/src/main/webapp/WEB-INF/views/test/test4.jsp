@@ -430,13 +430,16 @@ $( "old" ).on( "mousemove", function() {
                     <!-- Start of Job Post Wrapper -->
                     <div class="job-post-wrapper mt20">
 
+
+						<c:forEach var="vo" items="${recList }">
+						
                         <!-- ===== Start of Single Job Post 1 ===== -->
                         <div class="single-job-post row shadow-hover">
                             <!-- Job Company -->
                             <div class="col-md-2 col-xs-3">
                                 <div class="job-company">
                                     <a href="#">
-                                        <img src="images/companies/envato.svg" alt="">
+                                        <img src="<c:url value='/com_profile/${vo.comPic }'/>" alt="">
                                     </a>
                                 </div>
                             </div>
@@ -444,162 +447,34 @@ $( "old" ).on( "mousemove", function() {
                             <!-- Job Title & Info -->
                             <div class="col-md-8 col-xs-6 ptb20">
                                 <div class="job-title">
-                                    <a href="job-page.html">php senior developer</a>
+                                    <a href="job-page.html">${vo.recTitle }</a>
                                 </div>
 
                                 <div class="job-info">
-                                    <span class="company"><i class="fa fa-building-o"></i>Envato</span>
-                                    <span class="location"><i class="fa fa-map-marker"></i>Melbourn, Australia</span>
+                                    <span class="company"><i class="fa fa-building-o"></i>${vo.comName }</span>
+                                    <span class="location"><i class="fa fa-clock"></i>${vo.recRegdate }</span>
                                 </div>
                             </div>
 
                             <!-- Job Category -->
                             <div class="col-md-2 col-xs-3 ptb30">
                                 <div class="job-category">
-                                    <a href="javascript:void(0)" class="btn btn-green btn-small btn-effect">full time</a>
+                                    <a href="<c:url value='/request/detail?recNo=${vo.recNo }'/>" class="btn btn-green btn-small btn-effect">상세보기</a>
                                 </div>
                             </div>
                         </div>
                         <!-- ===== End of Single Job Post 1 ===== -->
 
+						</c:forEach>
 
-                        <!-- ===== Start of Single Job Post 2 ===== -->
-                        <div class="single-job-post row shadow-hover mt30">
-                            <!-- Job Company -->
-                            <div class="col-md-2 col-xs-3">
-                                <div class="job-company">
-                                    <a href="#">
-                                        <img src="images/companies/google.svg" alt="">
-                                    </a>
-                                </div>
-                            </div>
-
-                            <!-- Job Title & Info -->
-                            <div class="col-md-8 col-xs-6 ptb20">
-                                <div class="job-title">
-                                    <a href="#">department head</a>
-                                </div>
-
-                                <div class="job-info">
-                                    <span class="company"><i class="fa fa-building-o"></i>Google</span>
-                                    <span class="location"><i class="fa fa-map-marker"></i>Berlin, Germany</span>
-                                </div>
-                            </div>
-
-                            <!-- Job Category -->
-                            <div class="col-md-2 col-xs-3 ptb30">
-                                <div class="job-category">
-                                    <a href="javascript:void(0)" class="btn btn-purple btn-small btn-effect">part time</a>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- ===== End of Single Job Post 2 ===== -->
-
-
-                        <!-- ===== Start of Single Job Post 3 ===== -->
-                        <div class="single-job-post row shadow-hover mt30">
-                            <!-- Job Company -->
-                            <div class="col-md-2 col-xs-3">
-                                <div class="job-company">
-                                    <a href="#">
-                                        <img src="images/companies/facebook.svg" alt="">
-                                    </a>
-                                </div>
-                            </div>
-
-                            <!-- Job Title & Info -->
-                            <div class="col-md-8 col-xs-6 ptb20">
-                                <div class="job-title">
-                                    <a href="#">graphic designer</a>
-                                </div>
-
-                                <div class="job-info">
-                                    <span class="company"><i class="fa fa-building-o"></i>Facebook</span>
-                                    <span class="location"><i class="fa fa-map-marker"></i>london, uk</span>
-                                </div>
-                            </div>
-
-                            <!-- Job Category -->
-                            <div class="col-md-2 col-xs-3 ptb30">
-                                <div class="job-category">
-                                    <a href="javascript:void(0)" class="btn btn-blue btn-small btn-effect">freelancer</a>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- ===== End of Single Job Post 3 ===== -->
-
-
-                        <!-- ===== Start of Single Job Post 4 ===== -->
-                        <div class="single-job-post row shadow-hover mt30">
-                            <!-- Job Company -->
-                            <div class="col-md-2 col-xs-3">
-                                <div class="job-company">
-                                    <a href="#">
-                                        <img src="images/companies/envato.svg" alt="">
-                                    </a>
-                                </div>
-                            </div>
-
-                            <!-- Job Title & Info -->
-                            <div class="col-md-8 col-xs-6 ptb20">
-                                <div class="job-title">
-                                    <a href="#">senior UI & UX designer</a>
-                                </div>
-
-                                <div class="job-info">
-                                    <span class="company"><i class="fa fa-building-o"></i>Envato</span>
-                                    <span class="location"><i class="fa fa-map-marker"></i>Melbourn, Australia</span>
-                                </div>
-                            </div>
-
-                            <!-- Job Category -->
-                            <div class="col-md-2 col-xs-3 ptb30">
-                                <div class="job-category">
-                                    <a href="javascript:void(0)" class="btn btn-orange btn-small btn-effect">intership</a>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- ===== End of Single Job Post 4 ===== -->
-
-
-                        <!-- ===== Start of Single Job Post 5 ===== -->
-                        <div class="single-job-post row shadow-hover mt30">
-                            <!-- Job Company -->
-                            <div class="col-md-2 col-xs-3">
-                                <div class="job-company">
-                                    <a href="#">
-                                        <img src="images/companies/twitter.svg" alt="">
-                                    </a>
-                                </div>
-                            </div>
-
-                            <!-- Job Title & Info -->
-                            <div class="col-md-8 col-xs-6 ptb20">
-                                <div class="job-title">
-                                    <a href="#">senior health advisor</a>
-                                </div>
-
-                                <div class="job-info">
-                                    <span class="company"><i class="fa fa-building-o"></i>twitter</span>
-                                    <span class="location"><i class="fa fa-map-marker"></i>New York, USA</span>
-                                </div>
-                            </div>
-
-                            <!-- Job Category -->
-                            <div class="col-md-2 col-xs-3 ptb30">
-                                <div class="job-category">
-                                    <a href="javascript:void(0)" class="btn btn-red btn-small btn-effect">temporary</a>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- ===== End of Single Job Post 5 ===== -->
+                       
 
                     </div>
                     <!-- End of Job Post Wrapper -->
 
                     <!-- Start of Pagination -->
                     <div class="col-md-12 text-center mt40">
-                        <a href="search-jobs-3.html" class="btn btn-blue btn-effect">show more</a>
+                        <a href="<c:url value='/request/search'/>" class="btn btn-blue btn-effect">전체보기</a>
                     </div>
                     <!-- End of Pagination -->
 

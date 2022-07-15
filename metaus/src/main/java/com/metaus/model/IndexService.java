@@ -8,4 +8,5 @@ import com.metaus.resume.model.PortfolioVO;
 public interface IndexService {
 	IndexVO selectCateCnt() ;
 	IndexVO selectFooterCnt();
+	List<IndexVO> selectRec();
 }
