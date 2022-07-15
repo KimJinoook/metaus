@@ -2,16 +2,22 @@
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
         <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
             <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-                <%@ include file="inc/header.jsp" %>
-
-<!DOCTYPE html>
-<html lang="en">
+            <%@ include file="inc/header.jsp" %>
 
 <head>
     <title>made by pond</title>
     <meta charset="utf-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script> 오류로 인해 주석처리 -->
+    <style>
+      .carousel-inner img {
+        width: 100%;
+        height: 100%;
+      }
+    </style>
     <link rel="stylesheet"
-          href="https://index_css/fonts.googleapis.comindex_index_css/css/css?family=Nunito+Sans:200,300,400,700,900|Oswald:400,700">
+      href="https://index_css/fonts.googleapis.comindex_index_css/css/css?family=Nunito+Sans:200,300,400,700,900|Oswald:400,700">
     <link rel="stylesheet" href="index_css/fonts/icomoon/style.css">
     <link rel="stylesheet" href="index_css/css/bootstrap.min.css">
     <link rel="stylesheet" href="index_css/css/magnific-popup.css">
@@ -25,76 +31,102 @@
     <link rel="stylesheet" href="index_css/css/fl-bigmug-line.css">
     <link rel="stylesheet" href="index_css/css/aos.css">
     <link rel="stylesheet" href="index_css/css/style.css">
-
-</head>
-
-<body class="d-xl-none">
-</div>
-<div class="site-mobile-menu">
-    <div class="site-mobile-menu-header">
+  
+  </head>
+  
+  <body class="d-xl-none">
+    </div>
+    <div class="site-mobile-menu">
+      <div class="site-mobile-menu-header">
         <div class="site-mobile-menu-close mt-3">
-            <span class="icon-close2 js-menu-toggle"></span>
+          <span class="icon-close2 js-menu-toggle"></span>
         </div>
+      </div>
+      <div class="site-mobile-menu-body"></div>
     </div>
-    <div class="site-mobile-menu-body"></div>
-</div>
-<div class="site-blocks-cover overlay" style="background-image: url('images/hero_bg_2.jpg');"
-     data-stellar-background-ratio="0.5">
-    <div class="container"></div>
-    <div class="row align-items-center justify-content-center">
+    <div class="site-blocks-cover overlay" style="background-image: url('images/hero_bg_2.jpg');"
+      data-stellar-background-ratio="0.5">
+      <div class="container"></div>
+      <div class="row align-items-center justify-content-center">
         <div class="col-md-8 text-center col-lg-10" data-aos="fade-up" data-aos-delay="400">
-            <img src="./images/mainlogo.png" alt="not ac">
-            <h1 class="main">Beyond limits, beyond reality.</h1>
-            <p class="mb-5">Meta Verse, Meta Us.</p>
-            <p>&nbsp;</p>
-            <p class="d-lg-none d-xl-block">&nbsp;</p>
+          <img src="./images/mainlogo.png" alt="not ac">
+          <h1 class="main">Beyond limits, beyond reality.</h1>
+          <p class="mb-5">Meta Verse, Meta Us.</p>
+          <p>&nbsp;</p>
+          <p class="d-lg-none d-xl-block">&nbsp;</p>
         </div>
+      </div>
     </div>
-</div>
-</div>
-
-
-<div class="container">
-    <div class="featured-property-half d-flex">
-        <div class="image" style="background-image: url('images/main-1.png')"></div>
     </div>
+    <!-- 여기서부터 자동 배너 -->
+    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+      <!-- Indicators -->
+      <ul class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to="1"></li>
+        <li data-target="#myCarousel" data-slide-to="2"></li>
+      </ul>
+      <!--slideshow -->
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img src="images/be1.png">
+        </div>
+        <div class="carousel-item">
+          <img src="images/be2.png">
+        </div>
+        <div class=" carousel-item">
+          <img src="images/be3.png">
+        </div>
+      </div>
+      <!-- Left and right controls -->
+      <a class="carousel-control-prev" href="#myCarousel" data-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+      </a>
+      <a class="carousel-control-next" href="#myCarousel" data-slide="next">
+        <span class="carousel-control-next-icon"></span>
+      </a>
+    </div>
+    <!-- 끝 -->
+  </div>
+  
     <div class="site-section">
-        <div class="container">
-            <div class="row">
-                <div class="site-section-heading text-center mb-5 w-border col-md-6 mx-auto">
-                    <h2 class="mb-5">beyond verse</h2>
-                </div>
-                <div class="columns">
-                    <img src="images/hero_bg_4.jpg">
-                    <h3>500,293&nbsp;</h3>
-                    <h5> 메타어스로 이루어진 작업들</h5>
-                    <p>메타어스는 메타버스 공간으로 중계를 지원합니다. </p>
-                </div>
-                <div class="columns">
-                    <img src="images/hero_bg_4.jpg">
-                    <h4>100,124</h4>
-                    <h5> 메타어스를 이용하는 사람들 </h5>
-                    <p>배움과 소통에는 나이가 없는 것 처럼.</p>
-                </div>
-                <div class="columns">
-
-                    <img src="images/hero_bg_4.jpg">
-                    <h4>234</h4>
-                    <h5> 메타어스에서 제공하는 강의들. </h5>
-                    <p>또한 강의를 듣는 것에도 제한을 두지 않으니.</p>
-                </div>
-                <div class="columns">
-                    <img src="images/hero_bg_4.jpg">
-                    <h4>45642</h4>
-                    <h5> 메타어스 이용자 </h5>
-                    <p> 이렇게 이용자가 많을 수 밖에. </p>
-                </div>
-                <a href="#" class="btn btn-primary">더 자세히 알아보고 싶으신가요?</a>
-            </div>
+  <div class="container">
+  
+        <div class="site-section-heading text-center mb-5 w-border col-md-6 mx-auto">
+          <h2 class="mb-5">beyond verse</h2>
         </div>
-    </div>
-</div>
-
+     <!-- <a href="#" class="col1 unit-9 no-height" data-aos="fade-up" data-aos-delay="100">-->  
+        <div style="text-align: center; "data-aos="fade-up" data-aos-delay="100">
+          <h1>500,293&nbsp;</h1>
+          <img src="images/icon1.png" alt="타원">
+          <h5> 메타어스로 이루어진 작업들</h5>
+          <p>메타어스는 메타버스 공간으로 중계를 지원합니다. </p>
+          </div>
+  
+          <br>
+        <div style="text-align: center; "data-aos="fade-up" data-aos-delay="100">
+          <h1>100,124</h1>
+          <img src="images/icon2.png" alt="타원">
+          <h5> 메타어스를 이용하는 사람들 </h5>
+          <p>배움과 소통에는 나이가 없는 것 처럼.</p>
+        </div>
+        <br>
+        <div style="text-align: center; "data-aos="fade-up" data-aos-delay="100">
+          <h1>2134</h1>
+          <img src="images/icon3.png" alt="타원">
+          <h5> 메타어스에서 제공하는 강의들. </h5>
+          <p>또한 강의를 듣는 것에도 제한을 두지 않으니.</p>
+        </div>
+        <br>
+          <div style="text-align: center; "data-aos="fade-up" data-aos-delay="100">
+            <h1>45642</h1>
+            <img src="images/icon4.png" alt="타원">
+            <h5> 메타어스 이용자 </h5>
+            <p> 이렇게 이용자가 많을 수 밖에. </p>
+            </div>
+          </div>
+        </div>
+      <div>
 <div>
 
     <div class="container">
@@ -140,21 +172,10 @@
 
     </div>
 </div>
-
-
 <div class="site-section block-13">
     <div class="container" data-aos="fade-up">
-
     </div>
-
 </div>
-</div>
-</div>
-</div>
-</body>
-
-
-
 
 <div class="site-section bg-light">
     <div class="container">
@@ -217,8 +238,5 @@
 <script src="index_css/js/main.js"></script>
 
 </body>
-
+<%@ include file="inc/footer.jsp" %>
 </html>
-
-</html>
-                    <%@ include file="inc/footer.jsp" %>
