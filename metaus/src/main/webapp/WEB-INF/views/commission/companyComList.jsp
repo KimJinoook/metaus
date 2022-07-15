@@ -109,6 +109,11 @@
 					
 					<!-- Start of Products -->
                     <div class="row ajaxProduct">
+                    	<c:if test="${empty list }">
+                    		<div style="font-size: 50px;text-align: center;">
+                    			<i class="fa-solid fa-user-large-slash"></i> 등록한 의뢰가 없습니다.
+                    		</div>
+                    	</c:if>
 						<c:forEach var="map" items="${list }">
                         <!-- Start of Product 1 -->
                         <div class="col-md-6 col-xs-12">
