@@ -14,5 +14,5 @@ public interface IndexDAO {
 
 	IndexVO selectCateCnt() ;
 	IndexVO selectFooterCnt();
-
+	List<IndexVO> selectRec();
 }

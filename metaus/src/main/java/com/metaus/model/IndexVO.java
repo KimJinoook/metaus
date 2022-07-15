@@ -18,4 +18,9 @@ public class IndexVO {
 	private int comCnt;
 	private int resumeCnt;
 	private int recCnt;
+	private String comPic;
+	private String recTitle;
+	private String comName;
+	private Timestamp recRegdate;
+	private int recNo;
 }

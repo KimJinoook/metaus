@@ -23,5 +23,9 @@ public class IndexServiceImpl implements IndexService {
 	public IndexVO selectFooterCnt() {
 		return indexDao.selectFooterCnt();
 	}
+	
+	public List<IndexVO> selectRec() {
+		return indexDao.selectRec();
+	}
 
 }

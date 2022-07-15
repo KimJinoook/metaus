@@ -2,7 +2,7 @@ package com.metaus.common;
 
 public interface ConstUtil {
 	//게시판 페이징 관련 상수
-	public static final int RECORD_COUNT=2;
+	public static final int RECORD_COUNT=6;
 	int BLOCKSIZE=5;
 	
 	//메세지 페이징 관련 상수
