@@ -134,7 +134,7 @@ public class PdController {
 		List<PdVO> list=pdService.selectByCategory(searchVo);
 		logger.info("상품 카테고리 목록 조회 결과, list.size={}", list.size());
 
-		int totalRecord=pdService.selectTotalRecord(searchVo);
+		int totalRecord=pdService.selectTotalRecord2(searchVo);
 		logger.info("상품 카테고리 목록 조회-레코드개수, totalRecord={}", totalRecord);		
 		pagingInfo.setTotalRecord(totalRecord);
 

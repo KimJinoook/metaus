@@ -114,7 +114,7 @@ $(function(){
             <div class="row portfolio-grid mt40">
 				
                 <!-- Start of Shop Product Wrapper -->
-                <div class="col-md-12 col-xs-12 shop-products-wrapper">
+                <div class="col-md-12 col-xs-12 shop-products-wrapper"">
 				<c:if test="${empty list }">
             <p class="noPd2" style="text-align: center;"><img src="<c:url value='/images/noPd2.png'/>" alt="..." width="40%"/></p>            
             </c:if>
@@ -123,7 +123,7 @@ $(function(){
 				<c:forEach var="vo" items="${list }">
 				
                 <!-- Portfolio Item -->
-                <div class="element col-md-4 col-sm-6 col-xs-6 portfolio-cat1">
+                <div class="element col-md-4 col-sm-6 col-xs-6 portfolio-cat1" style="margin-top: 30px;">
                     
                                 <div class="product-image">
 <canvas id="can${vo.pdNo }" width="360px" height="270px" style="margin-bottom:0"></canvas>

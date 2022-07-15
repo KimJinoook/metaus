@@ -1646,15 +1646,16 @@ values(fp_cate_seq.nextval, '과학');
 insert into fp_cate
 values(fp_cate_seq.nextval, '스포츠');
 
+commit;
 select * from fp_pd;
 insert into fp_pd
-values(fp_pd_seq.nextval,1,1,'시바견','시바견입니다','2.zip',null,null,1500,3);
+values(fp_pd_seq.nextval,1,1,'시바견','시바견입니다','2.zip',null,null,3500,3);
 insert into fp_pd
-values(fp_pd_seq.nextval,10,2,'화장실','화장실입니다','1.zip',null,null,1500,null);
+values(fp_pd_seq.nextval,10,2,'화장실','화장실입니다','1.zip',null,null,3500,null);
 insert into fp_pd
-values(fp_pd_seq.nextval,6,1,'귀여운 소녀','귀여운 소녀입니다','kawai.zip',null,null,35000,null);
+values(fp_pd_seq.nextval,6,1,'귀여운 소녀','귀여운 소녀입니다','kawai.zip',null,null,3500,null);
 insert into fp_pd
-values(fp_pd_seq.nextval,12,1,'삼지창','들면 멋있음','trident.zip',null,null,35000,null);
+values(fp_pd_seq.nextval,12,1,'삼지창','들면 멋있음','trident.zip',null,null,3500,null);
 
 select * from fp_resume;
 
