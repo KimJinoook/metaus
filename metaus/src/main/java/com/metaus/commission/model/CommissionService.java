@@ -12,4 +12,6 @@ public interface CommissionService {
 	int deleteCommissionByRecNo(int recNo);
 	int selectMemNoByRecNo(int recNo);
 	int insertContractByrecNoMemNo(Map<String, Integer> map);
+	int updateConDoneDateByRecNo(int recNo);
+	int deleteContractByRecNo(int recNo);
 }

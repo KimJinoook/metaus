@@ -49,6 +49,14 @@
 	                                        <a role="button" class="cancel-commission"><i class="fa-solid fa-circle-minus"></i>의뢰 취소</a>
 	                                    </div>
                                     </c:if>
+                                    <c:if test="${map['conFlag'] eq 'contracted'}">
+                                    	<!-- Product overlay -->
+	                                    <div class="product-overlay">
+	                                    	<input type="hidden" value="${map['REC_NO'] }">
+	                                        <a role="button" class="contract-cancel" style="width: 50%;float: left;"><i class="fa-solid fa-circle-minus"></i>계약 취소</a>
+	                                        <a role="button" class="contract-done" style="width: 50%;float: left;"><i class="fa-solid fa-circle-check"></i>계약 완료</a>
+	                                    </div>
+                                    </c:if>
 
                                 </div>
 
@@ -57,7 +65,9 @@
 
                                     <a role="button">
                                         <div class="com-decs-font com-decs-margin comList-avg-estimate left align-line"><i class="fa-solid fa-sack-dollar"></i> 페이</div>
-										<div class="com-decs-font com-decs-margin-content left com-decs-font-bold align-line">${map['REC_PAY'] }원 &nbsp;&nbsp;&nbsp;&nbsp;|</div>
+										<div class="com-decs-font com-decs-margin-content left com-decs-font-bold align-line">
+										<fmt:formatNumber value="${map['REC_PAY'] }" type="number"/> 원 &nbsp;&nbsp;&nbsp;&nbsp;|
+										</div>
 										<div class="com-decs-font com-decs-margin omList-avg-applicant left align-line"><i class="fa-solid fa-user-tie"></i> 지원자수</div>
 										<div class="com-decs-font com-decs-margin-content left com-decs-font-bold align-line">${map['applicantNo'] }명</div>
 										<c:if test="${map['applicantNo'] > 0}">

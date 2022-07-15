@@ -6183,9 +6183,24 @@ section.shop .product-image .product-overlay a {
     text-align: center;
 }
 
+section.shop .product-image .product-overlay a.contract-done {
+    display: block;
+    width: 100%;
+    font-size: 14px;
+    color: #f6f6f6;
+    background: #29b1fdbf;
+    text-align: center;
+}
+
 section.shop .product-image .product-overlay a:hover {
     background: #da2323;
 }
+
+section.shop .product-image .product-overlay a.contract-done:hover {
+    background: #1863eb;
+}
+
+
 
 section.shop .product-image .product-overlay a i {
     padding-right: 5px;

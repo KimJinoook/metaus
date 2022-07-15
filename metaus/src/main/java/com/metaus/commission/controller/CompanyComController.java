@@ -150,4 +150,21 @@ public class CompanyComController {
 		return "redirect:/commission/companyComList";
 	}
 	
+	@RequestMapping("/commissionContractDone")
+	public String commissionContractDone(@RequestParam(defaultValue = "0") int recNo) {
+		int cnt = commissionService.updateConDoneDateByRecNo(recNo);
+		logger.info("계약의뢰 완료 날짜 업데이트 결과, cnt={}", cnt);
+		
+		return "redirect:/commission/ajaxCompanyComList";
+	}
+	
+	@RequestMapping("/commissionContractCancel")
+	public String commissionContractCancel(@RequestParam(defaultValue = "0") int recNo) {
+		logger.info("계약의뢰 삭제 파라미터, recNo={}", recNo);
+		
+		int cnt = commissionService.deleteContractByRecNo(recNo);
+		logger.info("계약의뢰 삭제 결과, cnt={}", cnt);
+		
+		return "redirect:/commission/ajaxCompanyComList";
+	}
 }
