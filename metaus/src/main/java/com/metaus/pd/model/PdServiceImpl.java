@@ -52,5 +52,10 @@ public class PdServiceImpl implements PdService{
 	public List<PdVO> selectByBuyCnt(int pdNo) {
 		return pdDao.selectByBuyCnt(pdNo);
 	}
+
+	@Override
+	public int selectTotalRecord2(SearchVO searchVo) {
+		return pdDao.selectTotalRecord2(searchVo);
+	}
 	
 }

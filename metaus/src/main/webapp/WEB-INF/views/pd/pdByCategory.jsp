@@ -112,9 +112,9 @@ $(function(){
 				<c:forEach var="vo" items="${list }">
 				
                 <!-- Portfolio Item -->
-                <div class="element col-md-4 col-sm-6 col-xs-6 portfolio-cat1">
+                <div class="element col-md-4 col-sm-6 col-xs-6 portfolio-cat1" style="margin-top: 30px;">
                     
-                                <div class="product-image">
+                                <div class="product-image" >
                     	<canvas id="can${vo.pdNo }" width="360px" height="270px" style="margin-bottom:0"></canvas>
 
 <script type="module">

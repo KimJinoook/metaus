@@ -85,12 +85,17 @@
 	<select id="selectTotalRecord" parameterType="pdVO"
 		resultType="int">
 		<if test="pdName==null or pdName==''">
-    		select count(*) from fp_pd 
+    		select count(*) from fp_pd
 		</if>
     	<if test="pdName!=null and pdName!=''">
 			select count(*) from fp_pd
 			where pd_name=#{pdName}
 		</if>
+	</select>
+	<select id="selectTotalRecord2" parameterType="pdVO"
+		resultType="int">
+			select count(*) from fp_pd
+			where cate_no=#{cateNo}
 	</select>
 	
 	<delete id="deletePd" parameterType="int">
