@@ -200,7 +200,7 @@ $(function(){
 
                                     <!-- Product overlay -->
                                     <div class="product-overlay">
-                                        <a href="<c:url value='/cart/cartAdd?pdNo=${vo.pdNo}'/>" class="addCart"><i class="fa fa-shopping-cart"></i>Add to Cart</a>
+                                        <a href="<c:url value='/cart/cartAdd?pdNo=${vo.pdNo}&pdFilename=${vo.pdFilename }'/>" class="addCart"><i class="fa fa-shopping-cart"></i>Add to Cart</a>
                                     </div>
 
                                 </div>

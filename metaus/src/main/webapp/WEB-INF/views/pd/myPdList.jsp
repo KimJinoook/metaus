@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../inc/header.jsp"%>
+<script type="text/javascript">
+	
+</script>
 <!-- =============== Start of Page Header 1 Section =============== -->
     <section class="page-header" style="margin-top: 150px;">
         <div class="container">
@@ -55,9 +58,9 @@
 									<td colspan="5" style="text-align: center;">구입한 상품이 없습니다.</td>
 								</tr>		
 							</c:if>
-							
 							<c:if test="${!empty list }">
 							<!--반복 시작 -->
+							<form enctype="multipart/form-data">
 						<c:forEach var="vo" items="${list }">
 	                         <!-- Start of Cart Item 1 -->
                                 <tr class="cart-item">
@@ -98,10 +101,11 @@
 
                                     <!-- Cart Subtotal -->
                                     <td class="cart-product-subtotal">
-                                                <a href="" class="btn btn-purple btn-effect" id="download">다운로드</a>
+                                           <a href="<c:url value='/product/${vo.pdFilename }'/>" class="btn btn-purple btn-effect" id="download">다운로드</a>
                                     </td>
                                 </tr>
                                 </c:forEach>
+							</form>
                                 </c:if>
                                 <!-- End of Cart Item 1 -->
 
