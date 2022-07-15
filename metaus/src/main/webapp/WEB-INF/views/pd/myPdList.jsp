@@ -2,7 +2,23 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../inc/header.jsp"%>
 <script type="text/javascript">
+function pdList(curPage){
+	$('input[name=currentPage]').val(curPage);
+	$('form[name=frmPage]').submit();
+}
+
+$(function(){
+	$('.remove').click(function(){
+		var res=confirm('정말 삭제하시겠습니까? 삭제한 후에는 되돌릴 수 없습니다.');
+		if(res===true){
+			
+		}else{
+			alert('취소되었습니다.');
+			event.preventDefault();
+		}
+	});
 	
+});
 </script>
 <!-- =============== Start of Page Header 1 Section =============== -->
     <section class="page-header" style="margin-top: 150px;">
@@ -67,7 +83,7 @@
 
                                     <!-- Cart Remove Product -->
                                      <td class="cart-product-remove">
-                                        <%-- <a href="<c:url value='/cart/delete?pdNo=${vo.pdNo }'/>" class="remove" title="Remove this item"><i class="fa fa-times"></i></a> --%>
+                                         <a href="<c:url value='/buy/delete?pdNo=${vo.pdNo }'/>" class="remove" title="Remove this item"><i class="fa fa-times"></i></a> 
                                     </td> 
 
                                     <!-- Cart Product Thumbnail -->
@@ -192,7 +208,39 @@
                         <!-- End of Cart Total -->
                     </div>
                     <!-- End of Row -->
+					<!-- Start of Pagination -->
+					<div class="col-md-12">
+						<ul class="pagination list-inline text-center">
+							<c:if test="${pagingInfo.firstPage>1 }">
+								<li><a href="#"
+									onclick="pdList(${pagingInfo.firstPage-1})">prev</a></li>
+							</c:if>
 
+							<!-- [1][2][3][4][5][6][7][8][9][10] -->
+							<c:forEach var="i" begin="${pagingInfo.firstPage }"
+								end="${pagingInfo.lastPage }">
+								<c:if test="${i==pagingInfo.currentPage }">
+									<li class="active"><a>${i }</a></li>
+								</c:if>
+								<c:if test="${i!=pagingInfo.currentPage }">
+									<li><a href="#" onclick="pdList(${i})">${i } </a></li>
+								</c:if>
+							</c:forEach>
+
+							<c:if test="${pagingInfo.lastPage<pagingInfo.totalPage }">
+								<li><a href="#"
+									onclick="pdList(${pagingInfo.lastPage+1})">Next</a></li>
+							</c:if>
+							<!--  페이지 번호 끝 -->
+						</ul>
+					</div>
+					<!-- End of Pagination -->
+                    <!-- 페이징 처리를 위한 form 시작-->
+				<form name="frmPage" method="post"
+					action="<c:url value='/pd/myPdList'/>">
+					<input type="hidden" name="currentPage">
+				</form>
+				<!-- 페이징 처리 form 끝 -->
                 </div>
                 <!-- End of Cart Wrapper -->
 

@@ -200,7 +200,7 @@ $(function(){
 
                                     <!-- Product overlay -->
                                     <div class="product-overlay">
-                                        <a href="<c:url value='/cart/cartAdd?pdNo=${vo.pdNo}&pdFilename=${vo.pdFilename }'/>" class="addCart"><i class="fa fa-shopping-cart"></i>Add to Cart</a>
+                                        <a href="<c:url value='/cart/cartAdd?pdNo=${vo.pdNo}&pdFilename=${vo.pdFilename }'/>" class="addCart"><i class="fa fa-shopping-cart"></i>장바구니 담기</a>
                                     </div>
 
                                 </div>
@@ -212,7 +212,7 @@ $(function(){
 
                                         <!-- Price -->
                                         <span class="price">
-								            <del><span class="amount">$39.99</span></del>
+								            <del><span class="amount">$399.99</span></del>
                                         <span class="amount"><fmt:formatNumber value="${vo.pdPrice }" pattern="#,###"/>원</span>
                                         </span>
                                     </a>
@@ -570,7 +570,6 @@ $(function(){
                 <!-- End of Shop Product Wrapper -->
 
             </div>
-        </div>
     </section>
     <!-- ===== End of Shop Section ===== -->
     <%@ include file="../inc/footer.jsp"%>
