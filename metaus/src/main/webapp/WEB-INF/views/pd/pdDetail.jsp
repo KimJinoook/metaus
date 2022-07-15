@@ -5,11 +5,19 @@
  $(function(){
 	 $('#cart').click(function(){
 		 if($('#memId').val()=="" || $('#memId').val()==null){
-			alert('로그인 후 이용가능합니다!');
+			alert('일반 회원 로그인 후 이용가능합니다!');
 			event.preventDefault();
 		}else{
-			location.href="<c:url value='/cart/cartAdd?pdNo=${param.pdNo}'/>"; 
-				
+			location.href="<c:url value='/cart/cartAdd?pdNo=${param.pdNo}'/>";
+		}		 
+	 });
+	 
+	 $('#review').click(function(){
+		 if($('#memId').val()=="" || $('#memId').val()==null){
+			alert('일반 회원 로그인 후 이용가능합니다!');
+			event.preventDefault();
+		}else{
+			location.href="<c:url value='/pd/review?pdNo=${param.pdNo}'/>";				
 		}		 
 	 });
  });
@@ -289,45 +297,6 @@
                                                       </c:forEach>
                                                       </c:if>
                                             <!-- End of Comment 1 -->
-
-
-                                            <!-- Start of Comment 2 -->
-                                            <%-- <li class="comment">
-                                                <!-- Commenter Image -->
-                                                <a class="pull-left commenter" href="#">
-                                                    <img src="<c:url value='/images/clients/client2.jpg'/>" alt="" class="img-responsive">
-                                                </a>
-
-                                                <div class="media-body comment-body">
-                                                    <!-- Comment Wrapper -->
-                                                    <div class="comment-content-wrapper">
-                                                        <div class="media-heading clearfix">
-
-                                                            <!-- Commenters Name -->
-                                                            <h6 class="commenter-name">john doe</h6>
-
-                                                            <div class="comment-rating pull-right">
-                                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                                <i class="fa fa-star-half-o" aria-hidden="true"></i>
-                                                            </div>
-
-                                                            <!-- Comment Info -->
-                                                            <div class="comment-info">
-                                                                <span>Nov 11, 2016 at 8:51 am</span>
-                                                            </div>
-
-                                                            <!-- Comment -->
-                                                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-                                                        </div>
-                                                    </div>
-                                                    <!-- End of Comment Wrapper -->
-                                                </div>
-                                            </li> --%>
-                                            <!-- End of Comment 2 -->
-
                                         </ul>
                                         <!-- End of Comments -->
 
@@ -351,7 +320,7 @@
                                                 <div class="form-group">
                                                     <div class="col-md-12">
                                                         <label>리뷰 *</label>
-                                                        <textarea class="form-control" rows="8" name="message" placeholder="이곳에 적어주세요"></textarea>
+                                                        <textarea class="form-control" rows="8" name="reviewContent" placeholder="이곳에 적어주세요"></textarea>
                                                     </div>
                                                 </div>
                                             </div>
