@@ -193,7 +193,7 @@
             
             
             <li class="treeview">
-              <a href="#">
+              <a href="<c:url value='/mailbox/mailbox'/>">
                 <i class="fa fa-envelope"></i><span>메세지</span>
               </a>
             </li>
