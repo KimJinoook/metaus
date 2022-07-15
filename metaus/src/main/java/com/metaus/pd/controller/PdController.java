@@ -112,7 +112,7 @@ public class PdController {
 		int cnt=pdService.insertPd(vo);
 		logger.info("상품 등록 처리 결과, cnt={}",cnt);
 
-		return "redirect:/pd/pdDetail?pdNo="+vo.getPdNo();
+		return "redirect:/pd/pdDetail?pdNo="+vo.getPdNo()+"&pdFilename"+fileName;
 	}
 	
 	@RequestMapping("/pdByCategory")
@@ -158,11 +158,10 @@ public class PdController {
 	@RequestMapping("/myPdList")
 	public String myPdList(HttpSession session, Model model) {
 		int memNo=(int)session.getAttribute("memNo");
-		logger.info("구매상품 조회 페이지 파라미터 memNo={}",memNo);
+		logger.info("구매상품 조회 페이지 파라미터 memNo={}, pdVo={}",memNo);
 		
 		List<BuyVO> list=buyService.selectBuyByMemNo(memNo);
 		logger.info("구매상품 조회 결과 파라미터 list.size={}",list.size());
-		
 		model.addAttribute("list",list);
 		return "/pd/myPdList";
 	}

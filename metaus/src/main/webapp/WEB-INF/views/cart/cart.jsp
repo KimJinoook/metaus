@@ -45,10 +45,8 @@
     <section class="shop ptb80">
         <div class="container">
             <div class="row">
-
                 <!-- Start of Cart Wrapper -->
                 <div class="col-md-12 cart-wrapper">
-
                     <!-- Start of Table Responsive -->
                     <div class="table-responsive">
                         <!-- Start of Cart Table -->

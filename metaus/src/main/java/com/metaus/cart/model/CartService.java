@@ -7,4 +7,5 @@ public interface CartService {
 	List<CartVO> selectCartList(int memNo);
 	int deleteCartByMemNo(int memNo, int pdNo);
 	int deleteCartAllByMemNo(int memNo);
+	int selectBuyCount();
 }

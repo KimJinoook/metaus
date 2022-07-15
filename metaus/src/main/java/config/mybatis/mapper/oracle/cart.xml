@@ -34,4 +34,10 @@
 		delete from fp_cart
 		where mem_no=#{memNo}
 	</delete>
+	
+	<select id="selectBuyCount" resultType="int">
+		select count(b.pd_no)
+		from fp_cart c join fp_buy b
+		on c.pd_no = b.pd_no
+	</select>
 </mapper>

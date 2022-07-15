@@ -20,10 +20,10 @@
 	</update>
 	
 	<select id="selectBuyByMemNo" parameterType="int" resultType="BuyVo">
-		select DISTINCT b.pd_no, p.pd_name, p.pd_price
-		from fp_buy b join fp_pay p
-		on b.mem_no=p.mem_no join fp_pd p
-		on p.pd_no=b.pd_no
+		select b.pd_no, p.pd_name, p.pd_filename, p.pd_price
+		from fp_buy b join fp_pd p
+		on b.pd_no=p.pd_no
 		where b.mem_no=#{memNo}
 	</select>
+	
 </mapper>

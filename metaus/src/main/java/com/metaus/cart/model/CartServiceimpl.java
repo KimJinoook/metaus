@@ -41,4 +41,9 @@ public class CartServiceimpl implements CartService{
 		return cartDao.deleteCartAllByMemNo(memNo);
 	}
 
+	@Override
+	public int selectBuyCount() {
+		return cartDao.selectBuyCount();
+	}
+
 }

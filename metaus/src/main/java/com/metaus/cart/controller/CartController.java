@@ -52,8 +52,18 @@ public class CartController {
 		List<CartVO> list=cartService.selectCartList(memNo);
 		logger.info("장바구니 목록, 결과 list.size={}", list.size());
 		
-		model.addAttribute("list", list);
+		int cnt=cartService.selectBuyCount();
+		if(cnt>0) {
+			String msg="이미 구매하신 상품입니다. 다운로드 페이지로 이동합니다.";
+			cnt=cartService.deleteCartAllByMemNo(memNo);
+			String url="/pd/myPdList";
+			model.addAttribute("msg",msg);
+			model.addAttribute("url",url);		
+			
+			return "/common/message";
+		}
 		
+		model.addAttribute("list", list);
 		return "/cart/cart";
 	}
 	
@@ -71,7 +81,7 @@ public class CartController {
 	}
 	
 	@RequestMapping("/delete")
-	public String cartDel(HttpSession session,@RequestParam int pdNo, Model model ) {
+	public String cartDel(HttpSession session, @RequestParam int pdNo, Model model) {
 		int memNo=(int)session.getAttribute("memNo");
 		logger.info("장바구니 목록 삭제 파라미터 memNo={}",memNo);
 		
