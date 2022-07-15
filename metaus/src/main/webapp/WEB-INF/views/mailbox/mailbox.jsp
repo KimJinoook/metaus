@@ -361,13 +361,15 @@
 			$(document).on("click", ".message-detail", function(){
 				var msgaddNo = $(this).closest('tr').find('.msgaddNo').val();
 				var msgNo = $(this).closest('tr').find('.msgNo').val();
+				var flag = $(this).closest('tr').find('.flag').val();
 				//alert(msgaddNo);
 				$.ajax({
 					url: "<c:url value='/mailbox/mailDetail'/>",
 					type: "GET",
 					data: {
 						"msgaddNo" : msgaddNo,
-						"msgNo" : msgNo
+						"msgNo" : msgNo,
+						"flag" : flag
 					},
 					success: function(data){
 						$('.btn-compose').text("메세지 작성");
