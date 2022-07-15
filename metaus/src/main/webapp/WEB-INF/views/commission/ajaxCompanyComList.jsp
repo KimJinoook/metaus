@@ -94,6 +94,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <ul class="pagination list-inline text-center">
+                            	<input type="hidden" value="${pagingInfo.currentPage }" id="currentPage">
                             	<!-- 이전블럭으로 이동 -->
                             	<c:if test="${pagingInfo.firstPage>1 }">
                             		<input type="hidden" value="${pagingInfo.firstPage-1}" class="currentPage${i}">

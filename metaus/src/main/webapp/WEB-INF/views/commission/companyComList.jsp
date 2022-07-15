@@ -41,12 +41,15 @@
 		
 		$(document).on("click",".cancel-commission",function(){
 			var recNo = $(this).prev().val();
+			var currentPage = $("#currentPage").val();
+			currentPage = Number(currentPage);
 			//console.log(recNo);
 			$.ajax({
 				url: "<c:url value='/commission/cancelCommission'/>",
 				type: "GET",
 				data: {
-					"recNo" : recNo
+					"recNo" : recNo,
+					"currentPage" : currentPage
 				},
 				success: function(data){
 					$('.shop-products-wrapper').html(data);
@@ -59,12 +62,15 @@
 		
 		$(document).on("click",".contract-cancel",function(){
 			var recNo = $(this).prev().val();
+			var currentPage = $("#currentPage").val();
+			currentPage = Number(currentPage);
 			
 			$.ajax({
 				url: "<c:url value='/commission/commissionContractCancel'/>",
 				type: "GET",
 				data: {
-					"recNo" : recNo
+					"recNo" : recNo,
+					"currentPage" : currentPage
 				},
 				success: function(data){
 					$('.shop-products-wrapper').html(data);
@@ -77,12 +83,15 @@
 		
 		$(document).on("click",".contract-done",function(){
 			var recNo = $(this).prev().prev().val();
+			var currentPage = $("#currentPage").val();
+			currentPage = Number(currentPage);
 			
 			$.ajax({
 				url: "<c:url value='/commission/commissionContractDone'/>",
 				type: "GET",
 				data: {
-					"recNo" : recNo
+					"recNo" : recNo,
+					"currentPage" : currentPage
 				},
 				success: function(data){
 					$('.shop-products-wrapper').html(data);
@@ -201,6 +210,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <ul class="pagination list-inline text-center">
+                            	<input type="hidden" value="${pagingInfo.currentPage }" id="currentPage">
                             	<!-- 이전블럭으로 이동 -->
                             	<c:if test="${pagingInfo.firstPage>1 }">
                             		<input type="hidden" value="${pagingInfo.firstPage-1}" class="currentPage${i}">
