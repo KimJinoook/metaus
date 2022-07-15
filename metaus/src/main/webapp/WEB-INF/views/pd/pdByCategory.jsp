@@ -13,14 +13,14 @@ function pdList(curPage){
 $(function(){
 	$('#pdPost').click(function(){
 		if($('#memId').val()=="" || $('#memId').val()==null){
-			alert('로그인 후 이용가능합니다!');
+			alert('일반 회원 로그인 후 이용가능합니다!');
 			event.preventDefault();
 		}
 	});
 	
 	$('.addCart').click(function(){
        if($('#memId').val()=="" || $('#memId').val()==null){
-         alert('로그인 후 이용가능합니다!');
+         alert('일반 회원 로그인 후 이용가능합니다!');
          event.preventDefault();
        }
 	});
@@ -189,7 +189,7 @@ $(function(){
 
                                     <!-- Product overlay -->
                                     <div class="product-overlay">
-                                        <a href="<c:url value='/cart/cartAdd?pdNo=${vo.pdNo}'/>" class="addCart"><i class="fa fa-shopping-cart"></i>Add to Cart</a>
+                                        <a href="<c:url value='/cart/cartAdd?pdNo=${vo.pdNo}'/>" class="addCart"><i class="fa fa-shopping-cart"></i>장바구니 담기</a>
                                     </div>
 
                                 </div>
@@ -215,8 +215,6 @@ $(function(){
             <!-- End of Portfolio Grid -->
 
         </div>
-    </section>
-    <!-- ===== End of Portfolio Section ===== -->                       
                     <!-- Start of Pagination -->
 					<div class="col-md-12">
 						<ul class="pagination list-inline text-center">
@@ -252,6 +250,8 @@ $(function(){
 					<input type="hidden" name="searchCondition" value="${searchVo.searchCondition }">
 				</form>
 				<!-- 페이징 처리 form 끝 -->
-        </section>
+        </div>
+    </section>
+    <!-- ===== End of Portfolio Section ===== -->                       
 
 <%@ include file="../inc/footer.jsp"%>

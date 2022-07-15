@@ -2,17 +2,23 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../inc/header.jsp"%>
 <script type="text/javascript">
+
 	$(function(){
 		$('.remove').click(function(){
 			var res=confirm('삭제하시겠습니까?');
-			if(res===true){
-				
-			}else{
+			if(res===false){
 				alert('취소되었습니다.');
-				event.preventDefault();
+				event.preventDefault();				
 			}
 		});
 		
+		$('#checkOut').click(function(){
+			var res=confirm('결제 후에는 환불되지 않습니다. 확인 부탁드립니다.');
+			if(res===false){
+				alert('취소되었습니다.');
+				event.preventDefault();				
+			}
+		});
 	});
 </script>
 <!-- =============== Start of Page Header 1 Section =============== -->
@@ -181,11 +187,13 @@
                                         </div>
                                     </td>
                                 </tr>
+                                
                                 <!-- End of Cart Item -->
 
                             </tbody>
                         </table>
                         <!-- End of Cart Table -->
+                        
                     </div>
                     <!-- End of Table Responsive -->
 
@@ -511,7 +519,7 @@
                         <!-- End of Cart Total -->
                     </div>
                     <!-- End of Row -->
-
+				
                 </div>
                 <!-- End of Cart Wrapper -->
 

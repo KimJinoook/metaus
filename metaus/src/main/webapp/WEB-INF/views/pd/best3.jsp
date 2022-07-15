@@ -11,7 +11,7 @@
 $(function(){	
 	$('.addCart').click(function(){
 	       if($('#memId').val()=="" || $('#memId').val()==null){
-	         alert('로그인 후 이용가능합니다!');
+	         alert('일반 회원 로그인 후 이용가능합니다!');
 	         event.preventDefault();
 	       }
 	    });
@@ -116,7 +116,7 @@ $(function(){
 
                                     <!-- Product overlay -->
                                     <div class="product-overlay">
-                                        <a a href="<c:url value='/cart/cartAdd?pdNo=${vo.pdNo}'/>" class="addCart"><i class="fa fa-shopping-cart"></i>Add to Cart</a>
+                                        <a a href="<c:url value='/cart/cartAdd?pdNo=${vo.pdNo}'/>" class="addCart"><i class="fa fa-shopping-cart"></i>장바구니 담기</a>
                                     </div>
 
                                 </div>

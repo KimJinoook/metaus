@@ -20,4 +20,9 @@ public class BuyServiceImpl implements BuyService{
 	public List<BuyVO> selectBuyByMemNo(int memNo) {
 		return buyDao.selectBuyByMemNo(memNo);
 	}
+
+	@Override
+	public int deleteBuyByMemNo(int memNo, int pdNo) {
+		return buyDao.deleteBuyByMemNo(memNo, pdNo);
+	}
 }

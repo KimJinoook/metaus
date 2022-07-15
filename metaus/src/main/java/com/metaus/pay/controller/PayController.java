@@ -45,8 +45,9 @@ public class PayController {
 		BuyVO buyVo= new BuyVO();
 		if(cnt>0) {
 			for(int i=0;i<list.size();i++) {
+				CartVO cartVo=list.get(i);
 				buyVo.setMemNo(memNo);
-				buyVo.setPdNo(pdNo);
+				buyVo.setPdNo(cartVo.getPdNo());
 				int res=buyService.insertBuy(buyVo);
 			}
 			logger.info("결제 완료 파라미터 buyVo={}, list.size={}",buyVo,list.size());		

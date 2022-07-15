@@ -26,4 +26,8 @@
 		where b.mem_no=#{memNo}
 	</select>
 	
+	<delete id="deleteBuyByMemNo" parameterType="int">
+		delete from fp_buy
+		where mem_no=#{memNo} and pd_no=#{pdNo}
+	</delete>
 </mapper>

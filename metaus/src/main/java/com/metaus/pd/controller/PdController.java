@@ -116,7 +116,7 @@ public class PdController {
 	}
 	
 	@RequestMapping("/pdByCategory")
-	public void pdByCategory(@ModelAttribute PdVO searchVo, @RequestParam String cateName,
+	public String pdByCategory(@ModelAttribute PdVO searchVo, @RequestParam String cateName,
 			@RequestParam int cateNo, Model model) {
 		logger.info("pd 목록 페이지, 파라미터 searchVo={}",searchVo);
 		
@@ -132,15 +132,16 @@ public class PdController {
 		searchVo.setRecordCountPerPage(ConstUtil.RECORD_COUNT);
 
 		List<PdVO> list=pdService.selectByCategory(searchVo);
-		logger.info("상품 목록 조회 결과, list.size={}", list.size());
+		logger.info("상품 카테고리 목록 조회 결과, list.size={}", list.size());
 
 		int totalRecord=pdService.selectTotalRecord(searchVo);
-		logger.info("상품 목록 조회-레코드개수, totalRecord={}", totalRecord);		
+		logger.info("상품 카테고리 목록 조회-레코드개수, totalRecord={}", totalRecord);		
 		pagingInfo.setTotalRecord(totalRecord);
 
 		model.addAttribute("list", list);
 		model.addAttribute("pagingInfo", pagingInfo);
 		
+		return "/pd/pdByCategory";
 	}
 	
 	@RequestMapping("/best3")
@@ -163,6 +164,7 @@ public class PdController {
 		List<BuyVO> list=buyService.selectBuyByMemNo(memNo);
 		logger.info("구매상품 조회 결과 파라미터 list.size={}",list.size());
 		model.addAttribute("list",list);
+		
 		return "/pd/myPdList";
 	}
 }

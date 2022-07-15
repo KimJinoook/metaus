@@ -9,4 +9,5 @@ public interface BuyDAO {
 	int insertBuy(BuyVO vo);
 	List<BuyVO> selectBuyByMemNo(int memNo);
 	int insertBuyDetail(BuyVO vo);
+	int deleteBuyByMemNo(int memNo, int pdNo);
 }

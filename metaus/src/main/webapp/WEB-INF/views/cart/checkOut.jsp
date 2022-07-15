@@ -516,8 +516,10 @@
 
                     </div>
                     <!-- End of Panel Group -->
-
-                    <div class="col-md-12 text-right" style="margin-top: 20px;">
+                    					 
+                    <div class="col-md-12 text-right" style="margin-top: 20px;">                    
+                       <input type="checkbox" id="agree">
+                       <label for="agree" style="color: red;">환불이 불가능한 상품입니다.</label>
                         <input type="submit" value="결제 하기" name="proceed" id="checkOut" class="btn btn-blue btn-effect">
                     </div>
 
@@ -585,6 +587,9 @@
 	            alert('결제 방식을 체크해주세요.');
 	            $('#bank').focus();
 	            event.preventDefault();
+	         }else if(!$('#agree').is(':checked')){
+	        	 alert('환불이 불가능한 상품입니다. 체크하셔야 결제 가능합니다.');
+	        	 event.preventDefault();
 	         }else{
 	        	 var IMP = window.IMP; // 생략가능
 	     		IMP.init('imp60165917'); 
@@ -634,7 +639,7 @@
     <form id="form-cart-pay" method="post" action="<c:url value='/pay/pay'/>">
     <input type="hidden" name="payPrice">
     <input type="hidden" name="memNo" value="${sessionScope.memNo}">
-    <input type="hidden" name="payKind" value="카드 결제">
+    <input type="hidden" name="payKind" value="신용카드">
     <input type="hidden" name="pdNo" >
     </form>
     <%@ include file="../inc/footer.jsp"%>
