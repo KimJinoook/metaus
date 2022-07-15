@@ -1,5 +1,7 @@
 package com.metaus.controller;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -30,6 +32,9 @@ public class IndexController {
 		
 		IndexVO footCnt = indexService.selectFooterCnt();
 		model.addAttribute("footCnt",footCnt);
+		
+		List<IndexVO> recList = indexService.selectRec();
+		model.addAttribute("recList",recList);
 		
 		return "/test/test4";
 	}
