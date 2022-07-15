@@ -649,7 +649,7 @@ ALTER TABLE fp_port
 CREATE TABLE fp_rec (
 	rec_no NUMBER NOT NULL, /* 의뢰번호 */
 	com_no NUMBER, /* 기업번호 */
-	rec_title VARCHAR2(50), /* 의뢰제목 */
+	rec_title VARCHAR2(500), /* 의뢰제목 */
 	rec_content CLOB, /* 의뢰내용 */
 	rec_pay NUMBER, /* 페이 */
 	rec_regdate DATE, /* 등록일 */
@@ -1548,10 +1548,57 @@ insert into fp_mem
 values(fp_mem_seq.nextval,'테스터','test@naver.com','1234','닉네임1','941215','01030843045','15151','서울시영등포구시흥대로','상세주소','프사경로',sysdate,null,null,null,null,null,null,null);
 
 insert into fp_mem
-values(fp_mem_seq.nextval,'김진욱','kimjin0132@naver.com','1234','닉네임1','941215','01030843045','15151','서울시영등포구시흥대로','상세주소','1.jpg',sysdate,null,null,null,null,null,null,null);
+values(fp_mem_seq.nextval,'김진욱','kimjin0132@naver.com','1234','김진욱','941215','01030843045','15151','서울시영등포구시흥대로','상세주소','1.jpg',sysdate,null,null,null,null,null,null,null);
+
+insert into fp_mem
+values(fp_mem_seq.nextval,'김태연','kimae743@gmail.com','1234','김태연','941215','01012345678','15151','서울시영등포구시흥대로','상세주소','3.png',sysdate,null,null,null,null,null,null,null);
+
+insert into fp_mem
+values(fp_mem_seq.nextval,'박정환','dlstod789@nate.com','1234','박정환','941215','01012345678','15151','서울시영등포구시흥대로','상세주소','4.jpg',sysdate,null,null,null,null,null,null,null);
+
+insert into fp_mem
+values(fp_mem_seq.nextval,'오충렬','dhcndduf1234@naver.com','1234','오충렬','941215','01012345678','15151','서울시영등포구시흥대로','상세주소','5.jpg',sysdate,null,null,null,null,null,null,null);
+
+insert into fp_mem
+values(fp_mem_seq.nextval,'이소망','sky38009@naver.com','1234','이소망','941215','01012345678','15151','서울시영등포구시흥대로','상세주소','6.jpg',sysdate,null,null,null,null,null,null,null);
+
+insert into fp_mem
+values(fp_mem_seq.nextval,'최재훈','chlwognschlw@naver.com','1234','최재훈','941215','01012345678','15151','서울시영등포구시흥대로','상세주소','7.jpg',sysdate,null,null,null,null,null,null,null);
+
+insert into fp_mem
+values(fp_mem_seq.nextval,'한용민','hanym9191@gmail.com','1234','한용민','941215','01012345678','15151','서울시영등포구시흥대로','상세주소','8.jpg',sysdate,null,null,null,null,null,null,null);
 
 insert into fp_com
 values(fp_com_seq.nextval,'testcom','1234','테스트기업','기업프리뷰','기업사진경로','기업대표','기업주소','기업위도','기업경도','사업자등록번호',1,'기업전화번호',sysdate,null);
+
+insert into fp_com
+values(fp_com_seq.nextval,'samsung','1234','삼성','삼성입니다','samsung.png','이재용','경기도 수원시 영통구 삼성로 129','37.255557407733','127.05407180066','12-12-12',0,'02123456',sysdate,null);
+
+insert into fp_com
+values(fp_com_seq.nextval,'google','1234','구글코리아','구글 한국지사입니다','google.svg','낸시 워커','서울특별시 강남구 테헤란로 152 22층','37.500087969056','127.03612652131054','12-12-12',0,'02123456',sysdate,null);
+
+insert into fp_com
+values(fp_com_seq.nextval,'poom','1234','품어떡','품어떡 신촌점입니다','','품어떡','신촌 목화빌딩','37.55718459027301','126.941700222679','12-12-12',0,'02123456',sysdate,null);
+
+insert into fp_com
+values(fp_com_seq.nextval,'bangkok','1234','방콕익스프레스','방콕익스프레스 신촌점입니다','','방콕','신촌 gs앞','37.55716650739785','126.94157291383048','12-12-12',0,'02123456',sysdate,null);
+
+select * from fp_rec;
+insert into fp_rec
+values(fp_rec_seq.nextval, 2, '갤럭시 s22 3d모델 만들어주실 분 구합니다','갤럭시 s22 출시 홍보를 위해 3d모델 만들려 합니다. 실력있는 크리에이터 모집중입니다',150000,sysdate,0,'','','','');
+select * from fp_rec;
+insert into fp_rec
+values(fp_rec_seq.nextval, 4, '품어떡 메인메뉴 모델 만들어주실 분 구합니다','실력있는 크리에이터 모집중입니다',150000,sysdate,0,'','','','');
+insert into fp_rec
+values(fp_rec_seq.nextval, 5, '방콕익스프레스 가게 건물 만들어주실 분 구합니다','실력있는 크리에이터 모집중입니다',150000,sysdate,0,'','','','');
+insert into fp_rec
+values(fp_rec_seq.nextval, 3, '구글 제페토 월드 제작 크리에이터 모집','실력있는 크리에이터 모집중입니다',150000,sysdate,0,'','','','');
+insert into fp_rec
+values(fp_rec_seq.nextval, 2, '삼성 월드 제작 크리에이터 모집','실력있는 크리에이터 모집중입니다',150000,sysdate,0,'','','','');
+
+
+
+
 
 insert into fp_boardType
 values(fp_boardType_seq.nextval,'공지사항','Y','Y');
@@ -1609,18 +1656,52 @@ values(fp_pd_seq.nextval,6,1,'귀여운 소녀','귀여운 소녀입니다','kawai.zip',null,
 insert into fp_pd
 values(fp_pd_seq.nextval,12,1,'삼지창','들면 멋있음','trident.zip',null,null,35000,null);
 
+select * from fp_resume;
 
 insert into fp_resume
-values(2,'1','1','1');
+values(2,'김진욱 이력서','메타버스 전문 크리에이터 김진욱 입니다. 제페토, 로블록스 모두 가능하며 분야 상관없이 3d 모델 제작 가능합니다. 유니티를 이용해 제작하며 누구보다 저렴하게 원하시는 대로 제작해드리겠습니다','09:00 ~ 18:00');
+
+insert into fp_resume
+values(3,'1','1','09:00 ~ 18:00');
+
+insert into fp_resume
+values(4,'1','1','09:00 ~ 18:00');
+
+insert into fp_resume
+values(5,'1','1','09:00 ~ 18:00');
+
+insert into fp_resume
+values(6,'1','1','09:00 ~ 18:00');
+
+insert into fp_resume
+values(7,'1','1','09:00 ~ 18:00');
+
+insert into fp_resume
+values(8,'1','1','09:00 ~ 18:00');
+
+
+select * from fp_port;
 
 insert into fp_port
-values(FP_PORT_SEQ.nextval,2,'1','2.zip','1','1');
+values(FP_PORT_SEQ.nextval,2,'시바견','2.zip','bathroom.zip','시바견 입니다');
 insert into fp_port
-values(FP_PORT_SEQ.nextval,2,'1','1.zip','1','1');
+values(FP_PORT_SEQ.nextval,2,'화장실','1.zip','shiba.zip','화장실 입니다');
 insert into fp_port
-values(FP_PORT_SEQ.nextval,2,'1','2.zip','1','1');
+values(FP_PORT_SEQ.nextval,2,'캐릭터','human_eevee.zip','human_eevee.zip','캐릭터 입니다');
 insert into fp_port
-values(FP_PORT_SEQ.nextval,2,'1','1.zip','1','1');
+values(FP_PORT_SEQ.nextval,2,'삼지창','pirate_ship.zip','lightscale_trident.zip','삼지창 입니다');
+insert into fp_port
+values(FP_PORT_SEQ.nextval,3,'1','1.zip','1','1');
+insert into fp_port
+values(FP_PORT_SEQ.nextval,4,'1','1.zip','1','1');
+insert into fp_port
+values(FP_PORT_SEQ.nextval,5,'1','1.zip','1','1');
+insert into fp_port
+values(FP_PORT_SEQ.nextval,6,'1','1.zip','1','1');
+insert into fp_port
+values(FP_PORT_SEQ.nextval,7,'1','1.zip','1','1');
+insert into fp_port
+values(FP_PORT_SEQ.nextval,8,'1','1.zip','1','1');
 
 insert into fp_manager
 values(fp_manager_seq.nextval,'test','김진욱','1234',sysdate,'1.jpg','01030843045');

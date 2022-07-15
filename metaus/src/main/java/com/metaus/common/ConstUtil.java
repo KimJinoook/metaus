@@ -49,7 +49,7 @@ public interface ConstUtil {
 	String COMPANY_FILE_UPLOAD_PATH_TEST="src/main/resources/static/com_profile";
 	
 	//포트폴리오 첨부파일
-	String PORTFOLIO_FILE_UPLOAD_PATH="portfolio";
+	String PORTFOLIO_FILE_UPLOAD_PATH="gltfmodel";
 	String PORTFOLIO_FILE_UPLOAD_PATH_TEST="src/main/resources/static/gltfmodel";
 	
 	//기업의뢰 첨부파일

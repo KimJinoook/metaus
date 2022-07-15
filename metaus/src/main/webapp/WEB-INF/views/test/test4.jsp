@@ -438,8 +438,8 @@ $( "old" ).on( "mousemove", function() {
                             <!-- Job Company -->
                             <div class="col-md-2 col-xs-3">
                                 <div class="job-company">
-                                    <a href="#">
-                                        <img src="<c:url value='/com_profile/${vo.comPic }'/>" alt="">
+                                    <a href="<c:url value='/request/detail?recNo=${vo.recNo }'/>">
+                                        <img src="<c:url value='/com_profile/${vo.comPic }'/>" alt="" style="height:100%">
                                     </a>
                                 </div>
                             </div>
@@ -447,7 +447,7 @@ $( "old" ).on( "mousemove", function() {
                             <!-- Job Title & Info -->
                             <div class="col-md-8 col-xs-6 ptb20">
                                 <div class="job-title">
-                                    <a href="job-page.html">${vo.recTitle }</a>
+                                    <a href="<c:url value='/request/detail?recNo=${vo.recNo }'/>">${vo.recTitle }</a>
                                 </div>
 
                                 <div class="job-info">
