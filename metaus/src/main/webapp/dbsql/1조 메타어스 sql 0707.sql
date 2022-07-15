@@ -131,7 +131,17 @@ ALTER TABLE fp_msgadd
 ALTER TABLE fp_msgatc
 	DROP
 		CONSTRAINT FK_fp_msg_TO_fp_msgatc
-		CASCADE;        
+		CASCADE;    
+        
+ALTER TABLE fp_pdreview
+	DROP
+		CONSTRAINT FK_fp_pd_TO_fp_pdreview
+		CASCADE;
+        
+ALTER TABLE fp_pdreview
+	DROP
+		CONSTRAINT FK_fp_mem_TO_fp_pdreview
+		CASCADE;
 
 ALTER TABLE fp_classatc
 	DROP
@@ -380,7 +390,13 @@ ALTER TABLE fp_visit
 	DROP
 		PRIMARY KEY
 		CASCADE
-		KEEP INDEX;        
+		KEEP INDEX;      
+        
+ALTER TABLE fp_pdreview
+	DROP
+		PRIMARY KEY
+		CASCADE
+		KEEP INDEX;
 
 /* 회원정보 */
 DROP TABLE fp_mem 
@@ -513,6 +529,10 @@ DROP TABLE fp_buy
 /* 방문자수 */
 DROP TABLE fp_visit 
 	CASCADE CONSTRAINTS;    
+    
+/* 상품리뷰 */
+DROP TABLE fp_pdreview 
+	CASCADE CONSTRAINTS;
     
 
 /* 회원정보 */
@@ -992,7 +1012,22 @@ ALTER TABLE fp_visit
 			visit_no
 		);        
 
+/* 상품리뷰 */
+CREATE TABLE fp_pdreview (
+	review_no NUMBER NOT NULL, /* 리뷰번호 */
+	pd_no NUMBER, /* 모델번호 */
+	mem_no NUMBER, /* 회원번호 */
+	review_content CLOB, /* 리뷰 */
+	review_score NUMBER, /* 평점 */
+	review_regdate DATE /* 등록일 */
+);
 
+ALTER TABLE fp_pdreview
+	ADD
+		CONSTRAINT PK_fp_pdreview
+		PRIMARY KEY (
+			review_no
+		);
 
 
 ALTER TABLE fp_kakao
@@ -1300,7 +1335,25 @@ ALTER TABLE fp_buy
 		)on delete cascade;       
         
         
-        
+ALTER TABLE fp_pdreview
+	ADD
+		CONSTRAINT FK_fp_pd_TO_fp_pdreview
+		FOREIGN KEY (
+			pd_no
+		)
+		REFERENCES fp_pd (
+			pd_no
+		);
+
+ALTER TABLE fp_pdreview
+	ADD
+		CONSTRAINT FK_fp_mem_TO_fp_pdreview
+		FOREIGN KEY (
+			mem_no
+		)
+		REFERENCES fp_mem (
+			mem_no
+		);
         
 
 
@@ -1514,6 +1567,15 @@ increment by 1
 start with 1
 nocache;
 
+
+--리뷰 시퀀스
+drop sequence fp_pdreview_seq;
+create sequence fp_pdreview_seq
+increment by 1
+start with 1
+nocache;
+
+
 ALTER TABLE fp_rec
    ADD
         rec_content2
@@ -1597,7 +1659,12 @@ insert into fp_rec
 values(fp_rec_seq.nextval, 2, '삼성 월드 제작 크리에이터 모집','실력있는 크리에이터 모집중입니다',150000,sysdate,0,'','','','');
 
 
-
+select * from fp_contact;
+insert into fp_contact
+values(1,2,150000,null);
+insert into fp_contact
+values(4,2,150000,sysdate);
+commit;
 
 
 insert into fp_boardType
