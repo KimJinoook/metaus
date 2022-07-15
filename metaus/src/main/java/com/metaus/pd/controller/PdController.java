@@ -26,6 +26,8 @@ import com.metaus.common.FileUploadUtil;
 import com.metaus.common.PaginationInfo;
 import com.metaus.pd.model.PdService;
 import com.metaus.pd.model.PdVO;
+import com.metaus.pdReview.model.PdReviewService;
+import com.metaus.pdReview.model.PdReviewVO;
 
 import lombok.RequiredArgsConstructor;
 
@@ -40,6 +42,7 @@ public class PdController {
 	private final FileUploadUtil fileUploadUtil;
 	private final CategoryService cateService;
 	private final BuyService buyService;
+	private final PdReviewService pdReviewService;
 	
 	@RequestMapping("/pd")
 	public String pd(@ModelAttribute PdVO searchVo, Model model) {
@@ -72,6 +75,10 @@ public class PdController {
 		PdVO vo=pdService.selectPdByNo(pdNo);		
 		logger.info("상품 상세보기 vo={}",vo);
 		
+		List<PdReviewVO> list=pdReviewService.selectPdReviewByPdNo(pdNo);		
+		logger.info("리뷰 목록 페이지 파라미터 list.size={}", list.size());
+		
+		model.addAttribute("list",list);
 		model.addAttribute("vo", vo);
 	}
 	

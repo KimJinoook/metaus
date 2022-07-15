@@ -839,7 +839,7 @@ CREATE TABLE fp_pay (
 	mem_no NUMBER, /* 회원번호 */
 	pay_kind VARCHAR2(50), /* 결제 수단 */
 	pay_price NUMBER, /* 결제 금액 */
-	pay_date DATE /* 결제일 */
+	pay_date DATE default sysdate/* 결제일 */
 );
 
 ALTER TABLE fp_pay
@@ -989,7 +989,7 @@ CREATE TABLE fp_buy (
     buy_no NUMBER NOT NULL, /* 구매번호 */
 	mem_no NUMBER NOT NULL, /* 회원번호 */
 	pd_no NUMBER, /* 모델번호 */
-    buy_date DATE
+    buy_date DATE default sysdate
 );
 
 ALTER TABLE fp_buy
@@ -1018,8 +1018,8 @@ CREATE TABLE fp_pdreview (
 	pd_no NUMBER, /* 모델번호 */
 	mem_no NUMBER, /* 회원번호 */
 	review_content CLOB, /* 리뷰 */
-	review_score NUMBER, /* 평점 */
-	review_regdate DATE /* 등록일 */
+	review_score NUMBER default 0, /* 평점 */
+	review_regdate DATE default sysdate /* 등록일 */
 );
 
 ALTER TABLE fp_pdreview

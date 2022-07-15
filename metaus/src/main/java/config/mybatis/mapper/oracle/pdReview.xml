@@ -11,4 +11,11 @@
 		insert into fp_pdreview(review_no, pd_no, mem_no, review_content, review_score)
 		values(#{reviewNo},#{pdNo}, #{memNo}, #{reviewContent}, #{reviewScore})
 	</insert>
+	
+	<select id="selectPdReviewByPdNo" parameterType="int" resultType="PdReviewVo">
+		select p.*, m.mem_name, m.mem_pic
+		from fp_pdreview p join fp_mem m
+		on p.mem_no=m.mem_no
+		where pd_no=#{pdNo}
+	</select>
 </mapper>
