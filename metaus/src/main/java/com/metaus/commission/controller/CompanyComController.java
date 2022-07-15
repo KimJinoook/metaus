@@ -126,13 +126,13 @@ public class CompanyComController {
 	}
 	
 	@RequestMapping("/cancelCommission")
-	public String cancelCommission(@RequestParam(defaultValue = "0") int recNo) {
+	public String cancelCommission(@RequestParam(defaultValue = "1") int currentPage, @RequestParam(defaultValue = "0") int recNo) {
 		logger.info("의뢰 삭제 매개변수, recNo={}", recNo);
 		
 		int cnt =commissionService.deleteCommissionByRecNo(recNo);
 		logger.info("의뢰 삭제 결과, cnt={}", cnt);
 		
-		return "redirect:/commission/ajaxCompanyComList";
+		return "redirect:/commission/ajaxCompanyComList?currentPage="+currentPage;
 		
 	}
 	
@@ -150,4 +150,21 @@ public class CompanyComController {
 		return "redirect:/commission/companyComList";
 	}
 	
+	@RequestMapping("/commissionContractDone")
+	public String commissionContractDone(@RequestParam(defaultValue = "1") int currentPage, @RequestParam(defaultValue = "0") int recNo) {
+		int cnt = commissionService.updateConDoneDateByRecNo(recNo);
+		logger.info("계약의뢰 완료 날짜 업데이트 결과, cnt={}", cnt);
+		
+		return "redirect:/commission/ajaxCompanyComList?currentPage="+currentPage;
+	}
+	
+	@RequestMapping("/commissionContractCancel")
+	public String commissionContractCancel(@RequestParam(defaultValue = "1") int currentPage, @RequestParam(defaultValue = "0") int recNo) {
+		logger.info("계약의뢰 삭제 파라미터, recNo={}", recNo);
+		
+		int cnt = commissionService.deleteContractByRecNo(recNo);
+		logger.info("계약의뢰 삭제 결과, cnt={}", cnt);
+		
+		return "redirect:/commission/ajaxCompanyComList?currentPage="+currentPage;
+	}
 }

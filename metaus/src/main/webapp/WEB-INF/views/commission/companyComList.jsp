@@ -41,12 +41,57 @@
 		
 		$(document).on("click",".cancel-commission",function(){
 			var recNo = $(this).prev().val();
+			var currentPage = $("#currentPage").val();
+			currentPage = Number(currentPage);
 			//console.log(recNo);
 			$.ajax({
 				url: "<c:url value='/commission/cancelCommission'/>",
 				type: "GET",
 				data: {
-					"recNo" : recNo
+					"recNo" : recNo,
+					"currentPage" : currentPage
+				},
+				success: function(data){
+					$('.shop-products-wrapper').html(data);
+				},
+				error: function(xhr, status, error){
+					alert('error:' + error);
+				} 
+			});
+		});
+		
+		$(document).on("click",".contract-cancel",function(){
+			var recNo = $(this).prev().val();
+			var currentPage = $("#currentPage").val();
+			currentPage = Number(currentPage);
+			
+			$.ajax({
+				url: "<c:url value='/commission/commissionContractCancel'/>",
+				type: "GET",
+				data: {
+					"recNo" : recNo,
+					"currentPage" : currentPage
+				},
+				success: function(data){
+					$('.shop-products-wrapper').html(data);
+				},
+				error: function(xhr, status, error){
+					alert('error:' + error);
+				} 
+			});
+		});
+		
+		$(document).on("click",".contract-done",function(){
+			var recNo = $(this).prev().prev().val();
+			var currentPage = $("#currentPage").val();
+			currentPage = Number(currentPage);
+			
+			$.ajax({
+				url: "<c:url value='/commission/commissionContractDone'/>",
+				type: "GET",
+				data: {
+					"recNo" : recNo,
+					"currentPage" : currentPage
 				},
 				success: function(data){
 					$('.shop-products-wrapper').html(data);
@@ -73,6 +118,11 @@
 					
 					<!-- Start of Products -->
                     <div class="row ajaxProduct">
+                    	<c:if test="${empty list }">
+                    		<div style="font-size: 50px;text-align: center;">
+                    			<i class="fa-solid fa-user-large-slash"></i> 등록한 의뢰가 없습니다.
+                    		</div>
+                    	</c:if>
 						<c:forEach var="map" items="${list }">
                         <!-- Start of Product 1 -->
                         <div class="col-md-6 col-xs-12">
@@ -117,6 +167,14 @@
 	                                        <a role="button" class="cancel-commission"><i class="fa-solid fa-circle-minus"></i>의뢰 취소</a>
 	                                    </div>
                                     </c:if>
+									<c:if test="${map['conFlag'] eq 'contracted'}">
+                                    	<!-- Product overlay -->
+	                                    <div class="product-overlay">
+	                                    	<input type="hidden" value="${map['REC_NO'] }">
+	                                        <a role="button" class="contract-cancel" style="width: 50%;float: left;"><i class="fa-solid fa-circle-minus"></i>계약 취소</a>
+	                                        <a role="button" class="contract-done" style="width: 50%;float: left;"><i class="fa-solid fa-circle-check"></i>계약 완료</a>
+	                                    </div>
+                                    </c:if>
 
                                 </div>
 
@@ -124,7 +182,9 @@
                                 <div class="product-descr">
 
                                         <div class="com-decs-font com-decs-margin comList-avg-estimate left align-line"><i class="fa-solid fa-sack-dollar"></i> 페이</div>
-										<div class="com-decs-font com-decs-margin-content left com-decs-font-bold align-line">${map['REC_PAY'] }원 &nbsp;&nbsp;&nbsp;&nbsp;|</div>
+										<div class="com-decs-font com-decs-margin-content left com-decs-font-bold align-line">
+										<fmt:formatNumber value="${map['REC_PAY'] }" type="number"/>원 &nbsp;&nbsp;&nbsp;&nbsp;|
+										</div>
 										<div class="com-decs-font com-decs-margin omList-avg-applicant left align-line"><i class="fa-solid fa-user-tie"></i> 지원자수</div>
 										<div class="com-decs-font com-decs-margin-content left com-decs-font-bold align-line">${map['applicantNo'] }명</div>
 										<c:if test="${map['applicantNo'] > 0}">
@@ -150,6 +210,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <ul class="pagination list-inline text-center">
+                            	<input type="hidden" value="${pagingInfo.currentPage }" id="currentPage">
                             	<!-- 이전블럭으로 이동 -->
                             	<c:if test="${pagingInfo.firstPage>1 }">
                             		<input type="hidden" value="${pagingInfo.firstPage-1}" class="currentPage${i}">

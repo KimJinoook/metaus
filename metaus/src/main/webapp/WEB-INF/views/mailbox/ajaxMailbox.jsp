@@ -69,7 +69,7 @@
 	                          <c:if test="${flag ne 'trash' && flag ne 'spam'}">
 		                          <td class="mailbox-star">
 		                          	<a href="#">
-		                          		<input type="hidden" value="${flag}">
+		                          		<input type="hidden" value="${flag}" class="flag">
 		                          		<c:if test="${map['STAR_FLAG'] eq 'Y'}">
 		                          			<i class="fa fa-star text-yellow star"></i>
 		                          		</c:if>

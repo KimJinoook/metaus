@@ -60,4 +60,16 @@
 		insert into fp_contact(rec_no, mem_no, con_pay)
 		values(#{recNo}, #{memNo}, #{conPay})
 	</insert>
+	
+	<!-- updateConDoneDateByRecNo -->
+	<update id="updateConDoneDateByRecNo" parameterType="int">
+		update fp_contact
+		set con_donedate = sysdate
+		where rec_no = #{recNo}
+	</update>
+	
+	<!-- deleteContractByRecNo -->
+	<delete id="deleteContractByRecNo" parameterType="int">
+		delete fp_contact where rec_no=#{recNo}
+	</delete>
 </mapper>

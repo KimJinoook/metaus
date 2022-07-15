@@ -52,5 +52,15 @@ public class CommissionServiceImpl implements CommissionService{
 		return commissionDao.insertContractByrecNoMemNo(map);
 	}
 
+	@Override
+	public int updateConDoneDateByRecNo(int recNo) {
+		return commissionDao.updateConDoneDateByRecNo(recNo);
+	}
+
+	@Override
+	public int deleteContractByRecNo(int recNo) {
+		return commissionDao.deleteContractByRecNo(recNo);
+	}
+
 
 }

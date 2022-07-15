@@ -447,14 +447,14 @@ public class MailboxController {
 	
 	@RequestMapping("/mailDetail")
 	public String mailDetail(@RequestParam(defaultValue = "0") int msgaddNo, @RequestParam(defaultValue = "0") int msgNo
-			, ModelMap model) {
+			,@RequestParam(required = false) String flag, ModelMap model) {
 		logger.info("메세지 상세 조회, 매개변수 msgaddNo={}, msgNo={}", msgaddNo, msgNo);
 		
 		Map<String, Object> map = mailboxService.selectByMsgAddNo(msgaddNo);
 		logger.info("메세지 상세 조회 결과, map={}", map);
 		
 		Timestamp msgaddDate = (Timestamp) map.get("MSGADD_DATE");
-		if(msgaddDate == null) {
+		if(msgaddDate == null && flag.equals("received")) {
 			int cnt = mailboxService.updateMsgaddDate(msgaddNo);
 			map = mailboxService.selectByMsgAddNo(msgaddNo);
 			logger.info("메세지 읽은 날짜 업데이트 결과, cnt={}, map={}", cnt, map);
