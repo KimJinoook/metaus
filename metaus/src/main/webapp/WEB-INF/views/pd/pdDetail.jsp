@@ -192,13 +192,28 @@
                                 <h2>${vo.pdName }</h2>
 
                                 <!-- Start of Product Rating -->
-                                <div class="product-rating mt10">
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                </div>
+                                <c:if test="${vo.pdTotalreview eq 0 }">
+	                            <fieldset id="review0">
+								<label for="rate">★</label>
+								<label for="rate">★</label>
+								<label for="rate">★</label>
+								<label for="rate">★</label>
+								<label for="rate">★</label>
+								</fieldset>
+								</c:if>
+			                    <fieldset id="review">
+			                    <c:if test="${!empty vo.pdTotalreview }">
+			                    <c:if test="${vo.pdTotalreview ne 0}">
+			                    <c:forEach var="i" begin="1" end="${5-vo.pdTotalreview }">
+								<label for="rate1" style="color: #ddd8d8;">★</label>
+			                    </c:forEach>
+			                    </c:if>
+								<c:forEach var="review" begin="1" end="${vo.pdTotalreview }">
+								<label for="rate">★</label>
+								</c:forEach>
+			                    </c:if>
+								</fieldset>
+                                ${vo.pdTotalreview }
                                 <!-- End of Product Rating -->
 
                                 <!-- Start of Product Price -->
@@ -297,11 +312,23 @@
 															<label for="rate">★</label>
 															</fieldset>
 															</c:if>
-															<c:forEach var="review" begin="1" end="${vo.reviewScore }">
+															<%-- <c:forEach var="review" begin="1" end="${vo.reviewScore }">
                                                             <fieldset id="review">
 															<label for="rate">★</label>
 															</fieldset>
+															</c:forEach> --%>
+															<fieldset id="review">
+															<c:if test="${!empty vo.reviewScore }">
+										                    <c:if test="${vo.reviewScore ne 0}">
+										                    <c:forEach var="i" begin="1" end="${5-vo.reviewScore }">
+															<label for="rate1" style="color: #ddd8d8;">★</label>
+										                    </c:forEach>
+										                    </c:if>
+															<c:forEach var="review" begin="1" end="${vo.reviewScore }">
+															<label for="rate">★</label>
 															</c:forEach>
+										                    </c:if>
+										                    </fieldset>
 
                                                             <!-- Comment Info -->
                                                             <div class="comment-info">

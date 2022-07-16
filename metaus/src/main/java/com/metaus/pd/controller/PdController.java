@@ -78,6 +78,12 @@ public class PdController {
 		List<PdReviewVO> list=pdReviewService.selectPdReviewByPdNo(pdNo);		
 		logger.info("리뷰 목록 페이지 파라미터 list.size={}", list.size());
 		
+		if(!list.isEmpty() && list!=null) {
+			double avg=pdReviewService.selectPdReviewAvg(pdNo);			
+			logger.info("리뷰 목록 페이지 파라미터 avg={}", avg);
+			vo.setPdTotalreview(avg);
+		}
+		
 		model.addAttribute("list",list);
 		model.addAttribute("vo", vo);
 	}

@@ -9,4 +9,5 @@ public interface PdReviewDAO {
 	int insertPdReview(PdReviewVO vo);
 	List<PdReviewVO> selectPdReviewByPdNo(int pdNo);
 	int deletePdReview(int reviewNo);
+	double selectPdReviewAvg(int pdNo);
 }

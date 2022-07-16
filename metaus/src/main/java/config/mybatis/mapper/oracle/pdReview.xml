@@ -19,8 +19,14 @@
 		where pd_no=#{pdNo}
 	</select>
 	
+	<select id="selectPdReviewAvg" parameterType="int" resultType="double">
+		select round(avg(review_score),1)
+		from fp_pdreview
+		where pd_no=#{pdNo}
+	</select>
+	
 	<delete id="deletePdReview" parameterType="int">
 	delete from fp_pdreview
 	where review_no=#{reviewNo}
-	</delete>
+	</delete>	
 </mapper>

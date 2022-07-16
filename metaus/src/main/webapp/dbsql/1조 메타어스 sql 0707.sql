@@ -960,8 +960,9 @@ CREATE TABLE fp_pd (
 	pd_filename CLOB, /* 모델파일명 */
 	pd_originname CLOB, /* 모델원본파일명 */
 	pd_filesize NUMBER, /* 모델파일사이즈 */
-    pd_price number,
-	pd_buycnt NUMBER /* 구매수 */
+    pd_price number, /* 모델 금액 */
+	pd_buycnt NUMBER, /* 구매수 */
+    pd_totalreview number default 0 /* 리뷰점수 */
 );
 
 ALTER TABLE fp_pd
@@ -1715,14 +1716,14 @@ values(fp_cate_seq.nextval, '스포츠');
 
 commit;
 select * from fp_pd;
-insert into fp_pd
-values(fp_pd_seq.nextval,1,1,'시바견','시바견입니다','2.zip',null,null,3500,3);
-insert into fp_pd
-values(fp_pd_seq.nextval,10,2,'화장실','화장실입니다','1.zip',null,null,3500,null);
-insert into fp_pd
-values(fp_pd_seq.nextval,6,1,'귀여운 소녀','귀여운 소녀입니다','kawai.zip',null,null,3500,null);
-insert into fp_pd
-values(fp_pd_seq.nextval,12,1,'삼지창','들면 멋있음','trident.zip',null,null,3500,null);
+insert into fp_pd(pd_no, cate_no, mem_no, pd_name, pd_pre, pd_filename, pd_price, pd_buycnt)
+values(fp_pd_seq.nextval,1,1,'시바견','시바견입니다','2.zip',3500,3);
+insert into fp_pd(pd_no, cate_no, mem_no, pd_name, pd_pre, pd_filename, pd_price)
+values(fp_pd_seq.nextval,10,2,'화장실','화장실입니다','1.zip',3500);
+insert into fp_pd(pd_no, cate_no, mem_no, pd_name, pd_pre, pd_filename, pd_price)
+values(fp_pd_seq.nextval,6,1,'귀여운 소녀','귀여운 소녀입니다','kawai.zip',3500);
+insert into fp_pd(pd_no, cate_no, mem_no, pd_name, pd_pre, pd_filename, pd_price)
+values(fp_pd_seq.nextval,12,1,'삼지창','들면 멋있음','trident.zip',3500);
 
 select * from fp_resume;
 
