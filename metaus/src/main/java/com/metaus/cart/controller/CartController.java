@@ -3,6 +3,7 @@ package com.metaus.cart.controller;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -29,15 +30,32 @@ public class CartController {
 	private final CartService cartService;
 	
 	@RequestMapping("/cartAdd")
-	public String cartAdd(@RequestParam int pdNo, @ModelAttribute CartVO cartVo, HttpSession session) {
+	public String cartAdd(HttpServletRequest request, @RequestParam int pdNo, @ModelAttribute CartVO cartVo, HttpSession session, Model model) {
 		int memNo=(int)session.getAttribute("memNo");
 		cartVo.setMemNo(memNo);
 		cartVo.setPdNo(pdNo);
 		logger.info("장바구니 담기 파라미터 cartVo={}, memNo={}",cartVo, memNo, pdNo);
-		
 		int cnt=cartService.insertCart(cartVo);
+		if(cnt==0) {
+			String msg="이미 장바구니에 담긴 상품입니다.";			
+			String url=request.getHeader("Referer");
+			model.addAttribute("msg",msg);
+			model.addAttribute("url",url);
+			
+			return "/common/message";
+		}
 		logger.info("장바구니 담기 결과 cnt={}",cnt);
 		
+		cnt=cartService.selectBuyCount(memNo, pdNo);
+		if(cnt>0) {
+			String msg="이미 구매하신 상품입니다. 다운로드 페이지로 이동합니다.";
+			cnt=cartService.deleteCartByMemNo(memNo,pdNo);
+			String url="/pd/myPdList";
+			model.addAttribute("msg",msg);
+			model.addAttribute("url",url);
+			
+			return "/common/message";
+		}
 		List<CartVO> list=cartService.selectCartList(memNo);
 		logger.info("장바구니 목록, 결과 list.size={}", list.size());
 		
@@ -52,16 +70,6 @@ public class CartController {
 		List<CartVO> list=cartService.selectCartList(memNo);
 		logger.info("장바구니 목록, 결과 list.size={}", list.size());
 		
-		int cnt=cartService.selectBuyCount();
-		if(cnt>0) {
-			String msg="이미 구매하신 상품입니다. 다운로드 페이지로 이동합니다.";
-			cnt=cartService.deleteCartAllByMemNo(memNo);
-			String url="/pd/myPdList";
-			model.addAttribute("msg",msg);
-			model.addAttribute("url",url);		
-			
-			return "/common/message";
-		}
 		
 		model.addAttribute("list", list);
 		return "/cart/cart";

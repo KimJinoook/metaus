@@ -16,8 +16,7 @@ public class CartServiceimpl implements CartService{
 		int count=cartDao.selectCartCount(vo);
 		int cnt=0;
 		if(count>0) {
-			//해당 상품이 장바구니에 이미 존재하면 등록안함
-			
+			//해당 상품이 장바구니에 이미 존재하면 등록안함			
 		}else {
 			//존재하지 않으면 입력
 			cnt=cartDao.insertCart(vo);
@@ -42,8 +41,13 @@ public class CartServiceimpl implements CartService{
 	}
 
 	@Override
-	public int selectBuyCount() {
-		return cartDao.selectBuyCount();
+	public int selectBuyCount(int memNo, int pdNo) {
+		return cartDao.selectBuyCount(memNo, pdNo);
+	}
+
+	@Override
+	public int selectCartCountByPdNo(int memNo, int pdNo) {
+		return cartDao.selectCartCountByPdNo(memNo, pdNo);
 	}
 
 }

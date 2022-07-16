@@ -19,11 +19,7 @@ $(function(){
 	    		   alert('취소되었습니다.');
 	    		   event.preventDefault();
 	    	   }else{
-	    		   res=confirm('지금 장바구니로 이동하시겠습니까?');
-	    		   if(res===false){
-	    			   alert('취소되었습니다.');
-		    		   event.preventDefault();    			   
-	    		   }
+	    		   
 	    	   }
 	       }
 	    });

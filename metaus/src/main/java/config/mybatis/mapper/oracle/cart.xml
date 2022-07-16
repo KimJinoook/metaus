@@ -36,8 +36,13 @@
 	</delete>
 	
 	<select id="selectBuyCount" resultType="int">
-		select count(b.pd_no)
-		from fp_cart c join fp_buy b
-		on c.pd_no = b.pd_no
+		select count(pd_no)
+		from fp_buy
+		where pd_no=#{pdNo} and mem_no=#{memNo}
+	</select>
+	
+	<select id="selectCartCountByPdNo" resultType="int">
+		select count(pd_no) from fp_cart
+		where mem_no=#{memNo} and pd_no=#{pdNo}
 	</select>
 </mapper>
