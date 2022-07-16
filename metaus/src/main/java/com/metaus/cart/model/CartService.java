@@ -8,5 +8,4 @@ public interface CartService {
 	int deleteCartByMemNo(int memNo, int pdNo);
 	int deleteCartAllByMemNo(int memNo);
 	int selectBuyCount(int memNo, int pdNo);
-	int selectCartCountByPdNo(int memNo, int pdNo);
 }

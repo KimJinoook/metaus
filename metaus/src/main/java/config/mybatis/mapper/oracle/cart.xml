@@ -41,8 +41,4 @@
 		where pd_no=#{pdNo} and mem_no=#{memNo}
 	</select>
 	
-	<select id="selectCartCountByPdNo" resultType="int">
-		select count(pd_no) from fp_cart
-		where mem_no=#{memNo} and pd_no=#{pdNo}
-	</select>
 </mapper>

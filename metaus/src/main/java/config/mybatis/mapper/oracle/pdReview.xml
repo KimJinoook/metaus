@@ -18,4 +18,9 @@
 		on p.mem_no=m.mem_no
 		where pd_no=#{pdNo}
 	</select>
+	
+	<delete id="deletePdReview" parameterType="int">
+	delete from fp_pdreview
+	where review_no=#{reviewNo}
+	</delete>
 </mapper>

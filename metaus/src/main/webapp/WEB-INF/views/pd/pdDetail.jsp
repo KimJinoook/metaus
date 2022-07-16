@@ -29,6 +29,14 @@
 		}
 		 
 	 });
+	 
+	 $('.remove').click(function(){
+			var res=confirm('삭제하시겠습니까?');
+			if(res===false){
+				alert('취소되었습니다.');
+				event.preventDefault();				
+			}
+		});
  });
  </script>
  <!-- =============== Start of Page Header 1 Section =============== -->
@@ -302,6 +310,11 @@
 
                                                             <!-- Comment -->
                                                             <p>${vo.reviewContent }</p>
+                                                            <c:if test="${vo.memName==memName }">
+                                                            <div class="cart-product-remove">
+                                        <a href="<c:url value='/pd/delete?reviewNo=${vo.reviewNo }'/>" class="remove" title="리뷰 삭제"><i class="fa fa-times"></i></a>
+                                    		</div>
+                                                            </c:if>
                                                       
                                                         </div>
                                                         

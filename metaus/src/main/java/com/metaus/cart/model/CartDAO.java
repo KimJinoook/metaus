@@ -13,5 +13,4 @@ public interface CartDAO {
 	int totalCartPrice(int memNo);
 	int deleteCartAllByMemNo(int memNo);
 	int selectBuyCount(int memNo, int pdNo);
-	int selectCartCountByPdNo(int memNo, int pdNo);
 }

@@ -8,4 +8,5 @@ import org.apache.ibatis.annotations.Mapper;
 public interface PdReviewDAO {
 	int insertPdReview(PdReviewVO vo);
 	List<PdReviewVO> selectPdReviewByPdNo(int pdNo);
+	int deletePdReview(int reviewNo);
 }

@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -42,4 +43,20 @@ public class PdReviewController {
 		return "redirect:/pd/pdDetail?pdNo="+pdNo;
 	}
 	
+	@RequestMapping("/delete")
+	public String pdReviewDel(HttpServletRequest request,@RequestParam int reviewNo, Model model) {
+		logger.info("리뷰 삭제 파라미터 reviewNo={}", reviewNo);
+		int cnt=pdReviewService.deletePdReview(reviewNo);
+		
+		logger.info("리뷰 삭제 결과 cnt={}", cnt);		
+		String msg="삭제 실패했습니다.", url=request.getHeader("Referer");
+		
+		if(cnt>0) {
+			msg="삭제 되었습니다.";
+		}
+		model.addAttribute("msg",msg);
+		model.addAttribute("url",url);
+		
+		return "/common/message";
+	}
 }

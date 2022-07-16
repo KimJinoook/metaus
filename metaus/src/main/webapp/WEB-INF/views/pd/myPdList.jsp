@@ -83,7 +83,7 @@ $(function(){
 
                                     <!-- Cart Remove Product -->
                                      <td class="cart-product-remove">
-                                         <a href="<c:url value='/buy/delete?pdNo=${vo.pdNo }'/>" class="remove" title="Remove this item"><i class="fa fa-times"></i></a> 
+                                         <a href="<c:url value='/buy/delete?pdNo=${vo.pdNo }'/>" class="remove" title="상품 삭제"><i class="fa fa-times"></i></a> 
                                     </td> 
 
                                     <!-- Cart Product Thumbnail -->

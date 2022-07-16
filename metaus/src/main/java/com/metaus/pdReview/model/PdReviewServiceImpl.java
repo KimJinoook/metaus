@@ -21,4 +21,9 @@ public class PdReviewServiceImpl implements PdReviewService{
 		return pdReviewDao.selectPdReviewByPdNo(pdNo);
 	}
 
+	@Override
+	public int deletePdReview(int reviewNo) {
+		return pdReviewDao.deletePdReview(reviewNo);
+	}
+
 }

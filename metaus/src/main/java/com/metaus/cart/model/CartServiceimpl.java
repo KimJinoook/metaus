@@ -45,9 +45,4 @@ public class CartServiceimpl implements CartService{
 		return cartDao.selectBuyCount(memNo, pdNo);
 	}
 
-	@Override
-	public int selectCartCountByPdNo(int memNo, int pdNo) {
-		return cartDao.selectCartCountByPdNo(memNo, pdNo);
-	}
-
 }
