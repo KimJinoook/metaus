@@ -36,7 +36,7 @@ public class IndexController {
 		List<IndexVO> recList = indexService.selectRec();
 		model.addAttribute("recList",recList);
 		
-		return "/test/test4";
+		return "/index_ex";
 	}
 	@RequestMapping("/index_ex")
 	public String index_ex() {

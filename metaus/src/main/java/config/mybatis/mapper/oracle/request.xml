@@ -95,6 +95,11 @@
 		where recfile_no=#{recfileNo}
 	</select>
 	
+	<select id="selectByrecfileRecNo" parameterType="int" resultType="requestAtcVo">
+		select * from fp_recatc
+		where rec_no=#{recNo}
+	</select>
+	
 	<update id="updateRequest" parameterType="requestVo">
 		update fp_rec
 		set rec_title=#{recTitle}, rec_content=#{recContent}, rec_pay=#{recPay},
@@ -108,5 +113,37 @@
 		set recfile_filename=#{recfileFilename}, recfile_originname=#{recfileOriginname}
 		where recfile_no=#{recfileNo}
 	</update>
+	
+	<insert id="insertScrap" parameterType="scrapVo">
+		<selectKey resultType="int" keyProperty="scrapNo" order="BEFORE">
+			select fp_scrap_seq.nextval from dual
+		</selectKey>
+		insert into fp_scrap(scrap_no, mem_no, rec_no)
+		values(#{scrapNo}, #{memNo}, #{recNo})
+	</insert>
+	
+	<insert id="insertRecpre" parameterType="RecpreVo">
+		<selectKey resultType="int" keyProperty="recpreNo" order="BEFORE">
+			select fp_recpre_seq.nextval from dual
+		</selectKey>
+		insert into fp_recpre(recpre_no, rec_no, mem_no, recpre_date, recpre_content)
+		values(#{recpreNo},#{recNo},#{memNo},sysdate,#{recpreContent})
+	</insert>
+	
+	<select id="selectScrapBymemNo" parameterType="int" resultType="ScrapVo">
+		select * from fp_scrap
+		where mem_no=#{memNo}
+	</select>
+	
+	<select id="selectRequestAll" resultType="RequestVo">
+		select * from fp_rec
+	</select>
+	
+	<select id="checkRecpre" resultType="int" parameterType="checkVo">
+		select count(*) from fp_recpre where mem_no = #{memNo} and rec_no = #{recNo}
+	</select>
+	<select id="checkScrap" resultType="int" parameterType="checkVo">
+		select count(*) from fp_recpre where mem_no = #{memNo} and rec_no = #{recNo}
+	</select>
 	
 </mapper>

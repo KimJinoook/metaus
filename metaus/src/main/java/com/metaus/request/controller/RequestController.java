@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.metaus.board.model.BoardAtcVO;
@@ -26,11 +27,17 @@ import com.metaus.common.PaginationInfo;
 import com.metaus.common.SearchVO;
 import com.metaus.member.model.CompanyService;
 import com.metaus.member.model.CompanyVO;
+import com.metaus.member.model.MemberService;
 import com.metaus.member.model.MemberVO;
+import com.metaus.request.model.CheckVO;
+import com.metaus.request.model.RecpreVO;
 import com.metaus.request.model.RequestAtcVO;
 import com.metaus.request.model.RequestDAO;
 import com.metaus.request.model.RequestService;
 import com.metaus.request.model.RequestVO;
+import com.metaus.request.model.ScrapVO;
+import com.metaus.resume.model.ResumeService;
+import com.metaus.resume.model.ResumeVO;
 
 import lombok.RequiredArgsConstructor;
 
@@ -44,6 +51,8 @@ public class RequestController {
 	private final RequestService requestService;
 	private final CompanyService companyService;
 	private final FileUploadUtil fileUploadUtil;
+	private final MemberService memberService;
+	private final ResumeService resumeService;
 	
 	@RequestMapping("/detail")
 	public String pagere(HttpSession session, @RequestParam(defaultValue = "0") int recNo, Model model) {
@@ -103,7 +112,7 @@ public class RequestController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		 int cnt = requestService.insertRequest(requestVo);
+
 		
 		recAtcVo.setRecfileFilename(fileName);
 		recAtcVo.setRecfileOriginname(originFileName);
@@ -168,17 +177,15 @@ public class RequestController {
 		}
 
 	  @GetMapping("/update")
-		public String boardUpdate_get(@RequestParam int recNo,
-				@RequestParam int recfileNo, Model model) {
-			logger.info("글 수정 페이지, 파라미터", recNo, recfileNo);
+		public String boardUpdate_get(@RequestParam int recNo,Model model) {
+			logger.info("글 수정 페이지, 파라미터", recNo);
 
 			RequestVO vo = requestService.selectByRequestNo(recNo);
-			RequestAtcVO AtcVo = requestService.selectByrecfileNo(recfileNo);
 
 			model.addAttribute("vo", vo);
-			model.addAttribute("AtcVo", AtcVo);
+			/* model.addAttribute("AtcVo", AtcVo); */
 
-			return "/request/Update";
+			return "/request/update";
 		}
 	  
 	  @PostMapping("/update")
@@ -187,6 +194,8 @@ public class RequestController {
 				HttpServletRequest request,
 				@ModelAttribute RequestAtcVO requestAtcVo,
 				Model model) {
+		  
+		  logger.info("requestVo={}",requestVo);
 
 			int requestResult = requestService.updateRequest(requestVo);
 			logger.info("글 내용 수정 결과,requestResult={}", requestResult);
@@ -225,5 +234,89 @@ public class RequestController {
 			
 			return "redirect:/request/search";
 		}
+	  
+	  @ResponseBody
+		@RequestMapping("/recpreCheck")
+		public int recpreCheck(int memNo, int recNo) {
+
+			CheckVO vo = new CheckVO();
+			vo.setMemNo(memNo);
+			vo.setRecNo(recNo);
+			logger.info("일반회원 지원여부 vo={}",vo);
+			int result = 1;
+			int cnt = requestService.checkRecpre(vo);
+			if(cnt>0) {
+				result=2;
+			
+			}
+			logger.info("지원여부 결과, result={}", result);
+			
+			return result;
+		}
+	  
+	  @ResponseBody
+		@RequestMapping("/scrapCheck")
+		public int scrapCheck(int memNo, int recNo) {
+
+		  CheckVO vo = new CheckVO();
+			vo.setMemNo(memNo);
+			vo.setRecNo(recNo);
+			logger.info("일반회원 스크랩 여부 vo={}",vo);
+			int result = 1;
+			int cnt = requestService.checkScrap(vo);
+			if(cnt>0) {
+				result=2;
+			
+			}
+			logger.info("스크랩여부 결과, result={}", result);
+			
+			return result;
+		}
+	  @RequestMapping("/insertScrap")
+	  public String insertScrap(@ModelAttribute ScrapVO scrapVo, Model model, @RequestParam int recNo, @RequestParam int memNo) {
+		  logger.info("의뢰 글 스크랩 recNo={}, memNo={}", recNo, memNo);
+		  scrapVo.setMemNo(memNo);
+		  scrapVo.setRecNo(recNo);
+		  
+		  int cnt= requestService.insertScrap(scrapVo);
+		  
+		 
+		  
+		  return "redirect:/request/search";
+		  
+	  }
+	  
+	  @GetMapping("/recpreWrite")
+	  public String insertRecpre(Model model, @RequestParam int recNo, HttpSession session) {
+		  logger.info("의뢰 지원 페이지");
+		  
+		  String memId=(String)session.getAttribute("memId");
+		  
+		  RequestVO rvo=requestService.selectByRequestNo(recNo);
+		  MemberVO mvo=memberService.selectByUserid(memId);
+		  ResumeVO resvo=resumeService.selectBymemNo(mvo.getMemNo());
+		  
+		  model.addAttribute("rvo",rvo);
+		  model.addAttribute("mvo",mvo);
+		  model.addAttribute("resvo",resvo);
+		  
+		  return "/request/recpreWrite";
+		  
+		  
+	  }
+	  
+	  @PostMapping("/recpreWrite")
+	  public String insertRecpre(@ModelAttribute RecpreVO recpreVo, @RequestParam int memNo, @RequestParam int recNo, HttpSession session, Model model) {
+		  logger.info("의뢰 지원 페이지");
+		  
+		  recpreVo.setMemNo(memNo);
+		  recpreVo.setRecNo(recNo);
+		  
+		  int cnt = requestService.insertRecpre(recpreVo);
+		  
+		  return "redirect:/request/search";
+		  
+		  
+	  }
 
 }

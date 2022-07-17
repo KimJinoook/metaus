@@ -72,4 +72,9 @@
 	<delete id="deleteContractByRecNo" parameterType="int">
 		delete fp_contact where rec_no=#{recNo}
 	</delete>
+	
+	<select id="selectScrap" parameterType="int" resultType="ScrapVo">
+		select * fp_scrap
+		where mem_no=#{memNo}
+	</select>
 </mapper>

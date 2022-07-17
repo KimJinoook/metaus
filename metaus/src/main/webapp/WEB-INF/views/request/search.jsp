@@ -4,6 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ include file="../inc/header.jsp"%>
+<link rel="stylesheet" type="text/css" href="<c:url value='/css/request.css'/>">
  <script type="text/javascript">
  function boardList(curPage){
 		$('input[name=currentPage]').val(curPage);
@@ -13,6 +14,15 @@
 		$('#writeRequest').click(function(){
 			if($('#comId').val()=="" || $('#comId').val()==null){
 				alert('기업회원 로그인 후 이용가능합니다!');
+				event.preventDefault();
+			}
+		});
+	});
+	
+	$(function(){
+		$('#recpreWrite').click(function(){
+			if($('#memId').val()=="" || $('#memId').val()==null){
+				alert('일반회원 로그인 후 이용가능합니다!');
 				event.preventDefault();
 			}
 		});
@@ -50,6 +60,7 @@
         </div>
     </section>
        <input type="hidden" id="comId" name="comId" value="${comId }">
+       <input type="hidden" id="memId" name="memId" value="${memId }">
     <!-- =============== End of Page Header 1 Section =============== -->
 
 
@@ -130,7 +141,7 @@
                 <c:if test="${empty reclist }">
                 	<img alt="게시글 내용이 없습니다"
 						src="<c:url value='/images/board/no_board.gif'/>"
-						style="width: 800px;">
+						style="width: 800px; margin-left: 50px;">
                 </c:if>
                 <c:if test="${!empty reclist }">
                  <c:forEach var="vo" items="${reclist }">
@@ -142,7 +153,7 @@
                         <!-- 반복문 시작 -->
                       
                         <div class="job-post-header clearfix">
-                            <a href="company-page-1.html"><img src="<c:url value='/images/companyProfile/${cvo.comPic }'/>" alt=""></a>
+                            <a href="company-page-1.html"><img src="<c:url value='/com_profile/${cvo.comPic }'/>" alt=""></a>
                             <div>
                                 <a href="<c:url value='/request/detail?recNo=${vo.recNo }'/>"><h4>${vo.recTitle }</h4></a>
                                 <h5><small>${cvo.comName }</small></h5>
@@ -152,7 +163,9 @@
                                 <li>
                                     <h6 class="time">등록일: <fmt:formatDate pattern="yyyy-MM-dd" value="${vo.recRegdate }"/></h6></li>
                                 <li>
-                                    <a href="#" class="btn btn-green btn-small btn-effect">즉시 지원</a>
+                                <div id="recpreWrite" >
+                                    <a href="<c:url value='/request/recpreWrite?recNo=${vo.recNo }'/>" class="btn btn-green btn-small btn-effect" id="recpreWrite">즉시 지원</a>
+                                 </div>
                                 </li>
                             </ul>
 

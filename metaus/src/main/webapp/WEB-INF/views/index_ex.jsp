@@ -3,7 +3,6 @@
         <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
             <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
             <%@ include file="inc/header.jsp" %>
-
 <head>
     <title>made by pond</title>
     <meta charset="utf-8">
@@ -165,18 +164,14 @@
                         <span>여유가 있는 배움,&nbsp;&nbsp;</span>
                     </div>
                 </a>
-
             </div>
-
         </div>
-
     </div>
 </div>
 <div class="site-section block-13">
     <div class="container" data-aos="fade-up">
     </div>
 </div>
-
 <div class="site-section bg-light">
     <div class="container">
         <div class="row">
@@ -192,15 +187,13 @@
                     <span class="d-block text-secondary small text-uppercase">2022.01.01 서울신문&nbsp;</span>
                     <h2 class="h5 text-black mb-3"><a href="single.html">&nbsp;코로나 시대에 살아남는 법은 메타버스?&nbsp; &nbsp;
                         &nbsp;&nbsp;</a></h2>
-
-                </div>
+               </div>
             </div>
             <div class="col-md-6 col-lg-4 mb-4 mb-lg-0" data-aos="fade-up" data-aos-delay="200">
                 <a href="single.html"><img src="images/img_2.jpg" alt="Image" class="img-fluid"></a>
                 <div class="p-4 bg-white">
                     <span class="d-block text-secondary small text-uppercase">2022.01.01경인일보</span>
                     <h2 class="h5 text-black mb-3"><a href="single.html">가상 공간을 즐기는 법.&nbsp; &nbsp;</a></h2>
-
                 </div>
             </div>
             <div class="col-md-6 col-lg-4 mb-4 mb-lg-0" data-aos="fade-up" data-aos-delay="300">
@@ -208,7 +201,6 @@
                 <div class="p-4 bg-white">
                     <span class="d-block text-secondary small text-uppercase">2022.03.02 디에디트 미디어&nbsp;&nbsp;</span>
                     <h2 class="h5 text-black mb-3"><a href="single.html">내가 아는 메타어스.&nbsp; &nbsp;</a></h2>
-
                 </div>
             </div>
             <div class="col-md-6 col-lg-4 mb-4 mb-lg-0" data-aos="fade-up" data-aos-delay="300"> <a href="single.html"></a>
@@ -216,10 +208,7 @@
         </div>
     </div>
 </div>
-
 <div class="bg-primary" data-aos="fade"> </div>
-
-
 </div>
 </body>
 <script src="index_css/js/jquery-3.3.1.min.js"></script>
@@ -236,7 +225,5 @@
 <script src="index_css/js/aos.js"></script>
 <script src="index_css/js/circleaudioplayer.js"></script>
 <script src="index_css/js/main.js"></script>
-
-</body>
 <%@ include file="inc/footer.jsp" %>
 </html>

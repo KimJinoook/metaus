@@ -7,6 +7,19 @@ body {
   font-family: "Nunito Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 
+/*
+.E_1 {
+  background-color: rgb(104, 122, 190);
+  opacity: 0.38;
+  position: absolute;
+  left: 30px;
+  top: 34px;
+  width: 221px;
+  height: 224px;
+  z-index: 7;
+}
+*/ 
+
 ::-moz-selection {
   background: #000;
   color: #fff;
@@ -25,6 +38,31 @@ h5,
 h6 {
   font-family: 'Oswald', sans-serif;
 }
+
+.columns1 {
+  text-align: center;
+  float: right;
+
+}
+
+.columns2 {
+  text-align: center;
+  float: right;
+
+}
+
+.columns3 {
+  text-align: center;
+  float: right;
+
+}
+
+.columns4 {
+  text-align: center;
+  float: right;
+
+}
+
 
 a {
   -webkit-transition: .3s all ease;

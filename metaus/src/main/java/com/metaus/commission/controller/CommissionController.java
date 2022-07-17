@@ -18,7 +18,11 @@ import com.metaus.commission.model.MypageVO;
 import com.metaus.common.ConstUtil;
 import com.metaus.common.PaginationInfo;
 import com.metaus.common.SearchVO;
-
+import com.metaus.member.model.MemberService;
+import com.metaus.member.model.MemberVO;
+import com.metaus.request.model.RequestService;
+import com.metaus.request.model.RequestVO;
+import com.metaus.request.model.ScrapVO;
 
 import lombok.RequiredArgsConstructor;
 
@@ -30,6 +34,8 @@ public class CommissionController {
 	=LoggerFactory.getLogger(CommissionController.class);
 	
 	private final MypageService mypageService;
+	private final MemberService memberService;
+	private final RequestService requestService;
 	
 	@RequestMapping("/progressSchedule")
 	public String progressSchedule(@ModelAttribute MypageVO searchVo,HttpSession session,Model model) {
@@ -142,5 +148,25 @@ public class CommissionController {
 		model.addAttribute("list",list);
 		
 		return "/commission/Progress";
+	}
+	
+	/*박정환*/
+	@RequestMapping("/interestList")
+	public String AttentionList(HttpSession session, Model model) {
+		logger.info("관심 의뢰 페이지");
+		
+		String memId=(String)session.getAttribute("memId");
+		logger.info("memId={}", memId);
+		
+		MemberVO mvo= memberService.selectByUserid(memId);
+		
+		List<ScrapVO> scList=requestService.selectScrapBymemNo(mvo.getMemNo());
+		List<RequestVO> reList=requestService.selectRequestAll();
+		
+		model.addAttribute("scList", scList);
+		model.addAttribute("reList", reList);
+		
+		return "/commission/interestList";
+		
 	}
 }

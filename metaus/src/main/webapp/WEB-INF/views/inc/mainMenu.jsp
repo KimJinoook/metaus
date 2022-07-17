@@ -143,6 +143,7 @@
 	                     <li class="dropdown-submenu">
 	                         <a href="#">의뢰<i class="fa fa-angle-right"></i></a>
 	                         <ul class="dropdown-menu">
+	                             <li><a href="<c:url value='/commission/interestList'/>">관심의뢰목록</a></li>
 	                             <li><a href="<c:url value='/commission/commissionList'/>">의뢰목록</a></li>
 	                             <li><a href="<c:url value='/commission/Progress'/>">의뢰진행현황</a></li>	                             
 	                             <li><a href="<c:url value='/commission/progressSchedule'/>">의뢰완료목록</a></li>
