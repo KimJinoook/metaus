@@ -2,7 +2,7 @@
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
         <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
             <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-            <%@ include file="inc/header_for_index_ex.jsp" %>
+            <%@ include file="inc/header.jsp" %>
 <head>
     <title>made by pond</title>
     <meta charset="utf-8">
@@ -18,6 +18,7 @@
     <link rel="stylesheet"
       href="https://index_css/fonts.googleapis.comindex_index_css/css/css?family=Nunito+Sans:200,300,400,700,900|Oswald:400,700">
     <link rel="stylesheet" href="index_css/fonts/icomoon/style.css">
+    <link rel="stylesheet" href="index_css/css/bootstrap.min.css">
     <link rel="stylesheet" href="index_css/css/magnific-popup.css">
     <link rel="stylesheet" href="index_css/css/jquery-ui.css">
     <link rel="stylesheet" href="index_css/css/owl.carousel.min.css">
@@ -90,7 +91,7 @@
     <div class="site-section">
   <div class="container">
   
-        <div class="site-section-heading text-center mb-5 w-border col-md-6 mx-auto" style="width:100%">
+        <div class="site-section-heading text-center mb-5 w-border col-md-6 mx-auto">
           <h2 class="mb-5">beyond verse</h2>
         </div>
      <!-- <a href="#" class="col1 unit-9 no-height" data-aos="fade-up" data-aos-delay="100">-->  
@@ -124,10 +125,11 @@
             </div>
           </div>
         </div>
-      <div style="display:none;"> 
+      <div>
 <div>
 
     <div class="container">
+
         <div class="site-section-heading w-border col-md-6 mx-auto col-xl-9" data-aos="fade-up">
             <h2 class="mb-5">Look around!</h2>
             <p> 때론 글자보다 사진이 설명에 더욱 유용하게 쓰일 때가 있죠.
