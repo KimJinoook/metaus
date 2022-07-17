@@ -139,4 +139,11 @@
 		select * from fp_rec
 	</select>
 	
+	<select id="checkRecpre" resultType="int" parameterType="checkVo">
+		select count(*) from fp_recpre where mem_no = #{memNo} and rec_no = #{recNo}
+	</select>
+	<select id="checkScrap" resultType="int" parameterType="checkVo">
+		select count(*) from fp_recpre where mem_no = #{memNo} and rec_no = #{recNo}
+	</select>
+	
 </mapper>

@@ -31,8 +31,7 @@
 
         </div>
     </section>
- <input type="hidden" name="recNo" id="recNo" value="${vo.recNo }">
- <input type="hidden" name="recfileNo" id="recfileNo" value="${AtcVo.recfileNo }">
+
     <!-- =============== End of Page Header 1 Section =============== -->
 
 
@@ -49,8 +48,9 @@
             
            
              
-            <form method="post" action="<c:url value='/request/update'/>" class="post-job-resume mt50">
+            <form method="post" action="<c:url value='/request/update'/>" class="post-job-resume mt50" enctype="multipart/form-data">
 			<input type="hidden" name="comId" value="${comId }">
+			 <input type="hidden" name="recNo" id="recNo" value="${vo.recNo }">
                 <!-- Start of Job Details -->
              <h3 class="capitalize pb20">의뢰 정보</h3>
              <br>
@@ -125,7 +125,7 @@
                             <!-- Upload Button -->
                             <div class="upload-file-btn">
                                 <span><i class="fa fa-upload"></i> Upload</span>
-                                <input class="form-control" type="file" name="application_attachment" accept=".jpg,.png,.gif">
+                                <input class="form-control" type="file" name="upfile" accept=".jpg,.png,.gif">
                             </div>
                         </div>
 

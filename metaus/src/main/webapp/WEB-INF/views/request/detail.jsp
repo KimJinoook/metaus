@@ -34,8 +34,8 @@
 
 	            <form id="insertScrap" action='<c:url value='/request/insertScrap'/>'>
                 	<div class="col-md-6 col-xs-12 clearfix">
-		                <input type="hidden" name="recNo" value="${vo.recNo }">
-		                <input type="hidden" name="memNo" value="${memNo }">
+		                <input type="hidden" name="recNo" id="chkrecNo" value="${vo.recNo }">
+		                <input type="hidden" name="memNo" id="chkmemNo" value="${memNo }">
 	                    <a href="#" class="btn btn-blue btn-effect pull-right mt15" id="inesrtScrap"><i class="fa fa-star"></i>관심 의뢰 등록</a>
                 	</div>
 	            </form>
@@ -214,12 +214,10 @@
                         </ul>
                         
                         <div class="mt20">
-                            <a href="<c:url value='/request/recpreWrite?recNo=${vo.recNo }'/>" class="btn btn-blue btn-effect" id="recpreWrite">지원하기</a>
+                            <a href="javascript:void(0)" class="btn btn-blue btn-effect" id="recpreWrite">지원하기</a>
                         </div>
                         
-                        <div class="mt20">
-                            <a href="#" class="btn btn-red btn-effect">신고</a>
-                        </div>
+                        
 
                     </div>
                     <!-- Start of Job Sidebar -->
@@ -302,6 +300,24 @@
 			if($('#memId').val()=="" || $('#memId').val()==null){
 				alert('일반회원 로그인 후 이용가능합니다!');
 				event.preventDefault();
+			}else{
+				var memNo = $('#chkmemNo').val();
+				var recNo = $('#chkrecNo').val();
+				$.ajax({
+					url: "<c:url value='/request/recpreCheck'/>"+"?memNo="+memNo+"&recNo="+recNo,
+					type:"get",
+					async:false,
+					success:function(data){
+						if(data==1){
+							location.href="<c:url value='/request/recpreWrite?recNo=${vo.recNo }'/>";
+							
+						}else if(data==2){
+							alert('이미 지원완료한 의뢰입니다.');
+						}else{
+							alert('지원여부 확인 체크에 실패했습니다.');
+						}
+					}
+				});
 			}
 		});
 		
@@ -310,8 +326,25 @@
 				alert('일반회원 로그인 후 이용가능합니다!');
 				event.preventDefault();
 			}else{
-				alert('관심의뢰 등록');
-				$('#insertScrap').submit();
+				var memNo = $('#chkmemNo').val();
+				var recNo = $('#chkrecNo').val();
+				$.ajax({
+					url: "<c:url value='/request/scrapCheck'/>"+"?memNo="+memNo+"&recNo="+recNo,
+					type:"get",
+					async:false,
+					success:function(data){
+						if(data==1){
+							alert('관심의뢰 등록');
+							$('#insertScrap').submit();
+							
+						}else if(data==2){
+							alert('이미 스크랩한 의뢰입니다.');
+						}else{
+							alert('스크랩여부 확인 체크에 실패했습니다.');
+						}
+					}
+				});
+				
 			}
 		});
 	});

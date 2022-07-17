@@ -106,6 +106,16 @@ public class RequestServiceImpl implements RequestService {
 		return requestDao.selectRequestAll();
 	}
 
+	@Override
+	public int checkScrap(CheckVO vo) {
+		return requestDao.checkScrap(vo);
+	}
+
+	@Override
+	public int checkRecpre(CheckVO vo) {
+		return requestDao.checkRecpre(vo);
+	}
+
 	
 	
 	

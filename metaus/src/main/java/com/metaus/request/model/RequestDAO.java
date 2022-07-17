@@ -30,4 +30,6 @@ public interface RequestDAO {
 	RequestAtcVO selectByrecfileRecNo(int recNo);
 	List<ScrapVO> selectScrapBymemNo(int memNo);
 	List<RequestVO> selectRequestAll();
+	int checkScrap(CheckVO vo);
+	int checkRecpre(CheckVO vo);
 }
