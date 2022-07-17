@@ -81,6 +81,31 @@ public class RequestServiceImpl implements RequestService {
 		return requestDao.updateRequestAtc(requestAtcVo);
 	}
 
+	@Override
+	public int insertScrap(ScrapVO scrapVo) {
+		return requestDao.insertScrap(scrapVo);
+	}
+
+	@Override
+	public int insertRecpre(RecpreVO recpreVo) {
+		return requestDao.insertRecpre(recpreVo);
+	}
+
+	@Override
+	public RequestAtcVO selectByrecfileRecNo(int recNo) {
+		return requestDao.selectByrecfileRecNo(recNo);
+	}
+
+	@Override
+	public List<ScrapVO> selectScrapBymemNo(int memNo) {
+		return requestDao.selectScrapBymemNo(memNo);
+	}
+
+	@Override
+	public List<RequestVO> selectRequestAll() {
+		return requestDao.selectRequestAll();
+	}
+
 	
 	
 	
