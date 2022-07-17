@@ -80,8 +80,9 @@ public class PdController {
 		
 		if(!list.isEmpty() && list!=null) {
 			double avg=pdReviewService.selectPdReviewAvg(pdNo);			
-			logger.info("리뷰 목록 페이지 파라미터 avg={}", avg);
 			vo.setPdTotalreview(avg);
+			int cnt=pdService.updateTotalReview(vo);
+			logger.info("리뷰 목록 페이지 파라미터 avg={}, cnt={}", avg, cnt);
 		}
 		
 		model.addAttribute("list",list);

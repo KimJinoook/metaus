@@ -17,4 +17,5 @@ public interface PdDAO {
 	int selectTotalRecord(SearchVO searchVo);
 	int selectTotalRecord2(SearchVO searchVo);
 	List<PdVO> selectByBuyCnt(int pdNo);
+	int updateTotalReview(PdVO vo);
 }

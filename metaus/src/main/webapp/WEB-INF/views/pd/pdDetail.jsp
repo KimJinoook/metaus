@@ -304,7 +304,7 @@
                                                             <!-- Commenters Name -->
                                                             <h6 class="commenter-name">${vo.memName }</h6>
 															<c:if test="${vo.reviewScore eq 0 }">
-                                                            <fieldset id="review0">
+                                                            <fieldset id="review1">
 															<label for="rate">★</label>
 															<label for="rate">★</label>
 															<label for="rate">★</label>
@@ -321,7 +321,7 @@
 															<c:if test="${!empty vo.reviewScore }">
 										                    <c:if test="${vo.reviewScore ne 0}">
 										                    <c:forEach var="i" begin="1" end="${5-vo.reviewScore }">
-															<label for="rate1" style="color: #ddd8d8;">★</label>
+															<label for="rate1" style="color: #f0f0f0;">★</label>
 										                    </c:forEach>
 										                    </c:if>
 															<c:forEach var="review" begin="1" end="${vo.reviewScore }">

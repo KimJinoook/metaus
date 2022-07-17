@@ -961,7 +961,7 @@ CREATE TABLE fp_pd (
 	pd_originname CLOB, /* 모델원본파일명 */
 	pd_filesize NUMBER, /* 모델파일사이즈 */
     pd_price number, /* 모델 금액 */
-	pd_buycnt NUMBER, /* 구매수 */
+	pd_buycnt NUMBER default 0, /* 구매수 */
     pd_totalreview number default 0 /* 리뷰점수 */
 );
 
@@ -1716,14 +1716,41 @@ values(fp_cate_seq.nextval, '스포츠');
 
 commit;
 select * from fp_pd;
-insert into fp_pd(pd_no, cate_no, mem_no, pd_name, pd_pre, pd_filename, pd_price, pd_buycnt)
-values(fp_pd_seq.nextval,1,1,'시바견','시바견입니다','2.zip',3500,3);
-insert into fp_pd(pd_no, cate_no, mem_no, pd_name, pd_pre, pd_filename, pd_price)
-values(fp_pd_seq.nextval,10,2,'화장실','화장실입니다','1.zip',3500);
-insert into fp_pd(pd_no, cate_no, mem_no, pd_name, pd_pre, pd_filename, pd_price)
-values(fp_pd_seq.nextval,6,1,'귀여운 소녀','귀여운 소녀입니다','kawai.zip',3500);
-insert into fp_pd(pd_no, cate_no, mem_no, pd_name, pd_pre, pd_filename, pd_price)
-values(fp_pd_seq.nextval,12,1,'삼지창','들면 멋있음','trident.zip',3500);
+insert into fp_pd(pd_no, cate_no, mem_no, pd_name, pd_pre, pd_filename, pd_price, pd_buycnt, pd_totalreview)
+values(fp_pd_seq.nextval,1,1,'시바견','시바견입니다','2.zip',3500,30,15);
+insert into fp_pd(pd_no, cate_no, mem_no, pd_name, pd_pre, pd_filename, pd_price, pd_buycnt, pd_totalreview)
+values(fp_pd_seq.nextval,10,2,'화장실','화장실입니다','1.zip',3500, 40,10);
+insert into fp_pd(pd_no, cate_no, mem_no, pd_name, pd_pre, pd_filename, pd_price, pd_buycnt, pd_totalreview)
+values(fp_pd_seq.nextval,6,1,'귀여운 소녀','귀여운 소녀입니다','kawai.zip',3500, 278,15);
+insert into fp_pd(pd_no, cate_no, mem_no, pd_name, pd_pre, pd_filename, pd_price, pd_buycnt, pd_totalreview)
+values(fp_pd_seq.nextval,12,1,'삼지창','들면 멋있음','trident.zip',3500, 40,15);
+
+select * from fp_pdreview;
+insert into fp_pdreview(review_no, pd_no, mem_no, review_content, review_score)
+values(fp_pdreview_seq.nextval,1, 2,'아주 귀여워요 키우고싶어요.', 5);
+insert into fp_pdreview(review_no, pd_no, mem_no, review_content, review_score)
+values(fp_pdreview_seq.nextval,1, 3,'저희집 강아지랑 닮아서 기분이 좋아요.', 5);
+insert into fp_pdreview(review_no, pd_no, mem_no, review_content, review_score)
+values(fp_pdreview_seq.nextval,1, 4,'잘 쓰겠습니다. 다른 댕댕이도 만들어주세요.', 5);
+
+insert into fp_pdreview(review_no, pd_no, mem_no, review_content, review_score)
+values(fp_pdreview_seq.nextval,2, 5,'멋집니다. 굿', 5);
+insert into fp_pdreview(review_no, pd_no, mem_no, review_content, review_score)
+values(fp_pdreview_seq.nextval,2, 6,'여기서 살아도 될것같아요.', 5);
+
+insert into fp_pdreview(review_no, pd_no, mem_no, review_content, review_score)
+values(fp_pdreview_seq.nextval,3, 7,'제일 맘에들어요.', 5);
+insert into fp_pdreview(review_no, pd_no, mem_no, review_content, review_score)
+values(fp_pdreview_seq.nextval,3, 8,'꼬리가 인상적', 5);
+insert into fp_pdreview(review_no, pd_no, mem_no, review_content, review_score)
+values(fp_pdreview_seq.nextval,3, 6,'아 졸귀탱 키우고싶다ㅠㅠ', 5);
+
+insert into fp_pdreview(review_no, pd_no, mem_no, review_content, review_score)
+values(fp_pdreview_seq.nextval,4, 5,'색감이 좋네요.', 5);
+insert into fp_pdreview(review_no, pd_no, mem_no, review_content, review_score)
+values(fp_pdreview_seq.nextval,4, 6,'떡볶이 찍어먹을때 정말 좋아요.', 5);
+insert into fp_pdreview(review_no, pd_no, mem_no, review_content, review_score)
+values(fp_pdreview_seq.nextval,4, 2,'아주 멋집니다. 합격', 5);
 
 select * from fp_resume;
 

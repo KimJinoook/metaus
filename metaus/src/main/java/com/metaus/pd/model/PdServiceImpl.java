@@ -57,5 +57,10 @@ public class PdServiceImpl implements PdService{
 	public int selectTotalRecord2(SearchVO searchVo) {
 		return pdDao.selectTotalRecord2(searchVo);
 	}
+
+	@Override
+	public int updateTotalReview(PdVO vo) {
+		return pdDao.updateTotalReview(vo);
+	}
 	
 }
