@@ -1,55 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="utf-8"%>
 <%@ include file="../inc/header.jsp"%>
-<script type="text/javascript" src="<c:url value='/js/jquery-3.6.0.min.js'/>"></script>
-<script type="text/javascript">
-function validate_pay(pay) {
-	var pattern = new RegExp(/^[0-9]*$/g);
-	return pattern.test(tel);
-}
-	$(function(){
-		$('#btPost').click(function(){
-			if($.trim($('#recTitle').val()).length < 1 ){
-				alert("제목을 입력해주세요.");
-				$('#recTitle').focus();
-				event.preventDefault();
-				
-			}else if($.trim($('#recPay').val()).length < 1){
-				alert("페이를 입력해주세요.");
-				$('#recPay').focus();
-				event.preventDefault();
-				
-			}else if(!validate_pay($('#recPay').val())){
-				alert("페이는 숫자만 입력해주세요.");
-				$('#recPay').focus();
-				event.preventDefault();		
-			
-			}else if($.trim($('#recWeb').val()).length < 1){
-				$('#recWeb').push("1");
-				
-			}else if($.trim($('#recTwitter').val()).length < 1){
-				$('#recTwitter').push("1");
-				
-			}
-		});
-	});
-	
-	
-</script>
+
+
 
 
 
     <!-- =============== Start of Page Header 1 Section =============== -->
-    <hr>
-    <hr>
-    <hr>
     <section class="page-header">
         <div class="container">
 
             <!-- Start of Page Title -->
             <div class="row">
                 <div class="col-md-12">
-                    <h2>의뢰 글 작성</h2>
+                    <h2>의뢰 글 수정</h2>
                 </div>
             </div>
             <!-- End of Page Title -->
@@ -67,6 +31,8 @@ function validate_pay(pay) {
 
         </div>
     </section>
+ <input type="hidden" name="recNo" id="recNo" value="${vo.recNo }">
+ <input type="hidden" name="recfileNo" id="recfileNo" value="${AtcVo.recfileNo }">
     <!-- =============== End of Page Header 1 Section =============== -->
 
 
@@ -83,7 +49,7 @@ function validate_pay(pay) {
             
            
              
-            <form method="post" action="<c:url value='/request/post'/>" class="post-job-resume mt50" enctype="multipart/form-data">
+            <form method="post" action="<c:url value='/request/update'/>" class="post-job-resume mt50">
 			<input type="hidden" name="comId" value="${comId }">
                 <!-- Start of Job Details -->
              <h3 class="capitalize pb20">의뢰 정보</h3>
@@ -96,7 +62,7 @@ function validate_pay(pay) {
                         <!-- Form Group -->
                         <div class="form-group">
                             <label>의뢰 제목</label>
-                            <input class="form-control" name="recTitle" id="recTitle" type="text" required>
+                            <input class="form-control" name="recTitle" id="recTitle" type="text" required value="${vo.recTitle }">
                         </div>
 
                         <!-- Form Group -->
@@ -123,43 +89,43 @@ function validate_pay(pay) {
                         <!-- Form Group -->
                         <div class="form-group">
                             <label>의뢰 설명</label>
-                            <textarea class="tinymce" name="recContent" id="recContent"></textarea>
+                            <textarea class="tinymce" name="recContent" id="recContent">${vo.recContent }</textarea>
                         </div>
                         
                         <div class="form-group">
                             <label>주요 요구 사항</label>
-                            <textarea class="tinymce" name="recContent2" id="recContent2"></textarea>
+                            <textarea class="tinymce" name="recContent2" id="recContent2">${vo.recContent2 }</textarea>
                         </div>
                         
                         <div class="form-group">
                             <label>주요 제안 사항</label>
-                            <textarea class="tinymce" name="recContent3" id="recContent3"></textarea>
+                            <textarea class="tinymce" name="recContent3" id="recContent3">${vo.recContent3 }</textarea>
                         </div>
                         
                         <!-- Form Group -->
                         <div class="form-group">
-                            <label>페이</label>
-                            <input class="form-control" name="recPay" id="recPay" type="text" placeholder='5000'>
+                            <label>페이 <span>(선택사항)</span></label>
+                            <input class="form-control" name="recPay" id="recPay" type="text" value="${vo.recPay }">
+                        </div>
+                        
+                         <div class="form-group">
+                            <label>웹사이트 링크 <span>(선택사항)</span></label>
+                            <input class="form-control" type="text"  name="recWeb" id="recWeb" value="${vo.recWeb }">
                         </div>
                         
                         <div class="form-group">
-                            <label>웹사이트 링크</label>
-                            <input class="form-control" type="text"  name="recWeb" id="recWeb" placeholder='http://your-company-website.com'>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label>트위터 링크</label>
-                            <input class="form-control" type="text" name="recTwitter" id="recTwitter" placeholder='http://your-company-website.com'>
+                            <label>트위터 링크 <span>(선택사항)</span></label>
+                            <input class="form-control" type="text" name="recTwitter" id="recTwitter" value="${vo.recTwitter }">
                         </div>
                         
                         <!-- Form Group -->
                         <div class="form-group">
-                            <label>헤더 이미지</label>
+                            <label>헤더 이미지 <span>(선택사항)</span></label>
                             
                             <!-- Upload Button -->
                             <div class="upload-file-btn">
                                 <span><i class="fa fa-upload"></i> Upload</span>
-                                <input class="form-control" type="file" id="upfile" name="upfile" accept=".jpg,.png,.gif">
+                                <input class="form-control" type="file" name="application_attachment" accept=".jpg,.png,.gif">
                             </div>
                         </div>
 
@@ -211,8 +177,10 @@ function validate_pay(pay) {
                         </div>
                         
  -->                        <!-- Form Group -->
+ 
+ 
                         <div class="form-group pt30 nomargin" id="last">
-                            <button type="submit" id="btPost" class="btn btn-blue btn-effect">등록</button>
+                            <button type="submit" class="btn btn-blue btn-effect">등록</button>
                         </div>
                         
                         
@@ -221,7 +189,7 @@ function validate_pay(pay) {
                 <!-- End of Company Details -->
 
 
-           </form>
+            </form>
             <!-- End of Post Job Form -->
 
         </div>
