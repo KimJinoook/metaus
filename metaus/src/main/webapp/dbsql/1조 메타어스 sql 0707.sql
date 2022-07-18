@@ -1710,20 +1710,9 @@ values(fp_cate_seq.nextval, '스포츠');
 
 commit;
 select * from fp_pd;
-<<<<<<< HEAD
-insert into fp_pd
-values(fp_pd_seq.nextval,1,1,'시바견','시바견입니다','2.zip',null,null,3500,3);
-insert into fp_pd
-values(fp_pd_seq.nextval,10,2,'화장실','화장실입니다','1.zip',null,null,3500,null);
-insert into fp_pd
-values(fp_pd_seq.nextval,6,1,'귀여운 소녀','귀여운 소녀입니다','kawai.zip',null,null,3500,null);
-insert into fp_pd
-values(fp_pd_seq.nextval,12,1,'삼지창','들면 멋있음','trident.zip',null,null,3500,null);
-insert into fp_pd
-values(fp_pd_seq.nextval,12,2,'테스트이름','설명','vhs.zip',null,null,3500,null);
+
 commit;
 
-=======
 insert into fp_pd(pd_no, cate_no, mem_no, pd_name, pd_pre, pd_filename, pd_price, pd_buycnt, pd_totalreview)
 values(fp_pd_seq.nextval,1,1,'시바견','시바견입니다','2.zip',3500,30,15);
 insert into fp_pd(pd_no, cate_no, mem_no, pd_name, pd_pre, pd_filename, pd_price, pd_buycnt, pd_totalreview)
@@ -1759,7 +1748,7 @@ insert into fp_pdreview(review_no, pd_no, mem_no, review_content, review_score)
 values(fp_pdreview_seq.nextval,4, 6,'떡볶이 찍어먹을때 정말 좋아요.', 5);
 insert into fp_pdreview(review_no, pd_no, mem_no, review_content, review_score)
 values(fp_pdreview_seq.nextval,4, 2,'아주 멋집니다. 합격', 5);
->>>>>>> branch 'main' of https://github.com/KimJinoook/metaus.git
+
 
 select * from fp_resume;
 
