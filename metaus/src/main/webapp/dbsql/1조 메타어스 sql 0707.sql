@@ -1659,12 +1659,6 @@ insert into fp_rec
 values(fp_rec_seq.nextval, 2, '삼성 월드 제작 크리에이터 모집','실력있는 크리에이터 모집중입니다',150000,sysdate,0,'','','','');
 
 
-select * from fp_contact;
-insert into fp_contact
-values(1,2,150000,null);
-insert into fp_contact
-values(4,2,150000,sysdate);
-commit;
 
 
 insert into fp_boardType
@@ -1723,6 +1717,10 @@ insert into fp_pd
 values(fp_pd_seq.nextval,6,1,'귀여운 소녀','귀여운 소녀입니다','kawai.zip',null,null,3500,null);
 insert into fp_pd
 values(fp_pd_seq.nextval,12,1,'삼지창','들면 멋있음','trident.zip',null,null,3500,null);
+insert into fp_pd
+values(fp_pd_seq.nextval,12,2,'테스트이름','설명','vhs.zip',null,null,3500,null);
+commit;
+
 
 select * from fp_resume;
 
@@ -1773,6 +1771,14 @@ values(FP_PORT_SEQ.nextval,8,'1','1.zip','1','1');
 
 insert into fp_manager
 values(fp_manager_seq.nextval,'test','김진욱','1234',sysdate,'1.jpg','01030843045');
+
+
+select * from fp_contact;
+insert into fp_contact
+values(1,2,150000,null);
+insert into fp_contact
+values(4,2,150000,sysdate);
+commit;
 
 select * from fp_buy;
 
