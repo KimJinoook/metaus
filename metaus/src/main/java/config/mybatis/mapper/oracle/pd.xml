@@ -108,4 +108,11 @@
 		<![CDATA[		
 		where rownum <=3 and not pd_no=#{pdNo}]]>
 	</select>
+	
+	<update id="updateTotalReview" parameterType="pdVO">
+	update fp_pd
+	set pd_totalreview=pd_totalreview+#{pdTotalreview}
+	where pd_no=#{pdNo}
+	</update>
+	
 </mapper>

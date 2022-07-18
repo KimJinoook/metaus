@@ -83,7 +83,7 @@ $(function(){
 
                                     <!-- Cart Remove Product -->
                                      <td class="cart-product-remove">
-                                         <a href="<c:url value='/buy/delete?pdNo=${vo.pdNo }'/>" class="remove" title="Remove this item"><i class="fa fa-times"></i></a> 
+                                         <a href="<c:url value='/buy/delete?pdNo=${vo.pdNo }'/>" class="remove" title="상품 삭제"><i class="fa fa-times"></i></a> 
                                     </td> 
 
                                     <!-- Cart Product Thumbnail -->
@@ -207,40 +207,8 @@ $(function(){
                         </div>
                         <!-- End of Cart Total -->
                     </div>
-                    <!-- End of Row -->
-					<!-- Start of Pagination -->
-					<div class="col-md-12">
-						<ul class="pagination list-inline text-center">
-							<c:if test="${pagingInfo.firstPage>1 }">
-								<li><a href="#"
-									onclick="pdList(${pagingInfo.firstPage-1})">prev</a></li>
-							</c:if>
+                    <!-- End of Row -->		
 
-							<!-- [1][2][3][4][5][6][7][8][9][10] -->
-							<c:forEach var="i" begin="${pagingInfo.firstPage }"
-								end="${pagingInfo.lastPage }">
-								<c:if test="${i==pagingInfo.currentPage }">
-									<li class="active"><a>${i }</a></li>
-								</c:if>
-								<c:if test="${i!=pagingInfo.currentPage }">
-									<li><a href="#" onclick="pdList(${i})">${i } </a></li>
-								</c:if>
-							</c:forEach>
-
-							<c:if test="${pagingInfo.lastPage<pagingInfo.totalPage }">
-								<li><a href="#"
-									onclick="pdList(${pagingInfo.lastPage+1})">Next</a></li>
-							</c:if>
-							<!--  페이지 번호 끝 -->
-						</ul>
-					</div>
-					<!-- End of Pagination -->
-                    <!-- 페이징 처리를 위한 form 시작-->
-				<form name="frmPage" method="post"
-					action="<c:url value='/pd/myPdList'/>">
-					<input type="hidden" name="currentPage">
-				</form>
-				<!-- 페이징 처리 form 끝 -->
                 </div>
                 <!-- End of Cart Wrapper -->
 

@@ -22,6 +22,14 @@ $(function(){
        if($('#memId').val()=="" || $('#memId').val()==null){
          alert('일반 회원 로그인 후 이용가능합니다!');
          event.preventDefault();
+       }else {
+    	   var res=confirm('장바구니에 담으시겠습니까?');
+    	   if(res===false){
+    		   alert('취소되었습니다.');
+    		   event.preventDefault();
+    	   }else{
+
+    	   }
        }
 	});
 	
@@ -183,9 +191,9 @@ $(function(){
 </script>
  							<!-- Product Image -->
 
-                                    <a href="<c:url value='/images/shop/product1.jpg'/>" class="hover-zoom">
+                                    <!-- <a href="<c:url value='/images/shop/product1.jpg'/>" class="hover-zoom">
                                         <img src="<c:url value='/images/shop/product1.jpg'/>" class="img-responsive" alt="">
-                                    </a>
+                                    </a>-->
 
                                     <!-- Product overlay -->
                                     <div class="product-overlay">

@@ -5,6 +5,8 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ include file="../inc/header.jsp"%>
 
+<link rel="stylesheet" type="text/css" href="<c:url value='/css/request.css'/>">
+
 <script type="text/javascript"
 	src="<c:url value='/js/jquery-3.6.0.min.js'/>">
 	
@@ -20,22 +22,26 @@
      <c:if test="${vo.comNo == cvo.comNo }">
 
     <!-- ===== Start of Job Header Section ===== -->
-    <section class="job-header ptb60">
+    <section class="job-header ptb60" id="one">
         <div class="container">
 
             <!-- Start of Row -->
-            <div class="row">
+            <div class="row" >
 
-                <div class="col-md-6 col-xs-12">
-                    <h3>${vo.recTitle }</h3>
+                <div class="col-md-6 col-xs-12" style="margin-top: 30px;">
+                    <h3 style="color: white;">${vo.recTitle }</h3>
                 </div>
 
-                <div class="col-md-6 col-xs-12 clearfix">
-                    <a href="#" class="btn btn-blue btn-effect pull-right mt15"><i class="fa fa-star"></i>관심 의뢰 등록</a>
-                </div>
+	            <form id="insertScrap" action='<c:url value='/request/insertScrap'/>'>
+                	<div class="col-md-6 col-xs-12 clearfix">
+		                <input type="hidden" name="recNo" id="chkrecNo" value="${vo.recNo }">
+		                <input type="hidden" name="memNo" id="chkmemNo" value="${memNo }">
+	                    <a href="#" class="btn btn-blue btn-effect pull-right mt15" id="inesrtScrap"><i class="fa fa-star"></i>관심 의뢰 등록</a>
+                	</div>
+	            </form>
                 <c:if test="${cvo.comId==comId }">
                 <form id="requestUpdate"
-                	action ="<c:url value='/request/update?recNo=${vo.recNo }&recfileNo=${recfileNo }'/>" style="float:right; margin-right: 20px; margin-bottom: 10px;">
+                	action ="<c:url value='/request/update'/>" style="float:right; margin-right: 20px; margin-bottom: 10px;">
                 <div class="mt20">
                 			<input type="hidden" name="recNo" value="${vo.recNo }">
                             <a href="#" class="btn btn-blue btn-effect" id="requestUpdate">수정</a>
@@ -52,6 +58,8 @@
 
         </div>
     </section>
+    <input type="hidden" id="comId" name="comId" value="${comId }">
+       <input type="hidden" id="memId" name="memId" value="${memId }">
     <!-- ===== End of Job Header Section ===== -->
 
 
@@ -72,16 +80,11 @@
                     <div class="row company-info">
 
                         <!-- Job Company Image -->
-                        <div class="col-md-3">
-                            <div class="job-company">
-                                <a href="company-page.html">
-                                
-                                    <img src="<c:url value='/com_profile/${cvo.comPic}'/>" alt="">
-                               
-                                </a>
+                        <div class="col-md-2 col-xs-3" style="margin-top: 20px;">
+                                <div class="candidate-img" >
+                                        <img src="<c:url value='/com_profile/${cvo.comPic }'/>" class="img-responsive" alt="" onerror="this.onerror=null; this.src='<c:url value='/images/createrProfile/user.png'/>'">
+                                </div>
                             </div>
-                        </div>
-
                         <!-- Job Company Info -->
                         <div class="col-md-9">
                             <div class="job-company-info mt30">
@@ -181,10 +184,10 @@
 
                             <!-- Social Media -->
                             <li>
-                                <a href="${vo.recWeb }" class="social-btn-roll google-plus transparent">
+                                <a href="${vo.recWeb }" class="social-btn-roll linkedin">
                                     <div class="social-btn-roll-icons">
-                                        <i class="social-btn-roll-icon fa fa-google-plus"></i>
-                                        <i class="social-btn-roll-icon fa fa-google-plus"></i>
+                                        <i class="social-btn-roll-icon fa fa-linkedin"></i>
+                                        <i class="social-btn-roll-icon fa fa-linkedin"></i>
                                     </div>
                                 </a>
                             </li>
@@ -200,8 +203,8 @@
                             </li>
 
                             <li>
-                                <h5><i class="fa fa-map-marker"></i> 지역:</h5>
-                                <span></span>
+                                <h5><i class="fa fa-user"></i> 대표자:</h5>
+                                <span>${cvo.comCeo }</span>
                             </li>
 
                             <li>
@@ -209,14 +212,12 @@
                                 <span><fmt:formatNumber value = "${vo.recPay }" pattern="#,###"/>원</span>
                             </li>
                         </ul>
-
-                        <div class="mt20">
-                            <a href="#" class="btn btn-blue btn-effect">지원하기</a>
-                        </div>
                         
                         <div class="mt20">
-                            <a href="#" class="btn btn-red btn-effect">신고</a>
+                            <a href="javascript:void(0)" class="btn btn-blue btn-effect" id="recpreWrite">지원하기</a>
                         </div>
+                        
+                        
 
                     </div>
                     <!-- Start of Job Sidebar -->
@@ -229,13 +230,24 @@
                          <div id="map"></div>
                     </div>
                     <script>
-				        var container = document.getElementById('map');
-						var options = {
-							center: new kakao.maps.LatLng(${cvo.comLati}, ${cvo.comLongi}),
-							level: 3
-						};
-				
-						var map = new kakao.maps.Map(container, options);
+                    var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+                    mapOption = { 
+                        center: new kakao.maps.LatLng(${cvo.comLati}, ${cvo.comLongi}), // 지도의 중심좌표
+                        level: 3 // 지도의 확대 레벨
+                    };
+
+	                var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+	
+	                // 마커가 표시될 위치입니다 
+	                var markerPosition  = new kakao.maps.LatLng(${cvo.comLati}, ${cvo.comLongi}); 
+	
+	                // 마커를 생성합니다
+	                var marker = new kakao.maps.Marker({
+	                    position: markerPosition
+	                });
+	
+	                // 마커가 지도 위에 표시되도록 설정합니다
+	                marker.setMap(map);
 				    </script>
                     
                    
@@ -283,7 +295,68 @@
 				$('#requestUpdate').submit();
 			}
 		});
+		
+		$('#recpreWrite').click(function(){
+			if($('#memId').val()=="" || $('#memId').val()==null){
+				alert('일반회원 로그인 후 이용가능합니다!');
+				event.preventDefault();
+			}else{
+				var memNo = $('#chkmemNo').val();
+				var recNo = $('#chkrecNo').val();
+				$.ajax({
+					url: "<c:url value='/request/recpreCheck'/>"+"?memNo="+memNo+"&recNo="+recNo,
+					type:"get",
+					async:false,
+					success:function(data){
+						if(data==1){
+							location.href="<c:url value='/request/recpreWrite?recNo=${vo.recNo }'/>";
+							
+						}else if(data==2){
+							alert('이미 지원완료한 의뢰입니다.');
+						}else{
+							alert('지원여부 확인 체크에 실패했습니다.');
+						}
+					}
+				});
+			}
+		});
+		
+		$('#inesrtScrap').click(function(){
+			if($('#memId').val()=="" || $('#memId').val()==null){
+				alert('일반회원 로그인 후 이용가능합니다!');
+				event.preventDefault();
+			}else{
+				var memNo = $('#chkmemNo').val();
+				var recNo = $('#chkrecNo').val();
+				$.ajax({
+					url: "<c:url value='/request/scrapCheck'/>"+"?memNo="+memNo+"&recNo="+recNo,
+					type:"get",
+					async:false,
+					success:function(data){
+						if(data==1){
+							alert('관심의뢰 등록');
+							$('#insertScrap').submit();
+							
+						}else if(data==2){
+							alert('이미 스크랩한 의뢰입니다.');
+						}else{
+							alert('스크랩여부 확인 체크에 실패했습니다.');
+						}
+					}
+				});
+				
+			}
+		});
 	});
+
+	/* $(function(){
+		$('#recpreWrite').click(function(){
+			if($('#memId').val()=="" || $('#memId').val()==null){
+				alert('일반회원 로그인 후 이용가능합니다!');
+				event.preventDefault();
+			}
+		});
+	}); */
 </script>
 
 

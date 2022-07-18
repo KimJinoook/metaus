@@ -5,13 +5,38 @@
  $(function(){
 	 $('#cart').click(function(){
 		 if($('#memId').val()=="" || $('#memId').val()==null){
-			alert('로그인 후 이용가능합니다!');
+			alert('일반 회원 로그인 후 이용가능합니다!');
 			event.preventDefault();
-		}else{
-			location.href="<c:url value='/cart/cartAdd?pdNo=${param.pdNo}'/>"; 
-				
-		}		 
+		}else {
+			var res=confirm('장바구니에 담으시겠습니까?');
+	    	   if(res===false){
+	    		   alert('취소되었습니다.');
+	    		   event.preventDefault();
+	    	   }else{
+					location.href="<c:url value='/cart/cartAdd?pdNo=${param.pdNo}'/>";	    			   
+	    	   }
+	       }
+		});		 
+
+	 $('#reviewAdd').click(function(){
+		 if($('#memId').val()=="" || $('#memId').val()==null){
+			alert('일반 회원 로그인 후 이용가능합니다!');
+			event.preventDefault();
+		}else if($('#reviewContent').val()=="" || $('#reviewContent').val()==null){
+			alert('리뷰를 작성해주세요!');
+			$('#reviewContent').focus();
+			event.preventDefault();
+		}
+		 
 	 });
+	 
+	 $('.remove').click(function(){
+			var res=confirm('삭제하시겠습니까?');
+			if(res===false){
+				alert('취소되었습니다.');
+				event.preventDefault();				
+			}
+		});
  });
  </script>
  <!-- =============== Start of Page Header 1 Section =============== -->
@@ -59,7 +84,7 @@
 <script src="https://cdn.rawgit.com/takahirox/THREE.ZipLoader/v0.0.1/build/ziploader.min.js"></script>
 <script src="https://unpkg.com/three@0.141.0/examples/js/controls/OrbitControls.js"></script>
                                     
-                                    <canvas id="can${vo.pdNo }" width="555px" height="350px" style="margin-bottom:0"></canvas>
+<canvas id="can${vo.pdNo }" width="555px" height="350px" style="margin-bottom:0"></canvas>
 
 <script type="module">
 
@@ -167,18 +192,33 @@
                                 <h2>${vo.pdName }</h2>
 
                                 <!-- Start of Product Rating -->
-                                <div class="product-rating mt10">
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                    <i class="fa fa-star-half-o" aria-hidden="true"></i>
-                                </div>
+                                <c:if test="${vo.pdTotalreview eq 0 }">
+	                            <fieldset id="review0">
+								<label for="rate">★</label>
+								<label for="rate">★</label>
+								<label for="rate">★</label>
+								<label for="rate">★</label>
+								<label for="rate">★</label>
+								</fieldset>
+								</c:if>
+			                    <fieldset id="review">
+			                    <c:if test="${!empty vo.pdTotalreview }">
+			                    <c:if test="${vo.pdTotalreview ne 0}">
+			                    <c:forEach var="i" begin="1" end="${5-vo.pdTotalreview }">
+								<label for="rate1" style="color: #ddd8d8;">★</label>
+			                    </c:forEach>
+			                    </c:if>
+								<c:forEach var="review" begin="1" end="${vo.pdTotalreview }">
+								<label for="rate">★</label>
+								</c:forEach>
+			                    </c:if>
+								</fieldset>
+                                ${vo.pdTotalreview }
                                 <!-- End of Product Rating -->
 
                                 <!-- Start of Product Price -->
                                 <div class="product-price">
-                                    <span><del>$39.99</del></span>
+                                    <span><del>$399.99</del></span>
                                     <span class="price"><fmt:formatNumber value="${vo.pdPrice }" pattern="#,###"/>원</span>
                                 </div>
                                 <!-- End of Product Price -->
@@ -196,7 +236,7 @@
                                 </div> -->
                                 <!-- End of Product Quantity -->
 
-                                <button class="btn btn-blue btn-effect mt20" id="cart">Add to Cart</button>
+                                <button class="btn btn-blue btn-effect mt20" id="cart">장바구니 담기</button>
 
                             </div>
                             <!-- End of Product Details -->
@@ -219,9 +259,9 @@
                                     <li class="active">
                                         <a href="#productDescription" data-toggle="tab" aria-expanded="false"><h6>상품설명</h6></a>
                                     </li>
-
+                                    								
                                     <li>
-                                        <a href="#productReviews" data-toggle="tab" aria-expanded="true"><h6>리뷰</h6></a>
+                                        <a href="#productReviews" data-toggle="tab" aria-expanded="true"><h6>리뷰 (${list.size()})</h6></a>
                                     </li>
                                 </ul>
                                 <!-- End of Nav Tabs -->
@@ -242,19 +282,19 @@
 
                                         <!-- Start of Comments -->
                                         <ul class="comments-list">
-											<c:if test="${empty list }">
+											 <c:if test="${empty list }">
 										<div class="align_center" style="text-align: center;">
 											<span>작성된 리뷰가 없습니다.<br><br><br></span>
 										</div>
-										</c:if>
+										</c:if> 
                                             <!-- Start of Comment 1 -->
-											<c:if test="${!empty list }">
+											 <c:if test="${!empty list }"> 
 											<!--반복 시작 -->
-											<c:forEach var="vo" items="${list }">
+											 <c:forEach var="vo" items="${list }">
                                             <li class="comment">
                                                 <!-- Commenter Image -->
                                                 <a class="pull-left commenter" href="#">
-                                                    <img src="<c:url value='/images/clients/client1.jpg'/>" alt="" class="img-responsive">
+                                                    <img src="<c:url value='/mem_profile/${vo.memPic}'/>" alt="" class="img-responsive">
                                                 </a>
 
                                                 <div class="media-body comment-body">
@@ -262,23 +302,46 @@
                                                     <div class="comment-content-wrapper">
                                                         <div class="media-heading clearfix">
                                                             <!-- Commenters Name -->
-                                                            <h6 class="commenter-name">john doe</h6>
-			
-                                                            <div class="comment-rating pull-right">
-                                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                                <i class="fa fa-star-half-o" aria-hidden="true"></i>
-                                                            </div>
+                                                            <h6 class="commenter-name">${vo.memName }</h6>
+															<c:if test="${vo.reviewScore eq 0 }">
+                                                            <fieldset id="review1">
+															<label for="rate">★</label>
+															<label for="rate">★</label>
+															<label for="rate">★</label>
+															<label for="rate">★</label>
+															<label for="rate">★</label>
+															</fieldset>
+															</c:if>
+															<%-- <c:forEach var="review" begin="1" end="${vo.reviewScore }">
+                                                            <fieldset id="review">
+															<label for="rate">★</label>
+															</fieldset>
+															</c:forEach> --%>
+															<fieldset id="review">
+															<c:if test="${!empty vo.reviewScore }">
+										                    <c:if test="${vo.reviewScore ne 0}">
+										                    <c:forEach var="i" begin="1" end="${5-vo.reviewScore }">
+															<label for="rate1" style="color: #f0f0f0;">★</label>
+										                    </c:forEach>
+										                    </c:if>
+															<c:forEach var="review" begin="1" end="${vo.reviewScore }">
+															<label for="rate">★</label>
+															</c:forEach>
+										                    </c:if>
+										                    </fieldset>
 
                                                             <!-- Comment Info -->
                                                             <div class="comment-info">
-                                                                <span>Nov 11, 2016 at 8:51 am</span>
+                                                                <span>${vo.reviewRegdate }</span>
                                                             </div>
 
                                                             <!-- Comment -->
-                                                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+                                                            <p>${vo.reviewContent }</p>
+                                                            <c:if test="${vo.memName==memName }">
+                                                            <div class="cart-product-remove">
+                                        <a href="<c:url value='/pd/delete?reviewNo=${vo.reviewNo }'/>" class="remove" title="리뷰 삭제"><i class="fa fa-times"></i></a>
+                                    		</div>
+                                                            </c:if>
                                                       
                                                         </div>
                                                         
@@ -286,55 +349,29 @@
                                                     <!-- End of Comment Wrapper -->
                                                 </div>
                                             </li>
-                                                      </c:forEach>
-                                                      </c:if>
+                                                       </c:forEach> 
+                                                       </c:if> 
                                             <!-- End of Comment 1 -->
-
-
-                                            <!-- Start of Comment 2 -->
-                                            <%-- <li class="comment">
-                                                <!-- Commenter Image -->
-                                                <a class="pull-left commenter" href="#">
-                                                    <img src="<c:url value='/images/clients/client2.jpg'/>" alt="" class="img-responsive">
-                                                </a>
-
-                                                <div class="media-body comment-body">
-                                                    <!-- Comment Wrapper -->
-                                                    <div class="comment-content-wrapper">
-                                                        <div class="media-heading clearfix">
-
-                                                            <!-- Commenters Name -->
-                                                            <h6 class="commenter-name">john doe</h6>
-
-                                                            <div class="comment-rating pull-right">
-                                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                                <i class="fa fa-star-half-o" aria-hidden="true"></i>
-                                                            </div>
-
-                                                            <!-- Comment Info -->
-                                                            <div class="comment-info">
-                                                                <span>Nov 11, 2016 at 8:51 am</span>
-                                                            </div>
-
-                                                            <!-- Comment -->
-                                                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-                                                        </div>
-                                                    </div>
-                                                    <!-- End of Comment Wrapper -->
-                                                </div>
-                                            </li> --%>
-                                            <!-- End of Comment 2 -->
-
                                         </ul>
                                         <!-- End of Comments -->
 
                                         <!-- Start of Form -->
-                                        <form action="#" method="post">
-
+                                        <form action="<c:url value='/pd/review?pdNo=${vo.pdNo }'/>" method="post" id="myform">
                                             <div class="row">
+                                            <hr>
+										<fieldset>
+										<span class="text-bold" style="font-weight: bold; float: left;">별점</span><br>
+										<input type="radio" name="reviewScore" value="5" id="rate1"><label 
+											for="rate1">★</label>
+										<input type="radio" name="reviewScore" value="4" id="rate2"><label 
+											for="rate2">★</label>
+										<input type="radio" name="reviewScore" value="3" id="rate3"><label 
+											for="rate3">★</label>
+										<input type="radio" name="reviewScore" value="2" id="rate4"><label 
+											for="rate4">★</label>
+										<input type="radio" name="reviewScore" value="1" id="rate5"><label 
+											for="rate5">★</label>
+										</fieldset>
                                                 <div class="form-group nomargin">
                                                     <div class="col-md-6 mt15">
                                                         <label>작성자 *</label>
@@ -346,19 +383,19 @@
                                                     </div>
                                                 </div>
                                             </div>
-
                                             <div class="row mt15">
                                                 <div class="form-group">
                                                     <div class="col-md-12">
                                                         <label>리뷰 *</label>
-                                                        <textarea class="form-control" rows="8" name="message" placeholder="이곳에 적어주세요"></textarea>
+                                                        <textarea class="form-control" rows="8" id="reviewContent" name="reviewContent" placeholder="이곳에 적어주세요"></textarea>
                                                     </div>
+                                                    
                                                 </div>
                                             </div>
 
                                             <div class="row mt15">
                                                 <div class="col-md-12 text-center">
-                                                    <button type="submit" id="review" class="btn btn-blue btn-effect">리뷰 등록</button>
+                                                    <button type="submit" id="reviewAdd" class="btn btn-blue btn-effect">리뷰 등록</button>
                                                 </div>
                                             </div>
                                         </form>

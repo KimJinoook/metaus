@@ -588,7 +588,7 @@
 	            $('#bank').focus();
 	            event.preventDefault();
 	         }else if(!$('#agree').is(':checked')){
-	        	 alert('환불이 불가능한 상품입니다. 체크하셔야 결제 가능합니다.');
+	        	 alert('환불이 불가능한 상품입니다. 동의하셔야 결제 가능합니다.');
 	        	 event.preventDefault();
 	         }else{
 	        	 var IMP = window.IMP; // 생략가능
@@ -618,8 +618,8 @@
 	     			}, function (rsp) {
 	     				console.log(rsp);
 	     			if (rsp.success) {
-	     				var msg = '결제가 완료되었습니다.';
-	     				msg += '결제 금액 : ' + rsp.paid_amount+'원';
+	     				var msg = '결제가 완료되었습니다. ';
+	     				msg += '결제 금액은 ' + rsp.paid_amount+'원 입니다.';
 	     				$('#form-cart-pay input[name=payPrice]').val(${sum});
 	     				$('#form-cart-pay input[name=pdNo]').val(${pdNo});
 	     				$('#form-cart-pay').submit();
