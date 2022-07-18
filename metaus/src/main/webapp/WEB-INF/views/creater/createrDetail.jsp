@@ -129,9 +129,20 @@
         </div>
     </section>
     <!-- ===== End of Candidate Profile Section ===== -->
-
-
-
+	
+	<c:if test="${not empty map }">
+		<section>
+			<div class="container">
+				<div class="row">
+					<h2>지원내용</h2><br>
+					<fmt:formatDate value="${map['RECPRE_DATE'] }" dateStyle="full"/><br><br>
+					<div style="border-radius:5px;background-color:#dddddda1;width: 50%;padding:10px;">
+						 ${map['RECPRE_CONTENT'] }
+					</div>
+				</div>
+			</div>
+		</section><br><br><br>
+	</c:if>
 
 <script src="https://rawgit.com/mrdoob/three.js/dev/build/three.js"></script>
 <script src="https://rawgit.com/mrdoob/three.js/dev/examples/js/loaders/GLTFLoader.js"></script>

@@ -131,7 +131,7 @@ public class CreaterController {
 	}
 	
 	@RequestMapping("/createrDetail")
-	public void createrDetail(@RequestParam int memNo, Model model) {
+	public void createrDetail(@RequestParam int memNo, @RequestParam(required = false) int recNo,  Model model) {
 		logger.info("크리에이터 디테일 뷰 memNo={}",memNo);
 		
 		MemberVO memVo = memberService.selectByMemNo(memNo);
@@ -146,6 +146,13 @@ public class CreaterController {
 		List<ContactVO> contactList = contactService.selectContactByMemNo(memNo);
 		logger.info("크리에이터 디테일 뷰 contactList={}",contactList);
 		
+		if(recNo > 0) {
+			Map<String, Integer> paramMap = new HashMap<>();
+			paramMap.put("recNo", recNo);
+			paramMap.put("memNo", memNo);
+			Map<String, Object> map = contactService.selectRecpreByRecNoMemNo(paramMap);
+			model.addAttribute("map", map);
+		}
 		
 		model.addAttribute("memVo",memVo);
 		model.addAttribute("resumeVo", resumeVo);

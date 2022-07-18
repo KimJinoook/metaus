@@ -150,7 +150,7 @@
                             <!-- CTA -->
                             <div class="col-md-2 col-xs-3">
                                 <div class="candidate-cta ptb30" style="width: 180px;">
-                                    <a href="<c:url value='/creater/createrDetail?memNo=${vo.memNo}'/>" class="btn btn-blue btn-small btn-effect">상세보기</a>
+                                    <a href="<c:url value='/creater/createrDetail?memNo=${vo.memNo}&recNo=${recNo }'/>" class="btn btn-blue btn-small btn-effect">상세보기</a>
                                     <c:if test="${recNo > 0 && conFlag eq 'recruiting'}">
                                     	<button class="btn btn-green btn-small btn-effect btn-contract">계약하기</button>
                                     	<input type="hidden" value="${recNo }">

@@ -18,6 +18,12 @@ D.mem_name, D.mem_id, D.mem_pw, D.mem_nick, D.mem_birth, D.mem_tel, D.mem_zipcod
 		where A.mem_no=#{memNo}
 	</select>
 	
+	<resultMap id="getRecpreByRecNoMemNo" type="HashMap">
+		<result property="RECPRE_CONTENT" column="RECPRE_CONTENT" jdbcType="CLOB" javaType="java.lang.String" />
+	</resultMap>
+	<select id="selectRecpreByRecNoMemNo" parameterType="HashMap" resultMap="getRecpreByRecNoMemNo">
+		select * from fp_recpre where rec_no=#{recNo} and mem_no=#{memNo}
+	</select>
 	
 </mapper>
 
