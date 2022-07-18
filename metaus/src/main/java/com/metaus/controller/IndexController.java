@@ -38,11 +38,11 @@ public class IndexController {
 		
 		return "/index_ex";
 	}
-	@RequestMapping("/index_ex")
+	@RequestMapping("/index_ex2")
 	public String index_ex() {
 		logger.info("index 페이지");
 		
-		return "/index_ex";
+		return "/index_ex2";
 	}
 	@RequestMapping("/test/test")
 	public String test() {

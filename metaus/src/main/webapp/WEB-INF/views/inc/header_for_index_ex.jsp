@@ -31,6 +31,20 @@
     <link rel="stylesheet" type="text/css" href="<c:url value='/css/owl.carousel.min.css'/>">
     <link rel="stylesheet" type="text/css" href="<c:url value='/css/style.css'/>">
     <link rel="stylesheet" type="text/css" href="<c:url value='/css/responsive.css'/>">
+    <link rel="stylesheet"
+      href="https://index_css/fonts.googleapis.comindex_index_css/css/css?family=Nunito+Sans:200,300,400,700,900|Oswald:400,700">
+    <link rel="stylesheet" href="index_css/fonts/icomoon/style.css">
+    <link rel="stylesheet" href="index_css/css/magnific-popup.css">
+    <link rel="stylesheet" href="index_css/css/jquery-ui.css">
+    <link rel="stylesheet" href="index_css/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="index_css/css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="index_css/css/bootstrap-datepicker.css">
+    <link rel="stylesheet" href="index_css/css/mediaelementplayer.css">
+    <link rel="stylesheet" href="index_css/css/animate.css">
+    <link rel="stylesheet" href="index_css/fonts/flaticon/font/flaticon.css">
+    <link rel="stylesheet" href="index_css/css/fl-bigmug-line.css">
+    <link rel="stylesheet" href="index_css/css/aos.css">
+    <link rel="stylesheet" href="index_css/css/style.css">
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500&display=swap" rel="stylesheet">

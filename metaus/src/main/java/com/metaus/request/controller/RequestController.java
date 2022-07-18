@@ -94,6 +94,7 @@ public class RequestController {
 		CompanyVO comVo=companyService.selectByUserid(comId);
 		logger.info("커뮤니티 글 작성 페이지, 파라미터 comId={}, requestVo={}, recAtcVo={}",comId, requestVo, recAtcVo);
 		requestVo.setComNo(comVo.getComNo());
+		int cnt2 = requestService.insertRequest(requestVo);
 		
 		String fileName = "", originFileName = "";
 		try {
@@ -106,6 +107,10 @@ public class RequestController {
 
 				originFileName=(String) fileMap.get("originalFileName");
 				fileName=(String) fileMap.get("fileName");	
+				recAtcVo.setRecfileFilename(fileName);
+				recAtcVo.setRecfileOriginname(originFileName);
+				recAtcVo.setRecNo(requestVo.getRecNo());
+				int upload=requestService.insertRequestAtc(recAtcVo);
 			}//for
 
 			logger.info("파일 업로드 성공, fileName={}", fileName);
@@ -114,12 +119,6 @@ public class RequestController {
 		}
 
 		
-		recAtcVo.setRecfileFilename(fileName);
-		recAtcVo.setRecfileOriginname(originFileName);
-		recAtcVo.setRecNo(requestVo.getRecNo());
-		
-		int cnt2 = requestService.insertRequest(requestVo);
-		int upload=requestService.insertRequestAtc(recAtcVo);
 		return "redirect:/request/search";
 	}
 	

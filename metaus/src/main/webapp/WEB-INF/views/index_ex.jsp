@@ -33,7 +33,7 @@
   </head>
   
   <body class="d-xl-none">
-    </div>
+
     <div class="site-mobile-menu">
       <div class="site-mobile-menu-header">
         <div class="site-mobile-menu-close mt-3">
@@ -44,7 +44,7 @@
     </div>
     <div class="site-blocks-cover overlay" style="background-image: url('images/hero_bg_2.jpg');"
       data-stellar-background-ratio="0.5">
-      <div class="container"></div>
+      <div class="container">
       <div class="row align-items-center justify-content-center">
         <div class="col-md-8 text-center col-lg-10" data-aos="fade-up" data-aos-delay="400">
           <img src="./images/mainlogo.png" alt="not ac">
@@ -85,7 +85,7 @@
       </a>
     </div>
     <!-- 끝 -->
-  </div>
+  
   
     <div class="site-section">
   <div class="container">
