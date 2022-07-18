@@ -19,14 +19,33 @@
 		});
 	});
 	
-	$(function(){
-		$('#recpreWrite').click(function(){
-			if($('#memId').val()=="" || $('#memId').val()==null){
-				alert('일반회원 로그인 후 이용가능합니다!');
-				event.preventDefault();
-			}
-		});
-	});
+
+	
+function recpre(recNo){
+	
+		if($('#memId').val()=="" || $('#memId').val()==null){
+			alert('일반회원 로그인 후 이용가능합니다!');
+			event.preventDefault();
+		}else{
+			var memNo = $('#memNo').val();
+			$.ajax({
+				url: "<c:url value='/request/recpreCheck'/>"+"?memNo="+memNo+"&recNo="+recNo,
+				type:"get",
+				async:false,
+				success:function(data){
+					if(data==1){
+						location.href="<c:url value='/request/recpreWrite?recNo='/>"+recNo;
+						
+					}else if(data==2){
+						alert('이미 지원완료한 의뢰입니다.');
+					}else{
+						alert('지원여부 확인 체크에 실패했습니다.');
+					}
+				}
+			});
+		}
+	
+}	
 </script>
  
 <br>
@@ -61,6 +80,7 @@
     </section>
        <input type="hidden" id="comId" name="comId" value="${comId }">
        <input type="hidden" id="memId" name="memId" value="${memId }">
+       <input type="hidden" id="memNo" name="memNo" value="${sessionScope.memNo }">
     <!-- =============== End of Page Header 1 Section =============== -->
 
 
@@ -164,7 +184,7 @@
                                     <h6 class="time">등록일: <fmt:formatDate pattern="yyyy-MM-dd" value="${vo.recRegdate }"/></h6></li>
                                 <li>
                                 <div id="recpreWrite" >
-                                    <a href="<c:url value='/request/recpreWrite?recNo=${vo.recNo }'/>" class="btn btn-green btn-small btn-effect" id="recpreWrite">즉시 지원</a>
+                                    <a href="javascript:recpre(${vo.recNo })" class="btn btn-green btn-small btn-effect" id="recpreWrite">즉시 지원</a>
                                  </div>
                                 </li>
                             </ul>
