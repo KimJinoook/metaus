@@ -99,8 +99,8 @@
 		on b.mem_no=m.mem_no
 		left join fp_boardatc f
 		on b.board_no= f.board_no
-		where b.btype_no=#{btypeNo}
-		order by board_regdate desc
+		where b.btype_no=#{btypeNo} and board_delFlag='N'
+		order by board_regdate asc
 	</select>
 
 	<select id="selectBoardAtc" resultType="boardAtcVo">

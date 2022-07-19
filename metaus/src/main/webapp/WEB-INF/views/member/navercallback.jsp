@@ -17,7 +17,7 @@
 <script>
 	var naverLogin = new naver.LoginWithNaverId({
 		clientId: "hP_hkEdQKOSZIWk68Pgk", // 본인걸로 수정, 띄어쓰기 금지.
-		callbackUrl: "http://localhost:8080/member/memberMain", // 아무거나 설정
+		callbackUrl: "http://192.168.0.66:9091/login/naverlogin", // 아무거나 설정
 		isPopup: false,
 		callbackHandle: true
 	});

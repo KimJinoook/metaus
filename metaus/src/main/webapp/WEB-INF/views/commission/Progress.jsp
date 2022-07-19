@@ -140,4 +140,6 @@
 
 
 
-<%@ include file="../inc/footer.jsp"%>
+	<%@ include file="../layout/sidebar_function_bottom.jsp" %>
+  </body>
+</html>

@@ -47,7 +47,7 @@
 
 	//var url = "<c:url value='/gltfmodel/bathroom_interior.zip'/>";
 
-	var url = "<c:url value='/gltfmodel/${pdVo.pdFilename}'/>";
+	var url = "<c:url value='/product/${pdVo.pdFilename}'/>";
 
 	//var url = 'models/gltf/BoomBox.gltf';
 
@@ -147,7 +147,7 @@
 			                                        <div class="form-group">
 			                                        	<span>파일명</span>
 			                                            <input type="text" class="form-control"
-			                                            	value="${pdVo.pdOriginname }"
+			                                            	value="${pdVo.pdFilename }"
 			                                                readonly="readonly" style="background-color: white;">
 			                                                
 			                                        </div>

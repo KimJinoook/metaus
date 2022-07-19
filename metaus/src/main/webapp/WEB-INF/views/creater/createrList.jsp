@@ -46,7 +46,10 @@
 		});
 	});	
 </script>
-
+<br>
+<br>
+<br>
+<br>
     <!-- =============== Start of Page Header 1 Section =============== -->
     <section class="page-header" id="find-candidate">
         <div class="container">
@@ -125,7 +128,7 @@
 
                                 <!-- Candidate Name -->
                                 <div class="candidate-name">
-                                    <a href="<c:url value='/creater/createrDetail?memNo=${vo.memNo}'/>"><h5>${vo.memNick }</h5></a>
+                                    <a href="<c:url value='/creater/createrDetail?memNo=${vo.memNo}&recNo=${recNo }'/>"><h5>${vo.memNick }</h5></a>
                                 </div>
 
                                 <!-- Candidate Info -->

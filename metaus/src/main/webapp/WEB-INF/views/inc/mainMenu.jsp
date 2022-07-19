@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
@@ -144,7 +145,7 @@
 	                         <a href="#">의뢰<i class="fa fa-angle-right"></i></a>
 	                         <ul class="dropdown-menu">
 	                             <li><a href="<c:url value='/commission/interestList'/>">관심의뢰목록</a></li>
-	                             <li><a href="<c:url value='/commission/commissionList'/>">의뢰목록</a></li>
+	                             <li><a href="<c:url value='/commission/commissionList'/>">지원의뢰목록</a></li>
 	                             <li><a href="<c:url value='/commission/Progress'/>">의뢰진행현황</a></li>	                             
 	                             <li><a href="<c:url value='/commission/progressSchedule'/>">의뢰완료목록</a></li>
 	                         </ul>
@@ -156,7 +157,7 @@
 	                         <a href="#">의뢰<i class="fa fa-angle-right"></i></a>
 	                         <ul class="dropdown-menu">
 	                             <li><a href="<c:url value='/commission/companyComList'/>">의뢰목록</a></li>	                             	                             
-	                             <li><a href="<c:url value='/commission/progressSchedule'/>">의뢰완료상황</a></li>
+	                             
 	                         </ul>
 	                     </li>
 	                     </c:if>
@@ -171,8 +172,6 @@
 	                     <li class="dropdown-submenu">
 	                         <a href="#">3D모델<i class="fa fa-angle-right"></i></a>
 	                         <ul class="dropdown-menu">
-	                             <li><a href="<c:url value='/lecture/lectureList'/>">모델목록</a></li>
-	                             <li><a href="<c:url value='/lecture/salesChart'/>">모델매출</a></li>
 	                             <li><a href="<c:url value='/pd/myPdList'/>">내가 구매한 모델</a></li>
 	                         </ul>
 	                     </li>

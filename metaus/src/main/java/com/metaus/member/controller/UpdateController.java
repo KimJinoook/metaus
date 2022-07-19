@@ -47,12 +47,10 @@ public class UpdateController {
 			msg="[기업회원] 정보수정 페이지로 이동합니다.";
 			url="/ModifyInfo/companyUpdate";
 			logger.info("url={}",url);
-		}else if(kind.equals("member")) {
+		}else  {
 			msg="[개인회원] 정보수정 페이지로 이동합니다.";
 			url="/ModifyInfo/memberUpdate";
 			logger.info("url={}",url);
-		}else {
-			msg="로그인이 필요한 메뉴입니다.";
 		}
 		
 		model.addAttribute("msg", msg);

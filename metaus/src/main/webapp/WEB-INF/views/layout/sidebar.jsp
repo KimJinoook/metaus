@@ -170,8 +170,11 @@
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li><a href="<c:url value='/commission/commissionList'/>"><i class="fa fa-circle-o"></i> 의뢰목록</a></li>
-                <li><a href="<c:url value='/commission/progressSchedule'/>"><i class="fa fa-circle-o"></i> 의뢰진행상황</a></li>
+                
+                <li><a href="<c:url value='/commission/interestList'/>"><i class="fa fa-circle-o"></i> 관심의뢰목록</a></li>
+	                             <li><a href="<c:url value='/commission/commissionList'/>"><i class="fa fa-circle-o"></i> 지원의뢰목록</a></li>
+	                             <li><a href="<c:url value='/commission/Progress'/>"><i class="fa fa-circle-o"></i> 의뢰진행현황</a></li>	                             
+	                             <li><a href="<c:url value='/commission/progressSchedule'/>"><i class="fa fa-circle-o"></i> 의뢰완료목록</a></li>
               </ul>
             </li>
             </c:if>
@@ -185,7 +188,6 @@
               </a>
               <ul class="treeview-menu">
                 <li><a href="<c:url value='/commission/companyComList'/>"><i class="fa fa-circle-o"></i> 등록의뢰목록</a></li>
-                <li><a href="<c:url value='/commission/progressSchedule'/>"><i class="fa fa-circle-o"></i> 의뢰진행상황</a></li>
               </ul>
             </li>
             </c:if>
@@ -197,18 +199,7 @@
                 <i class="fa fa-envelope"></i><span>메세지</span>
               </a>
             </li>
-            <c:if test="${ 'company' ne sessionScope.isLogin }">
-	            <li class="treeview">
-	              <a href="#">
-	                <i class="fa-solid fa-cube"></i></i> <span>3D모델</span>
-	                <i class="fa fa-angle-left pull-right"></i>
-	              </a>
-	              <ul class="treeview-menu">
-	                <li><a href="<c:url value='/lecture/lectureList'/>"><i class="fa fa-circle-o"></i> 3D모델목록</a></li>
-	                <li><a href="<c:url value='/lecture/salesChart'/>"><i class="fa fa-circle-o"></i> 3D모델매출</a></li>
-	              </ul>
-	            </li>
-            </c:if>
+            
           </ul>
         </section>
         <!-- /.sidebar -->

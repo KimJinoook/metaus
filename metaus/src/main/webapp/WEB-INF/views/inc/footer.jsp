@@ -374,7 +374,7 @@ $(function(){
 
 	var naverLogin = new naver.LoginWithNaverId({
 		clientId: "hP_hkEdQKOSZIWk68Pgk",
-		callbackUrl: "http://localhost:9091/metaus/login/navercallback",
+		callbackUrl: "http://192.168.0.66:9091/metaus/login/navercallback",
 		isPopup: false,
 		loginButton:{color:'green',type:5,height:60}
 	});

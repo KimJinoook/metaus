@@ -74,6 +74,9 @@ public class VisitListener implements HttpSessionListener {
 	}
 	public void sessionDestroyed(HttpSessionEvent e) {
 		activeSession--;
+		if(activeSession<0) {
+			activeSession=0;
+		}
 		logger.info("destroy sessionId={}",e.getSession().getId());
 		VisitListener.managerMap.remove((String)e.getSession().getAttribute("managerId"));
 	}
