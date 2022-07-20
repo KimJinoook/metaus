@@ -42,14 +42,11 @@
 > 4차산업의 발전으로 메타버스라는 새로운 시장이 확장하며 구찌, 현대차등 다양한 대기업이 가상세계에 입점 및 상품을 판매하고 있습니다.   
 > 이러한 가운데 기술이 없어 진출하지 못하는 소상공인들의 메타버스 진출을 위해 '크리에이터' 와 '소상공인'을 연결하는 플랫폼으로 메타어스를 제작했습니다.   
 
-![캡처](https://user-images.githubusercontent.com/99188096/179894432-b11285a6-4880-460a-8244-859d408ab418.JPG)
-![2](https://user-images.githubusercontent.com/99188096/179894422-831ffa34-e9a8-4d9f-898a-047dc29a17d2.JPG)
-![3](https://user-images.githubusercontent.com/99188096/179894431-a4048c0e-9e2e-47d5-a3c8-b123a28a2a13.JPG)   
+
 
    
 ***
 # :gear: 개발환경   
 
-![5](https://user-images.githubusercontent.com/99188096/179895754-ae7778e5-cbd8-4007-aafa-f14c30c1a941.JPG)
-![6](https://user-images.githubusercontent.com/99188096/179895758-fde06d4a-4f39-4c8e-ae3b-8f25c0ff88b6.JPG)
+- OS : window 10
 
