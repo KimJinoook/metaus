@@ -11,7 +11,7 @@
 <img src="https://img.shields.io/badge/Oracle-red?style=for-the-badge&logo=oracle&logoColor=white"/></a>
 <img src="https://img.shields.io/badge/SqlDeveloper-548294?style=for-the-badge&logo=sqldeveloper&logoColor=white"/></a>
 <img src="https://img.shields.io/badge/MyBatis-black?style=for-the-badge&logo=bybatis&logoColor=white"/></a>
-<img src="https://img.shields.io/badge/Tomcat-F8DC75?style=for-the-badge&logo=abache-tomcat&logoColor=white"/></a>
+<img src="https://img.shields.io/badge/Tomcat-F8DC75?style=for-the-badge&logo=apachetomcat&logoColor=white"/></a>
 <img src="https://img.shields.io/badge/Spring-6DB33F?style=for-the-badge&logo=Spring&logoColor=white"/></a>   
 ### FrontEnd   
 <img src="https://img.shields.io/badge/Html5-E34F26?style=for-the-badge&logo=Html5&logoColor=white"/></a>
