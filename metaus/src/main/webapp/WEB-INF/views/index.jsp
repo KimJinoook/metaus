@@ -5,791 +5,528 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ include file="inc/header.jsp" %>
 
-	 <!-- ===== Start of Main Search Section ===== -->
-    <section class="main overlay-black">
-        <img src="images/mainlogo_daemunjjack.png" alt="">
+
+       <!-- ===== Start of Main Search Section ===== -->
+    <section class="ptb120" style="height:92%; padding-top:50px; background:url(<c:url value='/forthree/indexTestBack.png'/>); padding-left:0px;">
+
+        <!-- Start of Wrapper -->
+        <div class="container wrapper" style="width:67%">
+
+
+            <div class="col-md-7 col-xs-12 text-left" style="padding-left:0px; margin-left: 0px; padding-top:120px" >
+                
+                    <h1 class="text-black" style="font-size: 80px; font-family: fantasy;">Where the world builds MetaVerse</h1>
+                	<br>
+
+                <p class="text-black" style="font-family: 'Noto Sans KR'; font-size:22px; width:90%; text-align: justify;" >수많은 크리에이터들과 회사가 메타어스와 함께 가상세계를 구축합니다. 다양한 종류의 3D모델을 제공하며, 당신의 메타버스 진출을 지원합니다.</p>
+                <br>
+                <form class="job-search-form row" action="#" method="get">
+                <!-- Start of category input -->
+                <div class="col-md-7 col-sm-12 search-categories">
+                    <label for="search-categories">Category</label>
+                    <select name="search-categories" class="selectpicker" id="search-categories" data-live-search="true"  data-size="5" data-container="body">
+                        <option value="1">기업의뢰 찾기</option>
+                        <option value="2">크리에이터 찾기</option>
+                    </select>
+                </div>
+
+
+                <!-- Start of submit input -->
+                <div class="col-md-4 col-sm-12 search-submit">
+                    <button type="button" class="btn btn-blue btn-effect btn-large" id="selectBtn"><i class="fa fa-search"></i>search</button>
+                </div>
+				<br>
+				</form>
+                
+                
+            </div>
+
+
+            <div id="canvas1" class="col-md-4 col-xs-12"  id="canvas1">
+                
+            </div>
+                
+        </div>
+        <!-- End of Wrapper -->
+
     </section>
     <!-- ===== End of Main Search Section ===== -->
 
-	<section>
-		<div>
-			<canvas id="canvas" width="300px" height="300px"></canvas>
-			
-		</div>
-	</section>
-			<script async src="https://unpkg.com/es-module-shims@1.3.6/dist/es-module-shims.js"></script>
-			<script type="importmap">
-				{
-					"imports":{
-						"three": "<c:url value='/js/three.module.js'/>",
-						"GLTFLoader" : "https://unpkg.com/three@0.141.0/examples/jsm/loaders/GLTFLoader.js",
-						"OrbitControls" : "https://unpkg.com/three@0.141.0/examples/jsm/controls/OrbitControls.js"
-					}
-				}
-			</script>
-			<script type="module">
-				import {GLTFLoader} from 'GLTFLoader';
-				import { OrbitControls } from 'OrbitControls';
-				import * as THREE from 'three';
+<script src="https://rawgit.com/mrdoob/three.js/dev/build/three.js"></script>
+<script src="https://rawgit.com/mrdoob/three.js/dev/examples/js/loaders/GLTFLoader.js"></script>
 
-				let scene = new THREE.Scene();
-				let renderer = new THREE.WebGLRenderer({
-					canvas : document.querySelector('#canvas'),
-					antialias : true
-				});
-				renderer.outputEncoding = THREE.sRGBEncoding;
-				
+<script src="https://cdn.rawgit.com/takahirox/THREE.ZipLoader/v0.0.1/build/ziploader.min.js"></script>
+<script src="https://unpkg.com/three@0.141.0/examples/js/controls/OrbitControls.js"></script>
+<script type="text/javascript" src="<c:url value='/js/jquery-3.6.0.min.js'/>"></script>
+<script>
+var camera, scene, renderer;
+var image;
 
-				let camera = new THREE.PerspectiveCamera(30,1);
-				camera.position.set(0,0,5)
+init();
+animate();
 
-				let controls = new OrbitControls(camera, renderer.domElement);
-				controls.update();
+//add textureloader
 
-				scene.background = new THREE.Color('white');
+function init() {
+
+  renderer = new THREE.WebGLRenderer( {alpha: true});
+	//renderer.setSize(window.innerWidth/2, window.innerWidth/2); //handle pixel density stuff (currently being set in CSS
+	renderer.setSize(550, 550); //handle pixel density stuff (currently being set in CSS
+  // renderer.setPixelRatio( window.devicePixelRatio );
+   renderer.setPixelRatio(2);
+  // console.log(window.devicePixelRatio );
+	document.querySelector('#canvas1').appendChild( renderer.domElement );
 
 
-				const grid = new THREE.GridHelper( 20, 20, 0x000000, 0x000000 );
-				grid.material.opacity = 0.2;
-				grid.material.transparent = true;
-				grid.position.y = -1;
-				scene.add( grid );
-
-				let loader = new GLTFLoader();
-				loader.load('gltfmodel/shiba/scene.gltf', function(gltf){
-					scene.add(gltf.scene);
-					function animate(){
-						requestAnimationFrame(animate)
-						controls.update();
-						renderer.render(scene,camera);
-						gltf.scene.rotation.y += 0.005;
-					}
-					animate();
-				});
-
-			</script>
+	scene = new THREE.Scene();
+  camera = new THREE.OrthographicCamera( -10, 10, 10,  -10, - 10, 10); 
+  
+	// camera.position.set( 0, 0, 0 );
 
 
-    <!-- ===== Start of Popular Categories Section ===== -->
-<section class="ptb80" id="categories">
-    <div class="container">
+	// controls = new THREE.OrbitControls( camera, document.getElementById("controller") );
+	// controls.minDistance = 1;
+    // controls.enablePan = false;
+  // controls.enableZoom = false;
+  // controls.minPolarAngle = 0;
 
-        <div class="section-title">
-            <h2>What is Meta Us? &nbsp; </h2>
-        </div>
-
-        <div class="row nomargin">
-            <!-- Start of Category div -->
-            <div class="col-md-3 col-sm-6 col-xs-12 cat-wrapper">
-                <div class="category ptb30">
-
-                    <!-- Icon -->
-                    <div class="category-icon">
-                        <i class="fa fa-line-chart"></i>
-                    </div>
-
-                    <!-- Category Info - Title -->
-                    <div class="category-info pt30">
-                        <a href="#">업무 향상성</a>
-
-                    </div>
-
-                    <!-- Category Description -->
-                    <div class="category-descr">
-                        <span>빠르고 간편하지만 효율성을 놓치는 법이 없습니다.</span>
-                    </div>
-
-                </div>
-            </div>
-            <!-- End of Category div -->
-
-            <!-- Start of Category div -->
-            <div class="col-md-3 col-sm-6 col-xs-12 cat-wrapper">
-                <div class="category ptb30">
-
-                    <!-- Icon -->
-                    <div class="category-icon">
-                        <i class="fa fa-university"></i>
-                    </div>
-
-                    <!-- Category Info - Title -->
-                    <div class="category-info pt30">
-                        <a href="#">멀리서도 가까이&nbsp;</a>
-
-                    </div>
-
-                    <!-- Category Description -->
-                    <div class="category-descr">
-                        <span>만나지 못 해서 생기는 소통의 빈 공간을 메타어스가 보조해줍니다. 가상 공간에서의 커뮤니티를 이용해보세요.</span>
-                    </div>
-
-                </div>
-            </div>
-            <!-- End of Category div -->
-
-            <!-- Start of Category div -->
-            <div class="col-md-3 col-sm-6 col-xs-12 cat-wrapper">
-                <div class="category ptb30">
-
-                    <!-- Icon -->
-                    <div class="category-icon">
-                        <i class="fa fa-pencil"></i>
-                    </div>
-
-                    <!-- Category Info - Title -->
-                    <div class="category-info pt30">
-                        <a href="#">생산성</a>
-                        <p>(36 open positions)</p>
-                    </div>
-
-                    <!-- Category Description -->
-                    <div class="category-descr">
-                        <span>Lorem Ipsum is simply dummy text of the printing industry. Lorem has been the standard
-                            dummy text since 1500s.</span>
-                    </div>
-
-                </div>
-            </div>
-            <!-- End of Category div -->
-
-            <!-- Start of Category div -->
-            <div class="col-md-3 col-sm-6 col-xs-12 cat-wrapper">
-                <div class="category ptb30">
-
-                    <!-- Icon -->
-                    <div class="category-icon">
-                        <i class="fa fa-umbrella"></i>
-                    </div>
-
-                    <!-- Category Info - Title -->
-                    <div class="category-info pt30">
-                        <a href="#">편리함</a>
-                        <p>(6 open positions)</p>
-                    </div>
-
-                    <!-- Category Description -->
-                    <div class="category-descr">
-                        <span>Lorem Ipsum is simply dummy text of the printing industry. Lorem has been the standard
-                            dummy text since 1500s.</span>
-                    </div>
-
-                </div>
-            </div>
-            <!-- End of Category div -->
-        </div>
+    // image = document.createElement( 'img' );
+   
+  // document.body.appendChild( image );
+  
+//       image2 = document.createElement( 'img' );
+   
+//   document.body.appendChild( image2 );
 
 
-        <div class="row pt40 nomargin">
-            <!-- Start of Category div -->
+    // var texture = new THREE.Texture( image );
+  var texture = new THREE.TextureLoader().load( '<c:url value="/forthree/metausout.png"/>' );
+    var texture2 = new THREE.TextureLoader().load( '<c:url value="/forthree/metausmiddle.png"/>' );
+  // var texture = new THREE.SVGLoader().load( 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/39255/face.svg' );
+  // texture.anisotropy = renderer.capabilities.getMaxAnisotropy();
+  // texture.anisotropy = renderer.maxAnisotropy;
+  // texture.magFilter = THREE.NearestFilter;
+// texture.minFilter = THREE.LinearMipMapLinearFilter;
+  
+    // var texture2 = new THREE.Texture( image2 );
+  
+//     image.addEventListener( 'load', function ( event ) { texture.needsUpdate = true; } );
+  
+//       image2.addEventListener( 'load', function ( event ) { texture2.needsUpdate = true; } );
+
+	var material = new THREE.MeshBasicMaterial( {
+		map: texture
+	} );
+  
+  	var material2 = new THREE.MeshBasicMaterial( {
+		map: texture2
+	} );
+  material.transparent = true;
+  material2.transparent = true;
+    // material2.opacity = 0.5;
+     // material.opacity = 0.5;
+  
+//   material2.map.transparent = true;
+//   material2.map.opacity = 0.5;
+
+	var geometry = new THREE.SphereGeometry(9.98, 50, 50 );
+  mesh = new THREE.Mesh( geometry, material);
+var geometry2 = new THREE.SphereGeometry( 10, 50, 50 );
+   mesh2 = new THREE.Mesh( geometry2, material2);
+	// scene.add( mesh );
+   mesh2.rotation.y= -Math.PI/2;
+    mesh.rotation.y= -Math.PI/2;
+  scene.add( mesh2 );
+  	scene.add( mesh );
+}
+
+function animate() {
+	requestAnimationFrame( animate );
+	render();
+}
+
+function render() {
+	renderer.render( scene, camera );
+  mesh2.rotation.y -=0.0009;
+   mesh.rotation.y +=0.0009;
+}
+
+// image.crossOrigin = "anonymous";
+// image2.crossOrigin = "";
+// image.src = 'http://maxim.is/test/outer.svg';
+// image2.src = 'https://s33.postimg.cc/rourh7anz/tester.png';
+// image.src = 'https://s33.postimg.cc/kvuekp6xb/Artboard.png';
+
+Math.radians = function(degrees) {
+  return degrees * Math.PI / 180;
+};
+
+ var offset = $( "canvas" ).offset();
+
+$( "old" ).on( "mousemove", function() {
+  // pos = ((360*(event.pageX - window.innerWidth/2)/window.innerWidth)* Math.PI / 180) - Math.PI/2;
+    pos = (((360*(event.pageX - window.innerWidth/2)/window.innerWidth)* Math.PI / 180)/2) - Math.PI/2;
+  
+   pos2 = ((360*(event.pageY - window.innerHeight/8)/window.innerHeight)* Math.PI / 180) - Math.PI/2;
+  // pos = (event.pageX / 2 / window.innerWidth) - 0.5;
+  // mesh.rotation.set(0, pos, 0); //add parallax here
+ 
+  // mesh2.material.map.offset.set(-pos, 0);
+
+  // mesh.material.map.offset.set(-pos/2, 0);
+
+  mesh2.rotation.y=-pos - Math.PI;
+    mesh.rotation.y=pos;
+  // mesh2.rotation.x=-pos2;
+   mesh2.rotation.x=pos2/10;
+   mesh.rotation.x=pos2/10;
+  
+  
+   // mesh.rotation.z=10;
+
+});
+
+ $(document).on("mousemove touchmove touchstart", function( e ) {
+
+        e.preventDefault();
+
+        var touchstart = e.type === 'touchstart' || e.type === 'touchmove',
+            e = touchstart ? e.originalEvent : e,
+            pageX = touchstart ? e.targetTouches[0].pageX : e.pageX,
+            pageY = touchstart ? e.targetTouches[0].pageY : e.pageY;
+
+     
+    pos = (((360*(event.pageX - window.innerWidth/2)/window.innerWidth)* Math.PI / 180)/2) - Math.PI/2;
+  
+   pos2 = ((360*(event.pageY - window.innerHeight/8)/window.innerHeight)* Math.PI / 180) - Math.PI/2;
+     
+   mesh2.rotation.y=-pos - Math.PI;
+    mesh.rotation.y=pos;
+
+   mesh2.rotation.x=pos2/10;
+   mesh.rotation.x=pos2/10;
+ });
+ 
+ 
+ $(function(){
+	 $('#selectBtn').click(function(){
+		 if($('#search-categories').val()==1){
+			 location.href="<c:url value='/request/search'/>";
+		 }else if($('#search-categories').val()==2){
+			 location.href="<c:url value='/creater/createrList'/>";
+			 
+		 }
+	 });
+ });
+</script>
+
+
+ <!-- ===== Start of Popular Categories Section ===== -->
+    <section class="ptb80" id="categories3" style="background-color: white;">
+        <div class="container">
+
             <div class="section-title">
-                <h2> We're here for You! </h2>&nbsp;</h2>
+                <h2>3D 모델 카테고리</h2>
             </div>
-            <div class="col-md-3 col-sm-6 col-xs-12 cat-wrapper">
 
-                <div class="category ptb30">
+            <div class="row nomargin">
+                <!-- Start of Category div -->
+                <a href="<c:url value='/pd/pdByCategory?cateNo=1&cateName=동물'/>">
+                <div class="col-md-3 col-sm-6 col-xs-12 cat-wrapper">
+                    <div class="category shadow-hover ptb30">
 
-                    <!-- Icon -->
-                    <div class="category-icon">
-                        <i class="fa fa-desktop"></i>
+                        <!-- Icon -->
+                        <div class="category-icon pt10">
+                            <img src="/metaus/images/icons/animal.png" alt="">
+                        </div>
+
+                        <!-- Category Info - Title -->
+                        <div class="category-info pt20">
+                            <a href="<c:url value='/pd/pdByCategory?cateNo=1&cateName=동물'/>">동물</a>
+                            <p>( ${cateCnt.animalCnt } products )</p>
+                        </div>
+
                     </div>
+                </div></a>
+                <!-- End of Category div -->
 
-                    <!-- Category Info - Title -->
-                    <div class="category-info pt30">
-                        <a href="#">프리랜서</a>
-                        <p>(22 open positions)</p>
+                
+                <!-- Start of Category div -->
+                <a href="<c:url value='/pd/pdByCategory?cateNo=2&cateName=인물'/>">
+                <div class="col-md-3 col-sm-6 col-xs-12 cat-wrapper">
+                    <div class="category shadow-hover ptb30">
+
+                        <!-- Icon -->
+                        <div class="category-icon pt10">
+                            <img src="/metaus/images/icons/human.png" alt="">
+                        </div>
+
+                        <!-- Category Info - Title -->
+                        <div class="category-info pt20">
+                            <a href="<c:url value='/pd/pdByCategory?cateNo=2&cateName=인물'/>">인물</a>
+                            <p>( ${cateCnt.humanCnt } products )</p>
+                        </div>
+
                     </div>
+                </div></a>
+                <!-- End of Category div -->
 
-                    <!-- Category Description -->
-                    <div class="category-descr">
-                        <span>Lorem Ipsum is simply dummy text of the printing industry. Lorem has been the standard
-                            dummy text since 1500s.</span>
+                
+                <!-- Start of Category div -->
+                <a href="<c:url value='/pd/pdByCategory?cateNo=3&cateName=가구'/>">
+                <div class="col-md-3 col-sm-6 col-xs-12 cat-wrapper">
+                    <div class="category shadow-hover ptb30">
+
+                        <!-- Icon -->
+                        <div class="category-icon pt10">
+                            <img src="/metaus/images/icons/furniture.png" alt="">
+                        </div>
+
+                        <!-- Category Info - Title -->
+                        <div class="category-info pt20">
+                            <a href="<c:url value='/pd/pdByCategory?cateNo=3&cateName=가구'/>">가구</a>
+                            <p>( ${cateCnt.furnitureCnt } products )</p>
+                        </div>
+
                     </div>
+                </div></a>
+                <!-- End of Category div -->
 
-                </div>
+                
+                <!-- Start of Category div -->
+                <a href="<c:url value='/pd/pdByCategory?cateNo=4&cateName=예술'/>">
+                <div class="col-md-3 col-sm-6 col-xs-12 cat-wrapper">
+                    <div class="category shadow-hover ptb30">
+
+                        <!-- Icon -->
+                        <div class="category-icon pt10">
+                            <img src="/metaus/images/icons/paint-palette.png" alt="">
+                        </div>
+
+                        <!-- Category Info - Title -->
+                        <div class="category-info pt20">
+                            <a href="<c:url value='/pd/pdByCategory?cateNo=4&cateName=예술'/>">예술</a>
+                            <p>( ${cateCnt.artCnt } products )</p>
+                        </div>
+
+                    </div>
+                </div></a>
+                <!-- End of Category div -->
             </div>
-            <!-- End of Category div -->
 
-            <!-- Start of Category div -->
-            <div class="col-md-3 col-sm-6 col-xs-12 cat-wrapper">
-                <div class="category ptb30">
+            
+            <div class="row nomargin">
+                <!-- Start of Category div -->
+                <a href="<c:url value='/pd/pdByCategory?cateNo=5&cateName=탈것'/>">
+                <div class="col-md-3 col-sm-6 col-xs-12 cat-wrapper">
+                    <div class="category shadow-hover ptb30">
 
-                    <!-- Icon -->
-                    <div class="category-icon">
-                        <i class="fa fa-line-chart"></i>
+                        <!-- Icon -->
+                        <div class="category-icon pt10">
+                            <img src="/metaus/images/icons/car.png" alt="">
+                        </div>
+
+                        <!-- Category Info - Title -->
+                        <div class="category-info pt20">
+                            <a href="<c:url value='/pd/pdByCategory?cateNo=5&cateName=탈것'/>">탈것</a>
+                            <p>( ${cateCnt.vehicleCnt } products )</p>
+                        </div>
+
                     </div>
+                </div></a>
+                <!-- End of Category div -->
 
-                    <!-- Category Info - Title -->
-                    <div class="category-info pt30">
-                        <a href="#">기업&nbsp;</a>
-                        <p>(14 open positions)</p>
+                <!-- Start of Category div -->
+                <a href="<c:url value='/pd/pdByCategory?cateNo=6&cateName=캐릭터'/>">
+                <div class="col-md-3 col-sm-6 col-xs-12 cat-wrapper">
+                    <div class="category shadow-hover ptb30">
+
+                        <!-- Icon -->
+                        <div class="category-icon pt10">
+                            <img src="/metaus/images/icons/knight.png" alt="">
+                        </div>
+
+                        <!-- Category Info - Title -->
+                        <div class="category-info pt20">
+                            <a href="<c:url value='/pd/pdByCategory?cateNo=6&cateName=캐릭터'/>">캐릭터</a>
+                            <p>( ${cateCnt.characterCnt } products )</p>
+                        </div>
+
                     </div>
+                </div></a>
+                <!-- End of Category div -->
 
-                    <!-- Category Description -->
-                    <div class="category-descr">
-                        <span>Lorem Ipsum is simply dummy text of the printing industry. Lorem has been the standard
-                            dummy text since 1500s.</span>
+                <!-- Start of Category div -->
+                <a href="<c:url value='/pd/pdByCategory?cateNo=7&cateName=문화'/>">
+                <div class="col-md-3 col-sm-6 col-xs-12 cat-wrapper">
+                    <div class="category shadow-hover ptb30">
+
+                        <!-- Icon -->
+                        <div class="category-icon pt10">
+                            <img src="/metaus/images/icons/worldwide.png" alt="">
+                        </div>
+
+                        <!-- Category Info - Title -->
+                        <div class="category-info pt20">
+                            <a href="<c:url value='/pd/pdByCategory?cateNo=7&cateName=문화'/>">문화</a>
+                            <p>( ${cateCnt.cultureCnt } products )</p>
+                        </div>
+
                     </div>
+                </div></a>
+                <!-- End of Category div -->
 
-                </div>
+                <!-- Start of Category div -->
+                <a href="<c:url value='/pd/pdByCategory?cateNo=8&cateName=패션'/>">
+                <div class="col-md-3 col-sm-6 col-xs-12 cat-wrapper">
+                    <div class="category shadow-hover ptb30">
+
+                        <!-- Icon -->
+                        <div class="category-icon pt10">
+                            <img src="/metaus/images/icons/fashion.png" alt="">
+                        </div>
+
+                        <!-- Category Info - Title -->
+                        <div class="category-info pt20">
+                            <a href="<c:url value='/pd/pdByCategory?cateNo=8&cateName=패션'/>">패션</a>
+                            <p>( ${cateCnt.fashionCnt } products )</p>
+                        </div>
+
+                    </div>
+                </div></a>
+                <!-- End of Category div -->
             </div>
-            <!-- End of Category div -->
 
-            <!-- Start of Category div -->
-            <div class="col-md-3 col-sm-6 col-xs-12 cat-wrapper">
-                <div class="category ptb30">
-
-                    <!-- Icon -->
-                    <div class="category-icon">
-                        <i class="fa fa-heart"></i>
-                    </div>
-
-                    <!-- Category Info - Title -->
-                    <div class="category-info pt30">
-                        <a href="#">학생</a>
-                        <p>(7 open positions)</p>
-                    </div>
-
-                    <!-- Category Description -->
-                    <div class="category-descr">
-                        <span>Lorem Ipsum is simply dummy text of the printing industry. Lorem has been the standard
-                            dummy text since 1500s.</span>
-                    </div>
-
-                </div>
+            <div class="col-md-12 mt60 text-center">
+                <a href="<c:url value='/pd/pd'/>" class="btn btn-blue btn-effect nomargin">전체보기</a>
             </div>
-            <!-- End of Category div -->
-
-            <!-- Start of Category div -->
-            <div class="col-md-3 col-sm-6 col-xs-12 cat-wrapper">
-                <div class="category ptb30">
-
-                    <!-- Icon -->
-                    <div class="category-icon">
-                        <i class="fa fa-lightbulb-o"></i>
-                    </div>
-
-                    <!-- Category Info - Title -->
-                    <div class="category-info pt30">
-                        <a href="#">그 외의 모두들.&nbsp;</a>
-                        <p>(4 open positions)</p>
-                    </div>
-
-                    <!-- Category Description -->
-                    <div class="category-descr">
-                        <span>Lorem Ipsum is simply dummy text of the printing industry. Lorem has been the standard
-                            dummy text since 1500s.</span>
-                    </div>
-
-                </div>
-            </div>
-            <!-- End of Category div -->
-        </div>
-
-        <div class="col-md-12 mt60 text-center">
-            <a href="search-jobs-1.html" class="btn btn-blue btn-effect nomargin">browse all</a>
-        </div>
-
-    </div>
-</section>
-<!-- ===== End of Popular Categories Section ===== -->
-
-
-
-
-
-<!-- ===== Start of Signup & Video Section ===== -->
-<section id="signup-video">
-    <div class="container-fluid">
-        <div class="row">
-
-            <!-- Start of Signup Column -->
-            <div class="col-md-6 signup-sec ptb80 text-center">
-
-                <div class="col-md-8 col-md-offset-2">
-
-                    <!-- Section Title -->
-                    <div class="section-title">
-                        <h5 class="text-white">멀리서라도 바로 옆에 있는 것 같은 존재감.&nbsp;&nbsp;</h5>
-                    </div>
-
-                    <p class="text-white mt20">Lorem Ipsum is simply dummy text of the printing and typesetting
-                        industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                    <a href="register.html" class="btn btn-purple btn-effect mt80">signup now!</a>
-
-
-                </div>
-
-
-            </div>
-            <!-- End of Signup Column -->
-
-
-            <!-- Start of Video Column -->
-            <div class="col-md-6 video-sec overlay-gradient">
-                <a href="http://vimeo.com/99876106" class="popup-video"><i class="fa fa-play"></i></a>
-            </div>
-            <!-- End of Video Column -->
-
-        </div>
-    </div>
-</section>
-<!-- ===== End of Signup & Video Section ===== -->
-
-
-
-
-
-<!-- ===== Start of Job Post Section ===== -->
-<section class="ptb80" id="job-post">
-    <div class="container">
-
-        <!-- Start of Job Post Main -->
-        <div class="col-md-8 col-sm-12 col-xs-12 job-post-main">
-            <h2 class="capitalize"><i class="fa fa-briefcase">&nbsp;(모집 중인 공고들 추가 예정)&nbsp;</i></h2>
-
-            <!-- Start of Job Post Wrapper -->
-            <div class="job-post-wrapper mt60">
-
-                <!-- Start of Single Job Post 1 -->
-                <div class="single-job-post row nomargin">
-                    <!-- Job Company -->
-                    <div class="col-md-2 col-xs-3 nopadding">
-                        <div class="job-company">
-                            <a href="company-page-1.html">
-                                <img src="images/companies/envato.svg" alt="">
-                            </a>
-                        </div>
-                    </div>
-
-                    <!-- Job Title & Info -->
-                    <div class="col-md-8 col-xs-6 ptb20">
-                        <div class="job-title">
-                            <a href="job-page.html">php senior developer</a>
-                        </div>
-
-                        <div class="job-info">
-                            <span class="company"><i class="fa fa-building-o"></i>envato</span>
-                            <span class="location"><i class="fa fa-map-marker"></i>Melbourn, Australia</span>
-                        </div>
-                    </div>
-
-                    <!-- Job Category -->
-                    <div class="col-md-2 col-xs-3 ptb30">
-                        <div class="job-category">
-                            <a href="javascript:void(0)" class="btn btn-green btn-small btn-effect">full time</a>
-                        </div>
-                    </div>
-                </div>
-                <!-- End of Single Job Post 1 -->
-
-                <!-- Start of Single Job Post 2 -->
-                <div class="single-job-post row nomargin">
-                    <!-- Job Company -->
-                    <div class="col-md-2 col-xs-3 nopadding">
-                        <div class="job-company">
-                            <a href="company-page-1.html">
-                                <img src="images/companies/google.svg" alt="">
-                            </a>
-                        </div>
-                    </div>
-
-                    <!-- Job Title & Info -->
-                    <div class="col-md-8 col-xs-6 ptb20">
-                        <div class="job-title">
-                            <a href="job-page.html">department head</a>
-                        </div>
-
-                        <div class="job-info">
-                            <span class="company"><i class="fa fa-building-o"></i>google</span>
-                            <span class="location"><i class="fa fa-map-marker"></i>berlin, germany</span>
-                        </div>
-                    </div>
-
-                    <!-- Job Category -->
-                    <div class="col-md-2 col-xs-3 ptb30">
-                        <div class="job-category">
-                            <a href="javascript:void(0)" class="btn btn-purple btn-small btn-effect">part time</a>
-                        </div>
-                    </div>
-                </div>
-                <!-- End of Single Job Post 2 -->
-
-                <!-- Start of Single Job Post 3 -->
-                <div class="single-job-post row nomargin">
-                    <!-- Job Company -->
-                    <div class="col-md-2 col-xs-3 nopadding">
-                        <div class="job-company">
-                            <a href="company-page-1.html">
-                                <img src="images/companies/facebook.svg" alt="">
-                            </a>
-                        </div>
-                    </div>
-
-                    <!-- Job Title & Info -->
-                    <div class="col-md-8 col-xs-6 ptb20">
-                        <div class="job-title">
-                            <a href="job-page.html">graphic designer</a>
-                        </div>
-
-                        <div class="job-info">
-                            <span class="company"><i class="fa fa-building-o"></i>facebook</span>
-                            <span class="location"><i class="fa fa-map-marker"></i>london, UK</span>
-                        </div>
-                    </div>
-
-                    <!-- Job Category -->
-                    <div class="col-md-2 col-xs-3 ptb30">
-                        <div class="job-category">
-                            <a href="javascript:void(0)" class="btn btn-blue btn-small btn-effect">freelancer</a>
-                        </div>
-                    </div>
-                </div>
-                <!-- End of Single Job Post 3 -->
-
-                <!-- Start of Single Job Post 4 -->
-                <div class="single-job-post row nomargin">
-                    <!-- Job Company -->
-                    <div class="col-md-2 col-xs-3 nopadding">
-                        <div class="job-company">
-                            <a href="company-page-1.html">
-                                <img src="images/companies/envato.svg" alt="">
-                            </a>
-                        </div>
-                    </div>
-
-                    <!-- Job Title & Info -->
-                    <div class="col-md-8 col-xs-6 ptb20">
-                        <div class="job-title">
-                            <a href="job-page.html">senior UI & UX designer</a>
-                        </div>
-
-                        <div class="job-info">
-                            <span class="company"><i class="fa fa-building-o"></i>envato</span>
-                            <span class="location"><i class="fa fa-map-marker"></i>Melbourn, Australia</span>
-                        </div>
-                    </div>
-
-                    <!-- Job Category -->
-                    <div class="col-md-2 col-xs-3 ptb30">
-                        <div class="job-category">
-                            <a href="javascript:void(0)" class="btn btn-orange btn-small btn-effect">intership</a>
-                        </div>
-                    </div>
-                </div>
-                <!-- End of Single Job Post 4 -->
-
-                <!-- Start of Single Job Post 5 -->
-                <div class="single-job-post row nomargin">
-                    <!-- Job Company -->
-                    <div class="col-md-2 col-xs-3 nopadding">
-                        <div class="job-company">
-                            <a href="company-page-1.html">
-                                <img src="images/companies/twitter.svg" alt="">
-                            </a>
-                        </div>
-                    </div>
-
-                    <!-- Job Title & Info -->
-                    <div class="col-md-8 col-xs-6 ptb20">
-                        <div class="job-title">
-                            <a href="job-page.html">senior health advisor</a>
-                        </div>
-
-                        <div class="job-info">
-                            <span class="company"><i class="fa fa-building-o"></i>twitter</span>
-                            <span class="location"><i class="fa fa-map-marker"></i>New York, USA</span>
-                        </div>
-                    </div>
-
-                    <!-- Job Category -->
-                    <div class="col-md-2 col-xs-3 ptb30">
-                        <div class="job-category">
-                            <a href="javascript:void(0)" class="btn btn-red btn-small btn-effect">temporary</a>
-                        </div>
-                    </div>
-                </div>
-                <!-- End of Single Job Post 5 -->
-
-            </div>
-            <!-- End of Job Post Wrapper -->
-
-            <!-- Start of Pagination -->
-            <ul class="pagination list-inline text-center">
-                <li class="active"><a href="javascript:void(0)">1</a></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">4</a></li>
-                <li><a href="#">Next</a></li>
-            </ul>
-            <!-- End of Pagination -->
 
         </div>
-        <!-- End of Job Post Main -->
+    </section>
+    <!-- ===== End of Popular Categories Section ===== -->
 
 
-        <!-- Start of Job Post Sidebar -->
-        <div class="col-md-4 col-xs-12 job-post-sidebar">
-            <h2 class="capitalize"><i class="fa fa-star"></i>golden jobs</h2>
 
-            <!-- Start of Featured Job Widget -->
-            <div class="featured-job widget mt60">
 
-                <!-- Start of Company Logo -->
-                <div class="company">
-                    <img src="images/companies/cloudify.svg" alt="">
-                </div>
-                <!-- End of Company Logo -->
 
-                <!-- Start of Featured Job Info -->
-                <div class="featured-job-info">
+    
 
-                    <!-- Job Title -->
-                    <div class="job-title">
-                        <h5 class="uppercase pull-left">ui designer</h5>
-                        <a href="javascript:void(0)" class="btn btn-green btn-small btn-effect pull-right">full
-                            time</a>
+
+
+<!-- ===== Start of Latest Job Section ===== -->
+    <section class="search-jobs ptb80" id="version3">
+        <div class="container">
+
+            <div class="section-title">
+                <h2>신규 의뢰</h2>
+            </div>
+
+            <!-- Start of Row -->
+            <div class="row">
+
+                <!-- Start of Job Post Main -->
+                <div class="col-md-12 job-post-main">
+
+                    <!-- Start of Job Post Wrapper -->
+                    <div class="job-post-wrapper mt20">
+
+
+						<c:forEach var="vo" items="${recList }">
+						
+                        <!-- ===== Start of Single Job Post 1 ===== -->
+                        <div class="single-job-post row shadow-hover">
+                            <!-- Job Company -->
+                            <div class="col-md-2 col-xs-3">
+                                <div class="job-company">
+                                    <a href="<c:url value='/request/detail?recNo=${vo.recNo }'/>">
+                                        <img src="<c:url value='/com_profile/${vo.comPic }'/>" alt="" style="height:100%">
+                                    </a>
+                                </div>
+                            </div>
+
+                            <!-- Job Title & Info -->
+                            <div class="col-md-8 col-xs-6 ptb20">
+                                <div class="job-title">
+                                    <a href="<c:url value='/request/detail?recNo=${vo.recNo }'/>">${vo.recTitle }</a>
+                                </div>
+
+                                <div class="job-info">
+                                    <span class="company"><i class="fa fa-building-o"></i>${vo.comName }</span>
+                                    <span class="location"><i class="fa fa-clock"></i>${vo.recRegdate }</span>
+                                </div>
+                            </div>
+
+                            <!-- Job Category -->
+                            <div class="col-md-2 col-xs-3 ptb30">
+                                <div class="job-category">
+                                    <a href="<c:url value='/request/detail?recNo=${vo.recNo }'/>" class="btn btn-green btn-small btn-effect">상세보기</a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- ===== End of Single Job Post 1 ===== -->
+
+						</c:forEach>
+
+                       
+
                     </div>
+                    <!-- End of Job Post Wrapper -->
 
-                    <!-- Job Info -->
-                    <div class="job-info pt5">
-                        <span id="company"><i class="fa fa-building-o"></i>cloudify</span>
-                        <span id="location"><i class="fa fa-map-marker"></i>london, uk</span>
+                    <!-- Start of Pagination -->
+                    <div class="col-md-12 text-center mt40">
+                        <a href="<c:url value='/request/search'/>" class="btn btn-blue btn-effect">전체보기</a>
                     </div>
+                    <!-- End of Pagination -->
 
-                    <p class="mt20"> Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                        Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
-
-                    <!-- View Job Button -->
-                    <div class="text-center mt20">
-                        <a href="job-page.html" class="btn btn-purple btn-small btn-effect">view job</a>
-                    </div>
                 </div>
-                <!-- End of Featured Job Info -->
+                <!-- End of Job Post Main -->
 
             </div>
-            <!-- End of Featured Job Widget -->
+            <!-- End of Row -->
 
-            <!-- Start of Upload Resume Widget -->
-            <div class="upload-resume widget mt40 text-center">
-                <h4 class="capitalize">upload your resume</h4>
-                <p class="mtb10"> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
-                    Ipsum has been the industry...</p>
+        </div>
+    </section>
+    <!-- ===== End of Latest Job Section ===== -->
 
-                <a href="submit-resume.html" class="btn btn-blue btn-effect mt10">upload resume</a>
+
+
+
+    <!-- ===== Start of CountUp Section ===== -->
+    <section class="ptb40" id="countup">
+        <div class="container">
+
+            <!-- 1st Count up item -->
+            <div class="col-md-3 col-sm-3 col-xs-12">
+                <span class="counter" data-from="0" data-to="${footCnt.memCnt }"></span>
+                <h4>일반회원 수</h4>
             </div>
-            <!-- End of Upload Resume Widget -->
-        </div>
-        <!-- End of Job Post Sidebar -->
 
-    </div>
-</section>
-<!-- ===== End of Job Post Section ===== -->
-
-
-
-
-
-<!-- ===== Start of CountUp Section ===== -->
-<section class="ptb40" id="countup">
-    <div class="container">
-
-        <!-- 1st Count up item -->
-        <div class="col-md-3 col-sm-3 col-xs-12">
-            <span class="counter" data-from="0" data-to="743"></span>
-            <h4>이루어진 인연들&nbsp;</h4>
-        </div>
-
-        <!-- 2nd Count up item -->
-        <div class="col-md-3 col-sm-3 col-xs-12">
-            <span class="counter" data-from="0" data-to="579"></span>
-            <h4>사용중인 사람들&nbsp;</h4>
-        </div>
-
-        <!-- 3rd Count up item -->
-        <div class="col-md-3 col-sm-3 col-xs-12">
-            <span class="counter" data-from="0" data-to="251"></span>
-            <h4>월 평균 동시 접속자&nbsp;&nbsp;</h4>
-        </div>
-
-        <!-- 4th Count up item -->
-        <div class="col-md-3 col-sm-3 col-xs-12">
-            <span class="counter" data-from="0" data-to="330"></span>
-            <h4>( 공란 )&nbsp;</h4>
-        </div>
-    </div>
-</section>
-<!-- ===== End of CountUp Section ===== -->
-
-
-
-
-
-<!-- ===== Start of Testimonial Section ===== -->
-<section class="ptb80" id="testimonials">
-    <div class="container">
-
-        <!-- Section Title -->
-        <div class="section-title">
-            <h2 class="text-white">한 줄 평을 남기기</h2>
-        </div>
-
-
-        <!-- Start of Owl Slider -->
-        <div class="owl-carousel testimonial">
-
-            <!-- Start of Slide item -->
-            <div class="item">
-                <div class="review">
-                    <blockquote> 코로나 때문에 업무를 보러기기 어려운 상황에서도 메터어스 덕분에 성공적인 업무 미팅을 이끌어 낼 수 있었습니다. </blockquote>
-                </div>
-                <div class="customer">
-                    <img src="images/clients/client1.jpg" alt="">
-                    <h4 class="uppercase pt20">기업 사용자</h4>
-                </div>
+            <!-- 2nd Count up item -->
+            <div class="col-md-3 col-sm-3 col-xs-12">
+                <span class="counter" data-from="0" data-to="${footCnt.recCnt }"></span>
+                <h4>의뢰 수</h4>
             </div>
-            <!-- End Slide item -->
 
-            <!-- Start of Slide item -->
-            <div class="item">
-                <div class="review">
-                    <blockquote>요즘 같이 만나기 조심스러운 상황에서 적절한 대처 방법인 것 같아요 :)</blockquote>
-                </div>
-                <div class="customer">
-                    <img src="images/clients/client2.jpg" alt="">
-                    <h4 class="uppercase pt20">VOD수강자</h4>
-                </div>
+            <!-- 3rd Count up item -->
+            <div class="col-md-3 col-sm-3 col-xs-12">
+                <span class="counter" data-from="0" data-to="${footCnt.resumeCnt }"></span>
+                <h4>이력서 수</h4>
             </div>
-            <!-- End Slide item -->
 
-            <!-- Start of Slide item -->
-            <div class="item">
-                <div class="review">
-                    <blockquote>직장 동료들을 오랫 동안 못 봐왔었는데, 덕분에 가까이에 있는 듯한 느낌을 받았어요.</blockquote>
-                </div>
-                <div class="customer">
-                    <img src="images/clients/client3.jpg" alt="">
-                    <h4 class="uppercase pt20">기업 사용자</h4>
-                </div>
+            <!-- 4th Count up item -->
+            <div class="col-md-3 col-sm-3 col-xs-12">
+                <span class="counter" data-from="0" data-to="${footCnt.comCnt }"></span>
+                <h4>기업회원 수</h4>
             </div>
-            <!-- End Slide item -->
 
         </div>
-        <!-- End of Owl Slider -->
-
-    </div>
-</section>
-<!-- ===== End of Testimonial Section ===== -->
+    </section>
+    <!-- ===== End of CountUp Section ===== -->
 
 
 
 
 
-<!-- ===== Start of Latest News Section ===== -->
-<section id="latest-news">
-    <div class="container">
-
-        <!-- Section Title -->
-        <div class="section-title">
-            <h2>latest news</h2>
-        </div>
-
-        <!-- Start of Blog Post -->
-        <div class="col-md-4 col-xs-12">
-            <div class="blog-post">
-                <!-- Blog Post Image -->
-                <div class="blog-post-thumbnail">
-                    <a href="blog-post.html" class="hover-link">
-                        <img src="images/blog/blog1.jpg" alt="">
-                    </a>
-                </div>
-
-                <!-- Blog Post Info -->
-                <div class="post-info">
-                    <a href="blog-post.html">메타버스의 추억.&nbsp;</a>
-
-                    <div class="post-details">
-                        <span class="date"><i class="fa fa-calendar"></i>September 7, 2016</span>
-                        <span class="comments"><i class="fa fa-comment"></i>0 Comments</span>
-                    </div>
-
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
-                        been the industry's standard dummy t ext ever since the 1500s....</p>
-
-                </div>
-
-                <!-- Read More Button -->
-                <a href="blog-post.html" class="btn btn-blue btn-small btn-effect">read more</a>
-
-            </div>
-        </div>
-        <!-- End of Blog Post -->
-
-        <!-- Start of Blog Post -->
-        <div class="col-md-4 col-xs-12">
-            <div class="blog-post">
-                <!-- Blog Post Image -->
-                <div class="blog-post-thumbnail">
-                    <a href="blog-post.html" class="hover-link">
-                        <img src="images/blog/blog2.jpg" alt="">
-                    </a>
-                </div>
-
-                <!-- Blog Post Info -->
-                <div class="post-info">
-                    <a href="blog-post.html">만나기 어려운 이 시국.</a>
-
-                    <div class="post-details">
-                        <span class="date"><i class="fa fa-calendar"></i>September 7, 2016</span>
-                        <span class="comments"><i class="fa fa-comment"></i>0 Comments</span>
-                    </div>
-
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
-                        been the industry's standard dummy t ext ever since the 1500s....</p>
-
-                </div>
-
-                <!-- Read More Button -->
-                <a href="blog-post.html" class="btn btn-blue btn-small btn-effect">read more</a>
-
-            </div>
-        </div>
-        <!-- End of Blog Post -->
-
-        <!-- Start of Blog Post -->
-        <div class="col-md-4 col-xs-12">
-            <div class="blog-post">
-                <!-- Blog Post Image -->
-                <div class="blog-post-thumbnail">
-                    <a href="blog-post.html" class="hover-link">
-                        <img src="images/blog/blog3.jpg" alt="">
-                    </a>
-                </div>
-
-                <!-- Blog Post Info -->
-                <div class="post-info">
-                    <a href="blog-post.html">정말 이상하리만치 옆에 있는 것 같은 메타...</a>
-
-                    <div class="post-details">
-                        <span class="date"><i class="fa fa-calendar"></i>September 7, 2016</span>
-                        <span class="comments"><i class="fa fa-comment"></i>0 Comments</span>
-                    </div>
-
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
-                        been the industry's standard dummy t ext ever since the 1500s....</p>
-
-                </div>
-
-                <!-- Read More Button -->
-                <a href="blog-post.html" class="btn btn-blue btn-small btn-effect">read more</a>
-
-            </div>
-        </div>
-        <!-- End of Blog Post -->
 
 
-
-    </div>
-</section>
-<!-- ===== End of Latest News Section ===== -->
 <%@ include file="inc/footer.jsp" %>
