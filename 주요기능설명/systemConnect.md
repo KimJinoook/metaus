@@ -668,3 +668,53 @@ public class EmailController {
 </body>
 </html>
 ```
+
+## 3. 페이스북 로그인
+- 페이스북 로그인은 현재 이용자가 페이스북에 로그인 되어있는지 status에 따라 결과를 응답
+- 로그인 버튼 클릭 시 페이스북에 로그인 되어있지 않을 경우
+	- 페이스북 로그인 창 팝업, 팝업창에서 페이스북 로그인
+	- 팝업창에서 페이스북 로그인해도, 버튼 클릭 당시 비로그인 상태이기에 홈페이지 로그인 불가
+		- 팝업창에서 로그인 후, 성공시 페이스북 로그인 함수를 재귀호출, 로그인상태 변환하여 처리   
+
+```javascript
+<script async defer crossorigin="anonymous"
+	src="https://connect.facebook.net/ko_KR/sdk.js#xfbml=1&version=v10.0&appId=550605189855072"
+	nonce="SiOBIhLG"></script>
+<script>
+	function loginFormWithFacebook(){
+		
+		function fnFbCustomLogin(){
+			FB.login(function(response) {
+			
+				//현재 페이스북 연결상태인 경우, 폼에 정보를 담아 submit
+				if (response.status === 'connected') {
+					FB.api('/me', 'get', {fields: 'name,email'}, function(r) {
+						console.log(r);
+						$('#form-facebook-login input[name=facebookEmail]').val(r.email);
+			           		 $('#form-facebook-login input[name=facebookName]').val(r.name);
+			            		document.querySelector('#form-facebook-login').submit();
+					})
+				} else if (response.status === 'not_authorized') {
+					
+					alert('앱에 로그인해야 이용가능한 기능입니다.');
+					
+				//페이스북 비연결 상태인 경우, 팝업창에서 로그인 후 페이스북로그인 함수 
+				} else {
+					
+					fnFbCustomLogin();
+				}
+			}, {scope: 'public_profile,email'});
+		}
+		fnFbCustomLogin();
+		window.fbAsyncInit = function() {
+			FB.init({
+				appId      : '550605189855072', // 내 앱 ID를 입력한다.
+				cookie     : true,
+				xfbml      : true,
+				version    : 'v10.0'
+			});
+			FB.AppEvents.logPageView();   
+		};
+	};
+</script>
+```
