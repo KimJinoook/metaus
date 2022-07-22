@@ -82,6 +82,11 @@
 
 ### [2) 데이터의 처리](https://github.com/KimJinoook/metaus/blob/main/%EC%A3%BC%EC%9A%94%EA%B8%B0%EB%8A%A5%EC%84%A4%EB%AA%85/managerData.md)
    - 1. chart.js
-   - 2. sheet.js
+   - 2. sheet.js   
+
+### [3) 회원 관리]
+   - 1. 일반회원 차단 기능
+   - 2. 기업 회원 조회 (카카오 지도)
+   - 3. 메세지 전체 발송
 
 
