@@ -69,10 +69,9 @@
 ## [3. 기사 페이지의 크롤링](https://github.com/KimJinoook/metaus/blob/main/%EC%A3%BC%EC%9A%94%EA%B8%B0%EB%8A%A5%EC%84%A4%EB%AA%85/newsCrawling.md)   
 
 ## 4. 관리자페이지
-### 1) 로그인 및 접속자 관련 주요 기능
+### [1) 로그인 및 접속자 관련 주요 기능](https://github.com/KimJinoook/metaus/blob/main/%EC%A3%BC%EC%9A%94%EA%B8%B0%EB%8A%A5%EC%84%A4%EB%AA%85/managerLogin.md)
       - 1. 로그인 인터셉터
-      - 2. 총 방문자 수
-      - 3. 현재 접속자 수
-      - 4. 타 관리자 로그인 여부
+      - 2. 총 방문자 수, 현재 접속자 수
+      - 3. 타 관리자 로그인 여부
 
 
