@@ -84,11 +84,12 @@
    - 1. chart.js
    - 2. sheet.js   
 
-### [3) 회원 관리, 게시판 관리]
+### [3) 회원 관리, 게시판 관리](https://github.com/KimJinoook/metaus/blob/main/%EC%A3%BC%EC%9A%94%EA%B8%B0%EB%8A%A5%EC%84%A4%EB%AA%85/managerManage.md)
    - 1. 일반회원 차단 기능
    - 2. 기업 회원 조회 (카카오 지도)
    - 3. 메세지 전체 발송
    - 4. 신고게시글 관리   
+   - 5. 상품관리 다중조건 검색   
 
 ### [4) 메세지 기능]   
    - 1. 새로운 메세지 배지 알림
