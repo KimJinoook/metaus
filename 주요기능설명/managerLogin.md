@@ -4,9 +4,8 @@
 
 
   - 1. 로그인 인터셉터
-  - 2. 총 방문자 수
-  - 3. 현재 접속자 수
-  - 4. 타 관리자 로그인 여부   
+  - 2. 총 방문자 수, 현재 접속자 수
+  - 3. 타 관리자 로그인 여부   
 
 ***
 
@@ -132,39 +131,22 @@ public class AdminLoginInterceptor extends HandlerInterceptorAdapter{
 
 ***
 
-## 2. 총 방문자 수
-- 새로운 세션이 방문할 때 방문자수 테이블에 데이터 입력
-- 모델 1의 경우 헤더의 스크립트릿에서 session.isnew() 메서드를 이용하여 새로운 세션인지 판별 후 디비 입력이 가능했었다.
-- 스프링의 경우 web.xml에서 설정이 가능했었다.
-- 스프링 부트의 경우 WebListener 어노테이션을 이용, 애플리케이션이 실행될 때 해당 listener 클래스를 적용한다
-	- 스프링부트가 매퍼를 연결해주기 전 실행되기 때문에 DB연결을 직접 해준다   
+## 2. 총 방문자 수, 현재 접속자 수
+- 총 방문자 수
+	- 새로운 세션이 생성될 때 방문자수 테이블에 데이터 입력
+	- 모델 1의 경우 헤더의 스크립트릿에서 session.isnew() 메서드를 이용하여 새로운 세션인지 판별 후 디비 입력이 가능했었다.
+	- 스프링의 경우 web.xml에서 설정이 가능했었다.
+	- 스프링 부트의 경우 WebListener 어노테이션을 이용, 애플리케이션이 실행될 때 해당 listener 클래스를 적용한다
+		- 스프링부트가 매퍼를 연결해주기 전 실행되기 때문에 DB연결을 직접 해준다   
+- 현재 접속자 수
+	- listener 클래스에 스태틱 변수로 현재 접속자수 변수를 만든다
+	- 새로운 세션이 생성될 때 현재 접속자 수 1 증가
+	- 세션이 파괴될 때 현재 접속자 수 1 감소
+
+
 
 ```java
 package com.metaus.common;
-
-import java.security.KeyFactory;
-import java.security.KeyPair;
-import java.security.KeyPairGenerator;
-import java.security.NoSuchAlgorithmException;
-import java.security.PrivateKey;
-import java.security.PublicKey;
-import java.security.spec.InvalidKeySpecException;
-import java.security.spec.RSAPublicKeySpec;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.util.HashMap;
-
-import javax.crypto.Cipher;
-import javax.servlet.ServletContext;
-import javax.servlet.annotation.WebListener;
-import javax.servlet.http.HttpSession;
-import javax.servlet.http.HttpSessionEvent;
-import javax.servlet.http.HttpSessionListener;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 @WebListener
 public class VisitListener implements HttpSessionListener {
@@ -240,10 +222,6 @@ public class VisitListener implements HttpSessionListener {
 		
 		return cnt;
 	}
-	
-
-	
-	
 }
 
 ```
