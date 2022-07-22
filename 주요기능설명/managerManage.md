@@ -255,3 +255,69 @@ var marker = new kakao.maps.Marker({
 - 슬라이더 두개를 합쳐 범위 선택
 
 
+```javascript
+	function getVals(){
+	  // Get slider values
+	  var parent = this.parentNode;
+	  var slides = parent.getElementsByTagName("input");
+	    var slide1 = parseFloat( slides[0].value );
+	    var slide2 = parseFloat( slides[1].value );
+	  // Neither slider will clip the other, so make sure we determine which is larger
+	  if( slide1 > slide2 ){ var tmp = slide2; slide2 = slide1; slide1 = tmp; }
+	  
+	  var displayElement = parent.getElementsByClassName("rangeValues")[0];
+	      displayElement.innerHTML = slide1 + "원 - " + slide2 + "원";
+	}
+
+	window.onload = function(){
+	  // Initialize Sliders
+	  var sliderSections = document.getElementsByClassName("range-slider");
+	      for( var x = 0; x < sliderSections.length; x++ ){
+	        var sliders = sliderSections[x].getElementsByTagName("input");
+	        for( var y = 0; y < sliders.length; y++ ){
+	          if( sliders[y].type ==="range" ){
+	            sliders[y].oninput = getVals;
+	            // Manually trigger event first time to display values
+	            sliders[y].oninput();
+	          }
+	        }
+	      }
+	}
+	
+$(function(){
+
+	$('#searchBtn').click(function(){
+		var priceMin = $('input[name=priceMin]').val();
+		var priceMax = $('input[name=priceMax]').val();
+		var cateNo = new Array();
+		
+		for(var i=0; i<$('input[name=cateNo]:checked').length; i++){
+			cateNo[i] = $('input[name=cateNo]:checked').eq(i).val();
+		}
+		
+		//location.href="<c:url value='/admin/mail/mailDetail?msgaddNo='/>"+msgaddNo+"&msgNo="+msgNo;
+		//alert(msgaddNo);
+		 $.ajax({
+			url: "<c:url value='/admin/pd/ajaxpdSearch'/>",
+			type: "GET",
+			data: {
+				"priceMin" : priceMin,
+				"priceMax" : priceMax,
+				"cateNo" : cateNo
+				
+				
+			},
+			success: function(data){
+				$('#ajaxTarget').html(data);
+			},
+			error: function(xhr, status, error){
+				alert('error:' + error);
+			}
+		}); 
+	});
+	
+	$('#selectAllInput').change(function(){
+		$('input[name=cateNo]').prop("checked",$('#selectAllInput').prop("checked"));
+	});
+});
+```
