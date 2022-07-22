@@ -5,6 +5,7 @@
 - 3. 사업자등록번호 진위여부 확인
 - 4. 다음 우편번호 api 및 위도경도 변환
 - 5. 소셜 로그인 (카카오, 네이버, 페이스북)
+- 6. 소셜로그인 후처리 (로그인 혹은 연동, 회원가입)
 
 ***
 
@@ -203,7 +204,7 @@ public class MemberServiceImpl implements MemberService {
 # 2. 이메일 인증
 - 일반회원 회원가입 시 아이디 중복확인과 동시에 이메일 인증
 - Ajax 처리
-	- 사용가능한 이메일일 경우 인증번호 발송과 동시에 3분 타이머 적용, 3분 후 인증번호 초기화   
+	- 사용가능한 이메일일 경우 난수 발생 및 인증번호 발송과 동시에 3분 타이머 적용, 3분 후 인증번호 초기화   
 
 
 - 회원가입 view의 javascript
@@ -412,4 +413,258 @@ public class EmailController {
 		return result;
 	}
 }
+```
+
+***
+
+# 3. 사업자 등록번호 진위여부 확인
+
+- 기업회원의 경우 사업자 등록번호 진위여부 확인
+- 공공데이터 포털 api 이용
+- 필수 전송데이터 : 대표자명, 사업자 등록번호, 개업일   
+
+```javascript
+/** 기업회원 사업자 등록번호 확인 */
+		$('#comRrnCheck').click(function(){
+			
+			if ($.trim($('#comCeo').val()).length < 1) {
+				alert("대표자명을 입력해주세요.");
+				$('#comCeo').focus();
+				event.preventDefault();
+			}else if ($.trim($('#comRrn').val()).length < 1) {
+				alert("사업자 등록번호를 입력해주세요.");
+				$('#comRrn').focus();
+				event.preventDefault();
+			}else if ($.trim($('#comOpen').val()).length < 1) {
+				alert("개업일 입력해주세요.");
+				$('#comOpen').focus();
+				event.preventDefault();
+			}else if(!validate_tel($('#comRrn').val())){
+				alert("사업자 등록번호는 숫자만 입력해주세요.");
+				$('#comRrn').focus();
+				event.preventDefault();				
+			}else if(!validate_tel($('#comOpen').val())){
+				alert("개업일 숫자만 입력해주세요.");
+				$('#comOpen').focus();
+				event.preventDefault();				
+			}  else{
+				var name = $('#comCeo').val();
+				var open = $('#comOpen').val();
+				
+				var rrn = $('#comRrn').val();
+				
+				var data2 = {
+						"businesses": [
+						    {
+						      "b_no": rrn,
+						      "start_dt": open,
+						      "p_nm": name
+						    }
+						  ]
+				}
+				$.ajax({
+					url: "https://api.odcloud.kr/api/nts-businessman/v1/validate?serviceKey=aKSHxC3JN3xtPxQP64ysM2CE9UhYKMLXVKM9w7aL7WiHH6dYWKgG%2FJaYTvF0O82Dawkq6c%2ByK0ByxSovTdkXHw%3D%3D",
+					type:"POST",
+					data: JSON.stringify(data2),
+					dataType: "JSON",
+					contentType: "application/json",
+					
+					async:false,
+					success: function(result) {
+					      if(result.data[0].valid=='02'){
+					    	  alert('사업자 정보가 일치하지 않습니다.');
+					      }else if(result.data[0].valid=='01'){
+					    	  alert('사업자 정보가 확인되었습니다');
+					    	  $('#isComRrnCheck').val('Y');
+					      }
+					  },
+					  error: function(result) {
+					      alert('사업자 정보 확인에 실패했습니다.');
+					  }
+				});
+				event.preventDefault();	
+			}
+			
+					
+			
+		});
+```
+
+
+***
+
+# 4. 다음 우편번호 api 위도경도 변환 
+- 회원가입 시 주소 입력을 위해 다음 우편번호 api 이용
+- 기업회원의 경우 추후 카카오 지도 위치 표시를 위해 해당 회사의 위도경도 필요
+- 카카오 로컬api를 이용, 입력한 주소를 토대로 위치 검색 후 위도경도로 변환   
+
+```javascript
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js?autoload=false"></script>
+<script>
+	$(function() {
+		/**기업회원 주소찾기*/
+		$('#comAdd').click(function(){
+			execDaumPostcode2();
+
+		});
+	}
+
+	/** 기업회원 우편번호 찾기 */
+	function execDaumPostcode2() {
+	    daum.postcode.load(function(){
+	        new daum.Postcode({
+	            oncomplete: function(data) {
+	              $("#comAdd").val(data.roadAddress);
+	              mapsearch();
+	            }
+	        }).open();
+	    });
+	}
+	
+	/** 기업 주소 위도경도로 변환*/
+	function mapsearch(){
+		var address = $('#comAdd').val();
+		var geocoder2 = new kakao.maps.services.Geocoder();
+		geocoder2.addressSearch(address, function(result, status) {
+		    // 정상적으로 검색이 완료됐으면 
+		     if (status === kakao.maps.services.Status.OK) {
+		        
+		        $('#comLati').val(result[0].y);
+		    	$('#comLongi').val(result[0].x);
+		    } 
+		});	
+	}
+
+</script>
+
+
+```
+
+
+***
+
+# 5. 소셜 로그인
+
+## 1. 카카오 로그인
+- 팝업방식과 모달방식 중 팝업방식 이용
+- 카카오 로그인 api 호출 후 카카오 연결 성공 시 회원정보 추출
+- 추출한 회원정보를 hidden form에 입력 후 form submit
+
+```javascript
+<form id="form-kakao-login" method="post"
+	action="<c:url value='/login/kakaologin'/>">
+	<input type="hidden" name="kakaoEmail" /> 
+	<input type="hidden" name="kakaoName" />
+</form>
+
+<script src = "https://developers.kakao.com/sdk/js/kakao.min.js"></script>
+<script>
+	function loginFormWithKakao(){
+		Kakao.init('카카오javascript키');
+		Kakao.Auth.login({
+	        success: function(authObj) {
+	         
+	          Kakao.API.request({
+	            url: '/v2/user/me',
+	            success: function(res) {
+	              console.log(res);
+	              var id = res.id;
+	              var account = res.kakao_account;
+		      
+		      //카카오 연결 성공 시 폼에 로그인정보를 담은 후 제출
+	              $('#form-kakao-login input[name=kakaoEmail]').val(account.email);
+	              $('#form-kakao-login input[name=kakaoName]').val(account.profile.nickname);
+			document.querySelector('#form-kakao-login').submit();
+			
+	              
+	        }
+	          })
+	          console.log(authObj);
+	          var token = authObj.access_token;
+	        },
+	        fail: function(err) {
+	          alert(JSON.stringify(err));
+	        }
+	      });
+	};
+</script>
+
+```
+
+## 2. 네이버 로그인
+- 네이버 로그인의 경우 모달방식 이용, 콜백url 호출
+- 네이버 로그인의 경우 api에서 자체적으로 버튼을 생성
+	- 개인적으로 만든 버튼을 이용하고 싶은 경우
+		- api에서 만든 버튼을 숨긴 후, 커스텀 버튼 클릭 시 해당 버튼이 클릭되는 메서드 생성
+		- 커스텀 버튼은 네이버 정책에 맞도록 제작   
+
+```javascript
+<!-- 네이버 api에서 만든 로그인 버튼이 들어갈 div, display:none으로 보이지 않게 설정 -->
+<div id="naverIdLogin" style="display: none"></div>
+
+<script type="text/javascript"
+	src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js"
+	charset="utf-8"></script>
+<script type="text/javascript">	
+
+	// 커스텀 버튼 클릭 시 네이버 로그인 버튼 클릭 메서드
+	function loginFormWithNaver(){
+		var nl = document.getElementById("naverIdLogin").firstChild;
+		nl.click();
+	};
+	
+	var naverLogin = new naver.LoginWithNaverId({
+		clientId: "클라이언트 아이디",
+		callbackUrl: "http://도메인/metaus/login/navercallback",
+		isPopup: false,
+		loginButton:{color:'green',type:5,height:60}
+	});
+	naverLogin.init();
+</script>
+```
+
+- 네이버 로그인 연결 성공 후 callback url의 jsp   
+- 네이버 로그인 정보를 폼에 담아 submit   
+
+```javascript
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<form id="form-naver-login" method="post" action="<c:url value='/login/naverlogin'/>">
+	<input type="hidden" name="naverEmail"/>
+	<input type="hidden" name="naverName"/>
+</form>
+<script type="text/javascript" src="<c:url value='/js/jquery-3.6.0.min.js'/>"></script>
+<script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js" charset="utf-8"></script>
+<script>
+	var naverLogin = new naver.LoginWithNaverId({
+		clientId: "클라이언트 아이디", 
+		callbackUrl: "http://도메인/login/naverlogin", 
+		isPopup: false,
+		callbackHandle: true
+	});
+	naverLogin.init();
+	window.addEventListener('load', function () {
+	naverLogin.getLoginStatus(function (status) {
+	if (status) {
+		var email = naverLogin.user.getEmail();
+		var name = naverLogin.user.getName();
+		  $('#form-naver-login input[name=naverEmail]').val(email);
+          $('#form-naver-login input[name=naverName]').val(name);
+		  document.querySelector('#form-naver-login').submit();
+	} else {
+		console.log("callback 처리에 실패하였습니다.");
+	}
+	});
+});
+</script>
+</body>
+</html>
 ```
