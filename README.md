@@ -51,7 +51,7 @@
 - OS : window 10
 
 ***
-# 주요 기능
+# 주요 기능 (소제목 클릭 시 상세 설명 이동)
 
 ## [1. 시스템 접속 주요 기능](https://github.com/KimJinoook/metaus/blob/main/%EC%A3%BC%EC%9A%94%EA%B8%B0%EB%8A%A5%EC%84%A4%EB%AA%85/systemConnect.md)   
    - 1. 비밀번호 암호화
