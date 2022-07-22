@@ -91,9 +91,8 @@
    - 4. 신고게시글 관리   
    - 5. 상품관리 다중조건 검색   
 
-### [4) 메세지 기능]   
+### [4) 메세지 기능](https://github.com/KimJinoook/metaus/blob/main/%EC%A3%BC%EC%9A%94%EA%B8%B0%EB%8A%A5%EC%84%A4%EB%AA%85/managerMessage.md)   
    - 1. 새로운 메세지 배지 알림
    - 2. 메세지 작성 다중파일 업로드
-   - 3. 임시저장 및 휴지통 등의 플래그 처리
 
 
