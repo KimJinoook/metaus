@@ -111,6 +111,10 @@
 ***
 
 # 2. Three.js의 반복처리
+
+![크리에이터](https://user-images.githubusercontent.com/99188096/180383569-5efd054b-4ce5-44f6-82ee-45f291019d4d.PNG)   
+
+
 - Three.js의 scene을 담을 canvas 필요
 - 3d모델링을 읽어올 각각의 script 필요
 - jstl의 c코어를 이용, for each문을 통해 캔버스를 3d모델 수 만큼 반복 생성한다
@@ -222,7 +226,7 @@
 
 ***
 
-## 3. ZipLoader를 이용 합축파일의 해제 없이 로딩
+## 3. ZipLoader를 이용 압축파일의 해제 없이 로딩
 - zip 로더 이용 압축파일 내부를 순회
 - 원하는 확장자명의 을 찾으면 해당 파일 로드
 
