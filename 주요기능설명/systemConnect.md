@@ -17,7 +17,7 @@
   - DB에 비밀번호를 저장하지 않고, 암호화된 키를 저장
     - 사용자가 항상 같은 비밀번호를 입력했을 때, DB에 저장된 암호키와 매칭이 가능해야 한다
 
-### 클라이언트 비밀번호 암호화
+
 - 웹 리스너와 java.security 패키지 이용, 세션이 새로 생성될때 매번 새로운 공개키와 개인키를 생성한다   
 
 ```java
@@ -104,4 +104,96 @@ $(function(){
 	});
 });
 </script>
+```
+
+- 컨트롤러에서 암호화된 비밀번호를 받아 개인키를 이용하여 복호화   
+- 복호화한 비밀번호를 db에 저장하기 위한 암호키로 암호화
+	- 스프링 시큐리티의 BCrypt 이용
+
+```java
+public class MemberController {
+	
+	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
+
+	private final MemberService memberService;
+	private final KakaoService kakaoService;
+	private final NaverService naverService;
+	private final FacebookService facebookService;
+	
+	@PostMapping("/memberRegister")
+	public String memregister_post(@ModelAttribute MemberVO vo, Model model, HttpSession session) {
+		logger.info("일반회원 회원가입 처리, 파라미터 vo={}", vo);
+		
+		//개인키 확인
+		PrivateKey privateKey = (PrivateKey) session.getAttribute("__rsaPrivateKey__");
+		try {
+			
+			//개인키를 이용하여 암호호화된 비밀번호 복호화
+			String password = VisitListener.decryptRsa(privateKey, vo.getMemPw());
+			vo.setMemPw(password);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		//db에 저장하기 위한 비밀번호 암호화, BCrypt 이용
+		BCryptPasswordEncoder encoder= new BCryptPasswordEncoder();
+		String memLock=encoder.encode(vo.getMemPw());
+		vo.setMemLock(memLock);
+		
+		logger.info("회원가입 전 vo={}", vo);
+		int cnt=memberService.insertMember(vo);
+		logger.info("회원가입 결과, cnt={}", cnt);
+
+		String msg="회원가입 실패", url="/member/register";
+		if(cnt>0) {
+			msg="회원가입되었습니다.";
+			url="/";
+		}
+
+		model.addAttribute("msg", msg);
+		model.addAttribute("url", url);
+
+		return "/common/message";
+		
+	}
+}
+```
+
+- 로그인 시 db 비밀번호 암호키와, 사용자 입력 비밀번호 일치여부 확인   
+
+```java
+public class MemberServiceImpl implements MemberService {
+	
+	private final MemberDAO memberDao;
+	
+	public int insertMember(MemberVO vo){
+		int cnt=memberDao.insertMember(vo);
+		return cnt;
+	}
+	
+	public int checkLogin(String userid, String pwd) {
+		String dbPwd = memberDao.selectPwd(userid);
+		String dbLock = memberDao.selectLock(userid);
+		BCryptPasswordEncoder encoder= new BCryptPasswordEncoder();
+		
+		
+		int result=0;
+		if(dbPwd !=null && !dbPwd.isEmpty()) {
+			
+			//BCrypt의 matches 메서드를 이용, db에 저장된 암호키와 사용자 입력 비밀번호 일치여부 
+			if(encoder.matches(pwd, dbLock)) {
+				result=MemberService.LOGIN_OK;
+			}else {
+				result=MemberService.DISAGREE_PWD;				
+			}
+			
+
+		}else {
+			result=MemberService.NONE_USERID;
+		}
+		
+		return result;
+	}
+}
 ```
