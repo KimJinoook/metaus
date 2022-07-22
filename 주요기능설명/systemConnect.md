@@ -197,3 +197,219 @@ public class MemberServiceImpl implements MemberService {
 	}
 }
 ```
+
+***
+
+# 2. 이메일 인증
+- 일반회원 회원가입 시 아이디 중복확인과 동시에 이메일 인증
+- Ajax 처리
+	- 사용가능한 이메일일 경우 인증번호 발송과 동시에 3분 타이머 적용, 3분 후 인증번호 초기화   
+
+
+- 회원가입 view의 javascript
+
+```javascript
+<script type="text/javascript" src="<c:url value='/js/jquery-3.6.0.min.js'/>"></script>
+<script type="text/javascript">
+	var timer = null;
+	var isRunning = false;
+	
+	$(function() {
+		/** 일반회원 유효성검사*/
+		$('#btnMemSign').click(function() {
+			 
+			
+			if ($('#ismailcodeCheck').val() != 'Y'){
+				alert("이메일 인증이 필요합니다.");
+				event.preventDefault();
+				
+			} else if ($.trim($('#mailcode').val()) != $.trim($('#mailcodeCheck').val())) {
+				alert("이메일 인증번호가 일치하지 않습니다");
+				$('#mailcode').focus();
+				event.preventDefault();
+			
+			} else if ($.trim($('#memPw').val()).length < 1) {
+				alert("비밀번호를 입력해주세요.");
+				$('#memPw').focus();
+				event.preventDefault();
+			} else if ($.trim($('#memPw').val()) != $.trim($('#memPwCheck').val())) {
+				alert("비밀번호가 일치하지 않습니다.");
+				$('#memPwCheck').focus();
+				event.preventDefault();
+						
+			} else if ($.trim($('#memName').val())=="") {
+				alert("이름을 입력해주세요.");
+				$('#memName').focus();
+				event.preventDefault();
+						
+			}else if(!validate_birth($('#memBirth').val())){
+				alert("생년월일은 숫자만 입력해주세요.");
+				$('#memBirth').focus();
+				event.preventDefault();
+			}else if(!validate_tel($('#memTel').val())){
+				alert("휴대전화는 숫자만 입력해주세요.");
+				$('#memTel').focus();
+				event.preventDefault();
+			}else{
+				var inputText = $('#memPw').val();
+				
+				var rsaPkModule = $('#publicKeyModule').val();
+				var rsaPkExponent = $('#publicKeyExponent').val();
+				
+				var rsa = new RSAKey();
+				rsa.setPublic(rsaPkModule,rsaPkExponent);
+				
+				var securedPw = rsa.encrypt(inputText);
+				$('#memPw').val(securedPw);
+				$('#registerFrm').submit();
+			} 
+		});
+		
+		
+		/** 일반회원 이메일 인증 */
+		$('#sendEmail').click(function(){
+			$('#ismailcodeCheck').val('Y');
+			var id = $('#memId').val();
+			var num = Math.floor(Math.random() * 10000)+1;
+			var datas = {"id":id,"num":num};
+			var getdata;
+			
+			if(!validate_email(id)){
+				alert("이메일 형식이 올바르지 않습니다.");
+				$('#memId').focus();
+				event.preventDefault();
+			}else{
+				$.ajax({
+					url: "<c:url value='/email/signEmail'/>"+"?receiver="+id+"&num="+num,
+					type:"get",
+					async:false,
+					success:function(data){
+						if(data==1){
+							alert('해당 이메일로 인증번호가 발송되었습니다.');
+							$('#mailcodeCheck').val(num);
+							
+							var display = $('#emailCnt');
+					    	var leftSec = 180;
+					    	// 남은 시간
+					    	// 이미 타이머가 작동중이면 중지
+					    	if (isRunning){
+					    		clearInterval(timer);
+					    		display.html("");
+					    		$('#emailCnt').css("color","red");
+					    		startTimer(leftSec, display);
+					    	}else{
+					    		startTimer(leftSec, display);
+					    		
+					    	}
+						}else if(data==2){
+							alert('이미 사용중인 이메일 계정입니다.');
+						}else{
+							alert('인증번호 발송이 실패했습니다.');
+						}
+					}
+				});
+				event.preventDefault();			
+			}
+		});
+		
+		/**일반회원 인증번호 입력*/
+		$('#mailcode').keyup(function(){
+			if($.trim($('#mailcode').val()) == $.trim($('#mailcodeCheck').val())){
+				clearInterval(timer);
+				$('#emailCnt').html("&nbsp;&nbsp;[인증번호 일치]");
+				$('#emailCnt').css("color","green");
+			}
+		});
+		
+	
+	});
+	function validate_userid(id) {
+		var pattern = new RegExp(/^[a-zA-Z0-9_]+$/g);
+		return pattern.test(id);		
+	}
+	function validate_tel(tel) {
+		var pattern = new RegExp(/^[0-9]*$/g);
+		return pattern.test(tel);
+	}
+	function validate_birth(birth) {
+		var pattern = new RegExp(/^[0-9]*$/g);
+		return pattern.test(birth);
+	}
+	function validate_email(email) {
+		var pattern = new RegExp(/^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i);
+		return pattern.test(email);
+	}
+	
+	function startTimer(count, display) {
+	
+		var minutes, seconds;
+        timer = setInterval(function () {
+	        minutes = parseInt(count / 60, 10);
+	        seconds = parseInt(count % 60, 10);
+	 
+	        minutes = minutes < 10 ? "0" + minutes : minutes;
+	        seconds = seconds < 10 ? "0" + seconds : seconds;
+	 
+	        display.html("&nbsp;&nbsp;("+minutes + ":" + seconds+")");
+	 
+	        // 타이머 끝
+	        if (--count < 0) {
+		    	clearInterval(timer);
+		    	display.html("&nbsp;&nbsp;시간초과");
+		    	isRunning = false;
+		    	$('#mailcodeCheck').val("");
+	        }
+	    }, 1000);
+	         isRunning = true;
+	}
+
+</script>
+
+```
+
+- 컨트롤러   
+
+```java
+public class EmailController {
+	private static final Logger logger = LoggerFactory.getLogger(EmailController.class);
+	
+	private final EmailSender emailSender;
+	private final MemberService memberService;
+	
+	
+	@ResponseBody
+	@RequestMapping("/signEmail")
+	public int sendEmail(String receiver, String num) {
+		
+		int echeck=0;
+		int result=0;
+		if(receiver!=null && !receiver.isEmpty()) {
+				echeck=memberService.duplicateId(receiver);
+			
+			logger.info("이메일 중복확인 결과, echeck={}", echeck);
+		}
+	
+		if(echeck==MemberService.UNUSABLE_ID) {
+			result = MemberService.UNUSABLE_ID;
+			return result;
+		}else if(echeck==MemberService.USABLE_ID) {
+			String subject="메타어스 회원가입 이메일 인증번호 발송";
+			String content = "인증번호 : "+num;
+			String sender = "kimjin0132@naver.com";
+			
+			try {
+				emailSender.sendEmail(subject, content, receiver, sender);
+				logger.info("이메일발송");
+				result = MemberService.USABLE_ID;
+				return result;
+			} catch (MessagingException e) {
+				e.printStackTrace();
+				logger.info("이메일실패");
+			}
+		}
+		
+		
+		return result;
+	}
+}
+```
