@@ -708,7 +708,7 @@ public class EmailController {
 		fnFbCustomLogin();
 		window.fbAsyncInit = function() {
 			FB.init({
-				appId      : '550605189855072', // 내 앱 ID를 입력한다.
+				appId      : '앱id',
 				cookie     : true,
 				xfbml      : true,
 				version    : 'v10.0'
@@ -717,4 +717,207 @@ public class EmailController {
 		};
 	};
 </script>
+```
+
+## 4. 로그아웃의 경우
+- 로그인시 세션에 로그인 타입을 저장, 로그아웃 시 로그인 타입에 따라 서로 다른 로그아웃 처리
+- 카카오의 로그아웃
+	- 카카오의 로그아웃은 카카오 연결해제 (logout), 카카오 - 앱 서비스 탈퇴 (unlink) 두가지 중 unlink 이용
+- 네이버의 로그아웃
+	- 네이버는 정책적으로, 다른 홈페이지에서 네이버 로그아웃을 금지하여 따로 네이버 로그아웃처리 하지않고, 홈페이지만 로그아웃 처리
+
+```javascript
+<script>
+$(function(){
+	
+	$('#logoutBtn').click(function(){
+		var loginType = '${sessionScope.isLogin}';
+		if(loginType=='kakao'){
+			Kakao.init('48fd685b6c1070cc71f894be6653d843');
+			if (Kakao.Auth.getAccessToken()) {
+			      Kakao.API.request({
+			    	  
+			        url: '/v1/user/unlink',
+			        success: function(response) {
+			        	console.log(response);
+			        	console.log('성공');
+			        	Kakao.Auth.setAccessToken(undefined);
+						location.href="<c:url value='/login/logout'/>";
+			        },
+			        fail: function(error) {
+			          console.log(error);
+			        }
+			      });
+		    }
+		}else if(loginType=='naver'){
+			location.href="<c:url value='/login/logout'/>";
+		}else if(loginType=='facebook'){
+	
+		        FB.login(function(response) {
+		            if (response.status === 'connected') {
+		                FB.logout(function(response) {
+		                		location.href="<c:url value='/login/logout'/>";
+		                    });
+		                }
+		     
+		        });
+		}else{
+			location.href="<c:url value='/login/logout'/>";
+		}
+	});
+});
+</script>
+```
+
+
+***
+
+# 6. 소셜로그인 후처리
+- 로그인한 소셜계정이 메타어스 계정과 연동되어있을 경우
+	- 메타어스 계정으로 로그인
+- 로그인한 소셜계정이 메타어스 계정과 연동되어있지 않을 경우
+	- 소셜계정과 동일한 id를 가진 메타어스 계정 검색
+		- 있을 경우 연동여부 확인 및 연동
+		- 없을 경우 회원가입 페이지 이동   
+
+
+- 소셜 로그인 form 제출 후 컨트롤러   
+
+```java
+@RequestMapping("/kakaologin")
+	public String kakaologin_post(@ModelAttribute KakaoVO vo,
+			HttpServletRequest request,
+			HttpServletResponse response, Model model) {
+		logger.info("카카오 로그인 처리, 파라미터 vo={}", vo);
+		
+		KakaoVO kakaoVo = kakaoService.selectByUserid(vo.getKakaoEmail());
+		String kakaoId = vo.getKakaoEmail().substring(0, vo.getKakaoEmail().indexOf("@"));
+		logger.info("kakaoId={}",kakaoId);
+		
+		String url = "/", msg="로그인 실패";
+		
+		if(kakaoVo != null) {
+			//[1] session에 저장
+			MemberVO memVo = memberService.selectByMemNo(kakaoVo.getMemNo());
+			
+			HttpSession session=request.getSession();
+			session.setAttribute("isLogin", "kakao");
+			session.setAttribute("memNo", memVo.getMemNo());
+			session.setAttribute("memId", memVo.getMemId());
+			session.setAttribute("memName", memVo.getMemName());
+			
+			msg = memVo.getMemName()+"님 환영합니다";
+			
+		}else if(kakaoVo == null) {
+			MemberVO memVo = memberService.selectBySocialid(kakaoId);
+			model.addAttribute("vo",memVo);
+			model.addAttribute("socialEmail",vo.getKakaoEmail());
+			model.addAttribute("socialName",vo.getKakaoName());
+			model.addAttribute("socialType","kakao");
+			msg = "연동된 계정이 없습니다";
+			return "/member/socialRegister";
+		}
+		
+		
+		model.addAttribute("msg", msg);
+		model.addAttribute("url", url);
+		
+		return "/common/message";
+	}
+```
+
+- 연동된 메타어스 계정이 없을 경우 연동 페이지
+
+```javascript
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ include file="../inc/header.jsp"%>
+
+<section class="page-header">
+	<div class="container">
+
+		<!-- Start of Page Title -->
+		<div class="row">
+			<div class="col-md-12">
+				<h2>소셜계정 로그인</h2>
+			</div>
+		</div>
+	
+		<!-- End of Breadcrumb -->
+
+	</div>
+</section>
+
+
+
+<!-- ===== Start of Main Wrapper Section ===== -->
+<section class="ptb80" id="contact">
+	<div class="container">
+		<div class="row">
+			<c:if test="${empty vo }">
+			<div class="text-center">
+				<!-- Form Group -->
+				<div class="form-group">
+					<h4 >연동된 계정이 존재하지 않습니다.</h4><br><br>
+						
+					<label for="agree2">메타어스와 소셜계정을 연동하시면 간편하게 로그인할 수 있습니다.
+					<br>간단한 회원가입을 통해 메타어스와 함께하실 수 있습니다.</label> <br>
+					<br>
+				</div>
+			</div>
+			
+			</c:if>
+			<c:if test="${!empty vo }">
+			<div class="text-center">
+				<!-- Form Group -->
+				<div class="form-group">
+					<h4 >혹시 메타어스 계정이 있으신가요?</h4><br><br>
+						
+					<label for="agree2">회원님의 정보로 가입된 아이디가 있습니다.
+					<br>기존 아이디와 연동하시면, 이력서 및 회원정보가 유지됩니다.</label> <br>
+					<br>
+				</div>
+			</div>
+			<form method="post" action="<c:url value='/member/socialMerge'/>">
+				<div class="col-md-4 col-md-offset-3">
+					<!-- Form Group -->
+					<div class="form-group">
+						<label></label> <input type="text" class="form-control"
+							name="memId" value="${vo.memId }" readonly="readonly" style="background-color: white">
+							<input type="hidden" name="socialEmail" value="${socialEmail}">
+							<input type="hidden" name="socialName" value="${socialName}">
+							<input type="hidden" name="socialType" value="${socialType}">
+					</div>
+				</div>
+
+				<div class="col-md-2">
+					<div class="form-group">
+						<label> </label>
+						<button type="submit" style="margin-top: 2px"
+							class="btn btn-blue btn-effect form-control">연동하기</button>
+					</div>
+				</div>
+			</form>
+			</c:if>
+			
+			
+			<div class="col-md-6 col-md-offset-3">
+				<!-- Form Group -->
+				<div class="form-group text-center nomargin">
+					<br>
+					<a href="<c:url value='/member/register'/>"><button type="button" class="btn btn-blue btn-effect">신규 회원가입</button></a>
+				</div>
+
+			</div>
+		</div>
+
+	</div>
+
+</section>
+<!-- ===== End of Main Wrapper Section ===== -->
+
+<%@ include file="../inc/footer.jsp"%>
 ```
