@@ -3,6 +3,7 @@
   - 2. 기업회원 조회
   - 3. 메세지 전체 발송
   - 4. 신고 게시글 관리
+  - 5. 상품관리 다중조건 검색 
 
 ***
 
@@ -111,11 +112,146 @@
 
 ***
 
+## 2. 기업회원 조회
+- 회원가입 시 기업 주소를 위도경도로 자동변환
+- 해당 위도경도를 이용 카카오 지도 api 위치 표시   
+
+![기업정보](https://user-images.githubusercontent.com/99188096/180409334-cb213c49-204f-4fd1-a083-5440f8db1481.PNG)   
+
+
+```javascript
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=앱키&libraries=services"></script>
+<script>
+var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+    mapOption = {
+        center: new kakao.maps.LatLng(${comVo.comLati}, ${comVo.comLongi}), // 지도의 중심좌표
+        level: 3 // 지도의 확대 레벨
+    }; 
+var map = new kakao.maps.Map(mapContainer, mapOption); 
+var coords = new kakao.maps.LatLng(${comVo.comLati}, ${comVo.comLongi});
+var marker = new kakao.maps.Marker({
+    map: map,
+    position: coords
+});
+
+
+</script>
+```
+
+***
+
+## 3. 메세지 전체 발송   
+
+![메세지](https://user-images.githubusercontent.com/99188096/180409882-dc6da526-8d54-4d28-9673-51f490841001.PNG)   
+
+- 우측 체크박스 선택 범위에 따라 메세지 전체 발송   
+
+```java
+	@PostMapping("/sendAll")
+	public String sendAll_post(@ModelAttribute MailboxVO vo, @RequestParam String[] mailScope, HttpSession session, Model model){
+		
+		String memId=(String) session.getAttribute("managerId");
+		logger.info("memId={}", memId);
+		vo.setMsgaddAdser(memId);
+		
+		logger.info("메세지 전송 처리, 파라미터 vo={}", vo);
+		
+		int cnt1=mailboxService.insertMailbox(vo);
+		logger.info("메세지 송신자 등록 결과 cnt={}", cnt1);
+		
+		int cnt3=0;
+		for(int i=0; i<mailScope.length;i++) {
+			if(mailScope[i].equals("1")) {
+				List<MemberVO> list = memberService.selectAll();
+				
+				for(int j=0; j<list.size(); j++) {
+					MemberVO memberVo = list.get(j);
+					RecipientVO recipientVo = new RecipientVO();
+					recipientVo.setMsgaddAdsee(memberVo.getMemId());
+					recipientVo.setTemporaryFlag("N");
+					
+					int msgNo=mailboxService.selectMsgNo();
+					recipientVo.setMsgNo(msgNo);
+					
+					int cnt2=mailboxService.insertRecipient(recipientVo);
+					if(cnt2>0) {
+						cnt3++;
+					}
+				}
+				
+			}else if(mailScope[i].equals("2")) {
+				List<CompanyVO> list = comService.selectAll();
+				
+				for(int j=0; j<list.size(); j++) {
+					CompanyVO memberVo = list.get(j);
+					RecipientVO recipientVo = new RecipientVO();
+					recipientVo.setMsgaddAdsee(memberVo.getComId());
+					recipientVo.setTemporaryFlag("N");
+					
+					int msgNo=mailboxService.selectMsgNo();
+					recipientVo.setMsgNo(msgNo);
+					
+					int cnt2=mailboxService.insertRecipient(recipientVo);
+					if(cnt2>0) {
+						cnt3++;
+					}
+				}
+				
+			}else if(mailScope[i].equals("3")) {
+				List<ManagerVO> list = managerService.selectAll();
+				
+				for(int j=0; j<list.size(); j++) {
+					ManagerVO memberVo = list.get(j);
+					RecipientVO recipientVo = new RecipientVO();
+					recipientVo.setMsgaddAdsee(memberVo.getManagerId());
+					recipientVo.setTemporaryFlag("N");
+					
+					int msgNo=mailboxService.selectMsgNo();
+					recipientVo.setMsgNo(msgNo);
+					
+					int cnt2=mailboxService.insertRecipient(recipientVo);
+					if(cnt2>0) {
+						cnt3++;
+					}
+				}
+				
+			}
+			
+		}
+		logger.info("전체발송 결과 발숭 메세지 수 cnt3={}",cnt3);
+		String msg="메세지 발송 실패", url="/admin/mail/sendAll";
+		if(cnt3>0) {
+			msg="메세지 발송 성공, 발송 메세지 수 = "+cnt3;
+		}
+		model.addAttribute("msg",msg);
+		model.addAttribute("url",url);
+		
+		
+		
+
+		return "/common/message";
+	}
+```
+
+
+***
+
 ## 4. 신고 게시글 관리   
 
 ![신고게시글](https://user-images.githubusercontent.com/99188096/180407663-541a8767-0fbc-42ab-a484-3e7e36ff58ab.PNG)   
 
 - 화살표 버튼 클릭시 해당 게시글로 이동
 - 초록색 버튼 클릭시 해당 게시글 문제없음 판단, 신고 처리일자 입력
-- 빨간색 버튼 클릭시 해당 게시글 문제있음 판단, 신고 처리일자 입력, 작성자 경고수 1 증가, 작성자 차단, 게시글 삭제 처리
+- 빨간색 버튼 클릭시 해당 게시글 문제있음 판단, 신고 처리일자 입력, 작성자 경고수 1 증가, 작성자 차단, 게시글 삭제 처리   
+
+
+***
+
+## 5. 상품관리 다중 조건 검색   
+
+![가격](https://user-images.githubusercontent.com/99188096/180410442-45e1aa8c-3e4f-4948-8ed5-e3d74cac6e67.PNG)   
+
+
+- 슬라이더 두개를 합쳐 범위 선택
+
 
