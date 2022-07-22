@@ -80,7 +80,7 @@
    - 2. 총 방문자 수, 현재 접속자 수
    - 3. 타 관리자 로그인 여부   
 
-### [2) 데이터의 처리]
+### [2) 데이터의 처리](https://github.com/KimJinoook/metaus/blob/main/%EC%A3%BC%EC%9A%94%EA%B8%B0%EB%8A%A5%EC%84%A4%EB%AA%85/managerData.md)
    - 1. chart.js
    - 2. sheet.js
 
