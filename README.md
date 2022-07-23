@@ -12,7 +12,7 @@
 <img src="https://img.shields.io/badge/SqlDeveloper-548294?style=for-the-badge&logo=sqldeveloper&logoColor=white"/></a>
 <img src="https://img.shields.io/badge/MyBatis-black?style=for-the-badge&logo=bybatis&logoColor=white"/></a>
 <img src="https://img.shields.io/badge/Tomcat-F8DC75?style=for-the-badge&logo=apachetomcat&logoColor=black"/></a>
-<img src="https://img.shields.io/badge/Spring-6DB33F?style=for-the-badge&logo=Spring&logoColor=white"/></a>   
+<img src="https://img.shields.io/badge/Springboot-6DB33F?style=for-the-badge&logo=Spring&logoColor=white"/></a>   
 ### FrontEnd   
 <img src="https://img.shields.io/badge/Html5-E34F26?style=for-the-badge&logo=Html5&logoColor=white"/></a>
 <img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=CSS3&logoColor=white"/></a>
@@ -48,7 +48,8 @@
 ***
 # :gear: 개발환경   
 
-- OS : window 10
+![시스템아키](https://user-images.githubusercontent.com/99188096/180589394-dfaeddb2-7f1c-4f5b-89c7-6dcdb51c08fd.PNG)
+
 
 ***
 # :bulb: 주요 기능 (소제목 클릭 시 상세 설명 이동)
