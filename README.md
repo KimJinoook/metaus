@@ -75,7 +75,7 @@
    - 1. 결제 및 상품 구매 처리
    - 2. 구매 상품 파일 다운로드   
 
-
+ 
 ## 5. 관리자페이지
 ### [1) 로그인 및 접속자 관련 주요 기능](https://github.com/KimJinoook/metaus/blob/main/%EC%A3%BC%EC%9A%94%EA%B8%B0%EB%8A%A5%EC%84%A4%EB%AA%85/managerLogin.md)
    - 1. 로그인 인터셉터
